@@ -1,0 +1,91 @@
+/**
+ *  Login screen specific styles
+ */
+// combined with .modal class, this is a top-level
+// full-screen wrapper for login page
+#login-screen {
+  z-index: $z-login;
+  background-color: $p-blue;
+}
+// inner container helps to center the login form
+#login-container {
+  width: 80%;
+  max-width: 300px;
+  margin: auto;
+  .logo {
+    display: block;
+    width: 100%;
+    margin: 30px auto;
+  }
+  // input block. with label and utility buttons
+  .slim-input {
+    position: relative;
+    width: 100%;
+    margin: auto auto 20px;
+    color: #fff;
+    // text or passphrase
+    input {
+      width: 100%;
+      min-height: 4rem;
+      margin: 0;
+      padding: 5px;
+      background: none;
+      background-color: $p-blue-light-5;
+      border: none;
+      border-radius: 0;
+      font-family: OpenSans;
+      font-size: 1.8rem;
+      font-weight: 100;
+      transition: all 300ms ease;
+      &:focus {
+        outline: none;
+      }
+    }
+    label {
+      display: block;
+      width: 80%;
+      font-size: 1.2rem;
+      font-variant: small-caps;
+      color: $p-blue-light-40;
+    }
+    // "show passphrase" button
+    // padding helps to trigger touch event better
+    i {
+      position: absolute;
+      bottom: -26px;
+      right: -13px;
+      font-size: 2em;
+      padding: 3px 15px 15px 15px;
+    }
+  }
+  .login-btn,
+  .signup-btn {
+    display: block;
+    width: 100%;
+    margin: 30px 0 0;
+    padding: 5px;
+    border: none;
+    font-size: 1.6rem;
+    font-weight: 100;
+    text-shadow: none;
+    text-align: center;
+    color: #fff;
+  }
+  .login-btn {
+    margin-top: 10px;
+    background-color: $p-green;
+  }
+  .signup-btn {
+    background-color: $p-blue-light-10;
+  }
+}
+
+#passphrase-input{
+  margin-bottom: 10px;
+}
+
+#login-process-state{
+  text-align: center;
+  color: $p-blue-light-40;
+  height:15px;
+}

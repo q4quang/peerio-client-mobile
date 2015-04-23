@@ -1,0 +1,55 @@
+{
+  "name": "Peerio",
+  "version": "0.0.0",
+  "homepage": "https://github.com/PeerioTechnologies/peerio-mobile",
+  "authors": [
+    "Peerio"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize.css": "*",
+    "pouchdb": "3.x",
+    "zxcvbn": "*",
+    "font-awesome": "*",
+    "qrcode.js": "davidshimjs/qrcodejs",
+    "react": "0.x",
+    "moment": "*",
+    "lodash": "*",
+    "node-uuid": "*",
+    "is_js": "*",
+    "gsap": "*",
+    "bluebird": "~2.x",
+    "jssha": "*"
+  },
+  "install": {
+    "base": "www/bower",
+    "path": {
+      "css": "",
+      "js": "",
+      "/font-awesome\\.css/": "{name}/css",
+      "/fontawesome-webfont.*/": "{name}/fonts"
+    },
+    "sources": {
+      "qrcode.js": "bower_components/qrcode.js/qrcode.js",
+      "font-awesome": [
+        "bower_components/font-awesome/css/font-awesome.css",
+        "bower_components/font-awesome/fonts/fontawesome-webfont.woff",
+        "bower_components/font-awesome/fonts/fontawesome-webfont.woff2"
+      ],
+      "react": "bower_components/react/react-with-addons.js",
+      "gsap": [
+        "bower_components/gsap/src/minified/tweenlite.min.js",
+        "bower_components/gsap/src/minified/plugins/scrolltoplugin.min.js"
+      ],
+      "jssha": "bower_components/jssha/src/sha256.js"
+    }
+  }
+}

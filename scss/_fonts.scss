@@ -1,0 +1,85 @@
+/**
+ *   Font face rules
+ */
+
+@mixin all-font-formats($args){
+  src: url($args + '.eot');
+  src: url($args + '.eot?#iefix') format('embedded-opentype'),
+       url($args + '.woff2') format('woff2'),
+       url($args + '.woff') format('woff'),
+       url($args + '.ttf') format('truetype');
+}
+
+// ROBOTO
+// @font-face {
+//     font-family: "Roboto";
+//     src: url("#{$roboto-font-path}Roboto-Thin.ttf");
+//     font-weight: 200;
+// }
+// @font-face {
+//     font-family: "Roboto";
+//     src: url("#{$roboto-font-path}Roboto-Light.ttf");
+//     font-weight: 300;
+// }
+//
+// @font-face {
+//     font-family: "Roboto";
+//     src: url("#{$roboto-font-path}Roboto-Regular.ttf");
+//     font-weight: 400;
+// }
+//
+// @font-face {
+//     font-family: "Roboto";
+//     src: url("#{$roboto-font-path}Roboto-Medium.ttf");
+//     font-weight: 500;
+// }
+//
+// @font-face {
+//     font-family: "Roboto";
+//     src: url("#{$roboto-font-path}Roboto-Bold.ttf");
+//     font-weight: 700;
+// }
+
+
+// OPEN SANS
+@font-face {
+    font-family: "OpenSans";
+    @include all-font-formats("#{$opensans-font-path}OpenSans-Light");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "OpenSans";
+    @include all-font-formats("#{$opensans-font-path}OpenSans-Regular");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "OpenSans";
+    @include all-font-formats("#{$opensans-font-path}OpenSans-SemiBold");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "OpenSans";
+    @include all-font-formats("#{$opensans-font-path}OpenSans-Bold");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "OpenSans";
+    @include all-font-formats("#{$opensans-font-path}OpenSans-ExtraBold");
+    font-weight: 800;
+    font-style: normal;
+}
+
+// MONOSPACE FONTS
+// @font-face {
+//     font-family: "SourceCodePro";
+//     src: url("../media/fonts/SourceCodePro/SourceCodePro-ExtraLight.ttf");
+//     font-weight: 200;
+// }
