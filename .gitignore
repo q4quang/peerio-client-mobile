@@ -1,34 +1,27 @@
 *.tmp
 *.log
-
 *.keystore
-
 .DS_Store
 
+# build release apk output
 /bin
+
+# npm and bower cache
 /bower_components
 /node_modules
+
+# compiled jsx
+/www/js/ui/compiled
+# bower-installer picked lib files from /bower_components
+/www/bower
+
+# compiled sass
+/www/css/app.css
 
 # debug variables file with potentially sensitive info
 /debug.js
 
-
-# Android
-/platforms/android/assets/www
-/platforms/android/res/xml/config.xml
-/platforms/android/CordovaLib/ant-build/classes/org/apache/cordova/BuildConfig.class
-/platforms/android/CordovaLib/ant-build/build.prop
-/platforms/android/CordovaLib/ant-build/classes.jar
-/platforms/android/CordovaLib/xwalk_core_library/ant-build/build.prop
-/platforms/android/CordovaLib/xwalk_core_library/ant-build/classes/org/xwalk/core/BuildConfig.class
-
-# iOS
-/platforms/ios/build/
-/platforms/ios/CordovaLib/build/
-/platforms/ios/www
-/platforms/android/ant-build
-/platforms/ios/Peerio/config.xml
-/platforms/ios/Peerio/Peerio-Info.plist
-platforms/ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata
-platforms/ios/Peerio.xcodeproj/project.xcworkspace
-platforms/ios/Peerio.xcodeproj/xcuserdata
+# Cordova platform generated files
+/platforms/android/
+/platforms/ios/
+/plugins

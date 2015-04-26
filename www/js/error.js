@@ -12,10 +12,9 @@
 
   // will not fire in desktop browser, and we don't need it to
   document.addEventListener('deviceready', function () {
-    Peerio.NativeAPI.getAppVersion(function (code) {
-        appVersion = code;
-      },
-      console.error.bind(console, 'failed to retrieve app version'));
+  
+	  if(AppVersion && AppVersion.version) appVersion = AppVersion.version;
+   
   }, false);
 
 

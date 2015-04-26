@@ -3,10 +3,18 @@ peerio-mobile
 
 Peerio mobile clients
 
-npm install -g bower-installer browser-sync react-tools
 git config core.ignorecase false
 
+npm install cordova bower bower-installer gulp -g -d
 
+npm install -d
+
+bower install
+bower-installer
+
+cordova platform add ios android
+
+sudo  gem install github_changelog_generator
 
 notes
 ============
