@@ -16,6 +16,8 @@ cordova platform add ios android
 
 sudo  gem install github_changelog_generator
 
+chmod a+x ./generate_changelog.sh ./release_android.sh
+
 notes
 ============
 xwalk will not work without these permissions
