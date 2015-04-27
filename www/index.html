@@ -9,11 +9,9 @@
 	<!-- 
 		* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     	* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    	* Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-       	 	* Enable inline JS: add 'unsafe-inline' to default-src
-        	* Enable eval(): add 'unsafe-eval' to default-src
+    	* Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities.
 	-->
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://*.peerio.com wss://*.peerio.com https://peerio.blob.core.windows.net; style-src 'self' 'unsafe-inline'; media-src *">
     <title>Peerio</title>
     <link rel="icon" type="image/png" href="media/img/icon32.png" />
     <!-- CSS -->
@@ -71,24 +69,24 @@
     <script type="application/javascript" src="js/data.files.js"></script>
     <script type="application/javascript" src="js/data.messages.js"></script>
     <script type="application/javascript" src="js/start.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/app.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/swiper.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/alert.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/modal_menu.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/sidebar.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/mixins.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/login.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/navbar.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/footer.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/tabbar.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/item_placeholder.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/messages.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/files.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/contacts.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/conversation.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/new_message.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/avatar.js"></script>
-    <script type="application/javascript" src="js/ui/compiled/file_select.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/app.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/swiper.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/alert.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/modal_menu.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/sidebar.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/mixins.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/login.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/navbar.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/footer.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/tabbar.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/item_placeholder.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/messages.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/files.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/contacts.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/conversation.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/new_message.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/avatar.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/file_select.js"></script>
 
     <!-- Following libraries are shared with Peerio desktop client -->
     <script type="application/javascript" src="js/peerio/config.js"></script>

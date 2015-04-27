@@ -16,8 +16,8 @@ var paths = {
   css_dst: './www/css/',
   html: ['www/index.html'],
   js: ['www/js/**/*.js'],
-  jsx_src: 'www/js/ui/**/*.jsx',
-  jsx_dst: 'www/js/ui/compiled',
+  jsx_src: 'jsx/*.jsx',
+  jsx_dst: 'www/js/compiled_jsx',
   config_xml: 'config.xml'
 };
 /*eslint-enable*/
