@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="com.peerio" version="0.4.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.peerio" version="0.5.0">
     <name>Peerio</name>
     <description>
     Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end encryption.
@@ -7,67 +7,68 @@
     <author email="peerio@peerio.com" href="https://peerio.com">
     Technologies Peerio Inc.
   </author>
-    <icon src="res/icon.png" />
-    <content src="index.html" />
+    <icon src="res/icon.png"/>
+    <content src="index.html"/>
     <platform name="android">
-        <allow-intent href="market:*" />
-        <icon density="ldpi" src="res/icons/android/ldpi.png" />
-        <icon density="mdpi" src="res/icons/android/mdpi.png" />
-        <icon density="hdpi" src="res/icons/android/hdpi.png" />
-        <icon density="xhdpi" src="res/icons/android/xhdpi.png" />
-        <splash density="land-hdpi" src="res/screens/android/splash-land-hdpi.png" />
-        <splash density="land-ldpi" src="res/screens/android/splash-land-ldpi.png" />
-        <splash density="land-mdpi" src="res/screens/android/splash-land-mdpi.png" />
-        <splash density="land-xhdpi" src="res/screens/android/splash-land-xhdpi.png" />
-        <splash density="port-hdpi" src="res/screens/android/splash-port-hdpi.png" />
-        <splash density="port-ldpi" src="res/screens/android/splash-port-ldpi.png" />
-        <splash density="port-mdpi" src="res/screens/android/splash-port-mdpi.png" />
-        <splash density="port-xhdpi" src="res/screens/android/splash-port-xhdpi.png" />
+        <allow-intent href="market:*"/>
+        <icon density="ldpi" src="res/icons/android/ldpi.png"/>
+        <icon density="mdpi" src="res/icons/android/mdpi.png"/>
+        <icon density="hdpi" src="res/icons/android/hdpi.png"/>
+        <icon density="xhdpi" src="res/icons/android/xhdpi.png"/>
+        <splash density="land-hdpi" src="res/screens/android/splash-land-hdpi.png"/>
+        <splash density="land-ldpi" src="res/screens/android/splash-land-ldpi.png"/>
+        <splash density="land-mdpi" src="res/screens/android/splash-land-mdpi.png"/>
+        <splash density="land-xhdpi" src="res/screens/android/splash-land-xhdpi.png"/>
+        <splash density="port-hdpi" src="res/screens/android/splash-port-hdpi.png"/>
+        <splash density="port-ldpi" src="res/screens/android/splash-port-ldpi.png"/>
+        <splash density="port-mdpi" src="res/screens/android/splash-port-mdpi.png"/>
+        <splash density="port-xhdpi" src="res/screens/android/splash-port-xhdpi.png"/>
     </platform>
     <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
-        <splash height="480" src="res/screens/ios/Default~iphone.png" width="320" />
-        <splash height="960" src="res/screens/ios/Default@2x~iphone.png" width="640" />
-        <splash height="1024" src="res/screens/ios/Default-Portrait~ipad.png" width="768" />
-        <splash height="2048" src="res/screens/ios/Default-Portrait@2x~ipad.png" width="1536" />
-        <splash height="768" src="res/screens/ios/Default-Landscape~ipad.png" width="1024" />
-        <splash height="1536" src="res/screens/ios/Default-Landscape@2x~ipad.png" width="2048" />
-        <splash height="1136" src="res/screens/ios/Default-568h@2x~iphone.png" width="640" />
-        <splash height="1334" src="res/screens/ios/Default-667h.png" width="750" />
-        <splash height="2208" src="res/screens/ios/Default-736h.png" width="1242" />
-        <splash height="1242" src="res/screens/ios/Default-Landscape-736h.png" width="2208" />
+        <allow-intent href="itms:*"/>
+        <allow-intent href="itms-apps:*"/>
+        <splash height="480" src="res/screens/ios/Default~iphone.png" width="320"/>
+        <splash height="960" src="res/screens/ios/Default@2x~iphone.png" width="640"/>
+        <splash height="1024" src="res/screens/ios/Default-Portrait~ipad.png" width="768"/>
+        <splash height="2048" src="res/screens/ios/Default-Portrait@2x~ipad.png" width="1536"/>
+        <splash height="768" src="res/screens/ios/Default-Landscape~ipad.png" width="1024"/>
+        <splash height="1536" src="res/screens/ios/Default-Landscape@2x~ipad.png" width="2048"/>
+        <splash height="1136" src="res/screens/ios/Default-568h@2x~iphone.png" width="640"/>
+        <splash height="1334" src="res/screens/ios/Default-667h.png" width="750"/>
+        <splash height="2208" src="res/screens/ios/Default-736h.png" width="1242"/>
+        <splash height="1242" src="res/screens/ios/Default-Landscape-736h.png" width="2208"/>
     </platform>
-    <preference name="AndroidPersistentFileLocation" value="Internal" />
-    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
-    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
-    <preference name="SplashScreenDelay" value="1000" />
-    <content src="index.html" />
-    <access origin="https://*.peerio.com" />
-    <access origin="https://peerio.com" />
-    <access origin="https://peerio.blob.core.windows.net" />
-    <allow-intent href="*" />
-    <preference name="SplashScreen" value="screen" />
-    <preference name="KeepRunning" value="false" />
-    <preference name="Orientation" value="portrait" />
-    <preference name="Fullscreen" value="false" />
-    <preference name="UIWebViewBounce" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="15" />
-    <preference name="BackupWebStorage" value="none" />
-    <preference name="InAppBrowserStorageEnabled" value="true" />
-    <preference name="ShowTitle" value="true" />
-    <preference name="StatusBarStyle" value="default" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <plugin name="cordova-plugin-file" spec="2.x" />
-    <plugin name="cordova-plugin-whitelist" spec="1.x" />
-    <plugin name="cordova-plugin-appversion" spec="1.x" />
-    <plugin name="cordova-plugin-crosswalk-webview" spec="1.x" />
-    <plugin name="cordova-plugin-device" spec="1.x" />
-    <plugin name="cordova-plugin-file-transfer" spec="1.x" />
-    <plugin name="cordova-plugin-splashscreen" spec="2.x" />
-    <plugin name="cordova-plugin-sqlite" spec="0.x" />
-    <plugin name="cordova-plugin-statusbar" spec="1.x" />
-    <plugin name="com.ionic.keyboard" spec="1.x" />
-    <plugin name="com.disusered.open" spec="1.x" />
+    <preference name="xwalkVersion" value="12" />
+    <preference name="AndroidPersistentFileLocation" value="Internal"/>
+    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root"/>
+    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root"/>
+    <preference name="SplashScreenDelay" value="1000"/>
+    <content src="index.html"/>
+    <access origin="https://*.peerio.com"/>
+    <access origin="https://peerio.com"/>
+    <access origin="https://peerio.blob.core.windows.net"/>
+    <allow-intent href="*"/>
+    <preference name="SplashScreen" value="screen"/>
+    <preference name="KeepRunning" value="false"/>
+    <preference name="Orientation" value="portrait"/>
+    <preference name="Fullscreen" value="false"/>
+    <preference name="UIWebViewBounce" value="false"/>
+    <preference name="DisallowOverscroll" value="true"/>
+    <preference name="android-minSdkVersion" value="15"/>
+    <preference name="BackupWebStorage" value="none"/>
+    <preference name="InAppBrowserStorageEnabled" value="true"/>
+    <preference name="ShowTitle" value="true"/>
+    <preference name="StatusBarStyle" value="default"/>
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <plugin name="cordova-plugin-file" spec="2.x"/>
+    <plugin name="cordova-plugin-whitelist" spec="1.x"/>
+    <plugin name="cordova-plugin-appversion" spec="1.x"/>
+    <plugin name="cordova-plugin-crosswalk-webview" spec="1.x"/>
+    <plugin name="cordova-plugin-device" spec="1.x"/>
+    <plugin name="cordova-plugin-file-transfer" spec="1.x"/>
+    <plugin name="cordova-plugin-splashscreen" spec="2.x"/>
+    <plugin name="cordova-plugin-sqlite" spec="0.x"/>
+    <plugin name="cordova-plugin-statusbar" spec="1.x"/>
+    <plugin name="com.ionic.keyboard" spec="1.x"/>
+    <plugin name="com.disusered.open" spec="1.x"/>
 </widget>
