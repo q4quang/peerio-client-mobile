@@ -52,7 +52,7 @@
     //--- CUSTOM FUNCTIONS
     twoFA: function(callback){
       alert('Please use your computer to disable two-factor authentication before proceeding.');
-      Peerio.Actions.loginFail();
+      Peerio.Actions.loginFail('2fa fail');
       return;
       var code = prompt('Please enter your two-factor authentication code.');
       if(!code) return;

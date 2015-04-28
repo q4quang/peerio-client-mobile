@@ -13,6 +13,10 @@
 
   window.Peerio = window.Peerio || {};
   Peerio.Data = Peerio.Data || {};
+
+  var authTokenRequestTimeout = 10000;
+  var settingsTimeout = 10000;
+  var totalLoginTimeout = authTokenRequestTimeout + settingsTimeout + 10000;
   // promisified login helpers,
   // todo: should be moved to the new api, when it will be developed
   var doLogin = function (username, passphrase) {
@@ -26,7 +30,7 @@
         else reject("Invalid passphrase or PIN");
       });
 
-    }).timeout(10000);
+    }).timeout(authTokenRequestTimeout);
   };
 
   var getSettings = function () {
@@ -39,7 +43,7 @@
         Peerio.user.quota = data.quota;
         resolve();
       });
-    }).timeout(10000);
+    }).timeout(settingsTimeout);
   };
 
   /**
@@ -59,7 +63,7 @@
         Peerio.Actions.loginProgress('Ready.');
         Peerio.Actions.loginSuccess();
       })
-      .timeout(30000) // todo: remove magic number
+      .timeout(totalLoginTimeout) // todo: remove magic number
       .catch(function (err) {
         console.log(err);
         Peerio.Actions.loginFail((err && err.message) || 'Login fail');
@@ -87,6 +91,31 @@
     return new Promise(function (resolve, reject) {
       Peerio.user.removePIN(Peerio.user.username, resolve);
     }).timeout(5000);// todo: remove magic number
+  };
+
+  var lastLoginId = 'lastLogin';
+  Peerio.Data.setLastLogin = function (login) {
+    var db = new PouchDB('_default', Peerio.storage.options);
+    db.get(lastLoginId).then(function (doc) {
+      return db.put({
+        _id: lastLoginId,
+        _rev: doc._rev,
+        login: login
+      });
+    }).catch(function (err) {
+      db.put({
+        _id: lastLoginId,
+        login: login
+      });
+    });
+  };
+
+  Peerio.Data.getLastLogin = function (login) {
+    var db = new PouchDB('_default', Peerio.storage.options);
+    return db.get(lastLoginId)
+      .then(function (doc) {
+        return doc.login;
+      });
   };
 
 }());

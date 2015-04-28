@@ -27,7 +27,8 @@
     "Hammer":true,
     "_":true,
     "Identicon": true,
-    "TweenLite":true
+    "TweenLite":true,
+    "PouchDB":true
 
   }
 }

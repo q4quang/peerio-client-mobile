@@ -25,6 +25,12 @@
       Peerio.Dispatcher.onLoginProgress(this.handleLoginProgress);
       Peerio.Dispatcher.onLoginSuccess(this.handleLoginDone.bind(this, true));
       Peerio.Dispatcher.onLoginFail(this.handleLoginDone.bind(this, false));
+      Peerio.Data.getLastLogin()
+        .then(function (login) {
+          this.setState({savedLogin: login});
+        }.bind(this)).catch(function () {
+          this.setState({savedLogin: null});
+        }.bind(this));
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.handleLoginProgress, this.handleLoginDone);
@@ -34,6 +40,7 @@
       this.setState({loginState: state});
     },
     handleLoginDone: function (success, message) {
+      Peerio.Data.setLastLogin(Peerio.user.username);
       if (this.isMounted())
         this.setState({loginError: success ? false : message, waitingForLogin: false, loginState: ''});
     },
@@ -87,6 +94,10 @@
     handleAlertClose: function () {
       this.setState({loginError: false});
     },
+    clearLogin: function(){
+      this.setState({savedLogin: null});
+      Peerio.Data.setLastLogin('');
+    },
     //--- RENDER
     render: function () {
       var eyeIcon = 'fa-' + (this.state.passphraseVisible ? 'eye-slash' : 'eye');
@@ -104,14 +115,23 @@
           <div id="login-container">
             <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio" />
             <form className="loginForm" onSubmit={this.handleSubmit}>
-
-              <div className="slim-input">
+            {this.state.savedLogin
+              ?
+              (<div className="saved-login" onTouchEnd={this.clearLogin}>{this.state.savedLogin}
+                <div className="note">Wellcome back.
+                  <br/>
+                  Tap here to change or forget username.</div>
+              </div>)
+              :
+              (<div className="slim-input">
                 <input defaultValue={debugUserName} id="username" ref="username"
                   onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
                   autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-                <label htmlFor="username">username</label>
-              </div>
-
+                <div>
+                  <label htmlFor="username">username</label>
+                </div>
+              </div>)
+              }
               <div id="passphrase-input" className="slim-input">
                 <div>
                   <input defaultValue={debugPassword} id="password" ref="passphrase" key="passphrase"
