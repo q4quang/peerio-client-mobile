@@ -33,9 +33,9 @@
     handleLoginProgress: function (state) {
       this.setState({loginState: state});
     },
-    handleLoginDone: function (success) {
-      if(this.isMounted())
-        this.setState({loginError: !success, waitingForLogin: false, loginState: ''});
+    handleLoginDone: function (success, message) {
+      if (this.isMounted())
+        this.setState({loginError: success ? false : message, waitingForLogin: false, loginState: ''});
     },
     // show/hide passphrase
     handlePassphraseShowTap: function (e) {
@@ -59,6 +59,7 @@
     // initiate login
     handleSubmit: function (e) {
       if (e) e.preventDefault();
+      // todo: multiple login call is not ui's concern, move it from here
       // login already in progress
       if (this.state.waitingForLogin) return;
       this.setState({waitingForLogin: true});
@@ -96,8 +97,8 @@
       return (
         <div id="login-screen" className="modal active">
 
-          <Peerio.UI.Alert visible={this.state.loginError === true} onClose={this.handleAlertClose}>
-            Invalid Username, Passphrase or PIN
+          <Peerio.UI.Alert visible={!!this.state.loginError} onClose={this.handleAlertClose}>
+            {this.state.loginError}
           </Peerio.UI.Alert>
 
           <div id="login-container">

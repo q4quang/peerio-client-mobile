@@ -13,6 +13,34 @@
 
   window.Peerio = window.Peerio || {};
   Peerio.Data = Peerio.Data || {};
+  // promisified login helpers,
+  // todo: should be moved to the new api, when it will be developed
+  var doLogin = function (username, passphrase) {
+    return new Promise(function (resolve, reject) {
+
+      Peerio.storage.init(username);
+      Peerio.user.login(username, passphrase, false, function () {
+        // at the moment this callback is called
+        // we should have some auth tokens if login was a success
+        if (Peerio.user.authTokens.length) resolve();
+        else reject("Invalid passphrase or PIN");
+      });
+
+    }).timeout(10000);
+  };
+
+  var getSettings = function () {
+    return new Promise(function (resolve, reject) {
+      Peerio.network.getSettings(function (data) {
+        Peerio.user.firstName = data.firstName;
+        Peerio.user.lastName = data.lastName;
+        Peerio.user.addresses = data.addresses;
+        Peerio.user.settings = data.settings;
+        Peerio.user.quota = data.quota;
+        resolve();
+      });
+    }).timeout(10000);
+  };
 
   /**
    * Initiates login process.
@@ -21,39 +49,21 @@
    * @param passphrase or pin
    */
   Peerio.Data.login = function (username, passphrase) {
-    // todo: reject login attempt on timeout
-    // todo: reject on errors
     Peerio.Actions.loginProgress('Authenticating...');
-    Peerio.storage.init(username);
-    Peerio.user.login(username, passphrase, false, function () {
-      // at the moment this callback is called
-      // we should have some auth tokens if login was a success
-      if (!Peerio.user.authTokens.length) {
-        Peerio.Actions.loginFail();
-        return;
-      }
-
-      Peerio.Actions.loginProgress('Retrieving user data...');
-      Peerio.network.getSettings(function (data) {
-        Peerio.user.firstName = data.firstName;
-        Peerio.user.lastName = data.lastName;
-        Peerio.user.addresses = data.addresses;
-        Peerio.user.settings = data.settings;
-        Peerio.user.quota = data.quota;
-
-        Peerio.Actions.loginProgress('Retrieving contacts...');
-        Peerio.Data.loadContacts(true)
-          .then(function () {
-            Peerio.Actions.loginProgress('Ready.');
-            Peerio.Actions.loginSuccess();
-          }).catch(function (err) {
-            //todo remove alert, change loginFail to another event, this one is about credentials
-            console.log(err);
-            alert('error logging in');
-            Peerio.Actions.loginFail();
-          });
+    doLogin(username, passphrase)
+      .then(Peerio.Actions.loginProgress.bind(null, 'Retrieving user data...'))
+      .then(getSettings)
+      .then(Peerio.Actions.loginProgress.bind(null, 'Retrieving contacts...'))
+      .then(Peerio.Data.loadContacts.bind(null, true))
+      .then(function () {
+        Peerio.Actions.loginProgress('Ready.');
+        Peerio.Actions.loginSuccess();
+      })
+      .timeout(30000) // todo: remove magic number
+      .catch(function (err) {
+        console.log(err);
+        Peerio.Actions.loginFail((err && err.message) || 'Login fail');
       });
-    });
   };
 
   Peerio.Data.validate2FA = function (code, callback) {
@@ -76,7 +86,7 @@
   Peerio.Data.removePIN = function () {
     return new Promise(function (resolve, reject) {
       Peerio.user.removePIN(Peerio.user.username, resolve);
-    }).timeout(5000);
+    }).timeout(5000);// todo: remove magic number
   };
 
 }());
