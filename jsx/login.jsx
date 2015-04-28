@@ -8,8 +8,8 @@
   Peerio.UI.LoginScreen = React.createClass({
     //--- CONSTANTS
     // scalable passphrase font settings
-    maxFontSize: 2.5,
-    minFontSize: 1,
+    maxFontSize: 2,
+    minFontSize: 1.3,
     // font scaling factor
     factor: 8,
     //--- REACT EVENTS
@@ -71,8 +71,15 @@
       // TODO validate input
       Peerio.Data.login(userNode.value, passNode.value);
     },
+    // change focus to passphrase input on enter
+    handleKeyDownLogin: function (e) {
+      if (e.key === 'Enter') {
+        this.refs.passphrase.getDOMNode().focus();
+        e.preventDefault();
+      }
+    },
     // submit form on enter
-    handleKeyDown: function (e) {
+    handleKeyDownPass: function (e) {
       if (e.key === 'Enter') this.handleSubmit();
     },
     // close error alert
@@ -98,7 +105,8 @@
             <form className="loginForm" onSubmit={this.handleSubmit}>
 
               <div className="slim-input">
-                <input defaultValue={debugUserName} id="username" ref="username" type="text" maxLength="16"
+                <input defaultValue={debugUserName} id="username" ref="username"
+                  onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
                   autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
                 <label htmlFor="username">username</label>
               </div>
@@ -106,7 +114,7 @@
               <div id="passphrase-input" className="slim-input">
                 <div>
                   <input defaultValue={debugPassword} id="password" ref="passphrase" key="passphrase"
-                    type={passInputType} onChange={this.handlePassphraseChange} onKeyDown={this.handleKeyDown}
+                    type={passInputType} onChange={this.handlePassphraseChange} onKeyDown={this.handleKeyDownPass}
                     maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
                   <label htmlFor="password">passphrase or pin</label>
                   <i onTouchEnd={this.handlePassphraseShowTap} className={'pull-right fa ' + eyeIcon}></i>

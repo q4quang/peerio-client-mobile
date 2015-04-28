@@ -9,9 +9,12 @@
 	<!-- 
 		* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     	* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    	* Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities.
+    	* todo: unsafe inline can be removed from scripts in production. browsersync needs in in development.
 	-->
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://*.peerio.com wss://*.peerio.com https://peerio.blob.core.windows.net; style-src 'self' 'unsafe-inline'; media-src *">
+	<meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' 'unsafe-inline' data: gap: https://ssl.gstatic.com https://*.peerio.com
+                                https://peerio.blob.core.windows.net wss://*.peerio.com ws://localhost:3000;
+                   media-src *;">
     <title>Peerio</title>
     <link rel="icon" type="image/png" href="media/img/icon32.png" />
     <!-- CSS -->
