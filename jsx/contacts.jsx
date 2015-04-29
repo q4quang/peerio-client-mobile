@@ -112,7 +112,7 @@
                   : 'Established contact')}</div>
             </div>
             <div className="block">
-              <div className="block-title">Primary adress</div>
+              <div className="block-title">Primary address</div>
               <div className="block-content">{c.primaryAddress || 'N/A'}</div>
             </div>
           </div>

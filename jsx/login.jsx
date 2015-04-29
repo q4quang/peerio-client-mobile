@@ -60,8 +60,8 @@
       var element = this.refs.passphrase.getDOMNode();
       var width = element.offsetWidth;
       element.style.fontSize = Math.max(
-        Math.min(width / (element.value.length * this.factor), this.maxFontSize),
-        this.minFontSize) + 'rem';
+          Math.min(width / (element.value.length * this.factor), this.maxFontSize),
+          this.minFontSize) + 'rem';
     },
     // initiate login
     handleSubmit: function (e) {
@@ -71,9 +71,14 @@
       if (this.state.waitingForLogin) return;
       this.setState({waitingForLogin: true});
       // we want to close mobile keyboard after user submits the login form
-      var userNode = this.refs.username.getDOMNode();
+      var userNode;
+      if (this.state.savedLogin) {
+        userNode = {value: this.state.savedLogin};
+      } else {
+        userNode = this.refs.username.getDOMNode();
+        userNode.blur();
+      }
       var passNode = this.refs.passphrase.getDOMNode();
-      userNode.blur();
       passNode.blur();
       Peerio.NativeAPI.hideKeyboard();
       // TODO validate input
@@ -94,7 +99,7 @@
     handleAlertClose: function () {
       this.setState({loginError: false});
     },
-    clearLogin: function(){
+    clearLogin: function () {
       this.setState({savedLogin: null});
       Peerio.Data.setLastLogin('');
     },
@@ -113,30 +118,33 @@
           </Peerio.UI.Alert>
 
           <div id="login-container">
-            <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio" />
+            <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"/>
+
             <form className="loginForm" onSubmit={this.handleSubmit}>
-            {this.state.savedLogin
-              ?
-              (<div className="saved-login" onTouchEnd={this.clearLogin}>{this.state.savedLogin}
-                <div className="note">Wellcome back.
-                  <br/>
-                  Tap here to change or forget username.</div>
-              </div>)
-              :
-              (<div className="slim-input">
-                <input defaultValue={debugUserName} id="username" ref="username"
-                  onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
-                  autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-                <div>
-                  <label htmlFor="username">username</label>
-                </div>
-              </div>)
+              {this.state.savedLogin
+                ?
+                (<div className="saved-login" onTouchEnd={this.clearLogin}>{this.state.savedLogin}
+                  <div className="note">Welcome back.
+                    <br/>
+                    Tap here to change or forget username.
+                  </div>
+                </div>)
+                :
+                (<div className="slim-input">
+                  <input defaultValue={debugUserName} id="username" ref="username"
+                         onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
+                         autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
+
+                  <div>
+                    <label htmlFor="username">username</label>
+                  </div>
+                </div>)
               }
               <div id="passphrase-input" className="slim-input">
                 <div>
                   <input defaultValue={debugPassword} id="password" ref="passphrase" key="passphrase"
-                    type={passInputType} onChange={this.handlePassphraseChange} onKeyDown={this.handleKeyDownPass}
-                    maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+                         type={passInputType} onChange={this.handlePassphraseChange} onKeyDown={this.handleKeyDownPass}
+                         maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
                   <label htmlFor="password">passphrase or pin</label>
                   <i onTouchEnd={this.handlePassphraseShowTap} className={'pull-right fa ' + eyeIcon}></i>
                 </div>

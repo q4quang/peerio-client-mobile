@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.peerio" version="0.5.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.peerio" version="0.5.1">
     <name>Peerio</name>
     <description>
-    Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end encryption.
-  </description>
+        Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end
+        encryption.
+    </description>
     <author email="peerio@peerio.com" href="https://peerio.com">
-    Technologies Peerio Inc.
-  </author>
+        Technologies Peerio Inc.
+    </author>
     <icon src="res/icon.png"/>
     <content src="index.html"/>
     <platform name="android">
@@ -38,7 +39,7 @@
         <splash height="2208" src="res/screens/ios/Default-736h.png" width="1242"/>
         <splash height="1242" src="res/screens/ios/Default-Landscape-736h.png" width="2208"/>
     </platform>
-    <preference name="xwalkVersion" value="12" />
+    <preference name="xwalkVersion" value="12"/>
     <preference name="AndroidPersistentFileLocation" value="Internal"/>
     <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root"/>
     <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root"/>
