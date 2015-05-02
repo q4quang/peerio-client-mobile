@@ -14,9 +14,9 @@
   window.Peerio = window.Peerio || {};
   Peerio.Data = Peerio.Data || {};
 
-  var authTokenRequestTimeout = 10000;
+  var authTokenRequestTimeout = 15000;
   var settingsTimeout = 10000;
-  var totalLoginTimeout = authTokenRequestTimeout + settingsTimeout + 10000;
+  var totalLoginTimeout = (authTokenRequestTimeout + settingsTimeout)*2;
   // promisified login helpers,
   // todo: should be moved to the new api, when it will be developed
   var doLogin = function (username, passphrase) {

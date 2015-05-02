@@ -8,14 +8,43 @@
     <author email="peerio@peerio.com" href="https://peerio.com">
         Technologies Peerio Inc.
     </author>
-    <icon src="res/icon.png"/>
+
     <content src="index.html"/>
+    <icon src="res/icon.png"/>
+
+
+    <access origin="https://*.peerio.com"/>
+    <access origin="https://peerio.com"/>
+    <access origin="https://peerio.blob.core.windows.net"/>
+
+    <allow-intent href="*"/>
+
+    <preference name="Orientation" value="portrait"/>
+    <preference name="Fullscreen" value="false"/>
+    <preference name="DisallowOverscroll" value="false"/>
+    <preference name="UIWebViewBounce" value="false"/>
+    <!-- shared statusBarPlugin settings -->
+    <preference name="StatusBarBackgroundColor" value="#233445" />
+
+    <!-- Cordova plugins -->
+    <plugin name="cordova-plugin-file" spec="2.x"/>
+    <plugin name="cordova-plugin-whitelist" spec="1.x"/>
+    <plugin name="cordova-plugin-appversion" spec="1.x"/>
+    <plugin name="cordova-plugin-crosswalk-webview" spec="1.x"/>
+    <plugin name="cordova-plugin-device" spec="1.x"/>
+    <plugin name="cordova-plugin-file-transfer" spec="1.x"/>
+    <plugin name="cordova-plugin-splashscreen" spec="2.x"/>
+    <plugin name="cordova-plugin-sqlite" spec="0.x"/>
+    <plugin name="cordova-plugin-statusbar" spec="1.x"/>
+    <plugin name="com.ionic.keyboard" spec="1.x"/>
+    <plugin name="com.disusered.open" spec="1.x"/>
+    <!-- Cordova plugin installer will target  this xwalk major version -->
+    <preference name="xwalkVersion" value="12"/>
+
+    <!-- ANDROID-SPECIFIC CONFIG-->
     <platform name="android">
         <allow-intent href="market:*"/>
-        <icon density="ldpi" src="res/icon/android/ldpi.png"/>
-        <icon density="mdpi" src="res/icon/android/mdpi.png"/>
-        <icon density="hdpi" src="res/icon/android/hdpi.png"/>
-        <icon density="xhdpi" src="res/icon/android/xhdpi.png"/>
+        <!-- SPLASH SCREENS -->
         <splash density="land-hdpi" src="res/screen/android/splash-land-hdpi.png"/>
         <splash density="land-ldpi" src="res/screen/android/splash-land-ldpi.png"/>
         <splash density="land-mdpi" src="res/screen/android/splash-land-mdpi.png"/>
@@ -24,7 +53,27 @@
         <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png"/>
         <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png"/>
         <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png"/>
+        <!-- ICONS -->
+        <icon density="ldpi" src="res/icon/android/ldpi.png"/>
+        <icon density="mdpi" src="res/icon/android/mdpi.png"/>
+        <icon density="hdpi" src="res/icon/android/hdpi.png"/>
+        <icon density="xhdpi" src="res/icon/android/xhdpi.png"/>
+
+        <!-- When loading a page, the amount of time to wait before throwing a timeout error. -->
+        <preference name="LoadUrlTimeoutValue" value="60000"/>
+        <!-- Amount of time splash screen is displayed -->
+        <preference name="SplashScreenDelay" value="2000"/>
+        <!-- When sent to background, app execution will halt. Setting this to 'true' might violate Play store policy -->
+        <preference name="KeepRunning" value="false"/>
+        <preference name="AndroidPersistentFileLocation" value="Internal"/>
+        <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root"/>
+        <preference name="AndroidLaunchMode" value="singleTop"/>
+        <preference name="android-minSdkVersion" value="15"/>
+
+
     </platform>
+
+    <!-- IOS-SPECIFIC CONFIG-->
     <platform name="ios">
         <allow-intent href="itms:*"/>
         <allow-intent href="itms-apps:*"/>
@@ -67,38 +116,17 @@
         <!-- iPad Spotlight and Settings Icon -->
         <icon src="res/icon/ios/icon-50.png" width="50" height="50" />
         <icon src="res/icon/ios/icon-50@2x.png" width="100" height="100" />
+
+        <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root"/>
+        <preference name="BackupWebStorage" value="none"/>
+        <preference name="KeyboardDisplayRequiresUserAction" value="false"/>
+        <preference name="PaginationMode" value="unpaginated"/>
+        <preference name="UIWebViewDecelerationSpeed" value="fast" />
+        <!-- statusBarPlugin settings -->
+        <preference name="StatusBarStyle" value="lightcontent"/>
+        <preference name="StatusBarOverlaysWebView" value="false"/>
+
     </platform>
-    <preference name="xwalkVersion" value="12"/>
-    <preference name="AndroidPersistentFileLocation" value="Internal"/>
-    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root"/>
-    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root"/>
-    <preference name="SplashScreenDelay" value="1000"/>
-    <content src="index.html"/>
-    <access origin="https://*.peerio.com"/>
-    <access origin="https://peerio.com"/>
-    <access origin="https://peerio.blob.core.windows.net"/>
-    <allow-intent href="*"/>
-    <preference name="SplashScreen" value="screen"/>
-    <preference name="KeepRunning" value="false"/>
-    <preference name="Orientation" value="portrait"/>
-    <preference name="Fullscreen" value="false"/>
-    <preference name="UIWebViewBounce" value="false"/>
-    <preference name="DisallowOverscroll" value="true"/>
-    <preference name="android-minSdkVersion" value="15"/>
-    <preference name="BackupWebStorage" value="none"/>
-    <preference name="InAppBrowserStorageEnabled" value="true"/>
-    <preference name="ShowTitle" value="true"/>
-    <preference name="StatusBarStyle" value="default"/>
-    <preference name="StatusBarOverlaysWebView" value="false"/>
-    <plugin name="cordova-plugin-file" spec="2.x"/>
-    <plugin name="cordova-plugin-whitelist" spec="1.x"/>
-    <plugin name="cordova-plugin-appversion" spec="1.x"/>
-    <plugin name="cordova-plugin-crosswalk-webview" spec="1.x"/>
-    <plugin name="cordova-plugin-device" spec="1.x"/>
-    <plugin name="cordova-plugin-file-transfer" spec="1.x"/>
-    <plugin name="cordova-plugin-splashscreen" spec="2.x"/>
-    <plugin name="cordova-plugin-sqlite" spec="0.x"/>
-    <plugin name="cordova-plugin-statusbar" spec="1.x"/>
-    <plugin name="com.ionic.keyboard" spec="1.x"/>
-    <plugin name="com.disusered.open" spec="1.x"/>
+
+
 </widget>
