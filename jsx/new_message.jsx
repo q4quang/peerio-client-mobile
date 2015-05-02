@@ -2,6 +2,7 @@
   'use strict';
 
   Peerio.UI.NewMessage = React.createClass({
+    mixins: [ Peerio.UI.Mixins.GlobalTap ],
     //--- REACT EVENTS
     getInitialState: function () {
       return {showContactSelect: false, recipients: [], attachments: []};
@@ -45,6 +46,9 @@
     handleFilesSelected: function (selection) {
       this.setState({attachments: selection});
     },
+    globalTapHandler : function(e){
+      this.openContactSelect();
+    },
 
     //--- RENDER
     render: function () {
@@ -55,10 +59,10 @@
       return (
         <div className="content without-tab-bar">
           <div id="new-message">
-            <div className="recipients">
+            <div className="recipients" onTouchStart={this.registerTouchStart} onTouchEnd={this.registerTouchEnd}>
               <div className="to">To:</div>
               <div className="names">{r}</div>
-              <div className="add-btn" onTouchEnd={this.openContactSelect}>
+              <div className="add-btn">
                 <i className="fa fa-list"></i>
                 <span className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
               </div>

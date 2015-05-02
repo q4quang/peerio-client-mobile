@@ -7,6 +7,8 @@ git config core.ignorecase false
 
 npm install cordova bower bower-installer gulp -g -d
 
+sudo npm install -g ios-deploy
+
 npm install -d
 
 bower install
