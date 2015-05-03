@@ -1,4 +1,4 @@
-(function () {
+  (function () {
   'use strict';
 
   Peerio.UI.Messages = React.createClass({
@@ -42,11 +42,27 @@
         var item = Peerio.user.conversations[id];
         if (!item.original) return;
         var ts = moment(+item.lastTimestamp);
-        var sender = Peerio.user.contacts[item.original.sender];
+
+        // building name to display for conversation item.
+        // it should be in format "John Smith +3"
+        // and it should not display current user's name,
+        // unless he is the only one left in conversation
+        var fullName=null;
+        for(var i=0;i<item.participants.length;i++) {
+          if(item.participants[i] === Peerio.user.username) continue;
+          var username = item.participants[i];
+          var contact = Peerio.user.contacts[username];
+          fullName = (contact && contact.fullName) || username;
+            break;
+        }
+        if(!fullName) fullName = Peerio.user.fullName;
+        if(item.participants.length>2){
+          fullName+= ' [+'+(item.participants.length-2)+']';
+        }
 
         return (
           <Peerio.UI.MessagesItem key={item.id} msgId={item.id} unread={item.original.isModified}
-            fullName={sender ? sender.fullName : item.original.sender} fileCount={item.fileCount}
+            fullName={fullName} fileCount={item.fileCount}
             subject={item.original.decrypted.subject} ts={ts} />
         );
       });
