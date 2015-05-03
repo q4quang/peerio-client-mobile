@@ -64,15 +64,8 @@
    * Get app version from config.xml
    * @param {function(string)} callback
    */
-  api.getAppVersion = function (callback) {
-    cordova.getAppVersion(callback);
-  };
-
-  initializers.getAppVersion = function () {
-    if (cordova && cordova.getAppVersion)
-      return;
-
-    return console.log.bind(console, getGenericMsg('getAppVersion'));
+  api.getAppVersion = function () {
+    return (window.AppVersion && AppVersion.version) || 'n/a';
   };
 
   /**

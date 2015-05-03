@@ -118,6 +118,7 @@
           </Peerio.UI.Alert>
 
           <div id="login-container">
+            <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
             <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"/>
 
             <form className="loginForm" onSubmit={this.handleSubmit}>

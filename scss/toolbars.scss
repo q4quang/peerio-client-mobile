@@ -187,6 +187,13 @@
   padding: 25px 0 0;
   color: white;
   font-size: 1.2rem;
+  .app-version{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    font-size: 70%;
+    color: #9E9E9E;
+  }
   &.open {
     @include transform(translateX(0));
     @include transition-duration(.7s);

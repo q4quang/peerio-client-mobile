@@ -12,6 +12,13 @@
   width: 80%;
   max-width: 300px;
   margin: auto;
+  .app-version{
+    color: #73B3E0;
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    font-size: 80%;
+  }
   .logo {
     display: block;
     width: 100%;
