@@ -34,6 +34,7 @@
   // Main function executes when all systems are ready (dom, device)
   function main() {
     Peerio.NativeAPI.initialize();
+    Peerio.NativeAPI.hideKeyboardAccessoryBar();
     React.initializeTouchEvents(true);
     React.render(React.createElement(Peerio.UI.App, null), document.body);
   }

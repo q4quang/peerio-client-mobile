@@ -61,6 +61,23 @@
   };
 
   /**
+   * For IOS only. Hides "accessory bar" with "next", "previous" and "done" buttons.
+   */
+  api.hideKeyboardAccessoryBar = function () {
+    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  };
+
+  initializers.hideKeyboardAccessoryBar = function () {
+    if (cordova && cordova.plugins && cordova.plugins.Keyboard)
+      return;
+
+    return console.log.bind(console, getGenericMsg('hideKeyboardAccessoryBar'));
+  };
+
+
+
+
+  /**
    * Get app version from config.xml
    * @param {function(string)} callback
    */

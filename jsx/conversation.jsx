@@ -56,10 +56,18 @@
       if (node.value.isEmpty()) return;
       Peerio.Data.sendMessage(this.conversation, node.value, uuid.v4(), this.state.attachments);
       node.value = '';
+      this.resizeTextAreaAsync();
       this.setState({attachments: []});
     },
-    handleKeyDown: function (e) {
-      if (e.key === 'Enter') this.sendMessage();
+    resizeTextAreaAsync: function () {
+      setTimeout(this.resizeTextArea, 0);
+    },
+    // grows textarea height with content up to max-height css property value
+    // or shrinks down to 1 line
+    resizeTextArea: function(){
+      var node = this.refs.reply.getDOMNode();
+      node.style.height = 'auto';
+      node.style.height = node.scrollHeight+'px';
     },
     openFileSelect: function () {
       Peerio.Actions.showFileSelect(this.state.attachments.slice());
@@ -95,15 +103,22 @@
       return (
         <div>
           <Peerio.UI.ConversationHead subject={conversation.original.decrypted.subject} participants={participants}/>
+
           <div className="content with-reply-box without-tab-bar" ref="content" key="content">
             <div className="conversation">
               {nodes}
             </div>
           </div>
           <div id="reply">
-            <i className="fa fa-thumbs-o-up reply-ack" onTouchEnd={this.sendAck}></i>
-            <input className="reply-input" ref="reply" type="text" placeholder="type your message..." onKeyDown={this.handleKeyDown}/>
-            <i className="fa fa-paperclip reply-attach" onTouchEnd={this.openFileSelect}>{this.state.attachments.length || ''}</i>
+            <div className="reply-ack">
+              <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
+            </div>
+            <textarea className="reply-input" rows="1" ref="reply" onKeyUp={this.resizeTextArea} onChange={this.resizeTextArea}></textarea>
+
+            <div className="reply-attach">
+              <i className="fa fa-paperclip icon-btn"
+                 onTouchEnd={this.openFileSelect}>{this.state.attachments.length || ''}</i>
+            </div>
           </div>
         </div>
       );
@@ -151,7 +166,7 @@
           thisAck = ack;
         } else {
           var filesCount = (item.decrypted.fileIDs && item.decrypted.fileIDs.length) ?
-                            <div className="file-count">{item.decrypted.fileIDs.length} files attached.</div> : null;
+            <div className="file-count">{item.decrypted.fileIDs.length} files attached.</div> : null;
           body = (<div className="body">{filesCount}{item.decrypted.message}</div>);
         }
         var itemClass = React.addons.classSet({
@@ -163,7 +178,7 @@
         nodes.push(
           <div className={itemClass} ts={item.timestamp} key={item.id}>
             <div className="head">
-                {thisAck}
+              {thisAck}
               <span className="names">{sender.fullName}</span>
               <span className="timestamp">
                 {relativeTime}
