@@ -1,5 +1,29 @@
 # Peerio Mobile Change Log
 
+## [v0.6.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/HEAD)
+
+**Implemented enhancements:**
+
+- Preserve whitespace and newlines on message display [\#110](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/110)
+
+- Set proper splashscreens and icons [\#88](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/88)
+
+- Expand text-entry box for messages [\#52](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/52)
+
+- Make "To" field selectable for entry. [\#43](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/43)
+
+- Display recipient on conversation list [\#38](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/38)
+
+**Fixed bugs:**
+
+- Application load error [\#107](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/107)
+
+**Closed issues:**
+
+- Enter key on virtual keyboard should add a line break [\#59](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/59)
+
+- Display app version number on login and in sidebar. [\#42](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/42)
+
 ## [v0.5.0](https://github.com/PeerioTechnologies/peerio-mobile/tree/v0.5.0) (2015-04-28)
 
 **Implemented enhancements:**
