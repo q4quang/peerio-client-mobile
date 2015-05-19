@@ -64,7 +64,7 @@
      // .timeout(loginTimeout)
       .catch(function (err) {
         console.log(err);
-        Peerio.Actions.loginFail((err && err.message) || 'Login fail');
+        Peerio.Actions.loginFail((err && err.message) || 'Incorrect username or passphrase/PIN. If you are signing in with your Peerio PIN, please try using your account passphrase instead.');
       });
   };
 
