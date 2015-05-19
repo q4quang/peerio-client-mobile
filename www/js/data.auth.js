@@ -14,9 +14,7 @@
   window.Peerio = window.Peerio || {};
   Peerio.Data = Peerio.Data || {};
 
-  var authTokenRequestTimeout = 25000;
-  var settingsTimeout = 15000;
-  var totalLoginTimeout = (authTokenRequestTimeout + settingsTimeout)*2;
+  var loginTimeout = 60000;
   // promisified login helpers,
   // todo: should be moved to the new api, when it will be developed
   var doLogin = function (username, passphrase) {
@@ -30,7 +28,7 @@
         else reject("Invalid passphrase or PIN");
       });
 
-    }).timeout(authTokenRequestTimeout);
+    });
   };
 
   var getSettings = function () {
@@ -43,7 +41,7 @@
         Peerio.user.quota = data.quota;
         resolve();
       });
-    }).timeout(settingsTimeout);
+    });
   };
 
   /**
@@ -63,7 +61,7 @@
         Peerio.Actions.loginProgress('Ready.');
         Peerio.Actions.loginSuccess();
       })
-      .timeout(totalLoginTimeout) // todo: remove magic number
+     // .timeout(loginTimeout)
       .catch(function (err) {
         console.log(err);
         Peerio.Actions.loginFail((err && err.message) || 'Login fail');

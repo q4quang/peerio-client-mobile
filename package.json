@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "peerio-mobile",
   "dependencies": {
-	"gulp":"*",
+    "gulp": "*",
     "gulp-react": "*",
     "gulp-sass": "*",
     "gulp-xml-editor": "anri-asaturov/gulp-xml-editor",
     "inquirer": "0.x",
     "semver": "4.x",
     "shelljs": "0.x",
-	"browser-sync": "*"
+    "browser-sync": "*"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/PeerioTechnologies/peerio-mobile/issues"
   },
-  "homepage": "https://github.com/PeerioTechnologies/peerio-mobile"
+  "homepage": "https://github.com/PeerioTechnologies/peerio-mobile",
+  "devDependencies": {
+    "jasmine": "^2.3.1"
+  }
 }
