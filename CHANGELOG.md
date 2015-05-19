@@ -1,5 +1,25 @@
 # Peerio Mobile Change Log
 
+## [v0.7.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.7.0) (2015-05-19)
+
+**Implemented enhancements:**
+
+- Incorrect passphrase/PIN notification [\#111](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/111)
+
+**Fixed bugs:**
+
+- Authentication trouble / Operation timeout [\#124](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/124)
+
+- Font display issue [\#114](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/114)
+
+- Unable to enter body text in new message [\#112](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/112)
+
+- "Type your message" placeholder doesn't disappear [\#25](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/25)
+
+**Closed issues:**
+
+- Increase default font size [\#27](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/27)
+
 ## [v0.6.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/HEAD)
 
 **Implemented enhancements:**
