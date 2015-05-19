@@ -40,8 +40,6 @@
       // mapping hardware back button to navigate back action
       this.subscriptions.push(d.onHardBackButton(Peerio.Actions.navigateBack));
 
-      // pre-creating tabs
-      this.tabs = [<Peerio.UI.Messages/>, <Peerio.UI.Files/>, <Peerio.UI.Contacts/>];
     },
     componentWillUnmount: function () {
       // unsubscribing from global events
@@ -50,12 +48,12 @@
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
     },
     //--- CUSTOM FUNCTIONS
-    twoFA: function(callback){
+    twoFA: function (callback) {
       alert('Please use your computer to disable two-factor authentication before proceeding.');
       Peerio.Actions.loginFail('2fa fail');
       return;
       var code = prompt('Please enter your two-factor authentication code.');
-      if(!code) return;
+      if (!code) return;
       Peerio.Data.validate2FA(code, callback);
     },
     handleSwipe: function (direction) {
@@ -87,8 +85,20 @@
         case this.views.login:
           return <Peerio.UI.LoginScreen/>;
         case this.views.tabs:
-          content = this.tabs[this.state.selectedTab];
+        {
+          switch (this.state.selectedTab) {
+            case 0:
+              content = <Peerio.UI.Messages/>;
+              break;
+            case 1:
+              content = <Peerio.UI.Files/>;
+              break;
+            case 2:
+              content = <Peerio.UI.Contacts/>;
+              break;
+          }
           break;
+        }
         case this.views.newMessage:
           content = <Peerio.UI.NewMessage/>;
           break;
