@@ -1,7 +1,7 @@
 {
-  "name": "peerio-mobile",
+  "name": "peerio-client-mobile",
   "version": "1.0.0",
-  "description": "peerio-mobile",
+  "description": "peerio-client-mobile",
   "dependencies": {
     "gulp": "*",
     "gulp-react": "*",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PeerioTechnologies/peerio-mobile.git"
+    "url": "https://github.com/PeerioTechnologies/peerio-client-mobile.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/PeerioTechnologies/peerio-mobile/issues"
+    "url": "https://github.com/PeerioTechnologies/peerio-client-mobile/issues"
   },
-  "homepage": "https://github.com/PeerioTechnologies/peerio-mobile",
+  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
   "devDependencies": {
     "jasmine": "^2.3.1"
   }

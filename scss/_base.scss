@@ -2,36 +2,25 @@
  *   Shared/universal rules
  */
 html {
-  // specifying root font size
-  // all other font sizes should be in rem units
-  // TODO: media queries
+  // Root font size. All other font sizes should be in rem units
   font-size: 14px;
+  @include user-select(none);
+  @include box-sizing(border-box);
 }
-* {
-  // Use box sizing on all the things!
-  -webkit-box-sizing: border-box;
-//  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  // no tap highlight
-  //-webkit-tap-highlight-color: transparent;
-  // no text select
-  -webkit-user-select: none;
- // -khtml-user-select: none;
- // -moz-user-select: none;
- // -ms-user-select: none;
-  user-select: none;
+
+*, *:before, *:after {
+  @include user-select(inherit);
+  @include box-sizing(inherit);
 }
-//HACK: placeholder not disappearing on focus in textarea
+
+// HACK: placeholder not disappearing on focus in textarea
 input:focus::-webkit-input-placeholder {
   color: transparent;
 }
+
 // except inputs, they can be text-selected
 input, textarea {
-  -webkit-user-select: initial;
- // -khtml-user-select: initial;
- // -moz-user-select: initial;
- // -ms-user-select: initial;
-  user-select: initial;
+  @include user-select(initial);
   border-radius:0;
 }
 button:focus,

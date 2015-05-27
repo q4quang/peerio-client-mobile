@@ -1,5 +1,23 @@
 # Peerio Mobile Change Log
 
+## [v0.8.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.8.0) (2015-05-27)
+
+**Implemented enhancements:**
+
+- Consistent word spacing [\#135](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/135)
+
+- Clickable URLs [\#126](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/126)
+
+**Fixed bugs:**
+
+- Swipe navigation  [\#121](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/121)
+
+- Empty slide-menu in messages [\#119](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/119)
+
+**Closed issues:**
+
+- Copy+paste functions [\#136](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/136)
+
 ## [v0.7.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.7.0) (2015-05-19)
 
 **Implemented enhancements:**
@@ -20,7 +38,7 @@
 
 - Increase default font size [\#27](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/27)
 
-## [v0.6.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/HEAD)
+## [v0.6.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.6.0) (2015-05-06)
 
 **Implemented enhancements:**
 
@@ -44,24 +62,24 @@
 
 - Display app version number on login and in sidebar. [\#42](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/42)
 
-## [v0.5.0](https://github.com/PeerioTechnologies/peerio-mobile/tree/v0.5.0) (2015-04-28)
+## [v0.5.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.5.0) (2015-04-28)
 
 **Implemented enhancements:**
 
-- Sign in screen — make enter key go to next entry field [\#47](https://github.com/PeerioTechnologies/peerio-mobile/issues/47)
+- Sign in screen — make enter key go to next entry field [\#47](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/47)
 
 **Fixed bugs:**
 
-- Time out notification on sign in [\#40](https://github.com/PeerioTechnologies/peerio-mobile/issues/40)
+- Time out notification on sign in [\#40](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/40)
 
 **Closed issues:**
 
-- Configure content security policy [\#76](https://github.com/PeerioTechnologies/peerio-mobile/issues/76)
+- Configure content security policy [\#76](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/76)
 
-- Upgrade to cordova 5.0 [\#67](https://github.com/PeerioTechnologies/peerio-mobile/issues/67)
+- Upgrade to cordova 5.0 [\#67](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/67)
 
-- Reduce app size by building separate apk for each CPU architecture [\#24](https://github.com/PeerioTechnologies/peerio-mobile/issues/24)
+- Reduce app size by building separate apk for each CPU architecture [\#24](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/24)
 
-- Remember last signed in username [\#80](https://github.com/PeerioTechnologies/peerio-mobile/issues/80)
+- Remember last signed in username [\#80](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/80)
 
-## [v0.4.1](https://github.com/PeerioTechnologies/peerio-mobile/tree/v0.4.1) (2015-04-23)
+## [v0.4.1](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.4.1) (2015-04-23)

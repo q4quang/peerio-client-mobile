@@ -1,4 +1,4 @@
-peerio-mobile
+peerio-client-mobile
 =============
 
 Peerio mobile clients

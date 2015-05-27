@@ -94,6 +94,14 @@
     width: 15px;
     text-align: left;
   }
+  .message-count{
+   font-size: 80%;
+    margin-right:5px;
+    color:#8e8e8e;
+  }
+  .message-count-icon{
+    margin-right:1px;
+  }
   .animated-background {
     @include animation-duration(1s);
     @include animation-fill-mode(forwards);
@@ -171,6 +179,7 @@ $item-border-radius: 3px;
   margin-top: 30px;
   padding-bottom: 80px;
   color: $p-blue-darker;
+  @include user-select(initial);
   .item {
     width: 100%;
     padding: $msg-distance $big-side-distance 0 $edge-distance;
@@ -193,7 +202,7 @@ $item-border-radius: 3px;
       }
     }
     .body {
-      text-align: justify;
+      text-align: left;
       overflow-x: auto;
       padding: 0 7px 7px 15px;
       background-color: #E7F5FF;
@@ -356,7 +365,7 @@ $item-border-radius: 3px;
   border: none;
   border-top: 3px solid #F4F2FF;
   border-bottom: 3px solid #F4F2FF;
-  -webkit-user-select: initial; user-select: initial;
+  @include user-select(initial);
   resize: none;
 
   &:focus{

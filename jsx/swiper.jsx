@@ -11,7 +11,7 @@
     displayName: 'Swiper',
     minSwipeLength: 80, // swipe will not be registered if shorter
     swipeTime: 500,    // (ms) maximum time between touch start and touch end events
-    startTouch: null, // first time user touched the screen
+    startTouch: {}, // first time user touched the screen
     startTimeStamp: null,
 
     render: function () {
@@ -28,24 +28,22 @@
 
     handleTouchStart: function (e) {
       if (e.touches.length === 1) {
-        this.startTouch = e.touches[0];
+        var touch = e.touches[0];
+        // ios changes original object on touch end so we need to clone properties we want to remember
+        this.startTouch = {clientX: touch.clientX, clientY: touch.clientY};
         this.startTimeStamp = e.timeStamp;
       }
     },
 
     handleTouchEnd: function (endEvent) {
-      var startTouch = this.startTouch;
-      // clearing this now helps us make less nested code
-      this.startTouch = null;
-      // should not normally happen, but to be safe
-      if (!startTouch || endEvent.changedTouches.length !== 1) return;
+      if (endEvent.changedTouches.length !== 1) return;
       // if gesture took too long time
       if ((endEvent.timeStamp - this.startTimeStamp) > this.swipeTime) return;
 
       var endTouch = endEvent.changedTouches[0];
 
-      var xLength = Math.abs(startTouch.clientX - endTouch.clientX);
-      var yLength = Math.abs(startTouch.clientY - endTouch.clientY);
+      var xLength = Math.abs(this.startTouch.clientX - endTouch.clientX);
+      var yLength = Math.abs(this.startTouch.clientY - endTouch.clientY);
 
       // if swipe is longer on Y axis - it's not a horizontal swipe
       if (yLength > xLength) return;
@@ -54,7 +52,7 @@
       if (Math.sqrt(xLength * xLength + yLength * yLength) < this.minSwipeLength) return;
 
       // firing an event
-      if (startTouch.clientX > endTouch.clientX)
+      if (this.startTouch.clientX > endTouch.clientX)
         this.props.onSwipeLeft();
       else
         this.props.onSwipeRight();

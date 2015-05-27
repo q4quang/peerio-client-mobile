@@ -47,6 +47,20 @@
   };
 
   /**
+   * Opens url in inAppBrowser
+   * @param url
+   */
+  api.openInBrowser = function (url) {
+    cordova.InAppBrowser.open(url, '_system');
+  };
+
+  initializers.openInBrowser = function () {
+    if (cordova && cordova.InAppBrowser) return;
+
+    return window.open;
+  };
+
+  /**
    * Hide software keyboard
    */
   api.hideKeyboard = function () {
@@ -74,9 +88,6 @@
     return console.log.bind(console, getGenericMsg('hideKeyboardAccessoryBar'));
   };
 
-
-
-
   /**
    * Get app version from config.xml
    * @param {function(string)} callback
@@ -93,11 +104,11 @@
     return new Promise(function (resolve, reject) {
       // todo cache path
       var path = '';
-      if(is.ios())
+      if (is.ios())
         path = cordova.file.dataDirectory;
       else if (is.android())
         path = cordova.file.externalDataDirectory;
-      else if(is.blackberry())
+      else if (is.blackberry())
         path = cordova.file.sharedDirectory;
 
       window.resolveLocalFileSystemURL(path, resolve, reject);

@@ -128,7 +128,6 @@
 
 @mixin box-sizing($args) {
   -webkit-box-sizing: $args;
-  //  -moz-box-sizing: $args;
   box-sizing: $args;
 }
 
@@ -138,6 +137,12 @@
 
 @mixin content-box() {
   @include box-sizing(content-box);
+}
+// User select
+
+@mixin user-select($args) {
+  -webkit-user-select: $args;
+  user-select: $args;
 }
 
 // Columns

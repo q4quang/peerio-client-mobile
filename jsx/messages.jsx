@@ -62,7 +62,7 @@
 
         return (
           <Peerio.UI.MessagesItem key={item.id} msgId={item.id} unread={item.original.isModified}
-            fullName={fullName} fileCount={item.fileCount}
+            fullName={fullName} fileCount={item.fileCount} messageCount={item.messageCount}
             subject={item.original.decrypted.subject} ts={ts} />
         );
       });
@@ -90,7 +90,7 @@
           <div className="name-and-subject">
             <span className="name">{this.props.fullName}</span>
             <br/>
-            <span className="subject">{this.props.subject}</span>
+            <span className="subject"><span className="message-count"><i className='fa fa-comment-o message-count-icon'></i>{this.props.messageCount}</span>{this.props.subject}</span>
           </div>
           <div className="timestamp">
             <span className="date">{this.props.ts.format('MMM Do, YYYY')}</span>

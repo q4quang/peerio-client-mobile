@@ -64,10 +64,10 @@
     },
     // grows textarea height with content up to max-height css property value
     // or shrinks down to 1 line
-    resizeTextArea: function(){
+    resizeTextArea: function () {
       var node = this.refs.reply.getDOMNode();
       node.style.height = 'auto';
-      node.style.height = node.scrollHeight+'px';
+      node.style.height = node.scrollHeight + 'px';
     },
     openFileSelect: function () {
       Peerio.Actions.showFileSelect(this.state.attachments.slice());
@@ -113,7 +113,8 @@
             <div className="reply-ack">
               <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
             </div>
-            <textarea className="reply-input" rows="1" ref="reply" onKeyUp={this.resizeTextArea} onChange={this.resizeTextArea}></textarea>
+            <textarea className="reply-input" rows="1" ref="reply" onKeyUp={this.resizeTextArea}
+                      onChange={this.resizeTextArea}></textarea>
 
             <div className="reply-attach">
               <i className="fa fa-paperclip icon-btn"
@@ -122,6 +123,21 @@
           </div>
         </div>
       );
+    },
+    sanitizingOptions: {ALLOWED_TAGS: [], ALLOWED_ATTR: []},
+    autolinker: new Autolinker({
+      twitter: false,
+      replaceFn: function (autolinker, match) {
+        var tag = autolinker.getTagBuilder().build(match);
+        tag.setAttr('onclick', "javascript:Peerio.NativeAPI.openInBrowser('" + match.getAnchorHref() + "');event.preventDefault()");
+        tag.setAttr('href', '#');
+        return tag;
+      }
+    }),
+    processBody: function (body) {
+      body = DOMPurify.sanitize(body, this.sanitizingOptions);
+      body = this.autolinker.link(body);
+      return {__html: body};
     },
     // render helper, returns react nodes for messages
     buildNodes: function () {
@@ -167,7 +183,9 @@
         } else {
           var filesCount = (item.decrypted.fileIDs && item.decrypted.fileIDs.length) ?
             <div className="file-count">{item.decrypted.fileIDs.length} files attached.</div> : null;
-          body = (<div className="body">{filesCount}{item.decrypted.message}</div>);
+          body = (<div className="body">{filesCount}
+            <span dangerouslySetInnerHTML={this.processBody(item.decrypted.message)}></span>
+          </div>);
         }
         var itemClass = React.addons.classSet({
           'item': true,
@@ -188,7 +206,7 @@
             {receipts}
           </div>
         );
-      });
+      }.bind(this));
       // sorting by timestamp
       nodes.sort(function (a, b) { return a.props.ts < b.props.ts ? -1 : (a.props.ts > b.props.ts ? 1 : 0); });
       return nodes;
