@@ -40,7 +40,7 @@
             <Peerio.UI.Avatar size="big" username={item.username}/>
             <span className="name">{item.fullName}</span>
             <br/>
-            <span className="username">{item.username}</span>
+            <span className="username">{item.username} { item.isMe ? '(You)' : ''}</span>
             {item.isRequest ? (item.isReceivedRequest ? <i className="fa fa-user-plus status"></i> : <i className="fa fa-paper-plane-o status"></i> ) : null}
           </div>
         );
@@ -98,7 +98,7 @@
             <Peerio.UI.Avatar size="big" username={c.username} className="contact-view-avatar"/>
             <span className="name">{c.fullName}</span>
             <br/>
-            <span className="username">{c.username}</span>
+            <span className="username">{c.username} { c.isMe ? '(You)' : ''}</span>
           </div>
           <div className="info-blocks">
             <div className="block">
