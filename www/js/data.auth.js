@@ -52,6 +52,7 @@
    */
   Peerio.Data.login = function (username, passphrase) {
     Peerio.Actions.loginProgress('Authenticating...');
+    username = username.toLowerCase();
     doLogin(username, passphrase)
       .then(Peerio.Actions.loginProgress.bind(null, 'Retrieving user data...'))
       .then(getSettings)
