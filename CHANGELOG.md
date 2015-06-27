@@ -1,5 +1,21 @@
 # Peerio Mobile Change Log
 
+## [v.0.9.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.9.0) (2015-06-27)
+
+**Implemented enhancements:**
+
+- Remember last user display [\#139](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/139)
+
+- Add you/user tag when viewing your own contact info [\#101](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/101)
+
+**Fixed bugs:**
+
+- User should not be able to send messages to pending contacts [\#140](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/140)
+
+- Prompt to add contact when navigating to files tab. [\#122](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/122)
+
+- On sign-up, default username to lowercase [\#104](https://github.com/PeerioTechnologies/peerio-client-mobile/issues/104)
+
 ## [v0.8.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.8.0) (2015-05-27)
 
 **Implemented enhancements:**
