@@ -105,7 +105,7 @@
     render: function () {
       var contacts = [];
       Peerio.Helpers.forEachContact(function (c) {
-        if (c.username === Peerio.user.username) return;
+        if (c.username === Peerio.user.username || c.isRequest) return;
         var checkMark = this.props.selection.indexOf(c.username) >= 0
           ? (<i className="fa fa-check-circle"></i>) : '';
 
