@@ -26,7 +26,7 @@
       Peerio.Dispatcher.onLoginSuccess(this.handleLoginDone.bind(this, true));
       Peerio.Dispatcher.onLoginFail(this.handleLoginDone.bind(this, false));
       Peerio.Data.getLastLogin()
-        .then(function (login) {
+        .then(function (login, name) {
           this.setState({savedLogin: login});
         }.bind(this)).catch(function () {
           this.setState({savedLogin: null});
@@ -40,7 +40,7 @@
       this.setState({loginState: state});
     },
     handleLoginDone: function (success, message) {
-      Peerio.Data.setLastLogin(Peerio.user.username);
+      Peerio.Data.setLastLogin(Peerio.user.username, Peerio.user.firstName);
       if (this.isMounted())
         this.setState({loginError: success ? false : message, waitingForLogin: false, loginState: ''});
     },
@@ -73,7 +73,7 @@
       // we want to close mobile keyboard after user submits the login form
       var userNode;
       if (this.state.savedLogin) {
-        userNode = {value: this.state.savedLogin};
+        userNode = {value: this.state.savedLogin.login};
       } else {
         userNode = this.refs.username.getDOMNode();
         userNode.blur();
@@ -124,7 +124,7 @@
             <form className="loginForm" onSubmit={this.handleSubmit}>
               {this.state.savedLogin
                 ?
-                (<div className="saved-login" onTouchEnd={this.clearLogin}>{this.state.savedLogin}
+                (<div className="saved-login" onTouchEnd={this.clearLogin}>{this.state.savedLogin.name||this.state.savedLogin.login}
                   <div className="note">Welcome back.
                     <br/>
                     Tap here to change or forget username.

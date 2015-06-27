@@ -92,27 +92,29 @@
   };
 
   var lastLoginId = 'lastLogin';
-  Peerio.Data.setLastLogin = function (login) {
+  Peerio.Data.setLastLogin = function (login, name) {
     var db = new PouchDB('_default', Peerio.storage.options);
     db.get(lastLoginId).then(function (doc) {
       return db.put({
         _id: lastLoginId,
         _rev: doc._rev,
-        login: login
+        login: login,
+        name: name
       });
     }).catch(function (err) {
       db.put({
         _id: lastLoginId,
-        login: login
+        login: login,
+        name: name
       });
     });
   };
 
-  Peerio.Data.getLastLogin = function (login) {
+  Peerio.Data.getLastLogin = function () {
     var db = new PouchDB('_default', Peerio.storage.options);
     return db.get(lastLoginId)
       .then(function (doc) {
-        return doc.login;
+        return {login:doc.login, name:doc.name};
       });
   };
 
