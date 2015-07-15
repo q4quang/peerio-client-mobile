@@ -28,7 +28,8 @@
     "bluebird": "~2.x",
     "jssha": "*",
     "Autolinker.js": "~0.17.1",
-    "dompurify": "~0.6.4"
+    "dompurify": "~0.6.4",
+    "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git"
   },
   "install": {
     "base": "www/bower",
@@ -36,9 +37,11 @@
       "css": "",
       "js": "",
       "/font-awesome\\.css/": "{name}/css",
-      "/fontawesome-webfont.*/": "{name}/fonts"
+      "/fontawesome-webfont.*/": "{name}/fonts",
+      "/peerio-client-api\/dist\/dict.*txt/": "{name}"
     },
     "sources": {
+      "peerio-client-api": "bower_components/peerio-client-api/dist/**",
       "font-awesome": [
         "bower_components/font-awesome/css/font-awesome.css",
         "bower_components/font-awesome/fonts/fontawesome-webfont.woff",
