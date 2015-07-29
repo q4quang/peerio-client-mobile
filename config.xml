@@ -38,6 +38,8 @@
     <plugin name="cordova-plugin-statusbar" spec="1.x"/>
     <plugin name="com.ionic.keyboard" spec="1.x"/>
     <plugin name="com.disusered.open" spec="1.x"/>
+    <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="^1.1.1" />
+
     <!-- Cordova plugin installer will target  this xwalk major version -->
     <preference name="xwalkVersion" value="12"/>
 
