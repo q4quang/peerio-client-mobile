@@ -16,19 +16,14 @@
   ],
   "dependencies": {
     "normalize.css": "*",
-    "pouchdb": "3.x",
-    "zxcvbn": "*",
     "font-awesome": "*",
     "react": "0.x",
     "moment": "*",
-    "lodash": "*",
-    "node-uuid": "*",
     "is_js": "*",
     "gsap": "*",
-    "bluebird": "~2.x",
     "jssha": "*",
-    "Autolinker.js": "~0.17.1",
-    "dompurify": "~0.6.4",
+    "Autolinker.js": "*",
+    "dompurify": "*",
     "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git"
   },
   "install": {
