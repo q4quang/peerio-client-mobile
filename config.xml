@@ -27,21 +27,20 @@
     <preference name="StatusBarBackgroundColor" value="#233445"/>
 
     <!-- Cordova plugins -->
-    <plugin name="cordova-plugin-file" spec="2.x"/>
-    <plugin name="cordova-plugin-whitelist" spec="1.x"/>
-    <plugin name="cordova-plugin-appversion" spec="1.x"/>
-    <plugin name="cordova-plugin-crosswalk-webview" spec="1.x"/>
-    <plugin name="cordova-plugin-device" spec="1.x"/>
-    <plugin name="cordova-plugin-file-transfer" spec="1.x"/>
-    <plugin name="cordova-plugin-splashscreen" spec="2.x"/>
-    <plugin name="cordova-plugin-sqlite" spec="0.x"/>
-    <plugin name="cordova-plugin-statusbar" spec="1.x"/>
-    <plugin name="com.ionic.keyboard" spec="1.x"/>
-    <plugin name="com.disusered.open" spec="1.x"/>
-    <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="^1.1.1" />
+    <plugin name="cordova-plugin-file" spec="*"/>
+    <plugin name="cordova-plugin-whitelist" spec="*"/>
+    <plugin name="cordova-plugin-appversion" spec="*"/>
+    <plugin name="cordova-plugin-crosswalk-webview" spec="*"/>
+    <plugin name="cordova-plugin-device" spec="*"/>
+    <!--<plugin name="cordova-plugin-file-transfer" spec="*"/>-->
+    <plugin name="cordova-plugin-splashscreen" spec="*"/>
+    <plugin name="cordova-plugin-statusbar" spec="*"/>
+    <plugin name="com.ionic.keyboard" spec="*"/>
+    <!--<plugin name="com.disusered.open" spec="*"/>-->
+    <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="*" />
 
     <!-- Cordova plugin installer will target  this xwalk major version -->
-    <preference name="xwalkVersion" value="12"/>
+    <preference name="xwalkVersion" value="14"/>
 
     <!-- ANDROID-SPECIFIC CONFIG-->
     <platform name="android">
