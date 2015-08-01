@@ -21,13 +21,13 @@
     },
     openConversation: function (id) {
       this.setState({openConversation: id});
-      Peerio.Actions.navigatedIn('send', Peerio.Actions.sendCurrentMessage);
+      Peerio.Action.navigatedIn('send', Peerio.Action.sendCurrentMessage);
     },
     back: function () {
       // todo: probably subview should control it's own closing, utilizing event processing interruption and signalling back to parent
       if(this.state.openConversation===null) return;
       this.setState({openConversation: null});
-      Peerio.Actions.navigatedOut();
+      Peerio.Action.navigatedOut();
     },
     globalTapHandler: function (e) {
       var item = Peerio.Helpers.getParentWithClass(e.target, 'list-item');

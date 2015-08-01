@@ -32,7 +32,7 @@
 
       return (
         <div id="navbar">
-          <div id="sidemenu-toggle" ref="toggle" onTouchStart={Peerio.Actions.sidebarToggle}>
+          <div id="sidemenu-toggle" ref="toggle" onTouchStart={Peerio.Action.sidebarToggle}>
             <i className="fa fa-bars"></i>
           </div>
           <div className="logo"><img src="media/img/peerio-short-logo-white.png" className="peerio-logo" /></div>

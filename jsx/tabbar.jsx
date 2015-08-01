@@ -24,7 +24,7 @@
     changeTab: function (tab) {
       if (tab === this.state.selectedTab) return;
       this.setState({selectedTab: tab}, function () {
-        Peerio.Actions.tabChange(tab);
+        Peerio.Action.tabChange(tab);
       });
 
     },

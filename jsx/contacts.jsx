@@ -57,12 +57,12 @@
 
   Peerio.UI.ContactView = React.createClass({
     componentDidMount: function () {
-      Peerio.Actions.navigatedIn();
-      Peerio.Actions.tabBarHide();
+      Peerio.Action.navigatedIn();
+      Peerio.Action.tabBarHide();
     },
     componentWillUnmount: function () {
-      Peerio.Actions.navigatedOut();
-      Peerio.Actions.tabBarShow();
+      Peerio.Action.navigatedOut();
+      Peerio.Action.tabBarShow();
     },
     handleAccept: function () {
       Peerio.Data.acceptContact(this.props.username);
@@ -75,7 +75,7 @@
         + ' from contacts? You will not be able to message and share files with this contact after removal.')) return;
 
       Peerio.Data.removeContact(this.props.username)
-        .then(Peerio.Actions.navigateBack);
+        .then(Peerio.Action.navigateBack);
     },
     render: function () {
       var c = Peerio.user.contacts[this.props.username];

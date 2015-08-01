@@ -67,13 +67,13 @@
   Peerio.UI.FileView = React.createClass({
     componentDidMount: function () {
       // this.subscription = Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null));
-      Peerio.Actions.navigatedIn();
-      Peerio.Actions.tabBarHide();
+      Peerio.Action.navigatedIn();
+      Peerio.Action.tabBarHide();
     },
     componentWillUnmount: function () {
       // Peerio.Dispatcher.unsubscribe(this.subscription);
-      Peerio.Actions.navigatedOut();
-      Peerio.Actions.tabBarShow();
+      Peerio.Action.navigatedOut();
+      Peerio.Action.tabBarShow();
     },
     handleOpen: function () {
       Peerio.Data.openCachedFile(this.props.file)
@@ -99,7 +99,7 @@
     handleRemove: function () {
       if (!confirm('Remove this file? (it will be deleted from your device and cloud, but will be available for users who you may have shared it with)')) return;
       Peerio.Data.removeFile(this.props.file)
-        .then(Peerio.Actions.navigateBack())
+        .then(Peerio.Action.navigateBack())
         .catch(function (error) {
           console.log('Error deleting file:', error);
           alert('Failed to remove file.');
@@ -108,7 +108,7 @@
     handleNuke: function () {
       if (!confirm('Destroy file completely? (it will be deleted from your device, cloud and from the clouds of other users who you may have shared it with.)')) return;
       Peerio.Data.removeFile(this.props.file, true)
-        .then(Peerio.Actions.navigateBack())
+        .then(Peerio.Action.navigateBack())
         .catch(function (error) {
           console.log('Error deleting file:', error);
           alert('Failed to remove file.');

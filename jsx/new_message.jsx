@@ -10,30 +10,30 @@
     componentDidMount: function () {
       Peerio.Dispatcher.onFilesSelected(this.handleFilesSelected);
       Peerio.Dispatcher.onNavigateBack(this.handleNavigateBack);
-      Peerio.Actions.navigatedIn('send', this.send);
-      Peerio.Actions.tabBarHide();
+      Peerio.Action.navigatedIn('send', this.send);
+      Peerio.Action.tabBarHide();
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.handleNavigateBack, this.handleFilesSelected);
-      Peerio.Actions.navigatedOut();
-      Peerio.Actions.tabBarShow();
+      Peerio.Action.navigatedOut();
+      Peerio.Action.tabBarShow();
     },
     //--- CUSTOM FN
     send: function () {
       //todo validation
       Peerio.Data.sendNewMessage(this.state.recipients, this.refs.subject.getDOMNode().value, this.refs.message.getDOMNode().value, this.state.attachments);
-      Peerio.Actions.newMessageViewClose();
+      Peerio.Action.newMessageViewClose();
     },
     // todo: this is quite ugly, change it to the way file selector is made
     handleNavigateBack: function () {
       if (this.state.showContactSelect) {
         this.setState({showContactSelect: false});
-        Peerio.Actions.navigatedOut();
-      } else Peerio.Actions.newMessageViewClose();
+        Peerio.Action.navigatedOut();
+      } else Peerio.Action.newMessageViewClose();
     },
     openContactSelect: function () {
       this.recipientsCopy = this.state.recipients.slice();
-      Peerio.Actions.navigatedIn('Ok', this.acceptContactSelection);
+      Peerio.Action.navigatedIn('Ok', this.acceptContactSelection);
       this.setState({showContactSelect: true});
     },
     acceptContactSelection: function () {
@@ -41,7 +41,7 @@
       this.handleNavigateBack();
     },
     openFileSelect: function () {
-      Peerio.Actions.showFileSelect(this.state.attachments.slice());
+      Peerio.Action.showFileSelect(this.state.attachments.slice());
     },
     handleFilesSelected: function (selection) {
       this.setState({attachments: selection});

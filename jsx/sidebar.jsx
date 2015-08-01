@@ -56,7 +56,7 @@
             <div id="sidebar" className={className}>
               <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
               <ul ref="menu">
-                <li onTouchStart={Peerio.Actions.signOut}>Sign Out</li>
+                <li onTouchStart={Peerio.Action.signOut}>Sign Out</li>
                 <li className="header">PIN CODE IS {Peerio.user.PIN ? 'SET' : 'NOT SET'}</li>
                 {pinNode}
               </ul>

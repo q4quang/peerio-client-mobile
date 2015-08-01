@@ -31,7 +31,7 @@
         return;
       }
       this.selection = selection || [];
-      Peerio.Actions.navigatedIn('Ok', this.accept);
+      Peerio.Action.navigatedIn('Ok', this.accept);
       Peerio.Dispatcher.onNavigateBack(this.cancel);
       this.setState({visible: true});
     },
@@ -40,16 +40,16 @@
 
       this.setState({visible: false}, function () {
         this.selection = null;
-        Peerio.Actions.navigatedOut();
+        Peerio.Action.navigatedOut();
       });
       return true;
     },
     accept: function () {
       this.setState({visible: false}, function () {
-        Peerio.Actions.filesSelected(this.selection);
+        Peerio.Action.filesSelected(this.selection);
         this.selection = null;
         this.setState({visible: false});
-        Peerio.Actions.navigatedOut();
+        Peerio.Action.navigatedOut();
       });
     },
     globalTapHandler: function (e) {

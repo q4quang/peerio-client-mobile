@@ -29,14 +29,14 @@
         Peerio.Data.refreshConversation(this.props.conversationId);
       }
       // tabbar not needed here
-      Peerio.Actions.tabBarHide();
+      Peerio.Action.tabBarHide();
       // to update relative timestamps
       this.renderInterval = window.setInterval(this.forceUpdate.bind(this), 20000);
     },
     componentWillUnmount: function () {
       window.clearInterval(this.renderInterval);
       Peerio.Dispatcher.unsubscribe(this.rerender, this.sendMessage, this.handleFilesSelected);
-      Peerio.Actions.tabBarShow();
+      Peerio.Action.tabBarShow();
     },
     componentDidUpdate: function () {
       this.scrollToBottom();
@@ -70,7 +70,7 @@
       node.style.height = node.scrollHeight + 'px';
     },
     openFileSelect: function () {
-      Peerio.Actions.showFileSelect(this.state.attachments.slice());
+      Peerio.Action.showFileSelect(this.state.attachments.slice());
     },
     scrollToBottom: function () {
       if (!this.needsScroll) return;

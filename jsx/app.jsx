@@ -38,7 +38,7 @@
         d.onTwoFAValidateFail(this.twoFA)
       ];
       // mapping hardware back button to navigate back action
-      this.subscriptions.push(d.onHardBackButton(Peerio.Actions.navigateBack));
+      this.subscriptions.push(d.onHardBackButton(Peerio.Action.navigateBack));
 
     },
     componentWillUnmount: function () {
@@ -50,7 +50,7 @@
     //--- CUSTOM FUNCTIONS
     twoFA: function (callback) {
       alert('Please use your computer to disable two-factor authentication before proceeding.');
-      Peerio.Actions.loginFail('2fa fail');
+      Peerio.Action.loginFail('2fa fail');
       return;
       var code = prompt('Please enter your two-factor authentication code.');
       if (!code) return;
@@ -61,14 +61,14 @@
       if (Peerio.AppState.navigationLevel === 0 && this.state.currentView === this.views.tabs) {
         if (direction === 'right') {
           if (this.state.selectedTab > 0)
-            Peerio.Actions.tabChange(this.state.selectedTab - 1);
+            Peerio.Action.tabChange(this.state.selectedTab - 1);
         } else {
           if (this.state.selectedTab < this.maxTabIndex)
-            Peerio.Actions.tabChange(this.state.selectedTab + 1);
+            Peerio.Action.tabChange(this.state.selectedTab + 1);
         }
       }
 
-      if (direction === 'left') Peerio.Actions.navigateBack();
+      if (direction === 'left') Peerio.Action.navigateBack();
     },
     signOut: function () {
       //TODO check for unsaved changes (save draft?) before exit

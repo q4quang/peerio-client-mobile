@@ -51,30 +51,30 @@
    * @param passphrase or pin
    */
   Peerio.Data.login = function (username, passphrase) {
-    Peerio.Actions.loginProgress('Authenticating...');
+    Peerio.Action.loginProgress('Authenticating...');
     username = username.toLowerCase();
     doLogin(username, passphrase)
-      .then(Peerio.Actions.loginProgress.bind(null, 'Retrieving user data...'))
+      .then(Peerio.Action.loginProgress.bind(null, 'Retrieving user data...'))
       .then(getSettings)
-      .then(Peerio.Actions.loginProgress.bind(null, 'Retrieving contacts...'))
+      .then(Peerio.Action.loginProgress.bind(null, 'Retrieving contacts...'))
       .then(Peerio.Data.loadContacts.bind(null, true))
       .then(function () {
-        Peerio.Actions.loginProgress('Ready.');
-        Peerio.Actions.loginSuccess();
+        Peerio.Action.loginProgress('Ready.');
+        Peerio.Action.loginSuccess();
       })
      // .timeout(loginTimeout)
       .catch(function (err) {
         console.log(err);
-        Peerio.Actions.loginFail((err && err.message) || 'Incorrect username or passphrase/PIN. If you are signing in with your Peerio PIN, please try using your account passphrase instead.');
+        Peerio.Action.loginFail((err && err.message) || 'Incorrect username or passphrase/PIN. If you are signing in with your Peerio PIN, please try using your account passphrase instead.');
       });
   };
 
   Peerio.Data.validate2FA = function (code, callback) {
     Peerio.network.validate2FA(code, function (data) {
       if (data && data.hasOwnProperty('error'))
-        Peerio.Actions.twoFAValidateFail();
+        Peerio.Action.twoFAValidateFail();
       else {
-        Peerio.Actions.twoFAValidateSuccess();
+        Peerio.Action.twoFAValidateSuccess();
       }
       callback();
     });

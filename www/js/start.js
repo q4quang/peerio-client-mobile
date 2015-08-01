@@ -18,24 +18,30 @@
 
   // core js calls this, TODO: change core to use event system
   Peerio.UI.contactsSectionPopulate = Peerio.Data.loadContacts;
-  Peerio.UI.onSocketReconnecting = Peerio.Actions.socketDisconnect;
-  Peerio.UI.onSocketReconnect = Peerio.Actions.socketConnect;
   Peerio.UI.messagesSectionUpdate = Peerio.Data.refreshMessages;
-  Peerio.UI.twoFactorAuth = Peerio.Actions.twoFARequest;
   Peerio.UI.showRateLimitedAlert = noop.bind(null, 'rate limited.');
   Peerio.UI.showBlacklistedAlert = noop.bind(null, 'blacklisted.');
   Peerio.UI.filesSectionPopulate = Peerio.Data.loadFiles.bind(null, true);
-  // Hardware/OS event handlers
-  document.addEventListener('pause', Peerio.Actions.pause, false);
-  document.addEventListener('resume', Peerio.Actions.resume, false);
-  document.addEventListener('backbutton', Peerio.Actions.hardBackButton, false);
-  document.addEventListener('menubutton', Peerio.Actions.hardMenuButton, false);
+
 
   // Main function executes when all systems are ready (dom, device)
   function main() {
-    Peerio.NativeAPI.initialize();
+    Peerio.initAPI();
+    // order matters
+    Peerio.ActionExtension.init();
+    Peerio.AppStateExtension.init();
+
+    Peerio.NativeAPI.init();
     Peerio.NativeAPI.hideKeyboardAccessoryBar();
+
+    // Hardware/OS event handlers
+    document.addEventListener('pause', Peerio.Action.pause, false);
+    document.addEventListener('resume', Peerio.Action.resume, false);
+    document.addEventListener('backbutton', Peerio.Action.hardBackButton, false);
+    document.addEventListener('menubutton', Peerio.Action.hardMenuButton, false);
+
     React.initializeTouchEvents(true);
+
     React.render(React.createElement(Peerio.UI.App, null), document.body);
   }
 

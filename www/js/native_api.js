@@ -33,7 +33,7 @@
    * call this function during application startup but after DeviceReady event
    * it resolves availability/differences in implementation
    */
-  api.initialize = function () {
+  api.init = function () {
     _.forOwn(initializers, function (fn, name) {
       // if initializer returns alternative function
       // (usually a mock that is safe to call)
@@ -43,7 +43,7 @@
     });
     // cleaning memory
     initializers = null;
-    api.initialize = null;
+    api.init = null;
   };
 
   /**

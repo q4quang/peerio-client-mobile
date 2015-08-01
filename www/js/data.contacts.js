@@ -17,15 +17,15 @@
   Peerio.Data.loadContacts = function (reportProgress) {
     return new Promise(function (resolve, reject) {
       Peerio.user.getAllContacts(function (identitiesMatch) {
-        if (!identitiesMatch) Peerio.Actions.tOFUFail();
+        if (!identitiesMatch) Peerio.Action.tOFUFail();
 
-        if (reportProgress) Peerio.Actions.loginProgress('Building identicons...');
+        if (reportProgress) Peerio.Action.loginProgress('Building identicons...');
         Peerio.Data.buildIdenticons();
 
-        if (reportProgress) Peerio.Actions.loginProgress('Building contact properties...');
+        if (reportProgress) Peerio.Action.loginProgress('Building contact properties...');
         Peerio.Data.buildContactProperties();
         Peerio.user.fullName = Peerio.user.contacts[Peerio.user.username].fullName;
-        Peerio.Actions.contactsUpdated();
+        Peerio.Action.contactsUpdated();
         resolve();
       });
     });
@@ -60,7 +60,7 @@
   // todo: handle errors in callbacks
   Peerio.Data.acceptContact = function (username) {
     Peerio.user.contacts[username].responsePending = true;
-    Peerio.Actions.contactsUpdated();
+    Peerio.Action.contactsUpdated();
     return new Promise(function (resolve, reject) {
       Peerio.network.acceptContactRequest(username, resolve);
     })
@@ -77,7 +77,7 @@
 
   Peerio.Data.rejectContact = function (username) {
     Peerio.user.contacts[username].responsePending = true;
-    Peerio.Actions.contactsUpdated();
+    Peerio.Action.contactsUpdated();
     return new Promise(function (resolve, reject) {
       Peerio.network.declineContactRequest(username, resolve);
     })
@@ -94,7 +94,7 @@
 
   Peerio.Data.removeContact = function (username) {
     Peerio.user.contacts[username].responsePending = true;
-    Peerio.Actions.contactsUpdated();
+    Peerio.Action.contactsUpdated();
     return new Promise(function (resolve, reject) {
       var c = Peerio.user.contacts[username];
       if(c.isRequest && !c.isReceivedRequest)
