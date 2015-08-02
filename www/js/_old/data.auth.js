@@ -14,22 +14,22 @@
   window.Peerio = window.Peerio || {};
   Peerio.Data = Peerio.Data || {};
 
-  var loginTimeout = 60000;
-  // promisified login helpers,
-  // todo: should be moved to the new api, when it will be developed
-  var doLogin = function (username, passphrase) {
-    return new Promise(function (resolve, reject) {
-
-      Peerio.storage.init(username);
-      Peerio.user.login(username, passphrase, false, function () {
-        // at the moment this callback is called
-        // we should have some auth tokens if login was a success
-        if (Peerio.user.authTokens.length) resolve();
-        else reject("Invalid passphrase or PIN");
-      });
-
-    });
-  };
+  //var loginTimeout = 60000;
+  //// promisified login helpers,
+  //// todo: should be moved to the new api, when it will be developed
+  //var doLogin = function (username, passphrase) {
+  //  return new Promise(function (resolve, reject) {
+  //
+  //    Peerio.storage.init(username);
+  //    Peerio.user.login(username, passphrase, false, function () {
+  //      // at the moment this callback is called
+  //      // we should have some auth tokens if login was a success
+  //      if (Peerio.user.authTokens.length) resolve();
+  //      else reject("Invalid passphrase or PIN");
+  //    });
+  //
+  //  });
+  //};
 
   var getSettings = function () {
     return new Promise(function (resolve, reject) {

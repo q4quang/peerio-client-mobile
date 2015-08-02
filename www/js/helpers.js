@@ -2,11 +2,13 @@
  * Various helper functions that didn't fit anywhere else
  * ------------------------------------------------------
  */
-(function () {
+var Peerio = this.Peerio || {};
+Peerio.Helpers = {};
+
+Peerio.Helpers.init = function () {
   'use strict';
 
-  window.Peerio = window.Peerio || {};
-  Peerio.Helpers = {};
+  var api = Peerio.Helpers = {};
 
   /**
    * Returns same element or first parent dom element that has a specific css class
@@ -14,7 +16,7 @@
    * @param className - class name to look for
    * @returns dom element or null
    */
-  Peerio.Helpers.getParentWithClass = function (element, className) {
+  api.getParentWithClass = function (element, className) {
     do {
       if (element.classList.contains(className)) return element;
       element = element.parentElement;
@@ -36,7 +38,7 @@
    * @returns {function}
    * @note  at least one of the states should be specified. If passed both - they will be merged.
    */
-  Peerio.Helpers.getStateUpdaterFn = function (self, staticState, mappedState, callback) {
+  api.getStateUpdaterFn = function (self, staticState, mappedState, callback) {
     // validating params
     if (!staticState && !mappedState) throw 'Wrong use of getStateUpdaterFn.';
 
@@ -69,7 +71,7 @@
    * @param conversationId {string}   - Id of the conversation to iterate
    * @param fn             {function(message)} - function to call for each message in conversation
    */
-  Peerio.Helpers.forEachMessage = function (conversationId, fn) {
+  api.forEachMessage = function (conversationId, fn) {
     if (!Peerio.user || !Peerio.user.conversations) return;
     var m = Peerio.user.conversations.hasOwnProperty(conversationId) ? Peerio.user.conversations[conversationId].messages : null;
     if (m === null) return;
@@ -86,7 +88,7 @@
    * Safely iterates through contacts, calling function on each one
    * @param fn {function(contact)} - function to call for each contact
    */
-  Peerio.Helpers.forEachContact = function (fn) {
+  api.forEachContact = function (fn) {
     var c = Peerio.user.contacts;
     for (var id in c) {
       if (!c.hasOwnProperty(id)) continue;
@@ -99,7 +101,7 @@
    * @param bytes
    * @returns {string}
    */
-  Peerio.Helpers.bytesToSize = function (bytes) {
+  api.bytesToSize = function (bytes) {
     if (bytes === 0) return '0 Byte';
     var k = 1024;
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -112,7 +114,7 @@
    * @param {string} data
    * @returns {string} b64 encoded hash with '=' character in the end
    */
-  Peerio.Helpers.sha256 = function(data){
+  api.sha256 = function(data){
     return new jsSHA(data, 'TEXT').getHash('SHA-256', 'HEX');
   };
 
@@ -212,11 +214,11 @@
     }
   ];
 
-  Peerio.Helpers.fileIconsByExt = {};
+  api.fileIconsByExt = {};
 
   fileTypes.forEach(function (type) {
     type.extensions.forEach(function (ext) {
-      Peerio.Helpers.fileIconsByExt[ext] = type.icon;
+      api.fileIconsByExt[ext] = type.icon;
     });
   });
   /**
@@ -224,13 +226,14 @@
    * @param fileName
    * @returns {string} dot-less extension
    */
-  Peerio.Helpers.getFileExtension = function(fileName){
+  api.getFileExtension = function(fileName){
     var extension = fileName.toLowerCase().match(/\.\w+$/);
     extension = extension ? extension[0].substring(1) : '';
     return extension;
   };
-  Peerio.Helpers.getFileIconByName = function (fileName) {
-    return Peerio.Helpers.fileIconsByExt[Peerio.Helpers.getFileExtension(fileName)] || 'file-o';
+
+  api.getFileIconByName = function (fileName) {
+    return api.fileIconsByExt[api.getFileExtension(fileName)] || 'file-o';
   };
 
-}());
+};

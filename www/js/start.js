@@ -1,35 +1,19 @@
+var Peerio = this.Peerio || {};
+
 (function () {
   'use strict';
 
-  // Initializing global object to store UI components
-  window.Peerio = window.Peerio || {};
-
-  // Peerio core code will running in mobile mode
-  Peerio.isMobile = true;
-
-  Peerio.UI = Peerio.UI || {};
-
-  // TODO: handle this properly somewhere
-  var noop = function (a) {
-    if (a !== undefined) {
-      console.log('MOCKED FN MSG: ', a);
-    }
-  };
-
-  // core js calls this, TODO: change core to use event system
-  Peerio.UI.contactsSectionPopulate = Peerio.Data.loadContacts;
-  Peerio.UI.messagesSectionUpdate = Peerio.Data.refreshMessages;
-  Peerio.UI.showRateLimitedAlert = noop.bind(null, 'rate limited.');
-  Peerio.UI.showBlacklistedAlert = noop.bind(null, 'blacklisted.');
-  Peerio.UI.filesSectionPopulate = Peerio.Data.loadFiles.bind(null, true);
-
+  Peerio.UI = {};
 
   // Main function executes when all systems are ready (dom, device)
   function main() {
+    // peerio client api
     Peerio.initAPI();
+
     // order matters
     Peerio.ActionExtension.init();
     Peerio.AppStateExtension.init();
+    Peerio.Helpers.init();
 
     Peerio.NativeAPI.init();
     Peerio.NativeAPI.hideKeyboardAccessoryBar();
@@ -51,7 +35,6 @@
       document.addEventListener('deviceready', main, false);
     else
       main();
-
   });
 
 }());
