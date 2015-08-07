@@ -31,7 +31,7 @@
         return;
       }
       this.selection = selection || [];
-      Peerio.Action.navigatedIn('Ok', this.accept);
+      //Peerio.Action.navigatedIn('Ok', this.accept);
       Peerio.Dispatcher.onNavigateBack(this.cancel);
       this.setState({visible: true});
     },
@@ -40,7 +40,7 @@
 
       this.setState({visible: false}, function () {
         this.selection = null;
-        Peerio.Action.navigatedOut();
+        //Peerio.Action.navigatedOut();
       });
       return true;
     },
@@ -49,7 +49,7 @@
         Peerio.Action.filesSelected(this.selection);
         this.selection = null;
         this.setState({visible: false});
-        Peerio.Action.navigatedOut();
+       // Peerio.Action.navigatedOut();
       });
     },
     globalTapHandler: function (e) {

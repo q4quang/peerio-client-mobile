@@ -9,13 +9,13 @@
     },
     componentDidMount: function () {
       Peerio.Dispatcher.onFilesSelected(this.handleFilesSelected);
-      Peerio.Dispatcher.onNavigateBack(this.handleNavigateBack);
-      Peerio.Action.navigatedIn('send', this.send);
+     // Peerio.Dispatcher.onNavigateBack(this.handleNavigateBack);
+     // Peerio.Action.navigatedIn('send', this.send);
       Peerio.Action.tabBarHide();
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.handleNavigateBack, this.handleFilesSelected);
-      Peerio.Action.navigatedOut();
+     // Peerio.Action.navigatedOut();
       Peerio.Action.tabBarShow();
     },
     //--- CUSTOM FN
@@ -28,12 +28,12 @@
     handleNavigateBack: function () {
       if (this.state.showContactSelect) {
         this.setState({showContactSelect: false});
-        Peerio.Action.navigatedOut();
+       // Peerio.Action.navigatedOut();
       } else Peerio.Action.newMessageViewClose();
     },
     openContactSelect: function () {
       this.recipientsCopy = this.state.recipients.slice();
-      Peerio.Action.navigatedIn('Ok', this.acceptContactSelection);
+    //  Peerio.Action.navigatedIn('Ok', this.acceptContactSelection);
       this.setState({showContactSelect: true});
     },
     acceptContactSelection: function () {

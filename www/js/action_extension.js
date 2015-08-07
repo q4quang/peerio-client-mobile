@@ -10,20 +10,12 @@ Peerio.ActionExtension.init = function () {
 
   [
     //------- ACTIONS EMITTED BY UI -------
+    'ShowAlert',           // {string message} Message to modal manager to show alert
     'SignOut',             // User wants to sign out
     'TabChange',           // Active tab changed to (index)
     'SidebarToggle',       // User wants to change show/hide state of sidebar
     'SwipeLeft',           // Global swipe left event detected by app root
     'SwipeRight',          // Global swipe right event detected by app root
-    // Navigate* events allow opening nested views and navigating back from them(closing)
-    // When calling NavigatedIn action, parameter can be passed to change "universal action button" in footer
-    // If no parameters were passed - action button will remain the same.
-    // When calling NavigatedOut "universal action button will be reverted to previous state"
-    // NavigatedIn and Out are navigation change FACTS
-    // NavigateBack - is a REQUEST that may lead to NavigatedOut
-    'NavigatedIn',         // {Object{string actionName, function actionFn}} subview was opened (may be called several times sequentially)
-    'NavigatedOut',        // subview was closed
-    'NavigateBack',        // user wants to go back from subview
     'NewMessageViewOpen',  // open new message composition view requested
     'NewMessageViewClose', // open new message composition view requested
     'UploadFile',          // user wants to upload file

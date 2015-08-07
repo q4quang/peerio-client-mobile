@@ -5,8 +5,8 @@
     render: function() {
       return (
         <div>
-          <h1>I'm not in router</h1>
           <RouteHandler/>
+          <Peerio.UI.Portal/>
         </div>
       )
     }

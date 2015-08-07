@@ -53,10 +53,10 @@
       var ind = Math.floor(Math.random() * this.progressMessages.length);
       this.setState({loginProgressMsg: this.progressMessages[ind]});
     },
-    startProgress: function(){
+    startProgress: function () {
       this.progressInterval = window.setInterval(this.updateProgressMessage, 1000);
     },
-    stopProgress: function(){
+    stopProgress: function () {
       window.clearInterval(this.progressInterval);
     },
     handleLoginSuccess: function () {
@@ -67,8 +67,8 @@
     },
     handleLoginFail: function (message) {
       this.stopProgress();
-      this.setState({loginError: message||'Login failed.', waitingForLogin: false, loginProgressMsg: ''});
-      console.log('fail');
+      Peerio.Action.showAlert(message || 'Login failed.');
+      this.setState({waitingForLogin: false, loginProgressMsg: ''});
     },
     // show/hide passphrase
     handlePassphraseShowTap: function (e) {
@@ -124,10 +124,6 @@
     handleKeyDownPass: function (e) {
       if (e.key === 'Enter') this.handleSubmit();
     },
-    // close error alert
-    handleAlertClose: function () {
-      this.setState({loginError: false});
-    },
     clearLogin: function () {
       this.setState({savedLogin: null});
       Peerio.Auth.clearSavedLogin();
@@ -141,10 +137,6 @@
 
       return (
         <div id="login-screen" className="modal active">
-
-          <Peerio.UI.Alert visible={!!this.state.loginError} onClose={this.handleAlertClose}>
-            {this.state.loginError}
-          </Peerio.UI.Alert>
 
           <div id="login-container">
             <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>

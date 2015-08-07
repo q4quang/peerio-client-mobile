@@ -57,11 +57,11 @@
 
   Peerio.UI.ContactView = React.createClass({
     componentDidMount: function () {
-      Peerio.Action.navigatedIn();
+      //Peerio.Action.navigatedIn();
       Peerio.Action.tabBarHide();
     },
     componentWillUnmount: function () {
-      Peerio.Action.navigatedOut();
+     // Peerio.Action.navigatedOut();
       Peerio.Action.tabBarShow();
     },
     handleAccept: function () {

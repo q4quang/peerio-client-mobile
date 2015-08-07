@@ -24,8 +24,8 @@
       this.actionButtonStack.push(this.tabAction[0]);
     },
     componentDidMount: function () {
-      Peerio.Dispatcher.onNavigatedIn(this.levelIn);
-      Peerio.Dispatcher.onNavigatedOut(this.levelOut);
+      //Peerio.Dispatcher.onNavigatedIn(this.levelIn);
+      //Peerio.Dispatcher.onNavigatedOut(this.levelOut);
       Peerio.Dispatcher.onTabChange(this.handleTabChange);
     },
     componentWillUnmount: function () {

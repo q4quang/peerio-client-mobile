@@ -67,12 +67,12 @@
   Peerio.UI.FileView = React.createClass({
     componentDidMount: function () {
       // this.subscription = Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null));
-      Peerio.Action.navigatedIn();
+      //Peerio.Action.navigatedIn();
       Peerio.Action.tabBarHide();
     },
     componentWillUnmount: function () {
       // Peerio.Dispatcher.unsubscribe(this.subscription);
-      Peerio.Action.navigatedOut();
+     // Peerio.Action.navigatedOut();
       Peerio.Action.tabBarShow();
     },
     handleOpen: function () {
