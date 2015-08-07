@@ -1,3 +1,9 @@
+var Route = ReactRouter.Route;
+var DefaultRoute = ReactRouter.DefaultRoute;
+var Link = ReactRouter.Link;
+var RouteHandler = ReactRouter.RouteHandler;
+var NotFoundRoute = ReactRouter.NotFoundRoute;
+
 var Peerio = this.Peerio || {};
 
 (function () {
@@ -26,7 +32,10 @@ var Peerio = this.Peerio || {};
 
     React.initializeTouchEvents(true);
 
-    React.render(React.createElement(Peerio.UI.App, null), document.body);
+   // React.render(React.createElement(Peerio.UI.App, null), document.body);
+    ReactRouter.run(Peerio.UI.Routes, ReactRouter.HashLocation, function(Root) {
+      React.render(React.createElement(Root,null), document.body);
+    });
   }
 
   // Start rendering on DOM and device ready

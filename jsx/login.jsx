@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  Peerio.UI.LoginScreen = React.createClass({
+  Peerio.UI.Login = React.createClass({
     //--- CONSTANTS
     // scalable passphrase font settings
     maxFontSize: 2,
@@ -16,33 +16,59 @@
     getInitialState: function () {
       return {
         passphraseVisible: false,
-        waitingForLogin: false, // to be able to disable buttons while login in progress
+        waitingForLogin: false,
         loginError: false,
-        loginState: ''
+        loginProgressMsg: ''
       };
     },
     componentWillMount: function () {
-      Peerio.Dispatcher.onLoginProgress(this.handleLoginProgress);
-      Peerio.Dispatcher.onLoginSuccess(this.handleLoginDone.bind(this, true));
-      Peerio.Dispatcher.onLoginFail(this.handleLoginDone.bind(this, false));
-      Peerio.Data.getLastLogin()
-        .then(function (login, name) {
-          this.setState({savedLogin: login});
-        }.bind(this)).catch(function () {
-          this.setState({savedLogin: null});
-        }.bind(this));
+      Peerio.Dispatcher.onLoginSuccess(this.handleLoginSuccess);
+      Peerio.Dispatcher.onLoginFail(this.handleLoginFail);
+      //Peerio.Data.getLastLogin()
+      //  .then(function (login, name) {
+      //   this.setState({savedLogin: login});
+      // }.bind(this)).catch(function () {
+      //   this.setState({savedLogin: null});
+      // }.bind(this));
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.handleLoginProgress, this.handleLoginDone);
     },
     //--- CUSTOM FN
-    handleLoginProgress: function (state) {
-      this.setState({loginState: state});
+    progressMessages: [
+      'greeting server...',
+      'securing bits...',
+      'checking bytes...',
+      'hiding tracks...',
+      'moving keys...',
+      'increasing entropy...',
+      'adding awesomeness...',
+      'scaring NSA away...',
+      'inventing algorithms...',
+      'reading ciphertext...',
+      'settling checksums...',
+      'warming up...',
+      'cooling down...'],
+    updateProgressMessage: function () {
+      var ind = Math.floor(Math.random() * this.progressMessages.length);
+      this.setState({loginProgressMsg: this.progressMessages[ind]});
     },
-    handleLoginDone: function (success, message) {
-      Peerio.Data.setLastLogin(Peerio.user.username, Peerio.user.firstName);
-      if (this.isMounted())
-        this.setState({loginError: success ? false : message, waitingForLogin: false, loginState: ''});
+    startProgress: function(){
+      this.progressInterval = window.setInterval(this.updateProgressMessage, 1000);
+    },
+    stopProgress: function(){
+      window.clearInterval(this.progressInterval);
+    },
+    handleLoginSuccess: function () {
+      Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
+      this.stopProgress();
+      //todo route
+      console.log('success');
+    },
+    handleLoginFail: function (message) {
+      this.stopProgress();
+      this.setState({loginError: message||'Login failed.', waitingForLogin: false, loginProgressMsg: ''});
+      console.log('fail');
     },
     // show/hide passphrase
     handlePassphraseShowTap: function (e) {
@@ -66,11 +92,11 @@
     // initiate login
     handleSubmit: function (e) {
       if (e) e.preventDefault();
-      // todo: multiple login call is not ui's concern, move it from here
-      // login already in progress
+
       if (this.state.waitingForLogin) return;
       this.setState({waitingForLogin: true});
-      // we want to close mobile keyboard after user submits the login form
+      this.startProgress();
+      // getting login from input or from previously saved data
       var userNode;
       if (this.state.savedLogin) {
         userNode = {value: this.state.savedLogin.login};
@@ -78,11 +104,14 @@
         userNode = this.refs.username.getDOMNode();
         userNode.blur();
       }
+
+      // getting passphrase
       var passNode = this.refs.passphrase.getDOMNode();
       passNode.blur();
+      // hiding software keyboard
       Peerio.NativeAPI.hideKeyboard();
       // TODO validate input
-      Peerio.Data.login(userNode.value, passNode.value);
+      Peerio.Auth.login(userNode.value, passNode.value);
     },
     // change focus to passphrase input on enter
     handleKeyDownLogin: function (e) {
@@ -101,7 +130,7 @@
     },
     clearLogin: function () {
       this.setState({savedLogin: null});
-      Peerio.Data.setLastLogin('');
+      Peerio.Auth.clearSavedLogin();
     },
     //--- RENDER
     render: function () {
@@ -124,7 +153,8 @@
             <form className="loginForm" onSubmit={this.handleSubmit}>
               {this.state.savedLogin
                 ?
-                (<div className="saved-login" onTouchEnd={this.clearLogin}>{this.state.savedLogin.name||this.state.savedLogin.login}
+                (<div className="saved-login"
+                      onTouchEnd={this.clearLogin}>{this.state.savedLogin.name || this.state.savedLogin.login}
                   <div className="note">Welcome back.
                     <br/>
                     Tap here to change or forget username.
@@ -150,7 +180,7 @@
                   <i onTouchEnd={this.handlePassphraseShowTap} className={'pull-right fa ' + eyeIcon}></i>
                 </div>
               </div>
-              <div id="login-process-state">{this.state.loginState}</div>
+              <div id="login-process-state">{this.state.loginProgressMsg}</div>
               <button type="submit" ref="loginBtn" className="login-btn" onTouchEnd={this.handleSubmit}>
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
               </button>

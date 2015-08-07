@@ -24,7 +24,8 @@
     "jssha": "*",
     "Autolinker.js": "*",
     "dompurify": "*",
-    "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git"
+    "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git",
+    "react-router": "~0.13.3"
   },
   "install": {
     "base": "www/bower",
