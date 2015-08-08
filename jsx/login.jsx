@@ -6,6 +6,7 @@
   'use strict';
 
   Peerio.UI.Login = React.createClass({
+    mixins: [ReactRouter.Navigation],
     //--- CONSTANTS
     // scalable passphrase font settings
     maxFontSize: 2,
@@ -67,7 +68,7 @@
     },
     handleLoginFail: function (message) {
       this.stopProgress();
-      Peerio.Action.showAlert(message || 'Login failed.');
+      Peerio.Action.showAlert((message&&message.toString()) || 'Login failed.');
       this.setState({waitingForLogin: false, loginProgressMsg: ''});
     },
     // show/hide passphrase
@@ -111,7 +112,9 @@
       // hiding software keyboard
       Peerio.NativeAPI.hideKeyboard();
       // TODO validate input
-      Peerio.Auth.login(userNode.value, passNode.value);
+      Peerio.Auth.login(userNode.value, passNode.value)
+        .then(this.handleLoginSuccess)
+        .catch(this.handleLoginFail);
     },
     // change focus to passphrase input on enter
     handleKeyDownLogin: function (e) {
@@ -176,7 +179,8 @@
               <button type="submit" ref="loginBtn" className="login-btn" onTouchEnd={this.handleSubmit}>
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
               </button>
-              <button type="button" className="signup-btn">sign up</button>
+              <button type="button" className="signup-btn" onTouchEnd={this.transitionTo.bind(this,'signup')}>sign up
+              </button>
             </form>
           </div>
         </div>
