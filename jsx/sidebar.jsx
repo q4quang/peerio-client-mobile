@@ -10,11 +10,11 @@
       return {open: false};
     },
     componentDidMount: function () {
-      Peerio.Dispatcher.onSidebarToggle(this.toggle);
-      Peerio.Dispatcher.onHardMenuButton(this.toggle);
+     // Peerio.Dispatcher.onSidebarToggle(this.toggle);
+     // Peerio.Dispatcher.onHardMenuButton(this.toggle);
     },
     componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.toggle);
+     // Peerio.Dispatcher.unsubscribe(this.toggle);
     },
     //--- CUSTOM FN
     toggle: function () {
@@ -44,11 +44,12 @@
     },
     //--- RENDER
     render: function () {
-      var className = this.state.open ? 'open' : '';
+     // var className = this.state.open ? 'open' : '';
+      var className = 'open';
       var pinNode;
-      if (Peerio.user.PIN)
-        pinNode = <li onTouchStart={this.removePIN}>Remove PIN code</li>;
-      else
+      //if (Peerio.user.PIN)
+      //  pinNode = <li onTouchStart={this.removePIN}>Remove PIN code</li>;
+     // else
         pinNode = <li onTouchStart={this.setPIN}>Set new PIN code</li>;
       if (Peerio)
         return (
@@ -57,7 +58,7 @@
               <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
               <ul ref="menu">
                 <li onTouchStart={Peerio.Action.signOut}>Sign Out</li>
-                <li className="header">PIN CODE IS {Peerio.user.PIN ? 'SET' : 'NOT SET'}</li>
+                <li className="header">PIN CODE IS {true ? 'SET' : 'NOT SET'}</li>
                 {pinNode}
               </ul>
             </div>

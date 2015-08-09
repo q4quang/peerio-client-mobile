@@ -23,7 +23,7 @@ Peerio.Config.init = function () {
 
   // if client will not receive pings for pingTimeout, connection will be considered broken
   // set to 0 to disable ping timeout
-  cfg.pingTimeout = 0;//20000;// todo bring this back when Floh pushes new server version
+  cfg.pingTimeout = 20000;
 
   cfg.appVersion = 'n/a';
 

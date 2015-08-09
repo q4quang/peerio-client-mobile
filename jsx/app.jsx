@@ -1,14 +1,24 @@
 (function () {
   'use strict';
-  // Main component, entry point for React app
+  // Main component for app in authenticated state
   Peerio.UI.App = React.createClass({
-    render: function() {
+    getInitialState: function () {
+      return {
+      };
+    },
+    componentWillMount: function () {
+    },
+    componentWillUnmount: function () {
+    },
+    render: function () {
+      //rendering root elements
       return (
         <div>
+          <Peerio.UI.NavBar/>
           <RouteHandler/>
-          <Peerio.UI.Portal/>
+          <Peerio.UI.Footer/>
         </div>
-      )
+      );
     }
   });
 

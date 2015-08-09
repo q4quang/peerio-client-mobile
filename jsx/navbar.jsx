@@ -5,6 +5,8 @@
   'use strict';
 
   Peerio.UI.NavBar = React.createClass({
+    mixins: [ReactRouter.Navigation],
+
     //--- REACT EVENTS
     getInitialState: function () {
       return {
@@ -15,10 +17,10 @@
     componentWillMount: function () {
       var d = Peerio.Dispatcher;
       var fn = Peerio.Helpers.getStateUpdaterFn;
-      this.subscrIds = [ d.onSocketConnect(fn(this, {socketConnected: true})),
-                         d.onSocketDisconnect(fn(this, {socketConnected: false})),
-                         d.onLoading(fn(this, {loading: true})),
-                         d.onLoadingDone(fn(this, {loading: false}))];
+      this.subscrIds = [d.onSocketConnect(fn(this, {socketConnected: true})),
+        d.onSocketDisconnect(fn(this, {socketConnected: false})),
+        d.onLoading(fn(this, {loading: true})),
+        d.onLoadingDone(fn(this, {loading: false}))];
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.subscrIds);
@@ -32,10 +34,10 @@
 
       return (
         <div id="navbar">
-          <div id="sidemenu-toggle" ref="toggle" onTouchStart={Peerio.Action.sidebarToggle}>
+          <div id="sidemenu-toggle" ref="toggle" onTouchStart={this.transitionTo.bind(this, 'sidebar')}>
             <i className="fa fa-bars"></i>
           </div>
-          <div className="logo"><img src="media/img/peerio-short-logo-white.png" className="peerio-logo" /></div>
+          <div className="logo"><img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/></div>
           <div id="search">
             <input id="search-keyword" type="text"/>
             <i id="search-button" className="fa fa-search"></i>
