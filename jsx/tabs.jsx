@@ -6,6 +6,7 @@
       return (
         <div>
           <Peerio.UI.TabBar/>
+          <RouteHandler/>
         </div>
       )
     }

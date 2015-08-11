@@ -5,6 +5,8 @@
   'use strict';
 
   Peerio.UI.SideBar = React.createClass({
+
+    mixins: [ReactRouter.Navigation],
     //--- REACT EVENTS
     getInitialState: function () {
       return {open: false};
@@ -21,7 +23,7 @@
       this.setState({open: !this.state.open});
     },
     hide: function () {
-      this.setState({open: false});
+      this.goBack();
     },
     removePIN: function () {
       this.hide();

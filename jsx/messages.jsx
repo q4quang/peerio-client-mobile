@@ -3,40 +3,12 @@
 
   Peerio.UI.Messages = React.createClass({
     mixins: [Peerio.UI.Mixins.GlobalTap],
-    getInitialState: function () {
-      return {
-        openConversation: null
-      };
-    },
-
-    componentDidMount: function () {
-      Peerio.Dispatcher.onNavigateBack(this.back);
-      this.boundForceUpdate = this.forceUpdate.bind(this, null); // react freaks out without null argument
-      Peerio.Dispatcher.onConversationsLoaded(this.boundForceUpdate);
-      Peerio.Dispatcher.onMessagesUpdated(this.boundForceUpdate);
-      Peerio.Data.loadConversations();
-    },
-    componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.boundForceUpdate, this.back);
-    },
-    openConversation: function (id) {
-      this.setState({openConversation: id});
-     // Peerio.Action.navigatedIn('send', Peerio.Action.sendCurrentMessage);
-    },
-    back: function () {
-      // todo: probably subview should control it's own closing, utilizing event processing interruption and signalling back to parent
-      if(this.state.openConversation===null) return;
-      this.setState({openConversation: null});
-     // Peerio.Action.navigatedOut();
-    },
     globalTapHandler: function (e) {
       var item = Peerio.Helpers.getParentWithClass(e.target, 'list-item');
       if (!item || item.attributes['data-msgid'] == null) return;
       this.openConversation(item.attributes['data-msgid'].value);
     },
     render: function () {
-      if (this.state.openConversation !== null)
-        return ( <Peerio.UI.Conversation conversationId={this.state.openConversation}/> );
 
       var messageNodes = Object.keys(Peerio.user.conversations).map(function (id) {
         var item = Peerio.user.conversations[id];
