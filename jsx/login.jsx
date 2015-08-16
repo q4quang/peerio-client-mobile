@@ -63,8 +63,8 @@
     handleLoginSuccess: function () {
       Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
       this.stopProgress();
-      //todo route
-      console.log('success');
+      console.log('login success');
+      this.transitionTo('messages');
     },
     handleLoginFail: function (message) {
       this.stopProgress();

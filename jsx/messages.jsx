@@ -1,54 +1,68 @@
-  (function () {
+(function () {
   'use strict';
 
   Peerio.UI.Messages = React.createClass({
     mixins: [Peerio.UI.Mixins.GlobalTap],
+    getInitialState: function () {
+      return {};
+    },
     globalTapHandler: function (e) {
       var item = Peerio.Helpers.getParentWithClass(e.target, 'list-item');
       if (!item || item.attributes['data-msgid'] == null) return;
       this.openConversation(item.attributes['data-msgid'].value);
     },
+    componentWillMount: function () {
+      Peerio.Messages.getAllConversationsGradually(function(conversations){
+        if (!this.isMounted()) return;
+        this.setState({conversations: conversations});
+      }.bind(this));
+    },
     render: function () {
+      var messageNodes = this.state.conversations  ? this.renderNodes() : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
-      var messageNodes = Object.keys(Peerio.user.conversations).map(function (id) {
-        var item = Peerio.user.conversations[id];
-        if (!item.original) return;
-        var ts = moment(+item.lastTimestamp);
+      return (
+        <div className="content" id="Messages" ref="messageList"
+             onTouchStart={this.registerTouchStart} onTouchEnd={this.registerTouchEnd}>
+          {messageNodes}
+        </div>
+      );
+    },
+    renderNodes: function () {
+      var nodes = this.state.conversations.data.map(function (convItem) {
+        if (!convItem.original) {
+          console.log("Conversation misses original message:", convItem);
+          return;
+        }
+        var ts = moment(+convItem.lastTimestamp);
 
         // building name to display for conversation item.
         // it should be in format "John Smith +3"
         // and it should not display current user's name,
         // unless he is the only one left in conversation
-        var fullName=null;
-        for(var i=0;i<item.participants.length;i++) {
-          if(item.participants[i] === Peerio.user.username) continue;
-          var username = item.participants[i];
+        var fullName = null;
+        for (var i = 0; i < convItem.participants.length; i++) {
+          var username = convItem.participants[i];
+          if (username === Peerio.user.username) continue;
           var contact = Peerio.user.contacts[username];
           fullName = (contact && contact.fullName) || username;
-            break;
+          break;
         }
-        if(!fullName) fullName = Peerio.user.fullName;
-        if(item.participants.length>2){
-          fullName+= ' [+'+(item.participants.length-2)+']';
+        fullName = fullName || Peerio.user.fullName;
+        if (convItem.participants.length > 2) {
+          fullName += ' [+' + (convItem.participants.length - 2) + ']';
         }
 
         return (
-          <Peerio.UI.MessagesItem key={item.id} msgId={item.id} unread={item.original.isModified}
-            fullName={fullName} fileCount={item.fileCount} messageCount={item.messageCount}
-            subject={item.original.decrypted.subject} ts={ts} />
+          <Peerio.UI.MessagesItem key={convItem.id} msgId={convItem.id} unread={convItem.original.isModified}
+                                  fullName={fullName} fileCount={convItem.fileCount}
+                                  messageCount={convItem.messageCount}
+                                  subject={convItem.original.subject} ts={ts}/>
         );
       });
 
       // todo: DRY sort function
       // todo: why did i put reverse() here instead of modifying the function?
-      messageNodes = messageNodes.sort(function (a, b) { return a.props.ts < b.props.ts ? -1 : (a.props.ts > b.props.ts ? 1 : 0); }).reverse();
-
-      return (
-        <div className="content" id="Messages" ref="messageList"
-          onTouchStart={this.registerTouchStart} onTouchEnd={this.registerTouchEnd}>
-          {messageNodes}
-        </div>
-      );
+      return nodes.sort(function (a, b) { return a.props.ts < b.props.ts ? -1 : (a.props.ts > b.props.ts ? 1 : 0); }).reverse();
     }
   });
 
@@ -62,7 +76,8 @@
           <div className="name-and-subject">
             <span className="name">{this.props.fullName}</span>
             <br/>
-            <span className="subject"><span className="message-count"><i className='fa fa-comment-o message-count-icon'></i>{this.props.messageCount}</span>{this.props.subject}</span>
+            <span className="subject"><span className="message-count"><i
+              className='fa fa-comment-o message-count-icon'></i>{this.props.messageCount}</span>{this.props.subject}</span>
           </div>
           <div className="timestamp">
             <span className="date">{this.props.ts.format('MMM Do, YYYY')}</span>
