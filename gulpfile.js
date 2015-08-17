@@ -11,12 +11,14 @@ var browserSync = require('browser-sync').create();
 var inquirer = require('inquirer');
 var _ = require('lodash');
 var minimist = require('minimist');
+var autoprefixer = require('gulp-autoprefixer');
 
 // extracting --cli --parameters
 var knownOptions = {
   boolean: 'api',
   default: {  }
 };
+var supportedBrowsers = ['ios 3.2', 'chrome 37', 'android 4.2'];
 
 var options = minimist(process.argv.slice(2), knownOptions);
 
@@ -64,7 +66,12 @@ gulp.task('sass', function (done) {
       errLogToConsole: true,
       sourceComments: 'normal'
     }))
+    .pipe(autoprefixer({
+      browsers: supportedBrowsers,
+      cascade: false
+    }))
     .pipe(gulp.dest(paths.css_dst))
+
     .on('end', done);
 });
 
