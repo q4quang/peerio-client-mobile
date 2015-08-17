@@ -9,7 +9,7 @@
     <!--
 		* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     	* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    	* todo: unsafe inline can be removed from scripts in production. browsersync needs in in development.
+    	* todo: unsafe inline can be removed from scripts in production. browsersync needs it in development.
 	-->
 	<meta http-equiv="Content-Security-Policy"
           content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://ssl.gstatic.com https://*.peerio.com
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="bower/normalize.css/normalize.css" type="text/css" />
     <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" type="text/css" />
     <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+    <script type="application/javascript" src="js/urlfix.js"></script>
 
     <!-- debug.js may contain sensitive info that is used to help with development.
          The file is ignored in git and located in repository root,
