@@ -154,7 +154,7 @@
               <button type="submit" ref="loginBtn" className="login-btn" onTouchEnd={this.handleSubmit}>
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
               </button>
-              <button type="button" className="signup-btn">sign up</button>
+              <button type="button" className="signup-btn" onTouchStart={Peerio.Actions.newSignup}>sign up</button>
             </form>
           </div>
         </div>

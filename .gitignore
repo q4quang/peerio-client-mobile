@@ -2,6 +2,7 @@
 *.log
 *.keystore
 .DS_Store
+.idea/
 
 # build release apk output
 /bin

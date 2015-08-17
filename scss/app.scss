@@ -3,17 +3,20 @@
  *  IF YOU SEE THIS IN .CSS FILE
  *  DON'T EDIT IT - GO TO THE SCSS SOURCE
  */
-@import "_vars";
-@import "_fonts";
-@import "_prefixer";
-@import "_base";
+@import "vars";
+@import "fonts";
+@import "prefixer";
+@import "base";
 @import "toolbars";
 @import "login_screen";
 @import "contact_list";
 @import "file_list";
+@import "signup_screen";
 
 #app-container {
   min-height: 100%; // for global touch events to get detected
+  height: 100%; 
+  overflow: auto; 
 }
 
 // Wrapper to be used around all actual content data
@@ -35,6 +38,14 @@
   &.without-tab-bar {
     top: $navbar-height;
   }
+  &.fullscreen {
+    top: 0; 
+    bottom: 0; 
+  }
+  &.padded {
+    padding: 20px; 
+  }
+
   // Hack to force all relatively and absolutely positioned elements still render while scrolling
   // Note: This is a fix for IOS bug with "-webkit-overflow-scrolling: touch"
   //&>* {
@@ -575,22 +586,38 @@ $item-border-radius: 3px;
 }
 
 .btn {
-  padding: 8px 5px;
-  border: 1px solid #eee;
-  font-variant: small-caps;
-  text-transform: uppercase;
+  padding: 0.5em;
   font-size: 0.8em;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em; 
   border-radius: 3px;
+  color: white; 
+  width: 100%; 
+}
+.btn-subtle{
+  background-color: transparent;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
-.btn.btn-safe {
-  background-color: #66aa55;
+.btn-lrg{
+  @extend .btn; 
+  font-size:  1.6rem; 
+  width: 100%;
+  font-weight: 100;
+}
+
+.btn-safe {
+  @extend .btn; 
+  background-color: #95D583;
   color: white;
 }
 
-.btn.btn-danger {
+.btn-danger {
+  @extend .btn; 
   color: white;
   background-color: #ee3333;
 }

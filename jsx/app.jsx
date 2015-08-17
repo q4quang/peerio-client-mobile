@@ -7,8 +7,9 @@
     // enumeration of pseudo-routes/views that App component can switch between
     views: {
       login: 0,
-      tabs: 1,
-      newMessage: 2
+      signup: 1, 
+      tabs: 2,
+      newMessage: 3
     },
     //--- REACT EVENTS
     getInitialState: function () {
@@ -24,6 +25,7 @@
       var sfn = Peerio.Helpers.getStateUpdaterFn;
       this.subscriptions = [
         d.onLoginSuccess(sfn(this, {currentView: this.views.tabs})),
+        d.onNewSignup(sfn(this, {currentView: this.views.signup})),
         d.onLoginFail(sfn(this, {currentView: this.views.login})),
         d.onTabChange(sfn(this, null, {selectedTab: 0})), // mapped property to arguments[0]
         d.onNewMessageViewOpen(sfn(this, {currentView: this.views.newMessage})),
@@ -84,6 +86,8 @@
       switch (this.state.currentView) {
         case this.views.login:
           return <Peerio.UI.LoginScreen/>;
+        case this.views.signup: 
+          return <Peerio.UI.SignupScreen/>; 
         case this.views.tabs:
         {
           switch (this.state.selectedTab) {

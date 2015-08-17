@@ -47,6 +47,7 @@
     'FilesUpdated',        // Something in user files collection has changed, so you better rerender it
     'ContactsUpdated',     // One or more contacts loaded/modified/deleted
     //------- ACTIONS EMITTED BY UI -------
+    'NewSignup',           // New signup is initiated
     'SignOut',             // User wants to sign out
     'TabChange',           // Active tab changed to (index)
     'SidebarToggle',       // User wants to change show/hide state of sidebar
