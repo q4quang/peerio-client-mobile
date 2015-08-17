@@ -16,20 +16,16 @@
   ],
   "dependencies": {
     "normalize.css": "*",
-    "pouchdb": "3.x",
-    "zxcvbn": "*",
     "font-awesome": "*",
     "react": "0.x",
     "moment": "*",
-    "lodash": "*",
-    "node-uuid": "*",
     "is_js": "*",
     "gsap": "*",
-    "bluebird": "~2.x",
     "jssha": "*",
-    "Autolinker.js": "~0.17.1",
-    "dompurify": "~0.6.4",
-    "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git"
+    "Autolinker.js": "*",
+    "dompurify": "*",
+    "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git",
+    "react-router": "~0.13.3"
   },
   "install": {
     "base": "www/bower",
@@ -42,6 +38,7 @@
     },
     "sources": {
       "peerio-client-api": "bower_components/peerio-client-api/dist/**",
+      "react-router": "bower_components/react-router/build/umd/ReactRouter.js",
       "font-awesome": [
         "bower_components/font-awesome/css/font-awesome.css",
         "bower_components/font-awesome/fonts/fontawesome-webfont.woff",

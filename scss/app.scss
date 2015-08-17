@@ -125,6 +125,7 @@
     background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
     @include background-size(200% 100%);
     height: 90%;
+    width: 100%;
     margin: 3px 8px 0 0;
     position: relative;
     .mask1,

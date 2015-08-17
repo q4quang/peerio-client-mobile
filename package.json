@@ -10,7 +10,8 @@
     "inquirer": "0.x",
     "semver": "4.x",
     "shelljs": "0.x",
-    "browser-sync": "*"
+    "browser-sync": "*",
+    "lodash": "*"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   },
   "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
   "devDependencies": {
-    "jasmine": "^2.3.1"
+    "jasmine": "^2.3.1",
+    "lodash": "^3.10.0",
+    "minimist": "^1.1.2"
   }
 }

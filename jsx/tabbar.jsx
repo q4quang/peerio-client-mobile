@@ -5,42 +5,24 @@
    * UI component containing messages/files/contacts tab selector
    */
   Peerio.UI.TabBar = React.createClass({
-    //--- REACT EVENTS
-    getInitialState: function () {
-      return {
-        selectedTab: this.props.tab
-      };
-    },
-    componentWillMount: function () {
-      // this will make not-so-pretty duplicated action call
-      // but it's fine, because there is a check if tab was actually changed
-      // and this is cleaner then introducing additional action
-      Peerio.Dispatcher.onTabChange(this.changeTab);
-    },
-    componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.changeTab);
-    },
-    //--- CUSTOM FN
-    changeTab: function (tab) {
-      if (tab === this.state.selectedTab) return;
-      this.setState({selectedTab: tab}, function () {
-        Peerio.Actions.tabChange(tab);
-      });
-
-    },
-
+    mixins: [ReactRouter.Navigation, ReactRouter.State],
     //--- RENDER
     render: function () {
+      var routes = this.getRoutes();
+      var tab = routes[routes.length - 1].name;
       return (
         <div id="tabbar">
-          <Peerio.UI.TabBarButton text="Messages" active={this.state.selectedTab === 0}
-            onActivate={this.changeTab.bind(this, 0)} showBadge={false} />
+          <Peerio.UI.TabBarButton text="Messages" active={tab === 'messages'}
+                                  onActivate={this.transitionTo.bind(this, 'messages')}
+                                  showBadge={false}/>
 
-          <Peerio.UI.TabBarButton text="Files" active={this.state.selectedTab === 1}
-            onActivate={this.changeTab.bind(this, 1)} showBadge={false} />
+          <Peerio.UI.TabBarButton text="Files" active={tab === 'files'}
+                                  onActivate={this.transitionTo.bind(this, 'files')}
+                                  showBadge={false}/>
 
-          <Peerio.UI.TabBarButton text="Contacts" active={this.state.selectedTab === 2}
-            onActivate={this.changeTab.bind(this, 2)} showBadge={false} />
+          <Peerio.UI.TabBarButton text="Contacts" active={tab === 'contacts'}
+                                  onActivate={this.transitionTo.bind(this, 'contacts')}
+                                  showBadge={false}/>
         </div>
       );
     }

@@ -7,9 +7,9 @@
   Peerio.UI.Footer = React.createClass({
     //--- INSTANCE VARS
     // 0 navigation level buttons
-    tabActions: [ {name: 'new message', action: Peerio.Actions.newMessageViewOpen},
-                  {name: 'upload file', action: Peerio.Actions.uploadFile},
-                  {name: 'add contact', action: Peerio.Actions.addContact}
+    tabAction: [ {name: 'new message', action: Peerio.Action.newMessageViewOpen},
+                  {name: 'upload file', action: Peerio.Action.uploadFile},
+                  {name: 'add contact', action: Peerio.Action.addContact}
     ],
     // we make this an instance variable because this array will change
     // only in pair with state.navLevel and it's easier and faster to manipulate an array out of react state
@@ -21,11 +21,11 @@
       };
     },
     componentWillMount: function(){
-      this.actionButtonStack.push(this.tabActions[0]);
+      this.actionButtonStack.push(this.tabAction[0]);
     },
     componentDidMount: function () {
-      Peerio.Dispatcher.onNavigatedIn(this.levelIn);
-      Peerio.Dispatcher.onNavigatedOut(this.levelOut);
+      //Peerio.Dispatcher.onNavigatedIn(this.levelIn);
+      //Peerio.Dispatcher.onNavigatedOut(this.levelOut);
       Peerio.Dispatcher.onTabChange(this.handleTabChange);
     },
     componentWillUnmount: function () {
@@ -33,7 +33,7 @@
     },
     //--- CUSTOM FN
     handleTabChange: function(tab){
-      this.actionButtonStack[0] =this.tabActions[tab];
+      this.actionButtonStack[0] =this.tabAction[tab];
       this.forceUpdate();
     },
     levelIn: function(buttonName, buttonAction){
@@ -56,7 +56,7 @@
       return (
         <div id="footer">
           <div id="global-back" className={this.state.navLevel > 0 ? '' : 'hide'}
-            onTouchEnd={Peerio.Actions.navigateBack}>
+            onTouchEnd={Peerio.Action.navigateBack}>
             <i className="fa fa-chevron-left"></i>&nbsp;back
           </div>
           <div className="toolbar-fill"></div>

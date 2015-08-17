@@ -51,7 +51,7 @@
    */
   Peerio.Data.loadFiles = function (force) {
     if (!force && Peerio.user.filesLoaded) return Promise.resolve();
-    Peerio.Actions.loading();
+    Peerio.Action.loading();
     return Promise.join(Peerio.Data.getCachedFiles(), new Promise(Peerio.file.getFiles), function (localFiles) {
       _.forOwn(Peerio.user.files, function (file) {
         file.localName = Peerio.Helpers.sha256(file.id) + '.' + Peerio.Helpers.getFileExtension(file.name);
@@ -63,8 +63,8 @@
         if (found) found.cached = true;
       });
       Peerio.user.filesLoaded = true;
-      Peerio.Actions.filesUpdated();
-    }).finally(Peerio.Actions.loadingDone);
+      Peerio.Action.filesUpdated();
+    }).finally(Peerio.Action.loadingDone);
   };
 
   /**
@@ -75,7 +75,7 @@
   Peerio.Data.downloadFile = function (file) {
     if (file.downloadState) return;
     file.downloadState = {progress: 0, state: 'downloading...'};
-    Peerio.Actions.filesUpdated();
+    Peerio.Action.filesUpdated();
     new Promise(function (resolve) {
       Peerio.file.downloadFile(file.id, file.header, reportDownloadProgress.bind(null, file), resolve);
     }).then(function (decryptedBlob) {
@@ -84,7 +84,7 @@
 
         file.downloadState.progress = null;
         file.downloadState.state = 'saving...';
-        Peerio.Actions.filesUpdated();
+        Peerio.Action.filesUpdated();
 
         return Peerio.Data.saveFile(file.localName, decryptedBlob)
           .then(function () {
@@ -97,7 +97,7 @@
       })
       .finally(function () {
         file.downloadState = null;
-        Peerio.Actions.filesUpdated();
+        Peerio.Action.filesUpdated();
       });
   };
 
@@ -112,7 +112,7 @@
 
     file.downloadState.progress = val;
 
-    Peerio.Actions.filesUpdated();
+    Peerio.Action.filesUpdated();
   }
 
   /**
@@ -127,7 +127,7 @@
       })
       .then(function () {
         file.cached = false;
-        Peerio.Actions.filesUpdated();
+        Peerio.Action.filesUpdated();
       });
   };
   /**
@@ -153,7 +153,7 @@
           if (file.cached) Peerio.Data.removeCachedFile(Peerio.user.files[s]);
           delete Peerio.user.files[s];
         });
-        Peerio.Actions.filesUpdated();
+        Peerio.Action.filesUpdated();
       });
   };
 

@@ -6,10 +6,12 @@
  *
  */
 
-(function () {
+var Peerio = this.Peerio || {};
+Peerio.NativeAPI = {};
+
+Peerio.NativeAPI.init = function () {
   'use strict';
 
-  window.Peerio = window.Peerio || {};
   var api = Peerio.NativeAPI = {};
   var cordova = window.cordova;
   var initializers = {};
@@ -26,25 +28,6 @@
       return Promise.reject.bind(null, getGenericMsg(name));
     };
   }
-
-  //----- end of internal helpers
-
-  /**
-   * call this function during application startup but after DeviceReady event
-   * it resolves availability/differences in implementation
-   */
-  api.initialize = function () {
-    _.forOwn(initializers, function (fn, name) {
-      // if initializer returns alternative function
-      // (usually a mock that is safe to call)
-      // assign that function instead of original one
-      var alterFn = fn();
-      if (alterFn) api[name] = alterFn;
-    });
-    // cleaning memory
-    initializers = null;
-    api.initialize = null;
-  };
 
   /**
    * Opens url in inAppBrowser
@@ -240,4 +223,15 @@
 
   initializers.openFile = getFileApiGenericInitializer('openFile');
 
-}());
+  //--------------------------------------------------------------------------------------------------------------------
+  _.forOwn(initializers, function (fn, name) {
+    // if initializer returns alternative function
+    // (usually a mock that is safe to call)
+    // assign that function instead of original one
+    var alterFn = fn();
+    if (alterFn) api[name] = alterFn;
+  });
+  // cleaning memory
+  initializers = null;
+  //--------------------------------------------------------------------------------------------------------------------
+};

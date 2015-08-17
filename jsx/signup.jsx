@@ -4,7 +4,18 @@
   var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 
-  Peerio.UI.SignupScreen = React.createClass({
+  Peerio.UI.Signup = React.createClass({
+    mixins: [ReactRouter.Navigation],
+    doSignup: function(){
+      var username = this.refs.username.getDOMNode().value;
+      var pass = this.refs.pass.getDOMNode().value;
+      Peerio.Auth.signup(username, pass)
+        .then(function(){
+          Peerio.Auth.login(username, pass);
+        });
+
+    },
+
     getInitialState: function () {
       return {
         steps:[], 
@@ -206,3 +217,6 @@
   }); 
 
 }());
+
+
+
