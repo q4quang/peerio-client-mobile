@@ -6,12 +6,14 @@
 #login-screen {
   z-index: $z-login;
   background-color: $p-blue;
+  overflow: auto;
 }
 // inner container helps to center the login form
 #login-container {
   width: 80%;
   max-width: 300px;
   margin: auto;
+
   .app-version{
     color: #73B3E0;
     position: absolute;

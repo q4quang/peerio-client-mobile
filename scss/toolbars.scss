@@ -97,7 +97,7 @@
   }
 }
 
-@include keyframes(connecting) {
+@keyframes connecting {
   from {
     background-color: #ff0000;
   }
@@ -105,7 +105,7 @@
     background-color: #cc0000;
    }
 }
-@include keyframes(loading){
+@keyframes loading {
   from { background-position-x: 0%; }
   to   { background-position-x: 200%;    }
 }
@@ -117,17 +117,17 @@
   right:0;
   height:2px;
   background-color: #ff0000;
-  @include animation(connecting 1s ease 0s infinite alternate);
+  animation: connecting 1s ease 0s infinite alternate;
   &.connected{
     //height:1px;
     background-color: $p-green;
-    @include animation(none);
+    animation: none;
   }
   &.loading{
    // height:1px;
     background-size: 200% !important; // without !important does not apply, looks like a bug
     background: linear-gradient(to right, rgba(57,150,53,1) 20%, rgba(201,222,150,1)  50%, rgba(57,150,53,1) 80%);
-    @include animation(loading 1.5s linear 0s infinite reverse);
+    animation: loading 1.5s linear 0s infinite reverse;
   }
 }
 
@@ -177,8 +177,8 @@
 #sidebar {
   position: absolute;
   z-index: $z-sidebar;
-  @include transition(transform .3s cubic-bezier(.43,.01,.49,.95));
-  @include transform(translateX(-101%));
+  transition: transform .3s cubic-bezier(.43,.01,.49,.95);
+  transform: translateX(-101%);
   width: 80%;
   top: $navbar-height;
   bottom: 0;
@@ -195,8 +195,8 @@
     color: #9E9E9E;
   }
   &.open {
-    @include transform(translateX(0));
-    @include transition-duration(.7s);
+    transform: translateX(0);
+    transition-duration: .7s;
   }
   ul{
     list-style: none;
@@ -235,12 +235,12 @@
   height:100%;
   z-index: ($z-sidebar - 1);
   background-color: #000;
-  @include transition(none);
+  transition: none;
   opacity: 0;
   &.open {
     left:0;
     background-color: #000;
-    @include transition(opacity 200ms 500ms linear);
+    transition: opacity 200ms 500ms linear;
     opacity: 0.4;
   }
 }

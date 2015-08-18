@@ -4,13 +4,13 @@
 html {
   // Root font size. All other font sizes should be in rem units
   font-size: 14px;
-  @include user-select(none);
-  @include box-sizing(border-box);
+  user-select: none;
+  box-sizing: border-box;
 }
 
 *, *:before, *:after {
-  @include user-select(inherit);
-  @include box-sizing(border-box);
+  user-select: inherit;
+  box-sizing: border-box;
 }
 html * {
   -webkit-margin-collapse: separate;
@@ -23,7 +23,7 @@ input:focus::-webkit-input-placeholder {
 
 // except inputs, they can be text-selected
 input, textarea {
-  @include user-select(initial);
+  user-select: initial;
   border-radius:0;
 }
 button:focus,
