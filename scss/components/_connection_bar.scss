@@ -1,0 +1,33 @@
+@keyframes connecting {
+  from {
+    background-color: #ff0000;
+  }
+  to   {
+    background-color: #cc0000;
+  }
+}
+@keyframes loading {
+  from { background-position-x: 0%; }
+  to   { background-position-x: 200%;    }
+}
+
+#connection-status{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:2px;
+  background-color: #ff0000;
+  animation: connecting 1s ease 0s infinite alternate;
+  &.connected{
+    //height:1px;
+    background-color: $p-green;
+    animation: none;
+  }
+  &.loading{
+    // height:1px;
+    background-size: 200% !important; // without !important does not apply, looks like a bug
+    background: linear-gradient(to right, rgba(57,150,53,1) 20%, rgba(201,222,150,1)  50%, rgba(57,150,53,1) 80%);
+    animation: loading 1.5s linear 0s infinite reverse;
+  }
+}

@@ -1,0 +1,81 @@
+
+.text-input-group{
+  position: relative;
+  margin: 1rem 0;
+  font-size: $text-input-fontsize;
+  font-weight: 200;
+
+  .text-input{
+    display: block;
+    border: none;
+    border-bottom: 1px solid white;
+    width: 100%;
+    font-size: inherit;//from text-input-group
+    padding: $text-input-padding;
+    padding-bottom: 0.2em;
+    padding-top: 0.7em;
+    transition: border-color 150ms ease-in;
+    background-color: transparent;
+    height: 40px;
+  }
+
+  .text-input-label{
+    font-size: inherit; //from text-input-group
+    position: absolute;
+    top: $text-input-padding;
+    left: $text-input-padding;
+    color: white;
+    transition: top 150ms ease-out, color 150ms ease-out;
+  }
+
+  .text-input:focus + .text-input-label,
+  .text-input:valid + .text-input-label,
+  .select-input:focus + .text-input-label,
+  .select-input:valid + .text-input-label,{ //will this work on mobile? http://caniuse.com/#search=valid
+    font-size: 0.8rem;
+    top: -0.5rem;
+  }
+
+
+}
+
+.slim-input {
+  position: relative;
+  width: 100%;
+  margin: auto auto 20px;
+  color: #fff;
+  // text or passphrase
+  input {
+    width: 100%;
+    min-height: 4rem;
+    margin: 0;
+    padding: 5px;
+    background: none;
+    background-color: $p-blue-light-5;
+    border: none;
+    border-radius: 0;
+    font-family: OpenSans;
+    font-size: 2rem;
+    font-weight: 100;
+    transition: all 300ms ease;
+    &:focus {
+      outline: none;
+    }
+  }
+  label {
+    display: block;
+    width: 80%;
+    font-size: 1.2rem;
+    font-variant: small-caps;
+    color: $p-blue-light-40;
+  }
+  // "show passphrase" button
+  // padding helps to trigger touch event better
+  i {
+    position: absolute;
+    bottom: -26px;
+    right: -13px;
+    font-size: 2em;
+    padding: 3px 15px 15px 15px;
+  }
+}

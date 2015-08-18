@@ -1,0 +1,41 @@
+.headline{
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2em;
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+.headline-sm{
+  @extend .headline;
+  font-size: 1.2rem;
+  margin-bottom: 0.5em;
+}
+
+.headline-md{
+  @extend .headline;
+  font-size: 1.5rem;
+  margin-bottom: 0.5em;
+}
+
+.headline-lrg{
+  @extend .headline;
+  font-size: 2rem;
+}
+
+.txt-lrg{
+  display: block;
+  font-size: 1.5rem;
+  z-index: 1;
+  vertical-align: middle;
+  margin: 0.5em 0 1.5em 0;
+  width: 100%;
+  font-weight: 800;
+  color: white;
+}
+
+.centered-text{
+  text-align: center;
+  margin-bottom: 1rem;
+}

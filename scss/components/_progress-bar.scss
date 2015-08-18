@@ -1,0 +1,45 @@
+@mixin progress-bar($height, $bgcolor, $activecolor, $bordercolor, $childClass) {
+
+  @mixin right-arrow($bordercolor) {
+    right: -$height;
+    top: 0;
+    border: solid transparent;
+    border-width: $height/2;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    border-left-color: $bordercolor;
+  }
+
+  height: $height;
+  width: 100%;
+  display: flex;
+  box-shadow: 0px 0px 11px $bgcolor;
+
+  & > #{$childClass} {
+    background-color: $bgcolor;
+    flex-grow: 1;
+    position: relative;
+
+    &.active ~ #{$childClass} {
+      background-color: $activecolor;
+    }
+
+    &.active:after,
+    &.active:before{
+      @include right-arrow($bordercolor);
+    }
+
+    &.active:after{
+      border-color: rgba(136, 183, 213, 0);
+      border-left-color: $bgcolor;
+    }
+
+  }
+}
+
+.progress-bar{
+  @include progress-bar($height: 30px, $bgcolor: #193046,  $activecolor: #1D6AB5,$bordercolor: #193046, $childClass: '.progress-bar-step');
+}

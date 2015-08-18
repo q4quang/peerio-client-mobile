@@ -1,0 +1,80 @@
+/**
+ *   Shared/universal rules
+ */
+html {
+  // Root font size. All other font sizes should be in rem units
+  font-size: 14px;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  user-select: inherit;
+  box-sizing: border-box;
+}
+html * {
+  -webkit-margin-collapse: separate;
+}
+
+// HACK: placeholder not disappearing on focus in textarea
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+// except inputs, they can be text-selected
+input, textarea {
+  user-select: initial;
+  border-radius:0;
+}
+button:focus,
+input:focus,
+textarea:focus{
+  outline: none;
+}
+textarea:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+body {
+  //caused visual glitch after closing software keyboard on ios7
+  //position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-family: OpenSans;
+  color: #000;
+  background-color: #fff;
+}
+button{
+  background-color: #2795d0;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  //  text-shadow: 2px 2px 3px $p-blue-dark-20;
+  text-align: center;
+  padding: 0;
+}
+// Universal link styling
+a {
+  color: $p-blue;
+  text-decoration: none;
+  &:active {
+    color: $p-blue;
+  }
+}
+
+fieldset{
+  border: none;
+  margin: 0;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+
+img {
+  max-width: 100%;
+}
+// universal components

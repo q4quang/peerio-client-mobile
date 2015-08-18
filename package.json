@@ -25,6 +25,8 @@
   "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
   "devDependencies": {
     "gulp-autoprefixer": "^2.3.1",
+    "gulp-css-globbing": "^0.1.8",
+    "gulp-sourcemaps": "^1.5.2",
     "jasmine": "^2.3.1",
     "lodash": "^3.10.0",
     "minimist": "^1.1.2"

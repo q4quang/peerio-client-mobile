@@ -1,0 +1,23 @@
+.alert {
+  z-index: $z-alert;
+  &>div {
+    position: absolute;
+    background: white;
+    padding: 20px 10px 55px;
+    width: 100%;
+    margin: auto;
+    font-size: 1.2rem;
+    min-height: 120px;
+    button {
+      position: absolute;
+      bottom: 15px;
+      width: 160px;
+      right: 20px;
+      height: 30px;
+      left: 50%;
+      margin-left: -80px;    }
+  }
+  &+.dim-background{
+    z-index: ($z-alert - 1);
+  }
+}
