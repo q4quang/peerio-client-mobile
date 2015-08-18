@@ -18,7 +18,7 @@ var knownOptions = {
   boolean: 'api',
   default: {  }
 };
-var supportedBrowsers = ['ios 3.2', 'chrome 37', 'android 4.2'];
+var supportedBrowsers = ['ios >= 3.2', 'chrome >= 37', 'android >= 4.2'];
 
 var options = minimist(process.argv.slice(2), knownOptions);
 
