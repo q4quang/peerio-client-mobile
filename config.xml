@@ -28,7 +28,7 @@
     <plugin name="cordova-plugin-statusbar" spec="*" />
     <plugin name="com.ionic.keyboard" spec="*" />
     <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="*" />
-    <preference name="xwalkVersion" value="14" />
+    <preference name="xwalkVersion" value="xwalk_core_library_beta:14.43.343.17" />
     <platform name="android">
         <allow-intent href="market:*" />
         <splash density="land-hdpi" src="res/screen/android/splash-land-hdpi.png" />
