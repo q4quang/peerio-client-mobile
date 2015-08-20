@@ -206,7 +206,7 @@
             
             <form className="signup-form">
               <ReactCSSTransitionGroup transitionName="animate">
-              {currentStep }
+              {currentStep}
               </ReactCSSTransitionGroup>
               {modalStep}
             </form>

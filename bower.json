@@ -18,7 +18,6 @@
     "normalize.css": "*",
     "font-awesome": "*",
     "react": "0.x",
-    "moment": "*",
     "is_js": "*",
     "gsap": "*",
     "jssha": "*",

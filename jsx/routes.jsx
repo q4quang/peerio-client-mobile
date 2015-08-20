@@ -11,6 +11,7 @@ Peerio.UI.Routes = (
         <Route name='files' handler={Peerio.UI.Files}/>
         <Route name='contacts' handler={Peerio.UI.Contacts}/>
       </Route>
+      <Route name="conversation" path="/app/conversation/:id" handler={Peerio.UI.Conversation} />
     </Route>
     <Route name="sidebar" path="app/sidebar" handler={Peerio.UI.SideBar}/>
   </Route>
