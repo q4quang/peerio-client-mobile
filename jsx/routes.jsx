@@ -12,7 +12,6 @@ Peerio.UI.Routes = (
         <Route name='contacts' handler={Peerio.UI.Contacts}/>
       </Route>
     </Route>
-    <Route name="sidebar" path="app/sidebar" handler={Peerio.UI.SideBar}/>
   </Route>
 );
 

@@ -26,6 +26,9 @@
       Peerio.Dispatcher.unsubscribe(this.subscrIds);
       this.subscrIds = null;
     },
+    handleSidebarToggle: function(){
+      Peerio.Action.sidebarToggle()
+    },
     //--- RENDER
     render: function () {
       var connectionClass;
@@ -34,7 +37,7 @@
 
       return (
         <div id="navbar">
-          <div id="sidemenu-toggle" ref="toggle" onTouchStart={this.transitionTo.bind(this, 'sidebar')}>
+          <div id="sidemenu-toggle" ref="toggle" onTouchStart={this.handleSidebarToggle}>
             <i className="fa fa-bars"></i>
           </div>
           <div className="logo"><img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/></div>

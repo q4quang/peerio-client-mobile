@@ -1,10 +1,21 @@
-//micro-grid framework
+/*doc
+---
+title: Micro 12 column Grid
+name: grid
+category: Layout
+---
+
+This is a basic 12 column percentage grid, useful for putting things next to each other.
+The basic column rule applies: columns must add up to 12 to make row.
+*/
+
 $grid-columns:12;
 
 %col {
-  float: left;
+  display: inline-block;
   padding-left: 5px;
   padding-right: 5px;
+  vertical-align: middle;
 }
 
 @for $i from 1 through $grid-columns {
@@ -13,4 +24,3 @@ $grid-columns:12;
     @extend %col;
   }
 }
-//that's a 12 column grid.

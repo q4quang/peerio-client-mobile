@@ -9,7 +9,7 @@
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  z-index: 999;
+  z-index: $z-content;
 }
 .page-wrapper-login{
   @include content-wrapper(0, 0);

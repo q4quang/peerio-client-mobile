@@ -26,5 +26,25 @@
    }
   });
 
+Peerio.UI.UserPlaceholder = {
+    "settings": {
+        "enterToSend":false,
+        "useSounds":false,
+        "localeCode":"en",
+        "sendReadReceipts":true,
+        "twoFactorAuth":false,
+        "receiveMessageNotifications":true,
+        "receiveContactNotifications":false,
+        "receiveContactRequestNotifications":false
+    },
+    "addresses":[{"type":"email","value":"jan.drewniak@gmail.com","isPrimary":true,"isConfirmed":true}],
+    "paymentPlan":"free",
+    "firstName":"Sample",
+    "lastName":"User",
+    "publicKeyString":"KGQS1sVa5CztxXCuZM9UNzUS3PzmKbcK4fLEsbUtPLDyh",
+    "username":"sample_username",
+    "quota":{"user":51720519,"total":1493172224}
+}
+
 
 }());
