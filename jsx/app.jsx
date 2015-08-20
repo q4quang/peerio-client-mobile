@@ -6,6 +6,7 @@
       return (
         <div>
           <Peerio.UI.NavBar/>
+          <Peerio.UI.SideBar/>
           <RouteHandler/>
           <Peerio.UI.Footer/>
         </div>

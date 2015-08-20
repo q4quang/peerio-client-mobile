@@ -1,0 +1,85 @@
+/**
+ * Sliding sidebar with menu
+ */
+.sidebar {
+  position: absolute;
+  z-index: $z-sidebar;
+  transition: transform .3s cubic-bezier(.43,.01,.49,.95);
+  transform: translateX(-101%);
+  width: 80%;
+  top: $navbar-height;
+  bottom: 0;
+  background-color: $sidebar-bg-color;
+  padding: 20px 10px;
+  color: white;
+  font-size: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  .app-version{
+    position: static;
+    font-size: 70%;
+    color: #9E9E9E;
+  }
+  display: flex;
+  flex-direction: column;
+  .flex-1{
+    flex-grow: 1;
+  }
+  .flex-0{
+    flex-grow: 0;
+  }
+  .avatar{
+    width: 45px;
+    height: 45px;
+    margin-bottom: 0.5rem;
+  }
+
+  &.open {
+    transform: translateX(0);
+    transition-duration: .7s;
+  }
+  .fa-mobile {
+    font-size: 1.5em;
+  }
+  .sidebar-footer-text{
+    margin-top: 1rem;
+    .feedback{
+      float: right;
+      font-size: 70%;
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+  }
+
+  ul{
+    list-style: none;
+    padding:0 1em;
+    margin: 0.5em 0 0 0;
+    li {
+      margin-bottom: 1em;
+      font-weight: 100;
+    }
+  }
+}
+// dark semi-transulent div under sidemenu
+// it dims the content part that is not covered by sidemenu
+#sidebar-dimmer{
+  position: absolute;
+  top:$navbar-height;
+  // hiding it with left position because this way we will have an opacity transition on showing
+  // and fast hide on sidebar closing
+  left:-150%;
+  bottom:0;
+  right: 0;
+  width: 100%;
+  z-index: ($z-sidebar - 1);
+  background-color: #000;
+  transition: none;
+  opacity: 0;
+  &.open {
+    left:0;
+    background-color: #000;
+    transition: opacity 200ms 500ms linear;
+    opacity: 0.4;
+  }
+}

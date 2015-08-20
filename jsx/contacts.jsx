@@ -93,7 +93,7 @@
       }
       //// TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
       return (
-        <div className="content without-tab-bar contact-view">
+        <div className="content contact-view">
           <div className="head">
             <Peerio.UI.Avatar size="big" username={c.username} className="contact-view-avatar"/>
             <span className="name">{c.fullName}</span>

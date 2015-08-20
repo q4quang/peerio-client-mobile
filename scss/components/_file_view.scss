@@ -1,0 +1,25 @@
+.file-view{
+  padding: 10px 10px 40px 10px;
+  .head{
+    padding: 6px 0 10px 35px;
+    color: #525252;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    word-wrap: break-word;
+    position: relative;
+    min-height: 2.7em;
+    .file-type{
+      font-size: 2em;
+      position: absolute;
+      top:0;
+      left:0;
+    }
+  }
+  .download{
+    height: 40px;
+    text-align: center;
+    background-color: #DFF1FF;
+    line-height: 40px;
+    font-size: 120%;
+  }
+}

@@ -11,19 +11,23 @@ var browserSync = require('browser-sync').create();
 var inquirer = require('inquirer');
 var _ = require('lodash');
 var minimist = require('minimist');
+var autoprefixer = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
+var globbing = require('gulp-css-globbing');
 
 // extracting --cli --parameters
 var knownOptions = {
   boolean: 'api',
   default: {  }
 };
+var supportedBrowsers = ['ios >= 3.2', 'chrome >= 37', 'android >= 4.2'];
 
 var options = minimist(process.argv.slice(2), knownOptions);
 
 // put all the paths here
 var paths = {
   sass_main: ['scss/app.scss'],
-  sass_all: ['scss/*.scss'],
+  sass_all: ['scss/**/*.scss'],
   css_src: ['www/css/**/*.css'],
   css_dst: './www/css/',
   html: ['www/index.html'],
@@ -60,11 +64,21 @@ gulp.task('help', function () {
 gulp.task('sass', function (done) {
   console.log('compiling sass files.');
   gulp.src(paths.sass_main)
+    .pipe(globbing({
+      extensions: ['.scss']
+    }))
+    .pipe(sourcemaps.init())
     .pipe(sass({
       errLogToConsole: true,
-      sourceComments: 'normal'
+      sourceComments: false
     }))
+    .pipe(autoprefixer({
+      browsers: supportedBrowsers,
+      cascade: false
+    }))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css_dst))
+
     .on('end', done);
 });
 

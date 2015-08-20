@@ -197,8 +197,7 @@
 
 
       return (
-        <div id="app-container">
-          <div className="content fullscreen with-progress-bar signup">
+          <div className="content-wrapper-signup">
             
             <div className="progress-bar">
               {progressBarSteps}
@@ -210,8 +209,7 @@
               </ReactCSSTransitionGroup>
               {modalStep}
             </form>
-          </div> 
-        </div>
+          </div>
       ); 
     }
   }); 

@@ -1,0 +1,78 @@
+.headline{
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2em;
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+.headline-sm{
+  @extend .headline;
+  font-size: 1.2rem;
+  margin-bottom: 0.5em;
+}
+
+.headline-md{
+  @extend .headline;
+  font-size: 1.5rem;
+  //margin-bottom: 0.5em;
+}
+
+.headline-lrg{
+  @extend .headline;
+  font-size: 2rem;
+}
+.headline-sub{
+  @extend .headline;
+  font-weight: bold;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+
+.subhead{
+  font-weight: 400;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  margin: 0.2em 0;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 5px;
+  opacity: 0.6;
+}
+
+.subhead-inline{
+  font-weight: bold;
+  font-size: 0.7em;
+  text-transform: uppercase;
+}
+
+.txt-lrg{
+  display: block;
+  font-size: 1.5rem;
+  z-index: 1;
+  vertical-align: middle;
+  margin: 0.5em 0 1.5em 0;
+  width: 100%;
+  font-weight: 800;
+  color: white;
+}
+
+.centered-text{
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.info-label{
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+}
+.info-small{
+  font-weight: 200;
+  font-size: 1rem;
+  line-height: 1.5em;
+  .fa{
+    margin-right: 0.5em;
+  }
+}

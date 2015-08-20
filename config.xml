@@ -19,7 +19,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="StatusBarBackgroundColor" value="#233445" />
-    <preference name="xwalkVersion" value="14" />
+    <preference name="xwalkVersion" value="xwalk_core_library_beta:14.43.343.17" />
     <platform name="android">
         <allow-intent href="market:*" />
         <splash density="land-hdpi" src="res/screen/android/splash-land-hdpi.png" />

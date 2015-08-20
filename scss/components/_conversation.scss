@@ -1,0 +1,203 @@
+// Conversation styles
+$edge-distance: 0;
+$msg-distance: 15px;
+$big-side-distance: 30px;
+$item-border-radius: 3px;
+
+.conversation {
+  margin-top: 30px;
+  padding-bottom: 80px;
+  color: $p-blue-darker;
+  user-select: initial;
+  .item {
+    width: 100%;
+    padding: $msg-distance $big-side-distance 0 $edge-distance;
+    .head {
+      padding: 4px 7px 3px 15px;
+      background-color: #E7F5FF;
+      position: relative;
+      font-variant: small-caps;
+      text-transform: uppercase;
+      font-size: 85%;
+      font-weight: 600;
+      border-top-right-radius: $item-border-radius;
+      .timestamp {
+        float: right;
+        font-size: 80%;
+        .date {
+        }
+        .time {
+        }
+      }
+    }
+    .body {
+      text-align: left;
+      overflow-x: auto;
+      padding: 0 7px 7px 15px;
+      background-color: #E7F5FF;
+      border-bottom-right-radius: $item-border-radius;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .file-count{
+      font-size: 10px;
+      color: #aaa;
+    }
+
+    .receipts {
+      color: #A9A9A9;
+      font-size: 70%;
+      text-align: right;
+      margin-top: 2px;
+      padding-right: 4px;
+      .receipt {
+        margin-left: 3px;
+      }
+    }
+
+    &.ack {
+      .head {
+        padding-left: 50px;
+        border-radius: 0 $item-border-radius $item-border-radius 0;
+      }
+      &.self {
+        .head {
+          border-radius: $item-border-radius 0 0 $item-border-radius;
+          padding-left: 50px;
+        }
+        .ack-icon {
+          color: #9B9B9B;
+        }
+      }
+    }
+    .ack-icon {
+      font-size: 182%;
+      border-radius: 100px;
+      display: block;
+      padding: 6px;
+      position: absolute;
+      left: 15px;
+      top: -7px;
+      background-color: #FFFFFF;
+      color: #698FA9;
+    }
+
+    &.self {
+      padding-left: $big-side-distance;
+      padding-right: $edge-distance;
+      .head {
+        background-color: #f5f5f5;
+        border-radius: $item-border-radius 0 0 0;
+        padding-left: 7px;
+        padding-right: 15px;
+      }
+      .body {
+        background-color: #f5f5f5;
+        border-radius: 0 0 0 $item-border-radius;
+        padding-left: 7px;
+        padding-right: 15px;
+      }
+    }
+  }
+}
+
+#conversation-head {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  top: $navbar-height;
+  z-index: $z-tabbar;
+  height: 30px;
+  color: white;
+  line-height: 30px;
+  .counter {
+    width: 45px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: right;
+    padding-right: 5px;
+    background-color: $p-blue-darker;
+  }
+  .subject {
+    overflow: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 45px;
+    white-space: nowrap;
+    padding-left: 5px;
+    background-color: $p-blue-darker;
+  }
+  .participants {
+    transition: all 500ms ease;
+    transform: translateY(-100%);
+    max-height: 200px;
+    width: 100%;
+    overflow: auto;
+    background-color: $p-blue-darker;
+    margin-top: 30px;
+    padding-bottom: 5px;
+    &.open {
+      transform: translateY(0%);
+    }
+    .avatar {
+      margin: 2px 5px 2px 5px;
+    }
+  }
+}
+
+#reply {
+  position: fixed;
+  display: flex;
+  bottom: $footer-height;
+  height: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: $z-tabbar;
+  border-top: 1px solid #ddd;
+
+}
+
+.reply-ack, .reply-attach {
+  display: block;
+  position: relative;
+  width: 40px;
+  font-size: 22px;
+  flex: 0 0 auto;
+  background-color: #fafafa;
+  background: linear-gradient(135deg, rgba(250, 250, 250, 1) 0%, rgba(220, 220, 220, 1) 100%);
+  .icon-btn{
+    position: absolute;
+    top: 50%;
+    margin-top: -13px;
+    left: 10px;
+  }
+}
+.reply-ack{
+}
+.reply-attach {
+}
+
+.reply-input {
+  min-height: 45px;
+  max-height: 150px;
+  padding: 3px 10px 0 10px;
+  flex: 1 1 auto;
+  background: linear-gradient(0deg, #FAFAFF 0%, #F4F2FF 100%);
+  overflow: scroll;
+  border: none;
+  border-top: 3px solid #F4F2FF;
+  border-bottom: 3px solid #F4F2FF;
+  user-select: initial;
+  resize: none;
+
+  &:focus{
+    outline: none;
+  }
+}

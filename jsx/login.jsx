@@ -139,9 +139,9 @@
       var passInputType = this.state.passphraseVisible ? 'text' : 'password';
 
       return (
-        <div id="login-screen" className="modal active">
+        <div className="page-wrapper-login">
 
-          <div id="login-container">
+          <div className="content-wrapper-login">
             <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
             <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"/>
 
@@ -176,11 +176,11 @@
                 </div>
               </div>
               <div id="login-process-state">{this.state.loginProgressMsg}</div>
-              <button type="submit" ref="loginBtn" className="login-btn" onTouchEnd={this.handleSubmit}>
+              <button type="submit" ref="loginBtn" className="btn-lrg btn-safe" onTouchEnd={this.handleSubmit}>
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
               </button>
 
-              <button type="button" className="signup-btn" onTouchEnd={this.transitionTo.bind(this,'signup')}>sign up
+              <button type="button" className="btn-lrg" onTouchEnd={this.transitionTo.bind(this,'signup')}>sign up
               </button>
 
             </form>

@@ -13,7 +13,6 @@ Peerio.UI.Routes = (
       </Route>
       <Route name="conversation" path="/app/conversation/:id" handler={Peerio.UI.Conversation} />
     </Route>
-    <Route name="sidebar" path="app/sidebar" handler={Peerio.UI.SideBar}/>
   </Route>
 );
 

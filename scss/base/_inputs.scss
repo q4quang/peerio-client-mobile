@@ -1,0 +1,71 @@
+
+$text-input-padding: 0.5em;
+$text-input-fontsize: 1.2rem;
+
+.radio-button:checked + .radio-label-square{
+  background-color: #2795d0;
+  color: white;
+  font-weight:bold;
+}
+
+.radio-button:checked + .radio-label:after {
+  content: " ";
+  background-color: #95D583;
+}
+.radio-label{
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  font-size: 1.2rem;
+  border-radius: 1.5em;
+  z-index: 1;
+  vertical-align: middle;
+  margin: 0 0.3em;
+  background-color: #2795d0;
+}
+
+.radio-label:after{
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  height: 1.5em;
+  width: 1.5em;
+  background-color: transparent;
+  border: 1px solid #EAEAEA;
+  margin-left: 0.5em;
+  box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09);
+}
+
+.select-input {
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+  padding: $text-input-padding;
+  font-size: $text-input-fontsize;
+  -webkit-appearance: none;
+  width: 100%;
+  color: transparent;
+  height: 40px;
+}
+
+.select-input > option {
+  color: black;
+}
+.select-input > option:first-child {
+  color: #ccc;
+}
+.select-input:valid{
+  color: white;
+}
+
+
+.text-input-label-static{
+  @extend .text-input-label;
+  font-size: 0.8rem;
+  top: -0.5rem;
+}
+
+#passphrase-input{
+  margin-bottom: 10px;
+}

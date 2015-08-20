@@ -1,0 +1,30 @@
+/**
+ * Footer bar
+ */
+#footer{
+  position: absolute;
+  display: table;
+  bottom: 0;
+  left:0;
+  right:0;
+  width: 100%;
+  height: $footer-height;
+  color: #ccc;
+  background-color: $p-blue-darker;
+  font-size: 13px;;
+  z-index: $z-tabbar;
+}
+// back button
+#global-back{
+  display: table-cell;
+  vertical-align: middle;
+  width: auto;
+  text-align: left;
+  padding-left:10px;
+  white-space: nowrap;
+  text-transform:uppercase;
+}
+.toolbar-fill{
+  display:table-cell;
+  width:100%;
+}
