@@ -23,7 +23,7 @@
         : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
       return (
-        <div className="content" id="Messages" ref="messageList"
+        <div className="content" id="Messages" ref="messageList" onTouchTap={console.log.bind(console,'TAP')}
              onTouchStart={this.registerTouchStart} onTouchEnd={this.registerTouchEnd}>
           {nodes}
         </div>

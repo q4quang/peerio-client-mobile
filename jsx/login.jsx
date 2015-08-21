@@ -68,7 +68,7 @@
     },
     handleLoginFail: function (message) {
       this.stopProgress();
-      Peerio.Action.showAlert((message&&message.toString()) || 'Login failed.');
+      Peerio.Action.showAlert((message && message.toString()) || 'Login failed.');
       this.setState({waitingForLogin: false, loginProgressMsg: ''});
     },
     // show/hide passphrase
@@ -172,11 +172,13 @@
                          type={passInputType} onChange={this.handlePassphraseChange} onKeyDown={this.handleKeyDownPass}
                          maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
                   <label htmlFor="password">passphrase or pin</label>
-                  <i onTouchEnd={this.handlePassphraseShowTap} className={'pull-right fa ' + eyeIcon}></i>
+                  <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap}>
+                    <i className={'pull-right fa ' + eyeIcon}></i>
+                  </Peerio.UI.Tappable>
                 </div>
               </div>
               <div id="login-process-state">{this.state.loginProgressMsg}</div>
-              <button type="submit" ref="loginBtn" className="btn-lrg btn-safe" onTouchEnd={this.handleSubmit}>
+              <button type="submit" ref="loginBtn" className="btn-lrg btn-safe">
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
               </button>
 
