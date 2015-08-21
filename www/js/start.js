@@ -6,6 +6,9 @@ var NotFoundRoute = ReactRouter.NotFoundRoute;
 
 var Peerio = this.Peerio || {};
 
+// todo: put this in a right place
+Peerio.ACK_MSG = ':::PeerioAck:::';
+
 (function () {
   'use strict';
 

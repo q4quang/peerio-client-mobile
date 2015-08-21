@@ -12,7 +12,7 @@
     },
     componentDidMount: function () {
       var id = this.props.params.id;
-      Peerio.Messages.loadAllConversationMessages(id).then(this.forceUpdate.bind(this));
+      Peerio.Messages.loadAllConversationMessages(id).then(this.forceUpdate.bind(this, null));
       Peerio.Messages.getAllConversations().then(function (conversations) {
         if (!this.isMounted()) return;
         this.setState({conversation: conversations[id]}, this.scrollToBottom);
@@ -147,9 +147,8 @@
         if (isSelf) {
           receipts = [];
 
-          item.recipients.forEach(function (recipient) {
-            //if (!recipient.receipt || !recipient.receipt.isRead || Peerio.user.username === recipient.username) return;
-            receipts.push(<span className="receipt" key={recipient.username}>{recipient.username}</span>);
+          item.receipts.forEach(function (recipient) {
+            receipts.push(<span className="receipt" key={recipient}>{recipient}</span>);
           });
 
           if (receipts.length)
