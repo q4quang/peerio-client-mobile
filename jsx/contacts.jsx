@@ -2,7 +2,6 @@
   'use strict';
 
   Peerio.UI.Contacts = React.createClass({
-    mixins: [Peerio.UI.Mixins.GlobalTap],
     getInitialState: function () {
       // we don't cache actual object in state, but a username, because it might get expired after reload
       return {openContact: null};
@@ -16,12 +15,6 @@
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
-    },
-    globalTapHandler: function (e) {
-      var item = Peerio.Helpers.getParentWithClass(e.target, 'contact-list-item');
-      if (!item || item.attributes['data-username'] == null) return;
-      var username = item.attributes['data-username'].value;
-      this.setState({openContact: username});
     },
     handleAddContact: function(){
       var name = prompt('Please enter username of the contact you want to add');

@@ -2,20 +2,23 @@
   'use strict';
 
   Peerio.UI.Messages = React.createClass({
-    mixins: [Peerio.UI.Mixins.GlobalTap, ReactRouter.Navigation],
+    mixins: [ReactRouter.Navigation],
     getInitialState: function () {
       return {};
     },
-    globalTapHandler: function (e) {
-      var item = Peerio.Helpers.getParentWithClass(e.target, 'list-item');
-      if (!item || item.attributes['data-msgid'] == null) return;
-      this.transitionTo('conversation', {id:item.attributes['data-msgid'].value});
-    },
     componentWillMount: function () {
-      Peerio.Messages.getAllConversations(function (conversations) {
+      this.setState({conversations: Peerio.Messages.cache});
+    },
+    componentDidMount: function () {
+      var updateFn = function (conversations) {
         if (!this.isMounted()) return;
         this.setState({conversations: conversations});
-      }.bind(this));
+      }.bind(this);
+      // todo refactor when server paging is ready
+      Peerio.Messages.getAllConversations(updateFn).then(updateFn);
+    },
+    openConversation: function (id) {
+      this.transitionTo('conversation', {id: id});
     },
     render: function () {
       var nodes = this.state.conversations
@@ -23,8 +26,7 @@
         : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
       return (
-        <div className="content" id="Messages" ref="messageList" onTouchTap={console.log.bind(console,'TAP')}
-             onTouchStart={this.registerTouchStart} onTouchEnd={this.registerTouchEnd}>
+        <div className="content" id="Messages" ref="messageList">
           {nodes}
         </div>
       );
@@ -35,25 +37,30 @@
         // it should be in format "John Smith +3"
         // and it should not display current user's name,
         // unless he is the only one left in conversation
-        var fullName = null;
-        for (var i = 0; i < conv.participants.length; i++) {
-          var username = conv.participants[i];
-          if (username === Peerio.user.username) continue;
-          var contact = Peerio.user.contacts[username];
-          fullName = (contact && contact.fullName) || username;
-          break;
-        }
-        fullName = fullName || Peerio.user.fullName;
-        if (conv.participants.length > 2) {
-          fullName += ' [+' + (conv.participants.length - 2) + ']';
+        if (!conv.displayName) {
+          var displayName = null;
+          for (var i = 0; i < conv.participants.length; i++) {
+            var username = conv.participants[i];
+            if (username === Peerio.user.username) continue;
+            var contact = Peerio.user.contacts[username];
+            displayName = (contact && contact.fullName) || username;
+            break;
+          }
+          displayName = displayName || Peerio.user.fullName;
+          if (conv.participants.length > 2) {
+            displayName += ' [+' + (conv.participants.length - 2) + ']';
+          }
+          conv.displayName = displayName;
         }
 
         return (
-          <Peerio.UI.MessagesItem key={conv.id} msgId={conv.id} unread={conv.original.isModified}
-                                  fullName={fullName} fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
-                                  messageCount={conv.messageCount} subject={conv.original.subject}/>
+          <Peerio.UI.Tappable onTap={this.openConversation.bind(this, conv.id)} key={conv.id}>
+            <Peerio.UI.MessagesItem unread={conv.original.isModified} fullName={conv.displayName}
+                                    fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
+                                    messageCount={conv.messageCount} subject={conv.original.subject}/>
+          </Peerio.UI.Tappable>
         );
-      });
+      }.bind(this));
 
     }
   });
@@ -64,7 +71,7 @@
   Peerio.UI.MessagesItem = React.createClass({
     render: function () {
       return (
-        <div className={'list-item' + (this.props.unread ? ' unread' : '')} data-msgid={this.props.msgId}>
+        <div className={'list-item' + (this.props.unread ? ' unread' : '')}>
           <div className="name-and-subject">
             <span className="name">{this.props.fullName}</span>
             <br/>
@@ -75,10 +82,12 @@
             <span className="date">{this.props.timeStamp.format('MMM Do, YYYY')}</span>
             <br/>{this.props.timeStamp.format('HH:mm:ss')}
           </div>
-          <span className={this.props.fileCount ? '' : 'hide'}>
-            <i className={'fa fa-paperclip attachment'}></i>
-            <span className="attachment-count">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
-          </span>
+          {this.props.fileCount ?
+            (<span>
+              <i className={'fa fa-paperclip attachment'}></i>
+              <span className="attachment-count">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
+             </span>)
+            : ''}
         </div>);
     }
   });

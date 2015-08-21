@@ -21,7 +21,7 @@
 
       return (
         <div id="footer">
-          <div id="global-back" className={this.state.navLevel > 0 ? '' : 'hide'}
+          <div id="global-back" className={true ? '' : 'hide'}
             onTouchEnd={this.goBack}>
             <i className="fa fa-chevron-left"></i>&nbsp;back
           </div>
