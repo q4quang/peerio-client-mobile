@@ -109,14 +109,7 @@ Peerio.Helpers.init = function () {
     return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
   };
 
-  /**
-   * get string hash from string
-   * @param {string} data
-   * @returns {string} b64 encoded hash with '=' character in the end
-   */
-  api.sha256 = function(data){
-    return new jsSHA(data, 'TEXT').getHash('SHA-256', 'HEX');
-  };
+
 
   /**
    *  FILE HELPERS

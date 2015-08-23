@@ -56,6 +56,7 @@
       //Peerio.Action.showFileSelect(this.state.attachments.slice());
     },
     scrollToBottom: function () {
+      if(!this.refs.content)return;
       TweenLite.to(this.refs.content.getDOMNode(), .5, {scrollTo: {y: 'max'}});
     },
     //----- RENDER
@@ -64,7 +65,7 @@
       // todo: also not trying to send receipts that were already sent?
       //Peerio.Data.sendReceipts(this.props.conversationId);
       // todo: loading state
-      if (!this.state.conversation) return (<div>loading...</div>);
+      if (!this.state.conversation) return (<h1>loading...</h1>);
       var conversation = this.state.conversation;
       var participants = _.without(conversation.participants, Peerio.user.username).map(function (username) {
         var name;
@@ -79,8 +80,8 @@
             <Peerio.UI.Avatar username={username}/>{name}
           </div>
         );
-      })
-        ;
+      });
+
       var nodes = this.buildNodes();
       // note: reply has fixed positioning and should not be nested in .content,
       // this causes unwanted scroll when typing into text box

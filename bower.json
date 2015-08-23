@@ -20,7 +20,6 @@
     "react": "0.x",
     "is_js": "*",
     "gsap": "*",
-    "jssha": "*",
     "Autolinker.js": "*",
     "dompurify": "*",
     "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git",
