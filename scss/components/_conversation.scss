@@ -4,6 +4,8 @@ $msg-distance: 15px;
 $big-side-distance: 30px;
 $item-border-radius: 3px;
 
+$avater-size: 25px;
+
 .conversation {
   margin-top: 65px;
   padding-bottom: 80px;
@@ -12,9 +14,46 @@ $item-border-radius: 3px;
   .item {
     width: 100%;
     padding: $msg-distance $big-side-distance 0 $edge-distance;
+    padding-left:$avater-size + 5px;
+    position: relative;
+
+    .timestamp {
+      width: 100%;
+      padding: 0;
+      position: absolute;
+      left:0;
+      text-align: center;
+      font-size: 0.8em;
+      display: flex;
+      align-items: center;
+      color: #D3D3D3;
+      .date {
+      }
+      .time {
+      }
+    }
+    .timestamp:after,
+    .timestamp:before{
+      content: " ";
+      height: 1px;
+      background-color: #D3D3D3;
+      flex-grow: 1;
+      margin: 0px 1rem;
+    }
+    .timestamp + .head{
+      margin-top: 2rem;
+    }
+    .avatar{
+      width: $avater-size;
+      height: $avater-size;
+      position: absolute;
+      left: -($avater-size+3px);
+      top:0;
+    }
     .head {
       height: 22px;
-      padding: 4px 7px 3px 15px;
+      //padding: 4px 7px 3px 15px;
+      padding: 5px;
       background-color: #E7F5FF;
       position: relative;
       font-variant: small-caps;
@@ -22,19 +61,16 @@ $item-border-radius: 3px;
       font-size: 85%;
       font-weight: 600;
       border-top-right-radius: $item-border-radius;
-      .timestamp {
-        float: right;
-        font-size: 80%;
-        .date {
-        }
-        .time {
-        }
-      }
+    }
+    .names{
+      font-size:0.9em;
     }
     .body {
       text-align: left;
       overflow-x: auto;
-      padding: 0 7px 7px 15px;
+      padding: 5px;
+      padding-bottom: 10px;
+      padding-top: 0;
       background-color: #E7F5FF;
       border-bottom-right-radius: $item-border-radius;
       white-space: pre-wrap;

@@ -72,22 +72,26 @@
     render: function () {
       return (
         <div className={'list-item' + (this.props.unread ? ' unread' : '')}>
+          {this.props.fileCount ?
+              (<div className="icon-with-label">
+              <i className={'fa fa-paperclip attachment'}></i>
+              <span className="icon-label">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
+             </div>)
+              : ''}
           <div className="name-and-subject">
-            <span className="name">{this.props.fullName}</span>
-            <br/>
-            <span className="subject"><span className="message-count"><i
-              className='fa fa-comment-o message-count-icon'></i>{this.props.messageCount}</span>{this.props.subject}</span>
+            <div className="name">{this.props.fullName}</div>
+            <div className="subject"><span className="message-count"><i
+              className='fa fa-comment-o message-count-icon'></i>{this.props.messageCount}</span>{this.props.subject}</div>
           </div>
           <div className="timestamp">
-            <span className="date">{this.props.timeStamp.format('MMM Do, YYYY')}</span>
-            <br/>{this.props.timeStamp.format('HH:mm:ss')}
+            <div className="date">
+              {this.props.timeStamp.format('MMM Do, YYYY')}
+              <i className="fa fa-chevron-right"/>
+            </div>
+            <div className="time">
+              {this.props.timeStamp.format('HH:mm:ss')}
+            </div>
           </div>
-          {this.props.fileCount ?
-            (<span>
-              <i className={'fa fa-paperclip attachment'}></i>
-              <span className="attachment-count">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
-             </span>)
-            : ''}
         </div>);
     }
   });

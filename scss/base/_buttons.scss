@@ -72,14 +72,16 @@ button:disabled{
     display: inline-block;
     height: 1em;
     width: 1em;
-    border-radius: 50%;
-    background-color: white;
-    color: #44494D;
-    padding: 0.3em;
-    box-sizing: content-box;
   }
   .icon-label{
     display: block;
     font-size: 0.7em;
   }
+}
+.fa.circle{
+  border-radius: 50%;
+  background-color: white;
+  color: #44494D;
+  padding: 0.3em;
+  box-sizing: content-box;
 }

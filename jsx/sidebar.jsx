@@ -99,15 +99,15 @@
               <div className="flex-1" ref="menu">
                 <ul className="flex-row">
                   <li className="icon-with-label flex-col-1">
-                    <i className="fa fa-pencil"/>
+                    <i className="fa fa-pencil circle"/>
                     <span className="icon-label">New Message</span>
                   </li>
                   <li className="icon-with-label flex-col-1">
-                    <i className="fa fa-cloud-upload"/>
+                    <i className="fa fa-cloud-upload circle"/>
                     <span className="icon-label">Upload File</span>
                   </li>
                   <li className="icon-with-label flex-col-1">
-                    <i className="fa fa-user-plus"/>
+                    <i className="fa fa-user-plus circle"/>
                     <span className="icon-label">Add Contact</span>
                   </li>
                 </ul>

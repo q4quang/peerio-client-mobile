@@ -1,15 +1,8 @@
-@keyframes placeHolderShimmer {
-  0% {
-    background-position: 100% 0;
-  }
-  100% {
-    background-position: -100% 0;
-  }
-}
+$list-linehight: 1.5rem;
 
 .list-item {
   color: #444;
-  background-color: #e8e9e8;
+  background-color: #F3F3F3;
   height: $item-height;
   max-height: $item-height;
   min-height: $item-height;
@@ -18,11 +11,12 @@
   overflow: hidden;
   white-space: nowrap;
   padding: 15px $list-item-padding-left;
+  padding-right: 5px;
   position: relative;
   font-weight: 400;
   border-bottom: 1px solid #ddd;
-  diplay: flex;
-
+  display: flex;
+  align-items: baseline;
   &.unread {
     background: white;
     border-left: 5px solid $p-green;
@@ -34,19 +28,17 @@
   &.placeholder {
     background: white;
   }
-  .attachment {
-    position: absolute;
-    top: 20px;
-    right: 13px;
-    transform: rotate(224deg);
-    font-size: 140%;
+  .icon-with-label{
+    margin-left: -18px;
+    width:24px;
+    overflow:hidden;
+    .icon-label{
+      line-height: 1.6rem;
+    }
   }
-  .attachment-count {
-    position: absolute;
-    top: 23px;
-    right: 0;
-    width: 15px;
-    text-align: left;
+  .fa-chevron-right{
+    width: 1rem;
+    opacity: 0.5;
   }
   .message-count{
     font-size: 80%;
@@ -103,6 +95,7 @@
     .name {
       font-size: 1rem;
       font-weight: 600;
+      line-height: $list-linehight;
     }
     .subject {
       font-weight: 300;
@@ -112,13 +105,22 @@
   .timestamp {
     flex: 0 0 auto;
     font-weight: 300;
-    overflow: hidden;
-    padding-right: 8px;
     text-align: right;
     font-size: 0.9rem;
     .date {
       font-weight: 600;
-      font-size:90%
+      font-size:90%;
+      line-height: $list-linehight;
+    }
+    .time{
+      margin-right: 1rem;
     }
   }
+}
+
+.fadein-enter{
+  animation:fadeIn 1s ease-in both;
+}
+.fadein-leave{
+  animation:fadeOut 1s ease-in both;
 }

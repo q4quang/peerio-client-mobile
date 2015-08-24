@@ -131,16 +131,29 @@
       var ack = (<i className="fa fa-thumbs-o-up ack-icon"></i>);
       var nodes = [];
 
-      this.state.conversation.messages.forEach(function (item) {
+      //sort first, ask questions later
+      this.state.conversation.messages.sort(function(a,b){ return a.timestamp < b.timestamp  ? -1 : (a.timestamp > b.timestamp ? 1 : 0) ; })
+
+      this.state.conversation.messages.forEach(function (item, index) {
         // figuring out render details
         var sender = Peerio.user.contacts[item.sender];
         // mocking contact for deleted contacts
         if (!sender) {
           sender = {username: item.sender, fullName: item.sender};
         }
-        var relativeTime = moment.min(renderStartTs, moment(+item.timestamp)).fromNow();
+
+        var prevMessage = index ? this.state.conversation.messages[index-1] : false ;
+        var isSameDay = moment(item.timestamp).isSame(prevMessage.timestamp, 'day');
+
+        var momentTimestamp = moment(+item.timestamp);
+        var relativeTime = moment.min(renderStartTs, momentTimestamp).fromNow();
+
+        var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? momentTimestamp.format("MMM Do") : momentTimestamp.format("MMM Do YYYY");
+
         var isAck = item.message === Peerio.ACK_MSG;
         var isSelf = Peerio.user.username === sender.username;
+
+        var timestampHTML = ( isSameDay ) ? false : <div className="timestamp">{relativeTime}&nbsp;&bull;&nbsp;{messageDate}</div>;
 
         // will be undefined or ready to render root element for receipts
         var receipts;
@@ -176,15 +189,17 @@
           'self': isSelf,
           'ack': isAck
         });
-        // ts property is passed for sorting
+
+        var avatarHTML = (isSelf) ? false : <Peerio.UI.Avatar username={sender.username}/> ;
+
         nodes.push(
+
           <div className={itemClass} ts={item.timestamp} key={item.id}>
+            {timestampHTML}
             <div className="head">
               {thisAck}
+              {avatarHTML}
               <span className="names">{sender.fullName}</span>
-              <span className="timestamp">
-                {relativeTime}
-              </span>
             </div>
             {body}
             {receipts}
@@ -192,7 +207,7 @@
         );
       }.bind(this));
       // sorting by timestamp
-      nodes.sort(function (a, b) { return a.props.ts < b.props.ts ? -1 : (a.props.ts > b.props.ts ? 1 : 0); });
+      //nodes.sort(function (a, b) { return a.props.ts < b.props.ts ? -1 : (a.props.ts > b.props.ts ? 1 : 0); });
       return nodes;
     }
   });

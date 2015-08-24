@@ -1,16 +1,3 @@
-@keyframes connecting {
-  from {
-    background-color: #ff0000;
-  }
-  to   {
-    background-color: #cc0000;
-  }
-}
-@keyframes loading {
-  from { background-position-x: 0%; }
-  to   { background-position-x: 200%;    }
-}
-
 #connection-status{
   position:absolute;
   bottom:0;
