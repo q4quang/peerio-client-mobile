@@ -41,7 +41,14 @@
         }.bind(this));
     },
     setPIN: function () {
-      var p = prompt('Please enter the PIN you want to set up for this device');
+      var setPinText = <div>
+                        <span>Please enter the PIN you want to set up for this device</span>
+                        <input type="text"/>
+                      </div>
+      var setPinBtn = <button className="btn-md">Set PIN</button>
+      Peerio.Action.showAlert({text:setPinText, btns: setPinBtn});
+
+      //var p = prompt('Please enter the PIN you want to set up for this device');
       if (p) {
         Peerio.Data.setPIN(p).then(function () {
           alert('Your pin is set!');

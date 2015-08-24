@@ -68,7 +68,7 @@
     },
     handleLoginFail: function (message) {
       this.stopProgress();
-      Peerio.Action.showAlert((message&&message.toString()) || 'Login failed.');
+      Peerio.Action.showAlert({text:(typeof message !== "undefined" && message.toString()) || 'Login failed.'});
       this.setState({waitingForLogin: false, loginProgressMsg: ''});
     },
     // show/hide passphrase

@@ -1,3 +1,7 @@
+button:disabled{
+  background-color: rgba(103, 103, 103, 0.69);
+  color: #353535;
+}
 
 .btn {
   padding: 0.5em;
@@ -15,6 +19,7 @@
   text-align: center;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  color: inherit;
 }
 
 .btn-lrg{

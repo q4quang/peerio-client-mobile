@@ -21,12 +21,16 @@
         steps:[], 
         activeStep: 0,
         userData: {}, 
-        auth_method: null
+        auth_method: null,
+        passphrase_sample: "volume recorder speech badges expert buffy",
+        passphrase_sample_reentered: "",
+        passphrase_valid: false,
+        activeModalId: null
       };
     },
 
     handleNextStep: function(e){
-      e.preventDefault();
+      event.preventDefault();
       this.setState({activeStep: ++this.state.activeStep })
     },
 
@@ -42,12 +46,41 @@
       e.preventDefault();
       this.setState({auth_method: 'sms_sent'})
     },
+    validatePassPhrase: function(){
+      var passphrase_confirmed = event.target.value === this.state.passphrase_sample
+      this.setState({
+        passphrase_sample_reentered: event.target.value,
+        passphrase_valid:passphrase_confirmed
+      })
+    },
+    passPhraseIsValid: function(){
+      if (this.state.passphrase_valid) {
+        Peerio.Action.removeAlert(this.state.activeModalId);
+        this.handleNextStep();
+      }
+    },
+    removeModal: function(){
+      Peerio.Action.removeAlert(this.state.activeModalId);
+    },
+    showModal: function(){
+      var modalText = <div key={'singup-step-2'}>
+        <legend className="headline-md">Please enter your passphrase to continue</legend>
+        <textarea className="txt-lrg textarea-transparent" autoFocus="true" onChange={this.validatePassPhrase}></textarea>
+      </div>
+      var modalBtns = <div>
+        <button className="btn-lrg" onTouchEnd={this.passPhraseIsValid}> Create my account </button>
+        <button className="btn-subtle" onTouchEnd={this.removeModal}> Let me see my passphrase again </button>
+      </div>
+      var modalContent = {id: uuid.v4(), text:modalText, btns: modalBtns};
+      Peerio.Action.showAlert(modalContent);
+      this.setState({activeModalId: modalContent.id});
+
+    },
     render: function(){
-      
-      //var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
       var steps = []; 
       var auth_method = "";
+
       switch (this.state.auth_method) {
         case "sms":
           auth_method = <div>
@@ -120,7 +153,7 @@
 
           {auth_method}
 
-          <button className="btn-lrg" onTouchEnd={this.handleNextStep} disabled="disabled"> continue </button>
+          <button className="btn-lrg" onTouchEnd={this.handleNextStep}> continue </button>
         </fieldset> 
       )
       steps.push(
@@ -149,21 +182,11 @@
             <label className="text-input-label-static">Length</label>
           </div>
 
-          <button className="btn-lrg" onTouchEnd={this.handleNextStep}> I'll remember my passphrase </button>
+          <button className="btn-lrg" onTouchEnd={this.showModal}> I'll remember my passphrase </button>
           <button className="btn-subtle" onTouchEnd={this.handlePreviousStep}> I don't like this passphrase </button>
         </fieldset> 
       )
-      steps.push(
-        <fieldset className="modal"  key={'singup-step-2'}>
-          <div className="dim-background"></div>
-          <div className="modal-content">
-          <legend className="headline-md">Please enter your passphrase to continue</legend>
-          <textarea className="txt-lrg textarea-transparent" autoFocus="true"></textarea>
-            <button className="btn-lrg" onTouchEnd={this.handleNextStep}> Create my account </button>
-            <button className="btn-subtle" onTouchStart={this.handlePreviousStep}> Let me see my passphrase again </button>
-          </div>
-        </fieldset>
-      )
+
       steps.push(
         <fieldset  key={'singup-step-3'}>
           <h1 className="headline-lrg">Set a device passcode</h1>
@@ -180,13 +203,13 @@
       var activeStep = this.state.activeStep; 
       var currentStep = steps[activeStep]; 
       var progressBarSteps = []; 
-      var modalStep = "";
 
       //the third step is a modal dialog, so we display both previous and current step
-      if (activeStep === 2){
+      //var modalStep = "";
+      /*if (activeStep === 2){
         currentStep = steps[activeStep-1];
         modalStep = steps[activeStep];
-      }
+      }*/
 
       for (var i=0; i < steps.length; i++){
         var activeClass = (i === activeStep) ? "active progress-bar-step": "progress-bar-step";
@@ -207,7 +230,6 @@
               <ReactCSSTransitionGroup transitionName="animate">
               {currentStep }
               </ReactCSSTransitionGroup>
-              {modalStep}
             </form>
           </div>
       ); 

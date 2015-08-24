@@ -10,7 +10,8 @@ Peerio.ActionExtension.init = function () {
 
   [
     //------- ACTIONS EMITTED BY UI -------
-    'ShowAlert',           // {string message} Message to modal manager to show alert
+    'ShowAlert',           // {text:string/reactComponent, btn: reactComponent} Message to modal manager to show alert
+    'RemoveAlert',         // Message to modal manager to remove alert with ID
     'SignOut',             // User wants to sign out
     'TabChange',           // Active tab changed to (index)
     'SidebarToggle',       // User wants to change show/hide state of sidebar
