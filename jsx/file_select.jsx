@@ -9,7 +9,6 @@
   'use strict';
 
   Peerio.UI.FileSelect = React.createClass({
-    mixins: [Peerio.UI.Mixins.GlobalTap],
     getInitialState: function () {
       return {visible: false};
     },

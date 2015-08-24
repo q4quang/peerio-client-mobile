@@ -5,7 +5,7 @@ $big-side-distance: 30px;
 $item-border-radius: 3px;
 
 .conversation {
-  margin-top: 30px;
+  margin-top: 65px;
   padding-bottom: 80px;
   color: $p-blue-darker;
   user-select: initial;
@@ -13,6 +13,7 @@ $item-border-radius: 3px;
     width: 100%;
     padding: $msg-distance $big-side-distance 0 $edge-distance;
     .head {
+      height: 22px;
       padding: 4px 7px 3px 15px;
       background-color: #E7F5FF;
       position: relative;

@@ -19,15 +19,6 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="StatusBarBackgroundColor" value="#233445" />
-    <plugin name="cordova-plugin-file" spec="*" />
-    <plugin name="cordova-plugin-whitelist" spec="*" />
-    <plugin name="cordova-plugin-appversion" spec="*" />
-    <plugin name="cordova-plugin-crosswalk-webview" spec="*" />
-    <plugin name="cordova-plugin-device" spec="*" />
-    <plugin name="cordova-plugin-splashscreen" spec="*" />
-    <plugin name="cordova-plugin-statusbar" spec="*" />
-    <plugin name="com.ionic.keyboard" spec="*" />
-    <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="*" />
     <preference name="xwalkVersion" value="xwalk_core_library_beta:14.43.343.17" />
     <platform name="android">
         <allow-intent href="market:*" />
@@ -90,4 +81,15 @@
     <preference name="CROSSWALK_ANDROID_VERSION" value="14+" />
     <preference name="CROSSWALK_ANDROID_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
     <preference name="LIB_MODE" value="embedded" />
+    <plugin name="com.ionic.keyboard" spec="*" />
+    <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="*" />
+    <plugin name="cordova-plugin-appversion" spec="*" />
+    <plugin name="cordova-plugin-whitelist" spec="*" />
+    <plugin name="cordova-plugin-device" spec="*" />
+    <plugin name="cordova-plugin-statusbar" spec="*" />
+    <plugin name="cordova-plugin-splashscreen" spec="*" />
+    <plugin name="cordova-plugin-file-transfer" spec="*" />
+    <plugin name="cordova-plugin-file" spec="*" />
+    <plugin name="com.telerik.plugins.wkwebview" spec="*" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="https://github.com/crosswalk-project/cordova-plugin-crosswalk-webview.git" />
 </widget>

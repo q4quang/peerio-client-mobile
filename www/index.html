@@ -9,7 +9,7 @@
     <!--
 		* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     	* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    	* todo: unsafe inline can be removed from scripts in production. browsersync needs in in development.
+    	* todo: unsafe inline can be removed from scripts in production. browsersync needs it in development.
 	-->
 	<meta http-equiv="Content-Security-Policy"
           content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://ssl.gstatic.com https://*.peerio.com
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="bower/normalize.css/normalize.css" type="text/css" />
     <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" type="text/css" />
     <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+    <script type="application/javascript" src="js/urlfix.js"></script>
 
     <!-- debug.js may contain sensitive info that is used to help with development.
          The file is ignored in git and located in repository root,
@@ -34,13 +36,11 @@
     <script type="application/javascript" src="bower/bluebird/bluebird.js"></script>
     <script type="application/javascript" src="bower/react/react-with-addons.js"></script>
     <script type="application/javascript" src="bower/react-router/ReactRouter.js"></script>
-    <script type="application/javascript" src="bower/moment/moment.js"></script>
     <script type="application/javascript" src="bower/is_js/is.js"></script>
     <script type="application/javascript" src="bower/gsap/tweenlite.min.js"></script>
     <script type="application/javascript" src="bower/gsap/scrolltoplugin.min.js"></script>
     <script type="application/javascript" src="bower/Autolinker.js/Autolinker.js"></script>
     <script type="application/javascript" src="bower/dompurify/purify.js"></script>
-    <script type="application/javascript" src="bower/jssha/sha256.js"></script>
 
     <!-- Peerio Client API -->
     <script type="application/javascript" src="js/config.js"></script>
@@ -58,6 +58,7 @@
     <script type="application/javascript" src="js/compiled_jsx/root.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/app.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/swiper.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/tappable.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/portal.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/modal_manager.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/alert.js"></script>
@@ -75,7 +76,9 @@
     <script type="application/javascript" src="js/compiled_jsx/item_placeholder.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/messages.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/files.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/file_view.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/contacts.js"></script>
+    <script type="application/javascript" src="js/compiled_jsx/contact_view.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/conversation.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/new_message.js"></script>
     <script type="application/javascript" src="js/compiled_jsx/avatar.js"></script>

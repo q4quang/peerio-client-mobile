@@ -2,67 +2,66 @@
   'use strict';
 
   Peerio.UI.Messages = React.createClass({
-    mixins: [Peerio.UI.Mixins.GlobalTap],
+    mixins: [ReactRouter.Navigation],
     getInitialState: function () {
       return {};
     },
-    globalTapHandler: function (e) {
-      var item = Peerio.Helpers.getParentWithClass(e.target, 'list-item');
-      if (!item || item.attributes['data-msgid'] == null) return;
-      this.openConversation(item.attributes['data-msgid'].value);
-    },
     componentWillMount: function () {
-      Peerio.Messages.getAllConversationsGradually(function(conversations){
+      this.setState({conversations: Peerio.Messages.cache});
+    },
+    componentDidMount: function () {
+      var updateFn = function (conversations) {
         if (!this.isMounted()) return;
         this.setState({conversations: conversations});
-      }.bind(this));
+      }.bind(this);
+      // todo refactor when server paging is ready
+      Peerio.Messages.getAllConversations(updateFn).then(updateFn);
+    },
+    openConversation: function (id) {
+      this.transitionTo('conversation', {id: id});
     },
     render: function () {
-      var messageNodes = this.state.conversations  ? this.renderNodes() : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
+      var nodes = this.state.conversations
+        ? this.renderNodes()
+        : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
       return (
-        <div className="content" id="Messages" ref="messageList"
-             onTouchStart={this.registerTouchStart} onTouchEnd={this.registerTouchEnd}>
-          {messageNodes}
+        <div className="content" id="Messages" ref="messageList">
+          {nodes}
         </div>
       );
     },
     renderNodes: function () {
-      var nodes = this.state.conversations.data.map(function (convItem) {
-        if (!convItem.original) {
-          console.log("Conversation misses original message:", convItem);
-          return;
-        }
-        var ts = moment(+convItem.lastTimestamp);
-
+      return this.state.conversations.map(function (conv) {
         // building name to display for conversation item.
         // it should be in format "John Smith +3"
         // and it should not display current user's name,
         // unless he is the only one left in conversation
-        var fullName = null;
-        for (var i = 0; i < convItem.participants.length; i++) {
-          var username = convItem.participants[i];
-          if (username === Peerio.user.username) continue;
-          var contact = Peerio.user.contacts[username];
-          fullName = (contact && contact.fullName) || username;
-          break;
-        }
-        fullName = fullName || Peerio.user.fullName;
-        if (convItem.participants.length > 2) {
-          fullName += ' [+' + (convItem.participants.length - 2) + ']';
+        if (!conv.displayName) {
+          var displayName = null;
+          for (var i = 0; i < conv.participants.length; i++) {
+            var username = conv.participants[i];
+            if (username === Peerio.user.username) continue;
+            var contact = Peerio.user.contacts[username];
+            displayName = (contact && contact.fullName) || username;
+            break;
+          }
+          displayName = displayName || Peerio.user.fullName;
+          if (conv.participants.length > 2) {
+            displayName += ' [+' + (conv.participants.length - 2) + ']';
+          }
+          conv.displayName = displayName;
         }
 
         return (
-          <Peerio.UI.MessagesItem key={convItem.id} msgId={convItem.id} unread={convItem.original.isModified}
-                                  fullName={fullName} fileCount={convItem.fileCount}
-                                  messageCount={convItem.messageCount}
-                                  subject={convItem.original.subject} ts={ts}/>
+          <Peerio.UI.Tappable onTap={this.openConversation.bind(this, conv.id)} key={conv.id}>
+            <Peerio.UI.MessagesItem unread={conv.original.isModified} fullName={conv.displayName}
+                                    fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
+                                    messageCount={conv.messageCount} subject={conv.original.subject}/>
+          </Peerio.UI.Tappable>
         );
-      });
+      }.bind(this));
 
-      // todo: DRY sort function
-      // todo: why did i put reverse() here instead of modifying the function?
-      return nodes.sort(function (a, b) { return a.props.ts < b.props.ts ? -1 : (a.props.ts > b.props.ts ? 1 : 0); }).reverse();
     }
   });
 
@@ -72,7 +71,7 @@
   Peerio.UI.MessagesItem = React.createClass({
     render: function () {
       return (
-        <div className={'list-item' + (this.props.unread ? ' unread' : '')} data-msgid={this.props.msgId}>
+        <div className={'list-item' + (this.props.unread ? ' unread' : '')}>
           <div className="name-and-subject">
             <span className="name">{this.props.fullName}</span>
             <br/>
@@ -80,13 +79,15 @@
               className='fa fa-comment-o message-count-icon'></i>{this.props.messageCount}</span>{this.props.subject}</span>
           </div>
           <div className="timestamp">
-            <span className="date">{this.props.ts.format('MMM Do, YYYY')}</span>
-            <br/>{this.props.ts.format('HH:mm:ss')}
+            <span className="date">{this.props.timeStamp.format('MMM Do, YYYY')}</span>
+            <br/>{this.props.timeStamp.format('HH:mm:ss')}
           </div>
-          <span className={this.props.fileCount ? '' : 'hide'}>
-            <i className={'fa fa-paperclip attachment'}></i>
-            <span className="attachment-count">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
-          </span>
+          {this.props.fileCount ?
+            (<span>
+              <i className={'fa fa-paperclip attachment'}></i>
+              <span className="attachment-count">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
+             </span>)
+            : ''}
         </div>);
     }
   });

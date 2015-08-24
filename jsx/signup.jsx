@@ -228,7 +228,7 @@
             
             <form className="signup-form">
               <ReactCSSTransitionGroup transitionName="animate">
-              {currentStep }
+              {currentStep}
               </ReactCSSTransitionGroup>
             </form>
           </div>

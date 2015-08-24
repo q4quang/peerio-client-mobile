@@ -2,7 +2,7 @@
   'use strict';
 
   Peerio.UI.NewMessage = React.createClass({
-    mixins: [ Peerio.UI.Mixins.GlobalTap ],
+    mixins: [ ],
     //--- REACT EVENTS
     getInitialState: function () {
       return {showContactSelect: false, recipients: [], attachments: []};
@@ -86,7 +86,7 @@
   });
 
   Peerio.UI.ContactSelect = React.createClass({
-    mixins: [Peerio.UI.Mixins.GlobalTap],
+    mixins: [],
     globalTapHandler: function (e) {
       var item = Peerio.Helpers.getParentWithClass(e.target, 'contact');
       if (!item) return;

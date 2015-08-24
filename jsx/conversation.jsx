@@ -10,51 +10,34 @@
         attachments: []
       };
     },
-    componentWillMount: function () {
-      this.conversation = Peerio.user.conversations[this.props.conversationId];
-    },
     componentDidMount: function () {
-      this.scrollToBottom();
-      // subscribing to events
-      Peerio.Dispatcher.onMessageSentStatus(this.rerender);
-      Peerio.Dispatcher.onConversationUpdated(this.rerender);
-      Peerio.Dispatcher.onMessagesUpdated(this.rerender);
-      Peerio.Dispatcher.onSendCurrentMessage(this.sendMessage);
-      Peerio.Dispatcher.onFilesSelected(this.handleFilesSelected);
-      // todo: ugly hack, make it better
-      var c = Peerio.user.conversations[this.props.conversationId];
-      if (!c.isLoaded) {
-        c.isLoaded = true;
-        // requesting update for the thread from server
-        Peerio.Data.refreshConversation(this.props.conversationId);
-      }
-      // tabbar not needed here
-      Peerio.Action.tabBarHide();
+      var id = this.props.params.id;
+      Peerio.Messages.loadAllConversationMessages(id).then(this.forceUpdate.bind(this, null));
+      Peerio.Messages.getAllConversations().then(function (conversations) {
+        if (!this.isMounted()) return;
+        this.setState({conversation: conversations[id]}, this.scrollToBottom);
+
+      }.bind(this));
       // to update relative timestamps
       this.renderInterval = window.setInterval(this.forceUpdate.bind(this), 20000);
     },
     componentWillUnmount: function () {
       window.clearInterval(this.renderInterval);
-      Peerio.Dispatcher.unsubscribe(this.rerender, this.sendMessage, this.handleFilesSelected);
-      Peerio.Action.tabBarShow();
     },
     componentDidUpdate: function () {
       this.scrollToBottom();
     },
     //----- CUSTOM FN
-    rerender: function () {
-      this.forceUpdate();
-    },
     handleFilesSelected: function (selection) {
       this.setState({attachments: selection});
     },
     sendAck: function () {
-      Peerio.Data.sendMessage(this.conversation, Peerio.ACK_MSG);
+      Peerio.Data.sendMessage(this.state.conversation, Peerio.ACK_MSG);
     },
     sendMessage: function () {
       var node = this.refs.reply.getDOMNode();
       if (node.value.isEmpty()) return;
-      Peerio.Data.sendMessage(this.conversation, node.value, uuid.v4(), this.state.attachments);
+      Peerio.Messages.sendMessage(this.state.conversation, node.value, uuid.v4(), this.state.attachments);
       node.value = '';
       this.resizeTextAreaAsync();
       this.setState({attachments: []});
@@ -70,19 +53,20 @@
       node.style.height = node.scrollHeight + 'px';
     },
     openFileSelect: function () {
-      Peerio.Action.showFileSelect(this.state.attachments.slice());
+      //Peerio.Action.showFileSelect(this.state.attachments.slice());
     },
     scrollToBottom: function () {
-      if (!this.needsScroll) return;
-      this.needsScroll = false;
+      if(!this.refs.content)return;
       TweenLite.to(this.refs.content.getDOMNode(), .5, {scrollTo: {y: 'max'}});
     },
     //----- RENDER
     render: function () {
       // todo: more sophisticated logic for sending receipts, involving scrolling message into view detection
       // todo: also not trying to send receipts that were already sent?
-      Peerio.Data.sendReceipts(this.props.conversationId);
-      var conversation = Peerio.user.conversations[this.props.conversationId];
+      //Peerio.Data.sendReceipts(this.props.conversationId);
+      // todo: loading state
+      if (!this.state.conversation) return (<h1>loading...</h1>);
+      var conversation = this.state.conversation;
       var participants = _.without(conversation.participants, Peerio.user.username).map(function (username) {
         var name;
         var c = Peerio.user.contacts[username];
@@ -91,18 +75,19 @@
         else
           name = username;
 
-        return (<div key={username}>
-          <Peerio.UI.Avatar username={username}/>{name}</div>);
+        return (
+          <div key={username}>
+            <Peerio.UI.Avatar username={username}/>{name}
+          </div>
+        );
       });
+
       var nodes = this.buildNodes();
-      // setting flag if scroll to bottom is needed after render
-      this.needsScroll = this.lastNodeCount !== nodes.length;
-      this.lastNodeCount = nodes.length;
       // note: reply has fixed positioning and should not be nested in .content,
       // this causes unwanted scroll when typing into text box
       return (
         <div>
-          <Peerio.UI.ConversationHead subject={conversation.original.decrypted.subject} participants={participants}/>
+          <Peerio.UI.ConversationHead subject={conversation.subject} participants={participants}/>
 
           <div className="content with-reply-box without-tab-bar" ref="content" key="content">
             <div className="conversation">
@@ -146,7 +131,7 @@
       var ack = (<i className="fa fa-thumbs-o-up ack-icon"></i>);
       var nodes = [];
 
-      Peerio.Helpers.forEachMessage(this.props.conversationId, function (item) {
+      this.state.conversation.messages.forEach(function (item) {
         // figuring out render details
         var sender = Peerio.user.contacts[item.sender];
         // mocking contact for deleted contacts
@@ -154,7 +139,7 @@
           sender = {username: item.sender, fullName: item.sender};
         }
         var relativeTime = moment.min(renderStartTs, moment(+item.timestamp)).fromNow();
-        var isAck = item.decrypted.message === Peerio.ACK_MSG;
+        var isAck = item.message === Peerio.ACK_MSG;
         var isSelf = Peerio.user.username === sender.username;
 
         // will be undefined or ready to render root element for receipts
@@ -163,9 +148,8 @@
         if (isSelf) {
           receipts = [];
 
-          item.recipients.forEach(function (recipient) {
-            if (!recipient.receipt || !recipient.receipt.isRead || Peerio.user.username === recipient.username) return;
-            receipts.push(<span className="receipt" key={recipient.username}>{recipient.username}</span>);
+          item.receipts.forEach(function (recipient) {
+            receipts.push(<span className="receipt" key={recipient}>{recipient}</span>);
           });
 
           if (receipts.length)
@@ -181,10 +165,10 @@
         if (isAck) {
           thisAck = ack;
         } else {
-          var filesCount = (item.decrypted.fileIDs && item.decrypted.fileIDs.length) ?
-            <div className="file-count">{item.decrypted.fileIDs.length} files attached.</div> : null;
+          var filesCount = (item.fileIDs && item.fileIDs.length) ?
+            <div className="file-count">{item.fileIDs.length} files attached.</div> : null;
           body = (<div className="body">{filesCount}
-            <span dangerouslySetInnerHTML={this.processBody(item.decrypted.message)}></span>
+            <span dangerouslySetInnerHTML={this.processBody(item.message)}></span>
           </div>);
         }
         var itemClass = React.addons.classSet({
