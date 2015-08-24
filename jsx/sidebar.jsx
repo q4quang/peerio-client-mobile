@@ -10,7 +10,9 @@
     //--- REACT EVENTS
     getInitialState: function () {
       return {open: false,
-              user: this.getUserData()
+              user: this.getUserData(),
+              newPinCode: "",
+              modalID:""
       }
     },
     componentDidMount: function () {
@@ -40,18 +42,25 @@
           this.forceUpdate();
         }.bind(this));
     },
-    setPIN: function () {
+    newPinCodeText: function(val){
+      this.setState({newPinCode: val.target.value })
+    },
+    showPINmodal: function(){
       var setPinText = <div>
-                        <span>Please enter the PIN you want to set up for this device</span>
-                        <input type="text"/>
-                      </div>
-      var setPinBtn = <button className="btn-md">Set PIN</button>
-      Peerio.Action.showAlert({text:setPinText, btns: setPinBtn});
+        <span>Please enter the PIN you want to set up for this device</span>
+        <input type="text" onChange={this.newPinCodeText}/>
+      </div>
+      var btn = <button className="btn-md" onTouchEnd={this.setPIN}>Set PIN code</button>
+      var modal = {id: uuid.v4(), text: setPinText, btns:btn}
+      this.setState({modalID: modal.id})
+      Peerio.Action.showAlert(modal);
+    },
+    setPIN: function () {
+      Peerio.Action.removeAlert(this.state.modalID);
 
-      //var p = prompt('Please enter the PIN you want to set up for this device');
-      if (p) {
-        Peerio.Data.setPIN(p).then(function () {
-          alert('Your pin is set!');
+      if (this.state.newPinCode) {
+        Peerio.Data.setPIN(this.state.newPinCode).then(function () {
+          Peerio.Action.showAlert({text:"Your PIN is set"});
           this.forceUpdate();
         }.bind(this));
       }
@@ -79,7 +88,7 @@
       if ( user.PIN )
         pinNode = <li onTouchStart={this.removePIN}><i className="fa fa-lock"></i> Remove PIN code</li>;
       else
-        pinNode = <li onTouchStart={this.setPIN}><i className="fa fa-unlock"></i> Set new PIN code</li>;
+        pinNode = <li onTouchStart={this.showPINmodal}><i className="fa fa-unlock"></i> Set new PIN code</li>;
 
       if (user.twoFactorAuth)
         twoFactor = <li><i className="fa fa-mobile"></i> {user.twoFactorAuth} Disable two factor auth</li>;
