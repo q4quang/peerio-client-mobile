@@ -97,6 +97,21 @@
               </div>
 
               <div className="flex-1" ref="menu">
+                <ul className="flex-row">
+                  <li className="icon-with-label flex-col-1">
+                    <i className="fa fa-pencil"/>
+                    <span className="icon-label">New Message</span>
+                  </li>
+                  <li className="icon-with-label flex-col-1">
+                    <i className="fa fa-cloud-upload"/>
+                    <span className="icon-label">Upload File</span>
+                  </li>
+                  <li className="icon-with-label flex-col-1">
+                    <i className="fa fa-user-plus"/>
+                    <span className="icon-label">Add Contact</span>
+                  </li>
+                </ul>
+
                 <h3 className="subhead">Security</h3>
                 <ul>
                   {pinNode}
