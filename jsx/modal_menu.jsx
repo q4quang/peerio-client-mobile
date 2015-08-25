@@ -8,7 +8,7 @@
       // open react portal
       return null;
     },
-    // render it through the portal once, when mounter
+    // render it through the portal once, when mounted
     componentDidMount: function () {
       this.portal = document.createElement('div');
       document.body.appendChild(this.portal);

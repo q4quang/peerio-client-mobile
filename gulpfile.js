@@ -117,7 +117,7 @@ gulp.task('serve', ['compile'], function () {
     logFileChanges: true,
     logConnections: true,
     open: false,
-    reloadDelay: 2000,
+    reloadDelay: 4000,
     ui: false,
     ghostMode: false,
     server: {

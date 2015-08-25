@@ -21,46 +21,65 @@
   'use strict';
 
   Peerio.UI.ModalManager = React.createClass({
+
     getInitialState: function () {
       return {
         activeModals: []
       };
     },
-    componentWillMount: function () {
-      Peerio.Dispatcher.onShowAlert(this.handleShowAlert);
-      Peerio.Dispatcher.onRemoveAlert(this.removeAlert);
 
+    componentWillMount: function () {
+      // when adding a new modal, just add it here, everything else is universal
+      this.subscriptios = [
+        Peerio.Dispatcher.onShowAlert(this.showModal.bind(this, Peerio.UI.Alert)),
+        Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect)),
+        Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect)),
+
+        Peerio.Dispatcher.onRemoveModal(this.removeModal)
+      ];
     },
+
     componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.handleShowAlert);
+      Peerio.Dispatcher.unsubscribe(this.subscriptios);
     },
-    handleShowAlert: function (modalContent) {//{id, text, btns}
-      var id = (modalContent.id) ? modalContent.id : uuid.v4();
-      var newModal = {id: id, text: modalContent.text, btns: modalContent.btns};
+
+    // generic function to show modal
+    showModal: function (component, modal) {
+      modal.id = modal.id || uuid.v4();
+      var props = _.assign({key: modal.id, onClose: this.removeModal.bind(this, modal.id)}, modal);
+      modal.component = React.createElement(component, props);
+
+      this.addModal(modal);
+    },
+
+    // adds a modal to rendered stack, {component: jsx code, id: id }
+    addModal: function (modal) {
       this.setState(function (prevState) {
-        prevState.activeModals.push(newModal);
+        prevState.activeModals.push(modal);
       });
     },
-    removeAlert: function (id) {
+
+    // removes any rendered modal by id
+    removeModal: function (id) {
       for (var i = 0; i < this.state.activeModals.length; i++) {
         if (this.state.activeModals[i].id === id) {
           this.setState(function (prevState) {
+            // it's ok to access mutable 'i' in here, because once it's found it will not change
             prevState.activeModals.splice(i, 1);
           });
           return;
         }
       }
     },
-    render: function () {
-      var nodes = [];
-      for (var i = 0; i < this.state.activeModals.length; i++) {
-        var alert = this.state.activeModals[i];
-        nodes.push(
-          <Peerio.UI.Alert onClose={this.removeAlert.bind(this, alert.id)} text={alert.text} btns={alert.btns} />
-        );
-      }
 
-      return nodes.length > 0 ? (<div>{nodes}</div>) : null;
+    render: function () {
+      if (this.state.activeModals.length === 0) return null;
+
+      var nodes = [];
+      for (var i = 0; i < this.state.activeModals.length; i++)
+        nodes.push(this.state.activeModals[i].component);
+
+      return (<div>{nodes}</div>);
     }
   });
 
