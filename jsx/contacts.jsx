@@ -14,7 +14,7 @@
     },
     render: function () {
       var nodes = [];
-      _.forOwn(Peerio.user.contacts, function (item) {
+      Peerio.user.contacts.forEach(function (item) {
         nodes.push(
           <Peerio.UI.Tappable onTap={this.openContactView.bind(this, item.username)} key={item.username}>
             <div className="contact-list-item" order={item.isRequest ? (item.isReceivedRequest ? 2 : 0) : 1}>

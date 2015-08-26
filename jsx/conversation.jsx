@@ -3,6 +3,7 @@
 
   // Main component, entry point for React app
   Peerio.UI.Conversation = React.createClass({
+    mixins: [ReactRouter.Navigation, ReactRouter.State],
     //----- REACT EVENTS
     getInitialState: function () {
       return {
@@ -65,7 +66,7 @@
       // todo: also not trying to send receipts that were already sent?
       //Peerio.Data.sendReceipts(this.props.conversationId);
       // todo: loading state
-      if (!this.state.conversation) return (<h1>loading...</h1>);
+      if (!this.state.conversation) return null;
       var conversation = this.state.conversation;
       var participants = _.without(conversation.participants, Peerio.user.username).map(function (username) {
         var name;

@@ -10,6 +10,7 @@ Peerio.ActionExtension.init = function () {
 
   [
     //------- ACTIONS EMITTED BY UI -------
+    'BigGreenButton',      // universal context-dependent big green button tapped
     'ShowAlert',           // {[id]:, text:string/reactComponent, btn: reactComponent} Message to modal manager to show alert
     'ShowContactSelect',   // {[id]:, preselected:['username','username' ]}
     'ContactsSelected',    // {['username', 'username']} - contacts was selected and accepted in contacts selector
