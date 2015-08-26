@@ -78,8 +78,8 @@ gulp.task('sass', function (done) {
     }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css_dst))
-
-    .on('end', done);
+    .on('end', done)
+    .pipe(browserSync.stream());
 });
 
 // compiles jsx files
