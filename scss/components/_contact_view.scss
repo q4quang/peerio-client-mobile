@@ -7,21 +7,41 @@
 }
 
 .contact-select {
+  z-index: 600;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
   margin: 0;
   padding: 0;
-  list-style: none;
   background-color: white;
+  ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 145px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  .buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 145px;
+    background-color: #E8E8E8;
+  }
   .contact {
     padding: 11px 10px 11px 35px;
     font-size: 1rem;
     border-bottom: 3px solid #FFFFFF;
     position: relative;
-    background-color: #eee;
-    i {
+    background-color: #EEEEEE;
+    & > i {
       color: $p-blue;
       font-size: 150%;
       position: absolute;
@@ -30,7 +50,7 @@
     }
   }
   .username {
-    color: #888;
+    color: #888888;
     font-size: 90%;
     margin-left: 5px;
   }
@@ -45,8 +65,8 @@
   left: 0;
   right: 0;
   z-index: ($z-tabbar+1);
-  .contact{
-    i{
+  .contact {
+    i {
       top: 10px;
     }
   }
@@ -59,10 +79,10 @@
   display: inline-block;
   border: 1px solid #D8D8D8;
   padding: 2px 1px 1px 2px;
-  background-color: #eeeeee;
+  background-color: #EEEEEE;
   vertical-align: middle;
   text-align: center;
-  color: #c3c3c3;
+  color: #C3C3C3;
   font-size: 20px;
   .pic {
     width: 12px;
@@ -88,12 +108,12 @@
   margin: 10px -5px 40px -5px;
   .block {
     flex: auto;
-    background-color: #fafafa;
+    background-color: #FAFAFA;
     margin: 5px;
   }
   .block-title {
     background-color: #F2F2F2;
-    color: #777;
+    color: #777777;
     padding: 3px 5px 3px 5px;
   }
   .block-content {

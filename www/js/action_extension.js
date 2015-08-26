@@ -10,8 +10,12 @@ Peerio.ActionExtension.init = function () {
 
   [
     //------- ACTIONS EMITTED BY UI -------
-    'ShowAlert',           // {text:string/reactComponent, btn: reactComponent} Message to modal manager to show alert
-    'RemoveAlert',         // Message to modal manager to remove alert with ID
+    'ShowAlert',           // {[id]:, text:string/reactComponent, btn: reactComponent} Message to modal manager to show alert
+    'ShowContactSelect',   // {[id]:, preselected:['username','username' ]}
+    'ContactsSelected',    // {['username', 'username']} - contacts was selected and accepted in contacts selector
+    'ShowFileSelect',      // {string[]} open file selector, optionally pass array of preselected file id's
+    'FilesSelected',       // file selector was closed accepting selection
+    'RemoveModal',         // Message to modal manager to remove alert with ID
     'SignOut',             // User wants to sign out
     'TabChange',           // Active tab changed to (index)
     'SidebarToggle',       // User wants to change show/hide state of sidebar
@@ -24,8 +28,6 @@ Peerio.ActionExtension.init = function () {
     'TabBarShow',          // show tab bar requested
     'TabBarHide',          // show tab bar requested
     'SendCurrentMessage',  // user wants to send the message that he is currently typing
-    'ShowFileSelect',      // {string[]} open file selector, optionally pass array of preselected file id's
-    'FilesSelected',       // file selector was closed accepting selection
     //------- HARDWARE/OS ACTIONS
     'HardMenuButton',      // hardware "menu" button was pressed
     'HardBackButton',      // hardware "back" button was pressed

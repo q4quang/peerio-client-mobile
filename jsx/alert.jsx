@@ -20,17 +20,15 @@
       var btns;
       var text;
 
-      if (this.props.btns)
-        btns = this.props.btns
-      else
-        btns =  <div>
+      btns = this.props.btns ||
+        (<div>
           <button type="button" className="btn-lrg" onTouchStart={this.handleClose}>OK</button>
-        </div>
+        </div>);
 
       if (this.props.text)
         text = this.props.text;
       else
-        text =  "alert text"
+        text = 'alert text';
 
       return (
         <div>

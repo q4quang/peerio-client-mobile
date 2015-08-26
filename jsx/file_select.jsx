@@ -10,86 +10,60 @@
 
   Peerio.UI.FileSelect = React.createClass({
     getInitialState: function () {
-      return {visible: false};
+      return {selection: this.props.preselected || []};
     },
     componentWillMount: function () {
-      this.subscriptions = [
-        Peerio.Dispatcher.onShowFileSelect(this.show),
-        Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null))
-      ];
-      if (!Peerio.user.filesLoaded) {
-        Peerio.Data.loadFiles();
-      }
+      this.setState({files: Peerio.Files.cache});
     },
-    componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.subscriptions);
+    componentDidMount: function () {
+      Peerio.Files.getAllFiles()
+        .then(function (files) {
+          if (!this.isMounted()) return;
+          this.setState({files: files});
+        }.bind(this));
     },
-    show: function (selection) {
-      if (this.state.visible) {
-        console.error('File selector is already open.');
-        return;
-      }
-      this.selection = selection || [];
-      //Peerio.Action.navigatedIn('Ok', this.accept);
-      Peerio.Dispatcher.onNavigateBack(this.cancel);
-      this.setState({visible: true});
-    },
-    cancel: function () {
-      if (this.state.visible === false) return;
+    toggle: function (fileId) {
 
-      this.setState({visible: false}, function () {
-        this.selection = null;
-        //Peerio.Action.navigatedOut();
+      this.setState(function (prevState) {
+        var ind = prevState.selection.indexOf(fileId);
+        if (ind >= 0)
+          prevState.selection.splice(ind, 1);
+        else
+          prevState.selection.push(fileId);
       });
-      return true;
     },
     accept: function () {
-      this.setState({visible: false}, function () {
-        Peerio.Action.filesSelected(this.selection);
-        this.selection = null;
-        this.setState({visible: false});
-       // Peerio.Action.navigatedOut();
-      });
-    },
-    globalTapHandler: function (e) {
-      var item = Peerio.Helpers.getParentWithClass(e.target, 'contact');
-      if (!item) return;
-      this.toggle(item.attributes['data-fileid'].value);
-    },
-    toggle: function (fileid) {
-      var ind = this.selection.indexOf(fileid);
-      if (ind >= 0)
-        this.selection.splice(ind, 1);
-      else
-        this.selection.push(fileid);
-
-      this.forceUpdate();
-
+      Peerio.Action.filesSelected(this.state.selection);
+      this.props.onClose();
     },
     render: function () {
-      if (!this.state.visible) return null;
       var files = [];
-      //todo: ugly, think of something better
-      if (Peerio.user.filesLoaded) {
-        _.forOwn(Peerio.user.files, function (f) {
-          var checkMark = this.selection.indexOf(f.id) >= 0
+      //todo: loading indicator
+      if (this.state.files) {
+        this.state.files.forEach(function (f) {
+          var checkMark = this.state.selection.indexOf(f.id) >= 0
             ? (<i className="fa fa-check-circle"></i>) : '';
 
           files.push(
-            <li className="contact" data-fileid={f.id} key={f.localName}>
-            {checkMark}
-              <span className="username">{f.name}</span>
-            </li>
+            <Peerio.UI.Tappable key={f.id} onTap={this.toggle.bind(this,f.id)}>
+              <li className="contact">
+                {checkMark}
+                <span className="username">{f.name}</span>
+              </li>
+            </Peerio.UI.Tappable>
           );
         }.bind(this));
-      } else {
-        files = <li>Loading files, please wait...</li>;
       }
-
       return (
-        <ul className="contact-select file-select" onTouchStart={this.registerTouchStart} onTouchEnd={this.registerTouchEnd}>
-          {files}
-        </ul>
+        <div className="modal contact-select">
+          <ul className="contact-list">
+            {files}
+          </ul>
+          <div className="buttons">
+            <button type="button" className="btn-lrg" onTouchStart={this.accept}>OK</button>
+            <button type="button" className="btn-lrg btn-dark" onTouchStart={this.props.onClose}>Cancel</button>
+          </div>
+        </div>
       );
     }
   });
