@@ -2,6 +2,7 @@
   'use strict';
 
   Peerio.UI.NewMessage = React.createClass({
+    mixins:[ReactRouter.Navigation],
     //--- REACT EVENTS
     getInitialState: function () {
       return {recipients: [], attachments: []};
@@ -9,7 +10,8 @@
     componentDidMount: function () {
       this.subscriptions = [
         Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
-        Peerio.Dispatcher.onContactsSelected(this.acceptContactSelection)
+        Peerio.Dispatcher.onContactsSelected(this.acceptContactSelection),
+        Peerio.Dispatcher.onBigGreenButton(this.send)
       ];
     },
     componentWillUnmount: function () {
@@ -18,8 +20,10 @@
     //--- CUSTOM FN
     send: function () {
       //todo validation
-      Peerio.Data.sendNewMessage(this.state.recipients, this.refs.subject.getDOMNode().value, this.refs.message.getDOMNode().value, this.state.attachments);
-      Peerio.Action.newMessageViewClose();
+      Peerio.Messages.sendNewMessage(this.state.recipients, this.refs.subject.getDOMNode().value,
+        this.refs.message.getDOMNode().value, this.state.attachments);
+
+      this.goBack();
     },
     openContactSelect: function () {
       Peerio.Action.showContactSelect({preselected: this.state.recipients.slice()});
@@ -38,7 +42,7 @@
     render: function () {
       var r = this.state.recipients.map(function (username) {
         var c = Peerio.user.contacts[username];
-        return <span>{c.fullName} ({username});</span>;
+        return <span key={username}>{c.fullName} ({username});</span>;
       });
       return (
         <div className="content without-tab-bar">
