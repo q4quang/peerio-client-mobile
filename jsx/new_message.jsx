@@ -38,7 +38,7 @@
     render: function () {
       var r = this.state.recipients.map(function (username) {
         var c = Peerio.user.contacts[username];
-        return <span>{c.fullName} ({username});</span>;
+        return <span className="name-selected">{c.fullName || "nul" }&nbsp;&bull;&nbsp;{username}</span>;
       });
       return (
         <div className="content without-tab-bar">
@@ -52,12 +52,14 @@
                   className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
               </div>
             </div>
-            <input type="text" ref="subject" className="subject" placeholder="Subject"/>
+            <div className="subject-inputs">
+              <input type="text" ref="subject" className="subject" placeholder="Subject"/>
 
-            <div className="attach-btn" onTouchEnd={this.openFileSelect}>
-              <i className="fa fa-paperclip"></i>
-              <span
-                className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
+              <div className="attach-btn" onTouchEnd={this.openFileSelect}>
+                <i className="fa fa-paperclip"></i>
+                <span
+                  className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
+              </div>
             </div>
             <textarea ref="message" className="message" placeholder="Type your message"></textarea>
           </div>
