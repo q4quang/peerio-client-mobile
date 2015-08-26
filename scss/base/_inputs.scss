@@ -115,7 +115,8 @@ $text-input-fontsize: 1rem;
   line-height: 18px;
   box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09);
 }
-.checkbox-input:checked:after{
+.checkbox-input:checked:after,
+.checkbox-input.checked:after{
   content: "\f00c";
   font-family: 'FontAwesome';
   color: white;

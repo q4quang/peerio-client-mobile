@@ -36,17 +36,29 @@
     background-color: #E8E8E8;
   }
   .contact {
-    padding: 11px 10px 11px 35px;
+    padding: 10px;
     font-size: 1rem;
-    border-bottom: 3px solid #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
     position: relative;
     background-color: #EEEEEE;
-    & > i {
-      color: $p-blue;
-      font-size: 150%;
-      position: absolute;
-      left: 10px;
-      top: 15px;
+    .checkbox-input{
+      margin-right: 10px;
+    }
+    .avatar{
+      margin-right: 4px;
+    }
+  }
+  .contact.selected{
+    background-color: $p-blue-light-20;
+    color: white;
+    .checkbox-input{
+      display: inline-block;
+    }
+    .checkbox-input:after{
+      background-color: $p-blue-light-20;
+    }
+    .username{
+      color: white;
     }
   }
   .username {
