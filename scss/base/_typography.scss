@@ -55,7 +55,9 @@
   width: 100%;
   font-weight: 800;
 }
-
+.txt-sm{
+  font-size: 0.9em;
+}
 .centered-text{
   text-align: center;
   margin-bottom: 1rem;
@@ -66,12 +68,18 @@
   font-size: 0.8rem;
   letter-spacing: 1px;
   line-height: 1.5em;
+  font-weight: 600;
 }
 .info-small{
   font-weight: 200;
-  font-size: 1rem;
-  line-height: 1.5em;
+  font-size: 0.9rem;
+  line-height: 1.2em;
   .fa{
     margin-right: 0.5em;
   }
+}
+
+.text-mono{
+  font-family: monospace;
+  font-size:0.8em;
 }

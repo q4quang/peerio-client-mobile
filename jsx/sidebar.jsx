@@ -74,6 +74,10 @@
       var i = Math.floor(Math.log(bytes) / Math.log(k));
       return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
     },
+    toggleAndTransition: function(route){
+      this.toggle();
+      this.transitionTo(route);
+    },
     //--- RENDER
     render: function () {
       var className = this.state.open ? 'open' : '';
@@ -132,12 +136,14 @@
                     <span className="info-label">Storage</span>
                     <span className="info-small"><i className="fa fa-tachometer"></i>{quotaUsed} / {quota} ({quotaPercent}%) used</span>
                   </li>
-                  <li>
-                    <button className="btn-md" onTouchStart={Peerio.Action.signOut}><i className="fa fa-user"></i> Edit Profile</button>
-                  </li>
                 </ul>
+                  <div className="col-6 col-first">
+                    <button className="btn-md txt-sm" onTouchStart={this.toggleAndTransition.bind(this, 'account_settings')}><i className="fa fa-user"></i> Profile</button>
+                  </div>
+                  <div className="col-6 col-last">
+                    <button className="btn-md txt-sm" onTouchStart={this.toggleAndTransition.bind(this, 'preference_settings')}><i className="fa fa-cog"></i> Preferences</button>
+                  </div>
               </div>
-
 
               <div className="flex-0">
                 <button className="btn-dark btn-md" onTouchStart={Peerio.Action.signOut}><i className="fa fa-power-off"></i> Sign Out</button>

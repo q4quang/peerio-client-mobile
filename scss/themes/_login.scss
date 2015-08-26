@@ -9,7 +9,13 @@
 }
 
 
-.content.signup{
+.content-wrapper-signup{
   background-color: #2281C5;
   color: white;
+
+  .text-input, .select-input{
+    color: white;
+    border-color: white;
+  }
+
 }

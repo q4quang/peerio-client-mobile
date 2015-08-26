@@ -36,6 +36,11 @@
   @include content-wrapper($top: $navbar-height + $tabbar-height, $bottom: $footer-height);
 }
 
+.content-padded{
+  @extend .content;
+  padding: 10px;
+}
+
 .modal {
   position: fixed;
   top: 0;
