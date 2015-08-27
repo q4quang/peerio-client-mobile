@@ -36,7 +36,15 @@ button:disabled{
   font-weight: 100;
 }
 
-
+.btn-lrg-back{
+  @extend .btn-lrg;
+  background-color: transparent;
+  opacity: 0.8;
+  > .fa {
+    position: relative;
+    left: -5px;
+  }
+}
 .btn-md{
   @extend .btn;
   font-size: 1em;
