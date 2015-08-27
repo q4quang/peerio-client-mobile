@@ -20,7 +20,7 @@
     //--- CUSTOM FN
     send: function () {
       //todo validation
-      Peerio.Messages.sendNewMessage(this.state.recipients, this.refs.subject.getDOMNode().value,
+      Peerio.Messages.sendMessage(this.state.recipients, this.refs.subject.getDOMNode().value,
         this.refs.message.getDOMNode().value, this.state.attachments);
 
       this.goBack();

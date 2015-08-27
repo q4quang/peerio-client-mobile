@@ -16,6 +16,13 @@
       }.bind(this);
       // todo refactor when server paging is ready
       Peerio.Messages.getAllConversations(updateFn).then(updateFn);
+
+     this.subscriptions = [ Peerio.Dispatcher.onMessageAdded(function(){
+        this.forceUpdate();
+      }.bind(this))];
+    },
+    componentWillUnmount: function(){
+      Peerio.Dispatcher.unsubscribe(this.subscriptions);
     },
     openConversation: function (id) {
       this.transitionTo('conversation', {id: id});

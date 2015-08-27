@@ -23,7 +23,8 @@
         messages: {name: 'New message', action: this.transitionTo.bind(this, 'new_message')},
         //files: {name: 'Upload file', action: this.transitionTo.bind(this, '')},
         contacts: {name: 'Add contact'},
-        new_message: {name: 'Send'}
+        new_message: {name: 'Send'},
+        conversation: {name: 'Send'}
       };
 
     },
