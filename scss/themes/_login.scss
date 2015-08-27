@@ -1,6 +1,13 @@
 
 .page-wrapper-login{
   background-color: #2281C5;
+  color: white;
+  .select-input{
+    border: none;
+    background-color: $p-blue-light-10;
+    height: 30px;
+    padding: 5px;
+  }
 }
 
 .content-wrapper-signup{

@@ -36,7 +36,9 @@
 
     handlePreviousStep: function(e){
       e.preventDefault();
-      this.setState({activeStep: --this.state.activeStep })
+      ( this.state.activeStep-1 >= 0 ) ?
+        this.setState({activeStep: --this.state.activeStep })
+      : this.transitionTo('/') ;
     },
 
     handleAuthMethod: function(auth_method){
@@ -55,12 +57,12 @@
     },
     passPhraseIsValid: function(){
       if (this.state.passphrase_valid) {
-        Peerio.Action.removeAlert(this.state.activeModalId);
+        Peerio.Action.removeModal(this.state.activeModalId);
         this.handleNextStep();
       }
     },
     removeModal: function(){
-      Peerio.Action.removeAlert(this.state.activeModalId);
+      Peerio.Action.removeModal(this.state.activeModalId);
     },
     showModal: function(){
       var modalText = <div key={'singup-step-2'}>
@@ -69,7 +71,7 @@
       </div>
       var modalBtns = <div>
         <button className="btn-lrg" onTouchEnd={this.passPhraseIsValid}> Create my account </button>
-        <button className="btn-subtle" onTouchEnd={this.removeModal}> Let me see my passphrase again </button>
+        <button className="btn-subtle" onTouchStart={this.removeModal}> Let me see my passphrase again </button>
       </div>
       var modalContent = {id: uuid.v4(), text:modalText, btns: modalBtns};
       Peerio.Action.showAlert(modalContent);
@@ -152,9 +154,13 @@
           </div>
 
           {auth_method}
-
-          <button className="btn-lrg" onTouchEnd={this.handleNextStep}> continue </button>
-        </fieldset> 
+            <div className="col-4 col-first">
+              <button className="btn-lrg btn-lrg-back"  onTouchEnd={this.handlePreviousStep}><i className="fa fa-chevron-left"></i>back </button>
+            </div>
+            <div className="col-8 col-last">
+              <button className="btn-lrg" onTouchEnd={this.handleNextStep}> continue </button>
+            </div>
+        </fieldset>
       )
       steps.push(
         <fieldset  key={'singup-step-1'}>
@@ -184,7 +190,10 @@
 
           <button className="btn-lrg" onTouchEnd={this.showModal}> I'll remember my passphrase </button>
           <button className="btn-subtle" onTouchEnd={this.handlePreviousStep}> I don't like this passphrase </button>
-        </fieldset> 
+
+          <button className="btn-md btn-lrg-back"  onTouchEnd={this.handlePreviousStep}><i className="fa fa-chevron-left"></i>back </button>
+
+        </fieldset>
       )
 
       steps.push(
@@ -202,14 +211,7 @@
 
       var activeStep = this.state.activeStep; 
       var currentStep = steps[activeStep]; 
-      var progressBarSteps = []; 
-
-      //the third step is a modal dialog, so we display both previous and current step
-      //var modalStep = "";
-      /*if (activeStep === 2){
-        currentStep = steps[activeStep-1];
-        modalStep = steps[activeStep];
-      }*/
+      var progressBarSteps = [];
 
       for (var i=0; i < steps.length; i++){
         var activeClass = (i === activeStep) ? "active progress-bar-step": "progress-bar-step";
@@ -217,7 +219,6 @@
           <div className={activeClass}></div>
         )
       }
-
 
       return (
           <div className="content-wrapper-signup">

@@ -29,7 +29,7 @@
 }
 
 .content.without-tab-bar {
-  @include content-wrapper($top: 0, $bottom: $footer-height);
+  @include content-wrapper($top:  $navbar-height, $bottom: $footer-height);
 }
 
 .content {

@@ -23,25 +23,24 @@
       var contacts = [];
       Peerio.user.contacts.forEach(function (c) {
         if (c.username === Peerio.user.username || c.isRequest) return;
-        var checkMark = this.state.selection.indexOf(c.username) >= 0
-          ? (<i className="fa fa-check-circle"></i>) : '';
+        var isSelected = this.state.selection.indexOf(c.username) >= 0 ;
 
         contacts.push(
           <Peerio.UI.Tappable onTap={this.toggle.bind(this, c.username)} key={c.username}>
-            <li className="contact">
-              {checkMark}
+            <li className={isSelected ? 'contact selected' : 'contact'}>
+              <span type="checkbox" className={isSelected ? 'checkbox-input checked' : 'checkbox-input' }></span>
               <Peerio.UI.Avatar username={c.username}/> {c.fullName}
               <span className="username">({c.username})</span>
             </li>
           </Peerio.UI.Tappable>
-        );
+        )
       }.bind(this));
       return (
         <div className="modal contact-select">
           <ul className="contact-list">
             {contacts}
           </ul>
-          <div className="buttons">
+          <div className="buttons col-12">
             <button type="button" className="btn-lrg" onTouchStart={this.accept}>OK</button>
             <button type="button" className="btn-lrg btn-dark" onTouchStart={this.props.onClose}>Cancel</button>
           </div>
