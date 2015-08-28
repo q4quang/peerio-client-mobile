@@ -22,7 +22,7 @@
       if (this.state.files) {
         this.state.files.forEach(function (item) {
           // todo: preprocess somewhere else?
-          if (!item.icon) item.icon = 'file-type fa fa-' + H.getFileIconByName(item.name) + (item.cached ? ' cached' : '');
+          if (!item.icon) item.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(item.name) + (item.cached ? ' cached' : '');
           if (!item.humanSize) item.humanSize = H.bytesToSize(item.size);
           var downloadStateNode = null;
           if (item.downloadState) {
@@ -32,15 +32,20 @@
                 {ds.progress === null ? null : ds.progress + '%'}
               </div>);
           }
+          var timestamp = moment(item.timestamp).calendar();
           nodes.push(
             <Peerio.UI.Tappable key={item.shortId} onTap={this.openFileView.bind(this, item.shortId)}>
-              <div className="file-list-item">
+              <li className="list-item">
                 <i className={item.icon}></i>
-                <span className="name">{item.name}</span>
-                <br/>
-                <span className="size">{item.humanSize}</span>
-                {downloadStateNode}
-              </div>
+                <div className="list-item-content">
+                  <div className="list-item-title">{item.name}</div>
+                  <div className="list-item-description">{item.humanSize}&nbsp;&bull;&nbsp;{timestamp}</div>
+                  {downloadStateNode}
+                </div>
+                <div className="list-item-forward">
+                  <i className="fa fa-chevron-right"></i>
+                </div>
+              </li>
             </Peerio.UI.Tappable>
           );
         }.bind(this));
@@ -48,8 +53,10 @@
       else nodes = Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
       return (
-        <div className="content" id="file-list">
-          {nodes}
+        <div className="content">
+          <ul className="list-view">
+            {nodes}
+          </ul>
         </div>
       );
     }

@@ -71,27 +71,39 @@
   Peerio.UI.MessagesItem = React.createClass({
     render: function () {
       return (
-        <div className={'list-item' + (this.props.unread ? ' unread' : '')}>
-          {this.props.fileCount ?
+        <div className="list-view">
+
+          <div className={'list-item' + (this.props.unread ? ' unread' : '')}>
+            <div className="list-item-thumb">
+            {this.props.fileCount ?
               (<div className="icon-with-label">
-              <i className={'fa fa-paperclip attachment'}></i>
-              <span className="icon-label">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
-             </div>)
+                <i className={'fa fa-paperclip attachment'}></i>
+                <span className="icon-label">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
+              </div>)
               : ''}
-          <div className="name-and-subject">
-            <div className="name">{this.props.fullName}</div>
-            <div className="subject"><span className="message-count"><i
-              className='fa fa-comment-o message-count-icon'></i>{this.props.messageCount}</span>{this.props.subject}</div>
-          </div>
-          <div className="timestamp">
-            <div className="date">
-              {this.props.timeStamp.format('MMM Do, YYYY')}
-              <i className="fa fa-chevron-right"/>
             </div>
-            <div className="time">
-              {this.props.timeStamp.format('HH:mm:ss')}
+
+            <div className="list-item-content">
+              <div className="list-item-title">{this.props.fullName}</div>
+              <div className="list-item-description"><span className="message-count"><i
+                className='fa fa-comment-o message-count-icon'></i>&nbsp;{this.props.messageCount}&nbsp;</span>{this.props.subject}</div>
             </div>
+
+            <div className="list-item-content text-right">
+              <div className="list-item-description">
+                {this.props.timeStamp.format('MMM Do, YYYY')}
+              </div>
+              <div className="list-item-description">
+                {this.props.timeStamp.format('HH:mm:ss')}
+              </div>
+            </div>
+
+            <div className="list-item-forward">
+              <i className="fa fa-chevron-right"></i>
+            </div>
+
           </div>
+
         </div>);
     }
   });

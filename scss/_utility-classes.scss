@@ -51,6 +51,12 @@
 
 }
 
+@mixin ellipses(){
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .animate-enter {
   animation-name: bounceInRight;
   animation-duration: 1s;
