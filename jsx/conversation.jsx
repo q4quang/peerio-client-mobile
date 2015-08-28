@@ -11,19 +11,24 @@
         attachments: []
       };
     },
+    componentWillMount: function () {
+      this.setState({conversation: Peerio.Messages.cache[this.props.params.id]});
+    },
     componentDidMount: function () {
-      var id = this.props.params.id;
-      Peerio.Messages.loadAllConversationMessages(id).then(this.forceUpdate.bind(this, null));
-      Peerio.Messages.getAllConversations().then(function (conversations) {
-        if (!this.isMounted()) return;
-        this.setState({conversation: conversations[id]}, this.scrollToBottom);
 
-      }.bind(this));
+      this.subscriptions = [
+        Peerio.Dispatcher.onMessageAdded(function (msg) {
+          if (this.props.id === msg.conversationID) this.forceUpdate();
+        }.bind(this)),
+        Peerio.Dispatcher.onBigGreenButton(this.sendMessage)];
+
+      Peerio.Messages.loadAllConversationMessages(this.props.params.id).then(this.forceUpdate.bind(this, null));
       // to update relative timestamps
       this.renderInterval = window.setInterval(this.forceUpdate.bind(this), 20000);
     },
     componentWillUnmount: function () {
       window.clearInterval(this.renderInterval);
+      Peerio.Dispatcher.unsubscribe(this.subscriptions);
     },
     componentDidUpdate: function () {
       this.scrollToBottom();
@@ -33,12 +38,12 @@
       this.setState({attachments: selection});
     },
     sendAck: function () {
-      Peerio.Data.sendMessage(this.state.conversation, Peerio.ACK_MSG);
+      Peerio.Messages.sendACK(this.state.conversation);
     },
     sendMessage: function () {
       var node = this.refs.reply.getDOMNode();
       if (node.value.isEmpty()) return;
-      Peerio.Messages.sendMessage(this.state.conversation, node.value, uuid.v4(), this.state.attachments);
+      Peerio.Messages.sendMessage(this.state.conversation.participants,'', node.value, this.state.attachments, this.state.conversation.id);
       node.value = '';
       this.resizeTextAreaAsync();
       this.setState({attachments: []});
@@ -57,7 +62,7 @@
       //Peerio.Action.showFileSelect(this.state.attachments.slice());
     },
     scrollToBottom: function () {
-      if(!this.refs.content)return;
+      if (!this.refs.content)return;
       TweenLite.to(this.refs.content.getDOMNode(), .5, {scrollTo: {y: 'max'}});
     },
     //----- RENDER
@@ -133,7 +138,7 @@
       var nodes = [];
 
       //sort first, ask questions later
-      this.state.conversation.messages.sort(function(a,b){ return a.timestamp < b.timestamp  ? -1 : (a.timestamp > b.timestamp ? 1 : 0) ; })
+      this.state.conversation.messages.sort(function (a, b) { return a.timestamp < b.timestamp ? -1 : (a.timestamp > b.timestamp ? 1 : 0); })
 
       this.state.conversation.messages.forEach(function (item, index) {
         // figuring out render details
@@ -143,7 +148,7 @@
           sender = {username: item.sender, fullName: item.sender};
         }
 
-        var prevMessage = index ? this.state.conversation.messages[index-1] : false ;
+        var prevMessage = index ? this.state.conversation.messages[index - 1] : false;
         var isSameDay = moment(item.timestamp).isSame(prevMessage.timestamp, 'day');
 
         var momentTimestamp = moment(+item.timestamp);
@@ -154,7 +159,8 @@
         var isAck = item.message === Peerio.ACK_MSG;
         var isSelf = Peerio.user.username === sender.username;
 
-        var timestampHTML = ( isSameDay ) ? false : <div className="timestamp">{relativeTime}&nbsp;&bull;&nbsp;{messageDate}</div>;
+        var timestampHTML = ( isSameDay ) ? false :
+          <div className="timestamp">{relativeTime}&nbsp;&bull;&nbsp;{messageDate}</div>;
 
         // will be undefined or ready to render root element for receipts
         var receipts;
@@ -191,10 +197,9 @@
           'ack': isAck
         });
 
-        var avatarHTML = (isSelf) ? false : <Peerio.UI.Avatar username={sender.username}/> ;
+        var avatarHTML = (isSelf) ? false : <Peerio.UI.Avatar username={sender.username}/>;
 
         nodes.push(
-
           <div className={itemClass} ts={item.timestamp} key={item.id}>
             {timestampHTML}
             <div className="head">
