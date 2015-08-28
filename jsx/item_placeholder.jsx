@@ -15,11 +15,13 @@
    },
    render: function(){
      return (
-        <div className="list-item placeholder">
-          <div className="animated-background">
-            <div className="mask1"></div>
-            <div className="mask2"></div>
-            <div className="mask3"></div>
+        <div className="list-item">
+          <div className="list-item-content">
+            <div className="animated-background">
+              <div className="mask1"></div>
+              <div className="mask2"></div>
+              <div className="mask3"></div>
+            </div>
           </div>
         </div>
       );

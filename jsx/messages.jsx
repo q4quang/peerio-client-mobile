@@ -33,7 +33,7 @@
         : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
       return (
-        <div className="content" id="Messages" ref="messageList">
+        <div className="content list-view" id="Messages" ref="messageList">
           {nodes}
         </div>
       );
