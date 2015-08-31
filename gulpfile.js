@@ -87,7 +87,8 @@ gulp.task('jsx', function () {
   console.log('compiling jsx files.');
   return gulp.src(paths.jsx_src)
     .pipe(react())
-    .pipe(gulp.dest(paths.jsx_dst));
+    .pipe(gulp.dest(paths.jsx_dst))
+    .pipe(browserSync.stream());
 });
 
 // starts http server with live reload

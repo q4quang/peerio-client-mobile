@@ -43,7 +43,7 @@
     sendMessage: function () {
       var node = this.refs.reply.getDOMNode();
       if (node.value.isEmpty()) return;
-      Peerio.Messages.sendMessage(this.state.conversation.participants,'', node.value, this.state.attachments, this.state.conversation.id);
+      Peerio.Messages.sendMessage(this.state.conversation.participants, '', node.value, this.state.attachments, this.state.conversation.id);
       node.value = '';
       this.resizeTextAreaAsync();
       this.setState({attachments: []});
@@ -74,16 +74,18 @@
       if (!this.state.conversation) return null;
       var conversation = this.state.conversation;
       var participants = _.without(conversation.participants, Peerio.user.username).map(function (username) {
-        var name;
         var c = Peerio.user.contacts[username];
-        if (c)
-          name = c.fullName + ' (' + username + ') ';
-        else
-          name = username;
-
         return (
           <div key={username}>
-            <Peerio.UI.Avatar username={username}/>{name}
+            <Peerio.UI.Avatar username={username}/>{c.fullNameAndUsername}
+          </div>
+        );
+      });
+      conversation.formerParticipants.forEach(function (username) {
+        var c = Peerio.user.contacts[username];
+        participants.push(
+          <div key={username} className='former-participant'>
+            <Peerio.UI.Avatar username={username}/>{c.fullNameAndUsername}
           </div>
         );
       });
@@ -93,7 +95,9 @@
       // this causes unwanted scroll when typing into text box
       return (
         <div>
-          <Peerio.UI.ConversationHead subject={conversation.subject} participants={participants}/>
+          <Peerio.UI.ConversationHead subject={conversation.original.subject} participants={participants}
+                                      activeParticipantsCount={conversation.participants.length}
+                                      allParticipantsCount={conversation.allParticipants.length}/>
 
           <div className="content with-reply-box without-tab-bar" ref="content" key="content">
             <div className="conversation">
@@ -136,9 +140,6 @@
       // will be the same for all ack nodes
       var ack = (<i className="fa fa-thumbs-o-up ack-icon"></i>);
       var nodes = [];
-
-      //sort first, ask questions later
-      this.state.conversation.messages.sort(function (a, b) { return a.timestamp < b.timestamp ? -1 : (a.timestamp > b.timestamp ? 1 : 0); })
 
       this.state.conversation.messages.forEach(function (item, index) {
         // figuring out render details
@@ -212,8 +213,7 @@
           </div>
         );
       }.bind(this));
-      // sorting by timestamp
-      //nodes.sort(function (a, b) { return a.props.ts < b.props.ts ? -1 : (a.props.ts > b.props.ts ? 1 : 0); });
+
       return nodes;
     }
   });
@@ -226,14 +226,22 @@
       this.setState({open: !this.state.open});
     },
     render: function () {
+      var counter = this.props.allParticipantsCount - 1;
+      if (this.props.activeParticipantsCount !== this.props.allParticipantsCount) {
+        counter = this.props.activeParticipantsCount - 1 + '/' + counter;
+      }
       return (
-        <div id="conversation-head">
-          <div className={'participants' + (this.state.open ? ' open' : '')}>{this.props.participants}</div>
-          <div className="counter" onTouchStart={this.toggle}>
-            <i className="fa fa-users"></i> {this.props.participants.length}
+        <Peerio.UI.Tappable onTap={this.toggle}>
+          <div id="conversation-head">
+            <div className={'participants' + (this.state.open ? ' open' : '')}>{this.props.participants}</div>
+
+            <div className="counter">
+              <i className="fa fa-users"></i> {counter}
+            </div>
+            <div className="subject">{this.props.subject}</div>
           </div>
-          <div className="subject">{this.props.subject}</div>
-        </div>);
+        </Peerio.UI.Tappable>
+      );
     }
   });
 

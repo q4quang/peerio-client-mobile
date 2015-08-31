@@ -92,8 +92,7 @@
 
             <div className="list-item-content">
               <div className="list-item-title">{this.props.fullName}</div>
-              <div className="list-item-description"><span className="message-count"><i
-                className='fa fa-comment-o message-count-icon'></i>&nbsp;{this.props.messageCount}&nbsp;</span>{this.props.subject}</div>
+              <div className="list-item-description">{this.props.subject}</div>
             </div>
 
             <div className="list-item-content text-right">

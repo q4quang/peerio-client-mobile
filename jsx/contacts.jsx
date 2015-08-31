@@ -35,7 +35,6 @@
         );
       }.bind(this));
       //todo: by order, username
-      nodes = nodes.sort(function (a, b) { return a.props.order > b.props.order ? -1 : (a.props.order < b.props.order ? 1 : 0); });
       return (
         <div className="content" id="contact-list">
           <ul className="list-view">
