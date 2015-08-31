@@ -20,11 +20,11 @@
       // route name: { button text, button action }
       // default action is Peerio.Action.bigGreenButton
       this.mainButtonActions = {
-        messages: {name: 'New message', action: this.transitionTo.bind(this, 'new_message')},
+        messages: {name: 'Compose message', action: this.transitionTo.bind(this, 'new_message'), icon:"pencil"},
         //files: {name: 'Upload file', action: this.transitionTo.bind(this, '')},
-        contacts: {name: 'Add contact'},
-        new_message: {name: 'Send'},
-        conversation: {name: 'Send'}
+        contacts: {name: 'Add contact', icon:"user-plus"},
+        new_message: {name: 'Send', icon:"paper-plane-o"},
+        conversation: {name: 'Send', icon:"paper-plane-o"}
       };
 
     },
@@ -34,7 +34,7 @@
       if (greenButton)
         greenButton = (
           <div className="accept-button" onTouchEnd={greenButton.action || Peerio.Action.bigGreenButton}>
-            {greenButton.name}
+            <i className={"fa fa-"+greenButton.icon}/>&nbsp;{greenButton.name}
           </div>);
 
       return (

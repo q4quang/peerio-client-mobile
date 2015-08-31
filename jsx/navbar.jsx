@@ -40,14 +40,22 @@
           <div id="sidemenu-toggle" ref="toggle" onTouchStart={this.handleSidebarToggle}>
             <i className="fa fa-bars"></i>
           </div>
-          <div className="logo"><img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/></div>
+          <div className="logo">
+            <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'messages')}>
+              <img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/>
+            </Peerio.UI.Tappable>
+          </div>
           <div id="search">
             <input id="search-keyword" type="text"/>
             <i id="search-button" className="fa fa-search"></i>
           </div>
-          <div id="app-lock">
-            <i className="fa fa-lock"></i>
-          </div>
+
+            <div id="app-lock">
+              <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>
+                <i className="fa fa-pencil-square-o"></i>
+              </Peerio.UI.Tappable>
+            </div>
+
           <div id="connection-status" className={connectionClass}></div>
         </div>
       );

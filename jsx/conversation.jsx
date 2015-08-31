@@ -108,7 +108,7 @@
             <div className="reply-ack">
               <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
             </div>
-            <textarea className="reply-input" rows="1" ref="reply" onKeyUp={this.resizeTextArea}
+            <textarea className="reply-input" rows="1" ref="reply" placeholder="Type your message here..." onKeyUp={this.resizeTextArea}
                       onChange={this.resizeTextArea}></textarea>
 
             <div className="reply-attach">
