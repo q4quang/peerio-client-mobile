@@ -7,10 +7,10 @@
 
       if (user) {
         if (this.props.size === 'big') {
-          icons = user.identicons18;
+          icons = user.icon18;
           classes += ' big';
         } else
-          icons = user.identicons12;
+          icons = user.icon12;
       }
 
       if (icons && icons.length === 4)

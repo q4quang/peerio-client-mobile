@@ -46,16 +46,16 @@
         // unless he is the only one left in conversation
         if (!conv.displayName) {
           var displayName = null;
-          for (var i = 0; i < conv.participants.length; i++) {
-            var username = conv.participants[i];
+          for (var i = 0; i < conv.allParticipants.length; i++) {
+            var username = conv.allParticipants[i];
             if (username === Peerio.user.username) continue;
             var contact = Peerio.user.contacts[username];
             displayName = (contact && contact.fullName) || username;
             break;
           }
           displayName = displayName || Peerio.user.fullName;
-          if (conv.participants.length > 2) {
-            displayName += ' [+' + (conv.participants.length - 2) + ']';
+          if (conv.allParticipants.length > 2) {
+            displayName += ' [+' + (conv.allParticipants.length - 2) + ']';
           }
           conv.displayName = displayName;
         }

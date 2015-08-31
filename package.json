@@ -3,15 +3,6 @@
   "version": "1.0.0",
   "description": "peerio-client-mobile",
   "dependencies": {
-    "gulp": "*",
-    "gulp-react": "*",
-    "gulp-sass": "*",
-    "gulp-xml-editor": "anri-asaturov/gulp-xml-editor",
-    "inquirer": "0.x",
-    "semver": "4.x",
-    "shelljs": "0.x",
-    "browser-sync": "*",
-    "lodash": "*"
   },
   "repository": {
     "type": "git",
@@ -24,11 +15,18 @@
   },
   "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
   "devDependencies": {
-    "gulp-autoprefixer": "^2.3.1",
-    "gulp-css-globbing": "^0.1.8",
-    "gulp-sourcemaps": "^1.5.2",
-    "jasmine": "^2.3.1",
-    "lodash": "^3.10.0",
-    "minimist": "^1.1.2"
+    "gulp-autoprefixer": "2.x",
+    "gulp-css-globbing": "0.x",
+    "gulp-sourcemaps": "*",
+    "minimist": "1.x",
+    "gulp": "*",
+    "gulp-react": "*",
+    "gulp-sass": "*",
+    "gulp-xml-editor": "*",
+    "inquirer": "0.x",
+    "semver": "4.x",
+    "shelljs": "0.x",
+    "browser-sync": "*",
+    "lodash": "*"
   }
 }
