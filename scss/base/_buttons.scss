@@ -65,13 +65,13 @@ button:disabled{
 .btn-danger {
   @extend .btn;
   color: white;
-  background-color: #ee3333;
+  background-color:#BD3535;
 }
 
 .btn-link.btn-danger{
   background-color: transparent;
   text-decoration: underline;
-  color: #F00;
+  color: #BD3535;
   padding: 0;
 }
 .accept-button{

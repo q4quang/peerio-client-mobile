@@ -24,9 +24,9 @@
       console.log('todo: nuke file');
     },
     render: function () {
-      var sender = this.file.sender ? (<div className="block">
-        <div className="block-title">Sent to you by</div>
-        <div className="block-content">{this.file.sender}</div>
+      var sender = this.file.sender ? (<div className="info-row">
+        <div className="info-label">Sent to you by</div>
+        <div className="info-content">{this.file.sender}</div>
       </div>) : null;
       var downloadStateNode = null, buttonsNode = null;
       if (this.file.downloadState) {
@@ -39,47 +39,71 @@
         buttonsNode = (
           <div>
             {this.file.cached ? <div className="btn btn-safe" onTouchEnd={this.handleOpen}>Open</div>
-              : <div className="btn btn-safe" onTouchEnd={this.handleDownload}>Download</div>}
+              : <div className="btn-md btn-safe" onTouchEnd={this.handleDownload}><i className="fa fa-cloud-download">&nbsp;</i>Download</div>}
 
             {this.file.cached ?
-              <div className="btn btn-danger" onTouchEnd={this.handleRemoveLocal}>Remove from this device</div> : null }
+              <div className="btn btn-danger" onTouchEnd={this.handleRemoveLocal}><i class="fa fa-trash-o"></i>&nbsp;Remove from this device</div> : null }
 
             {this.file.cached ? <div className="btn btn-danger" onTouchEnd={this.handleRemove}>Remove from this device and your
               cloud</div>
               : <div className="btn btn-danger" onTouchEnd={this.handleRemove}>Remove from your cloud</div>}
 
             {this.file.creator === Peerio.user.username ?
-              <div className="btn btn-danger" onTouchEnd={this.handleNuke}>Unshare and destroy in all
+              <div className="btn btn-danger" onTouchEnd={this.handleNuke}>Unshare and remove from all
                 clouds</div> : null }
           </div>);
       }
 
       // TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
+
       return (
-        <div className="content without-tab-bar file-view">
+        <div className="content-padded">
           <div className="head">
-            <i className={'file-type fa fa-' + this.file.icon}></i>
-            {this.file.name}
+            <div className="col-1 col-first">
+              <i className={'file-type fa fa-' + this.file.icon}></i>
+            </div>
+            <div className="col-11">
+              <span className="headline-md">
+                {this.file.name}
+              </span>
+            </div>
           </div>
-          <div className="info-blocks">
-            <div className="block">
-              <div className="block-title">File size</div>
-              <div className="block-content">{this.file.humanSize}</div>
+
+          <hr className="col-12"/>
+
+          <div className="info-table">
+            <div className="info-row">
+              <div className="info-label">File Name</div>
+              <div className="info-content">{this.file.name}</div>
             </div>
-            <div className="block">
-              <div className="block-title">Location</div>
-              <div className="block-content">{this.file.cached ? 'On this device and in the cloud' : 'In the cloud'}</div>
+
+            <div className="info-row">
+              <div className="info-label">File Size</div>
+              <div className="info-content">{this.file.humanSize}</div>
             </div>
-            <div className="block">
-              <div className="block-title">Uploaded by</div>
-              <div className="block-content">{this.file.creator === Peerio.user.username ? 'You' : this.file.creator}</div>
+
+            <div className="info-row">
+              <div className="info-label">File Type</div>
+              <div className="info-content">{Peerio.Helpers.getFileTypeByName(this.file.name)}</div>
             </div>
-            <div className="block">
-              <div className="block-title">Uploaded at</div>
-              <div className="block-content">{new Date(this.file.timestamp).toLocaleString()}</div>
+
+            <div className="info-row">
+              <div className="info-label">Location</div>
+              <div className="info-content">{this.file.cached ? 'On this device and in the cloud' : 'In the cloud'}</div>
             </div>
+            <div className="info-row">
+              <div className="info-label">Owner</div>
+              <div className="info-content">{this.file.creator === Peerio.user.username ? 'You' : this.file.creator}</div>
+            </div>
+            <div className="info-row">
+              <div className="info-label">Uploaded at</div>
+              <div className="info-content">{new Date(this.file.timestamp).toLocaleString()}</div>
+            </div>
+
             {sender}
+
           </div>
+
           {downloadStateNode || buttonsNode}
 
         </div>

@@ -15,7 +15,7 @@
 
 .headline-md{
   @extend .headline;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   //margin-bottom: 0.5em;
 }
 
@@ -82,4 +82,5 @@
 .text-mono{
   font-family: monospace;
   font-size:0.8em;
+  @include ellipses();
 }

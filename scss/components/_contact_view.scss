@@ -117,19 +117,41 @@
 .info-blocks {
   display: flex;
   flex-wrap: wrap;
-  margin: 10px -5px 40px -5px;
-  .block {
+
+  .info-block {
     flex: auto;
-    background-color: #FAFAFA;
-    margin: 5px;
+    padding-right: 5px;
+    max-width: 100%;
+    margin-bottom: 15px;
   }
-  .block-title {
-    background-color: #F2F2F2;
-    color: #777777;
-    padding: 3px 5px 3px 5px;
+}
+
+.info-content {
+  font-weight: 300;
+  padding: 3px 5px 3px 5px;
+  word-wrap: break-word;
+  @include ellipses();
+}
+
+.info-table{
+  display: table;
+  margin-bottom: 15px;
+  .info-row{
+    display: table-row;
   }
-  .block-content {
-    padding: 3px 5px 3px 5px;
-    word-wrap: break-word;
+  .info-label, .info-content{
+    display: table-cell;
+  }
+  .info-label{
+    text-align: right;
+    padding-right: 0.5em;
+    white-space: nowrap;
+  }
+  .info-label:after{
+    content: ":";
+  }
+  .info-content{
+    text-align: left;
+    white-space: normal;
   }
 }

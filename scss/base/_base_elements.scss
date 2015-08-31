@@ -83,7 +83,8 @@ hr{
   clear: both;
   height:0;
   margin-top: 1rem;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid rgba(205, 205, 205, 0.5);
+  box-sizing: border-box;
   @include clearfix();
 }
 

@@ -208,10 +208,12 @@ Peerio.Helpers.init = function () {
   ];
 
   api.fileIconsByExt = {};
+  api.fileTypeByExt = {};
 
   fileTypes.forEach(function (type) {
     type.extensions.forEach(function (ext) {
       api.fileIconsByExt[ext] = type.icon;
+      api.fileTypeByExt[ext] = type.type;
     });
   });
   /**
@@ -223,6 +225,10 @@ Peerio.Helpers.init = function () {
     var extension = fileName.toLowerCase().match(/\.\w+$/);
     extension = extension ? extension[0].substring(1) : '';
     return extension;
+  };
+
+  api.getFileTypeByName = function (fileName) {
+    return api.fileTypeByExt[api.getFileExtension(fileName)] || 'file';
   };
 
   api.getFileIconByName = function (fileName) {
