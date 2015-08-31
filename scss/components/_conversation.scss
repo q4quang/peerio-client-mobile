@@ -4,7 +4,7 @@ $msg-distance: 15px;
 $big-side-distance: 30px;
 $item-border-radius: 3px;
 
-$avater-size: 25px;
+$avatar-size: 29px;
 
 .conversation {
   margin-top: 65px;
@@ -14,7 +14,7 @@ $avater-size: 25px;
   .item {
     width: 100%;
     padding: $msg-distance $big-side-distance 0 $edge-distance;
-    padding-left:$avater-size + 5px;
+    padding-left:$avatar-size + 5px;
     position: relative;
 
     .timestamp {
@@ -44,10 +44,10 @@ $avater-size: 25px;
       margin-top: 2rem;
     }
     .avatar{
-      width: $avater-size;
-      height: $avater-size;
+      width: $avatar-size;
+      height: $avatar-size;
       position: absolute;
-      left: -($avater-size+3px);
+      left: -($avatar-size+3px);
       top:0;
     }
     .head {
