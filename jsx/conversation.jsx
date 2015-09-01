@@ -16,15 +16,23 @@
     },
     componentDidMount: function () {
 
+      Peerio.Messages.markAsRead(this.state.conversation);
+
       this.subscriptions = [
         Peerio.Dispatcher.onMessageAdded(function (msg) {
           if (this.props.id === msg.conversationID) this.forceUpdate();
         }.bind(this)),
         Peerio.Dispatcher.onBigGreenButton(this.sendMessage)];
 
-      Peerio.Messages.loadAllConversationMessages(this.props.params.id).then(this.forceUpdate.bind(this, null));
+      Peerio.Messages.loadAllConversationMessages(this.props.params.id)
+        .then(this.forceUpdate.bind(this, null))
+        .then(function(){
+          Peerio.Messages.markAsRead(this.state.conversation);
+        }.bind(this));
       // to update relative timestamps
       this.renderInterval = window.setInterval(this.forceUpdate.bind(this), 20000);
+
+
     },
     componentWillUnmount: function () {
       window.clearInterval(this.renderInterval);

@@ -62,7 +62,7 @@
 
         return (
           <Peerio.UI.Tappable onTap={this.openConversation.bind(this, conv.id)} key={conv.id}>
-            <Peerio.UI.MessagesItem unread={conv.original.isModified} fullName={conv.displayName}
+            <Peerio.UI.MessagesItem unread={conv.isModified} fullName={conv.displayName}
                                     fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
                                     messageCount={conv.messageCount} subject={conv.original.subject}/>
           </Peerio.UI.Tappable>
