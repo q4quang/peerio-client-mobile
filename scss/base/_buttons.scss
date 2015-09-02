@@ -84,24 +84,3 @@ button:disabled{
   min-width: 120px;
   text-align: center;
 }
-
-.icon-with-label{
-  display: inline-block;
-  text-align: center;
-  .fa{
-    display: inline-block;
-    height: 1em;
-    width: 1em;
-  }
-  .icon-label{
-    display: block;
-    font-size: 0.7em;
-  }
-}
-.fa.circle{
-  border-radius: 50%;
-  background-color: white;
-  color: #44494D;
-  padding: 0.3em;
-  box-sizing: content-box;
-}

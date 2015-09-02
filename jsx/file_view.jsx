@@ -24,6 +24,11 @@
       console.log('todo: nuke file');
     },
     render: function () {
+      var H = Peerio.Helpers;
+      if (!this.file.icon) this.file.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(this.file.name) + (this.file.cached ? ' cached' : '');
+      if (!this.file.humanSize) this.file.humanSize = H.bytesToSize(this.file.size);
+
+
       var sender = this.file.sender ? (<div className="info-row">
         <div className="info-label">Sent to you by</div>
         <div className="info-content">{this.file.sender}</div>
