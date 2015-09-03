@@ -121,7 +121,8 @@
         <div>
           <Peerio.UI.ConversationHead subject={conversation.original.subject} participants={participants}
                                       activeParticipantsCount={conversation.participants.length}
-                                      allParticipantsCount={conversation.allParticipants.length}/>
+                                      allParticipantsCount={conversation.allParticipants.length}
+                                      conversationId={conversation.id}/>
 
           <div className="content with-reply-box without-tab-bar" ref="content" key="content">
             <div className="conversation">
@@ -243,11 +244,16 @@
   });
 
   Peerio.UI.ConversationHead = React.createClass({
+    mixins: [ReactRouter.Navigation, ReactRouter.State],
     getInitialState: function () {
       return {open: false};
     },
     toggle: function () {
       this.setState({open: !this.state.open});
+    },
+    openInfo: function(event){
+      event.preventDefault();
+      this.transitionTo('conversation_info', {id: this.props.conversationId});
     },
     render: function () {
       var counter = this.props.allParticipantsCount - 1;
@@ -262,6 +268,10 @@
             <div className="counter">
               <i className="fa fa-users"></i> {counter}
             </div>
+            <Peerio.UI.Tappable onTap={this.openInfo}>
+              <i className="info fa fa-info-circle"></i>
+            </Peerio.UI.Tappable>
+
             <div className="subject">{this.props.subject}</div>
           </div>
         </Peerio.UI.Tappable>

@@ -84,3 +84,8 @@
   font-size:0.8em;
   @include ellipses();
 }
+
+.text-crossout{
+  opacity: 0.6;
+  text-decoration: line-through;
+}
