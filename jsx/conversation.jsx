@@ -19,10 +19,25 @@
       Peerio.Messages.markAsRead(this.state.conversation);
 
       this.subscriptions = [
-        Peerio.Dispatcher.onMessageAdded(function (msg) {
-          if (this.props.id === msg.conversationID) this.forceUpdate();
+
+        Peerio.Dispatcher.onMessageAdded(function (conversationID) {
+          if (this.props.params.id === conversationID) {
+            this.forceUpdate();
+            Peerio.Messages.markAsRead(this.state.conversation);
+          }
         }.bind(this)),
-        Peerio.Dispatcher.onBigGreenButton(this.sendMessage)];
+
+        Peerio.Dispatcher.onReceiptAdded(function (conversationID) {
+          if (this.props.params.id === conversationID) {
+            this.forceUpdate();
+            //Peerio.Messages.markAsRead(this.state.conversation);
+          }
+        }.bind(this)),
+
+        Peerio.Dispatcher.onBigGreenButton(this.sendMessage),
+        Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection)
+
+      ];
 
       Peerio.Messages.loadAllConversationMessages(this.props.params.id)
         .then(this.forceUpdate.bind(this, null))
@@ -42,9 +57,13 @@
       this.scrollToBottom();
     },
     //----- CUSTOM FN
-    handleFilesSelected: function (selection) {
+    openFileSelect: function () {
+      Peerio.Action.showFileSelect({preselected: this.state.attachments.slice()});
+    },
+    acceptFileSelection: function (selection) {
       this.setState({attachments: selection});
     },
+
     sendAck: function () {
       Peerio.Messages.sendACK(this.state.conversation);
     },
@@ -65,9 +84,6 @@
       var node = this.refs.reply.getDOMNode();
       node.style.height = 'auto';
       node.style.height = node.scrollHeight + 'px';
-    },
-    openFileSelect: function () {
-      //Peerio.Action.showFileSelect(this.state.attachments.slice());
     },
     scrollToBottom: function () {
       if (!this.refs.content)return;
