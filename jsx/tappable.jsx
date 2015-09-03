@@ -20,11 +20,15 @@
       this.props.onTap(e);
     },
     render: function(){
-      return(
-        <span onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd}>
-          {this.props.children}
-        </span>
-      );
+      var tag = this.props.element || "span";
+      var reactElement = React.createElement(tag,
+                          { onTouchStart:this.handleTouchStart,
+                            onTouchEnd:this.handleTouchEnd,
+                            className: this.props.className,
+                            key: this.props.key
+                          }, this.props.children);
+
+      return reactElement;
     }
 
   });

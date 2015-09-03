@@ -61,16 +61,16 @@
         }
 
         return (
-          <Peerio.UI.Tappable onTap={this.openConversation.bind(this, conv.id)} key={conv.id}>
-            <Peerio.UI.MessagesItem unread={conv.isModified} fullName={conv.displayName}
-                                    fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
-                                    messageCount={conv.messageCount} subject={conv.original.subject}/>
-          </Peerio.UI.Tappable>
+                <Peerio.UI.MessagesItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
+                                        unread={conv.isModified} fullName={conv.displayName}
+                                        fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
+                                        messageCount={conv.messageCount} subject={conv.original.subject}/>
         );
       }.bind(this));
 
     }
   });
+
 
   /**
    * Message list item component
@@ -78,9 +78,9 @@
   Peerio.UI.MessagesItem = React.createClass({
     render: function () {
       return (
-        <div className="list-view">
+          //make it a div and replace .list-item div with it.
 
-          <div className={'list-item' + (this.props.unread ? ' unread' : '')}>
+          <Peerio.UI.Tappable element="div" onTap={this.props.onTap} key={this.props.key} className={'list-item' + (this.props.unread ? ' unread' : '')}>
             <div className="list-item-thumb">
             {this.props.fileCount ?
               (<div className="icon-with-label">
@@ -108,9 +108,9 @@
               <i className="fa fa-chevron-right"></i>
             </div>
 
-          </div>
+          </Peerio.UI.Tappable>
 
-        </div>);
+        );
     }
   });
 

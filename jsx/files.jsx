@@ -34,8 +34,7 @@
           }
           var timestamp = moment(item.timestamp).calendar();
           nodes.push(
-            <Peerio.UI.Tappable key={item.shortId} onTap={this.openFileView.bind(this, item.shortId)}>
-              <li className="list-item">
+            <Peerio.UI.Tappable element="li" className="list-item" key={item.shortId} onTap={this.openFileView.bind(this, item.shortId)}>
                 <i className={item.icon}></i>
                 <div className="list-item-content">
                   <div className="list-item-title">{item.name}</div>
@@ -45,7 +44,6 @@
                 <div className="list-item-forward">
                   <i className="fa fa-chevron-right"></i>
                 </div>
-              </li>
             </Peerio.UI.Tappable>
           );
         }.bind(this));

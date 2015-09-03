@@ -16,8 +16,7 @@
       var nodes = [];
       Peerio.user.contacts.forEach(function (item) {
         nodes.push(
-          <Peerio.UI.Tappable onTap={this.openContactView.bind(this, item.username)} key={item.username}>
-            <li className="list-item" order={item.isRequest ? (item.isReceivedRequest ? 2 : 0) : 1}>
+          <Peerio.UI.Tappable element="li" className="list-item" order={item.isRequest ? (item.isReceivedRequest ? 2 : 0) : 1} onTap={this.openContactView.bind(this, item.username)} key={item.username}>
               <div className="list-item-thumb">
                 <Peerio.UI.Avatar username={item.username}/>
               </div>
@@ -30,7 +29,6 @@
               <div className="list-item-forward">
                 <i className="fa fa-chevron-right"></i>
               </div>
-            </li>
           </Peerio.UI.Tappable>
         );
       }.bind(this));
