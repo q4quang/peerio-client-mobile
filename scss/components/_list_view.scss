@@ -1,3 +1,8 @@
+// Peerio.UI.Tappable renders span that collapses item height when there are too many items
+.content.list-view>span {
+  min-height: 60px;
+}
+
 .list-view{
   display: flex;
   flex-direction: column;

@@ -7,6 +7,7 @@
       this.setState({files: Peerio.Files.cache});
     },
     componentDidMount: function () {
+      if(Peerio.Files.cache) return;
       Peerio.Files.getAllFiles()
         .then(function (files) {
           if (!this.isMounted()) return;
