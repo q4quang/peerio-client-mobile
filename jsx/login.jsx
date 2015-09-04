@@ -182,8 +182,10 @@
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
               </button>
 
-              <button type="button" className="btn-lrg" onTouchEnd={this.transitionTo.bind(this,'signup')}>sign up
-              </button>
+              <Peerio.UI.Tappable element="button" className="btn-lrg" onTap={this.transitionTo.bind(this,'signup')}>
+                sign up
+              </Peerio.UI.Tappable>
+
               <div className="text-input-group">
                 <label className="info-label col-4" htmlFor="language-select">Language:</label>
                 <select id="language-select" className="select-input col-8">

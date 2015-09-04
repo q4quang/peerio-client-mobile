@@ -34,6 +34,9 @@ button:disabled{
   font-size:  1.6rem;
   width: 100%;
   font-weight: 100;
+  &.on-touchstart{
+    background-color: darken(#2795D0, 20%);
+  }
 }
 
 .btn-lrg-back{
@@ -60,6 +63,10 @@ button:disabled{
   @extend .btn;
   background-color: $p-green;
   color: white;
+
+  &.on-touchstart{
+    background-color: darken($p-green, 20%);
+  }
 }
 
 .btn-danger {
