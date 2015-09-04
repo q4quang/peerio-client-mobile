@@ -70,3 +70,26 @@
   animation-fill-mode: forwards;
 
 }
+
+
+.page-animate-enter,
+.page-animate-leave,
+.page-animate-reverse-enter,
+.page-animate-reverse-leave{
+  animation-name: slideInRight;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+.page-animate-leave{
+  animation-name: slideOutLeft;
+}
+
+.page-animate-reverse-enter{
+  animation-name: slideInLeft;
+}
+
+.page-animate-reverse-leave{
+  animation-name: slideOutRight;
+}
