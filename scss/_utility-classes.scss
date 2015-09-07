@@ -93,3 +93,20 @@
 .page-animate-reverse-leave{
   animation-name: slideOutRight;
 }
+
+
+@keyframes slideDelete{
+  0%{
+    transform: translateX(-50px);
+  }
+  50%{
+    transform: translateX(-100%);
+    min-height: 60px;
+    max-height: 60px;
+  }
+  100%{
+    transform: translateX(-100%);
+    min-height: 0;
+    max-height: 0;
+  }
+}

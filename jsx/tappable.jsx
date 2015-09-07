@@ -9,12 +9,14 @@
     maxDistanceY: 13, // pixels
     maxDelay: 500,   // milliseconds
     handleTouchStart: function (e) {
+      e.stopPropagation();
       this.touchStartStamp = Date.now();
       this.touchStartX = e.changedTouches[0].clientX;
       this.touchStartY = e.changedTouches[0].clientY;
       this.setState({tapState:"on-touchstart"})
     },
     handleTouchEnd: function (e) {
+      e.stopPropagation();
       this.setState({tapState:""})
       if ((Date.now() - this.touchStartStamp) > this.maxDelay) return;
       var touchEndX = e.changedTouches[0].clientX;
