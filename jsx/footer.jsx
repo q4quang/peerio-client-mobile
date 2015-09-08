@@ -5,26 +5,17 @@
   'use strict';
 
   Peerio.UI.Footer = React.createClass({
-    mixins: [ReactRouter.Navigation, ReactRouter.State],
-    getRouteName: function () {
-      var routes = this.getRoutes();
-      if (!routes || !routes.length) return null;
-      return routes[routes.length - 1].name;
-    },
-    // to know when to hide back button
-    backButtonlessRoutes: ['messages', 'files', 'contacts'],
-    showBackButton: function () {
-      return this.backButtonlessRoutes.indexOf(this.getRouteName()) < 0;
-    },
+    mixins: [ReactRouter.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
+
     componentWillMount: function () {
       // route name: { button text, button action }
       // default action is Peerio.Action.bigGreenButton
       this.mainButtonActions = {
-        messages: {name: 'Compose message', action: this.transitionTo.bind(this, 'new_message'), icon:"pencil"},
+        messages: {name: 'Compose message', action: this.transitionTo.bind(this, 'new_message'), icon: "pencil"},
         //files: {name: 'Upload file', action: this.transitionTo.bind(this, '')},
-        contacts: {name: 'Add contact', icon:"user-plus"},
-        new_message: {name: 'Send', icon:"paper-plane-o"},
-        conversation: {name: 'Send', icon:"paper-plane-o"}
+        contacts: {name: 'Add contact', icon: "user-plus"},
+        new_message: {name: 'Send', icon: "paper-plane-o"},
+        conversation: {name: 'Send', icon: "paper-plane-o"}
       };
 
     },
@@ -39,7 +30,7 @@
 
       return (
         <div id="footer">
-          <div id="global-back" className={this.showBackButton() ? '' : 'hide'} onTouchEnd={this.goBack}>
+          <div id="global-back" className={this.isAppRoot() ? 'hide' : ''} onTouchEnd={this.goBack}>
             <i className="fa fa-chevron-left"></i>&nbsp;back
           </div>
           <div className="toolbar-fill"></div>

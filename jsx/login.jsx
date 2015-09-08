@@ -28,7 +28,7 @@
       Peerio.Dispatcher.onPause(this.cleanPassphrase);
       Peerio.Auth.getSavedLogin()
         .then(function (data) {
-          this.setState({savedLogin: data });
+          this.setState({savedLogin: data});
         }.bind(this));
     },
     componentWillUnmount: function () {
@@ -49,7 +49,7 @@
       'settling checksums...',
       'warming up...',
       'cooling down...'],
-    cleanPassphrase: function(){
+    cleanPassphrase: function () {
       this.refs.passphrase.getDOMNode().value = '';
     },
     updateProgressMessage: function () {
@@ -184,7 +184,8 @@
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
               </button>
 
-              <Peerio.UI.Tappable element="button" type="button" className="btn-lrg" onTap={this.transitionTo.bind(this,'signup')}>
+              <Peerio.UI.Tappable element="button" type="button" className="btn-lrg"
+                                  onTap={this.transitionTo.bind(this,'signup')}>
                 sign up
               </Peerio.UI.Tappable>
 
