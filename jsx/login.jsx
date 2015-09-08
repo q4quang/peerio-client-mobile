@@ -25,13 +25,14 @@
     componentWillMount: function () {
       Peerio.Dispatcher.onLoginSuccess(this.handleLoginSuccess);
       Peerio.Dispatcher.onLoginFail(this.handleLoginFail);
+      Peerio.Dispatcher.onPause(this.cleanPassphrase);
       Peerio.Auth.getSavedLogin()
         .then(function (data) {
           this.setState({savedLogin: data });
         }.bind(this));
     },
     componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.handleLoginProgress, this.handleLoginDone);
+      Peerio.Dispatcher.unsubscribe(this.handleLoginProgress, this.handleLoginDone, this.cleanPassphrase);
     },
     //--- CUSTOM FN
     progressMessages: [
@@ -48,6 +49,9 @@
       'settling checksums...',
       'warming up...',
       'cooling down...'],
+    cleanPassphrase: function(){
+      this.refs.passphrase.getDOMNode().value = '';
+    },
     updateProgressMessage: function () {
       var ind = Math.floor(Math.random() * this.progressMessages.length);
       this.setState({loginProgressMsg: this.progressMessages[ind]});
