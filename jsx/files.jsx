@@ -3,16 +3,13 @@
 
   Peerio.UI.Files = React.createClass({
     mixins:[ReactRouter.Navigation],
-    componentWillMount: function () {
-      this.setState({files: Peerio.Files.cache});
-    },
+
     componentDidMount: function () {
-      if(Peerio.Files.cache) return;
-      Peerio.Files.getAllFiles()
-        .then(function (files) {
-          if (!this.isMounted()) return;
-          this.setState({files: files});
-        }.bind(this));
+      this.subscription = Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null));
+      Peerio.Files.getAllFiles();
+    },
+    componentWillUnmount: function(){
+      Peerio.Dispatcher.unsubscribe(this.subscription);
     },
     openFileView: function (id) {
       this.transitionTo('file', {id: id});
@@ -20,8 +17,8 @@
     render: function () {
       var H = Peerio.Helpers;
       var nodes = [];
-      if (this.state.files) {
-        this.state.files.forEach(function (item) {
+      if (Peerio.Files.cache) {
+        Peerio.Files.cache.forEach(function (item) {
           // todo: preprocess somewhere else?
           if (!item.icon) item.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(item.name) + (item.cached ? ' cached' : '');
           if (!item.humanSize) item.humanSize = H.bytesToSize(item.size);

@@ -5,7 +5,6 @@
     mixins: [ReactRouter.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
     componentWillMount: function(){
       this.subscriptions = [Peerio.Dispatcher.onHardBackButton(this.handleHardwareBack)];
-      console.log('mounting app');
     },
     componentWillUnmount: function(){
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
