@@ -22,8 +22,6 @@
 .headline-lrg{
   @extend .headline;
   font-size: 2rem;
-  -webkit-user-select: text;
-  user-select: text; //to make text copy/paste-able
 }
 .headline-sub{
   @extend .headline;
@@ -56,6 +54,8 @@
   margin: 0.5em 0 1.5em 0;
   width: 100%;
   font-weight: 800;
+  -webkit-user-select: text;
+  user-select: text;//to make text copy/paste-able
 }
 .txt-sm{
   font-size: 0.9em;

@@ -279,9 +279,9 @@
       return ( <fieldset key={'singup-step-1'}>
         <h1 className="headline-lrg">Your Passphrase</h1>
 
-        <p className='info'>This is your secure randomly generated passphrase. If you loose it, you will<strong>&nbsp;
+        <p className='info'>This is your secure randomly generated passphrase. If you lose it, you will<strong>&nbsp;
           permanently&nbsp;</strong>
-          loose access to your account.</p>
+          lose access to your account.</p>
 
         <p className="txt-lrg">
           {this.state.passphrase}
