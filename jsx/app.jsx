@@ -2,6 +2,18 @@
   'use strict';
   // Main component for app in authenticated state
   Peerio.UI.App = React.createClass({
+    mixins: [ReactRouter.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
+    componentWillMount: function(){
+      this.subscriptions = [Peerio.Dispatcher.onHardBackButton(this.handleHardwareBack)];
+      console.log('mounting app');
+    },
+    componentWillUnmount: function(){
+      Peerio.Dispatcher.unsubscribe(this.subscriptions);
+    },
+    handleHardwareBack: function(){
+      if(this.isAppRoot()) return;
+      this.goBack();
+    },
     render: function () {
       return (
         <div>
