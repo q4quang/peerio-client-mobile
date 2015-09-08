@@ -5,6 +5,9 @@
  * todo: join this with contact selector and make it a universal select component
  */
 
+//todo fix potential bug: when file deleted while selected it might still be in the selection
+
+
 (function () {
   'use strict';
 
@@ -12,15 +15,12 @@
     getInitialState: function () {
       return {selection: this.props.preselected || []};
     },
-    componentWillMount: function () {
-      this.setState({files: Peerio.Files.cache});
-    },
     componentDidMount: function () {
-      Peerio.Files.getAllFiles()
-        .then(function (files) {
-          if (!this.isMounted()) return;
-          this.setState({files: files});
-        }.bind(this));
+      this.subscription = Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null));
+      Peerio.Files.getAllFiles();
+    },
+    componentWillUnmount: function () {
+      Peerio.Dispatcher.unsubscribe(this.subscription);
     },
     toggle: function (fileId) {
 
@@ -39,10 +39,10 @@
     render: function () {
       var files = [];
       //todo: loading indicator
-      if (this.state.files) {
-        this.state.files.forEach(function (f) {
+      if (Peerio.Files.cache) {
+        Peerio.Files.cache.forEach(function (f) {
 
-          var isSelected = this.state.selection.indexOf(f.id) >= 0 ;
+          var isSelected = this.state.selection.indexOf(f.id) >= 0;
 
           files.push(
             <Peerio.UI.Tappable key={f.id} onTap={this.toggle.bind(this,f.id)}>
@@ -53,7 +53,8 @@
             </Peerio.UI.Tappable>
           );
         }.bind(this));
-      }
+      } else files.push(<li>Please wait...</li>);
+
       return (
         <div className="modal contact-select">
           <ul className="contact-list">
