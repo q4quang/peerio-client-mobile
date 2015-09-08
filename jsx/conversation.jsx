@@ -98,18 +98,16 @@
       if (!this.state.conversation) return null;
       var conversation = this.state.conversation;
       var participants = _.without(conversation.participants, Peerio.user.username).map(function (username) {
-        var c = Peerio.user.contacts[username];
         return (
           <div key={username}>
-            <Peerio.UI.Avatar username={username}/>{c.fullNameAndUsername}
+            <Peerio.UI.Avatar username={username}/>{Peerio.Contacts.getFullNameAndUsername(username)}
           </div>
         );
       });
       conversation.formerParticipants.forEach(function (username) {
-        var c = Peerio.user.contacts[username];
         participants.push(
           <div key={username} className='former-participant'>
-            <Peerio.UI.Avatar username={username}/>{c.fullNameAndUsername}
+            <Peerio.UI.Avatar username={username}/>{Peerio.Contacts.getFullNameAndUsername(username)}
           </div>
         );
       });
@@ -169,7 +167,7 @@
       this.state.conversation.messages.forEach(function (item, index) {
         // figuring out render details
         var sender = Peerio.user.contacts[item.sender];
-        // mocking contact for deleted contacts
+        // mocking contact for deleted contacts todo: ugly!
         if (!sender) {
           sender = {username: item.sender, fullName: item.sender};
         }

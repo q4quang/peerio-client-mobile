@@ -23,11 +23,11 @@
     },
     render: function(){
 
-      var c = this.state.conversation;
-      var f = this.state.files;
+      var c = this.state.conversation
+      var f = this.state.files
       var info = {
         subject: c.original.subject,
-        timestamp : new moment(c.original.timestamp).format('L'),
+        timestamp : c.original.moment.format('L'),
         messageCount: c.messageCount,
         fileCount: c.fileCount,
         participantCount: c.allParticipants.length,
@@ -107,13 +107,15 @@
     mixins: [ReactRouter.Navigation],
     componentWillMount: function(){
       var props = this.props;
-      var contact = Peerio.user.contacts[props.username]
-      contact.event = {}
+      var contact = Peerio.user.contacts[props.username];
+      if(!contact) contact = {username: props.username, fullName: ''};
+      
+      contact.event = {};
 
       //_.each provides 'undefined' handling.
       _.each(this.props.events, function(event){
         if (props.username === event.participant) {
-          contact = Peerio.user.contacts[props.username]
+          contact = Peerio.user.contacts[props.username];
           contact.event = event
         }
       });

@@ -3,23 +3,30 @@
 
 
   Peerio.UI.ContactView = React.createClass({
+    mixins: [ReactRouter.Navigation],
     componentWillMount: function () {
       this.contact = Peerio.user.contacts[this.props.params.id];
+      this.subscriptions = [Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this,null))];
      },
+    componentWillUnmount: function(){
+      Peerio.Dispatcher.unsubscribe(this.subscriptions);
+    },
     handleAccept: function () {
-      //Peerio.Data.acceptContact(this.props.username);
+      Peerio.Contacts.acceptContact(this.contact.username);
     },
     handleReject: function () {
-     // Peerio.Data.rejectContact(this.props.username).catch();
+      Peerio.Contacts.rejectContact(this.contact.username);
     },
     handleRemove: function () {
-      if (!confirm('Are you sure you want to remove ' + this.props.username
+     if(!this.contact.isRequest)
+      if (!confirm('Are you sure you want to remove ' + this.contact.username
         + ' from contacts? You will not be able to message and share files with this contact after removal.')) return;
 
-      //Peerio.Data.removeContact(this.props.username)
-       // .then(Peerio.Action.navigateBack);
+      Peerio.Contacts.removeContact(this.contact.username);
+      this.goBack();
     },
     render: function () {
+      this.contact = Peerio.user.contacts[this.props.params.id];
       var buttonNode = null, pendingNode = null;
       if (this.contact.responsePending) {
         pendingNode = <div className="pending"><i className="fa fa-spinner fa-pulse"></i> waiting for server response...</div>;

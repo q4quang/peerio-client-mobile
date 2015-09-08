@@ -25,12 +25,10 @@
     componentWillMount: function () {
       Peerio.Dispatcher.onLoginSuccess(this.handleLoginSuccess);
       Peerio.Dispatcher.onLoginFail(this.handleLoginFail);
-      //Peerio.Data.getLastLogin()
-      //  .then(function (login, name) {
-      //   this.setState({savedLogin: login});
-      // }.bind(this)).catch(function () {
-      //   this.setState({savedLogin: null});
-      // }.bind(this));
+      Peerio.Auth.getSavedLogin()
+        .then(function (data) {
+          this.setState({savedLogin: data });
+        }.bind(this));
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.handleLoginProgress, this.handleLoginDone);
@@ -68,7 +66,7 @@
     },
     handleLoginFail: function (message) {
       this.stopProgress();
-      Peerio.Action.showAlert({text:(typeof message !== "undefined" && message.toString()) || 'Login failed.'});
+      Peerio.Action.showAlert({text: (typeof message !== "undefined" && message.toString()) || 'Login failed.'});
       this.setState({waitingForLogin: false, loginProgressMsg: ''});
     },
     // show/hide passphrase
@@ -100,7 +98,7 @@
       // getting login from input or from previously saved data
       var userNode;
       if (this.state.savedLogin) {
-        userNode = {value: this.state.savedLogin.login};
+        userNode = {value: this.state.savedLogin.username};
       } else {
         userNode = this.refs.username.getDOMNode();
         userNode.blur();
@@ -149,7 +147,7 @@
               {this.state.savedLogin
                 ?
                 (<div className="saved-login"
-                      onTouchEnd={this.clearLogin}>{this.state.savedLogin.name || this.state.savedLogin.login}
+                      onTouchEnd={this.clearLogin}>{this.state.savedLogin.firstName || this.state.savedLogin.username}
                   <div className="note">Welcome back.
                     <br/>
                     Tap here to change or forget username.

@@ -65,6 +65,9 @@
 
             return (
                 <div className="content-padded flex-col">
+                    <div style={{color:"red"}}>NOTICE TO TESTERS:
+                      This page is only a mock up and not yet functional.</div>
+
                     <div className="flex-col-1">
 
                         <div className="text-input-group col-12">

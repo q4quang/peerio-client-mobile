@@ -3,11 +3,18 @@
 
   Peerio.UI.Contacts = React.createClass({
     mixins:[ReactRouter.Navigation],
+    componentDidMount: function(){
+      this.subscriptions = [Peerio.Dispatcher.onBigGreenButton(this.handleAddContact),
+        Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this,null))
+      ];
+    },
+    componentWillUnmount: function(){
+      Peerio.Dispatcher.unsubscribe(this.subscriptions);
+    },
     handleAddContact: function () {
       var name = prompt('Please enter username of the contact you want to add');
       if (!name) return;
-      //Peerio.Data.addContact(name);
-      console.log('todo: add contact');
+      Peerio.Contacts.addContact(name);
     },
     openContactView: function(id){
       this.transitionTo('contact',{id:id})

@@ -21,7 +21,7 @@
         <div>
           <Peerio.UI.TabBar/>
           <ReactCSSTransitionGroup transitionName={this.state.reverseAnimation ? "page-animate-reverse": "page-animate"}>
-            {React.cloneElement(<RouteHandler/>, { key: this.state.currentPath })}
+            <RouteHandler key={this.state.currentPath}/>
           </ReactCSSTransitionGroup>
         </div>
       )
