@@ -27,6 +27,12 @@
     openConversation: function (id) {
       this.transitionTo('conversation', {id: id});
     },
+    destroyConversation: function(id){
+      //TODO: implement conversation destroy in API
+      //mock conversation deletion
+      var conversations = _.reject(this.state.conversations, function(c){ return c.id === id; });
+      this.setState({conversations: conversations});
+    },
     render: function () {
       var nodes = this.state.conversations
         ? this.renderNodes()
@@ -64,7 +70,8 @@
                 <Peerio.UI.MessagesItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
                                         unread={conv.isModified} fullName={conv.displayName}
                                         fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
-                                        messageCount={conv.messageCount} subject={conv.original.subject}/>
+                                        messageCount={conv.messageCount} subject={conv.original.subject}
+                                        onSwipe={this.toggleSwipe} swiped={this.state.swiped} destroyConversation={this.destroyConversation.bind(this, conv.id)}/>
         );
       }.bind(this));
 
@@ -76,11 +83,60 @@
    * Message list item component
    */
   Peerio.UI.MessagesItem = React.createClass({
-    render: function () {
-      return (
-          //make it a div and replace .list-item div with it.
+    getInitialState: function(){
+      return {swiped: false};
+    },
+    closeSwipe: function(){
+      this.setState({swiped: false});
+    },
+    openSwipe: function(){
+      this.setState({swiped: true});
+    },
+    destroyConversationAfterAnimate: function(){
+      setTimeout(this.props.destroyConversation, 600);
+    },
+    destroyConversation: function(){
+      this.closeAlert();
+      this.setState({destroyAnimation: true}, this.destroyConversationAfterAnimate );
+    },
+    closeAlert: function(event){
+      Peerio.Action.removeModal(this.state.alertId);
+    },
+    showDestroyDialog: function(){
+      var removeButtons = <div>
+                            <div className='col-12'>
+                              <Peerio.UI.Tappable element='button' onTap={this.destroyConversation} className='btn-md btn-danger'>Delete</Peerio.UI.Tappable>
+                            </div>
+                            <div className='col-12'>
+                              <Peerio.UI.Tappable element='button' onTap={this.closeAlert} className='btn-subtle'>Cancel</Peerio.UI.Tappable>
+                            </div>
+                          </div>;
 
-          <Peerio.UI.Tappable element="div" onTap={this.props.onTap} key={this.props.key} className={'list-item' + (this.props.unread ? ' unread' : '')}>
+      var removeText = <div>
+                          <div className='subhead'>
+                            <i className="fa fa-comments-o"></i>&nbsp;{this.props.subject}
+                          </div>
+                          <p>
+                            You will no longer receive messages or files within this conversation.
+                          </p>
+                      </div>;
+
+      var removeAlert = {id: uuid.v4(), text: removeText, btns:removeButtons };
+      this.setState({alertId: removeAlert.id});
+      Peerio.Action.showAlert(removeAlert);
+    },
+    render: function () {
+      var cx = React.addons.classSet;
+      var classes = cx({
+        'list-item':true,
+        'read': this.props.read,
+        'swiped': this.state.swiped,
+        'list-item-animation-leave': this.state.destroyAnimation
+      });
+      return (
+          <Peerio.UI.Tappable element="div" onTap={this.props.onTap} key={this.props.key} className={classes}>
+            <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe} className="list-item-swipe-wrapper">
+
             <div className="list-item-thumb">
             {this.props.fileCount ?
               (<div className="icon-with-label">
@@ -108,6 +164,11 @@
               <i className="fa fa-chevron-right"></i>
             </div>
 
+            <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
+              <i className="fa fa-trash-o"></i>
+            </Peerio.UI.Tappable>
+
+            </Peerio.UI.Swiper>
           </Peerio.UI.Tappable>
 
         );

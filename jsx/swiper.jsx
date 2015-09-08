@@ -19,7 +19,8 @@
         React.createElement('div', {
             onTouchStart: this.handleTouchStart,
             onTouchEnd: this.handleTouchEnd,
-            onTouchCancel: this.handleTouchCancel
+            onTouchCancel: this.handleTouchCancel,
+            className: this.props.className
           },
           this.props.children
         )

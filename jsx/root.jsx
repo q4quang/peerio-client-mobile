@@ -4,11 +4,11 @@
   Peerio.UI.Root = React.createClass({
     render: function() {
       return (
-        <Peerio.UI.Swiper id="app-container" key="app-container">
+          <div>
           <RouteHandler/>
           <Peerio.UI.Portal/>
-        </Peerio.UI.Swiper>
-      )
+          </div>
+      );
     }
   });
 
