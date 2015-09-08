@@ -22,7 +22,7 @@
     render: function () {
       var contacts = [];
       Peerio.user.contacts.forEach(function (c) {
-        if (c.username === Peerio.user.username || c.isRequest) return;
+        if (c.isRequest) return;
         var isSelected = this.state.selection.indexOf(c.username) >= 0 ;
 
         contacts.push(

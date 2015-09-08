@@ -89,7 +89,7 @@
       if (!user || !user.settings) return null;
       var quotaUsed = this.formatBytes(user.settings.quota.user);
       var quota = this.formatBytes(user.settings.quota.total);
-      var quotaPercent = parseInt(user.settings.quota.user / user.settings.quota.total * 100);
+      var quotaPercent = Math.floor(user.settings.quota.user / (user.settings.quota.total / 100));
 
       if (user.isPINSet)
         pinNode = <li onTouchStart={this.removePIN}><i className="fa fa-lock"></i> Remove PIN code</li>;
