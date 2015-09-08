@@ -16,6 +16,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
   // Main function executes when all systems are ready (dom, device)
   function main() {
+    window.StatusBar && window.StatusBar.hide();
     // peerio client api
     Peerio.initAPI().then(function () {
       // order matters
