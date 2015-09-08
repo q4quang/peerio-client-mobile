@@ -97,7 +97,8 @@
       if (this.state.passphrase_valid) {
         Peerio.Action.removeModal(this.state.activeModalId);
         this.doSignup();
-      }
+      } else      Peerio.Action.showAlert({text: 'Passphrases do not match'});
+
     },
 
     removeModal: function (e) {
