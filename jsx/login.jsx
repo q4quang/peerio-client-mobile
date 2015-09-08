@@ -180,7 +180,7 @@
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
               </button>
 
-              <Peerio.UI.Tappable element="button" className="btn-lrg" onTap={this.transitionTo.bind(this,'signup')}>
+              <Peerio.UI.Tappable element="button" type="button" className="btn-lrg" onTap={this.transitionTo.bind(this,'signup')}>
                 sign up
               </Peerio.UI.Tappable>
 
