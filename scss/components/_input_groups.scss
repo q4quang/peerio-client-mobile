@@ -5,10 +5,11 @@
   font-size: $text-input-fontsize;
   font-weight: 200;
 
-  .text-input:focus + .text-input-label,
-  .text-input:valid + .text-input-label,
   .select-input:focus + .text-input-label,
-  .select-input:valid + .text-input-label,{ //will this work on mobile? http://caniuse.com/#search=valid
+  .text-input:focus + .text-input-label,
+  .select-input:focus + .text-input-label,
+  .select-input:valid + .text-input-label,
+  .text-input-label.up{
     font-size: 0.8rem;
     top: -0.5rem;
   }

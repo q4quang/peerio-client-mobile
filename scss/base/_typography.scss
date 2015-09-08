@@ -22,6 +22,8 @@
 .headline-lrg{
   @extend .headline;
   font-size: 2rem;
+  -webkit-user-select: text;
+  user-select: text; //to make text copy/paste-able
 }
 .headline-sub{
   @extend .headline;

@@ -23,12 +23,15 @@
         steps: [],
         activeStep: 0,
         usernameValid: null,
+        username: "",
         auth_method: null,
         passphrase: "",
         passphrase_reentered: "",
         passphrase_valid: false,
         firstNameValid: null,
+        firstName: "",
         lastNameValid: null,
+        lastName:"",
         activeModalId: null
       };
     },
@@ -66,6 +69,7 @@
 
     validateUsername: function () {
       var username = this.refs.username.getDOMNode().value;
+      this.setState({username: username});
       Peerio.Net.validateUsername(username).then(function (valid) {
         this.setState({usernameValid: valid});
       }.bind(this)).catch(function () {
@@ -82,11 +86,11 @@
     },
     validateFirstName: function () {
       var name = this.refs.firstName.getDOMNode().value;
-      this.setState({firstNameValid: !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i)});
+      this.setState({firstNameValid: !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i), firstName: name});
     },
     validateLastName: function () {
       var name = this.refs.lastName.getDOMNode().value;
-      this.setState({lastNameValid: !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i)});
+      this.setState({lastNameValid: !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i), lastName: name});
     },
 
     passPhraseIsValid: function () {
@@ -104,7 +108,7 @@
     showModal: function () {
       var modalText = (<div key={'singup-step-2'}>
         <legend className="headline-md">Please enter your passphrase to continue</legend>
-        <textarea className="txt-lrg textarea-transparent" autoFocus="true"
+        <textarea className="txt-lrg textarea-transparent" autoFocus="true" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
                   onChange={this.validatePassPhrase}></textarea>
       </div>);
       var modalBtns = (<div>
@@ -216,32 +220,32 @@
 
         <div className="text-input-group">
           <input className="text-input" type="text" value={this.state.username} name="user_name" id="user_name"
-                 ref='username' required="required"
+                 ref='username' required="required" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
                  onChange={this.validateUsername}/>
           {
             (this.state.usernameValid === null || this.state.usernameValid === true)
-              ? <label className="text-input-label" htmlFor="user_name">Desired username</label>
+              ? <label className={this.state.username.length > 0 ? "text-input-label up" : "text-input-label"} htmlFor="user_name">Desired username</label>
               :
-              <label className="text-input-label" style={{color: '#FF7272', fontWeight:600}} htmlFor="user_name">Please
+              <label className={this.state.username.length > 0  ? "text-input-label up" : "text-input-label"} style={{color: '#FF7272', fontWeight:600}} htmlFor="user_name">Please
                 pick a different username</label>
           }
         </div>
 
         <div className="text-input-group">
           <input className="text-input" type="text" name="user_first_name" id="user_first_name" ref="firstName"
-                 onChange={this.validateFirstName}/>
+                 onChange={this.validateFirstName} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
           {(this.state.firstNameValid === null || this.state.firstNameValid === true)
-            ? <label className="text-input-label" htmlFor="user_first_name">First name</label>
-            : <label className="text-input-label" htmlFor="user_first_name" style={{color: '#FF7272', fontWeight:600}}>Invalid
+            ? <label className={this.state.firstName.length > 0  ? "text-input-label up" : "text-input-label"} htmlFor="user_first_name">First name</label>
+            : <label className={this.state.firstName.length > 0  ? "text-input-label up" : "text-input-label"} htmlFor="user_first_name" style={{color: '#FF7272', fontWeight:600}}>Invalid
             name</label>}
         </div>
 
         <div className="text-input-group">
           <input className="text-input" type="text" name="user_last_name" id="user_last_name" ref="lastName"
-                 onChange={this.validateLastName}/>
+                 onChange={this.validateLastName} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
           {(this.state.lastNameValid === null || this.state.lastNameValid === true)
-            ? <label className="text-input-label" htmlFor="user_last_name">Last name</label>
-            : <label className="text-input-label" htmlFor="user_last_name" style={{color: '#FF7272', fontWeight:600}}>Invalid
+            ? <label className={this.state.lastName.length > 0  ? "text-input-label up" : "text-input-label"} htmlFor="user_last_name">Last name</label>
+            : <label className={this.state.firstName.length > 0  ? "text-input-label up" : "text-input-label"} htmlFor="user_last_name" style={{color: '#FF7272', fontWeight:600}}>Invalid
             name</label>}
         </div>
 
