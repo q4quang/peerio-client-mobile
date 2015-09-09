@@ -16,7 +16,15 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
   // Main function executes when all systems are ready (dom, device)
   function main() {
-    window.StatusBar && window.StatusBar.hide();
+    // platform-specific classes on body
+    if (window.device) {
+      var platform = device.platform.toLowerCase();
+      if (platform === 'ios')
+        document.body.classList.add('ios');
+      else if (platform === 'android')
+        document.body.classList.add('android');
+    }
+
     // peerio client api
     Peerio.initAPI().then(function () {
       // order matters
