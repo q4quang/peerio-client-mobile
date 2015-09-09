@@ -32,6 +32,7 @@
       // when adding a new modal, just add it here, everything else is universal
       this.subscriptios = [
         Peerio.Dispatcher.onShowAlert(this.showModal.bind(this, Peerio.UI.Alert)),
+        Peerio.Dispatcher.onShowConfirm(this.showModal.bind(this, Peerio.UI.Confirm)),
         Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect)),
         Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect)),
 

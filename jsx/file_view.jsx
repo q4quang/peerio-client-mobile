@@ -16,17 +16,20 @@
       console.log('todo: download file');
     },
     handleRemoveLocal: function () {
-      if (!confirm('Remove file from this device? (it will still be available in your cloud)')) return;
       console.log('todo: remove cahed file');
+      Peerio.Action.showConfirm({headline:"Remove file from this device?",
+                                text:'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.'});
     },
     handleRemove: function () {
-      if (!confirm('Remove this file? (it will be deleted from your device and cloud, but will be available for users who you may have shared it with)')) return;
-      Peerio.Files.delete(this.props.params.id);
+      Peerio.Action.showConfirm({headline:"Remove this file?",
+                                 text:'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
+                                 onAccept: Peerio.Files.delete.bind(this, this.props.params.id)});
     },
     handleNuke: function () {
-      if (!confirm('Destroy file completely? (it will be deleted from your device, cloud and from the clouds of other users who you may have shared it with.)')) return;
       console.log('todo: nuke file');
-      Peerio.Files.nuke(this.props.params.id);
+      Peerio.Action.showConfirm({headline:"Destroy file completely?",
+                                 text:'This file will be deleted from your device, cloud and from the clouds of other users who you have shared it with.',
+                                 onAccept: Peerio.Files.nuke.bind(this, this.props.params.id)});
     },
     render: function () {
       var H = Peerio.Helpers;

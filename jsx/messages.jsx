@@ -96,34 +96,10 @@
       setTimeout(this.props.destroyConversation, 600);
     },
     destroyConversation: function(){
-      this.closeAlert();
       this.setState({destroyAnimation: true}, this.destroyConversationAfterAnimate );
     },
-    closeAlert: function(event){
-      Peerio.Action.removeModal(this.state.alertId);
-    },
     showDestroyDialog: function(){
-      var removeButtons = <div>
-                            <div className='col-12'>
-                              <Peerio.UI.Tappable element='button' onTap={this.destroyConversation} className='btn-md btn-danger'>Delete</Peerio.UI.Tappable>
-                            </div>
-                            <div className='col-12'>
-                              <Peerio.UI.Tappable element='button' onTap={this.closeAlert} className='btn-subtle'>Cancel</Peerio.UI.Tappable>
-                            </div>
-                          </div>;
-
-      var removeText = <div>
-                          <div className='subhead'>
-                            <i className="fa fa-comments-o"></i>&nbsp;{this.props.subject}
-                          </div>
-                          <p>
-                            You will no longer receive messages or files within this conversation.
-                          </p>
-                      </div>;
-
-      var removeAlert = {id: uuid.v4(), text: removeText, btns:removeButtons };
-      this.setState({alertId: removeAlert.id});
-      Peerio.Action.showAlert(removeAlert);
+      Peerio.Action.showConfirm({text:"are you sure you want do delete this conversation? You will no longer receive messages or files within this conversation.", onAccept: this.destroyConversation});
     },
     render: function () {
       var cx = React.addons.classSet;
