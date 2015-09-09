@@ -13,7 +13,7 @@
         open: false,
         newPinCode: "",
         modalID: ""
-      }
+      };
     },
     componentDidMount: function () {
       Peerio.Dispatcher.onSidebarToggle(this.toggle);
@@ -68,7 +68,7 @@
       this.toggle();
       this.transitionTo(route);
     },
-    addContactCallback(username){
+    addContactCallback: function(username){
       if (!username) return;
       Peerio.Contacts.addContact(username);
       //TODO: add alert with error success feedback

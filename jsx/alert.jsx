@@ -20,7 +20,7 @@
 
       var btns = this.props.btns ||
         (<div>
-          <Peerio.UI.Tappable element="button" className="btn-lrg" onTap={this.props.onClose}>OK</Peerio.UI.Tappable>
+          <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.props.onClose}>OK</Peerio.UI.Tappable>
         </div>);
 
       var text = this.props.text || 'alert text';
@@ -49,10 +49,10 @@
 
       var btns = this.props.btns || <div>
             <div className="col-6">
-              <Peerio.UI.Tappable element="button" className="btn-lrg btn-danger" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+              <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
             </div>
             <div className="col-6">
-              <Peerio.UI.Tappable element="button" className="btn-lrg" onTap={this.handleAction}>OK</Peerio.UI.Tappable>
+              <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.handleAction}>OK</Peerio.UI.Tappable>
             </div>
           </div>;
 
@@ -93,19 +93,16 @@
     },
     componentDidMount: function(){
       var element = React.findDOMNode(this.refs.promptInput);
-      //TODO: find out why this doesn't work immediately
-      setTimeout(function(){
-        element.focus();
-      }, 100);
+      element.focus(); //TODO: looks like it works on ios but not android.
     },
     render: function () {
 
       var btns = this.props.btns || <div>
             <div className="col-6">
-              <Peerio.UI.Tappable element="button" className="btn-lrg btn-danger" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+              <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
             </div>
             <div className="col-6">
-              <Peerio.UI.Tappable element="button" className="btn-lrg" onTap={this.handleAction}>OK</Peerio.UI.Tappable>
+              <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.handleAction}>OK</Peerio.UI.Tappable>
             </div>
           </div>;
 
@@ -120,9 +117,9 @@
                 </div>
                 <div className="alert-content-text">
                   {text}
-                  <input type="text" className="text-input centered-text" ref="promptInput" autoFocus={focus}
-                         autoFocus autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
-                         onChange={this.updatePromptValue} value={this.state.promptValue} onChange={this.updatePromptValue}/>
+                  <input type="text" className="text-input centered-text" ref="promptInput"
+                         autoCorrect="off" autoCapitalize="off" spellCheck="false"
+                         value={this.state.promptValue} onChange={this.updatePromptValue}/>
                 </div>
                 <div className="alert-content-btns">
                   {btns}
