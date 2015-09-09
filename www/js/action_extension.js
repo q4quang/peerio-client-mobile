@@ -13,6 +13,7 @@ Peerio.ActionExtension.init = function () {
     'BigGreenButton',      // universal context-dependent big green button tapped
     'ShowAlert',           // {[id]:, text:string/reactComponent, btn: reactComponent} Message to modal manager to show alert
     'ShowConfirm',
+    'ShowPrompt',
     'ShowContactSelect',   // {[id]:, preselected:['username','username' ]}
     'ContactsSelected',    // {['username', 'username']} - contacts was selected and accepted in contacts selector
     'ShowFileSelect',      // {string[]} open file selector, optionally pass array of preselected file id's

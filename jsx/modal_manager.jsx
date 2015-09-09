@@ -33,6 +33,7 @@
       this.subscriptios = [
         Peerio.Dispatcher.onShowAlert(this.showModal.bind(this, Peerio.UI.Alert)),
         Peerio.Dispatcher.onShowConfirm(this.showModal.bind(this, Peerio.UI.Confirm)),
+        Peerio.Dispatcher.onShowPrompt(this.showModal.bind(this, Peerio.UI.Prompt)),
         Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect)),
         Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect)),
 

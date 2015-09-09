@@ -11,10 +11,14 @@
     componentWillUnmount: function(){
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
     },
-    handleAddContact: function () {
-      var name = prompt('Please enter username of the contact you want to add');
-      if (!name) return;
+    addContactCallback: function(name){
       Peerio.Contacts.addContact(name);
+      //TODO: add success/fail alert.
+    },
+    handleAddContact: function () {
+      Peerio.Action.showPrompt({headline: 'Add Contact',
+        text: 'Please enter username of the contact you want to add',
+        onAccept: this.addContactCallback});
     },
     openContactView: function(id){
       this.transitionTo('contact',{id:id})

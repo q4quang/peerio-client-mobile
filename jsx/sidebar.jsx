@@ -26,31 +26,30 @@
     toggle: function () {
       this.setState({open: !this.state.open});
     },
+    removePinModal: function(){
+      Peerio.Auth.removePIN();
+      Peerio.Action.showAlert({text:"Your PIN has been removed"});
+      this.forceUpdate();
+    },
     removePIN: function () {
-      if (confirm('Are you sure you want to remove your PIN code?')) {
-        Peerio.Auth.removePIN();
-        alert('Your PIN was removed.');
-        this.forceUpdate();
-      }
+      Peerio.Action.showConfirm({
+        headline: "Remove PIN",
+        text: 'Are you sure you want to remove your PIN code?',
+        onAccept: this.removePinModal
+      });
     },
     newPinCodeText: function (val) {
       this.setState({newPinCode: val.target.value})
     },
     showPINmodal: function () {
-      var setPinText = (<div>
-        <span>Please enter the PIN you want to set up for this device</span><br/>
-        <input type="text" onChange={this.newPinCodeText}/>
-      </div>);
-      var btn = <button className="btn-md" onTouchEnd={this.setPIN}>Set PIN code</button>;
-      var modal = {id: uuid.v4(), text: setPinText, btns: btn};
-      this.setState({modalID: modal.id});
-      Peerio.Action.showAlert(modal);
+      Peerio.Action.showPrompt({headline:"Setup New PIN",
+                                text: "enter the PIN you wish to use for this device.",
+                                onAccept: this.setPIN });
     },
-    setPIN: function () {
-      Peerio.Action.removeModal(this.state.modalID);
+    setPIN: function (newPIN) {
 
-      if (this.state.newPinCode) {
-        Peerio.Auth.setPIN(this.state.newPinCode, Peerio.user.username, Peerio.user.passphrase).then(function () {
+      if (newPIN) {
+        Peerio.Auth.setPIN(newPIN, Peerio.user.username, Peerio.user.passphrase).then(function () {
           Peerio.Action.showAlert({text: "Your PIN is set"});
           this.forceUpdate();
         }.bind(this));
@@ -69,12 +68,16 @@
       this.toggle();
       this.transitionTo(route);
     },
+    addContactCallback(username){
+      if (!username) return;
+      Peerio.Contacts.addContact(username);
+      //TODO: add alert with error success feedback
+    },
     // todo: this is bad. find a way to share this chunk of code with contact list view
     handleAddContact: function () {
-      this.toggle();
-      var name = prompt('Please enter username of the contact you want to add');
-      if (!name) return;
-      Peerio.Contacts.addContact(name);
+      Peerio.Action.showPrompt({headline: 'Add Contact',
+                                text: 'Please enter username of the contact you want to add',
+                                onAccept: this.addContactCallback});
     },
     handleNewMessage: function () {
       this.toggle();

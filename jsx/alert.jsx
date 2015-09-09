@@ -20,7 +20,7 @@
 
       var btns = this.props.btns ||
         (<div>
-          <Peerio.UI.Tappable element="button" className="btn-lrg" onTap={this.handleClose}>OK</Peerio.UI.Tappable>
+          <Peerio.UI.Tappable element="button" className="btn-lrg" onTap={this.props.onClose}>OK</Peerio.UI.Tappable>
         </div>);
 
       var text = this.props.text || 'alert text';
@@ -40,11 +40,7 @@
           <div className="modal dim-background"></div>
         </div>
       );
-    },
-    handleClose: function () {
-      this.props.onClose();
     }
-
   });
 
   Peerio.UI.Confirm = React.createClass({
@@ -84,6 +80,62 @@
     handleAction: function(){
       this.props.onClose();
       this.props.onAccept();
+    }
+  });
+
+
+  Peerio.UI.Prompt = React.createClass({
+    getInitialState: function(){
+      return {promptValue: ""};
+    },
+    updatePromptValue: function(event){
+      this.setState({promptValue: event.target.value});
+    },
+    componentDidMount: function(){
+      var element = React.findDOMNode(this.refs.promptInput);
+      //TODO: find out why this doesn't work immediately
+      setTimeout(function(){
+        element.focus();
+      }, 100);
+    },
+    render: function () {
+
+      var btns = this.props.btns || <div>
+            <div className="col-6">
+              <Peerio.UI.Tappable element="button" className="btn-lrg btn-danger" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+            </div>
+            <div className="col-6">
+              <Peerio.UI.Tappable element="button" className="btn-lrg" onTap={this.handleAction}>OK</Peerio.UI.Tappable>
+            </div>
+          </div>;
+
+      var text = this.props.text || 'confirm text';
+
+      return (
+          <div>
+            <div className="modal alert text-center">
+              <div className="alert-content">
+                <div className="headline-lrg">
+                  {this.props.headline}
+                </div>
+                <div className="alert-content-text">
+                  {text}
+                  <input type="text" className="text-input centered-text" ref="promptInput" autoFocus={focus}
+                         autoFocus autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
+                         onChange={this.updatePromptValue} value={this.state.promptValue} onChange={this.updatePromptValue}/>
+                </div>
+                <div className="alert-content-btns">
+                  {btns}
+                </div>
+              </div>
+            </div>
+            <div className="modal dim-background"></div>
+          </div>
+      );
+    },
+    handleAction: function(){
+      this.props.onClose();
+      this.props.onAccept(this.state.promptValue);
     }
   });
 
