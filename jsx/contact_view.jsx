@@ -17,13 +17,19 @@
     handleReject: function () {
       Peerio.Contacts.rejectContact(this.contact.username);
     },
-    handleRemove: function () {
-     if(!this.contact.isRequest)
-      if (!confirm('Are you sure you want to remove ' + this.contact.username
-        + ' from contacts? You will not be able to message and share files with this contact after removal.')) return;
-
-      Peerio.Contacts.removeContact(this.contact.username);
+    removeContactAndGoBack: function(username){
+      Peerio.Contacts.removeContact(username);
       this.goBack();
+    },
+    handleRemove: function () {
+     if(!this.contact.isRequest) {
+       Peerio.Action.showConfirm({
+         headline: "Remove Contact?",
+         text: 'Are you sure you want to remove ' + this.contact.username +
+         ' from contacts? You will not be able to message and share files with this contact after removal.',
+         onAccept: this.removeContactAndGoBack.bind(this, this.contact.username)
+       });
+     }
     },
     render: function () {
       this.contact = Peerio.user.contacts[this.props.params.id];
@@ -33,9 +39,9 @@
       } else if (!this.contact.isMe) {
         buttonNode = (
           <div>
-            { this.contact.isRequest && this.contact.isReceivedRequest ? <div className="btn btn-safe" onTouchEnd={this.handleAccept}>Accept contact request</div> : null }
-            { this.contact.isRequest && this.contact.isReceivedRequest ? <div className="btn btn-danger" onTouchEnd={this.handleReject}>Reject contact request</div>
-              : <div className="btn btn-danger" onTouchEnd={this.handleRemove}>Remove contact</div>}
+            { this.contact.isRequest && this.contact.isReceivedRequest ? <Peerio.UI.Tappable element="button" className="btn-md btn-safe" onTap={this.handleAccept}>Accept contact request</Peerio.UI.Tappable> : null }
+            { this.contact.isRequest && this.contact.isReceivedRequest ? <Peerio.UI.Tappable element="button" className="btn-md btn-danger" onTap={this.handleReject}>Reject contact request</Peerio.UI.Tappable>
+              : <Peerio.UI.Tappable element="button" className="btn-md btn-danger" onTap={this.handleRemove}>Remove contact</Peerio.UI.Tappable>}
           </div>);
       }
       //// TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
