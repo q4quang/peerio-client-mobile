@@ -34,9 +34,34 @@
       this.setState({conversations: conversations});
     },
     render: function () {
+
       var nodes = this.state.conversations
         ? this.renderNodes()
         : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
+
+      //TODO: when new user has no contacts, add contact popup should appear instead of transitioning to contacts page.
+      if ( this.state.conversations && this.state.conversations.length  === 0 ) {
+        var intro_content = Peerio.user.contacts.length > 1
+            ? <div>
+                <p>Peerio lets you send messages securely. Try it out by sending a message to one of your contacts.</p>
+                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this, 'new_message')}>
+                  <i className="fa fa-pencil"></i>&nbsp;Send a new message
+                </Peerio.UI.Tappable>
+              </div>
+            : <div>
+                <p>Peerio lets you send messages securely. Add a contact and try it out.</p>
+                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this, 'contacts')}>
+                  <i className="fa fa-user-plus"></i>&nbsp;Add a contact
+                </Peerio.UI.Tappable>
+              </div>;
+
+        nodes = <div className="content-intro">
+                  <img className="peerio-logo" src="media/img/Peerio_LogoLight.png"/>
+                  <h1 className="headline-lrg">Welcome to Peerio!</h1>
+                  {intro_content}
+                  <img src="media/img/paperPlane.png"/>
+                </div>;
+      }
 
       return (
         <div className="content list-view" id="Messages" ref="messageList">

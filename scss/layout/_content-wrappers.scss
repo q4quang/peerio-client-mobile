@@ -42,7 +42,15 @@
   @extend .content;
   padding: 10px;
 }
-
+.content-intro{
+  padding: 20px;
+  .peerio-logo{
+    width: 30%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
 .modal {
   position: fixed;
   top: 0;
