@@ -47,11 +47,11 @@ Peerio.NativeAPI.init = function () {
    * Hide software keyboard
    */
   api.hideKeyboard = function () {
-    cordova.plugins.Keyboard.close();
+    Keyboard.hide();
   };
 
   initializers.hideKeyboard = function () {
-    if (cordova && cordova.plugins && cordova.plugins.Keyboard)
+    if (window.Keyboard && Keyboard.hide)
       return;
 
     return console.log.bind(console, getGenericMsg('hideKeyboard'));
@@ -61,14 +61,27 @@ Peerio.NativeAPI.init = function () {
    * For IOS only. Hides "accessory bar" with "next", "previous" and "done" buttons.
    */
   api.hideKeyboardAccessoryBar = function () {
-    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    Keyboard.hideFormAccessoryBar(true);
   };
 
   initializers.hideKeyboardAccessoryBar = function () {
-    if (cordova && cordova.plugins && cordova.plugins.Keyboard)
+    if (window.Keyboard && Keyboard.hideFormAccessoryBar)
       return;
 
     return console.log.bind(console, getGenericMsg('hideKeyboardAccessoryBar'));
+  };
+  /**
+   *  When keyboard is open, shrinks the webview instead of viewport
+   */
+  api.shrinkViewOnKeyboardOpen = function () {
+    Keyboard.shrinkView(true);
+  };
+
+  initializers.shrinkViewOnKeyboardOpen = function () {
+    if (window.Keyboard && Keyboard.shrinkView)
+      return;
+
+    return console.log.bind(console, getGenericMsg('shrinkViewOnKeyboardOpen'));
   };
 
   /**

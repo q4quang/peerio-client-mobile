@@ -14,7 +14,7 @@
     <access origin="https://peerio.com" />
     <access origin="https://peerio.blob.core.windows.net" />
     <allow-intent href="*" />
-    <preference name="Orientation" value="all" />
+    <preference name="Orientation" value="default" />
     <preference name="Fullscreen" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarBackgroundColor" value="#233445" />
@@ -78,7 +78,6 @@
     </platform>
     <preference name="xwalkVersion" value="xwalk_core_library_beta:14.43.343.17" />
     <preference name="LIB_MODE" value="embedded" />
-    <plugin name="com.ionic.keyboard" spec="*" />
     <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="*" />
     <plugin name="cordova-plugin-appversion" spec="*" />
     <plugin name="cordova-plugin-whitelist" spec="*" />
@@ -86,7 +85,8 @@
     <plugin name="cordova-plugin-splashscreen" spec="*" />
     <plugin name="cordova-plugin-file-transfer" spec="*" />
     <plugin name="cordova-plugin-file" spec="*" />
-    <plugin name="com.telerik.plugins.wkwebview" spec="~0.5.0" />
-    <plugin name="cordova-plugin-crosswalk-webview" spec="~1.2.0" />
-    <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
+    <plugin name="com.telerik.plugins.wkwebview" spec="*" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="*" />
+    <plugin name="cordova-plugin-statusbar" spec="*" />
+    <plugin name="cordova-plugin-keyboard" spec="*" />
 </widget>

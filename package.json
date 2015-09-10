@@ -2,8 +2,7 @@
   "name": "peerio-client-mobile",
   "version": "1.0.0",
   "description": "peerio-client-mobile",
-  "dependencies": {
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/PeerioTechnologies/peerio-client-mobile.git"
