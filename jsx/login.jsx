@@ -180,13 +180,13 @@
                 </div>
               </div>
               <div id="login-process-state">{this.state.loginProgressMsg}</div>
-              <button type="submit" ref="loginBtn" className="btn-lrg btn-safe">
+              <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-lrg btn-safe" onTap={this.handleSubmit}>
                 {this.state.waitingForLogin ? <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
-              </button>
+              </Peerio.UI.Tappable>
 
               {this.state.waitingForLogin
                 ? null
-                : (<Peerio.UI.Tappable element="button" type="button" className="btn-lrg"
+                : (<Peerio.UI.Tappable element="div" className="btn-lrg"
                                     onTap={this.transitionTo.bind(this,'signup')}>
                   sign up
                 </Peerio.UI.Tappable>)}
