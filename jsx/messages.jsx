@@ -7,35 +7,30 @@
       return {};
     },
     componentWillMount: function () {
-      this.setState({conversations: Peerio.Messages.cache});
+
     },
     componentDidMount: function () {
-      var updateFn = function (conversations) {
-        if (!this.isMounted()) return;
-        this.setState({conversations: conversations});
-      }.bind(this);
-      // todo refactor when server paging is ready
-      Peerio.Messages.getAllConversations(updateFn).then(updateFn);
+      Peerio.Messages.getAllConversations();
 
-     this.subscriptions = [ Peerio.Dispatcher.onMessageAdded(function(){
-        this.forceUpdate();
-      }.bind(this))];
+      this.subscriptions =
+        [
+          Peerio.Dispatcher.onMessageAdded(function () {
+            this.forceUpdate();
+          }.bind(this)),
+          Peerio.Dispatcher.onConversationsUpdated(this.forceUpdate.bind(this, null))
+        ];
     },
-    componentWillUnmount: function(){
+    componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
     },
     openConversation: function (id) {
       this.transitionTo('conversation', {id: id});
     },
-    destroyConversation: function(id){
-      //TODO: implement conversation destroy in API
-      //mock conversation deletion
-      var conversations = _.reject(this.state.conversations, function(c){ return c.id === id; });
-      this.setState({conversations: conversations});
+    destroyConversation: function (id) {
+      Peerio.Messages.removeConversation(id);
     },
     render: function () {
-
-      var nodes = this.state.conversations
+      var nodes = Peerio.Messages.cache
         ? this.renderNodes()
         : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
@@ -70,7 +65,7 @@
       );
     },
     renderNodes: function () {
-      return this.state.conversations.map(function (conv) {
+      return Peerio.Messages.cache.map(function (conv) {
         // building name to display for conversation item.
         // it should be in format "John Smith +3"
         // and it should not display current user's name,
@@ -92,59 +87,63 @@
         }
 
         return (
-                <Peerio.UI.MessagesItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
-                                        unread={conv.isModified} fullName={conv.displayName}
-                                        fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
-                                        messageCount={conv.messageCount} subject={conv.original.subject}
-                                        onSwipe={this.toggleSwipe} swiped={this.state.swiped} destroyConversation={this.destroyConversation.bind(this, conv.id)}/>
+          <Peerio.UI.MessagesItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
+                                  unread={conv.isModified} fullName={conv.displayName}
+                                  fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
+                                  messageCount={conv.messageCount} subject={conv.original.subject}
+                                  onSwipe={this.toggleSwipe} swiped={this.state.swiped}
+                                  destroyConversation={this.destroyConversation.bind(this, conv.id)}/>
         );
       }.bind(this));
 
     }
   });
 
-
   /**
    * Message list item component
    */
   Peerio.UI.MessagesItem = React.createClass({
-    getInitialState: function(){
+    getInitialState: function () {
       return {swiped: false};
     },
-    closeSwipe: function(){
+    closeSwipe: function () {
       this.setState({swiped: false});
     },
-    openSwipe: function(){
+    openSwipe: function () {
       this.setState({swiped: true});
     },
-    destroyConversationAfterAnimate: function(){
+    destroyConversationAfterAnimate: function () {
       setTimeout(this.props.destroyConversation, 600);
     },
-    destroyConversation: function(){
-      this.setState({destroyAnimation: true}, this.destroyConversationAfterAnimate );
+    destroyConversation: function () {
+      this.setState({destroyAnimation: true}, this.destroyConversationAfterAnimate);
     },
-    showDestroyDialog: function(){
-      Peerio.Action.showConfirm({text:"are you sure you want do delete this conversation? You will no longer receive messages or files within this conversation.", onAccept: this.destroyConversation});
+    showDestroyDialog: function () {
+      Peerio.Action.showConfirm({
+        text: "are you sure you want do delete this conversation? You will no longer receive messages or files within this conversation.",
+        onAccept: this.destroyConversation
+      });
     },
     render: function () {
       var cx = React.addons.classSet;
       var classes = cx({
-        'list-item':true,
+        'list-item': true,
         'read': this.props.read,
         'swiped': this.state.swiped,
         'list-item-animation-leave': this.state.destroyAnimation
       });
       return (
-          <Peerio.UI.Tappable element="div" onTap={this.props.onTap} key={this.props.key} className={classes}>
-            <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe} className="list-item-swipe-wrapper">
+        <Peerio.UI.Tappable element="div" onTap={this.props.onTap} key={this.props.key} className={classes}>
+          <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe}
+                            className="list-item-swipe-wrapper">
 
             <div className="list-item-thumb">
-            {this.props.fileCount ?
-              (<div className="icon-with-label">
-                <i className={'fa fa-paperclip attachment'}></i>
-                <span className="icon-label">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
-              </div>)
-              : ''}
+              {this.props.fileCount ?
+                (<div className="icon-with-label">
+                  <i className={'fa fa-paperclip attachment'}></i>
+                  <span className="icon-label">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
+                </div>)
+                : ''}
             </div>
 
             <div className="list-item-content">
@@ -169,10 +168,10 @@
               <i className="fa fa-trash-o"></i>
             </Peerio.UI.Tappable>
 
-            </Peerio.UI.Swiper>
-          </Peerio.UI.Tappable>
+          </Peerio.UI.Swiper>
+        </Peerio.UI.Tappable>
 
-        );
+      );
     }
   });
 

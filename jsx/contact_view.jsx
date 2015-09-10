@@ -29,7 +29,7 @@
          ' from contacts? You will not be able to message and share files with this contact after removal.',
          onAccept: this.removeContactAndGoBack.bind(this, this.contact.username)
        });
-     }
+     } else this.removeContactAndGoBack(this.contact.username);
     },
     render: function () {
       this.contact = Peerio.user.contacts[this.props.params.id];
