@@ -1,5 +1,10 @@
 # Peerio Mobile Change Log
 
+## [v.1.0.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v1.0.0) (2015-09-10)
+
+This is the first alpha release after complete rewrite of application core code and multiple fundamental changes in protocol.
+Functionally it is almost the same, but with better performance, with some visual changes and signup process working.
+
 ## [v.0.9.0](https://github.com/PeerioTechnologies/peerio-client-mobile/tree/v0.9.0) (2015-06-27)
 
 **Implemented enhancements:**
