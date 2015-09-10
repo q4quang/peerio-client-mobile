@@ -35,8 +35,7 @@ textarea:focus::-webkit-input-placeholder {
   color: transparent;
 }
 body {
-  //caused visual glitch after closing software keyboard on ios7
-  //position: fixed;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -45,6 +44,12 @@ body {
   color: #000;
   background-color: #fff;
 }
+
+body.ios{
+  margin-top: 20px;
+  background-color: #334455;
+}
+
 button{
   background-color: #2795d0;
   border: none;

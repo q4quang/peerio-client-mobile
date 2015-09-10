@@ -10,6 +10,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   z-index: $z-content;
+  background-color: white;
 }
 .page-wrapper-login{
   @include content-wrapper(0, 0);
@@ -19,6 +20,7 @@
   padding: 20px;
   max-width: 400px;
   margin: 0 auto;
+  background-color: transparent;
 }
 .content-wrapper-signup{
   @include content-wrapper(0, 0);
