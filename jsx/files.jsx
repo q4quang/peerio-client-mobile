@@ -17,7 +17,7 @@
     render: function () {
       var H = Peerio.Helpers;
       var nodes = [];
-      if (Peerio.Files.cache) {
+      if (Peerio.Files.cache && Peerio.Files.cache.length > 0) {
         Peerio.Files.cache.forEach(function (item) {
           // todo: preprocess somewhere else?
           if (!item.icon) item.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(item.name) + (item.cached ? ' cached' : '');
@@ -46,7 +46,22 @@
           );
         }.bind(this));
       }
-      else nodes = Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
+      //New account placeholder
+      //TODO: requires file upload action
+      else if (Peerio.Files.cache && Peerio.Files.cache.length == 0) {
+        nodes = <div className="content-intro">
+                  <img className="peerio-logo" src="media/img/Peerio_LogoLight.png"/>
+                  <h1 className="headline-lrg">Peerio File Storage!</h1>
+                  <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
+                  <Peerio.UI.Tappable element="div" className="btn-md">
+                    <i className="fa fa-cloud-upload"></i>&nbsp;Upload a file
+                  </Peerio.UI.Tappable>
+                  <img style={{maxWidth:"100px", display:"block", margin:"0 auto"}} src="media/img/home-bigfilesok.png"/>
+                </div>;
+      }
+      else {
+        nodes = Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
+      }
 
       return (
         <div className="content">

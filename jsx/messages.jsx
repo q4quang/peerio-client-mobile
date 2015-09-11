@@ -34,8 +34,9 @@
         ? this.renderNodes()
         : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
+      //New account placeholder
       //TODO: when new user has no contacts, add contact popup should appear instead of transitioning to contacts page.
-      if ( this.state.conversations && this.state.conversations.length  === 0 ) {
+      if ( Peerio.Messages.cache && Peerio.Messages.cache.length  === 0 ) {
         var intro_content = Peerio.user.contacts.length > 1
             ? <div>
                 <p>Peerio lets you send messages securely. Try it out by sending a message to one of your contacts.</p>

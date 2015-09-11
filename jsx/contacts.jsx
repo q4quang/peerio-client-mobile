@@ -43,6 +43,18 @@
           </Peerio.UI.Tappable>
         );
       }.bind(this));
+
+      if (Peerio.user.contacts.length === 1 ) {
+        var intro_content = <div className="content-intro">
+                              <h1 className="headline-lrg">Peerio Contacts</h1>
+                              <p>Add a contact to send your first message.Click the button below to get started.</p>
+                              <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.handleAddContact}>
+                                <i className="fa fa-pencil"></i>&nbsp;Add a contact
+                              </Peerio.UI.Tappable>
+                              <img src="media/img/contacts.png"/>
+                            </div>;
+        nodes.push(intro_content);
+      }
       //todo: by order, username
       return (
         <div className="content" id="contact-list">
