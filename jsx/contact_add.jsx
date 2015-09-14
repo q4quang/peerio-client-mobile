@@ -1,17 +1,24 @@
 (function () {
   'use strict';
-  Peerio.UI.ContactImport = React.createClass({
+  Peerio.UI.AddContact = React.createClass({
     mixins: [ReactRouter.Navigation],
     getInitialState: function(){
       return {searchString: ""};
     },
-    search: function(){
-      this.transitionTo('contact_import_search', {id:this.state.searchString});
+    goToSearch: function(){
+      this.transitionTo('add_contact_search', {id:this.state.searchString});
     },
     updateSearchString: function(e){
       this.setState({searchString: e.target.value});
     },
     render: function(){
+      var searchButton = (this.state.searchString.length === 0) ?
+          <div className="btn-md btn-disabled">
+            <i className="fa fa-search"></i>&nbsp; Search
+          </div>
+          :<Peerio.UI.Tappable element="div" className="btn-md btn-safe" onTap={this.goToSearch}>
+            <i className="fa fa-search"></i>&nbsp; Search
+           </Peerio.UI.Tappable>;
       return  (<div className="content-padded">
                 <h1 className="headline-lrg">Add Contact</h1>
                 <p>
@@ -19,21 +26,19 @@
                   person you want to add as a contact.
                 </p>
                 <input type="text" onChange={this.updateSearchString} className="text-input-primary" placeholder="email/username/phone" value={this.state.searchString}/>
-                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.search}>
-                  Search
-                </Peerio.UI.Tappable>
+                {searchButton}
                 <p className="line-across">or</p>
                 <p className="centered-text">
                   Import contacts from your phone.
                 </p>
-                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this, "contact_import_search", {id:"stuff"})}>
-                  Import
+                <Peerio.UI.Tappable element="div" className="btn-md">
+                  <i className="fa fa-mobile"></i>&nbsp; Import
                 </Peerio.UI.Tappable>
               </div>);
     }
   });
 
-  Peerio.UI.ContactImportSearch = React.createClass({
+  Peerio.UI.AddContactSearch = React.createClass({
     mixins: [ReactRouter.Navigation],
     getInitialState: function(){
       return {searchString: this.props.params.id, selectedUsers:[]};
@@ -53,7 +58,10 @@
       // this is mock contact search
       this.setState({returnData: false});
       var sampleResultData = _.shuffle([
-        {fullName:"test One", username:"test_one"}
+        {fullName:"test One", username:"test_one"},
+        {fullName:"test Two", username:"test_two"},
+        {fullName:"test Three", username:"test_three"},
+        {fullName:"test Four", username:"test_four"}
       ]);
       //no results
       //var sampleResultData = [];
@@ -98,7 +106,7 @@
         });
 
         inviteButton =  <Peerio.UI.Tappable element="div" className="btn-md btn-safe flex-col-1" onTap={this.handleAddContact}>
-                          Invite Selected Contacts
+                          Add Selected Contacts
                         </Peerio.UI.Tappable>;
 
       } else if (self.state.returnData && self.state.returnData.length === 0) {

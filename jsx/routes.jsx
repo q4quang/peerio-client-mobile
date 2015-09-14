@@ -24,8 +24,8 @@ Peerio.UI.Routes = (
       <Route name="account_settings" path="/app/settings/account" handler={Peerio.UI.AccountSettings} />
       <Route name="preference_settings" path="/app/settings/preferences" handler={Peerio.UI.PreferenceSettings} />
 
-      <Route name='contact_import' path="/app/contact_import" handler={Peerio.UI.ContactImport}/>
-      <Route name="contact_import_search" path="/app/contact_import/search/:id" handler={Peerio.UI.ContactImportSearch}/>
+      <Route name='add_contact' path="/app/add_contact" handler={Peerio.UI.AddContact}/>
+      <Route name="add_contact_search" path="/app/add_contact_search/:id" handler={Peerio.UI.AddContactSearch}/>
 
 
     </Route>
