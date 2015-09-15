@@ -30,7 +30,7 @@
   @include content-wrapper($top: $navbar-height + $tabbar-height, $bottom: $footer-height + $reply-height);
 }
 
-.content.without-tab-bar {
+.content.without-tab-bar, .without-tab-bar  {
   @include content-wrapper($top:  $navbar-height, $bottom: $footer-height);
 }
 

@@ -26,7 +26,7 @@ Peerio.UI.Routes = (
 
       <Route name='add_contact' path="/app/add_contact" handler={Peerio.UI.AddContact}/>
       <Route name="add_contact_search" path="/app/add_contact_search/:id" handler={Peerio.UI.AddContactSearch}/>
-
+      <Route name="add_contact_import" path="/app/add_contact_import" handler={Peerio.UI.AddContactImport}/>
 
     </Route>
   </Route>

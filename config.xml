@@ -89,4 +89,5 @@
     <plugin name="cordova-plugin-crosswalk-webview" spec="*"/>
     <plugin name="cordova-plugin-statusbar" spec="*"/>
     <plugin name="cordova-plugin-keyboard" spec="*"/>
+    <plugin name="cordova-plugin-contacts" spec="*"/>
 </widget>
