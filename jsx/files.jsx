@@ -15,34 +15,12 @@
       this.transitionTo('file', {id: id});
     },
     render: function () {
-      var H = Peerio.Helpers;
       var nodes = [];
       if (Peerio.Files.cache && Peerio.Files.cache.length > 0) {
         Peerio.Files.cache.forEach(function (item) {
-          // todo: preprocess somewhere else?
-          if (!item.icon) item.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(item.name) + (item.cached ? ' cached' : '');
-          if (!item.humanSize) item.humanSize = H.bytesToSize(item.size);
-          var downloadStateNode = null;
-          if (item.downloadState) {
-            var ds = item.downloadState;
-            downloadStateNode = (
-              <div className="download">{ds.state}&nbsp;
-                {ds.progress === null ? null : ds.progress + '%'}
-              </div>);
-          }
-          var timestamp = moment(item.timestamp).calendar();
           nodes.push(
-            <Peerio.UI.Tappable element="li" className="list-item" key={item.shortId} onTap={this.openFileView.bind(this, item.shortId)}>
-                <i className={item.icon}></i>
-                <div className="list-item-content">
-                  <div className="list-item-title">{item.name}</div>
-                  <div className="list-item-description">{item.humanSize}&nbsp;&bull;&nbsp;{timestamp}</div>
-                  {downloadStateNode}
-                </div>
-                <div className="list-item-forward">
-                  <i className="fa fa-chevron-right"></i>
-                </div>
-            </Peerio.UI.Tappable>
+            <Peerio.UI.FileItem className="list-item" item={item} onTap={this.openFileView.bind(this, item.shortId)}>
+            </Peerio.UI.FileItem>
           );
         }.bind(this));
       }
@@ -72,5 +50,70 @@
       );
     }
   });
+
+  Peerio.UI.FileItem = React.createClass({
+    getInitialState: function () {
+      return {swiped: false};
+    },
+    closeSwipe: function () {
+      this.setState({swiped: false});
+    },
+    openSwipe: function () {
+      this.setState({swiped: true});
+    },
+    destroyFileAfterAnimate: function () {
+      var fileId = this.props.item.shortId;
+      this.setState({destroyAnimation:true}, function(){
+        setTimeout( Peerio.Files.delete(fileId), 600);
+      });
+    },
+    showDestroyDialog: function () {
+      var destroyFileAfterAnimate = this.destroyFileAfterAnimate;
+      Peerio.Action.showConfirm({headline:"Remove this file?",
+        text:'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
+        onAccept: destroyFileAfterAnimate});
+    },
+    render: function(){
+      var H = Peerio.Helpers;
+      var item = this.props.item;
+      var cx = React.addons.classSet;
+      var classes = cx({
+        'list-item': true,
+        'swiped': this.state.swiped,
+        'list-item-animation-leave': this.state.destroyAnimation
+      });
+
+      if (!item.icon) item.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(item.name) + (item.cached ? ' cached' : '');
+      if (!item.humanSize) item.humanSize = H.bytesToSize(item.size);
+      var downloadStateNode = null;
+      if (item.downloadState) {
+        var ds = item.downloadState;
+        downloadStateNode = (
+            <div className="download">{ds.state}&nbsp;
+              {ds.progress === null ? null : ds.progress + '%'}
+            </div>);
+      }
+      var timestamp = moment(item.timestamp).calendar();
+
+      return  <Peerio.UI.Tappable element="li" className={classes} key={this.props.item.shortId} onTap={this.props.onTap}>
+                <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe} className="list-item-swipe-wrapper">
+                  <i className={this.props.item.icon}></i>
+                  <div className="list-item-content">
+                    <div className="list-item-title">{this.props.item.name}</div>
+                    <div className="list-item-description">{this.props.item.humanSize}&nbsp;&bull;&nbsp;{timestamp}</div>
+                    {downloadStateNode}
+                  </div>
+                  <div className="list-item-forward">
+                    <i className="fa fa-chevron-right"></i>
+                  </div>
+                  <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
+                    <i className="fa fa-trash-o"></i>
+                  </Peerio.UI.Tappable>
+                </Peerio.UI.Swiper>
+              </Peerio.UI.Tappable>;
+
+    }
+  });
+
 
 }());
