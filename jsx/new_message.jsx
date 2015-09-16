@@ -20,6 +20,9 @@
     //--- CUSTOM FN
     send: function () {
       //todo validation
+      if (!this.state.recipients.length) {
+        return Peerio.Action.showAlert({text:"Please select at least one contact to send your message to."});
+      }
       Peerio.Messages.sendMessage(this.state.recipients, this.refs.subject.getDOMNode().value,
         this.refs.message.getDOMNode().value, this.state.attachments);
 
