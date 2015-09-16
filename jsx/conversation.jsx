@@ -47,6 +47,7 @@
       // to update relative timestamps
       this.renderInterval = window.setInterval(this.forceUpdate.bind(this), 20000);
 
+      this.disableIfLastParticipant();
 
     },
     componentWillUnmount: function () {
@@ -88,6 +89,20 @@
     scrollToBottom: function () {
       if (!this.refs.content)return;
       TweenLite.to(this.refs.content.getDOMNode(), .5, {scrollTo: {y: 'max'}});
+    },
+    disableIfLastParticipant: function(){
+      /* If user is last participant in conversation, disable text entry */
+      /* unless the user started a conversation with themselves. */
+      var moreThanOneParticipant = this.state.conversation.allParticipants;
+      var noParticipantsLeft = _.without(this.state.conversation.participants, Peerio.user.username).length == 0;
+
+      if (moreThanOneParticipant.length > 1 && noParticipantsLeft) {
+        this.setState({textEntryDisabled: true, placeholderText: "There are no participants left in this conversation"});
+      } else if (moreThanOneParticipant.length == 1){
+        this.setState({ placeholderText: "You are the only person in this conversation."});
+      } else {
+        this.setState({placeholderText: "Type your message..."});
+      }
     },
     //----- RENDER
     render: function () {
@@ -131,8 +146,9 @@
             <div className="reply-ack">
               <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
             </div>
-            <textarea className="reply-input" rows="1" ref="reply" placeholder="Type your message here..." onKeyUp={this.resizeTextArea}
-                      onChange={this.resizeTextArea}></textarea>
+
+            <textarea className={this.state.textEntryDisabled ?  "reply-input placeholder-warning":"reply-input"} rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
+                     disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}></textarea>
 
             <div className="reply-attach">
               <i className="fa fa-paperclip icon-btn"

@@ -129,7 +129,7 @@
       var cx = React.addons.classSet;
       var classes = cx({
         'list-item': true,
-        'read': this.props.read,
+        'unread': this.props.unread,
         'swiped': this.state.swiped,
         'list-item-animation-leave': this.state.destroyAnimation
       });

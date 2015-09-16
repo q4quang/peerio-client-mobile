@@ -127,3 +127,8 @@ $text-input-fontsize: 1rem;
 .checkbox-label{
   color:inherit;
 }
+
+.placeholder-warning::-webkit-input-placeholder {
+  color: #BD8B8B;
+  font-weight: bold;
+}
