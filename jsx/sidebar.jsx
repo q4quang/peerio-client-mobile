@@ -165,8 +165,7 @@
                   className="fa fa-power-off"></i> Sign Out
                 </button>
                 <div className="sidebar-footer-text">
-                  <span className="feedback">Send Feedback</span>
-
+                  <a href="mailto:feedback@peerio.com" className="feedback">Send Feedback</a>
                   <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
                 </div>
               </div>
