@@ -5,7 +5,8 @@
     mixins:[ReactRouter.Navigation],
     //--- REACT EVENTS
     getInitialState: function () {
-      return {recipients: [], attachments: []};
+      var recipients = this.props.params.id ? [this.props.params.id] : [];
+      return {recipients: recipients, attachments: []};
     },
     componentDidMount: function () {
       this.subscriptions = [

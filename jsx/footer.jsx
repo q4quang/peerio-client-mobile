@@ -14,6 +14,7 @@
         messages: {name: 'Compose message', action: this.transitionTo.bind(this, 'new_message'), icon: "pencil"},
         //files: {name: 'Upload file', action: this.transitionTo.bind(this, '')},
         contacts: {name: 'Add contact', icon: "user-plus"},
+        contact: {name: 'Send Message', icon: "pencil"},
         new_message: {name: 'Send', icon: "paper-plane-o"},
         conversation: {name: 'Send', icon: "paper-plane-o"}
       };

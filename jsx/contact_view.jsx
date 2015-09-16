@@ -6,8 +6,13 @@
     mixins: [ReactRouter.Navigation],
     componentWillMount: function () {
       this.contact = Peerio.user.contacts[this.props.params.id];
-      this.subscriptions = [Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this,null))];
-     },
+      this.subscriptions = [
+        Peerio.Dispatcher.onBigGreenButton(this.startConversationWithContact),
+        Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this,null))];
+    },
+    startConversationWithContact: function(){
+     this.transitionTo('new_message', {id: this.contact.username});
+    },
     componentWillUnmount: function(){
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
     },
