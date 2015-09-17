@@ -78,3 +78,14 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.peerio-loader{
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 30px auto;
+  background-image: url(../media/img/peerio-loader-transparent.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}

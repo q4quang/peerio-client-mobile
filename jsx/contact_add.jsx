@@ -59,7 +59,9 @@
         {fullName:"test One", username:"test_one"},
         {fullName:"test Two", username:"test_two"},
         {fullName:"test Three", username:"test_three"},
-        {fullName:"test Four", username:"test_four"}
+        {fullName:"test Four", username:"test_four"},
+        {fullName:"test Five", username:"test_five"},
+        {fullName:"test Six", username:"test_six"}
       ]);
       //no results
       //var sampleResultData = [];
@@ -209,12 +211,17 @@
               <ResultTemplate isSelected={isSelected} title={contact.name.formatted} description={email} avatar={contact.avatar} />
             </Peerio.UI.Tappable>);
       });
-      return  <div className="content-padded without-tab-bar">
+      return  <div className="content-padded without-tab-bar flex-col">
                 <h1 className="headline-lrg">Contact Import</h1>
                 <p>Select the contacts you wish to import. Contacts who have a Peerio account will be sent a contact request.</p>
                 <p>Contacts who don't have a Peerio will be sent an invitation email instead.</p>
-                <div className="list-view">
+                <div className="list-view flex-col-0" style={{overflowY:'scroll'}}>
                   {results}
+                </div>
+                <div className="flex-col-0">
+                  <Peerio.UI.Tappable element="div" className="btn-md btn-safe flex-col-1">
+                    Add Selected Contacts
+                  </Peerio.UI.Tappable>
                 </div>
               </div>;
     }
