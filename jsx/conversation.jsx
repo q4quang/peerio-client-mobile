@@ -88,7 +88,13 @@
     },
     scrollToBottom: function () {
       if (!this.refs.content)return;
-      TweenLite.to(this.refs.content.getDOMNode(), .5, {scrollTo: {y: 'max'}});
+      //bug #153 https://github.com/PeerioTechnologies/peerio-client-mobile/issues/153
+      //on android, webview doesn't resize until after focus,
+      //so we set a delay and hope the webview is resized by the time we scroll.
+      var contentNode = this.refs.content.getDOMNode();
+      setTimeout(function(){
+        TweenLite.to(contentNode, .5, {scrollTo: {y: contentNode.scrollHeight}});
+      }, 100);
     },
     disableIfLastParticipant: function(){
       /* If user is last participant in conversation, disable text entry */
@@ -148,7 +154,7 @@
             </div>
 
             <textarea className={this.state.textEntryDisabled ?  "reply-input placeholder-warning":"reply-input"} rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
-                     disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}></textarea>
+                     disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea} onFocus={this.scrollToBottom}></textarea>
 
             <div className="reply-attach">
               <i className="fa fa-paperclip icon-btn"
