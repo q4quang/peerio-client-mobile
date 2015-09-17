@@ -25,15 +25,15 @@
       var greenButton = this.mainButtonActions[this.getRouteName()];
       if (greenButton)
         greenButton = (
-          <div className="accept-button" onTouchEnd={greenButton.action || Peerio.Action.bigGreenButton}>
+          <Peerio.UI.Tappable element="div" className="accept-button" onTap={greenButton.action || Peerio.Action.bigGreenButton}>
             <i className={"fa fa-"+greenButton.icon}/>&nbsp;{greenButton.name}
-          </div>);
+          </Peerio.UI.Tappable>);
 
       return (
         <div id="footer">
-          <div id="global-back" className={this.isAppRoot() ? 'hide' : ''} onTouchEnd={this.goBack}>
+          <Peerio.UI.Tappable element="div" id="global-back" className={this.isAppRoot() ? 'hide' : ''} onTap={this.goBack}>
             <i className="fa fa-chevron-left"></i>&nbsp;back
-          </div>
+          </Peerio.UI.Tappable>
           <div className="toolbar-fill"></div>
           {greenButton}
         </div>

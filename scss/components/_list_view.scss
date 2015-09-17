@@ -15,7 +15,7 @@
     color: #444444;
     background-color: #F3F3F3;
     position: relative;
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out, background-color 0.1s ease-in;
     &.unread{
       background-color: #fff;
       border-left: 5px solid #5EA767;
@@ -23,7 +23,9 @@
     &.swiped {
       transform: translateX(-50px);
     }
-
+    &.on-touchstart{
+      background-color:#E4E4E4;
+    }
     .list-item-content{
       flex-grow: 1;
       overflow: hidden;

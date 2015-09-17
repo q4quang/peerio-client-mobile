@@ -17,7 +17,13 @@
     },
     handleTouchEnd: function (e) {
       e.stopPropagation();
-      this.setState({tapState:""})
+
+      //setting 500ms delay for CSS 'button-ripple' animation
+      var self = this;
+      setTimeout(function(){
+        self.setState({tapState:""});
+      }, 500);
+
       if ((Date.now() - this.touchStartStamp) > this.maxDelay) return;
       var touchEndX = e.changedTouches[0].clientX;
       var touchEndY = e.changedTouches[0].clientY;
@@ -27,13 +33,9 @@
     },
     render: function(){
       var tag = this.props.element || "span";
-      var reactElement = React.createElement(tag,
-                          { onTouchStart:this.handleTouchStart,
-                            onTouchEnd:this.handleTouchEnd,
-                            className: this.props.className + " "+this.state.tapState,
-                            key: this.props.key
-                          }, this.props.children);
-
+      var props = _.assign({onTouchStart:this.handleTouchStart,onTouchEnd:this.handleTouchEnd}, this.props);
+      props.className = this.props.className + " "+this.state.tapState;
+      var reactElement = React.createElement(tag,props, this.props.children);
       return reactElement;
     }
 

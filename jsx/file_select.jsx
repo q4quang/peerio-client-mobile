@@ -61,8 +61,8 @@
             {files}
           </ul>
           <div className="buttons col-12">
-            <button type="button" className="btn-lrg" onTouchStart={this.accept}>OK</button>
-            <button type="button" className="btn-lrg btn-dark" onTouchStart={this.props.onClose}>Cancel</button>
+            <Peerio.UI.Tappable element="div" className="btn-lrg" onTouchStart={this.accept}>OK</Peerio.UI.Tappable>
+            <Peerio.UI.Tappable element="div" className="btn-lrg btn-dark" onTouchStart={this.props.onClose}>Cancel</Peerio.UI.Tappable>
           </div>
         </div>
       );
