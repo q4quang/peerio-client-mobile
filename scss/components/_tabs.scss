@@ -11,16 +11,40 @@
   height: $tabbar-height;
   color: white;
   background-color: $p-blue-light-5;
-  font-size: 13px;
+  font-size: 11px;
   z-index: $z-tabbar;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   .tab {
     display: table-cell;
     text-align: center;
     padding-top: 8px;
     width: 33.33333%;
+    position: relative;
+    line-height: 1.8em;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     &.active {
       color: #fff;
-      background: $p-blue-light-15 linear-gradient(to bottom, #278fda 0%, #81bde5 150%)
+      background-color: #4CA7E8;
+    //  background: $p-blue-light-15 linear-gradient(to bottom, #278fda 0%, #81bde5 150%)
+      &:after{
+        content: " ";
+        bottom: -18px;
+        left: 50%;
+        border: solid rgba(0, 0, 0, 0);
+        height: 0;
+        width: 0;
+        position: absolute;
+        border-color: rgba(0, 0, 0, 0);
+        border-bottom-color:#4CA7E8;
+        border-width: 10px;
+        transform: scale(1, 0.8) translate(-50%, 0%) rotate(180deg);
+      }
+    }
+    .tab-icon{
+      display: inline-block;
+      font-size: 1.3rem;
+      margin-right: 0.2em;
+      vertical-align: middle;
     }
     .badge {
       position: relative;
