@@ -4,7 +4,7 @@
   Peerio.UI.Messages = React.createClass({
     mixins: [ReactRouter.Navigation],
     getInitialState: function () {
-      return {};
+      return {currentYear: new Date().getFullYear()};
     },
     componentWillMount: function () {
 
@@ -19,6 +19,7 @@
           }.bind(this)),
           Peerio.Dispatcher.onConversationsUpdated(this.forceUpdate.bind(this, null))
         ];
+      //used to format timestamp
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
@@ -92,7 +93,7 @@
                                   unread={conv.isModified} fullName={conv.displayName}
                                   fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
                                   messageCount={conv.messageCount} subject={conv.original.subject}
-                                  onSwipe={this.toggleSwipe} swiped={this.state.swiped}
+                                  onSwipe={this.toggleSwipe} swiped={this.state.swiped} currentYear={this.state.currentYear}
                                   destroyConversation={this.destroyConversation.bind(this, conv.id)}/>
         );
       }.bind(this));
@@ -154,10 +155,10 @@
 
             <div className="list-item-content text-right">
               <div className="list-item-description">
-                {this.props.timeStamp.format('MMM Do, YYYY')}
+                {this.props.currentYear == this.props.timeStamp.year() ? this.props.timeStamp.format('MMM D') : this.props.timeStamp.format('MMM D, YYYY')}
               </div>
               <div className="list-item-description">
-                {this.props.timeStamp.format('HH:mm:ss')}
+                {this.props.timeStamp.format('h:mm a')}
               </div>
             </div>
 
