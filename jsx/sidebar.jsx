@@ -107,7 +107,7 @@
       if (Peerio)
         return (
           <div>
-            <div className={className + " sidebar"}>
+            <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + " sidebar"}>
 
               <div className="flex-0 centered-text sidebar-header">
                 <Peerio.UI.Avatar size="big" username={user.username}/>
@@ -169,7 +169,7 @@
                 </div>
               </div>
 
-            </div>
+            </Peerio.UI.Swiper>
 
             <div id="sidebar-dimmer" ref="dimmer" className={className} onTouchStart={this.toggle}></div>
           </div>
