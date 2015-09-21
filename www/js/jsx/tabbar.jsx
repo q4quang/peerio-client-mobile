@@ -36,6 +36,15 @@
    * UI component for 1 tab in tabbar
    */
   Peerio.UI.TabBarButton = React.createClass({
+    onTabTap: function(){
+      //scroll to top on active tab tap.
+      if (this.props.active) {
+        var contentNode = _.first(document.querySelectorAll('.content'));
+        TweenLite.to(contentNode, .5, {scrollTo: {y: 0}});
+      } else {
+        this.props.onActivate();
+      }
+    },
     render: function () {
       var tabClasses = 'tab';
       if (this.props.active) tabClasses += ' active';
@@ -44,11 +53,11 @@
       if (!this.props.showBadge) badgeClasses += ' hide';
 
       return (
-        <div ref="tab" className={tabClasses} onTouchStart={this.props.onActivate}>
+        <Peerio.UI.Tappable element="div" ref="tab" className={tabClasses} onTap={this.onTabTap}>
           <i className={'tab-icon fa fa-'+this.props.icon}></i>
           {this.props.text}
           <i className={badgeClasses}></i>
-        </div>
+        </Peerio.UI.Tappable>
       );
 
     }

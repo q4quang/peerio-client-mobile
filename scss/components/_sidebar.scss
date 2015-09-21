@@ -15,6 +15,17 @@
   font-size: 1rem;
   overflow-x: hidden;
   overflow-y: auto;
+  .sidebar-header{
+    @media screen and ( max-height: 480px ){
+      width: 150px;
+      text-align: left;
+      margin: 0 auto;
+      .avatar{
+        float: left;
+        margin-right: 10px;
+      }
+    }
+  }
   .app-version{
     position: static;
     font-size: 70%;
@@ -29,8 +40,6 @@
     flex-grow: 0;
   }
   .avatar{
-    width: 45px;
-    height: 45px;
     margin-bottom: 0.5rem;
   }
 
