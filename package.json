@@ -14,18 +14,19 @@
   },
   "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
   "devDependencies": {
-    "gulp-autoprefixer": "2.x",
-    "gulp-css-globbing": "0.x",
-    "gulp-sourcemaps": "*",
-    "minimist": "1.x",
+    "browser-sync": "*",
     "gulp": "*",
+    "gulp-autoprefixer": "2.x",
+    "gulp-babel": "^5.2.1",
+    "gulp-css-globbing": "0.x",
     "gulp-react": "*",
     "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
     "gulp-xml-editor": "*",
     "inquirer": "0.x",
+    "lodash": "*",
+    "minimist": "1.x",
     "semver": "4.x",
-    "shelljs": "0.x",
-    "browser-sync": "*",
-    "lodash": "*"
+    "shelljs": "0.x"
   }
 }

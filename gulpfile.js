@@ -14,11 +14,25 @@ var minimist = require('minimist');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var globbing = require('gulp-css-globbing');
+var babel = require('gulp-babel');
+
+var babelOptions = {
+  compact: false,
+  blacklist: ['strict', // because it assumes no global 'this'
+    'flow', //not using atm
+    'reactCompat', // pre react 0.12 support, not needed
+    'regenerator', // too raw to use anyway
+    'jscript' // we don't run in IE
+  ],
+  ast: false,
+  modules: 'ignore',
+  ignore: 'bower_components/**/*'
+};
 
 // extracting --cli --parameters
 var knownOptions = {
   boolean: 'api',
-  default: {  }
+  default: {}
 };
 var supportedBrowsers = ['ios >= 3.2', 'chrome >= 37', 'android >= 4.2'];
 
@@ -31,16 +45,22 @@ var paths = {
   css_src: ['www/css/**/*.css'],
   css_dst: './www/css/',
   html: ['www/index.html'],
-  js: ['www/js/**/*.js'],
-  jsx_src: 'jsx/*.jsx',
-  jsx_dst: 'www/js/compiled_jsx',
+  js_compiled: ['www/js/compiled/**/*.js'],
+  jsx_src: 'www/js/jsx/**/*.jsx',
+  jsx_dst: 'www/js/compiled/jsx',
+  js_src: ['!www/js/compiled/**/*', 'www/js/**/*.js'],
+  js_dst: 'www/js/compiled',
   config_xml: 'config.xml',
   peerio_client_api: 'bower_components/peerio-client-api/dist/*.js'
 };
 /*eslint-enable*/
 
 gulp.task('default', ['help']);
-gulp.task('compile', ['sass', 'jsx']);
+gulp.task('compile', ['sass', 'jsx'], function () {
+  gulp.src(paths.js_src)
+    .pipe(babel(babelOptions))
+    .pipe(gulp.dest(paths.js_dst));
+});
 
 gulp.task('help', function () {
   console.log();
@@ -86,7 +106,7 @@ gulp.task('sass', function (done) {
 gulp.task('jsx', function () {
   console.log('compiling jsx files.');
   return gulp.src(paths.jsx_src)
-    .pipe(react())
+    .pipe(babel(babelOptions))
     .pipe(gulp.dest(paths.jsx_dst));
 });
 
@@ -97,9 +117,9 @@ gulp.task('jsx', function () {
 gulp.task('serve', ['compile'], function () {
 
   // watching symlinked peerio-client-api package
-  if(options.api){
+  if (options.api) {
     // watch triggers for every file, so we debounce it
-    var copyApi = _.debounce(function(){
+    var copyApi = _.debounce(function () {
       sh.exec('bower-installer');
     }, 1500);
 
@@ -112,7 +132,7 @@ gulp.task('serve', ['compile'], function () {
   // starting http server with watcher
   browserSync.init({
     notify: false,
-    files: [paths.html, paths.css_src, paths.js],
+    files: [paths.html, paths.css_src, paths.js_compiled],
     logPrefix: 'SRV',
     logFileChanges: true,
     logConnections: true,
@@ -133,7 +153,6 @@ gulp.task('serve', ['compile'], function () {
   gulp.watch(paths.jsx_src, ['jsx']);
 
 });
-
 
 gulp.task('run-android', ['compile'], function () {
   sh.exec('cordova run android');
