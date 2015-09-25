@@ -11,6 +11,7 @@ Peerio.UI.Routes = (
         <Route name='messages' handler={Peerio.UI.Messages}/>
         <Route name='files' handler={Peerio.UI.Files}/>
         <Route name='contacts' handler={Peerio.UI.Contacts}/>
+
       </Route>
 
       <Route name="conversation" path="/app/conversation/:id" handler={Peerio.UI.Conversation}/>
@@ -22,6 +23,10 @@ Peerio.UI.Routes = (
 
       <Route name="account_settings" path="/app/settings/account" handler={Peerio.UI.AccountSettings} />
       <Route name="preference_settings" path="/app/settings/preferences" handler={Peerio.UI.PreferenceSettings} />
+
+      <Route name='add_contact' path="/app/add_contact" handler={Peerio.UI.AddContact}/>
+      <Route name="add_contact_search" path="/app/add_contact_search/:id" handler={Peerio.UI.AddContactSearch}/>
+      <Route name="add_contact_import" path="/app/add_contact_import" handler={Peerio.UI.AddContactImport}/>
 
     </Route>
   </Route>

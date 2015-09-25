@@ -87,6 +87,7 @@
     <plugin name="cordova-plugin-crosswalk-webview" spec="*" />
     <plugin name="cordova-plugin-statusbar" spec="*" />
     <plugin name="cordova-plugin-keyboard" spec="*" />
+    <plugin name="cordova-plugin-contacts" spec="*"/>
     <preference name="xwalkVersion" value="14+" />
     <plugin name="com.telerik.plugins.wkwebview" spec="~0.6.0" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />

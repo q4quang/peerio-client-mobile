@@ -61,7 +61,7 @@ Footer Buttons                                       | Button Class/ID
 }
 
 
-button:disabled{
+button:disabled, .btn-disabled{
   background-color: rgba(103, 103, 103, 0.69);
   color: #353535;
 }
