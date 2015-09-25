@@ -4,7 +4,6 @@
 // combined with .modal class, this is a top-level
 // full-screen wrapper for login page
 
-
 .app-version{
   color: #73B3E0;
   position: absolute;
@@ -34,6 +33,6 @@
 
 #login-process-state{
   text-align: center;
-  color: $p-blue-light-40;
+  color: color(p-blue-light-40);
   height:15px;
 }

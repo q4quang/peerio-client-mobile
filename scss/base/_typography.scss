@@ -1,3 +1,38 @@
+/*doc
+---
+title: Typography
+name: Typography
+category: Base CSS
+---
+
+These are styles for text elements. They can be applied to any element.
+
+Text Style                                                                  | class name
+----------------------------------------------------------------------------|-----------
+<span class="headline-lrg">Large Headline</span>                            | `headline-lrg`
+<span class="headline">Default Headline</span>                              | `headline`
+<span class="headline-md">Medium headline</span>                            | `headline-md`
+<span class="headline-sm">Small headline</span>                             | `headline-sm`
+<span class="subhead">subhead</span>                                        | `subhead`
+<span class="subhead-inline">inline subhead</span>                          | `subhead-inline`
+<span class="txt-lrg">Large text</span>                                     | `txt-lrg`
+<span class="txt-sm">small text</span>                                      | `txt-sm`
+<span class="info-label">info label</div>                                   | `info-label`
+<span class="info-small"><i class="fa fa-user"></i>label with icon </span>  | `info-small`
+<div class="text-mono">monospace text</div>                                 | `text-mono`
+<div class="text-crossout">crossed-out text</div>                           | `text-crossout`
+<div class="centered-text">centered text</div>                              | `centered-text`
+
+```html_example
+<h1 class="headline-lrg">Headline with a subhead</h1>
+<h2 class="subhead">subhead</h2>
+
+<h1 class="headline-md">Headline with inline-subhead</h1>
+<h1 class="subhead-inline">Inline subheads are very small</h1>
+```
+
+*/
+
 .headline{
   display: block;
   margin: 0;
@@ -9,7 +44,7 @@
 
 .headline-sm{
   @extend .headline;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 0.5em;
 }
 

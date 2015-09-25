@@ -7,6 +7,32 @@ category: Layout
 
 This is a basic 12 column percentage grid, useful for putting things next to each other.
 The basic column rule applies: columns must add up to 12 to make row.
+
+```html_example
+<div class="doc-cols">
+  <div class="col-12">
+    <div class="col-12">col-12</div>
+    <div class="col-6">col-6</div><div class="col-6">col-6</div>
+    <div class="col-4">col-4</div><div class="col-4">col-4</div><div class="col-4">col-4</div>
+    <div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div>
+  </div>
+</div>
+```
+
+`display:inline-block;` is used to position columns next to each other. The only reason this is viable is because
+JSX renders components without whitespace between them.
+
+This works
+
+```
+<div class="col-6"></div><div class="col-6"></div>
+```
+
+This doesn't
+
+```
+<div class="col-6"></div> <div class="col-6"></div>
+```
 */
 
 $grid-columns:12;

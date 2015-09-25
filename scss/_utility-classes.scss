@@ -1,3 +1,77 @@
+/*doc
+---
+title: Colors
+name: colors
+category: Utility
+---
+
+Colors are placed in a SASS map object called `$colors`. The colors can be accessed with the `color` function like so:
+
+```
+.sidebar{
+  background-color: color(p-blue-light-40);
+}
+```
+
+<div class="doc-swatches">
+  <h3>Light Blue</h3>
+  <div class="p-blue-light-50-bg">p-blue-light-50</div>
+  <div class="p-blue-light-40-bg">p-blue-light-40</div>
+  <div class="p-blue-light-35-bg">p-blue-light-35</div>
+  <div class="p-blue-light-30-bg">p-blue-light-30</div>
+  <div class="p-blue-light-25-bg">p-blue-light-25</div>
+  <div class="p-blue-light-20-bg">p-blue-light-20</div>
+  <div class="p-blue-light-15-bg">p-blue-light-15</div>
+  <div class="p-blue-light-10-bg">p-blue-light-10</div>
+  <div class="p-blue-light-5-bg">p-blue-light-5</div>
+</div>
+
+<div class="doc-swatches">
+  <h3>Dark Blue</h3>
+  <div class="p-blue-dark-5-bg">p-blue-light-5</div>
+  <div class="p-blue-dark-10-bg">p-blue-dark-10</div>
+  <div class="p-blue-dark-15-bg">p-blue-dark-15</div>
+  <div class="p-blue-dark-20-bg">p-blue-dark-20</div>
+  <div class="p-blue-dark-25-bg">p-blue-dark-25</div>
+  <div class="p-blue-dark-30-bg">p-blue-dark-30</div>
+  <div class="p-blue-darker-bg">p-blue-darker</div>
+</div>
+
+<div class="doc-swatches">
+  <h3>Light Green</h3>
+    <div class="p-green-light-25-bg">p-green-light-25</div>
+    <div class="p-green-light-20-bg">p-green-light-20</div>
+    <div class="p-green-light-15-bg">p-green-light-15</div>
+    <div class="p-green-light-10-bg">p-green-light-10</div>
+    <div class="p-green-light-5-bg"> p-green-light-5</div>
+</div>
+
+
+<div class="doc-swatches">
+  <h3>Dark Green</h3>
+  <div class="p-green-dark-5-bg">p-green-dark-5</div>
+  <div class="p-green-dark-10-bg">p-green-dark-10</div>
+  <div class="p-green-dark-15-bg">p-green-dark-15</div>
+  <div class="p-green-dark-20-bg">p-green-dark-20</div>
+  <div class="p-green-dark-25-bg">p-green-dark-25</div>
+  <div class="p-green-dark-30-bg">p-green-dark-30</div>
+  <div class="p-green-dark-35-bg">p-green-dark-35</div>
+  <div class="p-green-dark-40-bg">p-green-dark-40</div>
+</div>
+
+
+*/
+
+//color class-name helpers
+@each $color, $value in $colors {
+  .#{$color} {
+    color: $value;
+  }
+  .#{$color}-bg {
+    background-color: $value;
+  }
+}
+
 .dim-background {
   background: black;
   opacity: 0.8;

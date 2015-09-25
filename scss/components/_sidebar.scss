@@ -1,6 +1,32 @@
-/**
- * Sliding sidebar with menu
- */
+/*doc
+---
+title: Sidebar
+name: sidebar
+category: Components
+---
+
+The sidebar is a view with a dark background and white text that has an `.open` and closed state.
+Most elements inside the sidebar are base styles, and are not styled inside the `.sidebar` component.
+
+Click the sidebar in the example to toggle the `.open` state.
+
+```html_example
+<div style="height:150px;">
+<div class="sidebar open" onClick="$(this).toggleClass('open');">
+  <div class="sidebar-header">
+    <span class="headline">Headline in sidebar</span>
+  </div>
+  <span class="subhead">subhead in sidebar</span>
+  <span class="icon-with-label flex-col-1">
+    <i class="fa fa-pencil circle"></i>
+    <span class="icon-label">Icons in sidebar</span>
+  </span>
+</div>
+<div id="sidebar-dimmer" class="open"></div>
+</div>
+```
+
+*/
 .sidebar {
   position: absolute;
   z-index: $z-sidebar;
@@ -9,7 +35,7 @@
   width: 80%;
   top: $navbar-height;
   bottom: 0;
-  background-color: $sidebar-bg-color;
+  background-color: color(sidebar-bg-color);
   padding: 20px 10px;
   color: white;
   font-size: 1rem;

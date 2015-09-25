@@ -1,4 +1,19 @@
+/*doc
+---
+title: Content Wrappers
+name: content_wrappers
+category: Layout
+---
 
+Content wrappers are specially positioned divs designed to work on mobile webviews.
+They are absolutely positioned and have values for all `top` `bottom` `left` `right` properties.
+This ensures they are always positioned at the maximum width and height of the viewport.
+
+Content wrappers inherit from the `content-wrapper` mixin.
+
+Content wrappers have modifier classes for special scenarios, like `.content-wrapper.with-reply-box` and
+`content-wrapper.without-tab-bar`.
+*/
 
 @mixin content-wrapper($top, $bottom){
   position: absolute;

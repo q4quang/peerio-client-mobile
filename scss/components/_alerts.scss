@@ -1,3 +1,88 @@
+/*doc
+---
+title: Alerts
+name: alerts
+category: Components
+---
+
+Alert, confirm and prompt dialog boxes follow the same class pattern:
+
+```
+.alert
+  .alert-content
+    .alert-content-text
+    .alert-content-btns
+```
+
+The only difference between the three are whether they have one or two button and the contents of `.alert-content-text`.
+
+```html_example
+<!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 2rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="alert-content-text">
+        Alert modal
+      </div>
+      <div class="alert-content-btns">
+        <div class="btn-md">Alert Content Button</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+
+```html_example
+<!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 2rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="headline-lrg">
+        Confirm modal with headline
+      </div>
+      <div class="alert-content-text">
+        Confirm modal text
+      </div>
+      <div class="alert-content-btns">
+        <div class="col-6">
+          <div class="btn-md btn-danger">Confirm cancel button</div>
+        </div><div class="col-6">
+          <div class="btn-md btn-safe">Confirm accept button</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+
+```html_example
+<!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 1rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="headline-lrg">
+        Prompt modal with headline
+      </div>
+      <div class="alert-content-text">
+        Prompt with headline and some text
+        <input type="text" class="text-input centered-text" autoCorrect="off" autoCapitalize="off" spellCheck="false" value="" placeholder="prompt input placeholder"/>
+      </div>
+      <div class="alert-content-btns">
+        <div class="col-6">
+          <div class="btn-md btn-danger">Confirm cancel button</div>
+        </div><div class="col-6">
+          <div class="btn-md btn-safe">Confirm accept button</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+*/
+
 .alert {
   z-index: $z-alert;
   display: flex;

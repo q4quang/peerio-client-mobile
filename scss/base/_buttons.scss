@@ -1,3 +1,41 @@
+/*doc
+---
+title: Buttons
+name: button
+category: Base CSS
+---
+
+Button styles can be applied to any element. Buttons are full width by default,
+but can be made smaller using layout styles. Button styles can also be combined.
+
+```html_example
+<div class="col-5">
+  <div class="btn-md btn-danger">danger</div>
+</div>
+<div class="col-6">
+  <div class="btn-md btn-safe">safe</div>
+</div>
+```
+
+Button                                            | Button Class
+------------------------------------------------- | -----------------
+<div class="btn-lrg">large button</div>                  | `btn-lrg`
+<div class="btn-md">medium button</div>                  | `btn-md`
+<div class="btn-md btn-dark">dark button</div>           | `btn-md btn-dark`
+<div class="btn-md btn-safe">safe button</div>           | `btn-md btn-safe`
+<div class="btn-md btn-danger">danger button</div>       | `btn-md btn-danger`
+<div class="btn-sm">small button</div>                   | `btn-sm`
+<div class="btn">default button</div>                    | `btn`
+<div class="btn-subtle">subtle button</div>              | `btn-subtle`
+
+
+Footer Buttons                                       | Button Class/ID
+---------------------------------------------------- | -----------------
+<div id="global-back">Global Back Button</div>       | `#global-back`
+<div class="accept-button">Global Action Button</div>| `.accept-button`
+*/
+
+
 @mixin button-ripple(){
   position: relative;
   &:after{
@@ -15,7 +53,7 @@
     background-repeat: no-repeat;
   }
 
-  &.on-touchstart:after{
+  &.on-touchstart:after, &:hover:after{
     background-size: 1000%;
     transition: background-size 0.5s ease-in, opacity 0.5s ease-in 0.22s;
     opacity: 0;
@@ -51,16 +89,22 @@ button:disabled{
   color: inherit;
 }
 
-.btn-sm{
-  @extend .btn;
-  font-size: 0.9rem;
-}
-
 .btn-lrg{
   @extend .btn;
   font-size:  1.6rem;
   width: 100%;
   font-weight: 100;
+}
+
+.btn-md{
+  @extend .btn;
+  font-size: 1em;
+  padding: 0.7em;
+}
+
+.btn-sm{
+  @extend .btn;
+  font-size: 0.9rem;
 }
 
 .btn-lrg-back{
@@ -72,11 +116,6 @@ button:disabled{
     left: -5px;
   }
 }
-.btn-md{
-  @extend .btn;
-  font-size: 1em;
-  padding: 0.7em;
-}
 
 .btn-dark{
   @extend .btn;
@@ -85,7 +124,7 @@ button:disabled{
 
 .btn-safe {
   @extend .btn;
-  background-color: $p-green;
+  background-color: color(p-green);
   color: white;
 }
 

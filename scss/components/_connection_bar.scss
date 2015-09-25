@@ -8,7 +8,7 @@
   animation: connecting 1s ease 0s infinite alternate;
   &.connected{
     //height:1px;
-    background-color: $p-green;
+    background-color: color(p-green);
     animation: none;
   }
   &.loading{

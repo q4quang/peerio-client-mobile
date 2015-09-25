@@ -1,4 +1,26 @@
-// Conversation styles
+/*doc
+---
+title: Conversation Style
+name: conversation
+category: Components
+---
+
+```html_example
+<div class='conversation' style="margin-top:0;padding-bottom:0;">
+  <div class="item">
+    <div class="timestamp">Today</div>
+    <div class="head"><div class="avatar"></div>username</div>
+    <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</div>
+  </div>
+  <div class="item self">
+    <div class="head">current user</div>
+    <div class="body">Duis aute irure dolor in reprehenderit in voluptate velitdatat proident.</div>
+  </div>
+</div>
+```
+
+*/
+
 $edge-distance: 0;
 $msg-distance: 15px;
 $big-side-distance: 34px;
@@ -9,7 +31,7 @@ $avatar-size: 29px;
 .conversation {
   margin-top: 65px;
   padding-bottom: 80px;
-  color: $p-blue-darker;
+  color: color(p-blue-darker);
   user-select: initial;
   .item {
     width: 100%;
@@ -157,7 +179,7 @@ $avatar-size: 29px;
     bottom: 0;
     text-align: right;
     padding-right: 5px;
-    background-color: $p-blue-darker;
+    background-color: color(p-blue-darker);
   }
   .subject {
     overflow: auto;
@@ -168,7 +190,7 @@ $avatar-size: 29px;
     right: 75px;
     white-space: nowrap;
     padding-left: 5px;
-    background-color: $p-blue-darker;
+    background-color: color(p-blue-darker);
   }
   .info{
     position: absolute;
@@ -179,7 +201,7 @@ $avatar-size: 29px;
     width: 35px;
     vertical-align: middle;
     line-height: 30px;
-    background-color: $p-blue-darker;
+    background-color: color(p-blue-darker);
     text-align: center;
   }
   .participants {
@@ -188,7 +210,7 @@ $avatar-size: 29px;
     max-height: 200px;
     width: 100%;
     overflow: auto;
-    background-color: $p-blue-darker;
+    background-color: color(p-blue-darker);
     margin-top: 30px;
     padding-bottom: 5px;
     &.open {
@@ -230,7 +252,7 @@ $avatar-size: 29px;
 }
 .reply-ack{
   .fa{
-    background-color: $p-blue-light-10;
+    background-color: color(p-blue-light-10);
     border-radius: 50%;
     height: 20px;
     width:20px;

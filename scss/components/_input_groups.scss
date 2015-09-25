@@ -1,12 +1,40 @@
+/*doc
+---
+title: Input Groups
+name: input_groups
+category: Components
+---
 
+An input group is a combination of an input and a label. Both `.text-input` and `.text-input-label` are base styles,
+however when placed inside a `.text-input-group` their behaviour is modified.
+
+The **pop-up label** effect can be achieved with pure css by adding a 'required' attribute to the corresponding input,
+however this could have adverse effects in some cases, so it can also be acheived by added the `.up` class to the label
+with javascript. This effect only exists when both `.text-input` and `.text-input-label` are inside a `.text-input-group`.
+
+```html_example
+<div class="text-input-group col-6">
+  <input type="text" class="text-input" required id="text-input" />
+  <label class="text-input-label" for="text-input">Text Input Group Label</label>
+</div>
+<div class="text-input-group col-5">
+  <select class="select-input" required id="text-input-2">
+    <option>Select Option</option>
+  </select>
+  <label class="text-input-label" for="text-input-2">Select Input Group Label</label>
+</div>
+
+```
+
+*/
 .text-input-group{
   position: relative;
   margin: 0.5rem 0;
   font-size: $text-input-fontsize;
   font-weight: 200;
 
-  .select-input:focus + .text-input-label,
   .text-input:focus + .text-input-label,
+  .text-input:valid + .text-input-label,
   .select-input:focus + .text-input-label,
   .select-input:valid + .text-input-label,
   .text-input-label.up{
@@ -29,7 +57,7 @@
     margin: 0;
     padding: 5px;
     background: none;
-    background-color: $p-blue-light-5;
+    background-color: color(p-blue-light-5);
     border: none;
     border-radius: 0;
     font-family: OpenSans;
@@ -45,7 +73,7 @@
     width: 80%;
     font-size: 1.2rem;
     font-variant: small-caps;
-    color: $p-blue-light-40;
+    color: color(p-blue-light-40);
   }
   // "show passphrase" button
   // padding helps to trigger touch event better

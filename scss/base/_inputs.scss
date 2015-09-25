@@ -1,3 +1,60 @@
+/*doc
+---
+title: Inputs
+name: Inputs
+category: Base CSS
+---
+
+Some form inputs aren't strictly 'base' elements, since they rely on label plus input combo, but conceptually, they
+still act as a single unit.
+
+###Radio Inputs
+
+Custom radio and checkbox inputs rely on two HTML elements: an input and a label. The input itself is hidden,
+while the label is styled using the `:after` pseudo-selector to display a styled input.
+
+```html_example
+<input class="sr-only radio-button" type="radio" name="radio_inputs" id="radio_1" value="sms"/>
+<label class="radio-label" for="radio_1">SMS</label>
+
+<input class="sr-only radio-button" type="radio" name="radio_inputs" id="radio_2" value="captcha" checked />
+<label class="radio-label" for="radio_2">Captcha</label>
+```
+
+###Checkbox Inputs
+
+```html_example
+<input class="checkbox-input" type="checkbox" name="auth_method" id="checkbox_1" value="sms"/>
+<label class="checkbox-label" for="checkbox_1">Checkbox 1</label>
+
+<input class="checkbox-input" type="checkbox" name="auth_method" id="checkbox_2" value="captcha" checked />
+<label class="checkbox-label" for="checkbox_2">Checkbox 2</label>
+```
+
+###Text inputs
+
+Text inputs are full-width by default. They can be contained using layout classes.
+
+```html_example
+  <input class="text-input" id="text_input_1" type="text" placeholder="text input with placeholder" />
+```
+
+//TODO: better textarea styles
+
+```html_example
+  <textarea class="textarea-transparent"></textarea>
+```
+
+```html_example
+  <select class="select-input">
+    <option>Option 1</option>
+    <option>Option 1</option>
+    <option>Option 1</option>
+    <option>Option 1</option>
+  </select>
+```
+
+*/
 
 $text-input-padding: 0.5em;
 $text-input-fontsize: 1rem;

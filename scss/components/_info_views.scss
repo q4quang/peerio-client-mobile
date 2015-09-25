@@ -1,0 +1,93 @@
+/*doc
+---
+title: Info Views
+name: info_views
+category: Components
+---
+
+Info views are used on screens that display detailed information about an object, such as the file view and contact view.
+
+##Info Block
+Info blocks are positioned with flexbox, which let's them to wrap to the next line on mobile.
+
+```html_example
+<div class="info-blocks col-6">
+  <div class="info-block">
+    <div class="info-label">Public Key</div>
+    <div class="text-mono">r4G4JkNoULXnroFNxZQ5x7YgUsPgbLrSgsYbvVfwnA8HE</div>
+  </div>
+  <div class="info-block">
+    <div class="info-label">State:</div>
+    <div class="col-12 info-content">This is you!</div>
+  </div>
+  <div class="info-block">
+    <div class="info-label">Primary address:</div>
+    <div class="col-12 info-content">N/A</div>
+  </div>
+</div>
+```
+
+##Info Table
+Info tables are used to display info in a two column table view, such as on the file detail screen. They use `display:table;`
+to achieve this effect. In this example, `.info-label` is a base style that is modified by the `.info-table` class.
+
+```html_example
+<div class="info-table">
+  <div class="info-row">
+    <div class="info-label">File Name</div><div class="info-content">Peerio_LogoLight.psd</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">File Size</div><div class="info-content">1.01 MB</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">File Type</div><div class="info-content">image</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">Location</div><div class="info-content">In the cloud</div>
+  </div>
+</div>
+```
+
+*/
+
+.info-blocks {
+  display: flex;
+  flex-wrap: wrap;
+
+  .info-block {
+    flex: auto;
+    padding-right: 5px;
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+.info-content {
+  font-weight: 300;
+  padding: 3px 5px 3px 5px;
+  word-wrap: break-word;
+  @include ellipses();
+}
+
+.info-table{
+  display: table;
+  margin-bottom: 15px;
+  .info-row{
+    display: table-row;
+  }
+  .info-label, .info-content{
+    display: table-cell;
+  }
+  .info-label{
+    text-align: right;
+    padding-right: 0.5em;
+    white-space: nowrap;
+  }
+  .info-label:after{
+    content: ":";
+  }
+  .info-content{
+    text-align: left;
+    white-space: normal;
+  }
+}

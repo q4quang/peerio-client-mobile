@@ -1,8 +1,106 @@
+/*doc
+---
+title: List View
+name: list_view
+category: Components
+---
+
+The same `.list-view` component is used across messages, file, and contact lists. The component provides places for up
+to four columns of content, usually `|meta-content|main-content with description|more meta|right-arrow`. It also accommodates
+a 'swipe to delete' action.
+
+```html_example
+<div class="list-view">
+  <div class="list-item">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item unread">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item swiped">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+    <div class="list-item-swipe-content">
+      <i class="fa fa-trash-o"></i>
+    </div>
+  </div>
+
+  <div class="list-item">
+    <div class="list-item-thumb">
+      <i class="list-item-thumb file-type fa fa-file-image-o"></i>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">filename.jpg</div>
+      <div class="list-item-description">file size and date created</div>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item">
+    <div class="list-item-thumb">
+      <div class="avatar"></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">User's First and Last Name</div>
+      <div class="list-item-description">username</div>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+</div>
+```
+
+*/
 .list-view{
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
+  overflow-y: hidden;
   .list-item{
     min-height: 60px;
     max-height: 60px;

@@ -64,10 +64,10 @@ button{
 }
 // Universal link styling
 a {
-  color: $p-blue;
+  color: color(p-blue);
   text-decoration: none;
   &:active {
-    color: $p-blue;
+    color: color(p-blue);
   }
 }
 
