@@ -15,6 +15,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var globbing = require('gulp-css-globbing');
 var babel = require('gulp-babel');
+var runSequence = require('run-sequence');
+var clean = require('gulp-clean');
 
 var babelOptions = {
   compact: false,
@@ -25,8 +27,7 @@ var babelOptions = {
     'jscript' // we don't run in IE
   ],
   ast: false,
-  modules: 'ignore',
-  ignore: 'bower_components/**/*'
+  modules: 'ignore'
 };
 
 // extracting --cli --parameters
@@ -48,7 +49,7 @@ var paths = {
   js_compiled: ['www/js/compiled/**/*.js'],
   jsx_src: 'www/js/jsx/**/*.jsx',
   jsx_dst: 'www/js/compiled/jsx',
-  js_src: ['!www/js/compiled/**/*', 'www/js/**/*.js'],
+  js_src: ['!www/js/compiled/**/*','!www/js/_old/**/*', 'www/js/**/*.js'],
   js_dst: 'www/js/compiled',
   config_xml: 'config.xml',
   peerio_client_api: 'bower_components/peerio-client-api/dist/*.js'
@@ -56,10 +57,20 @@ var paths = {
 /*eslint-enable*/
 
 gulp.task('default', ['help']);
-gulp.task('compile', ['sass', 'jsx'], function () {
+gulp.task('compile', function () {
+  return runSequence('compile-clean', ['jsx', 'sass', 'js']);
+});
+
+gulp.task('js', function(){
+  console.log('compiling jss files.');
   gulp.src(paths.js_src)
     .pipe(babel(babelOptions))
     .pipe(gulp.dest(paths.js_dst));
+});
+
+gulp.task('compile-clean', function () {
+  return gulp.src([paths.js_dst, paths.css_dst], {read: false})
+    .pipe(clean());
 });
 
 gulp.task('help', function () {
