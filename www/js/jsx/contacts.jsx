@@ -16,7 +16,13 @@
       //TODO: add success/fail alert.
     },
     handleAddContact: function () {
-      this.transitionTo('add_contact');
+      //add contact prompt
+      Peerio.Action.showPrompt({headline: 'Add Contact',
+        text: 'Please enter username of the contact you want to add',
+        onAccept: this.addContactCallback
+      });
+      //Transition to add/import contact screen. 
+      //this.transitionTo('add_contact');
     },
     openContactView: function(id){
       this.transitionTo('contact',{id:id})
