@@ -26,10 +26,13 @@ $msg-distance: 15px;
 $big-side-distance: 34px;
 $item-border-radius: 3px;
 
+$message-other-bg: #f5f5f5;
+$message-self-bg: #E7F5FF;
+
 $avatar-size: 29px;
 
 .conversation {
-  margin-top: 65px;
+  margin-top: 36px;
   padding-bottom: 80px;
   color: color(p-blue-darker);
   user-select: initial;
@@ -76,7 +79,7 @@ $avatar-size: 29px;
       height: 22px;
       //padding: 4px 7px 3px 15px;
       padding: 5px;
-      background-color: #E7F5FF;
+      background-color: $message-other-bg;
       position: relative;
       font-variant: small-caps;
       text-transform: uppercase;
@@ -85,7 +88,7 @@ $avatar-size: 29px;
       border-top-right-radius: $item-border-radius;
     }
     .names{
-      font-size:0.9em;
+      font-size:0.8em;
     }
     .body {
       text-align: left;
@@ -93,7 +96,7 @@ $avatar-size: 29px;
       padding: 5px;
       padding-bottom: 10px;
       padding-top: 0;
-      background-color: #E7F5FF;
+      background-color: $message-other-bg;
       border-bottom-right-radius: $item-border-radius;
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -145,13 +148,13 @@ $avatar-size: 29px;
       padding-left: $big-side-distance;
       padding-right: $edge-distance;
       .head {
-        background-color: #f5f5f5;
+        background-color: $message-self-bg;
         border-radius: $item-border-radius 0 0 0;
         padding-left: 7px;
         padding-right: 15px;
       }
       .body {
-        background-color: #f5f5f5;
+        background-color: $message-self-bg;
         border-radius: 0 0 0 $item-border-radius;
         padding-left: 7px;
         padding-right: 15px;
