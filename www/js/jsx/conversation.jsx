@@ -181,7 +181,6 @@
     },
     // render helper, returns react nodes for messages
     buildNodes: function () {
-      var renderStartTs = moment();
       // will be the same for all ack nodes
       var ack = (<i className="fa fa-thumbs-o-up ack-icon"></i>);
       var nodes = [];
@@ -194,19 +193,14 @@
           sender = {username: item.sender, fullName: item.sender};
         }
 
-        var prevMessage = index ? this.state.conversation.messages[index - 1] : false;
-        var isSameDay = moment(item.timestamp).isSame(prevMessage.timestamp, 'day');
-
-        var momentTimestamp = moment(+item.timestamp);
-        var relativeTime = moment.min(renderStartTs, momentTimestamp).fromNow();
-
-        var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? momentTimestamp.format("MMM Do") : momentTimestamp.format("MMM Do YYYY");
-
         var isAck = item.message === Peerio.ACK_MSG;
         var isSelf = Peerio.user.username === sender.username;
 
-        var timestampHTML = ( isSameDay && prevMessage ) ? false :
-          <div className="timestamp">{relativeTime}&nbsp;&bull;&nbsp;{messageDate}</div>;
+        //TIMESTAMP
+        var prevMessage = index ? this.state.conversation.messages[index - 1] : false;
+        var isSameDay = moment(item.timestamp).isSame(prevMessage.timestamp, 'day');
+        var timestampHTML = ( isSameDay && prevMessage ) ? false : <Peerio.UI.ConversationTimestamp timestamp={item.timestamp}/>;
+        //END TIMESTAMP
 
         // will be undefined or ready to render root element for receipts
         var receipts;
@@ -296,6 +290,25 @@
 
 
       return receipts;
+    }
+  });
+
+  Peerio.UI.ConversationTimestamp = React.createClass({
+    getInitialState: function(){
+      return {relativeTime: true};
+    },
+    toggleRelative: function(){
+      this.setState({relativeTime: !this.state.relativeTime});
+    },
+    render: function(){
+      var timestamp = this.props.timestamp;
+      var renderStartTs = moment();
+      var momentTimestamp = moment(+timestamp);
+      var relativeTime = momentTimestamp.calendar(renderStartTs, {sameElse:"MMMM DD, YYYY"});
+      var absoluteTime = momentTimestamp.format("MMMM DD YYYY, h:mm A");
+      var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? momentTimestamp.format("MMM Do") : momentTimestamp.format("MMM Do YYYY");
+
+      return <div className="timestamp" onTouchEnd={this.toggleRelative}>{this.state.relativeTime ? relativeTime : absoluteTime }</div>;
     }
   });
 

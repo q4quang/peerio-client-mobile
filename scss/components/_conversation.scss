@@ -51,7 +51,7 @@ $avatar-size: 29px;
       font-size: 0.8em;
       display: flex;
       align-items: center;
-      color: #D3D3D3;
+      color: #A9A9A9;
       .date {
       }
       .time {
@@ -100,6 +100,7 @@ $avatar-size: 29px;
       border-bottom-right-radius: $item-border-radius;
       white-space: pre-wrap;
       word-wrap: break-word;
+      box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.2);
     }
     .file-count{
       font-size: 10px;
@@ -146,7 +147,8 @@ $avatar-size: 29px;
 
     &.self {
       padding-left: $big-side-distance;
-      padding-right: $edge-distance;
+      //padding-right: $edge-distance;
+      padding-right: 10px;
       .head {
         background-color: $message-self-bg;
         border-radius: $item-border-radius 0 0 0;
@@ -158,6 +160,19 @@ $avatar-size: 29px;
         border-radius: 0 0 0 $item-border-radius;
         padding-left: 7px;
         padding-right: 15px;
+        //right arrow
+        &:after{
+          display: block;
+          content: " ";
+          width: 0;
+          height: 0;
+          border-top: 8px solid rgba(0, 0, 0, 0);
+          border-bottom: 8px solid rgba(0, 0, 0, 0);
+          border-left: 8px solid $message-self-bg;
+          position: absolute;
+          right: 2px;
+          bottom: 16px;
+        }
       }
     }
   }
