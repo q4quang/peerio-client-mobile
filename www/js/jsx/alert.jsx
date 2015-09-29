@@ -107,7 +107,7 @@
           </div>;
 
       var text = this.props.text || 'confirm text';
-
+      var inputType = this.props.inputType || "text";
       return (
           <div>
             <div className="modal alert text-center">
@@ -117,7 +117,7 @@
                 </div>
                 <div className="alert-content-text">
                   {text}
-                  <input type="text" className="text-input centered-text" ref="promptInput"
+                  <input type={inputType} className="text-input centered-text" ref="promptInput"
                          autoCorrect="off" autoCapitalize="off" spellCheck="false"
                          value={this.state.promptValue} onChange={this.updatePromptValue}/>
                 </div>
