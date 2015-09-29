@@ -91,3 +91,11 @@ to achieve this effect. In this example, `.info-label` is a base style that is m
     white-space: normal;
   }
 }
+
+.info-banner{
+  height:40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: color(p-blue-dark-15);
+  color: white;
+}

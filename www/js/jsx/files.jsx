@@ -85,21 +85,25 @@
 
       if (!item.icon) item.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(item.name) + (item.cached ? ' cached' : '');
       if (!item.humanSize) item.humanSize = H.bytesToSize(item.size);
+
       var downloadStateNode = null;
       if (item.downloadState) {
         var ds = item.downloadState;
         downloadStateNode = (
-            <div className="download">{ds.state}&nbsp;
-              {ds.progress === null ? null : ds.progress + '%'}
+            <div className="download">{ds.stateName}&nbsp;
+              {ds.percent}
             </div>);
       }
+
+      var cacheState = item.cached ? <i className="fa fa-floppy-o p-blue-dark-10">&nbsp;</i> : null;
+
       var timestamp = moment(item.timestamp).calendar();
 
-      return  <Peerio.UI.Tappable element="li" className={classes} key={this.props.item.shortId} onTap={this.props.onTap}>
+      return  <Peerio.UI.Tappable element="li" className={classes} key={item.shortId} onTap={this.props.onTap}>
                 <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe} className="list-item-swipe-wrapper">
-                  <i className={this.props.item.icon}></i>
+                  <i className={item.icon}></i>
                   <div className="list-item-content">
-                    <div className="list-item-title">{this.props.item.name}</div>
+                    <div className="list-item-title">{cacheState}{this.props.item.name}</div>
                     <div className="list-item-description">{this.props.item.humanSize}&nbsp;&bull;&nbsp;{timestamp}</div>
                     {downloadStateNode}
                   </div>

@@ -39,6 +39,9 @@ Peerio.ACK_MSG = ':::peerioAck:::';
       // same thing but this call messes up wkwebview, while it is the default behaviour on android
       //Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
 
+      Peerio.FileSystemPlugin.init();
+      Peerio.FileSystem.plugin = Peerio.FileSystemPlugin;
+
       // Hardware/OS event handlers
       document.addEventListener('pause', Peerio.Action.pause, false);
       document.addEventListener('resume', Peerio.Action.resume, false);

@@ -57,8 +57,8 @@ var paths = {
 /*eslint-enable*/
 
 gulp.task('default', ['help']);
-gulp.task('compile', function () {
-  return runSequence('compile-clean', ['jsx', 'sass', 'js']);
+gulp.task('compile', function (done) {
+  return runSequence('compile-clean', ['jsx', 'sass', 'js'], done);
 });
 
 gulp.task('js', function(){
@@ -166,10 +166,12 @@ gulp.task('serve', ['compile'], function () {
 });
 
 gulp.task('run-android', ['compile'], function () {
+  sh.exec('bower-installer');
   sh.exec('cordova run android');
 });
 
 gulp.task('run-ios', ['compile'], function () {
+  sh.exec('bower-installer');
   sh.exec('cordova run ios');
 });
 
