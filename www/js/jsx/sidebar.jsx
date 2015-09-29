@@ -44,6 +44,7 @@
     showPINmodal: function () {
       Peerio.Action.showPrompt({headline:"Setup New PIN",
                                 text: "enter the PIN you wish to use for this device.",
+                                inputType: "password",
                                 onAccept: this.setPIN });
     },
     setPIN: function (newPIN) {

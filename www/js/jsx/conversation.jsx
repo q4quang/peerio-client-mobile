@@ -181,7 +181,6 @@
     },
     // render helper, returns react nodes for messages
     buildNodes: function () {
-      var renderStartTs = moment();
       // will be the same for all ack nodes
       var ack = (<i className="fa fa-thumbs-o-up ack-icon"></i>);
       var nodes = [];
@@ -194,37 +193,21 @@
           sender = {username: item.sender, fullName: item.sender};
         }
 
-        var prevMessage = index ? this.state.conversation.messages[index - 1] : false;
-        var isSameDay = moment(item.timestamp).isSame(prevMessage.timestamp, 'day');
-
-        var momentTimestamp = moment(+item.timestamp);
-        var relativeTime = moment.min(renderStartTs, momentTimestamp).fromNow();
-
-        var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? momentTimestamp.format("MMM Do") : momentTimestamp.format("MMM Do YYYY");
-
         var isAck = item.message === Peerio.ACK_MSG;
         var isSelf = Peerio.user.username === sender.username;
 
-        var timestampHTML = ( isSameDay ) ? false :
-          <div className="timestamp">{relativeTime}&nbsp;&bull;&nbsp;{messageDate}</div>;
+        //TIMESTAMP
+        var prevMessage = index ? this.state.conversation.messages[index - 1] : false;
+        var isSameDay = moment(item.timestamp).isSame(prevMessage.timestamp, 'day');
+        var timestampHTML = ( isSameDay && prevMessage ) ? false : <Peerio.UI.ConversationTimestamp timestamp={item.timestamp}/>;
+        //END TIMESTAMP
 
         // will be undefined or ready to render root element for receipts
         var receipts;
         // does this node need receipts?
-        if (isSelf) {
-          receipts = [];
-
-          item.receipts.forEach(function (recipient) {
-            receipts.push(<span className="receipt" key={recipient}>{recipient}</span>);
-          });
-
-          if (receipts.length)
-            receipts = (
-              <div className="receipts">{receipts}&nbsp;
-                <i className="fa fa-check"></i>
-              </div>);
-          else
-            receipts = null;
+        if (!isSelf) {
+        } else {
+          receipts = <Peerio.UI.ConversationReceipt receipts={item.receipts} participants = {this.state.conversation.participants}/>;
         }
         var body, thisAck;
         // ack message will have and ack icon and no body
@@ -244,7 +227,7 @@
         });
 
         var avatarHTML = (isSelf) ? false : <Peerio.UI.Avatar username={sender.username}/>;
-
+        console.log(receipts)
         nodes.push(
           <div className={itemClass} ts={item.timestamp} key={item.id}>
             {timestampHTML}
@@ -260,6 +243,72 @@
       }.bind(this));
 
       return nodes;
+    }
+  });
+
+  Peerio.UI.ConversationReceipt = React.createClass({
+    getInitialState: function(){
+      return {showUsers: false};
+    },
+    toggle: function(){
+      this.setState({showUsers: !this.state.showUsers});
+    },
+    render: function(){
+      var participants = this.props.participants;
+      var receipts = this.props.receipts;
+
+      /*read by all others when only 1 other participant */
+      if (participants.length -1 <= 1 && receipts.length == participants.length -1)
+        receipts = (
+            <div className="receipts">Read &nbsp;
+              <i className="fa fa-check"></i>
+            </div>);
+
+      /*read by all others when more than 1 participant */
+      else if (receipts.length == participants.length -1 /*read by all others - self */)
+        receipts = (
+            <div className="receipts" onTouchEnd={this.toggle}>{this.state.showUsers? receipts.join(' \u2022\ ') : 'Read by  all'}&nbsp;
+              <i className="fa fa-check"></i>
+            </div>);
+
+      /*read by 1 participant when more than 1 participants */
+      else if (receipts.length === 1 /*seen by one*/)
+        receipts = (
+            <div className="receipts">Read by {receipts}&nbsp;
+              <i className="fa fa-check"></i>
+            </div>);
+
+      /*read by some participant */
+      else if (receipts.length)
+        receipts = (
+            <div className="receipts" onTouchEnd={this.toggle}>{ this.state.showUsers? receipts.join(' \u2022\ ') : "Read by "+receipts.length }&nbsp;
+              <i className="fa fa-check"></i>
+            </div>);
+
+      else
+        receipts = null;
+
+
+      return receipts;
+    }
+  });
+
+  Peerio.UI.ConversationTimestamp = React.createClass({
+    getInitialState: function(){
+      return {relativeTime: true};
+    },
+    toggleRelative: function(){
+      this.setState({relativeTime: !this.state.relativeTime});
+    },
+    render: function(){
+      var timestamp = this.props.timestamp;
+      var renderStartTs = moment();
+      var momentTimestamp = moment(+timestamp);
+      var relativeTime = momentTimestamp.calendar(renderStartTs, {sameElse:"MMMM DD, YYYY"});
+      var absoluteTime = momentTimestamp.format("MMMM DD YYYY, h:mm A");
+      var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? momentTimestamp.format("MMM Do") : momentTimestamp.format("MMM Do YYYY");
+
+      return <div className="timestamp" onTouchEnd={this.toggleRelative}>{this.state.relativeTime ? relativeTime : absoluteTime }</div>;
     }
   });
 
