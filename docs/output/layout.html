@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Peerio Style Guide Layout</title>
+    <link rel="shortcut icon" href="static/brick.png" />
+
+    <!-- Styleguide CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/doc.css">
+    <link rel="stylesheet" href="assets/css/github.css">
+
+    <!-- CSS to be documented -->
+    <link rel="stylesheet" href="assets/css/app.css">
+
+    <!-- Main libraries -->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+
+  <body>
+    <header class="doc-header">
+        <h1>Peerio Style Guide</h1>
+              <!-- Add you pages here -->
+        <ul class="doc-main-menu">
+            <li><a href="index.html">Intro</a></li>
+            <li><a href="base_css.html">Base CSS</a></li>
+            <li><a href="components.html">Components</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="utility.html">Utility</a></li>
+        </ul>
+      <!-- //header/container -->
+    </header>
+
+    <ul class="doc-submenu">
+        
+        <li><a href="#content_wrappers">Content Wrappers</a></li>
+        
+        <li><a href="#grid">Micro 12 column Grid</a></li>
+        
+    </ul>
+
+    <div class="doc-content"><h1 id="content_wrappers" class="styleguide">Content Wrappers</h1>
+<p class="styleguide">Content wrappers are specially positioned divs designed to work on mobile webviews.
+They are absolutely positioned and have values for all <code class="styleguide">top</code> <code class="styleguide">bottom</code> <code class="styleguide">left</code> <code class="styleguide">right</code> properties.
+This ensures they are always positioned at the maximum width and height of the viewport.</p><p class="styleguide">Content wrappers inherit from the <code class="styleguide">content-wrapper</code> mixin.</p><p class="styleguide">Content wrappers have modifier classes for special scenarios, like <code class="styleguide">.content-wrapper.with-reply-box</code> and
+<code class="styleguide">content-wrapper.without-tab-bar</code>.</p>
+<h1 id="grid" class="styleguide">Micro 12 column Grid</h1>
+<p class="styleguide">This is a basic 12 column percentage grid, useful for putting things next to each other.
+The basic column rule applies: columns must add up to 12 to make row.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="doc-cols">
+  <div class="col-12">
+    <div class="col-12">col-12</div>
+    <div class="col-6">col-6</div><div class="col-6">col-6</div>
+    <div class="col-4">col-4</div><div class="col-4">col-4</div><div class="col-4">col-4</div>
+    <div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"doc-cols"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-12"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-12"</span><span class="nt">&gt;</span>col-12<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-6"</span><span class="nt">&gt;</span>col-6<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-6"</span><span class="nt">&gt;</span>col-6<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-4"</span><span class="nt">&gt;</span>col-4<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-4"</span><span class="nt">&gt;</span>col-4<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-4"</span><span class="nt">&gt;</span>col-4<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-2"</span><span class="nt">&gt;</span>col-2<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-2"</span><span class="nt">&gt;</span>col-2<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-2"</span><span class="nt">&gt;</span>col-2<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-2"</span><span class="nt">&gt;</span>col-2<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-2"</span><span class="nt">&gt;</span>col-2<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-2"</span><span class="nt">&gt;</span>col-2<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+<p class="styleguide"><code class="styleguide">display:inline-block;</code> is used to position columns next to each other. The only reason this is viable is because
+JSX renders components without whitespace between them.</p><p class="styleguide">This works</p><div class="codeBlock">
+  <div class="highlight">
+    <pre>&lt;div class="col-6"&gt;&lt;/div&gt;&lt;div class="col-6"&gt;&lt;/div&gt;</pre>
+  </div>
+</div><p class="styleguide">This doesn&#39;t</p><div class="codeBlock">
+  <div class="highlight">
+    <pre>&lt;div class="col-6"&gt;&lt;/div&gt; &lt;div class="col-6"&gt;&lt;/div&gt;</pre>
+  </div>
+</div></div>
+<script>
+$(document).ready(function() {
+
+  // set the active tab
+  var currentHref = document.location.pathname.substr(1);
+  var hash = document.location.hash;
+  var docMenu = $('.doc-submenu');
+  if (currentHref)
+  {
+    $('.doc-main-menu').find('a[href^="' + currentHref + '"]').parents('li').addClass('active');
+  }
+
+  $('.doc-submenu a').on('click', function(){
+    $('.doc-submenu li').removeClass('active');
+    $(this).parents('li').addClass('active');
+  });
+
+  $(".codeExample .codeBlock").append("<div class='showCode'>Toggle Code</div>");
+  $(".codeExample .highlight").hide()
+  $(".showCode").on('click', function(){
+    $(this).siblings('.highlight').toggle();
+  });
+
+});
+</script>
+</body>
+</html>

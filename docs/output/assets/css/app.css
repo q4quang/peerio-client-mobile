@@ -1,0 +1,2983 @@
+/**
+ *  IF YOU SEE THIS IN .CSS FILE
+ *  DON'T EDIT IT - GO TO THE SCSS SOURCE
+ */
+/*doc
+---
+title: Colors
+name: colors
+category: Utility
+---
+
+Colors are placed in a SASS map object called `$colors`. The colors can be accessed with the `color` function like so:
+
+```
+.sidebar{
+  background-color: color(p-blue-light-40);
+}
+```
+
+<div class="doc-swatches">
+  <h3>Light Blue</h3>
+  <div class="p-blue-light-50-bg">p-blue-light-50</div>
+  <div class="p-blue-light-40-bg">p-blue-light-40</div>
+  <div class="p-blue-light-35-bg">p-blue-light-35</div>
+  <div class="p-blue-light-30-bg">p-blue-light-30</div>
+  <div class="p-blue-light-25-bg">p-blue-light-25</div>
+  <div class="p-blue-light-20-bg">p-blue-light-20</div>
+  <div class="p-blue-light-15-bg">p-blue-light-15</div>
+  <div class="p-blue-light-10-bg">p-blue-light-10</div>
+  <div class="p-blue-light-5-bg">p-blue-light-5</div>
+</div>
+
+<div class="doc-swatches">
+  <h3>Dark Blue</h3>
+  <div class="p-blue-dark-5-bg">p-blue-light-5</div>
+  <div class="p-blue-dark-10-bg">p-blue-dark-10</div>
+  <div class="p-blue-dark-15-bg">p-blue-dark-15</div>
+  <div class="p-blue-dark-20-bg">p-blue-dark-20</div>
+  <div class="p-blue-dark-25-bg">p-blue-dark-25</div>
+  <div class="p-blue-dark-30-bg">p-blue-dark-30</div>
+  <div class="p-blue-darker-bg">p-blue-darker</div>
+</div>
+
+<div class="doc-swatches">
+  <h3>Light Green</h3>
+    <div class="p-green-light-25-bg">p-green-light-25</div>
+    <div class="p-green-light-20-bg">p-green-light-20</div>
+    <div class="p-green-light-15-bg">p-green-light-15</div>
+    <div class="p-green-light-10-bg">p-green-light-10</div>
+    <div class="p-green-light-5-bg"> p-green-light-5</div>
+</div>
+
+
+<div class="doc-swatches">
+  <h3>Dark Green</h3>
+  <div class="p-green-dark-5-bg">p-green-dark-5</div>
+  <div class="p-green-dark-10-bg">p-green-dark-10</div>
+  <div class="p-green-dark-15-bg">p-green-dark-15</div>
+  <div class="p-green-dark-20-bg">p-green-dark-20</div>
+  <div class="p-green-dark-25-bg">p-green-dark-25</div>
+  <div class="p-green-dark-30-bg">p-green-dark-30</div>
+  <div class="p-green-dark-35-bg">p-green-dark-35</div>
+  <div class="p-green-dark-40-bg">p-green-dark-40</div>
+</div>
+
+
+*/
+.p-blue {
+  color: #2281C5; }
+
+.p-blue-bg {
+  background-color: #2281C5; }
+
+.p-green {
+  color: #95D583; }
+
+.p-green-bg {
+  background-color: #95D583; }
+
+.p-blue-light-50 {
+  color: #ebf4fb; }
+
+.p-blue-light-50-bg {
+  background-color: #ebf4fb; }
+
+.p-blue-light-40 {
+  color: #bfdef4; }
+
+.p-blue-light-40-bg {
+  background-color: #bfdef4; }
+
+.p-blue-light-35 {
+  color: #a9d3f0; }
+
+.p-blue-light-35-bg {
+  background-color: #a9d3f0; }
+
+.p-blue-light-30 {
+  color: #94c7ec; }
+
+.p-blue-light-30-bg {
+  background-color: #94c7ec; }
+
+.p-blue-light-25 {
+  color: #7ebce9; }
+
+.p-blue-light-25-bg {
+  background-color: #7ebce9; }
+
+.p-blue-light-20 {
+  color: #68b1e5; }
+
+.p-blue-light-20-bg {
+  background-color: #68b1e5; }
+
+.p-blue-light-15 {
+  color: #52a6e1; }
+
+.p-blue-light-15-bg {
+  background-color: #52a6e1; }
+
+.p-blue-light-10 {
+  color: #3d9add; }
+
+.p-blue-light-10-bg {
+  background-color: #3d9add; }
+
+.p-blue-light-5 {
+  color: #278fda; }
+
+.p-blue-light-5-bg {
+  background-color: #278fda; }
+
+.p-blue-dark-5 {
+  color: #1e73af; }
+
+.p-blue-dark-5-bg {
+  background-color: #1e73af; }
+
+.p-blue-dark-10 {
+  color: #1a659a; }
+
+.p-blue-dark-10-bg {
+  background-color: #1a659a; }
+
+.p-blue-dark-15 {
+  color: #175684; }
+
+.p-blue-dark-15-bg {
+  background-color: #175684; }
+
+.p-blue-dark-20 {
+  color: #13486e; }
+
+.p-blue-dark-20-bg {
+  background-color: #13486e; }
+
+.p-blue-dark-25 {
+  color: #0f3a58; }
+
+.p-blue-dark-25-bg {
+  background-color: #0f3a58; }
+
+.p-blue-dark-30 {
+  color: #0b2c43; }
+
+.p-blue-dark-30-bg {
+  background-color: #0b2c43; }
+
+.p-blue-darker {
+  color: #334455; }
+
+.p-blue-darker-bg {
+  background-color: #334455; }
+
+.p-green-light-5 {
+  color: #a5db96; }
+
+.p-green-light-5-bg {
+  background-color: #a5db96; }
+
+.p-green-light-10 {
+  color: #b6e2a9; }
+
+.p-green-light-10-bg {
+  background-color: #b6e2a9; }
+
+.p-green-light-15 {
+  color: #c6e8bc; }
+
+.p-green-light-15-bg {
+  background-color: #c6e8bc; }
+
+.p-green-light-20 {
+  color: #d6efcf; }
+
+.p-green-light-20-bg {
+  background-color: #d6efcf; }
+
+.p-green-light-25 {
+  color: #e6f5e2; }
+
+.p-green-light-25-bg {
+  background-color: #e6f5e2; }
+
+.p-green-light-30 {
+  color: #f7fcf5; }
+
+.p-green-light-30-bg {
+  background-color: #f7fcf5; }
+
+.p-green-dark-5 {
+  color: #85cf70; }
+
+.p-green-dark-5-bg {
+  background-color: #85cf70; }
+
+.p-green-dark-10 {
+  color: #74c85d; }
+
+.p-green-dark-10-bg {
+  background-color: #74c85d; }
+
+.p-green-dark-15 {
+  color: #64c24a; }
+
+.p-green-dark-15-bg {
+  background-color: #64c24a; }
+
+.p-green-dark-20 {
+  color: #57b53d; }
+
+.p-green-dark-20-bg {
+  background-color: #57b53d; }
+
+.p-green-dark-25 {
+  color: #4ea237; }
+
+.p-green-dark-25-bg {
+  background-color: #4ea237; }
+
+.p-green-dark-30 {
+  color: #458f30; }
+
+.p-green-dark-30-bg {
+  background-color: #458f30; }
+
+.p-green-dark-35 {
+  color: #3c7c2a; }
+
+.p-green-dark-35-bg {
+  background-color: #3c7c2a; }
+
+.p-green-dark-40 {
+  color: #336923; }
+
+.p-green-dark-40-bg {
+  background-color: #336923; }
+
+.p-green-dark-45 {
+  color: #29561d; }
+
+.p-green-dark-45-bg {
+  background-color: #29561d; }
+
+.p-blue-greenish-light {
+  color: #A2EEFC; }
+
+.p-blue-greenish-light-bg {
+  background-color: #A2EEFC; }
+
+.sidebar-bg-color {
+  color: #44494D; }
+
+.sidebar-bg-color-bg {
+  background-color: #44494D; }
+
+.dim-background {
+  background: black;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.vertical-center {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.hide {
+  display: none !important; }
+
+.text-center {
+  text-align: center; }
+
+.text-right {
+  text-align: right; }
+
+.pull-left {
+  float: left; }
+
+.pull-right {
+  float: right; }
+
+.sr-only {
+  height: 0;
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute; }
+
+.animate-enter {
+  -webkit-animation-name: bounceInRight;
+  animation-name: bounceInRight;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  opacity: 0;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
+
+.animate-leave {
+  -webkit-animation-name: bounceOutLeft;
+  animation-name: bounceOutLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
+
+.page-animate-enter,
+.page-animate-leave,
+.page-animate-reverse-enter,
+.page-animate-reverse-leave {
+  -webkit-animation-name: slideInRight;
+  animation-name: slideInRight;
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out; }
+
+.page-animate-leave {
+  -webkit-animation-name: slideOutLeft;
+  animation-name: slideOutLeft; }
+
+.page-animate-reverse-enter {
+  -webkit-animation-name: slideInLeft;
+  animation-name: slideInLeft; }
+
+.page-animate-reverse-leave {
+  -webkit-animation-name: slideOutRight;
+  animation-name: slideOutRight; }
+
+@-webkit-keyframes slideDelete {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px); }
+  50% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    min-height: 60px;
+    max-height: 60px; }
+  100% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    min-height: 0;
+    max-height: 0; } }
+
+@keyframes slideDelete {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px); }
+  50% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    min-height: 60px;
+    max-height: 60px; }
+  100% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    min-height: 0;
+    max-height: 0; } }
+
+/**
+ *  Login screen specific styles
+ */
+.app-version {
+  color: #73B3E0;
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  font-size: 80%; }
+
+.logo {
+  display: block;
+  width: 100%;
+  margin: 0 auto 25px auto; }
+
+.saved-login {
+  color: white;
+  background-color: #1D6AB5;
+  margin: -10px -100% 12px -100%;
+  padding: 5px 0 10px 0;
+  font-size: 2em;
+  text-align: center; }
+  .saved-login .note {
+    font-size: 1rem;
+    margin-top: 5px;
+    padding: 0 5px;
+    color: #93C5EA; }
+
+#login-process-state {
+  text-align: center;
+  color: #bfdef4;
+  height: 15px; }
+
+@-webkit-keyframes bounceOutLeft {
+  20% {
+    opacity: 1;
+    -webkit-transform: translate3d(20px, 0, 0);
+    transform: translate3d(20px, 0, 0); }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-2000px, 0, 0);
+    transform: translate3d(-2000px, 0, 0); } }
+
+@keyframes bounceOutLeft {
+  20% {
+    opacity: 1;
+    -webkit-transform: translate3d(20px, 0, 0);
+    transform: translate3d(20px, 0, 0); }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-2000px, 0, 0);
+    transform: translate3d(-2000px, 0, 0); } }
+
+@-webkit-keyframes bounceInRight {
+  from, 60%, 75%, 90%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(3000px, 0, 0);
+    transform: translate3d(3000px, 0, 0); }
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(-25px, 0, 0);
+    transform: translate3d(-25px, 0, 0); }
+  75% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0); }
+  90% {
+    -webkit-transform: translate3d(-5px, 0, 0);
+    transform: translate3d(-5px, 0, 0); }
+  100% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1; } }
+
+@keyframes bounceInRight {
+  from, 60%, 75%, 90%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(3000px, 0, 0);
+    transform: translate3d(3000px, 0, 0); }
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(-25px, 0, 0);
+    transform: translate3d(-25px, 0, 0); }
+  75% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0); }
+  90% {
+    -webkit-transform: translate3d(-5px, 0, 0);
+    transform: translate3d(-5px, 0, 0); }
+  100% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1; } }
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@-webkit-keyframes scaleIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  60% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  60% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-webkit-keyframes connecting {
+  from {
+    background-color: #ff0000; }
+  to {
+    background-color: #cc0000; } }
+
+@keyframes connecting {
+  from {
+    background-color: #ff0000; }
+  to {
+    background-color: #cc0000; } }
+
+@-webkit-keyframes loading {
+  from {
+    background-position-x: 0%; }
+  to {
+    background-position-x: 200%; } }
+
+@keyframes loading {
+  from {
+    background-position-x: 0%; }
+  to {
+    background-position-x: 200%; } }
+
+@-webkit-keyframes placeHolderShimmer {
+  0% {
+    background-position: 100% 0; }
+  100% {
+    background-position: -100% 0; } }
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: 100% 0; }
+  100% {
+    background-position: -100% 0; } }
+
+@-webkit-keyframes slideInRight {
+  0% {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+
+@keyframes slideInRight {
+  0% {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+
+@-webkit-keyframes slideInLeft {
+  0% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+
+@keyframes slideInLeft {
+  0% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+
+@-webkit-keyframes slideOutRight {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0); } }
+
+@keyframes slideOutRight {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0); } }
+
+@-webkit-keyframes slideOutLeft {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); } }
+
+@keyframes slideOutLeft {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); } }
+
+.avatar {
+  width: 29px;
+  height: 29px;
+  line-height: 24px;
+  display: inline-block;
+  border: 1px solid #D8D8D8;
+  padding: 2px 1px 1px 2px;
+  background-color: #EEEEEE;
+  vertical-align: middle;
+  text-align: center;
+  color: #C3C3C3;
+  font-size: 20px; }
+  .avatar .pic {
+    width: 12px;
+    height: 12px;
+    float: left; }
+  .avatar.big {
+    width: 42px;
+    height: 42px;
+    line-height: 38px;
+    font-size: 28px; }
+    .avatar.big .pic {
+      width: 18px;
+      height: 18px; }
+
+/**
+ *   Shared/universal rules
+ */
+html {
+  font-size: 15px;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  -webkit-user-select: inherit;
+  user-select: inherit;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+html * {
+  -webkit-margin-collapse: separate;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+  /* For some Androids */ }
+
+input:focus::-webkit-input-placeholder {
+  color: transparent; }
+
+input, textarea {
+  -webkit-user-select: initial;
+  user-select: initial;
+  -webkit-border-radius: 0;
+  border-radius: 0; }
+
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none; }
+
+textarea:focus::-webkit-input-placeholder {
+  color: transparent; }
+
+body {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-family: OpenSans;
+  color: #000;
+  background-color: #fff; }
+
+body.ios {
+  margin-top: 20px;
+  background-color: #334455; }
+
+button {
+  background-color: #2795d0;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  padding: 0; }
+
+a {
+  color: #2281C5;
+  text-decoration: none; }
+  a:active {
+    color: #2281C5; }
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+img {
+  max-width: 100%; }
+
+hr {
+  width: 100%;
+  clear: both;
+  height: 0;
+  margin-top: 1rem;
+  border: 1px solid rgba(205, 205, 205, 0.5);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+  hr:before, hr:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  hr:after {
+    clear: both; }
+
+p {
+  margin-top: 0.2em;
+  margin-bottom: 0.7em; }
+
+/*doc
+---
+title: Buttons
+name: button
+category: Base CSS
+---
+
+Button styles can be applied to any element. Buttons are full width by default,
+but can be made smaller using layout styles. Button styles can also be combined.
+
+```html_example
+<div class="col-5">
+  <div class="btn-md btn-danger">danger</div>
+</div>
+<div class="col-6">
+  <div class="btn-md btn-safe">safe</div>
+</div>
+```
+
+Button                                            | Button Class
+------------------------------------------------- | -----------------
+<div class="btn-lrg">large button</div>                  | `btn-lrg`
+<div class="btn-md">medium button</div>                  | `btn-md`
+<div class="btn-md btn-dark">dark button</div>           | `btn-md btn-dark`
+<div class="btn-md btn-safe">safe button</div>           | `btn-md btn-safe`
+<div class="btn-md btn-danger">danger button</div>       | `btn-md btn-danger`
+<div class="btn-sm">small button</div>                   | `btn-sm`
+<div class="btn">default button</div>                    | `btn`
+<div class="btn-subtle">subtle button</div>              | `btn-subtle`
+
+
+Footer Buttons                                       | Button Class/ID
+---------------------------------------------------- | -----------------
+<div id="global-back">Global Back Button</div>       | `#global-back`
+<div class="accept-button">Global Action Button</div>| `.accept-button`
+*/
+button:disabled {
+  background-color: rgba(103, 103, 103, 0.69);
+  color: #353535; }
+
+.btn, .btn-lrg, .btn-lrg-back, .btn-md, .btn-sm, .btn-dark, .btn-safe, .btn-danger {
+  position: relative;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  padding: 0.5em;
+  font-size: 0.8em;
+  text-align: center;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: white;
+  width: 100%;
+  background-color: #2795D0; }
+  .btn:after, .btn-lrg:after, .btn-lrg-back:after, .btn-md:after, .btn-sm:after, .btn-dark:after, .btn-safe:after, .btn-danger:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: -webkit-radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 20%, transparent 21%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 20%, transparent 21%);
+    opacity: 1;
+    background-size: 0%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat; }
+  .btn.on-touchstart:after, .on-touchstart.btn-lrg:after, .on-touchstart.btn-lrg-back:after, .on-touchstart.btn-md:after, .on-touchstart.btn-sm:after, .on-touchstart.btn-dark:after, .on-touchstart.btn-safe:after, .on-touchstart.btn-danger:after, .btn:hover:after, .btn-lrg:hover:after, .btn-lrg-back:hover:after, .btn-md:hover:after, .btn-sm:hover:after, .btn-dark:hover:after, .btn-safe:hover:after, .btn-danger:hover:after {
+    background-size: 1000%;
+    -webkit-transition: background-size 0.5s ease-in, opacity 0.5s ease-in 0.22s;
+    transition: background-size 0.5s ease-in, opacity 0.5s ease-in 0.22s;
+    opacity: 0; }
+
+.btn-subtle {
+  background-color: transparent;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  color: inherit; }
+
+.btn-lrg, .btn-lrg-back {
+  font-size: 1.6rem;
+  width: 100%;
+  font-weight: 100; }
+
+.btn-md {
+  font-size: 1em;
+  padding: 0.7em; }
+
+.btn-sm {
+  font-size: 0.9rem; }
+
+.btn-lrg-back {
+  background-color: transparent;
+  opacity: 0.8; }
+  .btn-lrg-back > .fa {
+    position: relative;
+    left: -5px; }
+
+.btn-dark {
+  background-color: rgba(0, 0, 0, 0.4); }
+
+.btn-safe {
+  background-color: #95D583;
+  color: white; }
+
+.btn-danger {
+  color: white;
+  background-color: #BD3535; }
+
+.btn-link.btn-danger {
+  background-color: transparent;
+  text-decoration: underline;
+  color: #BD3535;
+  padding: 0; }
+
+.accept-button {
+  position: relative;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  display: table-cell;
+  padding: 0 15px 0 15px;
+  vertical-align: middle;
+  white-space: nowrap;
+  background-color: #5EA767;
+  color: white;
+  min-width: 120px;
+  text-align: center; }
+  .accept-button:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: -webkit-radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 20%, transparent 21%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 20%, transparent 21%);
+    opacity: 1;
+    background-size: 0%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat; }
+  .accept-button.on-touchstart:after, .accept-button:hover:after {
+    background-size: 1000%;
+    -webkit-transition: background-size 0.5s ease-in, opacity 0.5s ease-in 0.22s;
+    transition: background-size 0.5s ease-in, opacity 0.5s ease-in 0.22s;
+    opacity: 0; }
+
+#global-back {
+  position: relative;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 30px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  -webkit-transition: background-color 0.1s ease-in;
+  transition: background-color 0.1s ease-in; }
+  #global-back:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: -webkit-radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 20%, transparent 21%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 20%, transparent 21%);
+    opacity: 1;
+    background-size: 0%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat; }
+  #global-back.on-touchstart:after, #global-back:hover:after {
+    background-size: 1000%;
+    -webkit-transition: background-size 0.5s ease-in, opacity 0.5s ease-in 0.22s;
+    transition: background-size 0.5s ease-in, opacity 0.5s ease-in 0.22s;
+    opacity: 0; }
+  #global-back.on-touchstart {
+    background-color: #26384A; }
+
+/**
+ *   Font face rules
+ */
+@font-face {
+  font-family: "OpenSans";
+  src: url("../media/fonts/OpenSans/OpenSans-Light.eot");
+  src: url("../media/fonts/OpenSans/OpenSans-Light.eot?#iefix") format("embedded-opentype"), url("../media/fonts/OpenSans/OpenSans-Light.woff2") format("woff2"), url("../media/fonts/OpenSans/OpenSans-Light.woff") format("woff"), url("../media/fonts/OpenSans/OpenSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("../media/fonts/OpenSans/OpenSans-Regular.eot");
+  src: url("../media/fonts/OpenSans/OpenSans-Regular.eot?#iefix") format("embedded-opentype"), url("../media/fonts/OpenSans/OpenSans-Regular.woff2") format("woff2"), url("../media/fonts/OpenSans/OpenSans-Regular.woff") format("woff"), url("../media/fonts/OpenSans/OpenSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("../media/fonts/OpenSans/OpenSans-SemiBold.eot");
+  src: url("../media/fonts/OpenSans/OpenSans-SemiBold.eot?#iefix") format("embedded-opentype"), url("../media/fonts/OpenSans/OpenSans-SemiBold.woff2") format("woff2"), url("../media/fonts/OpenSans/OpenSans-SemiBold.woff") format("woff"), url("../media/fonts/OpenSans/OpenSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal; }
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("../media/fonts/OpenSans/OpenSans-Bold.eot");
+  src: url("../media/fonts/OpenSans/OpenSans-Bold.eot?#iefix") format("embedded-opentype"), url("../media/fonts/OpenSans/OpenSans-Bold.woff2") format("woff2"), url("../media/fonts/OpenSans/OpenSans-Bold.woff") format("woff"), url("../media/fonts/OpenSans/OpenSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("../media/fonts/OpenSans/OpenSans-ExtraBold.eot");
+  src: url("../media/fonts/OpenSans/OpenSans-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../media/fonts/OpenSans/OpenSans-ExtraBold.woff2") format("woff2"), url("../media/fonts/OpenSans/OpenSans-ExtraBold.woff") format("woff"), url("../media/fonts/OpenSans/OpenSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal; }
+
+/*doc
+---
+title: Icons
+name: Icons
+category: Base CSS
+---
+
+Peerio uses fontAwesome for the majority of icon. Icons have a default font-size of 1em.
+The following icons have been colorized for different filetypes.
+
+Icon                                       | File-type  | Code
+-------------------------------------------|------------|-----------
+  <i class="fa fa-file-excel-o"></i>       | Excel      | `<i class="fa fa-file-excel-o"></i>`
+  <i class="fa fa-file-text-o"></i>        | Text       | `<i class="fa fa-file-text-o"></i>`
+  <i class="fa fa-file-pdf-o"></i>         | PDF        | `<i class="fa fa-file-pdf-o"></i>`
+  <i class="fa fa-file-word-o"></i>        | MS Word    | `<i class="fa fa-file-word-o"></i>`
+  <i class="fa fa-file-powerpoint-o"></i>  | Powerpoint | `<i class="fa fa-file-powerpoint-o"></i>`
+  <i class="fa fa-file-image-o"></i>       | Image      | `<i class="fa fa-file-image-o"></i>`
+  <i class="fa fa-file-archive-o"></i>     | Archive    | `<i class="fa fa-file-archive-o"></i>`
+  <i class="fa fa-file-audio-o"></i>       | Audio      | `<i class="fa fa-file-audio-o"></i>`
+  <i class="fa fa-file-video-o"></i>       | Video      | `<i class="fa fa-file-video-o"></i>`
+  <i class="fa fa-file-code-o"></i>        | Code       | `<i class="fa fa-file-code-o"></i>`
+
+*/
+.fa-file-excel-o {
+  color: #1C881C; }
+
+.fa-file-pdf-o {
+  color: #A74040; }
+
+.fa-file-word-o {
+  color: #0A3D80; }
+
+.fa-file-powerpoint-o {
+  color: #B3622F; }
+
+.fa-file-image-o {
+  color: #296E71; }
+
+.fa-file-audio-o {
+  color: #AB8F3A; }
+
+.fa-file-video-o {
+  color: #783D82; }
+
+.icon-with-label {
+  display: inline-block;
+  text-align: center; }
+  .icon-with-label .fa {
+    display: inline-block;
+    height: 1em;
+    width: 1em; }
+  .icon-with-label .icon-label {
+    display: block;
+    font-size: 0.7em; }
+
+.icon-with-label + .icon-with-label {
+  margin-left: 1em; }
+
+.fa.circle {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: white;
+  color: #44494D;
+  padding: 0.3em;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+
+/*doc
+---
+title: Inputs
+name: Inputs
+category: Base CSS
+---
+
+Some form inputs aren't strictly 'base' elements, since they rely on label plus input combo, but conceptually, they
+still act as a single unit.
+
+###Radio Inputs
+
+Custom radio and checkbox inputs rely on two HTML elements: an input and a label. The input itself is hidden,
+while the label is styled using the `:after` pseudo-selector to display a styled input.
+
+```html_example
+<input class="sr-only radio-button" type="radio" name="radio_inputs" id="radio_1" value="sms"/>
+<label class="radio-label" for="radio_1">SMS</label>
+
+<input class="sr-only radio-button" type="radio" name="radio_inputs" id="radio_2" value="captcha" checked />
+<label class="radio-label" for="radio_2">Captcha</label>
+```
+
+###Checkbox Inputs
+
+```html_example
+<input class="checkbox-input" type="checkbox" name="auth_method" id="checkbox_1" value="sms"/>
+<label class="checkbox-label" for="checkbox_1">Checkbox 1</label>
+
+<input class="checkbox-input" type="checkbox" name="auth_method" id="checkbox_2" value="captcha" checked />
+<label class="checkbox-label" for="checkbox_2">Checkbox 2</label>
+```
+
+###Text inputs
+
+Text inputs are full-width by default. They can be contained using layout classes.
+
+```html_example
+  <input class="text-input" id="text_input_1" type="text" placeholder="text input with placeholder" />
+```
+
+//TODO: better textarea styles
+
+```html_example
+  <textarea class="textarea-transparent"></textarea>
+```
+
+```html_example
+  <select class="select-input">
+    <option>Option 1</option>
+    <option>Option 1</option>
+    <option>Option 1</option>
+    <option>Option 1</option>
+  </select>
+```
+
+*/
+.radio-button:checked + .radio-label-square {
+  background-color: #2795d0;
+  color: white;
+  font-weight: bold; }
+
+.radio-button:checked + .radio-label:after {
+  content: " ";
+  background-color: #95D583; }
+
+.radio-label {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  font-size: 1.2rem;
+  -webkit-border-radius: 1.5em;
+  border-radius: 1.5em;
+  z-index: 1;
+  vertical-align: middle;
+  margin: 0 0.3em; }
+
+.radio-label:after {
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  height: 1.5em;
+  width: 1.5em;
+  background-color: transparent;
+  border: 1px solid #EAEAEA;
+  margin-left: 0.5em;
+  -webkit-box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09);
+  box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09); }
+
+.select-input {
+  border: none;
+  border-color: #D6D6D6;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color: transparent;
+  padding: 0.5em;
+  font-size: 1rem;
+  -webkit-appearance: none;
+  width: 100%;
+  color: inherit;
+  height: 40px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+
+.select-input > option {
+  color: black; }
+
+.text-input-label-static {
+  font-size: 0.8rem;
+  top: -0.5rem; }
+
+#passphrase-input {
+  margin-bottom: 10px; }
+
+.textarea-transparent {
+  border: none; }
+
+.text-input {
+  display: block;
+  border: none;
+  border-color: #D6D6D6;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  width: 100%;
+  font-size: inherit;
+  font-weight: 200;
+  padding: 0.5em;
+  padding-bottom: 0.2em;
+  padding-top: 0.7em;
+  -webkit-transition: border-color 150ms ease-in;
+  transition: border-color 150ms ease-in;
+  background-color: transparent;
+  height: 40px;
+  color: black; }
+
+.text-input-label, .text-input-label-static {
+  font-size: inherit;
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+  color: inherit;
+  -webkit-transition: top 150ms ease-out, color 150ms ease-out;
+  transition: top 150ms ease-out, color 150ms ease-out; }
+
+.checkbox-input {
+  -webkit-appearance: none; }
+
+.checkbox-input:after {
+  visibility: visible;
+  content: '';
+  background: #fff;
+  border: 1px solid #EAEAEA;
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 18px;
+  -webkit-box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09);
+  box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09); }
+
+.checkbox-input:checked:after,
+.checkbox-input.checked:after {
+  content: "\f00c";
+  font-family: 'FontAwesome';
+  color: white;
+  background-color: #95D583; }
+
+.checkbox-label {
+  color: inherit; }
+
+.placeholder-warning::-webkit-input-placeholder {
+  color: #BD8B8B;
+  font-weight: bold; }
+
+/*doc
+---
+title: Typography
+name: Typography
+category: Base CSS
+---
+
+These are styles for text elements. They can be applied to any element.
+
+Text Style                                                                  | class name
+----------------------------------------------------------------------------|-----------
+<span class="headline-lrg">Large Headline</span>                            | `headline-lrg`
+<span class="headline">Default Headline</span>                              | `headline`
+<span class="headline-md">Medium headline</span>                            | `headline-md`
+<span class="headline-sm">Small headline</span>                             | `headline-sm`
+<span class="subhead">subhead</span>                                        | `subhead`
+<span class="subhead-inline">inline subhead</span>                          | `subhead-inline`
+<span class="txt-lrg">Large text</span>                                     | `txt-lrg`
+<span class="txt-sm">small text</span>                                      | `txt-sm`
+<span class="info-label">info label</div>                                   | `info-label`
+<span class="info-small"><i class="fa fa-user"></i>label with icon </span>  | `info-small`
+<div class="text-mono">monospace text</div>                                 | `text-mono`
+<div class="text-crossout">crossed-out text</div>                           | `text-crossout`
+<div class="centered-text">centered text</div>                              | `centered-text`
+
+```html_example
+<h1 class="headline-lrg">Headline with a subhead</h1>
+<h2 class="subhead">subhead</h2>
+
+<h1 class="headline-md">Headline with inline-subhead</h1>
+<h1 class="subhead-inline">Inline subheads are very small</h1>
+```
+
+*/
+.headline, .headline-sm, .headline-md, .headline-lrg, .headline-sub {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2em;
+  font-size: 1.5rem;
+  font-weight: 100; }
+
+.headline-sm {
+  font-size: 1.1rem;
+  margin-bottom: 0.5em; }
+
+.headline-md {
+  font-size: 1.2rem; }
+
+.headline-lrg {
+  font-size: 2rem; }
+
+.headline-sub {
+  font-weight: bold;
+  font-size: 0.9em;
+  text-transform: uppercase; }
+
+.subhead {
+  font-weight: 400;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  margin: 0.2em 0;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 5px;
+  opacity: 0.6; }
+
+.subhead-inline {
+  font-weight: bold;
+  font-size: 0.7em;
+  text-transform: uppercase; }
+
+.txt-lrg {
+  display: block;
+  font-size: 1.5rem;
+  z-index: 1;
+  vertical-align: middle;
+  margin: 0.5em 0 1.5em 0;
+  width: 100%;
+  font-weight: 800;
+  -webkit-user-select: text;
+  user-select: text; }
+
+.txt-sm {
+  font-size: 0.9em; }
+
+.centered-text {
+  text-align: center;
+  margin-bottom: 1rem; }
+
+.info-label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  font-weight: 600; }
+
+.info-small {
+  font-weight: 200;
+  font-size: 0.9rem;
+  line-height: 1.2em; }
+  .info-small .fa {
+    margin-right: 0.5em; }
+
+.text-mono {
+  font-family: monospace;
+  font-size: 0.8em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.text-crossout {
+  opacity: 0.6;
+  text-decoration: line-through; }
+
+/*doc
+---
+title: Content Wrappers
+name: content_wrappers
+category: Layout
+---
+
+Content wrappers are specially positioned divs designed to work on mobile webviews.
+They are absolutely positioned and have values for all `top` `bottom` `left` `right` properties.
+This ensures they are always positioned at the maximum width and height of the viewport.
+
+Content wrappers inherit from the `content-wrapper` mixin.
+
+Content wrappers have modifier classes for special scenarios, like `.content-wrapper.with-reply-box` and
+`content-wrapper.without-tab-bar`.
+*/
+.page-wrapper-login {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 100;
+  background-color: white; }
+
+.content-wrapper-login {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 100;
+  background-color: white;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: transparent; }
+
+.content-wrapper-signup {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 100;
+  background-color: white; }
+
+.content.with-reply-box, .with-reply-box.content-padded {
+  position: absolute;
+  top: 75px;
+  bottom: 80px;
+  right: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 100;
+  background-color: white; }
+
+.content.without-tab-bar, .without-tab-bar.content-padded {
+  position: absolute;
+  top: 40px;
+  bottom: 45px;
+  right: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 100;
+  background-color: white; }
+
+.content, .content-padded {
+  position: absolute;
+  top: 75px;
+  bottom: 45px;
+  right: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 100;
+  background-color: white; }
+
+.content-padded {
+  padding: 10px; }
+
+.content-intro {
+  padding: 20px; }
+  .content-intro .peerio-logo {
+    width: 30%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px; }
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden; }
+
+/*doc
+---
+title: Micro 12 column Grid
+name: grid
+category: Layout
+---
+
+This is a basic 12 column percentage grid, useful for putting things next to each other.
+The basic column rule applies: columns must add up to 12 to make row.
+
+```html_example
+<div class="doc-cols">
+  <div class="col-12">
+    <div class="col-12">col-12</div>
+    <div class="col-6">col-6</div><div class="col-6">col-6</div>
+    <div class="col-4">col-4</div><div class="col-4">col-4</div><div class="col-4">col-4</div>
+    <div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div><div class="col-2">col-2</div>
+  </div>
+</div>
+```
+
+`display:inline-block;` is used to position columns next to each other. The only reason this is viable is because
+JSX renders components without whitespace between them.
+
+This works
+
+```
+<div class="col-6"></div><div class="col-6"></div>
+```
+
+This doesn't
+
+```
+<div class="col-6"></div> <div class="col-6"></div>
+```
+*/
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  display: inline-block;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; }
+
+.col-1 {
+  width: 8.33333%; }
+
+.col-2 {
+  width: 16.66667%; }
+
+.col-3 {
+  width: 25%; }
+
+.col-4 {
+  width: 33.33333%; }
+
+.col-5 {
+  width: 41.66667%; }
+
+.col-6 {
+  width: 50%; }
+
+.col-7 {
+  width: 58.33333%; }
+
+.col-8 {
+  width: 66.66667%; }
+
+.col-9 {
+  width: 75%; }
+
+.col-10 {
+  width: 83.33333%; }
+
+.col-11 {
+  width: 91.66667%; }
+
+.col-12 {
+  width: 100%; }
+
+.col-first {
+  padding-left: 0; }
+
+.col-last {
+  padding-right: 0; }
+
+.flex-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  flex-direction: row; }
+
+.flex-col {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+.flex-col-1 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1; }
+
+.flex-col-0 {
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  flex-grow: 0; }
+
+/*doc
+---
+title: Alerts
+name: alerts
+category: Components
+---
+
+Alert, confirm and prompt dialog boxes follow the same class pattern:
+
+```
+.alert
+  .alert-content
+    .alert-content-text
+    .alert-content-btns
+```
+
+The only difference between the three are whether they have one or two button and the contents of `.alert-content-text`.
+
+```html_example
+<!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 2rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="alert-content-text">
+        Alert modal
+      </div>
+      <div class="alert-content-btns">
+        <div class="btn-md">Alert Content Button</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+
+```html_example
+<!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 2rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="headline-lrg">
+        Confirm modal with headline
+      </div>
+      <div class="alert-content-text">
+        Confirm modal text
+      </div>
+      <div class="alert-content-btns">
+        <div class="col-6">
+          <div class="btn-md btn-danger">Confirm cancel button</div>
+        </div><div class="col-6">
+          <div class="btn-md btn-safe">Confirm accept button</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+
+```html_example
+<!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 1rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="headline-lrg">
+        Prompt modal with headline
+      </div>
+      <div class="alert-content-text">
+        Prompt with headline and some text
+        <input type="text" class="text-input centered-text" autoCorrect="off" autoCapitalize="off" spellCheck="false" value="" placeholder="prompt input placeholder"/>
+      </div>
+      <div class="alert-content-btns">
+        <div class="col-6">
+          <div class="btn-md btn-danger">Confirm cancel button</div>
+        </div><div class="col-6">
+          <div class="btn-md btn-safe">Confirm accept button</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+*/
+.alert {
+  z-index: 600;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  color: #333; }
+  .alert > .alert-content {
+    max-width: 90%;
+    min-width: 80%;
+    background: white;
+    padding: 10px;
+    font-size: 1.1rem;
+    min-height: 120px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-animation: scaleIn 300ms ease-in;
+    animation: scaleIn 300ms ease-in; }
+  .alert .alert-content-text {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em; }
+  .alert .alert-content-btns {
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    flex-grow: 0; }
+  .alert + .dim-background {
+    z-index: 599;
+    -webkit-animation: scaleIn 200ms ease-in;
+    animation: scaleIn 200ms ease-in; }
+
+#connection-status {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #ff0000;
+  -webkit-animation: connecting 1s ease 0s infinite alternate;
+  animation: connecting 1s ease 0s infinite alternate; }
+  #connection-status.connected {
+    background-color: #95D583;
+    -webkit-animation: none;
+    animation: none; }
+  #connection-status.loading {
+    background-size: 200% !important;
+    background: -webkit-gradient(linear, left top, right top, color-stop(20%, #399635), color-stop(50%, #c9de96), color-stop(80%, #399635));
+    background: -webkit-linear-gradient(left, #399635 20%, #c9de96 50%, #399635 80%);
+    background: linear-gradient(to right, #399635 20%, #c9de96 50%, #399635 80%);
+    -webkit-animation: loading 1.5s linear 0s infinite reverse;
+    animation: loading 1.5s linear 0s infinite reverse; }
+
+/*doc
+---
+title: Conversation Style
+name: conversation
+category: Components
+---
+
+```html_example
+<div class='conversation' style="margin-top:0;padding-bottom:0;">
+  <div class="item">
+    <div class="timestamp">Today</div>
+    <div class="head"><div class="avatar"></div>username</div>
+    <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</div>
+  </div>
+  <div class="item self">
+    <div class="head">current user</div>
+    <div class="body">Duis aute irure dolor in reprehenderit in voluptate velitdatat proident.</div>
+  </div>
+</div>
+```
+
+*/
+.conversation {
+  margin-top: 65px;
+  padding-bottom: 80px;
+  color: #334455;
+  -webkit-user-select: initial;
+  user-select: initial; }
+  .conversation .item {
+    width: 100%;
+    padding: 15px 34px 0 0;
+    padding-left: 34px;
+    position: relative; }
+    .conversation .item .timestamp {
+      width: 100%;
+      padding: 0;
+      position: absolute;
+      left: 0;
+      text-align: center;
+      font-size: 0.8em;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      color: #D3D3D3; }
+    .conversation .item .timestamp:after,
+    .conversation .item .timestamp:before {
+      content: " ";
+      height: 1px;
+      background-color: #D3D3D3;
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      flex-grow: 1;
+      margin: 0px 1rem; }
+    .conversation .item .timestamp + .head {
+      margin-top: 2rem; }
+    .conversation .item .avatar {
+      width: 29px;
+      height: 29px;
+      position: absolute;
+      left: -32px;
+      top: 0; }
+    .conversation .item .head {
+      height: 22px;
+      padding: 5px;
+      background-color: #E7F5FF;
+      position: relative;
+      font-variant: small-caps;
+      text-transform: uppercase;
+      font-size: 85%;
+      font-weight: 600;
+      -webkit-border-top-right-radius: 3px;
+      border-top-right-radius: 3px; }
+    .conversation .item .names {
+      font-size: 0.9em; }
+    .conversation .item .body {
+      text-align: left;
+      overflow-x: auto;
+      padding: 5px;
+      padding-bottom: 10px;
+      padding-top: 0;
+      background-color: #E7F5FF;
+      -webkit-border-bottom-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      white-space: pre-wrap;
+      word-wrap: break-word; }
+    .conversation .item .file-count {
+      font-size: 10px;
+      color: #aaa; }
+    .conversation .item .receipts {
+      color: #A9A9A9;
+      font-size: 70%;
+      text-align: right;
+      margin-top: 2px;
+      padding-right: 4px; }
+      .conversation .item .receipts .receipt {
+        margin-left: 3px; }
+    .conversation .item.ack .head {
+      padding-left: 50px;
+      -webkit-border-radius: 0 3px 3px 0;
+      border-radius: 0 3px 3px 0; }
+    .conversation .item.ack.self .head {
+      -webkit-border-radius: 3px 0 0 3px;
+      border-radius: 3px 0 0 3px;
+      padding-left: 50px; }
+    .conversation .item.ack.self .ack-icon {
+      color: #9B9B9B; }
+    .conversation .item .ack-icon {
+      font-size: 182%;
+      -webkit-border-radius: 100px;
+      border-radius: 100px;
+      display: block;
+      padding: 6px;
+      position: absolute;
+      left: 15px;
+      top: -7px;
+      background-color: #FFFFFF;
+      color: #698FA9; }
+    .conversation .item.self {
+      padding-left: 34px;
+      padding-right: 0; }
+      .conversation .item.self .head {
+        background-color: #f5f5f5;
+        -webkit-border-radius: 3px 0 0 0;
+        border-radius: 3px 0 0 0;
+        padding-left: 7px;
+        padding-right: 15px; }
+      .conversation .item.self .body {
+        background-color: #f5f5f5;
+        -webkit-border-radius: 0 0 0 3px;
+        border-radius: 0 0 0 3px;
+        padding-left: 7px;
+        padding-right: 15px; }
+
+#conversation-head {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  top: 40px;
+  z-index: 200;
+  height: 30px;
+  color: white;
+  line-height: 30px; }
+  #conversation-head .counter {
+    width: 45px;
+    height: 100%;
+    position: absolute;
+    right: 35px;
+    top: 0;
+    bottom: 0;
+    text-align: right;
+    padding-right: 5px;
+    background-color: #334455; }
+  #conversation-head .subject {
+    overflow: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 75px;
+    white-space: nowrap;
+    padding-left: 5px;
+    background-color: #334455; }
+  #conversation-head .info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    bottom: 0;
+    width: 35px;
+    vertical-align: middle;
+    line-height: 30px;
+    background-color: #334455;
+    text-align: center; }
+  #conversation-head .participants {
+    -webkit-transition: all 500ms ease;
+    transition: all 500ms ease;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    max-height: 200px;
+    width: 100%;
+    overflow: auto;
+    background-color: #334455;
+    margin-top: 30px;
+    padding-bottom: 5px; }
+    #conversation-head .participants.open {
+      -webkit-transform: translateY(0%);
+      transform: translateY(0%); }
+    #conversation-head .participants .avatar {
+      margin: 2px 5px 2px 5px; }
+    #conversation-head .participants .former-participant {
+      color: #9FA8B1;
+      text-decoration: line-through; }
+
+#reply {
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  bottom: 45px;
+  height: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 200;
+  border-top: 1px solid #DADADA;
+  background-color: #ECECEC; }
+
+.reply-ack, .reply-attach {
+  display: block;
+  position: relative;
+  width: 40px;
+  font-size: 22px;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  -webkit-align-self: center;
+  align-self: center;
+  text-align: center; }
+
+.reply-ack .fa {
+  background-color: #3d9add;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  color: white;
+  padding: 5px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  font-size: 0.9em; }
+
+.reply-input {
+  min-height: 45px;
+  max-height: 150px;
+  padding: 3px 10px 0 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  overflow: scroll;
+  border: 1px solid #F4F2FF;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  -webkit-align-self: center;
+  align-self: center;
+  -webkit-user-select: initial;
+  user-select: initial;
+  resize: none; }
+  .reply-input:focus {
+    outline: none; }
+
+.file-view {
+  padding: 50px 10px 40px 10px; }
+  .file-view .head {
+    padding: 6px 0 10px 35px;
+    color: #525252;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    word-wrap: break-word;
+    position: relative;
+    min-height: 2.7em; }
+    .file-view .head .file-type {
+      font-size: 2em;
+      position: absolute;
+      top: 0;
+      left: 0; }
+  .file-view .download {
+    height: 40px;
+    text-align: center;
+    background-color: #DFF1FF;
+    line-height: 40px;
+    font-size: 120%; }
+
+#footer {
+  position: absolute;
+  display: table;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 45px;
+  color: #ccc;
+  background-color: #334455;
+  font-size: 13px;
+  z-index: 200; }
+
+.toolbar-fill {
+  display: table-cell;
+  width: 100%; }
+
+/*doc
+---
+title: Info Views
+name: info_views
+category: Components
+---
+
+Info views are used on screens that display detailed information about an object, such as the file view and contact view.
+
+##Info Block
+Info blocks are positioned with flexbox, which let's them to wrap to the next line on mobile.
+
+```html_example
+<div class="info-blocks col-6">
+  <div class="info-block">
+    <div class="info-label">Public Key</div>
+    <div class="text-mono">r4G4JkNoULXnroFNxZQ5x7YgUsPgbLrSgsYbvVfwnA8HE</div>
+  </div>
+  <div class="info-block">
+    <div class="info-label">State:</div>
+    <div class="col-12 info-content">This is you!</div>
+  </div>
+  <div class="info-block">
+    <div class="info-label">Primary address:</div>
+    <div class="col-12 info-content">N/A</div>
+  </div>
+</div>
+```
+
+##Info Table
+Info tables are used to display info in a two column table view, such as on the file detail screen. They use `display:table;`
+to achieve this effect. In this example, `.info-label` is a base style that is modified by the `.info-table` class.
+
+```html_example
+<div class="info-table">
+  <div class="info-row">
+    <div class="info-label">File Name</div><div class="info-content">Peerio_LogoLight.psd</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">File Size</div><div class="info-content">1.01 MB</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">File Type</div><div class="info-content">image</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">Location</div><div class="info-content">In the cloud</div>
+  </div>
+</div>
+```
+
+*/
+.info-blocks {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  .info-blocks .info-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: auto;
+    flex: auto;
+    padding-right: 5px;
+    max-width: 100%;
+    margin-bottom: 15px; }
+
+.info-content {
+  font-weight: 300;
+  padding: 3px 5px 3px 5px;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.info-table {
+  display: table;
+  margin-bottom: 15px; }
+  .info-table .info-row {
+    display: table-row; }
+  .info-table .info-label, .info-table .info-content {
+    display: table-cell; }
+  .info-table .info-label {
+    text-align: right;
+    padding-right: 0.5em;
+    white-space: nowrap; }
+  .info-table .info-label:after {
+    content: ":"; }
+  .info-table .info-content {
+    text-align: left;
+    white-space: normal; }
+
+/*doc
+---
+title: Input Groups
+name: input_groups
+category: Components
+---
+
+An input group is a combination of an input and a label. Both `.text-input` and `.text-input-label` are base styles,
+however when placed inside a `.text-input-group` their behaviour is modified.
+
+The **pop-up label** effect can be achieved with pure css by adding a 'required' attribute to the corresponding input,
+however this could have adverse effects in some cases, so it can also be acheived by added the `.up` class to the label
+with javascript. This effect only exists when both `.text-input` and `.text-input-label` are inside a `.text-input-group`.
+
+```html_example
+<div class="text-input-group col-6">
+  <input type="text" class="text-input" required id="text-input" />
+  <label class="text-input-label" for="text-input">Text Input Group Label</label>
+</div>
+<div class="text-input-group col-5">
+  <select class="select-input" required id="text-input-2">
+    <option>Select Option</option>
+  </select>
+  <label class="text-input-label" for="text-input-2">Select Input Group Label</label>
+</div>
+
+```
+
+*/
+.text-input-group {
+  position: relative;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 200; }
+  .text-input-group .text-input:focus + .text-input-label,
+  .text-input-group .text-input:focus + .text-input-label-static,
+  .text-input-group .text-input:valid + .text-input-label,
+  .text-input-group .text-input:valid + .text-input-label-static,
+  .text-input-group .select-input:focus + .text-input-label,
+  .text-input-group .select-input:focus + .text-input-label-static,
+  .text-input-group .select-input:valid + .text-input-label,
+  .text-input-group .select-input:valid + .text-input-label-static,
+  .text-input-group .text-input-label.up, .text-input-group .up.text-input-label-static {
+    font-size: 0.8rem;
+    top: -0.5rem; }
+
+.slim-input {
+  position: relative;
+  width: 100%;
+  margin: auto auto 15px;
+  color: #fff; }
+  .slim-input input {
+    width: 100%;
+    min-height: 4rem;
+    margin: 0;
+    padding: 5px;
+    background: none;
+    background-color: #278fda;
+    border: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    font-family: OpenSans;
+    font-size: 2rem;
+    font-weight: 100;
+    -webkit-transition: all 300ms ease;
+    transition: all 300ms ease; }
+    .slim-input input:focus {
+      outline: none; }
+  .slim-input label {
+    display: block;
+    width: 80%;
+    font-size: 1.2rem;
+    font-variant: small-caps;
+    color: #bfdef4; }
+  .slim-input i {
+    position: absolute;
+    bottom: -26px;
+    right: -13px;
+    font-size: 2em;
+    padding: 3px 15px 15px 15px; }
+
+/*doc
+---
+title: List View
+name: list_view
+category: Components
+---
+
+The same `.list-view` component is used across messages, file, and contact lists. The component provides places for up
+to four columns of content, usually `|meta-content|main-content with description|more meta|right-arrow`. It also accommodates
+a 'swipe to delete' action.
+
+```html_example
+<div class="list-view">
+  <div class="list-item">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item unread">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item swiped">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+    <div class="list-item-swipe-content">
+      <i class="fa fa-trash-o"></i>
+    </div>
+  </div>
+
+  <div class="list-item">
+    <div class="list-item-thumb">
+      <i class="list-item-thumb file-type fa fa-file-image-o"></i>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">filename.jpg</div>
+      <div class="list-item-description">file size and date created</div>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item">
+    <div class="list-item-thumb">
+      <div class="avatar"></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">User's First and Last Name</div>
+      <div class="list-item-description">username</div>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+</div>
+```
+
+*/
+.list-view, .compact-list-view {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden; }
+  .list-view .list-item, .compact-list-view .list-item {
+    min-height: 60px;
+    max-height: 60px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding-left: 0px;
+    padding-right: 5px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border-bottom: 1px solid #DDDDDD;
+    color: #444444;
+    background-color: #F3F3F3;
+    position: relative;
+    -webkit-transition: -webkit-transform 0.3s ease-out, background-color 0.1s ease-in;
+    transition: transform 0.3s ease-out, background-color 0.1s ease-in; }
+    .list-view .list-item.unread, .compact-list-view .list-item.unread {
+      background-color: #fff;
+      border-left: 5px solid #5EA767; }
+    .list-view .list-item.swiped, .compact-list-view .list-item.swiped {
+      -webkit-transform: translateX(-50px);
+      transform: translateX(-50px); }
+    .list-view .list-item.on-touchstart, .compact-list-view .list-item.on-touchstart {
+      background-color: #E4E4E4; }
+    .list-view .list-item .list-item-content, .compact-list-view .list-item .list-item-content {
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      flex-grow: 1;
+      overflow: hidden; }
+      .list-view .list-item .list-item-content .list-item-title, .compact-list-view .list-item .list-item-content .list-item-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 0.2em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+      .list-view .list-item .list-item-content .list-item-description, .compact-list-view .list-item .list-item-content .list-item-description {
+        font-size: 0.8rem;
+        font-weight: 400;
+        opacity: 0.6;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+    .list-view .list-item .list-item-content.text-right, .compact-list-view .list-item .list-item-content.text-right {
+      min-width: 50px; }
+    .list-view .list-item .list-item-thumb, .compact-list-view .list-item .list-item-thumb {
+      max-width: 40px;
+      min-width: 24px;
+      padding: 0 5px;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 auto;
+      flex: 0 0 auto;
+      text-align: center;
+      -webkit-align-self: center;
+      align-self: center; }
+      .list-view .list-item .list-item-thumb .avatar, .compact-list-view .list-item .list-item-thumb .avatar {
+        height: 29px;
+        width: 29px;
+        line-height: 8px;
+        font-size: 16px; }
+    .list-view .list-item .list-item-forward, .compact-list-view .list-item .list-item-forward {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 20px;
+      flex: 0 0 20px;
+      text-align: center;
+      -webkit-align-self: center;
+      align-self: center;
+      padding-left: 8px; }
+      .list-view .list-item .list-item-forward .fa-chevron-right, .compact-list-view .list-item .list-item-forward .fa-chevron-right {
+        opacity: 0.4; }
+    .list-view .list-item .list-item-swipe-content, .compact-list-view .list-item .list-item-swipe-content {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background-color: #B55353;
+      width: 50px;
+      z-index: -1;
+      height: 100%;
+      color: #FFF;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      font-size: 24px;
+      overflow: hidden; }
+
+.list-item-swipe-wrapper {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex; }
+
+.file-type.fa {
+  font-size: 24px;
+  opacity: 0.8; }
+
+.compact-list-view .list-item {
+  min-height: 20px;
+  max-height: 60px;
+  border: none;
+  background-color: transparent;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em; }
+  .compact-list-view .list-item .list-item-thumb {
+    text-align: left; }
+
+.list-item.swiped.list-item-animation-leave {
+  -webkit-animation-name: slideDelete;
+  animation-name: slideDelete;
+  -webkit-animation-duration: 600ms;
+  animation-duration: 600ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out; }
+  .list-item.swiped.list-item-animation-leave .list-item-swipe-content {
+    -webkit-transition: width 300ms ease-out;
+    transition: width 300ms ease-out;
+    width: 100%; }
+
+/**
+ * Topmost navigation bar with menu toggle, search input, etc
+ */
+#navbar {
+  position: absolute;
+  display: table;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 40px;
+  color: white;
+  background-color: #334455;
+  font-size: 20px;
+  z-index: 400; }
+  #navbar .logo {
+    display: table-cell;
+    width: 45px;
+    padding: 7px 0 0 5px;
+    vertical-align: middle; }
+    #navbar .logo .peerio-logo {
+      width: 22px;
+      height: 22px; }
+
+#sidemenu-toggle, #app-lock, #search {
+  display: table-cell;
+  width: 45px;
+  vertical-align: middle;
+  text-align: center; }
+
+#search {
+  position: relative;
+  width: auto; }
+
+#search-keyword {
+  height: 100%;
+  width: 100%;
+  padding: 0 33px 0 5px;
+  background-color: #49647e;
+  border: none;
+  font-weight: 200;
+  font-size: 13px;
+  text-align: left; }
+
+#search-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 30px;
+  padding-top: 10px;
+  text-align: center; }
+
+#app-lock {
+  padding-left: 10px; }
+
+#new-message {
+  position: relative;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100%; }
+  #new-message .recipients {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    min-height: 40px;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center; }
+    #new-message .recipients .names {
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      flex-grow: 1; }
+  #new-message .name-selected {
+    font-size: 0.9em;
+    background-color: #3d9add;
+    color: white;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 3px 3px 3px 3px;
+    display: inline-block;
+    margin: 2px;
+    word-break: break-all; }
+  #new-message .subject-inputs {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex; }
+  #new-message .to {
+    min-width: 30px;
+    text-align: center; }
+  #new-message .recipients {
+    min-height: 40px;
+    padding-right: 0; }
+    #new-message .recipients .add-btn {
+      min-width: 48px;
+      min-height: 40px;
+      background-color: #eee;
+      color: #888;
+      font-size: 150%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      position: relative;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      text-align: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-align-self: inherit;
+      align-self: inherit; }
+  #new-message .attach-btn {
+    min-width: 48px;
+    border-top: 1px solid white;
+    font-size: 188%;
+    background-color: #eee;
+    color: #888;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    min-height: 40px; }
+  #new-message .icon-counter {
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+    line-height: 16px;
+    position: relative;
+    top: 5px;
+    left: -2px; }
+  #new-message .subject-inputs {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    min-height: 40px; }
+  #new-message .subject {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    border-top: 1px solid #EDEDED;
+    border-bottom: 1px solid #EDEDED;
+    -webkit-appearance: none;
+    border-right: none;
+    border-left: none;
+    padding-left: 5px; }
+    #new-message .subject:focus {
+      background-color: #fafafa; }
+  #new-message .message {
+    resize: none;
+    top: 80px;
+    bottom: 0;
+    padding: 10px 5px;
+    border: none;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1; }
+    #new-message .message:focus {
+      background-color: #fafafa; }
+
+.animated-background {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: placeHolderShimmer;
+  animation-name: placeHolderShimmer;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, #eeeeee), color-stop(18%, #dddddd), color-stop(33%, #eeeeee));
+  background: -webkit-linear-gradient(left, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 200% 100%;
+  height: 90%;
+  min-height: 40px;
+  width: 100%;
+  margin: 3px 8px 0 0;
+  position: relative; }
+  .animated-background .mask1,
+  .animated-background .mask2,
+  .animated-background .mask3,
+  .animated-background .mask4 {
+    position: absolute;
+    background-color: #F3F3F3; }
+  .animated-background .mask1 {
+    top: 35%;
+    left: 0;
+    bottom: 35%;
+    right: 0; }
+  .animated-background .mask2 {
+    top: 0;
+    left: 40%;
+    bottom: 43%;
+    right: 25%; }
+  .animated-background .mask3 {
+    top: 43%;
+    left: 54%;
+    bottom: 0;
+    right: 16%; }
+
+.progress-bar {
+  height: 30px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-shadow: 0px 0px 11px #193046;
+  box-shadow: 0px 0px 11px #193046; }
+  .progress-bar > .progress-bar-step {
+    background-color: #193046;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    position: relative; }
+    .progress-bar > .progress-bar-step.active ~ .progress-bar-step {
+      background-color: #1D6AB5; }
+    .progress-bar > .progress-bar-step.active:after,
+    .progress-bar > .progress-bar-step.active:before {
+      right: -30px;
+      top: 0;
+      border: solid transparent;
+      border-width: 15px;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      z-index: 1;
+      border-left-color: #193046; }
+    .progress-bar > .progress-bar-step.active:after {
+      border-color: rgba(136, 183, 213, 0);
+      border-left-color: #193046; }
+
+/*doc
+---
+title: File / Contact Selector
+name: selectors
+category: Components
+---
+
+Contact / File selector is silimar to the list view but with simpler markup and the option to highlight a selected
+item with the `.selected` class. Selector also has special styles for positioning buttons below the list.
+
+```html_example
+<div class="contact-select-container" style="height: 180px;position:relative;margin-bottom:160px;">
+<ul class="contact-select">
+  <li class="contact">
+    <span type="checkbox" class="checkbox-input"></span>
+    <div class="avatar"></div> Test User 1
+  </li>
+  <li class="contact">
+    <span type="checkbox" checked="checked" class="checkbox-input checked"></span>
+    <div class="avatar"></div> Test User 2
+  </li>
+  <li class="contact selected">
+    <span type="checkbox" checked="checked" class="checkbox-input checked"></span>
+    <div class="avatar"></div> Test User 3
+  </li>
+  <li class="contact selected">
+    <span type="checkbox" checked="checked" class="checkbox-input checked"></span>
+    <div class="avatar"></div> Test User 3
+  </li>
+</ul>
+  <div class="buttons col-12">
+    <div class="btn-lrg btn-safe ">OK</div>
+    <div class="btn-lrg btn-dark">cancel</div>
+  </div>
+</div>
+```
+
+*/
+.contact-select-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+.contact-select {
+  z-index: 600;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+  background-color: white; }
+  .contact-select ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 145px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll; }
+  .contact-select .buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 145px;
+    background-color: #E8E8E8; }
+  .contact-select .contact {
+    padding: 10px;
+    font-size: 1rem;
+    border-bottom: 1px solid #FFFFFF;
+    position: relative;
+    background-color: #EEEEEE; }
+    .contact-select .contact .checkbox-input {
+      margin-right: 10px; }
+    .contact-select .contact .avatar {
+      margin-right: 4px; }
+  .contact-select .contact.selected {
+    background-color: #68b1e5;
+    color: white; }
+    .contact-select .contact.selected .checkbox-input {
+      display: inline-block; }
+    .contact-select .contact.selected .checkbox-input:after {
+      background-color: #68b1e5; }
+    .contact-select .contact.selected .username {
+      color: white; }
+  .contact-select .username {
+    color: #888888;
+    font-size: 90%;
+    margin-left: 5px; }
+
+.contact-select.file-select {
+  width: auto;
+  height: auto;
+  position: fixed;
+  top: 40px;
+  bottom: 45px;
+  left: 0;
+  right: 0;
+  z-index: 201; }
+  .contact-select.file-select .contact i {
+    top: 10px; }
+
+/*doc
+---
+title: Sidebar
+name: sidebar
+category: Components
+---
+
+The sidebar is a view with a dark background and white text that has an `.open` and closed state.
+Most elements inside the sidebar are base styles, and are not styled inside the `.sidebar` component.
+
+Click the sidebar in the example to toggle the `.open` state.
+
+```html_example
+<div style="height:150px;">
+<div class="sidebar open" onClick="$(this).toggleClass('open');">
+  <div class="sidebar-header">
+    <span class="headline">Headline in sidebar</span>
+  </div>
+  <span class="subhead">subhead in sidebar</span>
+  <span class="icon-with-label flex-col-1">
+    <i class="fa fa-pencil circle"></i>
+    <span class="icon-label">Icons in sidebar</span>
+  </span>
+</div>
+<div id="sidebar-dimmer" class="open"></div>
+</div>
+```
+
+*/
+.sidebar {
+  position: absolute;
+  z-index: 300;
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.43, 0.01, 0.49, 0.95);
+  transition: transform 0.3s cubic-bezier(0.43, 0.01, 0.49, 0.95);
+  -webkit-transform: translateX(-101%);
+  transform: translateX(-101%);
+  width: 80%;
+  top: 40px;
+  bottom: 0;
+  background-color: #44494D;
+  padding: 20px 10px;
+  color: white;
+  font-size: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+  @media screen and (max-height: 480px) {
+    .sidebar .sidebar-header {
+      width: 150px;
+      text-align: left;
+      margin: 0 auto; }
+      .sidebar .sidebar-header .avatar {
+        float: left;
+        margin-right: 10px; } }
+  .sidebar .app-version {
+    position: static;
+    font-size: 70%;
+    color: #9E9E9E; }
+  .sidebar .flex-1 {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1; }
+  .sidebar .flex-0 {
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    flex-grow: 0; }
+  .sidebar .avatar {
+    margin-bottom: 0.5rem; }
+  .sidebar.open {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition-duration: .7s;
+    transition-duration: .7s; }
+  .sidebar .fa-mobile {
+    font-size: 1.5em; }
+  .sidebar .sidebar-footer-text {
+    margin-top: 1rem; }
+    .sidebar .sidebar-footer-text .feedback {
+      float: right;
+      font-size: 70%;
+      opacity: 0.8;
+      text-decoration: underline;
+      color: white; }
+  .sidebar ul {
+    list-style: none;
+    padding: 0 1em;
+    margin: 0.5em 0 0 0; }
+    .sidebar ul li {
+      margin-bottom: 0.7em;
+      font-weight: 100; }
+
+#sidebar-dimmer {
+  position: absolute;
+  top: 40px;
+  left: -150%;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 299;
+  background-color: #000;
+  -webkit-transition: none;
+  transition: none;
+  opacity: 0; }
+  #sidebar-dimmer.open {
+    left: 0;
+    background-color: #000;
+    -webkit-transition: opacity 200ms 500ms linear;
+    transition: opacity 200ms 500ms linear;
+    opacity: 0.4; }
+
+/*doc
+---
+title: Tab Navigation
+name: tabs
+category: Components
+---
+
+Secondary navigation bar with tab selectors (messages, files, contacts). Tabs can include an icon and notification
+badge.
+
+```html_example
+<div style="position:relative;height:50px;top:-40px">
+  <div id="tabbar">
+    <div class="tab"><i class="tab-icon fa fa-comments-o"></i>messages</div>
+    <div class="tab active"><i class="tab-icon fa fa-files-o"></i>files</div>
+    <div class="tab"><i class="tab-icon fa fa-users"></i>contacts<i class="fa fa-circle badge"></i></div>
+  </div>
+</div>
+```
+
+*/
+#tabbar {
+  position: absolute;
+  display: table;
+  top: 40px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 35px;
+  color: white;
+  background-color: #278fda;
+  font-size: 11px;
+  z-index: 200;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); }
+  #tabbar .tab {
+    display: table-cell;
+    text-align: center;
+    padding-top: 8px;
+    width: 33.33333%;
+    position: relative;
+    line-height: 1.8em;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.3); }
+    #tabbar .tab.active {
+      color: #fff;
+      background-color: #4CA7E8; }
+      #tabbar .tab.active:after {
+        content: " ";
+        bottom: -18px;
+        left: 50%;
+        border: solid transparent;
+        height: 0;
+        width: 0;
+        position: absolute;
+        border-color: transparent;
+        border-bottom-color: #4CA7E8;
+        border-width: 10px;
+        -webkit-transform: scale(1, 0.8) translate(-50%, 0%) rotate(180deg);
+        transform: scale(1, 0.8) translate(-50%, 0%) rotate(180deg); }
+    #tabbar .tab .tab-icon {
+      display: inline-block;
+      font-size: 1.3rem;
+      margin-right: 0.2em;
+      vertical-align: middle; }
+    #tabbar .tab .badge {
+      position: relative;
+      top: -1px;
+      left: 3px;
+      height: 16px;
+      color: #b6e2a9;
+      font-size: 7px; }
+
+.page-wrapper-login {
+  background-color: #2281C5;
+  color: white; }
+  .page-wrapper-login .select-input {
+    border: none;
+    background-color: #3d9add;
+    height: 30px;
+    padding: 5px; }
+
+.content-wrapper-signup {
+  background-color: #2281C5;
+  color: white; }
+
+.content-wrapper-signup {
+  background-color: #2281C5;
+  color: white; }
+  .content-wrapper-signup .text-input, .content-wrapper-signup .select-input {
+    color: white;
+    border-color: white; }

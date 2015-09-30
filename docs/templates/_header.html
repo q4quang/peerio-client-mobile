@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Peerio Style Guide <%= title %></title>
+    <link rel="shortcut icon" href="static/brick.png" />
+
+    <!-- Styleguide CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/doc.css">
+    <link rel="stylesheet" href="assets/css/github.css">
+
+    <!-- CSS to be documented -->
+    <link rel="stylesheet" href="assets/css/app.css">
+
+    <!-- Main libraries -->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+
+  <body>
+    <header class="doc-header">
+        <h1>Peerio Style Guide</h1>
+              <!-- Add you pages here -->
+        <ul class="doc-main-menu">
+            <li><a href="index.html">Intro</a></li>
+            <li><a href="base_css.html">Base CSS</a></li>
+            <li><a href="components.html">Components</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="utility.html">Utility</a></li>
+        </ul>
+      <!-- //header/container -->
+    </header>
+
+    <ul class="doc-submenu">
+        <% @blocks.each do |block| %>
+        <li><a href="#<%= block[:name] %>"><%= block[:title] %></a></li>
+        <% end %>
+    </ul>
+
+    <div class="doc-content">

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Peerio Style Guide Base CSS</title>
+    <link rel="shortcut icon" href="static/brick.png" />
+
+    <!-- Styleguide CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/doc.css">
+    <link rel="stylesheet" href="assets/css/github.css">
+
+    <!-- CSS to be documented -->
+    <link rel="stylesheet" href="assets/css/app.css">
+
+    <!-- Main libraries -->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+
+  <body>
+    <header class="doc-header">
+        <h1>Peerio Style Guide</h1>
+              <!-- Add you pages here -->
+        <ul class="doc-main-menu">
+            <li><a href="index.html">Intro</a></li>
+            <li><a href="base_css.html">Base CSS</a></li>
+            <li><a href="components.html">Components</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="utility.html">Utility</a></li>
+        </ul>
+      <!-- //header/container -->
+    </header>
+
+    <ul class="doc-submenu">
+        
+        <li><a href="#button">Buttons</a></li>
+        
+        <li><a href="#Icons">Icons</a></li>
+        
+        <li><a href="#Inputs">Inputs</a></li>
+        
+        <li><a href="#Typography">Typography</a></li>
+        
+    </ul>
+
+    <div class="doc-content"><h1 id="button" class="styleguide">Buttons</h1>
+<p class="styleguide">Button styles can be applied to any element. Buttons are full width by default,
+but can be made smaller using layout styles. Button styles can also be combined.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="col-5">
+  <div class="btn-md btn-danger">danger</div>
+</div>
+<div class="col-6">
+  <div class="btn-md btn-safe">safe</div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-5"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-md btn-danger"</span><span class="nt">&gt;</span>danger<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-6"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-md btn-safe"</span><span class="nt">&gt;</span>safe<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+<table class="styleguide"> <tr>
+<th>Button</th>
+<th>Button Class</th>
+</tr>
+ <tr>
+<td><div class="btn-lrg">large button</div></td>
+<td><code class="styleguide">btn-lrg</code></td>
+</tr>
+<tr>
+<td><div class="btn-md">medium button</div></td>
+<td><code class="styleguide">btn-md</code></td>
+</tr>
+<tr>
+<td><div class="btn-md btn-dark">dark button</div></td>
+<td><code class="styleguide">btn-md btn-dark</code></td>
+</tr>
+<tr>
+<td><div class="btn-md btn-safe">safe button</div></td>
+<td><code class="styleguide">btn-md btn-safe</code></td>
+</tr>
+<tr>
+<td><div class="btn-md btn-danger">danger button</div></td>
+<td><code class="styleguide">btn-md btn-danger</code></td>
+</tr>
+<tr>
+<td><div class="btn-sm">small button</div></td>
+<td><code class="styleguide">btn-sm</code></td>
+</tr>
+<tr>
+<td><div class="btn">default button</div></td>
+<td><code class="styleguide">btn</code></td>
+</tr>
+<tr>
+<td><div class="btn-subtle">subtle button</div></td>
+<td><code class="styleguide">btn-subtle</code></td>
+</tr>
+ </table><table class="styleguide"> <tr>
+<th>Footer Buttons</th>
+<th>Button Class/ID</th>
+</tr>
+ <tr>
+<td><div id="global-back">Global Back Button</div></td>
+<td><code class="styleguide">#global-back</code></td>
+</tr>
+<tr>
+<td><div class="accept-button">Global Action Button</div></td>
+<td><code class="styleguide">.accept-button</code></td>
+</tr>
+ </table>
+<h1 id="Icons" class="styleguide">Icons</h1>
+<p class="styleguide">Peerio uses fontAwesome for the majority of icon. Icons have a default font-size of 1em.
+The following icons have been colorized for different filetypes.</p><table class="styleguide"> <tr>
+<th>Icon</th>
+<th>File-type</th>
+<th>Code</th>
+</tr>
+ <tr>
+<td><i class="fa fa-file-excel-o"></i></td>
+<td>Excel</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-excel-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-text-o"></i></td>
+<td>Text</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-text-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-pdf-o"></i></td>
+<td>PDF</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-word-o"></i></td>
+<td>MS Word</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-word-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-powerpoint-o"></i></td>
+<td>Powerpoint</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-powerpoint-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-image-o"></i></td>
+<td>Image</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-image-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-archive-o"></i></td>
+<td>Archive</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-archive-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-audio-o"></i></td>
+<td>Audio</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-audio-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-video-o"></i></td>
+<td>Video</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-video-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+<tr>
+<td><i class="fa fa-file-code-o"></i></td>
+<td>Code</td>
+<td><code class="styleguide">&lt;i class=&quot;fa fa-file-code-o&quot;&gt;&lt;/i&gt;</code></td>
+</tr>
+ </table>
+<h1 id="Inputs" class="styleguide">Inputs</h1>
+<p class="styleguide">Some form inputs aren&#39;t strictly &#39;base&#39; elements, since they rely on label plus input combo, but conceptually, they
+still act as a single unit.</p>
+<h3>Radio Inputs</h3>
+<p class="styleguide">Custom radio and checkbox inputs rely on two HTML elements: an input and a label. The input itself is hidden,
+while the label is styled using the <code class="styleguide">:after</code> pseudo-selector to display a styled input.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <input class="sr-only radio-button" type="radio" name="radio_inputs" id="radio_1" value="sms"/>
+<label class="radio-label" for="radio_1">SMS</label>
+
+<input class="sr-only radio-button" type="radio" name="radio_inputs" id="radio_2" value="captcha" checked />
+<label class="radio-label" for="radio_2">Captcha</label>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"sr-only radio-button"</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"radio_inputs"</span> <span class="na">id=</span><span class="s">"radio_1"</span> <span class="na">value=</span><span class="s">"sms"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"radio-label"</span> <span class="na">for=</span><span class="s">"radio_1"</span><span class="nt">&gt;</span>SMS<span class="nt">&lt;/label&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"sr-only radio-button"</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"radio_inputs"</span> <span class="na">id=</span><span class="s">"radio_2"</span> <span class="na">value=</span><span class="s">"captcha"</span> <span class="na">checked</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"radio-label"</span> <span class="na">for=</span><span class="s">"radio_2"</span><span class="nt">&gt;</span>Captcha<span class="nt">&lt;/label&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Checkbox Inputs</h3>
+<div class="codeExample">
+  <div class="exampleOutput">
+    <input class="checkbox-input" type="checkbox" name="auth_method" id="checkbox_1" value="sms"/>
+<label class="checkbox-label" for="checkbox_1">Checkbox 1</label>
+
+<input class="checkbox-input" type="checkbox" name="auth_method" id="checkbox_2" value="captcha" checked />
+<label class="checkbox-label" for="checkbox_2">Checkbox 2</label>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"checkbox-input"</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"auth_method"</span> <span class="na">id=</span><span class="s">"checkbox_1"</span> <span class="na">value=</span><span class="s">"sms"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"checkbox-label"</span> <span class="na">for=</span><span class="s">"checkbox_1"</span><span class="nt">&gt;</span>Checkbox 1<span class="nt">&lt;/label&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"checkbox-input"</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"auth_method"</span> <span class="na">id=</span><span class="s">"checkbox_2"</span> <span class="na">value=</span><span class="s">"captcha"</span> <span class="na">checked</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"checkbox-label"</span> <span class="na">for=</span><span class="s">"checkbox_2"</span><span class="nt">&gt;</span>Checkbox 2<span class="nt">&lt;/label&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Text inputs</h3>
+<p class="styleguide">Text inputs are full-width by default. They can be contained using layout classes.</p><div class="codeExample">
+  <div class="exampleOutput">
+      <input class="text-input" id="text_input_1" type="text" placeholder="text input with placeholder" />
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"text-input"</span> <span class="na">id=</span><span class="s">"text_input_1"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"text input with placeholder"</span> <span class="nt">/&gt;</span></pre>
+    </div>
+  </div>
+</div>
+<p class="styleguide">//TODO: better textarea styles</p><div class="codeExample">
+  <div class="exampleOutput">
+      <textarea class="textarea-transparent"></textarea>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">"textarea-transparent"</span><span class="nt">&gt;&lt;/textarea&gt;</span></pre>
+    </div>
+  </div>
+</div>
+<div class="codeExample">
+  <div class="exampleOutput">
+      <select class="select-input">
+    <option>Option 1</option>
+    <option>Option 1</option>
+    <option>Option 1</option>
+    <option>Option 1</option>
+  </select>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;select</span> <span class="na">class=</span><span class="s">"select-input"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Option 1<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Option 1<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Option 1<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Option 1<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;/select&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="Typography" class="styleguide">Typography</h1>
+<p class="styleguide">These are styles for text elements. They can be applied to any element.</p><table class="styleguide"> <tr>
+<th>Text Style</th>
+<th>class name</th>
+</tr>
+ <tr>
+<td><span class="headline-lrg">Large Headline</span></td>
+<td><code class="styleguide">headline-lrg</code></td>
+</tr>
+<tr>
+<td><span class="headline">Default Headline</span></td>
+<td><code class="styleguide">headline</code></td>
+</tr>
+<tr>
+<td><span class="headline-md">Medium headline</span></td>
+<td><code class="styleguide">headline-md</code></td>
+</tr>
+<tr>
+<td><span class="headline-sm">Small headline</span></td>
+<td><code class="styleguide">headline-sm</code></td>
+</tr>
+<tr>
+<td><span class="subhead">subhead</span></td>
+<td><code class="styleguide">subhead</code></td>
+</tr>
+<tr>
+<td><span class="subhead-inline">inline subhead</span></td>
+<td><code class="styleguide">subhead-inline</code></td>
+</tr>
+<tr>
+<td><span class="txt-lrg">Large text</span></td>
+<td><code class="styleguide">txt-lrg</code></td>
+</tr>
+<tr>
+<td><span class="txt-sm">small text</span></td>
+<td><code class="styleguide">txt-sm</code></td>
+</tr>
+<tr>
+<td><span class="info-label">info label</div></td>
+<td><code class="styleguide">info-label</code></td>
+</tr>
+<tr>
+<td><span class="info-small"><i class="fa fa-user"></i>label with icon </span></td>
+<td><code class="styleguide">info-small</code></td>
+</tr>
+<tr>
+<td><div class="text-mono">monospace text</div></td>
+<td><code class="styleguide">text-mono</code></td>
+</tr>
+<tr>
+<td><div class="text-crossout">crossed-out text</div></td>
+<td><code class="styleguide">text-crossout</code></td>
+</tr>
+<tr>
+<td><div class="centered-text">centered text</div></td>
+<td><code class="styleguide">centered-text</code></td>
+</tr>
+ </table><div class="codeExample">
+  <div class="exampleOutput">
+    <h1 class="headline-lrg">Headline with a subhead</h1>
+<h2 class="subhead">subhead</h2>
+
+<h1 class="headline-md">Headline with inline-subhead</h1>
+<h1 class="subhead-inline">Inline subheads are very small</h1>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"headline-lrg"</span><span class="nt">&gt;</span>Headline with a subhead<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"subhead"</span><span class="nt">&gt;</span>subhead<span class="nt">&lt;/h2&gt;</span>
+
+<span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"headline-md"</span><span class="nt">&gt;</span>Headline with inline-subhead<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"subhead-inline"</span><span class="nt">&gt;</span>Inline subheads are very small<span class="nt">&lt;/h1&gt;</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+$(document).ready(function() {
+
+  // set the active tab
+  var currentHref = document.location.pathname.substr(1);
+  var hash = document.location.hash;
+  var docMenu = $('.doc-submenu');
+  if (currentHref)
+  {
+    $('.doc-main-menu').find('a[href^="' + currentHref + '"]').parents('li').addClass('active');
+  }
+
+  $('.doc-submenu a').on('click', function(){
+    $('.doc-submenu li').removeClass('active');
+    $(this).parents('li').addClass('active');
+  });
+
+  $(".codeExample .codeBlock").append("<div class='showCode'>Toggle Code</div>");
+  $(".codeExample .highlight").hide()
+  $(".showCode").on('click', function(){
+    $(this).siblings('.highlight').toggle();
+  });
+
+});
+</script>
+</body>
+</html>

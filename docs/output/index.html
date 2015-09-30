@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Peerio Style Guide </title>
+    <link rel="shortcut icon" href="static/brick.png" />
+
+    <!-- Styleguide CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/doc.css">
+    <link rel="stylesheet" href="assets/css/github.css">
+
+    <!-- CSS to be documented -->
+    <link rel="stylesheet" href="assets/css/app.css">
+
+    <!-- Main libraries -->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+
+  <body>
+    <header class="doc-header">
+        <h1>Peerio Style Guide</h1>
+              <!-- Add you pages here -->
+        <ul class="doc-main-menu">
+            <li><a href="index.html">Intro</a></li>
+            <li><a href="base_css.html">Base CSS</a></li>
+            <li><a href="components.html">Components</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="utility.html">Utility</a></li>
+        </ul>
+      <!-- //header/container -->
+    </header>
+
+    <ul class="doc-submenu">
+        
+    </ul>
+
+    <div class="doc-content"><h1>Peerio CSS Style Guide</h1>
+<p class="styleguide">Welcome to the Peerio styleguide. Herein lies the method to our CSS madness.</p>
+<h2>Structure</h2>
+<p class="styleguide">Peerio styles are loosely bases on the <a class="styleguide" href="https://smacss.com/" title="https://smacss.com/">SMACSS</a> CSS architecture. Styles are divided into:</p><ul class="styleguide"><li><strong>Base Styles</strong></li>
+<li><strong>Components</strong></li>
+<li><strong>Layouts</strong></li>
+<li><strong>Themes</strong></li>
+</ul>
+<h4>Base Styles</h4>
+<p class="styleguide">Base styles are any styles that are applied to a single HTML element. 
+Base styles should be self-sustaining and should not depend on nesting.</p><p class="styleguide">This is an example of a base style: </p><div class="codeBlock">
+  <div class="highlight">
+    <pre>a {
+  color: color(p-blue);
+}</pre>
+  </div>
+</div><p class="styleguide">This is not: </p><div class="codeBlock">
+  <div class="highlight">
+    <pre>#sidebar a {
+  color: color(p-blue);
+}</pre>
+  </div>
+</div><p class="styleguide">Base styles are currently categorized into the following files: </p><div class="codeBlock">
+  <div class="highlight">
+    <pre>|-base/
+    |- base_elements (Styles that are applied to HTML tags)
+    |- buttons
+    |- fonts
+    |- icons
+    |- inputs
+    |- typography</pre>
+  </div>
+</div></div>
+<script>
+$(document).ready(function() {
+
+  // set the active tab
+  var currentHref = document.location.pathname.substr(1);
+  var hash = document.location.hash;
+  var docMenu = $('.doc-submenu');
+  if (currentHref)
+  {
+    $('.doc-main-menu').find('a[href^="' + currentHref + '"]').parents('li').addClass('active');
+  }
+
+  $('.doc-submenu a').on('click', function(){
+    $('.doc-submenu li').removeClass('active');
+    $(this).parents('li').addClass('active');
+  });
+
+  $(".codeExample .codeBlock").append("<div class='showCode'>Toggle Code</div>");
+  $(".codeExample .highlight").hide()
+  $(".showCode").on('click', function(){
+    $(this).siblings('.highlight').toggle();
+  });
+
+});
+</script>
+</body>
+</html>

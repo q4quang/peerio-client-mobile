@@ -1,0 +1,28 @@
+</div>
+<script>
+$(document).ready(function() {
+
+  // set the active tab
+  var currentHref = document.location.pathname.substr(1);
+  var hash = document.location.hash;
+  var docMenu = $('.doc-submenu');
+  if (currentHref)
+  {
+    $('.doc-main-menu').find('a[href^="' + currentHref + '"]').parents('li').addClass('active');
+  }
+
+  $('.doc-submenu a').on('click', function(){
+    $('.doc-submenu li').removeClass('active');
+    $(this).parents('li').addClass('active');
+  });
+
+  $(".codeExample .codeBlock").append("<div class='showCode'>Toggle Code</div>");
+  $(".codeExample .highlight").hide()
+  $(".showCode").on('click', function(){
+    $(this).siblings('.highlight').toggle();
+  });
+
+});
+</script>
+</body>
+</html>

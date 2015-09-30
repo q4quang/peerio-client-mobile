@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Peerio Style Guide Utility</title>
+    <link rel="shortcut icon" href="static/brick.png" />
+
+    <!-- Styleguide CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/doc.css">
+    <link rel="stylesheet" href="assets/css/github.css">
+
+    <!-- CSS to be documented -->
+    <link rel="stylesheet" href="assets/css/app.css">
+
+    <!-- Main libraries -->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+
+  <body>
+    <header class="doc-header">
+        <h1>Peerio Style Guide</h1>
+              <!-- Add you pages here -->
+        <ul class="doc-main-menu">
+            <li><a href="index.html">Intro</a></li>
+            <li><a href="base_css.html">Base CSS</a></li>
+            <li><a href="components.html">Components</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="utility.html">Utility</a></li>
+        </ul>
+      <!-- //header/container -->
+    </header>
+
+    <ul class="doc-submenu">
+        
+        <li><a href="#colors">Colors</a></li>
+        
+    </ul>
+
+    <div class="doc-content"><h1 id="colors" class="styleguide">Colors</h1>
+<p class="styleguide">Colors are placed in a SASS map object called <code class="styleguide">$colors</code>. The colors can be accessed with the <code class="styleguide">color</code> function like so:</p><div class="codeBlock">
+  <div class="highlight">
+    <pre>.sidebar{
+  background-color: color(p-blue-light-40);
+}</pre>
+  </div>
+</div>
+<div class="doc-swatches">
+  <h3>Light Blue</h3>
+  <div class="p-blue-light-50-bg">p-blue-light-50</div>
+  <div class="p-blue-light-40-bg">p-blue-light-40</div>
+  <div class="p-blue-light-35-bg">p-blue-light-35</div>
+  <div class="p-blue-light-30-bg">p-blue-light-30</div>
+  <div class="p-blue-light-25-bg">p-blue-light-25</div>
+  <div class="p-blue-light-20-bg">p-blue-light-20</div>
+  <div class="p-blue-light-15-bg">p-blue-light-15</div>
+  <div class="p-blue-light-10-bg">p-blue-light-10</div>
+  <div class="p-blue-light-5-bg">p-blue-light-5</div>
+</div>
+
+<div class="doc-swatches">
+  <h3>Dark Blue</h3>
+  <div class="p-blue-dark-5-bg">p-blue-light-5</div>
+  <div class="p-blue-dark-10-bg">p-blue-dark-10</div>
+  <div class="p-blue-dark-15-bg">p-blue-dark-15</div>
+  <div class="p-blue-dark-20-bg">p-blue-dark-20</div>
+  <div class="p-blue-dark-25-bg">p-blue-dark-25</div>
+  <div class="p-blue-dark-30-bg">p-blue-dark-30</div>
+  <div class="p-blue-darker-bg">p-blue-darker</div>
+</div>
+
+<div class="doc-swatches">
+  <h3>Light Green</h3>
+    <div class="p-green-light-25-bg">p-green-light-25</div>
+    <div class="p-green-light-20-bg">p-green-light-20</div>
+    <div class="p-green-light-15-bg">p-green-light-15</div>
+    <div class="p-green-light-10-bg">p-green-light-10</div>
+    <div class="p-green-light-5-bg"> p-green-light-5</div>
+</div>
+
+<div class="doc-swatches">
+  <h3>Dark Green</h3>
+  <div class="p-green-dark-5-bg">p-green-dark-5</div>
+  <div class="p-green-dark-10-bg">p-green-dark-10</div>
+  <div class="p-green-dark-15-bg">p-green-dark-15</div>
+  <div class="p-green-dark-20-bg">p-green-dark-20</div>
+  <div class="p-green-dark-25-bg">p-green-dark-25</div>
+  <div class="p-green-dark-30-bg">p-green-dark-30</div>
+  <div class="p-green-dark-35-bg">p-green-dark-35</div>
+  <div class="p-green-dark-40-bg">p-green-dark-40</div>
+</div>
+</div>
+<script>
+$(document).ready(function() {
+
+  // set the active tab
+  var currentHref = document.location.pathname.substr(1);
+  var hash = document.location.hash;
+  var docMenu = $('.doc-submenu');
+  if (currentHref)
+  {
+    $('.doc-main-menu').find('a[href^="' + currentHref + '"]').parents('li').addClass('active');
+  }
+
+  $('.doc-submenu a').on('click', function(){
+    $('.doc-submenu li').removeClass('active');
+    $(this).parents('li').addClass('active');
+  });
+
+  $(".codeExample .codeBlock").append("<div class='showCode'>Toggle Code</div>");
+  $(".codeExample .highlight").hide()
+  $(".showCode").on('click', function(){
+    $(this).siblings('.highlight').toggle();
+  });
+
+});
+</script>
+</body>
+</html>

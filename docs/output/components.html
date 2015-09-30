@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Peerio Style Guide Components</title>
+    <link rel="shortcut icon" href="static/brick.png" />
+
+    <!-- Styleguide CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/doc.css">
+    <link rel="stylesheet" href="assets/css/github.css">
+
+    <!-- CSS to be documented -->
+    <link rel="stylesheet" href="assets/css/app.css">
+
+    <!-- Main libraries -->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+
+  <body>
+    <header class="doc-header">
+        <h1>Peerio Style Guide</h1>
+              <!-- Add you pages here -->
+        <ul class="doc-main-menu">
+            <li><a href="index.html">Intro</a></li>
+            <li><a href="base_css.html">Base CSS</a></li>
+            <li><a href="components.html">Components</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="utility.html">Utility</a></li>
+        </ul>
+      <!-- //header/container -->
+    </header>
+
+    <ul class="doc-submenu">
+        
+        <li><a href="#alerts">Alerts</a></li>
+        
+        <li><a href="#conversation">Conversation Style</a></li>
+        
+        <li><a href="#info_views">Info Views</a></li>
+        
+        <li><a href="#input_groups">Input Groups</a></li>
+        
+        <li><a href="#list_view">List View</a></li>
+        
+        <li><a href="#selectors">File / Contact Selector</a></li>
+        
+        <li><a href="#sidebar">Sidebar</a></li>
+        
+        <li><a href="#tabs">Tab Navigation</a></li>
+        
+    </ul>
+
+    <div class="doc-content"><h1 id="alerts" class="styleguide">Alerts</h1>
+<p class="styleguide">Alert, confirm and prompt dialog boxes follow the same class pattern:</p><div class="codeBlock">
+  <div class="highlight">
+    <pre>.alert
+  .alert-content
+    .alert-content-text
+    .alert-content-btns</pre>
+  </div>
+</div><p class="styleguide">The only difference between the three are whether they have one or two button and the contents of <code class="styleguide">.alert-content-text</code>.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 2rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="alert-content-text">
+        Alert modal
+      </div>
+      <div class="alert-content-btns">
+        <div class="btn-md">Alert Content Button</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="c">&lt;!--this top div simulates the .dim-background class in the example--&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 2rem;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert text-center"</span> <span class="na">style=</span><span class="s">"z-index:600"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content-text"</span><span class="nt">&gt;</span>
+        Alert modal
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content-btns"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-md"</span><span class="nt">&gt;</span>Alert Content Button<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+<div class="codeExample">
+  <div class="exampleOutput">
+    <!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 2rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="headline-lrg">
+        Confirm modal with headline
+      </div>
+      <div class="alert-content-text">
+        Confirm modal text
+      </div>
+      <div class="alert-content-btns">
+        <div class="col-6">
+          <div class="btn-md btn-danger">Confirm cancel button</div>
+        </div><div class="col-6">
+          <div class="btn-md btn-safe">Confirm accept button</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="c">&lt;!--this top div simulates the .dim-background class in the example--&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 2rem;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert text-center"</span> <span class="na">style=</span><span class="s">"z-index:600"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"headline-lrg"</span><span class="nt">&gt;</span>
+        Confirm modal with headline
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content-text"</span><span class="nt">&gt;</span>
+        Confirm modal text
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content-btns"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-6"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-md btn-danger"</span><span class="nt">&gt;</span>Confirm cancel button<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-6"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-md btn-safe"</span><span class="nt">&gt;</span>Confirm accept button<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+<div class="codeExample">
+  <div class="exampleOutput">
+    <!--this top div simulates the .dim-background class in the example-->
+<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 1rem;">
+  <div class="alert text-center" style="z-index:600">
+    <div class="alert-content">
+      <div class="headline-lrg">
+        Prompt modal with headline
+      </div>
+      <div class="alert-content-text">
+        Prompt with headline and some text
+        <input type="text" class="text-input centered-text" autoCorrect="off" autoCapitalize="off" spellCheck="false" value="" placeholder="prompt input placeholder"/>
+      </div>
+      <div class="alert-content-btns">
+        <div class="col-6">
+          <div class="btn-md btn-danger">Confirm cancel button</div>
+        </div><div class="col-6">
+          <div class="btn-md btn-safe">Confirm accept button</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="c">&lt;!--this top div simulates the .dim-background class in the example--&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"width:100%;height:100%;background-color:rgba(0,0,0,0.5);padding: 1rem;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert text-center"</span> <span class="na">style=</span><span class="s">"z-index:600"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"headline-lrg"</span><span class="nt">&gt;</span>
+        Prompt modal with headline
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content-text"</span><span class="nt">&gt;</span>
+        Prompt with headline and some text
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"text-input centered-text"</span> <span class="na">autoCorrect=</span><span class="s">"off"</span> <span class="na">autoCapitalize=</span><span class="s">"off"</span> <span class="na">spellCheck=</span><span class="s">"false"</span> <span class="na">value=</span><span class="s">""</span> <span class="na">placeholder=</span><span class="s">"prompt input placeholder"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert-content-btns"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-6"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-md btn-danger"</span><span class="nt">&gt;</span>Confirm cancel button<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"col-6"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-md btn-safe"</span><span class="nt">&gt;</span>Confirm accept button<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="conversation" class="styleguide">Conversation Style</h1>
+<div class="codeExample">
+  <div class="exampleOutput">
+    <div class='conversation' style="margin-top:0;padding-bottom:0;">
+  <div class="item">
+    <div class="timestamp">Today</div>
+    <div class="head"><div class="avatar"></div>username</div>
+    <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</div>
+  </div>
+  <div class="item self">
+    <div class="head">current user</div>
+    <div class="body">Duis aute irure dolor in reprehenderit in voluptate velitdatat proident.</div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'conversation'</span> <span class="na">style=</span><span class="s">"margin-top:0;padding-bottom:0;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"timestamp"</span><span class="nt">&gt;</span>Today<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"head"</span><span class="nt">&gt;&lt;div</span> <span class="na">class=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/div&gt;</span>username<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"body"</span><span class="nt">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item self"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"head"</span><span class="nt">&gt;</span>current user<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"body"</span><span class="nt">&gt;</span>Duis aute irure dolor in reprehenderit in voluptate velitdatat proident.<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="info_views" class="styleguide">Info Views</h1>
+<p class="styleguide">Info views are used on screens that display detailed information about an object, such as the file view and contact view.</p>
+<h2>Info Block</h2>
+<p class="styleguide">Info blocks are positioned with flexbox, which let&#39;s them to wrap to the next line on mobile.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="info-blocks col-6">
+  <div class="info-block">
+    <div class="info-label">Public Key</div>
+    <div class="text-mono">r4G4JkNoULXnroFNxZQ5x7YgUsPgbLrSgsYbvVfwnA8HE</div>
+  </div>
+  <div class="info-block">
+    <div class="info-label">State:</div>
+    <div class="col-12 info-content">This is you!</div>
+  </div>
+  <div class="info-block">
+    <div class="info-label">Primary address:</div>
+    <div class="col-12 info-content">N/A</div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-blocks col-6"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-block"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-label"</span><span class="nt">&gt;</span>Public Key<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-mono"</span><span class="nt">&gt;</span>r4G4JkNoULXnroFNxZQ5x7YgUsPgbLrSgsYbvVfwnA8HE<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-block"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-label"</span><span class="nt">&gt;</span>State:<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-12 info-content"</span><span class="nt">&gt;</span>This is you!<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-block"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-label"</span><span class="nt">&gt;</span>Primary address:<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-12 info-content"</span><span class="nt">&gt;</span>N/A<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h2>Info Table</h2>
+<p class="styleguide">Info tables are used to display info in a two column table view, such as on the file detail screen. They use <code class="styleguide">display:table;</code>
+to achieve this effect. In this example, <code class="styleguide">.info-label</code> is a base style that is modified by the <code class="styleguide">.info-table</code> class.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="info-table">
+  <div class="info-row">
+    <div class="info-label">File Name</div><div class="info-content">Peerio_LogoLight.psd</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">File Size</div><div class="info-content">1.01 MB</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">File Type</div><div class="info-content">image</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">Location</div><div class="info-content">In the cloud</div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-table"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-label"</span><span class="nt">&gt;</span>File Name<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"info-content"</span><span class="nt">&gt;</span>Peerio_LogoLight.psd<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-label"</span><span class="nt">&gt;</span>File Size<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"info-content"</span><span class="nt">&gt;</span>1.01 MB<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-label"</span><span class="nt">&gt;</span>File Type<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"info-content"</span><span class="nt">&gt;</span>image<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"info-label"</span><span class="nt">&gt;</span>Location<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"info-content"</span><span class="nt">&gt;</span>In the cloud<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="input_groups" class="styleguide">Input Groups</h1>
+<p class="styleguide">An input group is a combination of an input and a label. Both <code class="styleguide">.text-input</code> and <code class="styleguide">.text-input-label</code> are base styles,
+however when placed inside a <code class="styleguide">.text-input-group</code> their behaviour is modified.</p><p class="styleguide">The <strong>pop-up label</strong> effect can be achieved with pure css by adding a &#39;required&#39; attribute to the corresponding input,
+however this could have adverse effects in some cases, so it can also be acheived by added the <code class="styleguide">.up</code> class to the label
+with javascript. This effect only exists when both <code class="styleguide">.text-input</code> and <code class="styleguide">.text-input-label</code> are inside a <code class="styleguide">.text-input-group</code>.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="text-input-group col-6">
+  <input type="text" class="text-input" required id="text-input" />
+  <label class="text-input-label" for="text-input">Text Input Group Label</label>
+</div>
+<div class="text-input-group col-5">
+  <select class="select-input" required id="text-input-2">
+    <option>Select Option</option>
+  </select>
+  <label class="text-input-label" for="text-input-2">Select Input Group Label</label>
+</div>
+
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-input-group col-6"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"text-input"</span> <span class="na">required</span> <span class="na">id=</span><span class="s">"text-input"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"text-input-label"</span> <span class="na">for=</span><span class="s">"text-input"</span><span class="nt">&gt;</span>Text Input Group Label<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-input-group col-5"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;select</span> <span class="na">class=</span><span class="s">"select-input"</span> <span class="na">required</span> <span class="na">id=</span><span class="s">"text-input-2"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Select Option<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;/select&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"text-input-label"</span> <span class="na">for=</span><span class="s">"text-input-2"</span><span class="nt">&gt;</span>Select Input Group Label<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="list_view" class="styleguide">List View</h1>
+<p class="styleguide">The same <code class="styleguide">.list-view</code> component is used across messages, file, and contact lists. The component provides places for up
+to four columns of content, usually <code class="styleguide">|meta-content|main-content with description|more meta|right-arrow</code>. It also accommodates
+a &#39;swipe to delete&#39; action.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="list-view">
+  <div class="list-item">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item unread">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item swiped">
+    <div class="list-item-thumb">
+    <div class="icon-with-label"><i class="fa fa-paperclip attachment"></i><span class="icon-label">2</span></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">List item title</div>
+      <div class="list-item-description">List item description</div>
+    </div>
+    <div class="list-item-content text-right">
+      <span class="list-item-description">Date</span>
+      <span class="list-item-description">and time</span>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+    <div class="list-item-swipe-content">
+      <i class="fa fa-trash-o"></i>
+    </div>
+  </div>
+
+  <div class="list-item">
+    <div class="list-item-thumb">
+      <i class="list-item-thumb file-type fa fa-file-image-o"></i>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">filename.jpg</div>
+      <div class="list-item-description">file size and date created</div>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div class="list-item">
+    <div class="list-item-thumb">
+      <div class="avatar"></div>
+    </div>
+    <div class="list-item-content">
+      <div class="list-item-title">User's First and Last Name</div>
+      <div class="list-item-description">username</div>
+    </div>
+    <div class="list-item-forward">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-view"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-thumb"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"icon-with-label"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-paperclip attachment"</span><span class="nt">&gt;&lt;/i&gt;&lt;span</span> <span class="na">class=</span><span class="s">"icon-label"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/span&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-title"</span><span class="nt">&gt;</span>List item title<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>List item description<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-content text-right"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>Date<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>and time<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-forward"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-right"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item unread"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-thumb"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"icon-with-label"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-paperclip attachment"</span><span class="nt">&gt;&lt;/i&gt;&lt;span</span> <span class="na">class=</span><span class="s">"icon-label"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/span&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-title"</span><span class="nt">&gt;</span>List item title<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>List item description<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-content text-right"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>Date<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>and time<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-forward"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-right"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item swiped"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-thumb"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"icon-with-label"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-paperclip attachment"</span><span class="nt">&gt;&lt;/i&gt;&lt;span</span> <span class="na">class=</span><span class="s">"icon-label"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/span&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-title"</span><span class="nt">&gt;</span>List item title<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>List item description<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-content text-right"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>Date<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>and time<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-forward"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-right"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-swipe-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-trash-o"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-thumb"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"list-item-thumb file-type fa fa-file-image-o"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-title"</span><span class="nt">&gt;</span>filename.jpg<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>file size and date created<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-forward"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-right"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-thumb"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-title"</span><span class="nt">&gt;</span>User's First and Last Name<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-description"</span><span class="nt">&gt;</span>username<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-item-forward"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-right"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="selectors" class="styleguide">File / Contact Selector</h1>
+<p class="styleguide">Contact / File selector is silimar to the list view but with simpler markup and the option to highlight a selected
+item with the <code class="styleguide">.selected</code> class. Selector also has special styles for positioning buttons below the list.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="contact-select-container" style="height: 180px;position:relative;margin-bottom:160px;">
+<ul class="contact-select">
+  <li class="contact">
+    <span type="checkbox" class="checkbox-input"></span>
+    <div class="avatar"></div> Test User 1
+  </li>
+  <li class="contact">
+    <span type="checkbox" checked="checked" class="checkbox-input checked"></span>
+    <div class="avatar"></div> Test User 2
+  </li>
+  <li class="contact selected">
+    <span type="checkbox" checked="checked" class="checkbox-input checked"></span>
+    <div class="avatar"></div> Test User 3
+  </li>
+  <li class="contact selected">
+    <span type="checkbox" checked="checked" class="checkbox-input checked"></span>
+    <div class="avatar"></div> Test User 3
+  </li>
+</ul>
+  <div class="buttons col-12">
+    <div class="btn-lrg btn-safe ">OK</div>
+    <div class="btn-lrg btn-dark">cancel</div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"contact-select-container"</span> <span class="na">style=</span><span class="s">"height: 180px;position:relative;margin-bottom:160px;"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"contact-select"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"contact"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">class=</span><span class="s">"checkbox-input"</span><span class="nt">&gt;&lt;/span&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/div&gt;</span> Test User 1
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"contact"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">checked=</span><span class="s">"checked"</span> <span class="na">class=</span><span class="s">"checkbox-input checked"</span><span class="nt">&gt;&lt;/span&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/div&gt;</span> Test User 2
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"contact selected"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">checked=</span><span class="s">"checked"</span> <span class="na">class=</span><span class="s">"checkbox-input checked"</span><span class="nt">&gt;&lt;/span&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/div&gt;</span> Test User 3
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"contact selected"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">checked=</span><span class="s">"checked"</span> <span class="na">class=</span><span class="s">"checkbox-input checked"</span><span class="nt">&gt;&lt;/span&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/div&gt;</span> Test User 3
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"buttons col-12"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-lrg btn-safe "</span><span class="nt">&gt;</span>OK<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-lrg btn-dark"</span><span class="nt">&gt;</span>cancel<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="sidebar" class="styleguide">Sidebar</h1>
+<p class="styleguide">The sidebar is a view with a dark background and white text that has an <code class="styleguide">.open</code> and closed state.
+Most elements inside the sidebar are base styles, and are not styled inside the <code class="styleguide">.sidebar</code> component.</p><p class="styleguide">Click the sidebar in the example to toggle the <code class="styleguide">.open</code> state.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div style="height:150px;">
+<div class="sidebar open" onClick="$(this).toggleClass('open');">
+  <div class="sidebar-header">
+    <span class="headline">Headline in sidebar</span>
+  </div>
+  <span class="subhead">subhead in sidebar</span>
+  <span class="icon-with-label flex-col-1">
+    <i class="fa fa-pencil circle"></i>
+    <span class="icon-label">Icons in sidebar</span>
+  </span>
+</div>
+<div id="sidebar-dimmer" class="open"></div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"height:150px;"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"sidebar open"</span> <span class="na">onClick=</span><span class="s">"$(this).toggleClass('open');"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"sidebar-header"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"headline"</span><span class="nt">&gt;</span>Headline in sidebar<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"subhead"</span><span class="nt">&gt;</span>subhead in sidebar<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon-with-label flex-col-1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-pencil circle"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon-label"</span><span class="nt">&gt;</span>Icons in sidebar<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"sidebar-dimmer"</span> <span class="na">class=</span><span class="s">"open"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="tabs" class="styleguide">Tab Navigation</h1>
+<p class="styleguide">Secondary navigation bar with tab selectors (messages, files, contacts). Tabs can include an icon and notification
+badge.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div style="position:relative;height:50px;top:-40px">
+  <div id="tabbar">
+    <div class="tab"><i class="tab-icon fa fa-comments-o"></i>messages</div>
+    <div class="tab active"><i class="tab-icon fa fa-files-o"></i>files</div>
+    <div class="tab"><i class="tab-icon fa fa-users"></i>contacts<i class="fa fa-circle badge"></i></div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"position:relative;height:50px;top:-40px"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tabbar"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tab"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"tab-icon fa fa-comments-o"</span><span class="nt">&gt;&lt;/i&gt;</span>messages<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tab active"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"tab-icon fa fa-files-o"</span><span class="nt">&gt;&lt;/i&gt;</span>files<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tab"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"tab-icon fa fa-users"</span><span class="nt">&gt;&lt;/i&gt;</span>contacts<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-circle badge"</span><span class="nt">&gt;&lt;/i&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+$(document).ready(function() {
+
+  // set the active tab
+  var currentHref = document.location.pathname.substr(1);
+  var hash = document.location.hash;
+  var docMenu = $('.doc-submenu');
+  if (currentHref)
+  {
+    $('.doc-main-menu').find('a[href^="' + currentHref + '"]').parents('li').addClass('active');
+  }
+
+  $('.doc-submenu a').on('click', function(){
+    $('.doc-submenu li').removeClass('active');
+    $(this).parents('li').addClass('active');
+  });
+
+  $(".codeExample .codeBlock").append("<div class='showCode'>Toggle Code</div>");
+  $(".codeExample .highlight").hide()
+  $(".showCode").on('click', function(){
+    $(this).siblings('.highlight').toggle();
+  });
+
+});
+</script>
+</body>
+</html>
