@@ -70,6 +70,7 @@
         <icon height="58" src="res/icon/ios/icon-small@2x.png" width="58" />
         <icon height="50" src="res/icon/ios/icon-50.png" width="50" />
         <icon height="100" src="res/icon/ios/icon-50@2x.png" width="100" />
+        <preference name="iosPersistentFileLocation" value="Library" />
         <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
         <preference name="BackupWebStorage" value="none" />
         <preference name="KeyboardDisplayRequiresUserAction" value="false" />
@@ -87,9 +88,11 @@
     <plugin name="cordova-plugin-crosswalk-webview" spec="*" />
     <plugin name="cordova-plugin-statusbar" spec="*" />
     <plugin name="cordova-plugin-keyboard" spec="*" />
-    <plugin name="cordova-plugin-contacts" spec="*"/>
+    <plugin name="cordova-plugin-contacts" spec="*" />
     <preference name="xwalkVersion" value="14+" />
     <plugin name="com.telerik.plugins.wkwebview" spec="~0.6.0" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
+    <plugin name="cordova-plugin-camera" spec="~1.2.0" />
+    <plugin name="cordova-open" spec="~1.0.9" />
 </widget>

@@ -2,46 +2,55 @@
   'use strict';
 
   Peerio.UI.FileView = React.createClass({
-    mixins:[ReactRouter.Navigation],
+    mixins: [ReactRouter.Navigation],
     componentWillMount: function () {
-      this.subscription = Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null));
+      this.subscription = [
+        Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null))
+      ];
     },
-    componentWillUnmount: function(){
+    componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.subscription);
     },
     handleOpen: function () {
-      console.log('todo: open file');
+      Peerio.FileSystem.openFileWithOS(Peerio.Files.cache[this.props.params.id])
+        .catch(function (err) {
+          alert('Failed to open file. ' + err);
+        });
     },
     handleDownload: function () {
-      console.log('todo: download file');
+      Peerio.Files.download(Peerio.Files.cache[this.props.params.id]);
     },
     handleRemoveLocal: function () {
-      console.log('todo: remove cahed file');
-      Peerio.Action.showConfirm({headline:"Remove file from this device?",
-                                text:'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.'});
+      Peerio.Action.showConfirm({
+        headline: "Remove file from this device?",
+        text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
+        onAccept: Peerio.Files.deleteFromCache.bind(this, this.props.params.id)
+      });
     },
     handleRemove: function () {
-      Peerio.Action.showConfirm({headline:"Remove this file?",
-                                 text:'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
-                                 onAccept: Peerio.Files.delete.bind(this, this.props.params.id)});
+      Peerio.Action.showConfirm({
+        headline: "Remove this file?",
+        text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
+        onAccept: Peerio.Files.delete.bind(this, this.props.params.id)
+      });
     },
     handleNuke: function () {
-      console.log('todo: nuke file');
-      Peerio.Action.showConfirm({headline:"Destroy file completely?",
-                                 text:'This file will be deleted from your device, cloud and from the clouds of other users who you have shared it with.',
-                                 onAccept: Peerio.Files.nuke.bind(this, this.props.params.id)});
+      Peerio.Action.showConfirm({
+        headline: "Destroy file completely?",
+        text: 'This file will be deleted from your device, cloud and from the clouds of other users who you have shared it with.',
+        onAccept: Peerio.Files.nuke.bind(this, this.props.params.id)
+      });
     },
     render: function () {
       var H = Peerio.Helpers;
       var file = Peerio.Files.cache[this.props.params.id];
-      if(!file) {
+      if (!file) {
         this.goBack();
         return null;
       }
 
       if (!file.icon) file.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(file.name) + (file.cached ? ' cached' : '');
       if (!file.humanSize) file.humanSize = H.bytesToSize(file.size);
-
 
       var sender = file.sender ? (<div className="info-row">
         <div className="info-label">Sent to you by</div>
@@ -50,21 +59,21 @@
       var downloadStateNode = null, buttonsNode = null;
       if (file.downloadState) {
         var ds = file.downloadState;
-        downloadStateNode = (
-          <div className="download">{ds.state}&nbsp;
-            {ds.progress === null ? null : ds.progress + '%'}
-          </div>);
+        downloadStateNode = (<div className="info-banner">{ds.stateName}&nbsp;{ds.percent}</div>);
       } else {
         buttonsNode = (
           <div>
             {file.cached ? <div className="btn btn-safe" onTouchEnd={this.handleOpen}>Open</div>
-              : <div className="btn-md btn-safe" onTouchEnd={this.handleDownload}><i className="fa fa-cloud-download">&nbsp;</i>Download</div>}
+              : <div className="btn-md btn-safe" onTouchEnd={this.handleDownload}><i
+              className="fa fa-cloud-download">&nbsp;</i>Download</div>}
 
             {file.cached ?
-              <div className="btn btn-danger" onTouchEnd={this.handleRemoveLocal}><i class="fa fa-trash-o"></i>&nbsp;Remove from this device</div> : null }
+              <div className="btn btn-danger" onTouchEnd={this.handleRemoveLocal}><i
+                className="fa fa-trash-o"></i>&nbsp;Remove from this device</div> : null }
 
-            {file.cached ? <div className="btn btn-danger" onTouchEnd={this.handleRemove}>Remove from this device and your
-              cloud</div>
+            {file.cached ?
+              <div className="btn btn-danger" onTouchEnd={this.handleRemove}>Remove from this device and your
+                cloud</div>
               : <div className="btn btn-danger" onTouchEnd={this.handleRemove}>Remove from your cloud</div>}
 
             {file.creator === Peerio.user.username ?

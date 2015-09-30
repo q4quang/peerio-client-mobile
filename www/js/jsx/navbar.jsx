@@ -56,7 +56,7 @@
               </Peerio.UI.Tappable>
             </div>
 
-          <div id="connection-status" className={connectionClass}></div>
+          <div id="connection-status" className={connectionClass}>{this.state.socketConnected?'':'connecting...'}</div>
         </div>
       );
     }
