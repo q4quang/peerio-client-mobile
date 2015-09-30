@@ -52,7 +52,8 @@ var paths = {
   js_src: ['!www/js/compiled/**/*','!www/js/_old/**/*', 'www/js/**/*.js'],
   js_dst: 'www/js/compiled',
   config_xml: 'config.xml',
-  peerio_client_api: 'bower_components/peerio-client-api/dist/*.js'
+  peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
+  bower_installer_dst: 'www/bower'
 };
 /*eslint-enable*/
 
@@ -130,9 +131,7 @@ gulp.task('serve', ['compile'], function () {
   // watching symlinked peerio-client-api package
   if (options.api) {
     // watch triggers for every file, so we debounce it
-    var copyApi = _.debounce(function () {
-      sh.exec('bower-installer');
-    }, 1500);
+    var copyApi = _.debounce(bowerInstaller, 1500);
 
     copyApi();
 
@@ -166,12 +165,12 @@ gulp.task('serve', ['compile'], function () {
 });
 
 gulp.task('run-android', ['compile'], function () {
-  sh.exec('bower-installer');
+  bowerInstaller();
   sh.exec('cordova run android');
 });
 
 gulp.task('run-ios', ['compile'], function () {
-  sh.exec('bower-installer');
+  bowerInstaller();
   sh.exec('cordova run ios');
 });
 
@@ -214,7 +213,7 @@ gulp.task('version', function () {
     .pipe(xeditor(function (xml, xmljs) {
 
       var oldVer = xml.root().attr('version').value();
-      console.log('Current app verison: ' + oldVer);
+      console.log('Current app version: ' + oldVer);
       return xml;
     }));
 });
@@ -236,3 +235,7 @@ function bump(version) {
     .pipe(gulp.dest('.'));
 }
 
+function bowerInstaller(){
+  sh.exec('rm -rf '+paths.bower_installer_dst);
+  sh.exec('bower-installer');
+}
