@@ -184,7 +184,7 @@ gulp.task('bump', ['version'], function () {
         name: 'version',
         message: 'WHICH VERSION DO YOU WANT TO BUMP?',
         choices: [
-          '[cancel]',
+          '[DO NOT CHANGE]',
           'PATCH 0.0.x',
           'MINOR 0.x.0',
           'MAJOR x.0.0'

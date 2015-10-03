@@ -23,7 +23,7 @@
           <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.props.onClose}>OK</Peerio.UI.Tappable>
         </div>);
 
-      var text = this.props.text || 'alert text';
+      var text = this.props.text || '';
 
       return (
         <div>

@@ -36,6 +36,7 @@
         Peerio.Dispatcher.onShowPrompt(this.showModal.bind(this, Peerio.UI.Prompt)),
         Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect)),
         Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect)),
+        Peerio.Dispatcher.onShowFileUpload(this.showModal.bind(this, Peerio.UI.Upload)),
 
         Peerio.Dispatcher.onRemoveModal(this.removeModal)
       ];
@@ -47,6 +48,7 @@
 
     // generic function to show modal
     showModal: function (component, modal) {
+      modal = modal || {};
       modal.id = modal.id || uuid.v4();
       var props = _.assign({key: modal.id, onClose: this.removeModal.bind(this, modal.id)}, modal);
       modal.component = React.createElement(component, props);
@@ -81,7 +83,7 @@
       for (var i = 0; i < this.state.activeModals.length; i++)
         nodes.push(this.state.activeModals[i].component);
 
-      return (<div>{nodes}</div>);
+      return (<div className={Peerio.runtime.platform}>{nodes}</div>);
     }
   });
 

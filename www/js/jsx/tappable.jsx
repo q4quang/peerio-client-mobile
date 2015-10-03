@@ -29,7 +29,7 @@
       var touchEndY = e.changedTouches[0].clientY;
       if (Math.abs(this.touchStartX - touchEndX) > this.maxDistanceX) return;
       if (Math.abs(this.touchStartY - touchEndY) > this.maxDistanceY) return;
-      this.props.onTap(e);
+      this.props.onTap();
     },
     render: function(){
       var tag = this.props.element || "span";

@@ -16,6 +16,9 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
   // Main function executes when all systems are ready (dom, device)
   function main() {
+    // todo: rethink
+    Peerio.runtime ={};
+
     // platform-specific classes on body
     if (window.device) {
       var platform = device.platform.toLowerCase();
@@ -23,7 +26,9 @@ Peerio.ACK_MSG = ':::peerioAck:::';
         document.body.classList.add('ios');
       else if (platform === 'android')
         document.body.classList.add('android');
-    }
+
+      Peerio.runtime.platform = platform;
+    } else Peerio.runtime.platform = "browser";
 
     // peerio client api
     Peerio.initAPI().then(function () {
@@ -40,7 +45,6 @@ Peerio.ACK_MSG = ':::peerioAck:::';
       //Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
 
       Peerio.FileSystemPlugin.init();
-      Peerio.FileSystem.plugin = Peerio.FileSystemPlugin;
 
       // Hardware/OS event handlers
       document.addEventListener('pause', Peerio.Action.pause, false);

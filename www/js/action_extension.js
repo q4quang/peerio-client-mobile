@@ -17,6 +17,7 @@ Peerio.ActionExtension.init = function () {
     'ShowContactSelect',   // {[id]:, preselected:['username','username' ]}
     'ContactsSelected',    // {['username', 'username']} - contacts was selected and accepted in contacts selector
     'ShowFileSelect',      // {string[]} open file selector, optionally pass array of preselected file id's
+    'ShowFileUpload',      //
     'FilesSelected',       // file selector was closed accepting selection
     'RemoveModal',         // Message to modal manager to remove alert with ID
     'SignOut',             // User wants to sign out

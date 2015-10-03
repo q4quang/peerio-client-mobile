@@ -13,6 +13,9 @@ Peerio.FileSystemPlugin.init = function () {
 
   var api = Peerio.FileSystemPlugin;
   delete Peerio.FileSystemPlugin.init;
+  if (!window.cordova) return;
+
+  Peerio.FileSystem.plugin = api;
 
   var cordova = window.cordova;
   var root;
@@ -136,6 +139,42 @@ Peerio.FileSystemPlugin.init = function () {
     return new Promise(function (resolve, reject) {
       cordova.plugins.disusered.open(fileEntry.toURL(), resolve, reject);
     });
+  };
+  /**
+   * Returns file or directory entry by url
+   * @param {string} fileURL - in `file://...` format
+   * @returns {Promise<FileEntry|DirectoryEntry>}
+   */
+  api.getByURL = function (fileURL) {
+    // HACK for kitkat incorrect URLs
+    // todo: other file types?
+    if (fileURL.substring(0, 21) == "content://com.android") {
+      var photo_split = fileURL.split("%3A");
+      fileURL = "content://media/external/images/media/" + photo_split[1];
+    }
+    return new Promise(function (resolve, reject) {
+      resolveLocalFileSystemURL(fileURL, resolve, reject);
+    });
+  };
+  /**
+   * Reads and returns contents of a file
+   * @param {FileEntry} fileEntry - file entry to read
+   * @returns {Promise<Object<File, ArrayBuffer>>} - File object and ArrayBuffer file data
+   */
+  api.readFile = function (fileEntry) {
+    return new Promise(function (resolve, reject) {
+      fileEntry.file(resolve, reject);
+    }).then(function (file) {
+        //todo report read progress
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function (event) {
+            resolve({file: file, data: event.target.result});
+          };
+          reader.onerror = reject;
+          reader.readAsArrayBuffer(file);
+        });
+      });
   };
 
 };

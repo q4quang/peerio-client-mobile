@@ -7,7 +7,6 @@
 
 //todo fix potential bug: when file deleted while selected it might still be in the selection
 
-
 (function () {
   'use strict';
 
@@ -36,6 +35,9 @@
       Peerio.Action.filesSelected(this.state.selection);
       this.props.onClose();
     },
+    upload: function(){
+      Peerio.Action.showFileUpload();
+    },
     render: function () {
       var files = [];
       //todo: loading indicator
@@ -55,14 +57,30 @@
         }.bind(this));
       } else files.push(<li>Please wait...</li>);
 
+      var uploads = [];
+      if (Peerio.Files.uploads.length) {
+        Peerio.Files.uploads.forEach(function (u) {
+          uploads.push(
+            <li className='contact'>
+              <span className="username">
+                 <i
+                   className="fa fa-circle-o-notch fa-spin"></i> {u.stateName} {u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''}
+              </span>
+            </li>);
+        });
+      }
+
       return (
         <div className="modal contact-select">
           <ul className="contact-list">
+            {uploads}
             {files}
           </ul>
           <div className="buttons col-12">
-            <Peerio.UI.Tappable element="div" className="btn-lrg" onTouchStart={this.accept}>OK</Peerio.UI.Tappable>
-            <Peerio.UI.Tappable element="div" className="btn-lrg btn-dark" onTouchStart={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+            <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.accept}>OK</Peerio.UI.Tappable>
+            <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.upload}>Upload new file</Peerio.UI.Tappable>
+            <Peerio.UI.Tappable element="div" className="btn-lrg btn-dark"
+                                onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
           </div>
         </div>
       );

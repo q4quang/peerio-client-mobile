@@ -94,6 +94,50 @@ Peerio.NativeAPI.init = function () {
     return (window.AppVersion && AppVersion.version) || 'n/a';
   };
 
+  /**
+   * Takes picture from camera or photo library
+   * @param {bool} camera - set true to take a new picture instead of picking from the library
+   * @returns {Promise<string>} - file url
+   */
+  api.takePicture = function (camera) {
+    return new Promise(function (resolve, reject) {
+      navigator.camera.getPicture(resolve, reject,
+        { // please, don't change properties without (re)reading docs on them first and testing result after
+          // yes, Anri, especially you!
+          sourceType: camera ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
+          destinationType: Camera.DestinationType.FILE_URI,
+          encodingType: Camera.EncodingType.JPEG,
+          mediaType: Camera.MediaType.ALLMEDIA,
+          cameraDirection: Camera.Direction.BACK,
+          allowEdit: false,
+          correctOrientation: true,
+          saveToPhotoAlbum: false,
+          quality: 90
+        });
+    });
+  };
+
+  initializers.takePicture = function () {
+    if (navigator.camera)
+      return;
+
+    return console.log.bind(console, getGenericMsg('takePicture'));
+  };
+
+  /**
+   * Removes all temporary pictures taken with previous cordova camera plugin calls
+   */
+  api.cleanupCamera = function(){
+    navigator.camera.cleanup();
+  };
+
+  initializers.cleanupCamera = function () {
+    if (navigator.camera)
+      return;
+
+    return console.log.bind(console, getGenericMsg('cleanupCamera'));
+  };
+
 //--------------------------------------------------------------------------------------------------------------------
   _.forOwn(initializers, function (fn, name) {
     // if initializer returns alternative function

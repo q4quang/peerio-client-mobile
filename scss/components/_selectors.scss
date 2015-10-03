@@ -37,6 +37,8 @@ item with the `.selected` class. Selector also has special styles for positionin
 
 */
 
+$buttons-height:195px;
+
 .contact-select-container {
   position: absolute;
   top: 0;
@@ -59,7 +61,7 @@ item with the `.selected` class. Selector also has special styles for positionin
     top: 0;
     left: 0;
     right: 0;
-    bottom: 145px;
+    bottom: $buttons-height;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -71,7 +73,7 @@ item with the `.selected` class. Selector also has special styles for positionin
     bottom: 0;
     left: 0;
     right: 0;
-    height: 145px;
+    height: $buttons-height;
     background-color: #E8E8E8;
   }
   .contact {
@@ -121,4 +123,11 @@ item with the `.selected` class. Selector also has special styles for positionin
       top: 10px;
     }
   }
+}
+.ios .contact-select{
+  margin-top: 20px;
+}
+
+.file-upload{
+  padding: 50% 10px 0 10px;
 }
