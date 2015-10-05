@@ -149,13 +149,13 @@
             <form className="loginForm" onSubmit={this.handleSubmit}>
               {this.state.savedLogin
                 ?
-                (<div className="saved-login"
-                      onTouchEnd={this.clearLogin}>{this.state.savedLogin.firstName || this.state.savedLogin.username}
+                (<Peerio.UI.Tappable element="div" className="saved-login"
+                      onTap={this.clearLogin}>{this.state.savedLogin.firstName || this.state.savedLogin.username}
                   <div className="note">Welcome back.
                     <br/>
                     Tap here to change or forget username.
                   </div>
-                </div>)
+                </Peerio.UI.Tappablediv>)
                 :
                 (<div className="slim-input">
                   <input defaultValue={debugUserName} id="username" ref="username"

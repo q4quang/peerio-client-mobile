@@ -23,7 +23,7 @@
                     <div className="info-label">Device PIN</div>
                     <div className="text-input-group col-12">
                         <input className="text-input text-center" type="text" required="required" placeholder="Enter a device PIN"/>
-                        <button className="btn-sm">create device PIN</button>
+                        <Peerio.UI.Tappable element="div" className="btn-sm">create device PIN</Peerio.UI.Tappable>
                     </div>
 
                     <div>
@@ -31,7 +31,7 @@
                         <p className="info-small col-12"> Paste the following secret key into your authenticator app, then enter the code that appears in the app. </p>
                         <p className="text-lrg text-center"><strong>RRHU WCAZ KGCE 6FRM</strong></p>
                         <input className="text-input text-center" type="text" placeholder="authenticator security code"/>
-                        <button className="btn-md">Verify 2FA Security Code</button>
+                        <Peerio.UI.Tappable element="div" className="btn-md">Verify 2FA Security Code</Peerio.UI.Tappable>
                     </div>
 
                 </div>

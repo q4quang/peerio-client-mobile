@@ -152,23 +152,23 @@
                   </li>
                 </ul>
                 <div className="col-6 col-first">
-                  <button className="btn-md txt-sm"
-                          onTouchStart={this.toggleAndTransition.bind(this, 'account_settings')}><i
+                  <Peerio.UI.Tappable element="div" className="btn-md txt-sm"
+                          onTap={this.toggleAndTransition.bind(this, 'account_settings')}><i
                     className="fa fa-user"></i> Profile
-                  </button>
+                  </Peerio.UI.Tappable>
                 </div>
                 <div className="col-6 col-last">
-                  <button className="btn-md txt-sm"
-                          onTouchStart={this.toggleAndTransition.bind(this, 'preference_settings')}><i
+                  <Peerio.UI.Tappable element="div" className="btn-md txt-sm"
+                          onTap={this.toggleAndTransition.bind(this, 'preference_settings')}><i
                     className="fa fa-cog"></i> Preferences
-                  </button>
+                  </div>
                 </div>
               </div>
 
               <div className="flex-0">
-                <button className="btn-dark btn-md" onTouchStart={function(){window.location.reload()}}><i
+                <Peerio.UI.Tappable element="div" className="btn-dark btn-md" onTap={function(){window.location.reload()}}><i
                   className="fa fa-power-off"></i> Sign Out
-                </button>
+                </Peerio.UI.Tappable>
                 <div className="sidebar-footer-text">
                   <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
                 </div>

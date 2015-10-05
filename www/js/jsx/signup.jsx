@@ -51,7 +51,7 @@
 
     },
 
-    handlePreviousStep: function (e) {
+    handlePreviousStep: function () {
       if (this.state.activeStep >= 1)
         this.setState({activeStep: --this.state.activeStep});
       else
@@ -63,7 +63,7 @@
     },
 
     handleSMSCode: function (e) {
-      e.preventDefault();
+      //e.preventDefault();
       this.setState({auth_method: 'sms_sent'});
     },
 
@@ -102,7 +102,7 @@
     },
 
     removeModal: function (e) {
-      e.stopPropagation();
+      //e.stopPropagation();
       Peerio.Action.removeModal(this.state.activeModalId);
     },
 
@@ -113,8 +113,8 @@
                   onChange={this.validatePassPhrase}></textarea>
       </div>);
       var modalBtns = (<div>
-        <button className="btn-lrg" onTouchEnd={this.passPhraseIsValid}> Create my account</button>
-        <button className="btn-subtle" onTouchEnd={this.removeModal}> Let me see my passphrase again</button>
+        <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.passPhraseIsValid}> Create my account</Peerio.UI.Tappable>
+        <Peerio.UI.Tappable element="div" className="btn-subtle" onTap={this.removeModal}> Let me see my passphrase again</Peerio.UI.Tappable>
       </div>);
       var modalContent = {id: uuid.v4(), text: modalText, btns: modalBtns};
       Peerio.Action.showAlert(modalContent);
@@ -339,8 +339,8 @@
                  required="required"/>
           <label className="text-input-label" htmlFor="user_device_passcode">Device passcode</label>
         </div>
-        <button className="btn-lrg" onTouchEnd={this.handleNextStep}>Login with this device passcode</button>
-        <button className="btn-subtle" onTouchStart={this.handleNextStep}>Login without a device passcode</button>
+        <Peerio.UI.Tappable element="div"  className="btn-lrg" onTap={this.handleNextStep}>Login with this device passcode</Peerio.UI.Tappable>
+        <Peerio.UI.Tappable element="div"  className="btn-subtle" onTap={this.handleNextStep}>Login without a device passcode</Peerio.UI.Tappable>
       </fieldset>);
     }
   });
