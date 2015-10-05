@@ -21,7 +21,6 @@
   'use strict';
 
   Peerio.UI.ModalManager = React.createClass({
-
     getInitialState: function () {
       return {
         activeModals: []
@@ -50,7 +49,10 @@
     showModal: function (component, modal) {
       modal = modal || {};
       modal.id = modal.id || uuid.v4();
-      var props = _.assign({key: modal.id, onClose: this.removeModal.bind(this, modal.id)}, modal);
+      var props = _.assign({
+        key: modal.id,
+        onClose: this.removeModal.bind(this, modal.id)
+      }, modal);
       modal.component = React.createElement(component, props);
 
       this.addModal(modal);

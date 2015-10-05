@@ -34,6 +34,7 @@ with javascript. This effect only exists when both `.text-input` and `.text-inpu
   font-weight: 200;
 
   .text-input:focus + .text-input-label,
+  .text-input:not([value=""]) + .text-input-label,
   .select-input:focus + .text-input-label,
   .text-input-label.up{
     font-size: 0.8rem;

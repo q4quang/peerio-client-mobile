@@ -320,8 +320,7 @@
     toggle: function () {
       this.setState({open: !this.state.open});
     },
-    openInfo: function(event){
-      event.preventDefault();
+    openInfo: function(){
       this.transitionTo('conversation_info', {id: this.props.conversationId});
     },
     render: function () {

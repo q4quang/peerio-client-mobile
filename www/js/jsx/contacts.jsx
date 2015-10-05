@@ -2,11 +2,12 @@
   'use strict';
 
   Peerio.UI.Contacts = React.createClass({
-    mixins:[ReactRouter.Navigation],
+    mixins:[ReactRouter.Navigation, ReactRouter.State],
     componentDidMount: function(){
       this.subscriptions = [Peerio.Dispatcher.onBigGreenButton(this.handleAddContact),
         Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this,null))
       ];
+      if(this.getQuery().trigger) this.handleAddContact();
     },
     componentWillUnmount: function(){
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
@@ -49,7 +50,7 @@
       }.bind(this));
 
       if (Peerio.user.contacts.length === 1 ) {
-        var intro_content = <div className="content-intro">
+        var intro_content = <div className="content-intro" key="intro">
                               <h1 className="headline-lrg">Peerio Contacts</h1>
                               <p>Add a contact to send your first message.Click the button below to get started.</p>
                               <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.handleAddContact}>

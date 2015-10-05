@@ -47,16 +47,16 @@
               </div>
             : <div>
                 <p>Peerio lets you send messages securely. Add a contact and try it out.</p>
-                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this, 'contacts')}>
+                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this, 'contacts', null, {trigger:true})}>
                   <i className="fa fa-user-plus"></i>&nbsp;Add a contact
                 </Peerio.UI.Tappable>
               </div>;
 
         nodes = <div className="content-intro">
-                  <img className="peerio-logo" src="media/img/Peerio_LogoLight.png"/>
+                  <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
                   <h1 className="headline-lrg">Welcome to Peerio!</h1>
                   {intro_content}
-                  <img src="media/img/paperPlane.png"/>
+                  <img src="media/img/paper-plane.png"/>
                 </div>;
       }
 

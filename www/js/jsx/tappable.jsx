@@ -19,10 +19,11 @@
       e.stopPropagation();
 
       //setting 500ms delay for CSS 'button-ripple' animation
-      var self = this;
+
       setTimeout(function(){
-        self.setState({tapState:""});
-      }, 500);
+        if(!this.isMounted()) return;
+        this.setState({tapState:""});
+      }.bind(this), 500);
 
       if ((Date.now() - this.touchStartStamp) > this.maxDelay) return;
       var touchEndX = e.changedTouches[0].clientX;

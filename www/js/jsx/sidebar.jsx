@@ -84,6 +84,11 @@
       this.toggle();
       this.transitionTo('new_message');
     },
+    handleUpload: function () {
+      this.toggle();
+      this.transitionTo('files');
+      Peerio.Action.showFileUpload();
+    },
     //--- RENDER
     render: function () {
       var className = this.state.open ? 'open' : '';
@@ -122,7 +127,7 @@
                     <i className="fa fa-pencil circle"/>
                     <span className="icon-label">New Message</span>
                   </Peerio.UI.Tappable>
-                  <Peerio.UI.Tappable tag="li" onTap={alert.bind(window, 'Not yet functional. Coming soon.')}
+                  <Peerio.UI.Tappable tag="li" onTap={this.handleUpload}
                                       className="icon-with-label flex-col-1">
                     <i className="fa fa-cloud-upload circle"/>
                     <span className="icon-label">Upload File</span>
@@ -165,7 +170,6 @@
                   className="fa fa-power-off"></i> Sign Out
                 </button>
                 <div className="sidebar-footer-text">
-                  <a href="mailto:feedback@peerio.com" className="feedback">Send Feedback</a>
                   <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
                 </div>
               </div>

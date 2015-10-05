@@ -40,8 +40,6 @@
     },
     render: function () {
       var files = [];
-      //todo: loading indicator
-      if (Peerio.Files.cache) {
         Peerio.Files.cache.forEach(function (f) {
 
           var isSelected = this.state.selection.indexOf(f.id) >= 0;
@@ -55,7 +53,7 @@
             </Peerio.UI.Tappable>
           );
         }.bind(this));
-      } else files.push(<li>Please wait...</li>);
+
 
       var uploads = [];
       if (Peerio.Files.uploads.length) {
@@ -68,6 +66,19 @@
               </span>
             </li>);
         });
+      }
+
+      if (Peerio.Files.cache.length === 0) {
+        var intro_content = (<div className="content-intro">
+          <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
+
+          <h1 className="headline-lrg">Peerio File Storage!</h1>
+
+          <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
+
+          <img style={{maxWidth:"100px", display:"block", margin:"0 auto"}} src="media/img/home-bigfilesok.png"/>
+        </div>);
+        files.push(intro_content);
       }
 
       return (

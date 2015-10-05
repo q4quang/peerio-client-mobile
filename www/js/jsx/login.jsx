@@ -74,13 +74,12 @@
       this.setState({waitingForLogin: false, loginProgressMsg: ''});
     },
     // show/hide passphrase
-    handlePassphraseShowTap: function (e) {
+    handlePassphraseShowTap: function () {
       this.setState({passphraseVisible: !this.state.passphraseVisible}, function () {
         var node = this.refs.passphrase.getDOMNode();
         if (!this.state.passphraseVisible) node.style.fontSize = '';
         this.handlePassphraseChange();
       });
-      e.preventDefault();
     },
     // scale passphrase font
     handlePassphraseChange: function () {

@@ -20,6 +20,10 @@
       Peerio.Action.contactsSelected(this.state.selection);
       this.props.onClose();
     },
+    addContact: function(){
+      Peerio.Action.transitionTo('contacts', null, {trigger: true});
+      this.props.onClose();
+    },
     render: function () {
       var contacts = [];
       Peerio.user.contacts.forEach(function (c) {
@@ -41,7 +45,7 @@
           var intro_content = (<div className="content-intro">
                                 <h1 className="headline-lrg">Peerio Contacts</h1>
                                 <p>It looks like you haven't added any contacts yet. Click below to get started.</p>
-                                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this, 'contacts')}>
+                                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.addContact}>
                                   <i className="fa fa-user-plus"></i>&nbsp;Add a contact
                                 </Peerio.UI.Tappable>
                                 <img src="media/img/contacts.png"/>
