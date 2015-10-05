@@ -155,7 +155,7 @@
                     <br/>
                     Tap here to change or forget username.
                   </div>
-                </Peerio.UI.Tappablediv>)
+                </Peerio.UI.Tappable>)
                 :
                 (<div className="slim-input">
                   <input defaultValue={debugUserName} id="username" ref="username"

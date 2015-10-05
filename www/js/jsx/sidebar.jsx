@@ -161,7 +161,7 @@
                   <Peerio.UI.Tappable element="div" className="btn-md txt-sm"
                           onTap={this.toggleAndTransition.bind(this, 'preference_settings')}><i
                     className="fa fa-cog"></i> Preferences
-                  </div>
+                  </Peerio.UI.Tappable>
                 </div>
               </div>
 
