@@ -85,7 +85,7 @@
                         {addresses}
                         <div className="col-8">
                             <input type="text" className="text-input" placeholder="add phone or email" onChange={this.onAddressChange} value={this.state.newAddressText}/>
-                            <button className="btn-sm" onTouchEnd={this.addNewAddress}>add address</button>
+                            <Peerio.UI.Tappable className="btn-sm" onTap={this.addNewAddress}>add address</Peerio.UI.Tappable>
                         </div>
                         <hr/>
                         <div className="info-label">Your public key: </div>
@@ -93,7 +93,7 @@
                     </div>
 
                     <div className="flex-col-0">
-                        <button className="btn-link btn-danger">delete your account</button>
+                        <Peerio.UI.Tappable className="btn-link btn-danger">delete your account</Peerio.UI.Tappable>
                     </div>
                 </div>
             );

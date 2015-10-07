@@ -2,12 +2,17 @@
   'use strict';
   // Main component, entry point for React app
   Peerio.UI.Root = React.createClass({
-    render: function() {
+    componentWillMount: function () {
+      Peerio.Dispatcher.onPause(Peerio.Net.pauseConnection);
+      Peerio.Dispatcher.onResume(Peerio.Net.resumeConnection);
+      // no need to unsubscribe, this is the root component
+    },
+    render: function () {
       return (
-          <div>
+        <div>
           <RouteHandler/>
           <Peerio.UI.Portal/>
-          </div>
+        </div>
       );
     }
   });
