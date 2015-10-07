@@ -60,12 +60,6 @@ Footer Buttons                                       | Button Class/ID
   }
 }
 
-
-button:disabled, .btn-disabled{
-  background-color: rgba(103, 103, 103, 0.69);
-  color: #353535;
-}
-
 .btn {
   @include button-ripple;
   @include button-text-shadow;
@@ -139,6 +133,11 @@ button:disabled, .btn-disabled{
   text-decoration: underline;
   color: #BD3535;
   padding: 0;
+}
+
+button:disabled , .btn-disabled {
+  background-color: rgba(103, 103, 103, 0.69);
+  color: white;
 }
 
 //green footer button

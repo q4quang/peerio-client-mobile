@@ -15,6 +15,8 @@
         files: {name: 'Upload file', action: Peerio.Action.showFileUpload, icon:"cloud-upload"},
         contacts: {name: 'Add contact', icon: "user-plus"},
         contact: {name: 'Send Message', icon: "pencil"},
+        add_contact_import: {name: 'Import & Invite Contacts', icon: "user-plus"},
+        add_contact_search: {name: 'Add Selected Contact', icon: "user-plus"},
         new_message: {name: 'Send', icon: "paper-plane-o"},
         conversation: {name: 'Send', icon: "paper-plane-o"}
       };

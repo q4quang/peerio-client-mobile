@@ -27,7 +27,14 @@ input:focus::-webkit-input-placeholder {
 input, textarea {
   user-select: initial;
   border-radius:0;
+  box-sizing: border-box;
 }
+
+input[type="search"]{
+  box-sizing: border-box;
+}
+
+
 button:focus,
 input:focus,
 textarea:focus{

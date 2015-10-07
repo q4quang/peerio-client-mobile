@@ -15,6 +15,7 @@ Text Style                                                                  | cl
 <span class="headline-sm">Small headline</span>                             | `headline-sm`
 <span class="subhead">subhead</span>                                        | `subhead`
 <span class="subhead-inline">inline subhead</span>                          | `subhead-inline`
+<span class="headline-divier">divider-header</span>                         | `headline-divider`
 <span class="txt-lrg">Large text</span>                                     | `txt-lrg`
 <span class="txt-sm">small text</span>                                      | `txt-sm`
 <span class="info-label">info label</div>                                   | `info-label`
@@ -141,4 +142,24 @@ Text Style                                                                  | cl
     margin:0 10px;
     opacity: 0.15;
   }
+}
+
+.headline-divider {
+  width: 100%;
+  padding: 0;
+  text-align: center;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  color: #A9A9A9;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.headline-divider:after,
+.headline-divider:before{
+  content: " ";
+  height: 1px;
+  background-color: #D3D3D3;
+  flex-grow: 1;
+  margin: 0px 1rem;
 }

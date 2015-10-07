@@ -26,6 +26,8 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
   overflow-y: auto;
   z-index: $z-content;
   background-color: white;
+  //Smooth scrolling on iOS
+  -webkit-overflow-scrolling: touch;
 }
 .page-wrapper-login{
   @include content-wrapper(0, 0);
