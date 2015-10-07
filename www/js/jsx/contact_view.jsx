@@ -49,7 +49,6 @@
               : <Peerio.UI.Tappable element="div" className="btn-md btn-danger" onTap={this.handleRemove}>Remove contact</Peerio.UI.Tappable>}
           </div>);
       }
-      //// TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
       return (
         <div className="content-padded contact-view">
 

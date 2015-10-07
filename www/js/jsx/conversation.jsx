@@ -308,7 +308,7 @@
       var absoluteTime = momentTimestamp.format("MMMM DD YYYY, h:mm A");
       var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? momentTimestamp.format("MMM Do") : momentTimestamp.format("MMM Do YYYY");
 
-      return <div className="timestamp" onTouchEnd={this.toggleRelative}>{this.state.relativeTime ? relativeTime : absoluteTime }</div>;
+      return <div className="headline-divider" onTouchEnd={this.toggleRelative}>{this.state.relativeTime ? relativeTime : absoluteTime }</div>;
     }
   });
 
