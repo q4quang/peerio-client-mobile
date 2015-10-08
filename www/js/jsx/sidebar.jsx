@@ -152,16 +152,16 @@
                   </li>
                 </ul>
                 <div className="col-6 col-first">
-                  <Peerio.UI.Tappable element="div" className="btn-md txt-sm"
+                  {/*  <Peerio.UI.Tappable element="div" className="btn-md txt-sm"
                           onTap={this.toggleAndTransition.bind(this, 'account_settings')}><i
                     className="fa fa-user"></i> Profile
-                  </Peerio.UI.Tappable>
+                  </Peerio.UI.Tappable> */ }
                 </div>
                 <div className="col-6 col-last">
-                  <Peerio.UI.Tappable element="div" className="btn-md txt-sm"
+                  {/*<Peerio.UI.Tappable element="div" className="btn-md txt-sm"
                           onTap={this.toggleAndTransition.bind(this, 'preference_settings')}><i
                     className="fa fa-cog"></i> Preferences
-                  </Peerio.UI.Tappable>
+                  </Peerio.UI.Tappable> */}
                 </div>
               </div>
 

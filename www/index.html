@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="format-detection" content="telephone=no" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
 
     <!-- for quicker testing in mobile safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,16 +16,16 @@
     	* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
     	* todo: unsafe inline can be removed from scripts in production. browsersync needs it in development.
 	-->
-	<meta http-equiv="Content-Security-Policy"
+    <meta http-equiv="Content-Security-Policy"
           content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://ssl.gstatic.com https://*.peerio.com
                                 https://peerio.blob.core.windows.net wss://*.peerio.com ws://localhost:3000;
                    media-src *;">
     <title>Peerio</title>
-    <link rel="icon" type="image/png" href="media/img/icon32.png" />
+    <link rel="icon" type="image/png" href="media/img/icon32.png"/>
     <!-- CSS -->
-    <link rel="stylesheet" href="bower/normalize.css/normalize.css" type="text/css" />
-    <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" type="text/css" />
-    <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <link rel="stylesheet" href="bower/normalize.css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" type="text/css"/>
+    <link rel="stylesheet" href="css/app.css" type="text/css"/>
 
     <script type="application/javascript" src="js/urlfix.js"></script>
 
@@ -95,10 +96,41 @@
     <script type="application/javascript" src="js/compiled/jsx/contact_add.js"></script>
     <script type="application/javascript" src="js/compiled/jsx/routes.js"></script>
 
-  </head>
+</head>
+<body>
 
-  <body>
+<div id="approot">
     <!-- Don't put anything in here - it will be replaced by React -->
-  </body>
+</div>
 
+<!-- This is as independent as possible developer mode controls-->
+<style>
+    #devmode {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    #devmode .title {
+        box-shadow: 0 3px 0px 3px gray;
+    }
+</style>
+
+<script>
+    window.devmode = {};
+    devmode.show = function (hide) {
+        document.getElementById('devmode').style.display = hide ? 'none' : 'block';
+    };
+    devmode.hide = document.show.bind(window, true);
+</script>
+
+<div id="devmode" style="display: none;">
+    <div class="title">Woah.. you've unlocked secret ninja mode.</div>
+</div>
+
+</body>
 </html>

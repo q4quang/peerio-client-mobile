@@ -12,6 +12,7 @@
         <div>
           <RouteHandler/>
           <Peerio.UI.Portal/>
+          {Peerio.runtime.platform === 'ios' ? <div className="ios-titlebar"></div> : null}
         </div>
       );
     }

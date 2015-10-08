@@ -56,9 +56,8 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
       React.initializeTouchEvents(true);
 
-      // React.render(React.createElement(Peerio.UI.App, null), document.body);
       ReactRouter.run(Peerio.UI.Routes, ReactRouter.HashLocation, function (Root) {
-        React.render(React.createElement(Root, null), document.body);
+        React.render(React.createElement(Root, null), document.getElementById('approot'));
       });
     });
   }
