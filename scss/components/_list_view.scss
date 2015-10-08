@@ -131,6 +131,7 @@ a 'swipe to delete' action.
         font-size: 0.95rem;
         font-weight: 600;
         margin-bottom: 0.2em;
+        margin-left: 4px;
         @include ellipses();
       }
 
@@ -215,12 +216,17 @@ a 'swipe to delete' action.
 .compact-list-view{
   @extend .list-view;
   .list-item{
-    min-height: 20px;
+    min-height: 30px;
     max-height: 60px;
-    border: none;
-    background-color: transparent;
-    margin-bottom: 0.2em;
-    margin-top: 0.2em;
+    //border: none;
+    //background-color: transparent;
+    //margin-bottom: 0.2em;
+    //margin-top: 0.2em;
+    .list-item-content{
+      .list-item-title{
+        font-weight: normal;
+      }
+    }
 
     .list-item-thumb{
       text-align: left;
@@ -228,6 +234,33 @@ a 'swipe to delete' action.
   
   }
   
+}
+
+.flexible-list-view{
+  @extend .list-view;
+  overflow: visible;
+  .list-item{
+    max-height: none;
+    min-height: 0;
+    overflow: visible;
+  }
+}
+
+.nested-list{
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  .list-item{
+    padding: 0 0 0.2em 0;
+    border-bottom: 1px solid white;
+  }
+  .list-item:last-child{
+    border-bottom: 1px solid transparent;
+  }
+}
+
+.list-item-title + .list-item-description > .nested-list{
+  padding-left: 1.5em;
 }
 
 //animation when deleting a conversations from list view.
