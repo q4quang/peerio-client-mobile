@@ -65,7 +65,7 @@
       Peerio.network.acceptContactRequest(username, resolve);
     })
       .then(Peerio.Data.loadContacts)
-      .timeout(60000, 'Accept contact request timed out.')
+      .summonTimeout(60000, 'Accept contact request timed out.')
       .catch(function (error) {
         console.log(error);
         alert('Failed to accept contact request');
@@ -82,7 +82,7 @@
       Peerio.network.declineContactRequest(username, resolve);
     })
       .then(Peerio.Data.loadContacts)
-      .timeout(60000, 'Reject contact request timed out.')
+      .summonTimeout(60000, 'Reject contact request timed out.')
       .catch(function (error) {
         console.log(error);
         alert('Failed to reject contact request');
@@ -103,7 +103,7 @@
         Peerio.network.removeContact(username, resolve);
     })
       .then(Peerio.Data.loadContacts)
-      .timeout(60000, 'Remove contact request timed out.')
+      .summonTimeout(60000, 'Remove contact request timed out.')
       .catch(function (error) {
         console.log(error);
         alert('Failed to remove contact.');
@@ -116,7 +116,7 @@
       Peerio.network.addContact([{username: username}], resolve);
     })
       .then(Peerio.Data.loadContacts)
-      .timeout(60000, 'Add contact request timed out.')
+      .summonTimeout(60000, 'Add contact request timed out.')
       .catch(function (error) {
         console.log(error);
         alert('Failed to add contact.');

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.peerio" version="1.1.6" android-versionCode="1" ios-CFBundleVersion="7">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" android-versionCode="1" id="com.peerio" ios-CFBundleVersion="8" version="1.2.0">
 	<name>Peerio</name>
 	<description>
         Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end
@@ -22,9 +22,6 @@
 	<preference name="StatusBarBackgroundColor" value="#233445"/>
 	<preference name="StatusBarStyle" value="lightcontent"/>
 	<preference name="StatusBarOverlaysWebView" value="true"/>
-	<preference name="xwalkVersion" value="14+"/>
-	<preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect"/>
-	<preference name="xwalkMode" value="embedded"/>
 	<platform name="android">
 		<allow-intent href="market:*"/>
 		<splash density="land-hdpi" src="res/screen/android/splash-land-hdpi.png"/>
@@ -97,5 +94,6 @@
 	<plugin name="com.telerik.plugins.wkwebview" spec="~0.6.0"/>
 	<plugin name="cordova-plugin-camera" spec="~1.2.0"/>
 	<plugin name="cordova-plugin-whitelist" spec="~1.1.0"/>
+	<plugin name="cordova-plugin-email" spec="~0.7.0"/>
 	<engine name="ios" spec="~3.9.1"/>
 </widget>

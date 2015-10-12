@@ -50,7 +50,9 @@
     <script type="application/javascript" src="js/config.js"></script>
     <script type="application/javascript" src="bower/peerio-client-api/ext_lib_bundle.js"></script>
     <script type="application/javascript" src="bower/peerio-client-api/peerio_client_api_bundle.js"></script>
-
+    <script>
+        L.captureConsole();
+    </script>
     <!-- UI -->
     <script type="application/javascript" src="js/helpers.js"></script>
     <script type="application/javascript" src="js/native_api.js"></script>
@@ -108,7 +110,32 @@
     <!-- Don't put anything in here - it will be replaced by React -->
 </div>
 
-<!-- This is as independent as possible developer mode controls-->
+<!---------------- <DEVMODE CONTROL START> ---------------->
+<!-- This is as independent/vanilla as possible developer mode controls-->
+<div id="devmode" style="transform: translateX(105%);">
+    <div id="devmode-title">woah.. secret ninja mode
+        <div id="devmode-close" onclick="devmode.hide()">X</div>
+    </div>
+    <div id="devmode-content">
+        <div class="devlog-full-width devlog-controls">
+            <select onchange="devmode.changeLogLevel(event)" id="devmode-log-level">
+                <option value="0">Errors</option>
+                <option value="1">Info</option>
+                <option value="2">Verbose</option>
+                <option value="3">Silly</option>
+            </select>
+            <span class="devlog-divider"></span>
+            <input type="checkbox" id="devmode-bench" onchange="devmode.changeLogBenchmark(event)"/>&nbsp;<label
+                for="devmode-bench">Benchmarks</label>
+            <span class="devlog-divider"></span>
+            log limit <input onchange="devmode.changeLogLimit(event)" id="devmode-log-limit" type="text" size="7"
+                             value="123" style="color: #000000;border: none;padding: 0px 2px;"/>
+        </div>
+        <button onclick="devmode.send()" class="devlog-full-width">Send log by email</button>
+        <div id="devmode-log"></div>
+    </div>
+</div>
+
 <style>
     #devmode {
         position: fixed;
@@ -118,24 +145,169 @@
         bottom: 0;
         width: 100%;
         height: 100%;
+        background-color: #FFFFFF;
+        z-index: 2147483647;
+        transition: transform 1s cubic-bezier(0.64, -0.09, 0.21, 0.84);
+        color: white;
     }
 
-    #devmode .title {
-        box-shadow: 0 3px 0px 3px gray;
+    .ios #devmode {
+        top: 20px;
     }
+
+    #devmode-title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        line-height: 30px;
+        max-height: 30px;
+        overflow: hidden;
+        text-align: center;
+        background-color: #125286;
+        color: #CCCCEE;
+        font-size: 13px;
+    }
+
+    #devmode-close {
+        float: right;
+        padding: 0 15px;
+        color: #FFFFFF;
+        border-left: 1px solid #123D61;
+        font-weight: bold;
+    }
+
+    #devmode-content {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        overflow: auto;
+        padding: 20px 5px;
+        background-color: #2795D0;
+    }
+
+    #devmode-log {
+        background-color: #E8EBFF;
+        color: #000000;
+        min-height: 600px;
+        font-size: 11px;
+        word-wrap: break-word;
+        margin: auto -5px;
+    }
+
+    .devlog-full-width {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .devlog-divider {
+        margin: 0 5px;
+        border-left: 1px solid #95D3F5;
+    }
+
+    .devlog-controls {
+        font-size: 11px;
+    }
+
+    #devmode button {
+        background-color: #57BBF1;
+        padding: 5px;
+    }
+
+    .devmode-log-item {
+        padding: 2px 7px;
+    }
+
+    .devmode-log-item:nth-child(odd) {
+        background-color: #DCE1FF;
+    }
+
 </style>
 
 <script>
-    window.devmode = {};
-    devmode.show = function (hide) {
-        document.getElementById('devmode').style.display = hide ? 'none' : 'block';
-    };
-    devmode.hide = document.show.bind(window, true);
+    document.addEventListener("DOMContentLoaded", function () {
+        window.devmode = {
+            root: document.getElementById('devmode'), // root devmode dom node
+            logNode: document.getElementById('devmode-log'), // root devmode dom node
+            summonCounter: 0,              // summon() calls count in current 'session'
+            summonTimeout: null,           // current session timeout id (setTimeout result)
+            summonCounterThreshold: 10,    // summon() will open devmode after this amount of calls
+            summonTimeoutThreshold: 10000, // summonCounter will reset if it didn't reach threshold within this number of milliseconds
+            // open devmode control
+            show: function () {
+                devmode.loadSettings();
+                //devmode.root.style.display = 'block';
+                devmode.root.style.transform = 'translateX(0%)';
+                devmode.populateLog();
+                devmode.interval = setInterval(function () {
+                    if (!L.cache.length) return;
+                    if (devmode.lastLog && devmode.lastLog === L.cache[0]) return;
+                    devmode.lastLog = L.cache[0];
+                    devmode.populateLog();
+                }, 1000);
+            },
+            // closes devmode control
+            hide: function () {
+                //devmode.root.style.display = 'none';
+                devmode.root.style.transform = 'translateX(105%)';
+                clearInterval(devmode.interval);
+            },
+            // call this function N times within T seconds to open devmode
+            summon: function (e) {
+                if (e) e.preventDefault();
+                devmode.summonCounter++;
+                if (devmode.summonTimeout === null) devmode.summonTimeout = setTimeout(devmode.resetSummon, 15000);
+                if (devmode.summonCounter < 10) return;
+                devmode.show();
+                devmode.resetSummon();
+            },
+            resetSummon: function (e) {
+                if (e) e.preventDefault();
+                if (devmode.summonTimeout !== null) clearTimeout(devmode.summonTimeout);
+                devmode.summonTimeout = null;
+                devmode.summonCounter = 0;
+            },
+            send:function(){
+                cordova.plugins.email.open({
+                    to:      'anri@peerio.com',
+                    subject: 'Peerio error report.',
+                    body:    devmode.logNode.innerHTML,
+                    isHtml: true
+                });
+            },
+            changeLogLevel: function (event) {
+                L.level = +event.target.value;
+                devmode.loadSettings();
+            },
+            changeLogBenchmark: function (event) {
+                L.B.enabled = !!event.target.checked;
+                devmode.loadSettings();
+            },
+            changeLogLimit: function (event) {
+                L.cacheLimit = isNaN(+event.target.value) ? 100 : +event.target.value;
+                devmode.loadSettings();
+            },
+            populateLog: function () {
+                var head = "<div class='devmode-log-item'>";
+                var tail = "</div>";
+                var mid = tail + head;
+                devmode.logNode.innerHTML = (head + L.cache.join(mid) + tail)
+                        .replace(/ERR/gm, "<span style='background-color: #FF0000'>ERR</span>");
+            },
+            loadSettings: function(){
+                document.getElementById('devmode-log-level').value = L.level;
+                document.getElementById('devmode-bench').checked = L.B.enabled;
+                document.getElementById('devmode-log-limit').value = L.cacheLimit;
+            }
+        };
+    });
+
 </script>
-
-<div id="devmode" style="display: none;">
-    <div class="title">Woah.. you've unlocked secret ninja mode.</div>
-</div>
-
+<!---------------- </DEVMODE CONTROL END> ---------------->
 </body>
 </html>

@@ -89,7 +89,7 @@
   Peerio.Data.removePIN = function () {
     return new Promise(function (resolve, reject) {
       Peerio.user.removePIN(Peerio.user.username, resolve);
-    }).timeout(5000);// todo: remove magic number
+    }).summonTimeout(5000);// todo: remove magic number
   };
 
   var lastLoginId = 'lastLogin';

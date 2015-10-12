@@ -17,7 +17,7 @@
   "dependencies": {
     "normalize.css": "*",
     "font-awesome": "*",
-    "react": "0.x",
+    "react": "0.13.x",
     "is_js": "*",
     "gsap": "*",
     "Autolinker.js": "*",

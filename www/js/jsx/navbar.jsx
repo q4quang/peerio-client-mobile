@@ -40,10 +40,8 @@
           <div id="sidemenu-toggle" ref="toggle" onTouchStart={this.handleSidebarToggle}>
             <i className="fa fa-bars"></i>
           </div>
-          <div className="logo">
-            <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'messages')}>
+          <div className="logo" onTouchStart={devmode.summon}>
               <img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/>
-            </Peerio.UI.Tappable>
           </div>
           <div id="search">
             <input id="search-keyword" type="text"/>
