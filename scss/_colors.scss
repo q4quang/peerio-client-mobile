@@ -1,0 +1,69 @@
+// base colors
+$p-blue: #2281C5;
+$p-green: #95D583;
+
+$colors: (
+  // base colors
+        p-blue:$p-blue,
+        p-green: $p-green,
+
+  //light blue
+        p-blue-light-50: lighten($p-blue, 50%),
+        p-blue-light-40: lighten($p-blue, 40%),
+        p-blue-light-35: lighten($p-blue, 35%),
+        p-blue-light-30: lighten($p-blue, 30%),
+        p-blue-light-25: lighten($p-blue, 25%),
+        p-blue-light-20: lighten($p-blue, 20%),
+        p-blue-light-15: lighten($p-blue, 15%),
+        p-blue-light-10: lighten($p-blue, 10%),
+        p-blue-light-5:  lighten($p-blue, 5%),
+
+  //dark blue
+        p-blue-dark-5:   darken($p-blue, 5%),
+        p-blue-dark-10:  darken($p-blue, 10%),
+        p-blue-dark-15:  darken($p-blue, 15%),
+        p-blue-dark-20:  darken($p-blue, 20%),
+        p-blue-dark-25:  darken($p-blue, 25%),
+        p-blue-dark-30:  darken($p-blue, 30%),
+        p-blue-darker:   #334455,
+
+  //light green
+        p-green-light-5:   lighten($p-green, 5%),
+        p-green-light-10:  lighten($p-green, 10%),
+        p-green-light-15:  lighten($p-green, 15%),
+        p-green-light-20:  lighten($p-green, 20%),
+        p-green-light-25:  lighten($p-green, 25%),
+        p-green-light-30:  lighten($p-green, 30%),
+
+  //dark green
+        p-green-dark-5:  darken($p-green, 5%),
+        p-green-dark-10: darken($p-green, 10%),
+        p-green-dark-15: darken($p-green, 15%),
+        p-green-dark-20: darken($p-green, 20%),
+        p-green-dark-25: darken($p-green, 25%),
+        p-green-dark-30: darken($p-green, 30%),
+        p-green-dark-35: darken($p-green, 35%),
+        p-green-dark-40: darken($p-green, 40%),
+        p-green-dark-45: darken($p-green, 45%),
+
+  // mix colors
+        p-blue-greenish-light: #A2EEFC,
+        sidebar-bg-color: #44494D,
+
+  //component colors
+        message-self-bg: lighten($p-blue, 49%),
+        message-other-bg: #f5f5f5,
+        list-item-bg: #EEE,
+        list-item-delete-bg: #B55353,
+        footer-btn-color: #5EA767,
+
+  //text colors
+        meta-text-light: #A9A9A9,
+        meta-text-dark: #888,
+        body-text: #444,
+        danger: #BD3535
+);
+
+@function color($key) {
+  @return map-get($colors, $key)
+}

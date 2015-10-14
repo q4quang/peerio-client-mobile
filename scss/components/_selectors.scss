@@ -37,7 +37,7 @@ item with the `.selected` class. Selector also has special styles for positionin
 
 */
 
-$buttons-height:195px;
+$buttons-height:125px;
 
 .contact-select-container {
   position: absolute;
@@ -74,14 +74,14 @@ $buttons-height:195px;
     left: 0;
     right: 0;
     height: $buttons-height;
-    background-color: #E8E8E8;
+    background-color: darken(color(list-item-bg), 5%);
   }
   .contact {
     padding: 10px;
     font-size: 1rem;
-    border-bottom: 1px solid #FFFFFF;
+    border-bottom: 1px solid darken(color(list-item-bg), 5%);
     position: relative;
-    background-color: #EEEEEE;
+    background-color: color(list-item-bg);
     .checkbox-input{
       margin-right: 10px;
     }
@@ -103,7 +103,7 @@ $buttons-height:195px;
     }
   }
   .username {
-    color: #888888;
+    color: color(meta-text-dark);
     font-size: 90%;
     margin-left: 5px;
   }

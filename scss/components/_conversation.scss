@@ -25,10 +25,6 @@ $edge-distance: 0;
 $msg-distance: 15px;
 $big-side-distance: 34px;
 $item-border-radius: 3px;
-
-$message-other-bg: #f5f5f5;
-$message-self-bg: #E7F5FF;
-
 $avatar-size: 29px;
 
 .conversation {
@@ -59,7 +55,7 @@ $avatar-size: 29px;
       height: 22px;
       //padding: 4px 7px 3px 15px;
       padding: 5px;
-      background-color: $message-other-bg;
+      background-color: color(message-other-bg);
       position: relative;
       font-variant: small-caps;
       text-transform: uppercase;
@@ -76,7 +72,7 @@ $avatar-size: 29px;
       padding: 5px;
       padding-bottom: 10px;
       padding-top: 0;
-      background-color: $message-other-bg;
+      background-color: color(message-other-bg);
       border-bottom-right-radius: $item-border-radius;
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -84,11 +80,11 @@ $avatar-size: 29px;
     }
     .file-count{
       font-size: 10px;
-      color: #aaa;
+      color: color(meta-text-light);
     }
 
     .receipts {
-      color: #A9A9A9;
+      color: color(meta-text-light);
       font-size: 70%;
       text-align: right;
       margin-top: 2px;
@@ -109,7 +105,7 @@ $avatar-size: 29px;
           padding-left: 50px;
         }
         .ack-icon {
-          color: #9B9B9B;
+          color: color(p-blue-light-20);
         }
       }
     }
@@ -121,8 +117,7 @@ $avatar-size: 29px;
       position: absolute;
       left: 15px;
       top: -7px;
-      background-color: #FFFFFF;
-      color: #698FA9;
+      background-color: white;
     }
 
     &.self {
@@ -130,13 +125,13 @@ $avatar-size: 29px;
       //padding-right: $edge-distance;
       padding-right: 10px;
       .head {
-        background-color: $message-self-bg;
+        background-color:   colors(message-self-bg);
         border-radius: $item-border-radius 0 0 0;
         padding-left: 7px;
         padding-right: 15px;
       }
       .body {
-        background-color: $message-self-bg;
+        background-color: colors(message-self-bg);
         border-radius: 0 0 0 $item-border-radius;
         padding-left: 7px;
         padding-right: 15px;
@@ -148,7 +143,7 @@ $avatar-size: 29px;
           height: 0;
           border-top: 8px solid rgba(0, 0, 0, 0);
           border-bottom: 8px solid rgba(0, 0, 0, 0);
-          border-left: 8px solid $message-self-bg;
+          border-left: 8px solid  colors(message-self-bg);
           position: absolute;
           right: 2px;
           bottom: 16px;
@@ -218,7 +213,7 @@ $avatar-size: 29px;
       margin: 2px 5px 2px 5px;
     }
     .former-participant{
-      color: #9FA8B1;
+      color: color(meta-text-light);
       text-decoration: line-through;
     }
   }
@@ -234,9 +229,8 @@ $avatar-size: 29px;
   right: 0;
   width: 100%;
   z-index: $z-tabbar;
-  //border-top: 1px solid $p-blue-light-30;
-  border-top: 1px solid #DADADA;
-  background-color: #ECECEC;
+  border-top: 1px solid lighten(color(meta-text-light), 20%);
+  background-color: lighten(color(meta-text-light), 30%);
 }
 
 .reply-ack, .reply-attach {
@@ -270,7 +264,7 @@ $avatar-size: 29px;
   padding: 3px 10px 0 10px;
   flex: 1 1 auto;
   overflow: scroll;
-  border: 1px solid #F4F2FF;
+  border: 1px solid lighten(color(meta-text-light), 28%);
   border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 10px;

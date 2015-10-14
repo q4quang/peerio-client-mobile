@@ -50,14 +50,14 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  font-family: OpenSans;
-  color: #000;
+  font-family: OpenSans, sans-serif;
+  color: color(body-text);
   background-color: #fff;
 }
 
 body.ios{
   margin-top: 20px;
-  background-color: #334455;
+  background-color: color(p-blue-darker);
 }
 
 .ios-titlebar{
@@ -66,12 +66,12 @@ body.ios{
   left: 0;
   right:0;
   height: 20px;
-  background-color: #334455;
+  background-color: color(p-blue-darker);
   z-index: 10000000000;
 }
 
 button{
-  background-color: #2795d0;
+  background-color: color(p-blue-darker);
   border: none;
   color: white;
   font-size: 1rem;
