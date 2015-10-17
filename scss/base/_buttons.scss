@@ -125,13 +125,13 @@ Footer Buttons                                       | Button Class/ID
 .btn-danger {
   @extend .btn;
   color: white;
-  background-color:#BD3535;
+  background-color:color(danger);
 }
 
 .btn-link.btn-danger{
   background-color: transparent;
   text-decoration: underline;
-  color: #BD3535;
+  color: color(danger);
   padding: 0;
 }
 
@@ -148,7 +148,7 @@ button:disabled , .btn-disabled {
   padding:0 15px 0 15px;
   vertical-align: middle;
   white-space: nowrap;
-  background-color: #5EA767;
+  background-color: color(footer-btn-color);
   color:white;
   min-width: 120px;
   text-align: center;

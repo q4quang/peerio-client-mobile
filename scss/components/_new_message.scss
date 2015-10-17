@@ -40,7 +40,7 @@
       min-width: 48px;
       min-height: $recipients-height;
       background-color: #eee;
-      color: #888;
+      color: color(meta-text-dark);
       font-size: 150%;
       display: flex;
       position: relative;
@@ -55,8 +55,8 @@
     min-width: 48px;
     border-top: 1px solid white;
     font-size: 188%;
-    background-color: #eee;
-    color: #888;
+    background-color: color(list-item-bg);
+    color: color(meta-text-dark);
     align-items: center;
     justify-content: center;
     display: flex;
@@ -81,14 +81,14 @@
   }
   .subject {
     flex-grow:1;
-    border-top: 1px solid #EDEDED;
-    border-bottom: 1px solid #EDEDED;
+    border-top: 1px solid color(list-item-bg);
+    border-bottom: 1px solid color(list-item-bg);
     -webkit-appearance: none; // removes weird inner shadow on ios
     border-right: none;
     border-left: none;
     padding-left: 5px;
     &:focus {
-      background-color: #fafafa;
+      background-color: lighten(color(list-item-bg), 5%);
     }
   }
 
@@ -100,7 +100,7 @@
     border: none;
     flex-grow:1;
     &:focus {
-      background-color: #fafafa;
+      background-color: lighten(color(list-item-bg), 5%);
     }
   }
 

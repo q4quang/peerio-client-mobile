@@ -43,7 +43,7 @@ badge.
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     &.active {
       color: #fff;
-      background-color: #4CA7E8;
+      background-color: color(p-blue-light-15);
     //  background: $p-blue-light-15 linear-gradient(to bottom, #278fda 0%, #81bde5 150%)
       &:after{
         content: " ";
@@ -54,7 +54,7 @@ badge.
         width: 0;
         position: absolute;
         border-color: rgba(0, 0, 0, 0);
-        border-bottom-color:#4CA7E8;
+        border-bottom-color:color(p-blue-light-15);
         border-width: 10px;
         transform: scale(1, 0.8) translate(-50%, 0%) rotate(180deg);
       }

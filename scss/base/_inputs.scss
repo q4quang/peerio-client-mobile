@@ -67,7 +67,7 @@ $text-input-fontsize: 1rem;
 
 .radio-button:checked + .radio-label:after {
   content: " ";
-  background-color: #95D583;
+  background-color: color(p-green);
 }
 .radio-label{
   display: inline-block;

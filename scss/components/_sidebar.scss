@@ -55,7 +55,8 @@ Click the sidebar in the example to toggle the `.open` state.
   .app-version{
     position: static;
     font-size: 70%;
-    color: #9E9E9E;
+    color: white;
+    opacity: 0.5;
   }
   display: flex;
   flex-direction: column;
