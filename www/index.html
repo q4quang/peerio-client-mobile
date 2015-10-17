@@ -52,6 +52,7 @@
     <script type="application/javascript" src="bower/peerio-client-api/peerio_client_api_bundle.js"></script>
     <script>
         L.captureConsole();
+        L.captureRootErrors();
     </script>
     <!-- UI -->
     <script type="application/javascript" src="js/helpers.js"></script>
@@ -256,6 +257,7 @@
                 //devmode.root.style.display = 'none';
                 devmode.root.style.transform = 'translateX(105%)';
                 clearInterval(devmode.interval);
+                devmode.logNode.innerHTML = '';
             },
             // call this function N times within T seconds to open devmode
             summon: function (e) {
@@ -272,20 +274,22 @@
                 devmode.summonTimeout = null;
                 devmode.summonCounter = 0;
             },
-            send:function(){
+            send: function () {
                 cordova.plugins.email.open({
-                    to:      'anri@peerio.com',
+                    to: 'anri@peerio.com',
                     subject: 'Peerio error report.',
-                    body:    devmode.logNode.innerHTML,
+                    body: devmode.logNode.innerHTML,
                     isHtml: true
                 });
             },
             changeLogLevel: function (event) {
                 L.level = +event.target.value;
+                L.setWorkersOptions({level: L.level});
                 devmode.loadSettings();
             },
             changeLogBenchmark: function (event) {
-                L.B.enabled = !!event.target.checked;
+                L.benchmarkEnabled = !!event.target.checked;
+                L.setWorkersOptions({benchmarkEnabled: L.benchmarkEnabled});
                 devmode.loadSettings();
             },
             changeLogLimit: function (event) {
@@ -297,9 +301,10 @@
                 var tail = "</div>";
                 var mid = tail + head;
                 devmode.logNode.innerHTML = (head + L.cache.join(mid) + tail)
-                        .replace(/ERR/gm, "<span style='background-color: #FF0000'>ERR</span>");
+                        .replace(/ ERR:/gm, "<span style='background-color: #FF8874'> ERR:</span>")
+                        .replace(/ BNC:/gm, "<span style='background-color: #8FFF74'> BNC:</span>");
             },
-            loadSettings: function(){
+            loadSettings: function () {
                 document.getElementById('devmode-log-level').value = L.level;
                 document.getElementById('devmode-bench').checked = L.B.enabled;
                 document.getElementById('devmode-log-limit').value = L.cacheLimit;
