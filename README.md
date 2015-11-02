@@ -5,13 +5,13 @@ Peerio mobile clients
 
 git config core.ignorecase false
 
-# we use specifically node v4 (node v5 breaks the build)
+We use specifically node v4 (node v5 breaks the build)
 
 npm install cordova bower bower-installer gulp -g -d
 
 npm install -g ios-deploy # for MacOSX using sudo causes an error, removed
 
-# xcode-select --install # if you don't already have console tools for XCode you would need this line
+xcode-select --install # if you don't already have console tools for XCode you would need this line
 
 npm install -d # install or update all packages
 
