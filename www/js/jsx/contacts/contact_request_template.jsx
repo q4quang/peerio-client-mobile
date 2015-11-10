@@ -24,7 +24,7 @@ Peerio.UI.ContactRequestTemplate = React.createClass({
     } else {
       name = <div className="list-item-title">
                 {this.props.username}
-                <div className="text-mono p-blue-dark-15">{this.props.publicKey}</div>
+                <div className="text-mono p-blue-dark-15">{publicKey}</div>
               </div>;
     }
     return <Peerio.UI.Tappable element="div" className='list-item' onTap={this.toggleSelection}>

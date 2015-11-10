@@ -26,7 +26,7 @@
     },
     render: function () {
       var contacts = [];
-      Peerio.user.contacts.forEach(function (c) {
+      Peerio.user.contacts.arr.forEach(function (c) {
         if (c.isRequest) return;
         var isSelected = this.state.selection.indexOf(c.username) >= 0 ;
 
@@ -41,7 +41,7 @@
         )
       }.bind(this));
 
-        if (Peerio.user.contacts.length === 1) {
+        if (Peerio.user.contacts.arr.length === 1) {
           var intro_content = (<div className="content-intro">
                                 <h1 className="headline-lrg">Peerio Contacts</h1>
                                 <p>It looks like you haven't added any contacts yet. Click below to get started.</p>

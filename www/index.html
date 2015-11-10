@@ -232,6 +232,10 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        if(window.PeerioDebug && PeerioDebug.logLevel != null){
+            L.level = PeerioDebug.logLevel;
+            L.releaseConsole();
+        }
         window.devmode = {
             root: document.getElementById('devmode'), // root devmode dom node
             logNode: document.getElementById('devmode-log'), // root devmode dom node

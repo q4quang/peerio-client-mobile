@@ -26,7 +26,7 @@ Peerio.UI.AddContact = React.createClass({
       <p className="centered-text">
         Import contacts from your phone.
       </p>
-      <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this ,'add_contact_import')}>
+      <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this, 'add_contact_import')}>
         <i className="fa fa-mobile"></i>&nbsp; Import
       </Peerio.UI.Tappable>
     </div>);

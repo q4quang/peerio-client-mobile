@@ -38,7 +38,7 @@
       //New account placeholder
       //TODO: when new user has no contacts, add contact popup should appear instead of transitioning to contacts page.
       if ( Peerio.Messages.cache && Peerio.Messages.cache.length  === 0 ) {
-        var intro_content = Peerio.user.contacts.length > 1
+        var intro_content = Peerio.user.contacts.arr.length > 1
             ? <div>
                 <p>Peerio lets you send messages securely. Try it out by sending a message to one of your contacts.</p>
                 <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.transitionTo.bind(this, 'new_message')}>
@@ -77,7 +77,7 @@
           for (var i = 0; i < conv.allParticipants.length; i++) {
             var username = conv.allParticipants[i];
             if (username === Peerio.user.username) continue;
-            var contact = Peerio.user.contacts[username];
+            var contact = Peerio.user.contacts.dict[username];
             displayName = (contact && contact.fullName) || username;
             break;
           }

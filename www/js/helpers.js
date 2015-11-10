@@ -84,17 +84,7 @@ Peerio.Helpers.init = function () {
     }
   };
 
-  /**
-   * Safely iterates through contacts, calling function on each one
-   * @param fn {function(contact)} - function to call for each contact
-   */
-  api.forEachContact = function (fn) {
-    var c = Peerio.user.contacts;
-    for (var id in c) {
-      if (!c.hasOwnProperty(id)) continue;
-      fn(c[id]);
-    }
-  };
+
 
   /**
    * Produces human-readable file size

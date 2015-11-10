@@ -2,7 +2,7 @@
   'use strict';
   Peerio.UI.Avatar = React.createClass({
     render: function () {
-      var user = Peerio.user.contacts[this.props.username];
+      var user = Peerio.user.contacts.dict[this.props.username];
       var icons, classes = 'avatar';
 
       if (user) {

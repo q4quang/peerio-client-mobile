@@ -3,9 +3,35 @@
   "version": "1.0.0",
   "description": "peerio-client-mobile",
   "dependencies": {
-    "cordova-build-increment": "0.0.5",
+    "browser-sync": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-babel": "^6.0.0",
     "gulp-clean": "^0.3.1",
-    "run-sequence": "^1.1.4"
+    "gulp-css-globbing": "*",
+    "gulp-react": "*",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "*",
+    "gulp-xml-editor": "*",
+    "run-sequence": "^1.1.4",
+    "inquirer": "*",
+    "lodash": "*",
+    "minimist": "*",
+    "semver": "*",
+    "shelljs": "*",
+    "babel-plugin-syntax-function-bind": "^6.0.2",
+    "babel-plugin-transform-es2015-arrow-functions": "^6.0.2",
+    "babel-plugin-transform-es2015-block-scoped-functions": "^6.0.2",
+    "babel-plugin-transform-es2015-block-scoping": "^6.0.9",
+    "babel-plugin-transform-es2015-destructuring": "^6.0.2",
+    "babel-plugin-transform-es2015-for-of": "^6.0.2",
+    "babel-plugin-transform-es2015-function-name": "^6.0.2",
+    "babel-plugin-transform-es2015-shorthand-properties": "^6.0.2",
+    "babel-plugin-transform-es2015-spread": "^6.0.2",
+    "babel-plugin-transform-function-bind": "^6.0.2",
+    "babel-plugin-transform-object-assign": "^6.0.2",
+    "babel-preset-react": "^6.0.12",
+    "cordova-build-increment": "0.0.5"
   },
   "repository": {
     "type": "git",
@@ -16,21 +42,5 @@
   "bugs": {
     "url": "https://github.com/PeerioTechnologies/peerio-client-mobile/issues"
   },
-  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
-  "devDependencies": {
-    "browser-sync": "*",
-    "gulp": "*",
-    "gulp-autoprefixer": "*",
-    "gulp-babel": "*",
-    "gulp-css-globbing": "*",
-    "gulp-react": "*",
-    "gulp-sass": "2.1.0-beta",
-    "gulp-sourcemaps": "*",
-    "gulp-xml-editor": "*",
-    "inquirer": "*",
-    "lodash": "*",
-    "minimist": "*",
-    "semver": "*",
-    "shelljs": "*"
-  }
+  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile"
 }

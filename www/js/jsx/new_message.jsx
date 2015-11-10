@@ -45,7 +45,7 @@
     //--- RENDER
     render: function () {
       var r = this.state.recipients.map(function (username) {
-        var c = Peerio.user.contacts[username];
+        var c = Peerio.user.contacts.dict[username];
         return <span className="name-selected">{c.fullName}&nbsp;&bull;&nbsp;{username}</span>;
       });
       return (
