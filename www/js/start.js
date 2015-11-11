@@ -41,6 +41,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             // keyboard plugin currently (10.09.2015) fails to execute this with wkwebview
             // but sometimes, in perfect future...
             Peerio.NativeAPI.hideKeyboardAccessoryBar();
+            Peerio.NativeAPI.enablePushNotifications(true);
             // same thing but this call messes up wkwebview, while it is the default behaviour on android
             //Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
 
