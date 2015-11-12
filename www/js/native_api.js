@@ -117,7 +117,17 @@ Peerio.NativeAPI.init = function () {
         });
     };
 
-    api.enablePushNotifications = function () {
+    /**
+     * Enables or disables push notifications (if possible) 
+     * @param {bool} enable - to enable or to disable todo: disable
+     * @returns {bool} - whether enabling notifications was successful or not
+     */
+    api.enablePushNotifications = function (enable) {
+        if(!enable) return false;
+        if(typeof PushNotification === 'undefined') {
+            console.log("push notifications unavailable at the platform");
+            return false;
+        }
         console.log("enabling push notifications");
         var push = PushNotification.init({ 
          "ios": {"alert": "true", "badge": "true", "sound": "true"}} );
@@ -133,6 +143,8 @@ Peerio.NativeAPI.init = function () {
         push.on('error', function(e) {
             console.log( "push notification error: " + e.message );
         });
+        console.log("push notifications enabled");
+        return true;
     };
 
     initializers.takePicture = function () {
