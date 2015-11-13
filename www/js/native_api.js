@@ -137,6 +137,36 @@ Peerio.NativeAPI.init = function () {
         });
     };
 
+    /**
+     * Enables or disables push notifications (if possible) 
+     * @param {bool} enable - to enable or to disable todo: disable
+     * @returns {bool} - whether enabling notifications was successful or not
+     */
+    api.enablePushNotifications = function (enable) {
+        if(!enable) return false;
+        if(typeof PushNotification === 'undefined') {
+            console.log("push notifications unavailable at the platform");
+            return false;
+        }
+        console.log("enabling push notifications");
+        var push = PushNotification.init({ 
+         "ios": {"alert": "true", "badge": "true", "sound": "true"}} );
+        push.on('registration', function(data) {
+            console.log( "push notification reg.id: " + data.registrationId );
+        });
+        push.on('notification', function(data) {
+            console.log( "push notification message: " + data.message );
+            console.log( "push notification title: " + data.title );
+            console.log( "push notification count: " + data.count );
+        });
+
+        push.on('error', function(e) {
+            console.log( "push notification error: " + e.message );
+        });
+        console.log("push notifications enabled");
+        return true;
+    };
+
     initializers.takePicture = function () {
         if (navigator.camera)
             return;
