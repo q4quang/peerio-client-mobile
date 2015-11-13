@@ -1,102 +1,102 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="3" id="com.peerio" ios-CFBundleVersion="15" version="1.6.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Peerio</name>
-    <description>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget android-versionCode="3" id="com.peerio" ios-CFBundleVersion="18" version="1.6.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+	<name>Peerio</name>
+	<description>
         Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end
         encryption.
     </description>
-    <author email="peerio@peerio.com" href="https://peerio.com">
+	<author email="peerio@peerio.com" href="https://peerio.com">
         Technologies Peerio Inc.
     </author>
-    <hook src="scripts/incrementBuildNum.js" type="after_build" />
-    <content src="index.html" />
-    <icon src="res/icon.png" />
-    <access origin="https://*.peerio.com" />
-    <access origin="https://peerio.com" />
-    <access origin="https://peerio.blob.core.windows.net" />
-    <allow-intent href="*" />
-    <allow-intent href="mailto:*" />
-    <preference name="Orientation" value="default" />
-    <preference name="Fullscreen" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="StatusBarBackgroundColor" value="#233445" />
-    <preference name="StatusBarStyle" value="lightcontent" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
-    <platform name="android">
-        <allow-intent href="market:*" />
-        <splash density="hdpi" src="res/screen/android/drawable-hdpi/splash.9.png" />
-        <splash density="ldpi" src="res/screen/android/drawable-ldpi/splash.9.png" />
-        <splash density="mdpi" src="res/screen/android/drawable-mdpi/splash.9.png" />
-        <splash density="xhdpi" src="res/screen/android/drawable-xhdpi/splash.9.png" />
-        <icon density="ldpi" src="res/icon/android/ldpi.png" />
-        <icon density="mdpi" src="res/icon/android/mdpi.png" />
-        <icon density="hdpi" src="res/icon/android/hdpi.png" />
-        <icon density="xhdpi" src="res/icon/android/xhdpi.png" />
-        <preference name="LoadUrlTimeoutValue" value="60000" />
-        <preference name="SplashScreenDelay" value="2000" />
-        <preference name="KeepRunning" value="false" />
-        <preference name="AndroidPersistentFileLocation" value="Internal" />
-        <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
-        <preference name="AndroidLaunchMode" value="singleTop" />
-        <preference name="android-minSdkVersion" value="15" />
-    </platform>
-    <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
-        <splash height="480" src="res/screen/ios/Default~iphone.png" width="320" />
-        <splash height="960" src="res/screen/ios/Default@2x~iphone.png" width="640" />
-        <splash height="1024" src="res/screen/ios/Default-Portrait~ipad.png" width="768" />
-        <splash height="2048" src="res/screen/ios/Default-Portrait@2x~ipad.png" width="1536" />
-        <splash height="768" src="res/screen/ios/Default-Landscape~ipad.png" width="1024" />
-        <splash height="1536" src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048" />
-        <splash height="1136" src="res/screen/ios/Default-568h@2x~iphone.png" width="640" />
-        <splash height="1334" src="res/screen/ios/Default-667h.png" width="750" />
-        <splash height="2208" src="res/screen/ios/Default-736h.png" width="1242" />
-        <splash height="1242" src="res/screen/ios/Default-Landscape-736h.png" width="2208" />
-        <icon height="180" src="res/icon/ios/icon-60@3x.png" width="180" />
-        <icon height="60" src="res/icon/ios/icon-60.png" width="60" />
-        <icon height="120" src="res/icon/ios/icon-60@2x.png" width="120" />
-        <icon height="76" src="res/icon/ios/icon-76.png" width="76" />
-        <icon height="152" src="res/icon/ios/icon-76@2x.png" width="152" />
-        <icon height="40" src="res/icon/ios/icon-40.png" width="40" />
-        <icon height="80" src="res/icon/ios/icon-40@2x.png" width="80" />
-        <icon height="57" src="res/icon/ios/icon.png" width="57" />
-        <icon height="114" src="res/icon/ios/icon@2x.png" width="114" />
-        <icon height="72" src="res/icon/ios/icon-72.png" width="72" />
-        <icon height="144" src="res/icon/ios/icon-72@2x.png" width="144" />
-        <icon height="29" src="res/icon/ios/icon-small.png" width="29" />
-        <icon height="58" src="res/icon/ios/icon-small@2x.png" width="58" />
-        <icon height="50" src="res/icon/ios/icon-50.png" width="50" />
-        <icon height="100" src="res/icon/ios/icon-50@2x.png" width="100" />
-        <preference name="iosPersistentFileLocation" value="Library" />
-        <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
-        <preference name="BackupWebStorage" value="none" />
-        <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-        <preference name="PaginationMode" value="unpaginated" />
-        <preference name="UIWebViewDecelerationSpeed" value="fast" />
-        <preference name="CameraUsesGeolocation" value="false" />
-    </platform>
-    <plugin name="cordova-open" spec="~1.0.9" />
-    <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="*" />
-    <plugin name="cordova-plugin-appversion" spec="*" />
-    <plugin name="cordova-plugin-device" spec="*" />
-    <plugin name="cordova-plugin-splashscreen" spec="*" />
-    <plugin name="cordova-plugin-file-transfer" spec="*" />
-    <plugin name="cordova-plugin-file" spec="*" />
-    <plugin name="cordova-plugin-crosswalk-webview" spec="*" />
-    <plugin name="cordova-plugin-statusbar" spec="*" />
-    <plugin name="cordova-plugin-keyboard" spec="*" />
-    <plugin name="cordova-plugin-contacts" spec="*" />
-    <plugin name="com.telerik.plugins.wkwebview" spec="~0.6.5" />
-    <plugin name="cordova-plugin-camera" spec="*" />
-    <plugin name="cordova-plugin-whitelist" spec="~1.1.0" />
-    <plugin name="cordova-plugin-email" spec="~0.7.0" />
-    <plugin name="io.litehelpers.cordova.sqlcipher" spec="https://github.com/litehelpers/Cordova-sqlcipher-adapter" />
-    <engine name="ios" spec="~3.9.1" />
-    <plugin name="cordova-plugin-privacyscreen" spec="~0.1.2" />
-    <preference name="xwalkVersion" value="15+" />
-    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
-    <preference name="xwalkMode" value="embedded" />
-    <preference name="xwalkMultipleApk" value="true" />
-    <plugin name="phonegap-plugin-push" spec="~1.4.2" />
+	<hook src="scripts/incrementBuildNum.js" type="after_build"/>
+	<content src="index.html"/>
+	<icon src="res/icon.png"/>
+	<access origin="https://*.peerio.com"/>
+	<access origin="https://peerio.com"/>
+	<access origin="https://peerio.blob.core.windows.net"/>
+	<allow-intent href="*"/>
+	<allow-intent href="mailto:*"/>
+	<preference name="Orientation" value="default"/>
+	<preference name="Fullscreen" value="false"/>
+	<preference name="DisallowOverscroll" value="true"/>
+	<preference name="StatusBarBackgroundColor" value="#233445"/>
+	<preference name="StatusBarStyle" value="lightcontent"/>
+	<preference name="StatusBarOverlaysWebView" value="true"/>
+	<preference name="xwalkVersion" value="15+"/>
+	<preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect"/>
+	<preference name="xwalkMode" value="embedded"/>
+	<preference name="xwalkMultipleApk" value="true"/>
+	<platform name="android">
+		<allow-intent href="market:*"/>
+		<splash density="hdpi" src="res/screen/android/drawable-hdpi/splash.9.png"/>
+		<splash density="ldpi" src="res/screen/android/drawable-ldpi/splash.9.png"/>
+		<splash density="mdpi" src="res/screen/android/drawable-mdpi/splash.9.png"/>
+		<splash density="xhdpi" src="res/screen/android/drawable-xhdpi/splash.9.png"/>
+		<icon density="ldpi" src="res/icon/android/ldpi.png"/>
+		<icon density="mdpi" src="res/icon/android/mdpi.png"/>
+		<icon density="hdpi" src="res/icon/android/hdpi.png"/>
+		<icon density="xhdpi" src="res/icon/android/xhdpi.png"/>
+		<preference name="LoadUrlTimeoutValue" value="60000"/>
+		<preference name="SplashScreenDelay" value="2000"/>
+		<preference name="KeepRunning" value="false"/>
+		<preference name="AndroidPersistentFileLocation" value="Internal"/>
+		<preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root"/>
+		<preference name="AndroidLaunchMode" value="singleTop"/>
+		<preference name="android-minSdkVersion" value="15"/>
+	</platform>
+	<platform name="ios">
+		<allow-intent href="itms:*"/>
+		<allow-intent href="itms-apps:*"/>
+		<splash height="480" src="res/screen/ios/Default~iphone.png" width="320"/>
+		<splash height="960" src="res/screen/ios/Default@2x~iphone.png" width="640"/>
+		<splash height="1024" src="res/screen/ios/Default-Portrait~ipad.png" width="768"/>
+		<splash height="2048" src="res/screen/ios/Default-Portrait@2x~ipad.png" width="1536"/>
+		<splash height="768" src="res/screen/ios/Default-Landscape~ipad.png" width="1024"/>
+		<splash height="1536" src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048"/>
+		<splash height="1136" src="res/screen/ios/Default-568h@2x~iphone.png" width="640"/>
+		<splash height="1334" src="res/screen/ios/Default-667h.png" width="750"/>
+		<splash height="2208" src="res/screen/ios/Default-736h.png" width="1242"/>
+		<splash height="1242" src="res/screen/ios/Default-Landscape-736h.png" width="2208"/>
+		<icon height="180" src="res/icon/ios/icon-60@3x.png" width="180"/>
+		<icon height="60" src="res/icon/ios/icon-60.png" width="60"/>
+		<icon height="120" src="res/icon/ios/icon-60@2x.png" width="120"/>
+		<icon height="76" src="res/icon/ios/icon-76.png" width="76"/>
+		<icon height="152" src="res/icon/ios/icon-76@2x.png" width="152"/>
+		<icon height="40" src="res/icon/ios/icon-40.png" width="40"/>
+		<icon height="80" src="res/icon/ios/icon-40@2x.png" width="80"/>
+		<icon height="57" src="res/icon/ios/icon.png" width="57"/>
+		<icon height="114" src="res/icon/ios/icon@2x.png" width="114"/>
+		<icon height="72" src="res/icon/ios/icon-72.png" width="72"/>
+		<icon height="144" src="res/icon/ios/icon-72@2x.png" width="144"/>
+		<icon height="29" src="res/icon/ios/icon-small.png" width="29"/>
+		<icon height="58" src="res/icon/ios/icon-small@2x.png" width="58"/>
+		<icon height="50" src="res/icon/ios/icon-50.png" width="50"/>
+		<icon height="100" src="res/icon/ios/icon-50@2x.png" width="100"/>
+		<preference name="iosPersistentFileLocation" value="Library"/>
+		<preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root"/>
+		<preference name="BackupWebStorage" value="none"/>
+		<preference name="KeyboardDisplayRequiresUserAction" value="false"/>
+		<preference name="PaginationMode" value="unpaginated"/>
+		<preference name="UIWebViewDecelerationSpeed" value="fast"/>
+		<preference name="CameraUsesGeolocation" value="false"/>
+	</platform>
+	<plugin name="cordova-open" spec="~1.0.9"/>
+	<plugin name="cordova-plugin-chrome-apps-system-cpu" spec="*"/>
+	<plugin name="cordova-plugin-appversion" spec="*"/>
+	<plugin name="cordova-plugin-device" spec="*"/>
+	<plugin name="cordova-plugin-splashscreen" spec="*"/>
+	<plugin name="cordova-plugin-file-transfer" spec="*"/>
+	<plugin name="cordova-plugin-file" spec="*"/>
+	<plugin name="cordova-plugin-crosswalk-webview" spec="*"/>
+	<plugin name="cordova-plugin-statusbar" spec="*"/>
+	<plugin name="cordova-plugin-keyboard" spec="*"/>
+	<plugin name="cordova-plugin-contacts" spec="*"/>
+	<plugin name="com.telerik.plugins.wkwebview" spec="~0.6.5"/>
+	<plugin name="cordova-plugin-camera" spec="*"/>
+	<plugin name="cordova-plugin-whitelist" spec="~1.1.0"/>
+	<plugin name="cordova-plugin-email" spec="~0.7.0"/>
+	<plugin name="io.litehelpers.cordova.sqlcipher" spec="https://github.com/litehelpers/Cordova-sqlcipher-adapter"/>
+	<plugin name="cordova-plugin-privacyscreen" spec="~0.1.2"/>
+	<plugin name="phonegap-plugin-push" spec="~1.4.2"/>
+	<engine name="ios" spec="~3.9.1"/>
 </widget>
