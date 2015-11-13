@@ -94,7 +94,8 @@
 
                 return (
                     <Peerio.UI.MessagesItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
-                                            unread={conv.isModified} fullName={conv.displayName} username={conv.username}
+                                            unread={conv.isModified} fullName={conv.displayName}
+                                            username={conv.username}
                                             fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
                                             messageCount={conv.messageCount} subject={conv.original.subject}
                                             onSwipe={this.toggleSwipe} swiped={this.state.swiped}
@@ -155,7 +156,8 @@
                         </div>
 
                         <div className="list-item-content">
-                            <div className="list-item-title"><span className="list-item-title-tag">{this.props.username}</span>{this.props.fullName}</div>
+                            <div className="list-item-sup">{this.props.username}</div>
+                            {this.props.fullName&&<div className="list-item-title">{this.props.fullName}</div>}
                             <div className="list-item-description">{this.props.subject}</div>
                         </div>
 

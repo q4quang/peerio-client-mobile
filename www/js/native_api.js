@@ -36,11 +36,31 @@ Peerio.NativeAPI.init = function () {
      * @param url
      */
     api.openInBrowser = function (url) {
-        cordova.InAppBrowser.open(url, '_system');
+        if (!window.SafariViewController) {
+            cordova.InAppBrowser.open(url, '_blank', 'location=yes');
+            return;
+        }
+
+        SafariViewController.isAvailable(function (available) {
+            if (!available) {
+                cordova.InAppBrowser.open(url, '_blank', 'location=yes');
+                return;
+            }
+            SafariViewController.show({
+                    'url': url,
+                    'enterReaderModeIfAvailable': false
+                },
+                function (msg) {
+                    // success callback
+                },
+                function (msg) {
+                    L.error(msg);
+                });
+        });
     };
 
     initializers.openInBrowser = function () {
-        if (cordova && cordova.InAppBrowser) return;
+        if (window.SafariViewController || cordova && cordova.InAppBrowser) return;
 
         return window.open;
     };
@@ -157,7 +177,7 @@ Peerio.NativeAPI.init = function () {
     /**
      * Removes all temporary pictures taken with previous cordova camera plugin calls
      */
-    api.cleanupCamera = function(){
+    api.cleanupCamera = function () {
         navigator.camera.cleanup();
     };
 
