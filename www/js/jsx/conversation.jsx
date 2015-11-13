@@ -173,20 +173,6 @@
             );
         },
         sanitizingOptions: {ALLOWED_TAGS: [], ALLOWED_ATTR: []},
-        autolinker: new Autolinker({
-            twitter: false,
-            replaceFn: function (autolinker, match) {
-                var tag = autolinker.getTagBuilder().build(match);
-                tag.setAttr('onclick', "javascript:Peerio.NativeAPI.openInBrowser('" + match.getAnchorHref() + "');event.preventDefault()");
-                tag.setAttr('href', '#');
-                return tag;
-            }
-        }),
-        processBody: function (body) {
-            body = DOMPurify.sanitize(body, this.sanitizingOptions);
-            body = this.autolinker.link(body);
-            return {__html: body};
-        },
         // render helper, returns react nodes for messages
         buildNodes: function () {
             // will be the same for all ack nodes
@@ -227,7 +213,7 @@
                     var filesCount = (item.fileIDs && item.fileIDs.length) ?
                         <div className="file-count">{item.fileIDs.length} files attached.</div> : null;
                     body = (<div className="body">{filesCount}
-                        <span dangerouslySetInnerHTML={this.processBody(item.message)}></span>
+                        <Peerio.UI.Linkify text={item.message} onOpen={Peerio.NativeAPI.openInBrowser}></Peerio.UI.Linkify>
                     </div>);
                 }
                 var itemClass = React.addons.classSet({

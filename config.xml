@@ -97,4 +97,6 @@
     <plugin name="io.litehelpers.cordova.sqlcipher" spec="https://github.com/litehelpers/Cordova-sqlcipher-adapter" />
     <engine name="ios" spec="~3.9.1" />
     <plugin name="cordova-plugin-privacyscreen" spec="~0.1.2" />
+    <plugin name="cordova-plugin-safariviewcontroller" spec="~1.0.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.0.1" />
 </widget>

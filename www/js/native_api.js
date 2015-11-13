@@ -10,143 +10,163 @@ var Peerio = this.Peerio || {};
 Peerio.NativeAPI = {};
 
 Peerio.NativeAPI.init = function () {
-  'use strict';
+    'use strict';
 
-  var api = Peerio.NativeAPI;
-  delete Peerio.NativeAPI.init;
+    var api = Peerio.NativeAPI;
+    delete Peerio.NativeAPI.init;
 
-  var cordova = window.cordova;
-  var initializers = {};
+    var cordova = window.cordova;
+    var initializers = {};
 
-  //----- internal helpers
-  function getGenericMsg(name) {
-    return (name ? name + ': ' : '') + 'Native API not available';
-  }
+    //----- internal helpers
+    function getGenericMsg(name) {
+        return (name ? name + ': ' : '') + 'Native API not available';
+    }
 
-  function getFileApiGenericInitializer(name) {
-    return function () {
-      if (cordova && cordova.file) return;
+    function getFileApiGenericInitializer(name) {
+        return function () {
+            if (cordova && cordova.file) return;
 
-      return Promise.reject.bind(null, getGenericMsg(name));
-    };
-  }
+            return Promise.reject.bind(null, getGenericMsg(name));
+        };
+    }
 
-  /**
-   * Opens url in inAppBrowser
-   * @param url
-   */
-  api.openInBrowser = function (url) {
-    cordova.InAppBrowser.open(url, '_system');
-  };
+    /**
+     * Opens url in inAppBrowser
+     * @param url
+     */
+    api.openInBrowser = function (url) {
+        if (!window.SafariViewController) {
+            cordova.InAppBrowser.open(url, '_blank', 'location=yes');
+            return;
+        }
 
-  initializers.openInBrowser = function () {
-    if (cordova && cordova.InAppBrowser) return;
-
-    return window.open;
-  };
-
-  /**
-   * Hide software keyboard
-   */
-  api.hideKeyboard = function () {
-    Keyboard.hide();
-  };
-
-  initializers.hideKeyboard = function () {
-    if (window.Keyboard && Keyboard.hide)
-      return;
-
-    return console.log.bind(console, getGenericMsg('hideKeyboard'));
-  };
-
-  /**
-   * For IOS only. Hides "accessory bar" with "next", "previous" and "done" buttons.
-   */
-  api.hideKeyboardAccessoryBar = function () {
-    Keyboard.hideFormAccessoryBar(true);
-  };
-
-  initializers.hideKeyboardAccessoryBar = function () {
-    if (window.Keyboard && Keyboard.hideFormAccessoryBar)
-      return;
-
-    return console.log.bind(console, getGenericMsg('hideKeyboardAccessoryBar'));
-  };
-  /**
-   *  When keyboard is open, shrinks the webview instead of viewport
-   */
-  api.shrinkViewOnKeyboardOpen = function () {
-    Keyboard.shrinkView(true);
-  };
-
-  initializers.shrinkViewOnKeyboardOpen = function () {
-    if (window.Keyboard && Keyboard.shrinkView)
-      return;
-
-    return console.log.bind(console, getGenericMsg('shrinkViewOnKeyboardOpen'));
-  };
-
-  /**
-   * Get app version from config.xml
-   * @param {function(string)} callback
-   */
-  api.getAppVersion = function () {
-    return (window.AppVersion && AppVersion.version) || 'n/a';
-  };
-
-  /**
-   * Takes picture from camera or photo library
-   * @param {bool} camera - set true to take a new picture instead of picking from the library
-   * @returns {Promise<string>} - file url
-   */
-  api.takePicture = function (camera) {
-    return new Promise(function (resolve, reject) {
-      navigator.camera.getPicture(resolve, reject,
-        { // please, don't change properties without (re)reading docs on them first and testing result after
-          // yes, Anri, especially you!
-          sourceType: camera ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
-          destinationType: Camera.DestinationType.FILE_URI,
-          encodingType: Camera.EncodingType.JPEG,
-          mediaType: Camera.MediaType.ALLMEDIA,
-          cameraDirection: Camera.Direction.BACK,
-          allowEdit: false,
-          correctOrientation: true,
-          saveToPhotoAlbum: false,
-          quality: 90
+        SafariViewController.isAvailable(function (available) {
+            if (!available) {
+                cordova.InAppBrowser.open(url, '_blank', 'location=yes');
+                return;
+            }
+            SafariViewController.show({
+                    'url': url,
+                    'enterReaderModeIfAvailable': false
+                },
+                function (msg) {
+                    // success callback
+                },
+                function (msg) {
+                    L.error(msg);
+                });
         });
-    });
-  };
+    };
 
-  initializers.takePicture = function () {
-    if (navigator.camera)
-      return;
+    initializers.openInBrowser = function () {
+        if (window.SafariViewController || cordova && cordova.InAppBrowser) return;
 
-    return console.log.bind(console, getGenericMsg('takePicture'));
-  };
+        return window.open;
+    };
 
-  /**
-   * Removes all temporary pictures taken with previous cordova camera plugin calls
-   */
-  api.cleanupCamera = function(){
-    navigator.camera.cleanup();
-  };
+    /**
+     * Hide software keyboard
+     */
+    api.hideKeyboard = function () {
+        Keyboard.hide();
+    };
 
-  initializers.cleanupCamera = function () {
-    if (navigator.camera)
-      return;
+    initializers.hideKeyboard = function () {
+        if (window.Keyboard && Keyboard.hide)
+            return;
 
-    return console.log.bind(console, getGenericMsg('cleanupCamera'));
-  };
+        return console.log.bind(console, getGenericMsg('hideKeyboard'));
+    };
+
+    /**
+     * For IOS only. Hides "accessory bar" with "next", "previous" and "done" buttons.
+     */
+    api.hideKeyboardAccessoryBar = function () {
+        Keyboard.hideFormAccessoryBar(true);
+    };
+
+    initializers.hideKeyboardAccessoryBar = function () {
+        if (window.Keyboard && Keyboard.hideFormAccessoryBar)
+            return;
+
+        return console.log.bind(console, getGenericMsg('hideKeyboardAccessoryBar'));
+    };
+    /**
+     *  When keyboard is open, shrinks the webview instead of viewport
+     */
+    api.shrinkViewOnKeyboardOpen = function () {
+        Keyboard.shrinkView(true);
+    };
+
+    initializers.shrinkViewOnKeyboardOpen = function () {
+        if (window.Keyboard && Keyboard.shrinkView)
+            return;
+
+        return console.log.bind(console, getGenericMsg('shrinkViewOnKeyboardOpen'));
+    };
+
+    /**
+     * Get app version from config.xml
+     * @param {function(string)} callback
+     */
+    api.getAppVersion = function () {
+        return (window.AppVersion && AppVersion.version) || 'n/a';
+    };
+
+    /**
+     * Takes picture from camera or photo library
+     * @param {bool} camera - set true to take a new picture instead of picking from the library
+     * @returns {Promise<string>} - file url
+     */
+    api.takePicture = function (camera) {
+        return new Promise(function (resolve, reject) {
+            navigator.camera.getPicture(resolve, reject,
+                { // please, don't change properties without (re)reading docs on them first and testing result after
+                    // yes, Anri, especially you!
+                    sourceType: camera ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    encodingType: Camera.EncodingType.JPEG,
+                    mediaType: Camera.MediaType.ALLMEDIA,
+                    cameraDirection: Camera.Direction.BACK,
+                    allowEdit: false,
+                    correctOrientation: true,
+                    saveToPhotoAlbum: false,
+                    quality: 90
+                });
+        });
+    };
+
+    initializers.takePicture = function () {
+        if (navigator.camera)
+            return;
+
+        return console.log.bind(console, getGenericMsg('takePicture'));
+    };
+
+    /**
+     * Removes all temporary pictures taken with previous cordova camera plugin calls
+     */
+    api.cleanupCamera = function () {
+        navigator.camera.cleanup();
+    };
+
+    initializers.cleanupCamera = function () {
+        if (navigator.camera)
+            return;
+
+        return console.log.bind(console, getGenericMsg('cleanupCamera'));
+    };
 
 //--------------------------------------------------------------------------------------------------------------------
-  _.forOwn(initializers, function (fn, name) {
-    // if initializer returns alternative function
-    // (usually a mock that is safe to call)
-    // assign that function instead of original one
-    var alterFn = fn();
-    if (alterFn) api[name] = alterFn;
-  });
-  // cleaning memory
-  initializers = null;
-  //--------------------------------------------------------------------------------------------------------------------
+    _.forOwn(initializers, function (fn, name) {
+        // if initializer returns alternative function
+        // (usually a mock that is safe to call)
+        // assign that function instead of original one
+        var alterFn = fn();
+        if (alterFn) api[name] = alterFn;
+    });
+    // cleaning memory
+    initializers = null;
+    //--------------------------------------------------------------------------------------------------------------------
 };

@@ -18,7 +18,7 @@ Peerio.Config.init = function () {
 
         var cfg = Peerio.Config = {};
 
-        cfg.webSocketServer = 'wss://labs.peerio.com:443';
+        cfg.webSocketServer = 'wss://app.peerio.com:443';
 
         cfg.cpuCount = navigator.hardwareConcurrency || 1;
         // if client will not receive pings for pingTimeout, connection will be considered broken
