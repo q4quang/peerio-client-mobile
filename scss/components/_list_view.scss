@@ -96,7 +96,7 @@ a 'swipe to delete' action.
 
 */
 
-$list-item-height: 60px;
+$list-item-height: 70px;
 
 .list-view {
   display: flex;
@@ -105,6 +105,7 @@ $list-item-height: 60px;
   padding: 0;
   overflow-x: hidden;
   .list-item {
+    transition: all 1s linear;
     min-height: $list-item-height;
     max-height: $list-item-height;
     display: flex;
@@ -136,11 +137,11 @@ $list-item-height: 60px;
         // margin-left: 4px;
         @include ellipses();
       }
-      .list-item-title-tag {
-        font-size: 0.65rem;
-        font-weight: 400;
-        margin-right: 5px;
+      .list-item-sup{
+        opacity: 1;
         text-transform: uppercase;
+        font-size: 0.6rem;
+        font-weight: 400;
       }
 
       .list-item-description {
@@ -152,6 +153,7 @@ $list-item-height: 60px;
     }
     .list-item-content.text-right {
       min-width: 50px;
+      align-self: center;
     }
     .list-item-thumb {
       max-width: 40px;
