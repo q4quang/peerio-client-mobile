@@ -153,6 +153,7 @@ Peerio.NativeAPI.init = function () {
          "ios": {"alert": "true", "badge": "true", "sound": "true"}} );
         push.on('registration', function(data) {
             console.log( "push notification reg.id: " + data.registrationId );
+            Peerio.Net.registerMobileDevice( data.registrationId );
         });
         push.on('notification', function(data) {
             console.log( "push notification message: " + data.message );

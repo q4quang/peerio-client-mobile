@@ -67,7 +67,7 @@ var paths = {
 
 gulp.task('default', ['help']);
 gulp.task('compile', function (done) {
-    return runSequence('compile-clean', ['jsx', 'sass', 'js'], done);
+    return runSequence('compile-clean', ['bower-installer', 'jsx', 'sass', 'js'], done);
 });
 
 gulp.task('js', function () {
@@ -100,6 +100,11 @@ gulp.task('help', function () {
     console.log();
 });
 
+// install external references
+gulp.task('bower-installer', function(done) {
+    console.log('running bower-installer');
+    bowerInstaller();
+});
 // compiles scss files
 gulp.task('sass', function (done) {
     console.log('compiling sass files.');
