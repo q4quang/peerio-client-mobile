@@ -22,6 +22,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
         // platform-specific classes on body
         if (window.device) {
             var platform = device.platform.toLowerCase();
+            L.info('Detected platform: {0}', platform);
             if (platform === 'ios')
                 document.body.classList.add('ios');
             else if (platform === 'android')
@@ -41,19 +42,9 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             // keyboard plugin currently (10.09.2015) fails to execute this with wkwebview
             // but sometimes, in perfect future...
             Peerio.NativeAPI.hideKeyboardAccessoryBar();
-
-            // same thing but this call messes up wkwebview, while it is the default behaviour on android
-            //Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
+            Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
 
             Peerio.FileSystemPlugin.init();
-
-            // Hardware/OS event handlers
-            document.addEventListener('pause', Peerio.Action.pause, false);
-            document.addEventListener('resume', Peerio.Action.resume, false);
-            document.addEventListener('backbutton', Peerio.Action.hardBackButton, false);
-            document.addEventListener('menubutton', Peerio.Action.hardMenuButton, false);
-            //window.document.addEventListener("offline", this.setOffline, false);
-            //window.document.addEventListener("online", this.setOnline, false);
 
             React.initializeTouchEvents(true);
 
@@ -72,5 +63,22 @@ Peerio.ACK_MSG = ':::peerioAck:::';
         else
             main();
     });
+    //
+    //var autoFocusControls = ['textarea', 'text', 'password'];
+    //var lastTarget = '';
+    //document.addEventListener('focusin', function (ev) {
+    //    if (ev && ev.target && autoFocusControls.indexOf(ev.target.type) >= 0) {
+    //        window.setTimeout(function () {
+    //            ev.target.scrollIntoView({block: "start", behavior: "smooth"});
+    //            //if (lastTarget !== ev.target) {
+    //            //    ev.target.blur();
+    //            //    window.setTimeout(function () {
+    //            //        ev.target.focus();
+    //            //    }, 0);
+    //            //}
+    //            //lastTarget = ev.target;
+    //        }, 500);
+    //    }
+    //});
 
 }());

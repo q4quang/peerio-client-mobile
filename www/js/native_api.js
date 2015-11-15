@@ -18,6 +18,17 @@ Peerio.NativeAPI.init = function () {
     var cordova = window.cordova;
     var initializers = {};
 
+    // Hardware/OS event handlers
+    document.addEventListener('pause', Peerio.Action.pause, true);
+    document.addEventListener('resume', Peerio.Action.resume, true);
+    document.addEventListener('backbutton', Peerio.Action.hardBackButton, true);
+    document.addEventListener('menubutton', Peerio.Action.hardMenuButton, true);
+    //window.document.addEventListener("offline", this.setOffline, false);
+    //window.document.addEventListener("online", this.setOnline, false);
+    window.addEventListener('keyboardHeightWillChange', Peerio.Action.viewShrink, true);
+    window.addEventListener('keyboardDidShow', Peerio.Action.keyboardDidShow, true);
+
+
     //----- internal helpers
     function getGenericMsg(name) {
         return (name ? name + ': ' : '') + 'Native API not available';
