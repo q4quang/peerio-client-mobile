@@ -79,6 +79,7 @@
         },
         handleLoginSuccess: function () {
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
+            Peerio.NativeAPI.enablePushNotifications(true);
             this.stopProgress();
             this.transitionTo('messages');
         },
