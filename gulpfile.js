@@ -17,6 +17,7 @@ var globbing = require('gulp-css-globbing');
 var babel = require('gulp-babel');
 var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
+var cp = require('child_process');
 
 var babelOptions = {
     compact: false,
@@ -67,7 +68,7 @@ var paths = {
 
 gulp.task('default', ['help']);
 gulp.task('compile', function (done) {
-    return runSequence('compile-clean', ['bower-installer', 'jsx', 'sass', 'js'], done);
+    return runSequence('compile-clean', ['jsx', 'sass', 'js', 'bower-installer'], done);
 });
 
 gulp.task('js', function () {
@@ -249,6 +250,6 @@ function bump(version) {
 }
 
 function bowerInstaller() {
-    sh.exec('rm -rf ' + paths.bower_installer_dst);
-    sh.exec('bower-installer');
+    cp.exec('rm -rf ' + paths.bower_installer_dst);
+    cp.exec('bower-installer');
 }
