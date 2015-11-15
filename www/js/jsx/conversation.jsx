@@ -94,7 +94,7 @@
             var contentNode = this.refs.content.getDOMNode();
             setTimeout(function () {
                 TweenLite.to(contentNode, .5, {scrollTo: {y: contentNode.scrollHeight}});
-            }, 100);
+            }, 500);
         },
         disableIfLastParticipant: function () {
             /* If user is last participant in conversation, disable text entry */
