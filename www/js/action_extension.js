@@ -39,6 +39,9 @@ Peerio.ActionExtension.init = function () {
         'Pause',               // OS sent app to background
         'Resume',              // app was restored from background
         'ViewShrink',          // webview changes height. arg {keyboardHeight:0}. 0 means view is stretching back to normal
-        'KeyboardDidShow'
+        'KeyboardWillShow',
+        'KeyboardDidShow',
+        'KeyboardWillHide',
+        'KeyboardDidHide'
     ].forEach(Peerio.Action.add);
 };

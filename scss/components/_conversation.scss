@@ -225,7 +225,7 @@ $avatar-size: 29px;
 
 
 #reply {
-  position: fixed;
+  position: absolute;
   display: flex;
   bottom: $footer-height;
   height: auto;

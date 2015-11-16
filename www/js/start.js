@@ -39,10 +39,10 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             Peerio.Helpers.init();
 
             Peerio.NativeAPI.init();
-            // keyboard plugin currently (10.09.2015) fails to execute this with wkwebview
-            // but sometimes, in perfect future...
-            Peerio.NativeAPI.hideKeyboardAccessoryBar();
-            Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
+
+            Peerio.NativeAPI.hideKeyboardAccessoryBar(false);
+            Peerio.NativeAPI.shrinkViewOnKeyboardOpen(true);
+            Peerio.NativeAPI.disableScrollingInShrinkView(true);
 
             Peerio.FileSystemPlugin.init();
 
