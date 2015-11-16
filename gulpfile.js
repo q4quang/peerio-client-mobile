@@ -67,8 +67,8 @@ var paths = {
 /*eslint-enable*/
 
 gulp.task('default', ['help']);
-gulp.task('compile', function (done) {
-    return runSequence('compile-clean', ['jsx', 'sass', 'js', 'bower-installer'], done);
+gulp.task('compile', ['bower-installer'], function (done) {
+    return runSequence('compile-clean', ['jsx', 'sass', 'js'], done);
 });
 
 gulp.task('js', function () {
@@ -105,6 +105,7 @@ gulp.task('help', function () {
 gulp.task('bower-installer', function(done) {
     console.log('running bower-installer');
     bowerInstaller();
+    done();
 });
 // compiles scss files
 gulp.task('sass', function (done) {
