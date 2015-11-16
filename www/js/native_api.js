@@ -26,7 +26,10 @@ Peerio.NativeAPI.init = function () {
     //window.document.addEventListener("offline", this.setOffline, false);
     //window.document.addEventListener("online", this.setOnline, false);
     window.addEventListener('keyboardHeightWillChange', Peerio.Action.viewShrink, true);
+    window.addEventListener('keyboardWillShow', Peerio.Action.keyboardWillShow, true);
     window.addEventListener('keyboardDidShow', Peerio.Action.keyboardDidShow, true);
+    window.addEventListener('keyboardWillHide', Peerio.Action.keyboardWillHide, true);
+    window.addEventListener('keyboardDidHide', Peerio.Action.keyboardDidHide, true);
 
 
     //----- internal helpers
@@ -93,8 +96,8 @@ Peerio.NativeAPI.init = function () {
     /**
      * For IOS only. Hides "accessory bar" with "next", "previous" and "done" buttons.
      */
-    api.hideKeyboardAccessoryBar = function () {
-        Keyboard.hideFormAccessoryBar(true);
+    api.hideKeyboardAccessoryBar = function (hide) {
+        Keyboard.hideFormAccessoryBar(hide);
     };
 
     initializers.hideKeyboardAccessoryBar = function () {
@@ -106,8 +109,8 @@ Peerio.NativeAPI.init = function () {
     /**
      *  When keyboard is open, shrinks the webview instead of viewport
      */
-    api.shrinkViewOnKeyboardOpen = function () {
-        Keyboard.shrinkView(true);
+    api.shrinkViewOnKeyboardOpen = function (shrink) {
+        Keyboard.shrinkView(shrink);
     };
 
     initializers.shrinkViewOnKeyboardOpen = function () {
@@ -116,6 +119,20 @@ Peerio.NativeAPI.init = function () {
 
         return console.log.bind(console, getGenericMsg('shrinkViewOnKeyboardOpen'));
     };
+
+    ////
+    api.disableScrollingInShrinkView = function (disable) {
+        Keyboard.disableScrollingInShrinkView(disable);
+    };
+
+    initializers.disableScrollingInShrinkView = function () {
+        if (window.Keyboard && Keyboard.disableScrollingInShrinkView)
+            return;
+
+        return console.log.bind(console, getGenericMsg('disableScrollingInShrinkView'));
+    };
+
+
 
     /**
      * Get app version from config.xml

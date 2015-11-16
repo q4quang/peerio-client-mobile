@@ -5,6 +5,7 @@
         componentWillMount: function () {
             Peerio.Dispatcher.onPause(Peerio.Net.pauseConnection);
             Peerio.Dispatcher.onResume(Peerio.Net.resumeConnection);
+
             Peerio.Dispatcher.onKeyboardDidShow(function () {
                 if (!document.activeElement)return;
                 var el = document.activeElement;
@@ -19,7 +20,6 @@
                 <div>
                     <RouteHandler/>
                     <Peerio.UI.Portal/>
-                    {Peerio.runtime.platform === 'ios' ? <div className="ios-titlebar"></div> : null}
                 </div>
             );
         }

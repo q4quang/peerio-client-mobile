@@ -45,19 +45,18 @@ textarea:focus::-webkit-input-placeholder {
   color: transparent;
 }
 body {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  //position: fixed;
+ // top: 0;
+ // right: 0;
+ // bottom: 0;
+ // left: 0;
   font-family: OpenSans, sans-serif;
   color: color(body-text);
-  background-color: #fff;
+  background-color: color(p-blue-darker);
 }
 
 body.ios{
-  margin-top: 20px;
-  background-color: color(p-blue-darker);
+  //margin-top: 20px;
 }
 
 .ios-titlebar{

@@ -55,7 +55,7 @@ Footer Buttons                                       | Button Class/ID
 
   &.on-touchstart:after{
     background-size: 1000%;
-    transition: background-size 0.5s ease-in, opacity 0.5s ease-in 0.22s;
+    transition: background-size 0.2s ease-in, opacity 0.2s ease-in 0.1s;
     opacity: 0;
   }
 }
