@@ -27,6 +27,3 @@
 /platforms/ios/
 /plugins
 GENERATED_CHANGELOG.md
-
-# Cordova automatic increment build num
-/scripts/incrementBuildNum.js
