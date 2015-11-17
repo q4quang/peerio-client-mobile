@@ -78,6 +78,7 @@
             window.clearInterval(this.progressInterval);
         },
         handleLoginSuccess: function () {
+            Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             Peerio.NativeAPI.enablePushNotifications(true);
             this.stopProgress();

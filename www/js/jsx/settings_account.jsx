@@ -34,7 +34,7 @@
         },
         render: function(){
             var user = this.state.user;
-            var addresses = user.settings.addresses.map(function(address, index){
+            var addresses = user.loadAddresses().map(function(address, index){
                 return (<div>
                         {address.isConfirmed ? (
                             <div>
