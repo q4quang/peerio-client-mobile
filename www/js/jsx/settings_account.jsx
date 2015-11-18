@@ -34,7 +34,12 @@
         },
         render: function(){
             var user = this.state.user;
-            var addresses = user.loadAddresses().map(function(address, index){
+            var addresses = [];
+            if(user.settings.addresses) {
+                addresses = user.settings.addresses;
+            }
+
+            addresses = addresses.map(function(address, index){
                 return (<div>
                         {address.isConfirmed ? (
                             <div>
@@ -65,27 +70,28 @@
 
             return (
                 <div className="content-padded flex-col">
-                    <div style={{color:"red"}}>NOTICE TO TESTERS:
-                      This page is only a mock up and not yet functional.</div>
-
                     <div className="flex-col-1">
 
                         <div className="text-input-group col-12">
-                            <input className="text-input" id="first-name" type="text" required="required" value={user.firstName}/>
+                            <input className="text-input" id="first-name" type="text" required="required" value={user.settings.firstName}/>
                             <label className="text-input-label" htmlFor="first-name">First Name</label>
                         </div>
                         <div className="text-input-group col-12">
-                            <input className="text-input" type="text" required="required" value={user.lastName}/>
-                            <label className="text-input-label" htmlFor="first-name">First Name</label>
+                            <input className="text-input" type="text" required="required" value={user.settings.lastName}/>
+                            <label className="text-input-label" htmlFor="first-name">Last Name</label>
                         </div>
 
                         <div className="info-label col-8">Addresses</div>
                         <div className="subhead-inline col-2">primary</div>
                         <div className="subhead-inline col-2">remove</div>
                         {addresses}
-                        <div className="col-8">
-                            <input type="text" className="text-input" placeholder="add phone or email" onChange={this.onAddressChange} value={this.state.newAddressText}/>
-                            <Peerio.UI.Tappable className="btn-sm" onTap={this.addNewAddress}>add address</Peerio.UI.Tappable>
+                        <div>
+                            <div className="col-8">
+                                <input type="text" className="text-input" placeholder="add phone or email" onChange={this.onAddressChange} value={this.state.newAddressText}/>
+                            </div>
+                            <div className="col-4 text-center">
+                                <Peerio.UI.Tappable className="btn-sm" onTap={this.addNewAddress}>add address</Peerio.UI.Tappable>
+                            </div>
                         </div>
                         <hr/>
                         <div className="info-label">Your public key: </div>
