@@ -36,7 +36,9 @@
             var user = this.state.user;
             var addresses = [];
             if(user.settings.addresses) {
-                addresses = user.settings.addresses;
+                addresses = user.settings.addresses.sort( function(a, b) {
+                    return a.isPrimary ? 0 : 1;
+                });
             }
 
             addresses = addresses.map(function(address, index){
