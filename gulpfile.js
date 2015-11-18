@@ -251,6 +251,6 @@ function bump(version) {
 }
 
 function bowerInstaller() {
-    cp.exec('rm -rf ' + paths.bower_installer_dst);
-    cp.exec('bower-installer');
+    cp.execSync('rm -rf ' + paths.bower_installer_dst);
+    cp.execSync('bower-installer');
 }
