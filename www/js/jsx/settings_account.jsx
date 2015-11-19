@@ -6,9 +6,28 @@
         getInitialState: function(){
             return {
                 user: (Peerio.user.isMe) ? Peerio.user : false,
-                newAddressText: ""
+                newAddressText: "",
+                firstName: Peerio.user ? Peerio.user.settings.firstName : '',
+                lastName: Peerio.user ? Peerio.user.settings.lastName : ''
             };
         },
+        updateName: function(){
+            this.doUpdateName = this.doUpdateName || _.throttle(function(){
+                    return this.state.user.setName(this.state.firstName, this.state.lastName);
+                }, 1000);
+            this.doUpdateName();
+        },
+
+        updateFirstName: function() {
+            this.setState({firstName: event.target.value});
+            this.updateName();
+        },
+
+        updateLastName: function() {
+            this.setState({lastName: event.target.value});
+            this.updateName();
+        },
+
         addAddress: function(){
 
         },
@@ -34,23 +53,23 @@
         },
         render: function(){
             var user = this.state.user;
-            var addresses = [];
-            if(user.settings.addresses) {
-                addresses = user.settings.addresses.sort( function(a, b) {
-                    return a.isPrimary ? 0 : 1;
-                });
-            }
+            var addresses = user.getAddresses();
 
             addresses = addresses.map(function(address, index){
                 return (<div>
                         {address.isConfirmed ? (
                             <div>
                                 <div className="col-8">
-                                    <input className="text-input" type="text" value={address.value}/>
+                                    <span className="text-mono">{address.value}</span>
                                 </div>
                                 <div className="col-2 text-center">
-                                    <input type="radio" name="default_address" id={"address_default_"+index} className="sr-only radio-button" checked={address.isPrimary}/>
-                                    <label htmlFor={"address_default_"+index} className="radio-label"></label>
+                                    <input type="radio"
+                                           name="default_address"
+                                           id={"address_default_"+index}
+                                           className="sr-only radio-button"
+                                           checked={address.isPrimary}/>
+                                    <label htmlFor={"address_default_"+index}
+                                           className="radio-label"></label>
                                 </div>
                                 <div className="col-2 text-center">
                                     <i className="fa fa-trash-o"/>
@@ -59,7 +78,7 @@
                         ) :
                             <div>
                                 <div className="col-8">
-                                    <input className="text-input" type="text" value={address.value} disabled="disabled"/>
+                                    <span className="text-mono">{address.value}</span>
                                 </div>
                                 <div className="col-4 text-center">
                                     <input type="text" className="text-input" placeholder="confirm"/>
@@ -75,11 +94,25 @@
                     <div className="flex-col-1">
 
                         <div className="text-input-group col-12">
-                            <input className="text-input" id="first-name" type="text" required="required" value={user.settings.firstName}/>
+                            <input className="text-input"
+                                   id="first-name"
+                                   type="text"
+                                   required="required"
+                                   value={this.state.firstName}
+                                   onChange={this.updateFirstName}
+                                   onBlur={this.updateFirstName}
+                                />
                             <label className="text-input-label" htmlFor="first-name">First Name</label>
                         </div>
                         <div className="text-input-group col-12">
-                            <input className="text-input" type="text" required="required" value={user.settings.lastName}/>
+                            <input className="text-input"
+                                   id="last-name"
+                                   type="text"
+                                   required="required"
+                                   value={this.state.lastName}
+                                   onChange={this.updateLastName}
+                                   onBlur={this.updateLastName}
+                                />
                             <label className="text-input-label" htmlFor="first-name">Last Name</label>
                         </div>
 
