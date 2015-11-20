@@ -34,18 +34,40 @@
         onAddressChange: function(event){
             this.setState({newAddressText:event.target.value})
         },
+
+        confirmAddress: function(address, code) {
+            this.state.user.confirmAddress(address, code).then(
+                function() {
+                    Peerio.Action.showAlert({text: "Address authorized"})
+                });
+        },
+
         addNewAddress: function(){
             //TODO: valid email or phone number.
             var newAddress = this.state.newAddressText;
             var emailRegex = new RegExp(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
             var phoneRegex = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/i);
-
-            if (emailRegex.test(newAddress) || phoneRegex.test(newAddress)){
+            var self = this;
+            if (emailRegex.test(newAddress)){
                 //mocking new address addition
                 var user = this.state.user;
-                user.settings.addresses.push({type: "email", value: newAddress, isPrimary: false, isConfirmed: false})
-                this.setState({user:user, newAddressText:""})
-                Peerio.Action.showAlert({text:"You'll receive an email/SMS with an authentication code. Please enter the code to confirm your new address."})
+                user.validateAddress(newAddress)
+                    .then(function(response) {
+                        user.addAddress(newAddress).then( function() {
+                            self.setState({user:user, newAddressText:""})
+                            Peerio.Action.showPrompt({
+                                headline: "Enter the code",
+                                text: "enter the code you received via email or SMS to confirm your address.",
+                                inputType: "password",
+                                onAccept: function(code) {
+                                    self.confirmAddress(newAddress, code);
+                                }
+                            });
+                        });
+                    });
+
+
+
             } else {
                 Peerio.Action.showAlert({text:"Sorry, that doesn't look like a valid email or phone number."})
             }
