@@ -124,6 +124,23 @@
             }
 
         },
+
+        deleteAccount: function() {
+            var user = this.state.user;
+            Peerio.Action.showConfirm({
+                headline: "Delete account",
+                text: 'Are you sure you want to delete account?',
+                onAccept: function() {
+                    user.closeAccount().then( function() {
+                        Peerio.Action.showAlert({text: "Account deleted. Signing out.",
+                            onClose: function(code) {
+                                Peerio.NativeAPI.signOut();
+                            }})
+                    });
+                }
+            });
+        },
+
         render: function(){
             var user = this.state.user;
             var addresses = this.state.addresses;
@@ -179,7 +196,7 @@
                     </div>
 
                     <div className="flex-col-0">
-                        <Peerio.UI.Tappable className="btn-link btn-danger">delete your account</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable className="btn-link btn-danger" onTap={this.deleteAccount}>delete your account</Peerio.UI.Tappable>
                     </div>
                 </div>
             );
