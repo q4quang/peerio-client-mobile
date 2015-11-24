@@ -223,6 +223,12 @@ Peerio.NativeAPI.init = function () {
         return console.log.bind(console, getGenericMsg('cleanupCamera'));
     };
 
+    /**
+     * It was like this in the existing code
+     */
+    api.signOut = function() {
+        window.location.reload();
+    }
 //--------------------------------------------------------------------------------------------------------------------
     _.forOwn(initializers, function (fn, name) {
         // if initializer returns alternative function
