@@ -18,6 +18,7 @@ var babel = require('gulp-babel');
 var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
 var cp = require('child_process');
+var inject = require('gulp-inject');
 
 var babelOptions = {
     compact: false,
@@ -68,7 +69,15 @@ var paths = {
 
 gulp.task('default', ['help']);
 gulp.task('compile', ['bower-installer'], function (done) {
-    return runSequence('compile-clean', ['jsx', 'sass', 'js'], done);
+    return runSequence('compile-clean', ['jsx', 'sass', 'js', 'index'], done);
+});
+
+gulp.task('index', function () {
+  var target = gulp.src(paths.html);
+  // It's not necessary to read the files (will speed up things), we're only after their paths: 
+  var sources = gulp.src([paths.jsx_dst, paths.js_dst], {read: false});
+  return target.pipe(inject(sources))
+    .pipe(gulp.dest('./www'));
 });
 
 gulp.task('js', function () {

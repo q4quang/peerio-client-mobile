@@ -41,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/PeerioTechnologies/peerio-client-mobile/issues"
   },
-  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile"
+  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
+  "devDependencies": {
+    "gulp-inject": "^3.0.0"
+  }
 }
