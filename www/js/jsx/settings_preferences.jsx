@@ -4,9 +4,6 @@
         render: function(){
             return (
                 <div className="content-padded">
-                    <div style={{color:"red"}}>NOTICE TO TESTERS:
-                      This page is only a mock up and not yet functional.</div>
-
                     <div className="text-input-group">
                         <label className="info-label col-4">Language:</label>
                         <select className="select-input col-8">
