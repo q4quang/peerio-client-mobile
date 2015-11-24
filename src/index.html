@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=device-dpi"/>
+
+    <!-- for quicker testing in mobile safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!--
+		* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    	* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    	* todo: unsafe inline can be removed from scripts in production. browsersync needs it in development.
+	-->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://ssl.gstatic.com https://*.peerio.com
+                                https://peerio.blob.core.windows.net wss://*.peerio.com ws://localhost:3000;
+                   media-src *;">
+    <title>Peerio</title>
+    <link rel="icon" type="image/png" href="media/img/icon32.png"/>
+    <!-- CSS -->
+    <link rel="stylesheet" href="bower/normalize.css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" type="text/css"/>
+    <link rel="stylesheet" href="css/app.css" type="text/css"/>
+
+    <script type="application/javascript" src="js/urlfix.js"></script>
+
+    <!-- debug.js may contain sensitive info that is used to help with development.
+         The file is ignored in git and located in repository root,
+         so it can't be accidentally exposed by cordova tools.
+         If you are cloning a new repository, you can create your own debug.js from debug_template.js.
+         On devices it will 404 which is ok. -->
+    <script type="application/javascript" src="../debug.js"></script>
+
+    <!-- JS libraries  TODO: replace react to production version on build -->
+    <script type="application/javascript" src="cordova.js"></script>
+    <script type="application/javascript" src="bower/react/react-with-addons.js"></script>
+    <script type="application/javascript" src="bower/react-router/ReactRouter.js"></script>
+    <script type="application/javascript" src="bower/is_js/is.js"></script>
+    <script type="application/javascript" src="bower/gsap/tweenlite.min.js"></script>
+    <script type="application/javascript" src="bower/gsap/scrolltoplugin.min.js"></script>
+
+    <!-- Peerio Client API -->
+    <script type="application/javascript" src="js/config.js"></script>
+    <script type="application/javascript" src="bower/peerio-client-api/ext_lib_bundle.js"></script>
+    <script type="application/javascript" src="bower/peerio-client-api/peerio_client_api_bundle.js"></script>
+    <script>
+        L.captureConsole();
+        L.captureRootErrors();
+    </script>
+    <!-- UI -->
+    <script type="application/javascript" src="js/helpers.js"></script>
+    <script type="application/javascript" src="js/native_api.js"></script>
+
+    <script type="application/javascript" src="js/file_system_plugin.js"></script>
+    <script type="application/javascript" src="js/app_state_extension.js"></script>
+    <script type="application/javascript" src="js/action_extension.js"></script>
+
+    <script type="application/javascript" src="js/start.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/mixins.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/root.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/app.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/swiper.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/tappable.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/portal.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/modal_manager.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/linkify.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/alert.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/checkbox.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/modal_menu.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/sidebar.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/signup.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/login.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/signup.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/navbar.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/footer.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/tabbar.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/tabs.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/item_placeholder.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/messages.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/files.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/file_view.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/upload.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/contacts.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/contact_view.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/conversation.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/conversation_info.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/new_message.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/avatar.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/file_select.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/settings_account.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/settings_preferences.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/contact_select.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/contacts/contact_add.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/contacts/contact_search.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/contacts/contact_import.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/contacts/contact_invite_template.js"></script>
+    <script type="application/javascript" src="js/compiled/jsx/contacts/contact_request_template.js"></script>
+
+    <script type="application/javascript" src="js/compiled/jsx/routes.js"></script>
+
+</head>
+<body>
+
+<div id="approot">
+    <!-- Don't put anything in here - it will be replaced by React -->
+</div>
+
+<!---------------- <DEVMODE CONTROL START> ---------------->
+<!-- This is as independent/vanilla as possible developer mode controls-->
+<div id="devmode" style="transform: translateX(105%);">
+    <div id="devmode-title">woah.. secret ninja mode
+        <div id="devmode-close" onclick="devmode.hide()">X</div>
+    </div>
+    <div id="devmode-content">
+        <div class="devlog-full-width devlog-controls">
+            <select onchange="devmode.changeLogLevel(event)" id="devmode-log-level">
+                <option value="0">Errors</option>
+                <option value="1">Info</option>
+                <option value="2">Verbose</option>
+                <option value="3">Silly</option>
+            </select>
+            <span class="devlog-divider"></span>
+            <input type="checkbox" id="devmode-bench" onchange="devmode.changeLogBenchmark(event)"/>&nbsp;<label
+                for="devmode-bench">Benchmarks</label>
+            <span class="devlog-divider"></span>
+            log limit <input onchange="devmode.changeLogLimit(event)" id="devmode-log-limit" type="text" size="7"
+                             value="123" style="color: #000000;border: none;padding: 0px 2px;"/>
+        </div>
+        <button onclick="devmode.send()" class="devlog-full-width">Send log by email</button>
+        <div id="devmode-log"></div>
+    </div>
+</div>
+
+<style>
+    #devmode {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #FFFFFF;
+        z-index: 2147483647;
+        transition: transform 1s cubic-bezier(0.64, -0.09, 0.21, 0.84);
+        color: white;
+    }
+
+    .ios #devmode {
+        top: 20px;
+    }
+
+    #devmode-title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        line-height: 30px;
+        max-height: 30px;
+        overflow: hidden;
+        text-align: center;
+        background-color: #125286;
+        color: #CCCCEE;
+        font-size: 13px;
+    }
+
+    #devmode-close {
+        float: right;
+        padding: 0 15px;
+        color: #FFFFFF;
+        border-left: 1px solid #123D61;
+        font-weight: bold;
+    }
+
+    #devmode-content {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        overflow: auto;
+        padding: 20px 5px;
+        background-color: #2795D0;
+    }
+
+    #devmode-log {
+        background-color: #E8EBFF;
+        color: #000000;
+        min-height: 600px;
+        font-size: 11px;
+        word-wrap: break-word;
+        margin: auto -5px;
+    }
+
+    .devlog-full-width {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .devlog-divider {
+        margin: 0 5px;
+        border-left: 1px solid #95D3F5;
+    }
+
+    .devlog-controls {
+        font-size: 11px;
+    }
+
+    #devmode button {
+        background-color: #57BBF1;
+        padding: 5px;
+    }
+
+    .devmode-log-item {
+        padding: 2px 7px;
+    }
+
+    .devmode-log-item:nth-child(odd) {
+        background-color: #DCE1FF;
+    }
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if(window.PeerioDebug && PeerioDebug.logLevel != null){
+            L.level = PeerioDebug.logLevel;
+            L.releaseConsole();
+        }
+        window.devmode = {
+            root: document.getElementById('devmode'), // root devmode dom node
+            logNode: document.getElementById('devmode-log'), // root devmode dom node
+            summonCounter: 0,              // summon() calls count in current 'session'
+            summonTimeout: null,           // current session timeout id (setTimeout result)
+            summonCounterThreshold: 10,    // summon() will open devmode after this amount of calls
+            summonTimeoutThreshold: 10000, // summonCounter will reset if it didn't reach threshold within this number of milliseconds
+            // open devmode control
+            show: function () {
+                devmode.loadSettings();
+                //devmode.root.style.display = 'block';
+                devmode.root.style.transform = 'translateX(0%)';
+                devmode.populateLog();
+                devmode.interval = setInterval(function () {
+                    if (!L.cache.length) return;
+                    if (devmode.lastLog && devmode.lastLog === L.cache[0]) return;
+                    devmode.lastLog = L.cache[0];
+                    devmode.populateLog();
+                }, 1000);
+            },
+            // closes devmode control
+            hide: function () {
+                //devmode.root.style.display = 'none';
+                devmode.root.style.transform = 'translateX(105%)';
+                clearInterval(devmode.interval);
+                devmode.logNode.innerHTML = '';
+            },
+            // call this function N times within T seconds to open devmode
+            summon: function (e) {
+                if (e) e.preventDefault();
+                devmode.summonCounter++;
+                if (devmode.summonTimeout === null) devmode.summonTimeout = setTimeout(devmode.resetSummon, 15000);
+                if (devmode.summonCounter < 10) return;
+                devmode.show();
+                devmode.resetSummon();
+            },
+            resetSummon: function (e) {
+                if (e) e.preventDefault();
+                if (devmode.summonTimeout !== null) clearTimeout(devmode.summonTimeout);
+                devmode.summonTimeout = null;
+                devmode.summonCounter = 0;
+            },
+            send: function () {
+                cordova.plugins.email.open({
+                    to: 'anri@peerio.com',
+                    subject: 'Peerio error report.',
+                    body: devmode.logNode.innerHTML,
+                    isHtml: true
+                });
+            },
+            changeLogLevel: function (event) {
+                L.level = +event.target.value;
+                L.setWorkersOptions({level: L.level});
+                devmode.loadSettings();
+            },
+            changeLogBenchmark: function (event) {
+                L.benchmarkEnabled = !!event.target.checked;
+                L.setWorkersOptions({benchmarkEnabled: L.benchmarkEnabled});
+                devmode.loadSettings();
+            },
+            changeLogLimit: function (event) {
+                L.cacheLimit = isNaN(+event.target.value) ? 100 : +event.target.value;
+                devmode.loadSettings();
+            },
+            populateLog: function () {
+                var head = "<div class='devmode-log-item'>";
+                var tail = "</div>";
+                var mid = tail + head;
+                devmode.logNode.innerHTML = (head + L.cache.join(mid) + tail)
+                        .replace(/ ERR:/gm, "<span style='background-color: #FF8874'> ERR:</span>")
+                        .replace(/ BNC:/gm, "<span style='background-color: #8FFF74'> BNC:</span>");
+            },
+            loadSettings: function () {
+                document.getElementById('devmode-log-level').value = L.level;
+                document.getElementById('devmode-bench').checked = L.B.enabled;
+                document.getElementById('devmode-log-limit').value = L.cacheLimit;
+            }
+        };
+    });
+
+</script>
+<!---------------- </DEVMODE CONTROL END> ---------------->
+</body>
+</html>
