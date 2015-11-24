@@ -51,16 +51,17 @@ var options = minimist(process.argv.slice(2), knownOptions);
 
 // put all the paths here
 var paths = {
-    sass_main: ['scss/app.scss'],
-    sass_all: ['scss/**/*.scss'],
+    sass_main: ['src/scss/app.scss'],
+    sass_all: ['src/scss/**/*.scss'],
     css_src: ['www/css/**/*.css'],
     css_dst: './www/css/',
-    html: ['www/index.html'],
-    js_compiled: ['www/js/compiled/**/*.js'],
-    jsx_src: 'www/js/jsx/**/*.jsx',
+    html_src: ['src/index.html'],
+    html_dst: ['www/index.html'],
+    jsx_src: 'src/js/jsx/**/*.jsx',
     jsx_dst: 'www/js/compiled/jsx',
-    js_src: ['!www/js/compiled/**/*', '!www/js/_old/**/*', 'www/js/**/*.js'],
+    js_src: ['!www/js/compiled/**/*', '!www/js/_old/**/*', 'src/js/**/*.js'],
     js_dst: 'www/js/compiled',
+    js_compiled: ['www/js/compiled/**/*.js'],
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
     bower_installer_dst: 'www/bower'
@@ -73,7 +74,7 @@ gulp.task('compile', ['bower-installer'], function (done) {
 });
 
 gulp.task('index', function () {
-  var target = gulp.src(paths.html);
+  var target = gulp.src(paths.html_src);
   // It's not necessary to read the files (will speed up things), we're only after their paths: 
   var sources = gulp.src([paths.jsx_dst, paths.js_dst], {read: false});
   return target.pipe(inject(sources))
