@@ -88,7 +88,9 @@ gulp.task('index', function () {
   var sourcesJsx = gulp.src(paths.jsx_inject, {read: false});
   var sourcesJsxPreInit = gulp.src(paths.jsx_preinit_inject, {read: false});
   var sourcesJsxPostInit = gulp.src(paths.jsx_postinit_inject, {read: false});
-  return target.pipe(inject(series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit))).pipe(gulp.dest('./www'));
+  return target.pipe(
+      inject(series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit), 
+          {addRootSlash: false, ignorePath: 'www'})).pipe(gulp.dest('./www'));
 });
 
 gulp.task('js', function () {
