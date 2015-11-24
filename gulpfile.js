@@ -19,6 +19,7 @@ var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
 var cp = require('child_process');
 var inject = require('gulp-inject');
+var series = require('stream-series');
 
 var babelOptions = {
     compact: false,
@@ -58,10 +59,18 @@ var paths = {
     html_src: ['src/index.html'],
     html_dst: ['www/index.html'],
     jsx_src: 'src/js/jsx/**/*.jsx',
-    jsx_dst: 'www/js/compiled/jsx',
-    js_src: ['!www/js/compiled/**/*', '!www/js/_old/**/*', 'src/js/**/*.js'],
-    js_dst: 'www/js/compiled',
-    js_compiled: ['www/js/compiled/**/*.js'],
+    jsx_dst: 'www/js/jsx',
+    jsx_preinit_src: 'src/js/jsx-preinit/**/*.jsx',
+    jsx_preinit_dst: 'www/js/jsx-preinit',
+    jsx_postinit_src: 'src/js/jsx-postinit/**/*.jsx',
+    jsx_postinit_dst: 'www/js/jsx-postinit',
+    js_src: ['!www/js/js/_old/**/*', 'src/js/**/*.js'],
+    js_dst: 'www/js/js',
+    js_compiled: ['www/js/**/*.js'],
+    js_inject: 'www/js/js/**/*.js',
+    jsx_inject: 'www/js/jsx/**/*.js',
+    jsx_preinit_inject: 'www/js/jsx-preinit/**/*.js',
+    jsx_postinit_inject: 'www/js/jsx-postinit/**/*.js',
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
     bower_installer_dst: 'www/bower'
@@ -70,15 +79,16 @@ var paths = {
 
 gulp.task('default', ['help']);
 gulp.task('compile', ['bower-installer'], function (done) {
-    return runSequence('compile-clean', ['jsx', 'sass', 'js', 'index'], done);
+    return runSequence('compile-clean', ['jsx', 'jsx-preinit', 'jsx-postinit', 'sass', 'js'], 'index', done);
 });
 
 gulp.task('index', function () {
   var target = gulp.src(paths.html_src);
-  // It's not necessary to read the files (will speed up things), we're only after their paths: 
-  var sources = gulp.src([paths.jsx_dst, paths.js_dst], {read: false});
-  return target.pipe(inject(sources))
-    .pipe(gulp.dest('./www'));
+  var sourcesJs = gulp.src(paths.js_inject, {read: false});
+  var sourcesJsx = gulp.src(paths.jsx_inject, {read: false});
+  var sourcesJsxPreInit = gulp.src(paths.jsx_preinit_inject, {read: false});
+  var sourcesJsxPostInit = gulp.src(paths.jsx_postinit_inject, {read: false});
+  return target.pipe(inject(series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit))).pipe(gulp.dest('./www'));
 });
 
 gulp.task('js', function () {
@@ -145,6 +155,20 @@ gulp.task('jsx', function () {
     return gulp.src(paths.jsx_src)
         .pipe(babel(babelOptions))
         .pipe(gulp.dest(paths.jsx_dst));
+});
+
+gulp.task('jsx-preinit', function () {
+    console.log('compiling jsx preinit files.');
+    return gulp.src(paths.jsx_preinit_src)
+        .pipe(babel(babelOptions))
+        .pipe(gulp.dest(paths.jsx_preinit_dst));
+});
+
+gulp.task('jsx-postinit', function () {
+    console.log('compiling jsx postinit files.');
+    return gulp.src(paths.jsx_postinit_src)
+        .pipe(babel(babelOptions))
+        .pipe(gulp.dest(paths.jsx_postinit_dst));
 });
 
 // starts http server with live reload

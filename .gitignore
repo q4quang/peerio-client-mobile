@@ -12,7 +12,7 @@
 /node_modules
 
 # compiled jsx
-/www/js/compiled
+/www/js/
 # bower-installer picked lib files from /bower_components
 /www/bower
 
