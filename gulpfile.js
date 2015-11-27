@@ -88,6 +88,8 @@ gulp.task('index', function () {
   var sourcesJsx = gulp.src(paths.jsx_inject, {read: false});
   var sourcesJsxPreInit = gulp.src(paths.jsx_preinit_inject, {read: false});
   var sourcesJsxPostInit = gulp.src(paths.jsx_postinit_inject, {read: false});
+  console.log("DON'T FORGET TO SET PROVISIONING PROFILE TO ios team provisioning profile: com.peerio");
+  console.log("OTHERWISE PUSH NOTIFICATIONS WOULD NOT WORK");
   return target.pipe(
       inject(series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit), 
           {addRootSlash: false, ignorePath: 'www'})).pipe(gulp.dest('./www'));
