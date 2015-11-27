@@ -17,10 +17,18 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         handleAccept: function () {
-            this.contact.accept();
+            // TODO: there is probably a better way to invoke loading contacts
+            this.contact.accept().then(function() {
+                Peerio.user.loadContacts();
+            });
+
+
         },
         handleReject: function () {
-            this.contact.reject();
+            // TODO: there is probably a better way to invoke loading contacts
+            this.contact.reject().then(function() {
+                Peerio.user.loadContacts();
+            });
         },
         removeContactAndGoBack: function (username) {
             this.contact.isRequest ? this.contact.cancelRequest() : this.contact.remove();
