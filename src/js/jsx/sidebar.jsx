@@ -56,15 +56,7 @@
                 });
 
         },
-        //TODO: this should be a generic helper function, placed elsewhere.
-        formatBytes: function (bytes, decimals) {
-            if (bytes == 0) return '0 Byte';
-            var k = 1024;
-            var dm = decimals + 1 || 3;
-            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-            var i = Math.floor(Math.log(bytes) / Math.log(k));
-            return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
-        },
+
         toggleAndTransition: function (route) {
             this.toggle();
             this.transitionTo(route);
@@ -92,8 +84,8 @@
             var twoFactor;
             var user = Peerio.user;
             if (!user || !user.settings) return null;
-            var quotaUsed = this.formatBytes(user.settings.quota.user);
-            var quota = this.formatBytes(user.settings.quota.total);
+            var quotaUsed = Peerio.Helpers.formatBytes(user.settings.quota.user);
+            var quota = Peerio.Helpers.formatBytes(user.settings.quota.total);
             var quotaPercent = Math.floor(user.settings.quota.user / (user.settings.quota.total / 100));
 
             if (user.PINIsSet)

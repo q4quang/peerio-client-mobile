@@ -1,6 +1,9 @@
 (function () {
 
     Peerio.UI.PreferenceSettings = React.createClass({
+        setDevicePin: function() {
+            Peerio.Action.transitionTo('set_pin', null, {});
+        },
         render: function(){
             return (
                 <div className="content-padded">
@@ -20,9 +23,9 @@
                     <div className="info-label">Device PIN</div>
                     <div className="text-input-group col-12">
                         <input className="text-input text-center" type="text" required="required" placeholder="Enter a device PIN"/>
-                        <Peerio.UI.Tappable element="div" className="btn-sm">create device PIN</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-sm" onTap={this.setDevicePin}>create device PIN</Peerio.UI.Tappable>
                     </div>
-
+                    {/* TODO: two factor authentication */}
                     <div>
                         <div className="info-label">Two Factor Authentication (2FA)</div>
                         <p className="info-small col-12"> Paste the following secret key into your authenticator app, then enter the code that appears in the app. </p>
