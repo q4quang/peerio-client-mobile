@@ -3,6 +3,8 @@
 *.keystore
 .DS_Store
 .idea/
+*.sublime-project
+*.sublime-workspace
 
 # build release apk output
 /bin
