@@ -25,37 +25,6 @@
         toggle: function () {
             this.setState({open: !this.state.open});
         },
-        removePinModal: function () {
-            Peerio.Auth.removePIN();
-            Peerio.Action.showAlert({text: "Your PIN has been removed"});
-        },
-        removePIN: function () {
-            Peerio.Action.showConfirm({
-                headline: "Remove PIN",
-                text: 'Are you sure you want to remove your PIN code?',
-                onAccept: this.removePinModal
-            });
-        },
-        newPinCodeText: function (val) {
-            this.setState({newPinCode: val.target.value})
-        },
-        showPINmodal: function () {
-            Peerio.Action.showPrompt({
-                headline: "Setup New PIN",
-                text: "enter the PIN you wish to use for this device.",
-                inputType: "password",
-                onAccept: this.setPIN
-            });
-        },
-        setPIN: function (newPIN) {
-            if (!newPIN) return;
-
-            Peerio.Auth.setPIN(newPIN, Peerio.user.username, Peerio.user.passphrase)
-                .then(() => {
-                    Peerio.Action.showAlert({text: "Your PIN is set"});
-                });
-
-        },
 
         toggleAndTransition: function (route) {
             this.toggle();
@@ -88,10 +57,8 @@
             var quota = Peerio.Helpers.formatBytes(user.settings.quota.total);
             var quotaPercent = Math.floor(user.settings.quota.user / (user.settings.quota.total / 100));
 
-            if (user.PINIsSet)
-                pinNode = <li onTouchStart={this.removePIN}><i className="fa fa-lock"></i> Remove PIN code</li>;
-            else
-                pinNode = <li onTouchStart={this.showPINmodal}><i className="fa fa-unlock"></i> Set new PIN code</li>;
+            pinNode = <li onTouchStart={this.toggleAndTransition.bind(this, 'set_pin')}>
+                        <i className="fa fa-lock"></i> Set/remove PIN code</li>;
 
             if (user.settings.twoFactorAuth)
                 twoFactor =

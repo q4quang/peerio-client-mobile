@@ -22,8 +22,7 @@
 
                     <div className="info-label">Device PIN</div>
                     <div className="text-input-group col-12">
-                        <input className="text-input text-center" type="text" required="required" placeholder="Enter a device PIN"/>
-                        <Peerio.UI.Tappable element="div" className="btn-sm" onTap={this.setDevicePin}>create device PIN</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-sm" onTap={this.setDevicePin}>Set/remove device PIN</Peerio.UI.Tappable>
                     </div>
                     {/* TODO: two factor authentication */}
                     <div>
