@@ -29,7 +29,7 @@
             this.transitionTo('add_contact');
         },
         openContactView: function (id) {
-            this.transitionTo('contact', {id: id})
+            this.transitionTo('contact', {id: id});
         },
         getContactNode: function (item, receivedRequest, sentRequest) {
             return (

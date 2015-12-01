@@ -11,8 +11,8 @@
         getInitialState: function () {
             return {
                 open: false,
-                newPinCode: "",
-                modalID: ""
+                newPinCode: '',
+                modalID: ''
             };
         },
         componentDidMount: function () {
@@ -27,23 +27,23 @@
         },
         removePinModal: function () {
             Peerio.Auth.removePIN();
-            Peerio.Action.showAlert({text: "Your PIN has been removed"});
+            Peerio.Action.showAlert({text: 'Your PIN has been removed'});
         },
         removePIN: function () {
             Peerio.Action.showConfirm({
-                headline: "Remove PIN",
+                headline: 'Remove PIN',
                 text: 'Are you sure you want to remove your PIN code?',
                 onAccept: this.removePinModal
             });
         },
         newPinCodeText: function (val) {
-            this.setState({newPinCode: val.target.value})
+            this.setState({newPinCode: val.target.value});
         },
         showPINmodal: function () {
             Peerio.Action.showPrompt({
-                headline: "Setup New PIN",
-                text: "enter the PIN you wish to use for this device.",
-                inputType: "password",
+                headline: 'Setup New PIN',
+                text: 'enter the PIN you wish to use for this device.',
+                inputType: 'password',
                 onAccept: this.setPIN
             });
         },
@@ -52,7 +52,7 @@
 
             Peerio.Auth.setPIN(newPIN, Peerio.user.username, Peerio.user.passphrase)
                 .then(() => {
-                    Peerio.Action.showAlert({text: "Your PIN is set"});
+                    Peerio.Action.showAlert({text: 'Your PIN is set'});
                 });
 
         },
@@ -111,7 +111,7 @@
             if (Peerio)
                 return (
                     <div>
-                        <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + " sidebar"}>
+                        <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
 
                             <div className="flex-0 centered-text sidebar-header">
                                 <Peerio.UI.Avatar size="big" username={user.username}/>
@@ -167,7 +167,7 @@
 
                             <div className="flex-0">
                                 <Peerio.UI.Tappable element="div" className="btn-dark btn-md"
-                                                    onTap={function(){window.location.reload()}}><i
+                                                    onTap={function(){window.location.reload();}}><i
                                     className="fa fa-power-off"></i> Sign Out
                                 </Peerio.UI.Tappable>
                                 <div className="sidebar-footer-text">

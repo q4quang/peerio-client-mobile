@@ -61,7 +61,7 @@
         },
         inviteByEmail: function () {
             Peerio.Net.inviteUserAddress(this.state.searchString);
-            Peerio.Action.showAlert({text: "We've sent an invite email to" + this.state.searchString});
+            Peerio.Action.showAlert({text: 'We\'ve sent an invite email to' + this.state.searchString});
         },
         handleAddContact: function () {
             if (this.selectedUsers.length === 0) {
@@ -89,7 +89,7 @@
                                                                onTap={this.selectUserToAdd}
                                                                id={this.state.searchResults.id}
                                                                key={this.state.searchResults.id}/>;
-            } else if (searchString && searchString.type === "email") {
+            } else if (searchString && searchString.type === 'email') {
                 resultNode = <div>
                     <p>Sorry, it looks like <strong>{this.state.searchString}</strong> is not signed up for Peerio.</p>
 

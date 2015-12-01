@@ -105,12 +105,12 @@
             if (moreThanOneParticipant.length > 1 && noParticipantsLeft) {
                 this.setState({
                     textEntryDisabled: true,
-                    placeholderText: "There are no participants left in this conversation"
+                    placeholderText: 'There are no participants left in this conversation'
                 });
             } else if (moreThanOneParticipant.length == 1) {
-                this.setState({placeholderText: "You are the only person in this conversation."});
+                this.setState({placeholderText: 'You are the only person in this conversation.'});
             } else {
-                this.setState({placeholderText: "Type your message..."});
+                this.setState({placeholderText: 'Type your message...'});
             }
         },
         //----- RENDER
@@ -159,7 +159,7 @@
                             <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
                         </div>
 
-            <textarea className={this.state.textEntryDisabled ?  "reply-input placeholder-warning":"reply-input"}
+            <textarea className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
                       rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
                       disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}
                       onFocus={this.scrollToBottom}></textarea>
@@ -278,7 +278,7 @@
             else if (receipts.length)
                 receipts = (
                     <div className="receipts"
-                         onTouchEnd={this.toggle}>{ this.state.showUsers ? receipts.join(' \u2022\ ') : "Read by " + receipts.length }&nbsp;
+                         onTouchEnd={this.toggle}>{ this.state.showUsers ? receipts.join(' \u2022\ ') : 'Read by ' + receipts.length }&nbsp;
                         <i className="fa fa-check"></i>
                     </div>);
 
@@ -301,9 +301,10 @@
             var timestamp = this.props.timestamp;
             var renderStartTs = moment();
             var momentTimestamp = moment(+timestamp);
-            var relativeTime = momentTimestamp.calendar(renderStartTs, {sameElse: "MMMM DD, YYYY"});
-            var absoluteTime = momentTimestamp.format("MMMM DD YYYY, h:mm A");
-            var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? momentTimestamp.format("MMM Do") : momentTimestamp.format("MMM Do YYYY");
+            var relativeTime = momentTimestamp.calendar(renderStartTs, {sameElse: 'MMMM DD, YYYY'});
+            var absoluteTime = momentTimestamp.format('MMMM DD YYYY, h:mm A');
+            var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? 
+                momentTimestamp.format('MMM Do') : momentTimestamp.format('MMM Do YYYY');
 
             return <div className="headline-divider"
                         onTouchEnd={this.toggleRelative}>{this.state.relativeTime ? relativeTime : absoluteTime }</div>;

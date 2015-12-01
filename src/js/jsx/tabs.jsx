@@ -9,7 +9,7 @@
           <Peerio.UI.TabBar/>
             <RouteHandler/>
         </div>
-      )
+      );
     }
   });
 

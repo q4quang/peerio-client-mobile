@@ -37,7 +37,7 @@
         handleRemove: function () {
             if (!this.contact.isRequest) {
                 Peerio.Action.showConfirm({
-                    headline: "Remove Contact?",
+                    headline: 'Remove Contact?',
                     text: 'Are you sure you want to remove ' + this.contact.username +
                     ' from contacts? You will not be able to message and share files with this contact after removal.',
                     onAccept: this.removeContactAndGoBack.bind(this, this.contact.username)

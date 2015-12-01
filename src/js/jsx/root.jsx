@@ -9,7 +9,7 @@
             Peerio.Dispatcher.onKeyboardDidShow(function () {
                 if (!document.activeElement)return;
                 var el = document.activeElement;
-                el.scrollIntoView({block: "start", behavior: "smooth"});
+                el.scrollIntoView({block: 'start', behavior: 'smooth'});
                 // ios hack to make input update and move cursor to the right position
                 el.value = el.value;
             });

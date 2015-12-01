@@ -17,7 +17,7 @@
       _.each(this.state.conversation.messages, function(message){
         _.each(message.fileIDs, function(messageFileID){
           files.push(_.findWhere(allUserFiles, {id: messageFileID}));
-        })
+        });
       });
       this.setState({files: files});
     },
@@ -82,13 +82,13 @@
     },
     render: function(){
       var icon = Peerio.Helpers.getFileIconByName(this.props.file.name);
-      var timestamp = moment(this.props.file.timestamp).format("L");
+      var timestamp = moment(this.props.file.timestamp).format('L');
       var sharedBy = this.props.file.sender || this.props.file.creator;
       return (
         <Peerio.UI.Tappable onTap={this.openFileView.bind(this, this.props.file.shortId)}>
         <div className="list-item">
           <div className="list-item-thumb">
-            <i className={"file-type fa fa-"+icon}></i>
+            <i className={'file-type fa fa-'+icon}></i>
           </div>
           <div className="list-item-content txt-sm">
             <span>{this.props.file.name}</span>
@@ -116,20 +116,20 @@
       _.each(this.props.events, function(event){
         if (props.username === event.participant) {
           contact = Peerio.user.contacts.dict[props.username];
-          contact.event = event
+          contact.event = event;
         }
       });
       this.setState({username: this.props.username, contact: contact});
     },
     openContactView: function(username){
-      this.transitionTo('contact',{id:username})
+      this.transitionTo('contact',{id:username});
     },
     render: function(){
       var timestamp = this.state.contact.event.timestamp ?  moment(this.state.contact.event.timestamp).calendar() : false;
       var removed = this.state.contact.event.type == 'remove';
       var eventInfo = false;
       if (removed) {
-        eventInfo = <div className="list-item-description">removed : {timestamp}</div>
+        eventInfo = <div className="list-item-description">removed : {timestamp}</div>;
       }
       return (
         <Peerio.UI.Tappable onTap={this.openContactView.bind(this, this.state.contact.username)}>

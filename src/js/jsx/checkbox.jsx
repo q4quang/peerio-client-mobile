@@ -16,7 +16,7 @@
       if(this.props.onChange) this.props.onChange(checked);
     },
     render: function () {
-      return (<i className={"fa fa-" + (this.state.checked ? 'check-' : '') + 'square'} onTouchEnd={this.handleTap}></i>);
+      return (<i className={'fa fa-' + (this.state.checked ? 'check-' : '') + 'square'} onTouchEnd={this.handleTap}></i>);
     }
   });
 

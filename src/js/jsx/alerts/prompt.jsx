@@ -16,7 +16,7 @@
 
     Peerio.UI.Prompt = React.createClass({
         getInitialState: function () {
-            return {promptValue: ""};
+            return {promptValue: ''};
         },
         updatePromptValue: function (event) {
             this.setState({promptValue: event.target.value});
@@ -38,7 +38,7 @@
                 </div>;
 
             var text = this.props.text || 'confirm text';
-            var inputType = this.props.inputType || "text";
+            var inputType = this.props.inputType || 'text';
             return (
                 <div>
                     <div className="modal alert text-center">

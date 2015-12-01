@@ -23,15 +23,15 @@
                 steps: [],
                 activeStep: 0,
                 usernameValid: null,
-                username: "",
+                username: '',
                 auth_method: null,
-                passphrase: "",
-                passphrase_reentered: "",
+                passphrase: '',
+                passphrase_reentered: '',
                 passphrase_valid: false,
                 firstNameValid: null,
-                firstName: "",
+                firstName: '',
                 lastNameValid: null,
-                lastName: "",
+                lastName: '',
                 activeModalId: null
             };
         },
@@ -82,7 +82,7 @@
             this.setState({
                 passphrase_reentered: event.target.value,
                 passphrase_valid: passphrase_confirmed
-            })
+            });
         },
         validateFirstName: function () {
             var name = this.refs.firstName.getDOMNode().value;
@@ -139,16 +139,16 @@
         render: function () {
 
             var steps = [];
-            var authMethod = "";
+            var authMethod = '';
 
             switch (this.state.auth_method) {
-                case "sms":
+                case 'sms':
                     authMethod = this.renderSMS();
                     break;
-                case "captcha":
+                case 'captcha':
                     authMethod = this.renderCaptcha();
                     break;
-                case "sms_sent":
+                case 'sms_sent':
                     authMethod = this.renderSMSSent();
                     break;
             }
@@ -164,7 +164,7 @@
             var progressBarSteps = [];
 
             for (var i = 0; i < steps.length; i++) {
-                var activeClass = (i === activeStep) ? "active progress-bar-step" : "progress-bar-step";
+                var activeClass = (i === activeStep) ? 'active progress-bar-step' : 'progress-bar-step';
                 progressBarSteps.push(<div className={activeClass}></div>);
             }
 
@@ -241,10 +241,10 @@
                     {
                         (this.state.usernameValid === null || this.state.usernameValid === true)
                             ? <label
-                            className={this.state.username.length > 0 ? "text-input-label up" : "text-input-label"}
+                            className={this.state.username.length > 0 ? 'text-input-label up' : 'text-input-label'}
                             htmlFor="user_name">Desired username</label>
                             :
-                        <label className={this.state.username.length > 0  ? "text-input-label up" : "text-input-label"}
+                        <label className={this.state.username.length > 0  ? 'text-input-label up' : 'text-input-label'}
                                style={{color: '#FF7272', fontWeight:600}} htmlFor="user_name">Please
                             pick a different username</label>
                         }
@@ -257,10 +257,10 @@
                            spellCheck="false"/>
                     {(this.state.firstNameValid === null || this.state.firstNameValid === true)
                         ? <label
-                        className={this.state.firstName.length > 0  ? "text-input-label up" : "text-input-label"}
+                        className={this.state.firstName.length > 0  ? 'text-input-label up' : 'text-input-label'}
                         htmlFor="user_first_name">First name</label>
                         : <label
-                        className={this.state.firstName.length > 0  ? "text-input-label up" : "text-input-label"}
+                        className={this.state.firstName.length > 0  ? 'text-input-label up' : 'text-input-label'}
                         htmlFor="user_first_name" style={{color: '#FF7272', fontWeight:600}}>Invalid
                         name</label>}
                 </div>
@@ -271,10 +271,10 @@
                            spellCheck="false"/>
                     {(this.state.lastNameValid === null || this.state.lastNameValid === true)
                         ? <label
-                        className={this.state.lastName.length > 0  ? "text-input-label up" : "text-input-label"}
+                        className={this.state.lastName.length > 0  ? 'text-input-label up' : 'text-input-label'}
                         htmlFor="user_last_name">Last name</label>
                         : <label
-                        className={this.state.firstName.length > 0  ? "text-input-label up" : "text-input-label"}
+                        className={this.state.firstName.length > 0  ? 'text-input-label up' : 'text-input-label'}
                         htmlFor="user_last_name" style={{color: '#FF7272', fontWeight:600}}>Invalid
                         name</label>}
                 </div>

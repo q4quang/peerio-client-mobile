@@ -22,21 +22,21 @@
     },
     handleRemoveLocal: function () {
       Peerio.Action.showConfirm({
-        headline: "Remove file from this device?",
+        headline: 'Remove file from this device?',
         text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
         onAccept: Peerio.Files.deleteFromCache.bind(this, this.props.params.id)
       });
     },
     handleRemove: function () {
       Peerio.Action.showConfirm({
-        headline: "Remove this file?",
+        headline: 'Remove this file?',
         text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
         onAccept: Peerio.Files.delete.bind(this, this.props.params.id)
       });
     },
     handleNuke: function () {
       Peerio.Action.showConfirm({
-        headline: "Destroy file completely?",
+        headline: 'Destroy file completely?',
         text: 'This file will be deleted from your device, cloud and from the clouds of other users who you have shared it with.',
         onAccept: Peerio.Files.nuke.bind(this, this.props.params.id)
       });

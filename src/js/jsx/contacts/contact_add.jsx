@@ -4,7 +4,7 @@
 Peerio.UI.AddContact = React.createClass({
   mixins: [ReactRouter.Navigation],
   getInitialState: function(){
-    return {searchString: ""};
+    return {searchString: ''};
   },
   goToSearch: function(){
     this.transitionTo('add_contact_search', {id:this.state.searchString});

@@ -23,8 +23,8 @@ Peerio.NativeAPI.init = function () {
     document.addEventListener('resume', Peerio.Action.resume, true);
     document.addEventListener('backbutton', Peerio.Action.hardBackButton, true);
     document.addEventListener('menubutton', Peerio.Action.hardMenuButton, true);
-    //window.document.addEventListener("offline", this.setOffline, false);
-    //window.document.addEventListener("online", this.setOnline, false);
+    //window.document.addEventListener('offline', this.setOffline, false);
+    //window.document.addEventListener('online', this.setOnline, false);
     window.addEventListener('keyboardHeightWillChange', Peerio.Action.viewShrink, true);
     window.addEventListener('keyboardWillShow', Peerio.Action.keyboardWillShow, true);
     window.addEventListener('keyboardDidShow', Peerio.Action.keyboardDidShow, true);
@@ -94,7 +94,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     /**
-     * For IOS only. Hides "accessory bar" with "next", "previous" and "done" buttons.
+     * For IOS only. Hides 'accessory bar' with 'next', 'previous' and 'done' buttons.
      */
     api.hideKeyboardAccessoryBar = function (hide) {
         Keyboard.hideFormAccessoryBar(hide);
@@ -173,14 +173,14 @@ Peerio.NativeAPI.init = function () {
     api.enablePushNotifications = function (enable) {
         if(!enable) return false;
         if(typeof PushNotification === 'undefined') {
-            console.log("push notifications unavailable at the platform");
+            console.log('push notifications unavailable at the platform');
             return false;
         }
-        console.log("enabling push notifications");
+        console.log('enabling push notifications');
         var push = PushNotification.init({ 
-         "ios": {"alert": "true", "badge": "true", "sound": "true"}} );
+         'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}} );
         push.on('registration', function(data) {
-            console.log( "push notification reg.id: " + data.registrationId );
+            console.log( 'push notification reg.id: ' + data.registrationId );
             if( window.device && window.device.platform ) {
                 var platform = window.device.platform.toLowerCase();             
                 var to_send = {};
@@ -190,15 +190,15 @@ Peerio.NativeAPI.init = function () {
             }
         });
         push.on('notification', function(data) {
-            console.log( "push notification message: " + data.message );
-            console.log( "push notification title: " + data.title );
-            console.log( "push notification count: " + data.count );
+            console.log( 'push notification message: ' + data.message );
+            console.log( 'push notification title: ' + data.title );
+            console.log( 'push notification count: ' + data.count );
         });
 
         push.on('error', function(e) {
-            console.log( "push notification error: " + e.message );
+            console.log( 'push notification error: ' + e.message );
         });
-        console.log("push notifications enabled");
+        console.log('push notifications enabled');
         return true;
     };
 
@@ -228,7 +228,7 @@ Peerio.NativeAPI.init = function () {
      */
     api.signOut = function() {
         window.location.reload();
-    }
+    };
 //--------------------------------------------------------------------------------------------------------------------
     _.forOwn(initializers, function (fn, name) {
         // if initializer returns alternative function
