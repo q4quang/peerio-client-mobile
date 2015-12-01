@@ -46,6 +46,9 @@
             this.toggleAndTransition('files');
             Peerio.Action.showFileUpload();
         },
+        signOut: function() {
+            window.location.reload();
+        },
         //--- RENDER
         render: function () {
             var className = this.state.open ? 'open' : '';
@@ -70,7 +73,7 @@
             if (Peerio)
                 return (
                     <div>
-                        <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + " sidebar"}>
+                        <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
 
                             <div className="flex-0 centered-text sidebar-header">
                                 <Peerio.UI.Avatar size="big" username={user.username}/>
@@ -126,7 +129,7 @@
 
                             <div className="flex-0">
                                 <Peerio.UI.Tappable element="div" className="btn-dark btn-md"
-                                                    onTap={function(){window.location.reload()}}><i
+                                                    onTap={this.signOut}><i
                                     className="fa fa-power-off"></i> Sign Out
                                 </Peerio.UI.Tappable>
                                 <div className="sidebar-footer-text">

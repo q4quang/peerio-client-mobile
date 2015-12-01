@@ -1,18 +1,37 @@
 (function () {
 
-    Peerio.UI.PreferenceSettings = React.createClass({
+    Peerio.UI.PreferenceSettings = React.createClass({        
         getInitialState: function(){
             return {
-                user: (Peerio.user.isMe) ? Peerio.user : false,
-                newAddressText: '',
-                firstName: Peerio.user ? Peerio.user.settings.firstName : '',
-                lastName: Peerio.user ? Peerio.user.settings.lastName : '',
-                addresses: Peerio.user ? Peerio.user.getAddresses() : ''
+                notifyNewContact: Peerio.user.settings.settings.receiveContactNotifications,
+                notifyNewMessage: Peerio.user.settings.settings.receiveMessageNotifications,
+                notifyContactRequest: Peerio.user.settings.settings.receiveContactRequestNotifications
             };
         },        
         setDevicePin: function() {
             Peerio.Action.transitionTo('set_pin', null, {});
         },
+        doUpdateNotificationSettings: function(){
+            this.doUpdateNotificationSettings = this.doUpdateName || _.throttle(function(){
+                    return Peerio.user.setNotifications(
+                        this.state.notifyNewMessage, 
+                        this.state.notifyNewContact,
+                        this.state.notifyContactRequest);
+                }, 1000);
+            this.doUpdateNotificationSettings();
+        },        
+        setNotifyNewContact: function() {
+            this.setState({notifyNewContact: !this.state.notifyNewContact});
+            this.doUpdateNotificationSettings();
+        },
+        setNotifyNewMessage: function() {
+            this.setState({notifyNewMessage: !this.state.notifyNewMessage});
+            this.doUpdateNotificationSettings();
+        },
+        setNotifyNewContactRequest: function() {
+            this.setState({notifyContactRequest: !this.state.notifyContactRequest});
+            this.doUpdateNotificationSettings();
+        },                
         render: function(){
             return (
                 <div className="content-padded">
@@ -28,28 +47,28 @@
                     <p className="radio-input-group">
                         <p>You will only get notifications on your primary address (email or phone).</p>
                         <p>
-                            <label htmlFor="notify-at-primary-address" className="col-10">
-                                Notify me of new messages:</label>
-                            <input id="notify-new-message" 
-                                type="checkbox" 
-                                name="notify-new-message" 
-                                className="checkbox-input col-2 text-right"/>
-                        </p>
-                        <p>
-                            <Peerio.UI.Tappable key={f.id} onTap={this.toggle.bind(this,f.id)}>
+                            <Peerio.UI.Tappable key='notify-new-message' onTap={this.setNotifyNewMessage}>
                                 <span className="col-10">
-                                    Tell me when I get new contacts:</span>
-                                <span type="checkbox" className={this.state.selected 
+                                    Notify me of new messages:</span>
+                                <span type="checkbox" className={this.state.notifyNewMessage 
                                     ? 'checkbox-input checked': 'checkbox-input'}></span>
                             </Peerio.UI.Tappable>
                         </p>
                         <p>
-                            <label htmlFor="notify-contact-request" className="col-10">
-                                Inform me when I get contact requests:</label>
-                            <input id="notify-contact-request" 
-                                type="checkbox" 
-                                name="notify-at-primary-address" 
-                                className="checkbox-input col-2 text-right"/>
+                            <Peerio.UI.Tappable key='notify-new-contact' onTap={this.setNotifyNewContact}>
+                                <span className="col-10">
+                                    Tell me when I get new contacts:</span>
+                                <span type="checkbox" className={this.state.notifyNewContact 
+                                    ? 'checkbox-input checked': 'checkbox-input'}></span>
+                            </Peerio.UI.Tappable>
+                        </p>
+                        <p>
+                            <Peerio.UI.Tappable key='notify-new-contact-request' onTap={this.setNotifyNewContactRequest}>
+                                <span className="col-10">
+                                    Inform me when I get contact requests:</span>
+                                <span type="checkbox" className={this.state.notifyContactRequest 
+                                    ? 'checkbox-input checked': 'checkbox-input'}></span>
+                            </Peerio.UI.Tappable>
                         </p>
                     </p>
 
