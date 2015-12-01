@@ -148,9 +148,9 @@ Peerio.FileSystemPlugin.init = function () {
   api.getByURL = function (fileURL) {
     // HACK for kitkat incorrect URLs
     // todo: other file types?
-    if (fileURL.substring(0, 21) == "content://com.android") {
-      var photo_split = fileURL.split("%3A");
-      fileURL = "content://media/external/images/media/" + photo_split[1];
+    if (fileURL.substring(0, 21) == 'content://com.android') {
+      var photo_split = fileURL.split('%3A');
+      fileURL = 'content://media/external/images/media/' + photo_split[1];
     }
     return new Promise(function (resolve, reject) {
       resolveLocalFileSystemURL(fileURL, resolve, reject);

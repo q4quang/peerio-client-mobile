@@ -27,7 +27,7 @@
       this.subscrIds = null;
     },
     handleSidebarToggle: function(){
-      Peerio.Action.sidebarToggle()
+      Peerio.Action.sidebarToggle();
     },
     //--- RENDER
     render: function () {

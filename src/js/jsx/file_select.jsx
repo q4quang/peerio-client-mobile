@@ -76,7 +76,7 @@
 
           <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
 
-          <img style={{maxWidth:"100px", display:"block", margin:"0 auto"}} src="media/img/home-bigfilesok.png"/>
+          <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}} src="media/img/home-bigfilesok.png"/>
         </div>);
         files.push(intro_content);
       }

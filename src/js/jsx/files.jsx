@@ -35,7 +35,7 @@
           <Peerio.UI.Tappable element="div" className="btn-md" onTap={Peerio.Action.showFileUpload}>
             <i className="fa fa-cloud-upload"></i>&nbsp;Upload a file
           </Peerio.UI.Tappable>
-          <img style={{maxWidth:"100px", display:"block", margin:"0 auto"}} src="media/img/home-bigfilesok.png"/>
+          <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}} src="media/img/home-bigfilesok.png"/>
         </div>;
       }
       else {
@@ -87,7 +87,7 @@
     showDestroyDialog: function () {
       var destroyFileAfterAnimate = this.destroyFileAfterAnimate;
       Peerio.Action.showConfirm({
-        headline: "Remove this file?",
+        headline: 'Remove this file?',
         text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
         onAccept: destroyFileAfterAnimate
       });

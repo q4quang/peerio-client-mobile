@@ -34,7 +34,7 @@ Peerio.UI.AddContactImport = React.createClass({
     }
   },
   deviceImportFailure: function(){
-    Peerio.Action.showAlert({text:"Please enable Peerio to access your device contacts to use the contact import feature."});
+    Peerio.Action.showAlert({text:'Please enable Peerio to access your device contacts to use the contact import feature.'});
   },
   deviceImportSuccess: function(contacts){
     //mock contacts
@@ -62,7 +62,7 @@ Peerio.UI.AddContactImport = React.createClass({
       Peerio.Net.addressLookup( searchAddresses )
           .then(function(returnData){
 
-            var foundUsers = _.filter(returnData, function(i){return i.username});
+            var foundUsers = _.filter(returnData, function(i) { return i.username; });
             foundUsers = _.indexBy(foundUsers, 'id');
 
             if ( self.state.availableContacts.length ) {

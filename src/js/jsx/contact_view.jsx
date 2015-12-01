@@ -17,10 +17,18 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         handleAccept: function () {
-            this.contact.accept();
+            // TODO: there is probably a better way to invoke loading contacts
+            this.contact.accept().then(function() {
+                Peerio.user.loadContacts();
+            });
+
+
         },
         handleReject: function () {
-            this.contact.reject();
+            // TODO: there is probably a better way to invoke loading contacts
+            this.contact.reject().then(function() {
+                Peerio.user.loadContacts();
+            });
         },
         removeContactAndGoBack: function (username) {
             this.contact.isRequest ? this.contact.cancelRequest() : this.contact.remove();
@@ -29,7 +37,7 @@
         handleRemove: function () {
             if (!this.contact.isRequest) {
                 Peerio.Action.showConfirm({
-                    headline: "Remove Contact?",
+                    headline: 'Remove Contact?',
                     text: 'Are you sure you want to remove ' + this.contact.username +
                     ' from contacts? You will not be able to message and share files with this contact after removal.',
                     onAccept: this.removeContactAndGoBack.bind(this, this.contact.username)

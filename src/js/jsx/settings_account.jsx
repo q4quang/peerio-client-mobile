@@ -5,7 +5,7 @@
         getInitialState: function() {
             return {
                 isPrimary: this.props.data.isPrimary
-            }
+            };
         },
 
         setPrimaryAddress: function(address) {
@@ -27,9 +27,8 @@
                             <input type="radio"
                                    name="address_default"
                                    className="sr-only radio-button"
-                                   checked={this.state.isPrimary}
-                                />
-                            <label htmlFor={"address_default_"+index}
+                                   checked={this.state.isPrimary}/>
+                            <label htmlFor={'address_default_'+index}
                                    className="radio-label"></label>
                         </div>
                         <div className="col-2 text-center">
@@ -45,7 +44,7 @@
         getInitialState: function(){
             return {
                 user: (Peerio.user.isMe) ? Peerio.user : false,
-                newAddressText: "",
+                newAddressText: '',
                 firstName: Peerio.user ? Peerio.user.settings.firstName : '',
                 lastName: Peerio.user ? Peerio.user.settings.lastName : '',
                 addresses: Peerio.user ? Peerio.user.getAddresses() : ''
@@ -69,7 +68,7 @@
         },
 
         onAddressChange: function(event){
-            this.setState({newAddressText:event.target.value})
+            this.setState({newAddressText:event.target.value});
         },
 
         confirmAddress: function(address, code) {
@@ -77,7 +76,7 @@
             this.state.user.confirmAddress(address, code).then(
                 function() {
                     self.setState({addresses: Peerio.user.getAddresses() });
-                    Peerio.Action.showAlert({text: "Address authorized"})
+                    Peerio.Action.showAlert({text: 'Address authorized'});
                 });
         },
 
@@ -85,7 +84,7 @@
             var self = this;
             this.state.user.removeAddress(address).then(function() {
                 self.setState({addresses: Peerio.user.getAddresses() });
-                Peerio.Action.showAlert({text: "Address removed"})
+                Peerio.Action.showAlert({text: 'Address removed'});
             });
         },
 
@@ -105,11 +104,11 @@
                     .then(function(response) {
                         user.addAddress(newAddress).then( function() {
                             self.setState({addresses: Peerio.user.getAddresses() });
-                            self.setState({user:user, newAddressText:""})
+                            self.setState({user:user, newAddressText:''});
                             Peerio.Action.showPrompt({
-                                headline: "Enter the code",
-                                text: "enter the code you received via email or SMS to confirm your address.",
-                                inputType: "password",
+                                headline: 'Enter the code',
+                                text: 'enter the code you received via email or SMS to confirm your address.',
+                                inputType: 'password',
                                 onAccept: function(code) {
                                     self.confirmAddress(newAddress, code);
                                 }
@@ -120,7 +119,7 @@
 
 
             } else {
-                Peerio.Action.showAlert({text:"Sorry, that doesn't look like a valid email or phone number."})
+                Peerio.Action.showAlert({text:'Sorry, that doesn\'t look like a valid email or phone number.'});
             }
 
         },
@@ -128,14 +127,14 @@
         deleteAccount: function() {
             var user = this.state.user;
             Peerio.Action.showConfirm({
-                headline: "Delete account",
+                headline: 'Delete account',
                 text: 'Are you sure you want to delete account?',
                 onAccept: function() {
                     user.closeAccount().then( function() {
-                        Peerio.Action.showAlert({text: "Account deleted. Signing out.",
+                        Peerio.Action.showAlert({text: 'Account deleted. Signing out.',
                             onClose: function(code) {
                                 Peerio.NativeAPI.signOut();
-                            }})
+                            }});
                     });
                 }
             });

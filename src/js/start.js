@@ -29,7 +29,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
                 document.body.classList.add('android');
 
             Peerio.runtime.platform = platform;
-        } else Peerio.runtime.platform = "browser";
+        } else Peerio.runtime.platform = 'browser';
 
         // peerio client api
         Peerio.initAPI().then(function () {

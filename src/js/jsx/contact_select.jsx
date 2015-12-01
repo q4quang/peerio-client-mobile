@@ -38,13 +38,13 @@
                 <span className="username">({c.username})</span>
               </li>
             </Peerio.UI.Tappable>
-        )
+        );
       }.bind(this));
 
         if (Peerio.user.contacts.arr.length === 1) {
           var intro_content = (<div className="content-intro">
                                 <h1 className="headline-lrg">Peerio Contacts</h1>
-                                <p>It looks like you haven't added any contacts yet. Click below to get started.</p>
+                                <p>It looks like you have not added any contacts yet. Click below to get started.</p>
                                 <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.addContact}>
                                   <i className="fa fa-user-plus"></i>&nbsp;Add a contact
                                 </Peerio.UI.Tappable>

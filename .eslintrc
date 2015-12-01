@@ -4,14 +4,15 @@
     "node": false
   },
   "ecmaFeatures": {
-    "jsx": true
+    "jsx": true,
+    "arrowFunctions": true
   },
   "rules": {
     "semi": 2,
     "quotes":[1, "single"],
     "eol-last": 0,
     "no-console": 0,
-    "curly": [1, "multi"],
+    "curly": [0, "multi"],
     "no-alert": 0,
     "consistent-return": 0,
     "no-duplicate-case": 0, // doesn't detect variable cases so had to disable
@@ -29,6 +30,5 @@
     "Identicon": true,
     "TweenLite":true,
     "PouchDB":true
-
   }
 }

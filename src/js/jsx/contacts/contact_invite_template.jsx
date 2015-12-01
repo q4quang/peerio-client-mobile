@@ -26,7 +26,7 @@ Peerio.UI.ContactInviteTemplate = React.createClass({
       </Peerio.UI.Tappable>);
     });
 
-    var name = this.props.name ? <div className="list-item-title">{this.props.name}</div> : "" ;
+    var name = this.props.name ? <div className="list-item-title">{this.props.name}</div> : '' ;
 
     return (
         <div className='list-item'>

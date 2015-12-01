@@ -22,7 +22,7 @@
     send: function () {
       //todo validation
       if (!this.state.recipients.length) {
-        return Peerio.Action.showAlert({text:"Please select at least one contact to send your message to."});
+        return Peerio.Action.showAlert({text:'Please select at least one contact to send your message to.'});
       }
       Peerio.Messages.sendMessage(this.state.recipients, this.refs.subject.getDOMNode().value,
         this.refs.message.getDOMNode().value, this.state.attachments);
@@ -46,7 +46,7 @@
     render: function () {
       var r = this.state.recipients.map(function (username) {
         var c = Peerio.user.contacts.dict[username];
-        return <span className="name-selected">{c.fullName}&nbsp;&bull;&nbsp;{username}</span>;
+        return <span className="name-selected">{c ? c.fullName : 'n/a'}&nbsp;&bull;&nbsp;{username}</span>;
       });
       return (
         <div className="content without-tab-bar">
