@@ -166,7 +166,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     /**
-     * Enables or disables push notifications (if possible) 
+     * Enables or disables push notifications (if possible)
      * @param {bool} enable - to enable or to disable todo: disable
      * @returns {bool} - whether enabling notifications was successful or not
      */
@@ -177,14 +177,14 @@ Peerio.NativeAPI.init = function () {
             return false;
         }
         console.log('enabling push notifications');
-        var push = PushNotification.init({ 
+        var push = PushNotification.init({
          'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}} );
         push.on('registration', function(data) {
             console.log( 'push notification reg.id: ' + data.registrationId );
             if( window.device && window.device.platform ) {
-                var platform = window.device.platform.toLowerCase();             
+                var platform = window.device.platform.toLowerCase();
                 var to_send = {};
-                to_send[platform] = data.registrationId; 
+                to_send[platform] = data.registrationId;
                 Peerio.Net.registerMobileDevice( to_send );
                 window.console.log(to_send);
             }
