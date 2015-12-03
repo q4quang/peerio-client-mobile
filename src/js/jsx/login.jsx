@@ -18,8 +18,7 @@
             return {
                 passphraseVisible: false,
                 waitingForLogin: false,
-                loginError: false,
-                loginProgressMsg: ''
+                loginError: false
             };
         },
         componentWillMount: function () {
@@ -44,51 +43,21 @@
                 this.handleSubmit();
             }
         },
-        //--- CUSTOM FN
-        progressMessages: [
-            'turing test passed...',
-            'herding cats...',
-            'calculating last digit of pi...',
-            'poking Schrödinger\'s cat...',
-            'turning keys...',
-            'correcting battery staples...',
-            'processing ciphertext...',
-            'deciphering meaning of life...',
-            'mathing...',
-            'taking a quick break...',
-            'are those new shoes?',
-            'what a wonderful day to encrypt...',
-            'you\'re looking sharp',
-            'that\'s a gorgeous haircut',
-            'I think you would like Alice...',
-            'I think you would like Bob...'
-        ],
+
         cleanPassphrase: function () {
             this.refs.passphrase.getDOMNode().value = '';
         },
-        updateProgressMessage: function () {
-            var ind = Math.floor(Math.random() * this.progressMessages.length);
-            this.setState({loginProgressMsg: this.progressMessages[ind]});
-        },
-        startProgress: function () {
-            this.updateProgressMessage();
-            this.progressInterval = window.setInterval(this.updateProgressMessage, 1800);
-        },
-        stopProgress: function () {
-            window.clearInterval(this.progressInterval);
-        },
+
         handleLoginSuccess: function () {
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             Peerio.NativeAPI.enablePushNotifications(true);
-            this.stopProgress();
             this.transitionTo('messages');
         },
         handleLoginFail: function (message) {
             L.error(message);
-            this.stopProgress();
             Peerio.Action.showAlert({text: 'Login failed. Please check your username and passphrase/PIN.' + (message ? (' Error message: ' + message) : '')});
-            this.setState({waitingForLogin: false, loginProgressMsg: ''});
+            this.setState({waitingForLogin: false});
         },
         // show/hide passphrase
         handlePassphraseShowTap: function () {
@@ -114,7 +83,6 @@
 
             if (this.state.waitingForLogin) return;
             this.setState({waitingForLogin: true});
-            this.startProgress();
             // getting login from input or from previously saved data
             var userNode;
             if (this.state.savedLogin) {
@@ -200,7 +168,10 @@
                                     </Peerio.UI.Tappable>
                                 </div>
                             </div>
-                            <div id="login-process-state">{this.state.loginProgressMsg}</div>
+                            <div id="login-process-state">
+                                <Peerio.UI.TalkativeProgress
+                                    enabled={this.state.waitingForLogin}/>
+                            </div>
                             <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-lrg btn-safe"
                                                 onTap={this.handleSubmit}>
                                 {this.state.waitingForLogin ?
