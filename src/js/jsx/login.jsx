@@ -184,12 +184,15 @@
                                                        onTap={this.transitionTo.bind(this,'signup')}>
                                 sign up
                             </Peerio.UI.Tappable>)}
-
+                            {/*
                             <div className="text-input-group">
                                 <label className="info-label col-4" htmlFor="language-select">Language:</label>
                                 <select id="language-select" className="select-input col-8">
                                     <option value="">english</option>
                                 </select>
+                            </div>*/}
+                            <div className="text-input-group">
+                                <label className="info-label col-4" htmlFor="language-select">BETA</label>
                             </div>
                         </form>
                     </div>
