@@ -10,7 +10,7 @@
         },
 
         progressMessages: [
-            'do you like whisky?',
+            'do you like whiskey?',
             'making sun shine brighter...',
             'getting Daenerys closer to Westeros...',
             'calculating the width of a unicorn hair...',

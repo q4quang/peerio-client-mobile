@@ -73,7 +73,7 @@ $buttons-height:125px;
     bottom: 0;
     left: 0;
     right: 0;
-    height: $buttons-height;
+    // height: $buttons-height;
     background-color: darken(color(list-item-bg), 5%);
   }
   .contact {
@@ -123,9 +123,6 @@ $buttons-height:125px;
       top: 10px;
     }
   }
-}
-.ios .contact-select{
-  margin-top: 20px;
 }
 
 .file-upload{
