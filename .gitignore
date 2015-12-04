@@ -14,12 +14,7 @@
 /node_modules
 
 # compiled jsx
-/www/js/
-# bower-installer picked lib files from /bower_components
-/www/bower
-
-# compiled sass
-/www/css/app.css
+/www
 
 # debug variables file with potentially sensitive info
 /debug.js

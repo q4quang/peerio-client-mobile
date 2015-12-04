@@ -96,7 +96,7 @@ gulp.task('index', function () {
 });
 
 gulp.task('js', function () {
-    console.log('compiling jss files.');
+    console.log('compiling js files.');
     gulp.src(paths.js_src)
         .pipe(babel(babelOptions))
         .pipe(gulp.dest(paths.js_dst));
@@ -214,7 +214,7 @@ gulp.task('serve', ['compile'], function () {
     // compile watchers
     gulp.watch(paths.sass_all, ['sass']);
     gulp.watch(paths.jsx_src, ['jsx']);
-
+    gulp.watch(paths.js_src, ['js']);
 });
 
 gulp.task('run-android', ['compile'], function () {
@@ -289,6 +289,7 @@ function bump(version) {
 }
 
 function bowerInstaller() {
+    console.log('bower-installer');
     cp.execSync('rm -rf ' + paths.bower_installer_dst);
     cp.execSync('bower-installer');
 }
