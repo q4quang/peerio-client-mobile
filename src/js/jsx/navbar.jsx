@@ -43,10 +43,8 @@
           <div className="logo" onTouchStart={devmode.summon}>
               <img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/>
           </div>
-          <div id="search">
-            <input id="search-keyword" type="text"/>
-            <i id="search-button" className="fa fa-search"></i>
-          </div>
+
+          <div class="spacer">&nbsp;</div>
 
             <div id="app-lock">
               <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>
