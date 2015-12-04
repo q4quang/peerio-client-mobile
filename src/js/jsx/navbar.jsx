@@ -43,8 +43,10 @@
           <div className="logo" onTouchStart={devmode.summon}>
               <img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/>
           </div>
-
-          <div class="spacer">&nbsp;</div>
+          {/* not sure why but the spacer doesn't work correcly on iOS
+            TODO: replace table with floats
+          */}
+          <div className="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
             <div id="app-lock">
               <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>

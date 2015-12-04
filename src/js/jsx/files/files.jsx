@@ -24,20 +24,6 @@
           );
         }.bind(this));
       }
-      //New account placeholder
-      else if (Peerio.Files.cache && Peerio.Files.cache.length == 0) {
-        nodes = <div className="content-intro">
-          <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
-
-          <h1 className="headline-lrg">Peerio File Storage!</h1>
-
-          <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
-          <Peerio.UI.Tappable element="div" className="btn-md" onTap={Peerio.Action.showFileUpload}>
-            <i className="fa fa-cloud-upload"></i>&nbsp;Upload a file
-          </Peerio.UI.Tappable>
-          <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}} src="media/img/home-bigfilesok.png"/>
-        </div>;
-      }
       else {
         nodes = Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
       }
@@ -56,15 +42,31 @@
             </div>);
         });
       }
+      /* if there are no files show a placeholder instead */
+      var content =
+        (Peerio.Files.cache && Peerio.Files.cache.length == 0) ?
+            <div className="content list-view">
+                <div className="content-intro">
+                  <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
 
-      return (
-        <div className="content">
-          <ul className="list-view">
-            {uploadNodes}
-            {nodes}
-          </ul>
-        </div>
-      );
+                  <h1 className="headline-lrg">Peerio File Storage!</h1>
+
+                  <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
+                  <Peerio.UI.Tappable element="div" className="btn-md" onTap={Peerio.Action.showFileUpload}>
+                    <i className="fa fa-cloud-upload"></i>&nbsp;Upload a file
+                  </Peerio.UI.Tappable>
+                  <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}} src="media/img/home-bigfilesok.png"/>
+                </div>
+            </div>
+            :
+            <div className="content">
+                <ul className="list-view">
+                  {uploadNodes}
+                  {nodes}
+                </ul>
+            </div>;
+
+      return content;
     }
   });
 
