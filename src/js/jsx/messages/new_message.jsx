@@ -14,6 +14,10 @@
         Peerio.Dispatcher.onContactsSelected(this.acceptContactSelection),
         Peerio.Dispatcher.onBigGreenButton(this.send)
       ];
+
+      if(this.state.recipients.length == 0) {
+          this.openContactSelect();
+      }
     },
     componentWillUnmount: function () {
       Peerio.Dispatcher.unsubscribe(this.subscriptions);
