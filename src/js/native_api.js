@@ -166,40 +166,62 @@ Peerio.NativeAPI.init = function () {
     };
 
     /**
-     * Enables or disables push notifications (if possible)
-     * @param {bool} enable - to enable or to disable todo: disable
+     * Enables push notifications (if possible on the platform)
      * @returns {bool} - whether enabling notifications was successful or not
      */
-    api.enablePushNotifications = function (enable) {
-        if(!enable) return false;
-        if(typeof PushNotification === 'undefined') {
-            console.log('push notifications unavailable at the platform');
-            return false;
-        }
-        console.log('enabling push notifications');
-        var push = PushNotification.init({
-         'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}} );
-        push.on('registration', function(data) {
-            console.log( 'push notification reg.id: ' + data.registrationId );
-            if( window.device && window.device.platform ) {
-                var platform = window.device.platform.toLowerCase();
-                var to_send = {};
-                to_send[platform] = data.registrationId;
-                Peerio.Net.registerMobileDevice( to_send );
-                window.console.log(to_send);
+    api.enablePushNotifications = function () {
+        return new Promise(function(resolve, reject) {
+            if(typeof PushNotification === 'undefined') {
+                console.log('push notifications unavailable at the platform');
+                reject('push notifications unavailable at the platform');
+            }
+            console.log('enabling push notifications');
+            var push = PushNotification.init({
+             'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}} );
+            push.on('registration', function(data) {
+                console.log( 'push notification reg.id: ' + data.registrationId );
+                if( window.device && window.device.platform ) {
+                    var platform = window.device.platform.toLowerCase();
+                    var to_send = {};
+                    to_send[platform] = data.registrationId;
+                    Peerio.Net.registerMobileDevice( to_send );
+                    window.console.log(to_send);
+                    api.push = push;
+                    resolve(to_send);
+                }
+            });
+            push.on('notification', function(data) {
+                console.log( 'push notification message: ' + data.message );
+                console.log( 'push notification title: ' + data.title );
+                console.log( 'push notification count: ' + data.count );
+            });
+
+            push.on('error', function(e) {
+                console.log( 'push notification error: ' + e.message );
+                reject( 'push notification error: ' + e.message );
+            });
+            console.log('push notifications enabled');
+        });
+    };
+
+    /**
+     * Disables push notifications
+     * @returns Promise
+     */
+    api.disablePushNotifications = function() {
+        return new Promise(function(resolve, reject) {
+            if(api.push) {
+                api.push.unregister(function() {
+                    console.log( 'push unregister succeeded');
+                    resolve('unregister success');
+                }, function() {
+                    console.log( 'push unregister failed');
+                    reject('unregister failed');
+                });
+            } else {
+                resolve('no push notifications were enabled');
             }
         });
-        push.on('notification', function(data) {
-            console.log( 'push notification message: ' + data.message );
-            console.log( 'push notification title: ' + data.title );
-            console.log( 'push notification count: ' + data.count );
-        });
-
-        push.on('error', function(e) {
-            console.log( 'push notification error: ' + e.message );
-        });
-        console.log('push notifications enabled');
-        return true;
     };
 
     initializers.takePicture = function () {

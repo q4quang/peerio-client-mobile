@@ -11,8 +11,8 @@
         getInitialState: function () {
             return {
                 open: false,
-                newPinCode: "",
-                modalID: ""
+                newPinCode: '',
+                modalID: ''
             };
         },
         componentDidMount: function () {
@@ -47,7 +47,11 @@
             Peerio.Action.showFileUpload();
         },
         signOut: function() {
-            window.location.reload();
+            Peerio.NativeAPI.disablePushNotifications()
+                .finally(function() {
+                    console.log('reload window');
+                    window.location.reload();
+                });
         },
         //--- RENDER
         render: function () {
