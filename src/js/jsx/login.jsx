@@ -98,7 +98,7 @@
             // hiding software keyboard
             Peerio.NativeAPI.hideKeyboard();
             // TODO validate input
-            Peerio.user = Peerio.User(userNode.value);
+            Peerio.user = Peerio.User.create(userNode.value);
             Peerio.user.login(passNode.value)
                 .then(this.handleLoginSuccess)
                 .catch(this.handleLoginFail);
