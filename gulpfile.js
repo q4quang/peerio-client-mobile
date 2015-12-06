@@ -73,13 +73,17 @@ var paths = {
     jsx_postinit_inject: 'www/js/jsx-postinit/**/*.js',
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
-    bower_installer_dst: 'www/bower'
+    bower_installer_dst: 'www/bower',
+    static_src: ['*media/**/*', '*locale/**/*'],
+    static_dst: 'www/',
+    clean_dst: ['www/js', 'www/css', 'www/index.html', 
+                'www/media', 'www/locale', 'www/bower']
 };
 /*eslint-enable*/
 
 gulp.task('default', ['help']);
 gulp.task('compile', ['bower-installer'], function (done) {
-    return runSequence('compile-clean', ['jsx', 'jsx-preinit', 'jsx-postinit', 'sass', 'js'], 'index', done);
+    return runSequence('compile-clean', ['jsx', 'jsx-preinit', 'jsx-postinit', 'sass', 'js', 'static-files'], 'index', done);
 });
 
 gulp.task('index', function () {
@@ -103,7 +107,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('compile-clean', function () {
-    return gulp.src([paths.js_dst, paths.css_dst], {read: false})
+    return gulp.src(paths.clean_dst, {read: false})
         .pipe(clean());
 });
 
@@ -173,6 +177,12 @@ gulp.task('jsx-postinit', function () {
     return gulp.src(paths.jsx_postinit_src)
         .pipe(babel(babelOptions))
         .pipe(gulp.dest(paths.jsx_postinit_dst));
+});
+
+gulp.task('static-files', function () {
+    console.log('copying static files');
+    return gulp.src(paths.static_src)
+        .pipe(gulp.dest(paths.static_dst));
 });
 
 // starts http server with live reload
@@ -264,7 +274,6 @@ gulp.task('bump', ['version'], function () {
 gulp.task('version', function () {
     gulp.src(paths.config_xml)
         .pipe(xeditor(function (xml, xmljs) {
-
             var oldVer = xml.root().attr('version').value();
             console.log('Current app version: ' + oldVer);
             return xml;
