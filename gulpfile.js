@@ -77,7 +77,7 @@ var paths = {
     static_src: ['*media/**/*', '*locale/**/*'],
     static_dst: 'www/',
     clean_dst: ['www/js', 'www/css', 'www/index.html', 
-                'www/media', 'www/locale', 'www/bower']
+                'www/media', 'www/locale']
 };
 /*eslint-enable*/
 
