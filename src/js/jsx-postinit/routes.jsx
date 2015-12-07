@@ -30,6 +30,7 @@ Peerio.UI.Routes = (
       <Route name="add_contact_import" path="/app/add_contact_import" handler={Peerio.UI.AddContactImport}/>
 
       <Route name="set_pin" path="/app/set_pin" handler={Peerio.UI.SetPin} />
+      <Route name="set_passphrase" path="/app/set_passphrase" handler={Peerio.UI.SetPassphrase} />
     </Route>
   </Route>
 );
