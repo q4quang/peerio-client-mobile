@@ -86,13 +86,7 @@
             }.bind(this));
 
         },
-        validatePassPhrase: function () {
-            var passphrase_confirmed = event.target.value === this.state.passphrase;
-            this.setState({
-                passphrase_reentered: event.target.value,
-                passphrase_valid: passphrase_confirmed
-            });
-        },
+
         validateFirstName: function () {
             var name = this.refs.firstName.getDOMNode().value;
             this.setState({
@@ -100,6 +94,7 @@
                 firstName: name
             });
         },
+
         validateLastName: function () {
             var name = this.refs.lastName.getDOMNode().value;
             this.setState({
@@ -108,47 +103,17 @@
             });
         },
 
-        passPhraseIsValid: function () {
-            if (this.state.passphrase_valid) {
-                Peerio.Action.removeModal(this.state.activeModalId);
-                this.doSignup();
-            } else      Peerio.Action.showAlert({text: 'Passphrases do not match'});
-
-        },
-
-        removeModal: function (e) {
-            //e.stopPropagation();
-            Peerio.Action.removeModal(this.state.activeModalId);
-        },
-
         showModal: function() {
-            this.transitionTo('set_passphrase');
+            this.transitionTo('set_passphrase', {passphrase: this.state.passphrase} );
         },
 
-        showModalObsolete: function () {
-            var modalText = (<div key={'singup-step-2'}>
-                <legend className="headline-md">Please enter your passphrase to continue</legend>
-                <textarea className="txt-lrg textarea-transparent" autoFocus="true" autoComplete="off" autoCorrect="off"
-                    autoCapitalize="off" spellCheck="false"
-                    onChange={this.validatePassPhrase}></textarea>
-            </div>);
-            var modalBtns = (<div>
-                <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.passPhraseIsValid}> Create my
-                    account</Peerio.UI.Tappable>
-                <Peerio.UI.Tappable element="div" className="btn-subtle" onTap={this.removeModal}> Let me see my
-                    passphrase again</Peerio.UI.Tappable>
-            </div>);
-            var modalContent = {id: uuid.v4(), text: modalText, btns: modalBtns};
-            Peerio.Action.showAlert(modalContent);
-            this.setState({activeModalId: modalContent.id});
-
-        },
         generatePassphrase: function () {
             Peerio.PhraseGenerator.getPassPhrase(this.refs.lang.getDOMNode().value, this.refs.wordCount.getDOMNode().value)
             .then(function (phrase) {
                 this.setState({passphrase: phrase});
             }.bind(this));
         },
+
         render: function () {
 
             var steps = [];
@@ -182,18 +147,19 @@
             }
 
             return (
-                <div className="content-wrapper-signup">
+                <div>
+                    <div className="content-wrapper-signup">
+                        <div className="progress-bar">
+                            {progressBarSteps}
+                        </div>
 
-                    <div className="progress-bar">
-                        {progressBarSteps}
+                        <form className="signup-form">
+                            <ReactCSSTransitionGroup transitionName="animate">
+                                {currentStep}
+                            </ReactCSSTransitionGroup>
+                        </form>
                     </div>
-
-                    <form className="signup-form">
-                        <ReactCSSTransitionGroup transitionName="animate">
-                            {currentStep}
-                        </ReactCSSTransitionGroup>
-                    </form>
-                    <RouteHandler/>
+                    <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup.bind(this)}/>
                 </div>
             );
         },
