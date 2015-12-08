@@ -193,6 +193,7 @@
                             {currentStep}
                         </ReactCSSTransitionGroup>
                     </form>
+                    <RouteHandler/>
                 </div>
             );
         },
