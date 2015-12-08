@@ -74,7 +74,7 @@ var paths = {
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
     bower_installer_dst: 'www/bower',
-    static_src: ['*media/**/*', '*locale/**/*', '*extra/**/*'],
+    static_src: ['*media/**/*', '*locale/**/*', 'extra/*'],
     static_dst: 'www/',
     clean_dst: ['www/js', 'www/css', 'www/index.html', 
                 'www/media', 'www/locale']
@@ -119,7 +119,7 @@ gulp.task('help', function () {
     console.log('| gulp serve       - start http server with live reload                                 |');
     console.log('| gulp serve --api - start http server with live reload and watch symlinked peerio api  |');
     console.log('| gulp compile     - same as "gulp sass jsx"                                            |');
-    console.log('| gulp run-android - compile + "cordova run androidi"                                   |');
+    console.log('| gulp run-android - compile + "cordova run android"                                    |');
     console.log('| gulp run-ios     - compile + "cordova run ios"                                        |');
     console.log('| gulp sass        - compile scss files                                                 |');
     console.log('| gulp jsx         - compile jsx files                                                  |');
