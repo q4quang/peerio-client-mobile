@@ -111,6 +111,7 @@
         },
 
         render: function () {
+            var deleteAccountStyle = { 'margin-top': '2em'};
             return (
                 <div className="content-padded flex-col">
                     <div className="flex-col-1">
@@ -152,19 +153,19 @@
                                        onChange={this.onAddressChange} value={this.state.newAddressText}/>
                             </div>
                             <div className="col-4 text-center">
-                                <Peerio.UI.Tappable className="btn-sm" onTap={this.addNewAddress}>add
-                                    address</Peerio.UI.Tappable>
+                                <Peerio.UI.Tappable className="btn-sm" onTap={this.addNewAddress}>
+                                    add
+                                </Peerio.UI.Tappable>
                             </div>
                         </div>
                         <hr/>
                         <div className="info-label">Your public key:</div>
                         <span className="text-mono">{Peerio.user.publicKey}</span>
-                    </div>
-
-                    <div className="flex-col-0">
+                        <div className="info-label" style={deleteAccountStyle}>Delete your account</div>
                         <Peerio.UI.Tappable className="btn-link btn-danger" onTap={this.deleteAccount}>delete your
                             account</Peerio.UI.Tappable>
                     </div>
+
                 </div>
             );
         }

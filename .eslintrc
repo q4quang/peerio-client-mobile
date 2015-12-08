@@ -5,7 +5,8 @@
   },
   "ecmaFeatures": {
     "jsx": true,
-    "arrowFunctions": true
+    "arrowFunctions": true,
+    "forOf": 1
   },
   "rules": {
     "semi": 2,
@@ -18,7 +19,7 @@
     "no-duplicate-case": 0, // doesn't detect variable cases so had to disable
     "no-irregular-whitespace": 0,
     "no-trailing-spaces": 0,
-    "no-use-before-define": [1, "nofunc"]
+    "no-use-before-define": [1, "nofunc"],
   },
   "globals": {
     "Peerio": true,
