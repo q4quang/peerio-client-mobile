@@ -74,7 +74,7 @@ var paths = {
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
     bower_installer_dst: 'www/bower',
-    static_src: ['*media/**/*', '*locale/**/*'],
+    static_src: ['*media/**/*', '*locale/**/*', '*extra/**/*'],
     static_dst: 'www/',
     clean_dst: ['www/js', 'www/css', 'www/index.html', 
                 'www/media', 'www/locale']
@@ -92,8 +92,8 @@ gulp.task('index', function () {
   var sourcesJsx = gulp.src(paths.jsx_inject, {read: false});
   var sourcesJsxPreInit = gulp.src(paths.jsx_preinit_inject, {read: false});
   var sourcesJsxPostInit = gulp.src(paths.jsx_postinit_inject, {read: false});
-  console.log("DON'T FORGET TO SET PROVISIONING PROFILE TO ios team provisioning profile: com.peerio");
-  console.log("OTHERWISE PUSH NOTIFICATIONS WOULD NOT WORK");
+  console.log('DON\'T FORGET TO SET PROVISIONING PROFILE TO ios team provisioning profile: com.peerio');
+  console.log('OTHERWISE PUSH NOTIFICATIONS WOULD NOT WORK');
   return target.pipe(
       inject(series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit), 
           {addRootSlash: false, ignorePath: 'www'})).pipe(gulp.dest('./www'));
@@ -119,8 +119,8 @@ gulp.task('help', function () {
     console.log('| gulp serve       - start http server with live reload                                 |');
     console.log('| gulp serve --api - start http server with live reload and watch symlinked peerio api  |');
     console.log('| gulp compile     - same as "gulp sass jsx"                                            |');
-    console.log("| gulp run-android - compile + 'cordova run android'                                    |");
-    console.log("| gulp run-ios     - compile + 'cordova run ios'                                        |");
+    console.log('| gulp run-android - compile + "cordova run androidi"                                   |');
+    console.log('| gulp run-ios     - compile + "cordova run ios"                                        |');
     console.log('| gulp sass        - compile scss files                                                 |');
     console.log('| gulp jsx         - compile jsx files                                                  |');
     console.log('| gulp bump        - interactively bump app version in config.xml                       |');
