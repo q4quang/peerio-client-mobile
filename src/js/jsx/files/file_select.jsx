@@ -8,94 +8,98 @@
 //todo fix potential bug: when file deleted while selected it might still be in the selection
 
 (function () {
-  'use strict';
+    'use strict';
 
-  Peerio.UI.FileSelect = React.createClass({
-    getInitialState: function () {
-      return {selection: this.props.preselected || []};
-    },
-    componentDidMount: function () {
-      this.subscription = Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null));
-      Peerio.Files.getAllFiles();
-    },
-    componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.subscription);
-    },
-    toggle: function (fileId) {
+    Peerio.UI.FileSelect = React.createClass({
+        getInitialState: function () {
+            return {selection: this.props.preselected || []};
+        },
+        componentDidMount: function () {
+            this.subscription = Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null));
+        },
+        componentWillUnmount: function () {
+            Peerio.Dispatcher.unsubscribe(this.subscription);
+        },
+        toggle: function (fileId) {
 
-      this.setState(function (prevState) {
-        var ind = prevState.selection.indexOf(fileId);
-        if (ind >= 0)
-          prevState.selection.splice(ind, 1);
-        else
-          prevState.selection.push(fileId);
-      });
-    },
-    accept: function () {
-      Peerio.Action.filesSelected(this.state.selection);
-      this.props.onClose();
-    },
-    upload: function(){
-      Peerio.Action.showFileUpload();
-    },
-    render: function () {
-      var files = [];
-        Peerio.Files.cache.forEach(function (f) {
+            this.setState(function (prevState) {
+                var ind = prevState.selection.indexOf(fileId);
+                if (ind >= 0)
+                    prevState.selection.splice(ind, 1);
+                else
+                    prevState.selection.push(fileId);
+            });
+        },
+        accept: function () {
+            Peerio.Action.filesSelected(this.state.selection);
+            this.props.onClose();
+        },
+        upload: function () {
+            Peerio.Action.showFileUpload();
+        },
+        render: function () {
+            var files = [];
+            Peerio.user.files.arr.forEach(function (f) {
 
-          var isSelected = this.state.selection.indexOf(f.id) >= 0;
+                var isSelected = this.state.selection.indexOf(f.id) >= 0;
 
-          files.push(
-            <Peerio.UI.Tappable key={f.id} onTap={this.toggle.bind(this,f.id)}>
-              <li className={isSelected ? 'contact selected' : 'contact'}>
-                <span type="checkbox" className={isSelected ? 'checkbox-input checked' : 'checkbox-input' }></span>
-                <span className="username">{f.name}</span>
-              </li>
-            </Peerio.UI.Tappable>
-          );
-        }.bind(this));
+                files.push(
+                    <Peerio.UI.Tappable key={f.id} onTap={this.toggle.bind(this,f.id)}>
+                        <li className={isSelected ? 'contact selected' : 'contact'}>
+                            <span type="checkbox"
+                                  className={isSelected ? 'checkbox-input checked' : 'checkbox-input' }></span>
+                            <span className="username">{f.name}</span>
+                        </li>
+                    </Peerio.UI.Tappable>
+                );
+            }.bind(this));
 
 
-      var uploads = [];
-      if (Peerio.Files.uploads.length) {
-        Peerio.Files.uploads.forEach(function (u) {
-          uploads.push(
-            <li className='contact'>
+            var uploads = [];
+            if (Peerio.user.uploads.length) {
+                Peerio.user.uploads.forEach(function (file) {
+                    var u = file.uploadState;
+                    uploads.push(
+                        <li className='contact'>
               <span className="username">
                  <i
-                   className="fa fa-circle-o-notch fa-spin"></i> {u.stateName} {u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''}
+                     className="fa fa-circle-o-notch fa-spin"></i> {u.stateName} {u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''}
               </span>
-            </li>);
-        });
-      }
+                        </li>);
+                });
+            }
 
-      if (Peerio.Files.cache.length === 0) {
-        var intro_content = (<div className="content-intro">
-          <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
+            if (Peerio.user.files && Peerio.user.files.arr.length === 0) {
+                var intro_content = (<div className="content-intro">
+                    <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
 
-          <h1 className="headline-lrg">Peerio File Storage!</h1>
+                    <h1 className="headline-lrg">Peerio File Storage!</h1>
 
-          <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
+                    <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
 
-          <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}} src="media/img/home-bigfilesok.png"/>
-        </div>);
-        files.push(intro_content);
-      }
+                    <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}}
+                         src="media/img/home-bigfilesok.png"/>
+                </div>);
+                files.push(intro_content);
+            }
 
-      return (
-        <div className="modal contact-select">
-          <ul className="contact-list">
-            {uploads}
-            {files}
-          </ul>
-          <div className="buttons col-12">
-            <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.accept}>OK</Peerio.UI.Tappable>
-            <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.upload}>Upload new file</Peerio.UI.Tappable>
-            <Peerio.UI.Tappable element="div" className="btn-lrg btn-dark"
-                                onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
-          </div>
-        </div>
-      );
-    }
-  });
+            return (
+                <div className="modal contact-select">
+                    <ul className="contact-list">
+                        {uploads}
+                        {files}
+                    </ul>
+                    <div className="buttons col-12">
+                        <Peerio.UI.Tappable element="div" className="btn-lrg"
+                                            onTap={this.accept}>OK</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.upload}>Upload new
+                            file</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-lrg btn-dark"
+                                            onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+                    </div>
+                </div>
+            );
+        }
+    });
 
 }());
