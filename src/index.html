@@ -102,7 +102,7 @@
     }
 
     .ios #devmode {
-        top: 20px;
+        top: 0px;
     }
 
     #devmode-title {
@@ -194,6 +194,10 @@
             summonTimeoutThreshold: 10000, // summonCounter will reset if it didn't reach threshold within this number of milliseconds
             // open devmode control
             show: function () {
+                /* making sure that devmode isn't compressed into small scrollable window */
+                if ( Peerio && Peerio.NativeAPI && Peerio.NativeAPI.hideKeyboard ) {
+                    Peerio.NativeAPI.hideKeyboard();
+                }
                 devmode.loadSettings();
                 //devmode.root.style.display = 'block';
                 devmode.root.style.transform = 'translateX(0%)';
