@@ -42,7 +42,7 @@
         },
 
         processReturnedPassphrase : function() {
-            console.log('processing returned passphrase, lol');
+            L.info('processing returned passphrase, lol');
         },
 
         handleNextStep: function (e) {

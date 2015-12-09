@@ -49,7 +49,7 @@
         signOut: function() {
             Peerio.NativeAPI.disablePushNotifications()
                 .finally(function() {
-                    console.log('reload window');
+                    L.info('reload window');
                     window.location.reload();
                 });
         },

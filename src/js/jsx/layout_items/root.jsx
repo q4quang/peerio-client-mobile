@@ -9,6 +9,9 @@
             Peerio.Dispatcher.onKeyboardDidShow(function () {
                 if (!document.activeElement)return;
                 var el = document.activeElement;
+                if(Peerio.Helpers.getParentWithClass(el, 'no-scroll-hack')) {
+                    return;
+                }
                 el.scrollIntoView({block: 'start', behavior: 'smooth'});
                 // ios hack to make input update and move cursor to the right position
                 el.value = el.value;

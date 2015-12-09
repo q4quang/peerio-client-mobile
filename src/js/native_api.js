@@ -172,35 +172,35 @@ Peerio.NativeAPI.init = function () {
     api.enablePushNotifications = function () {
         return new Promise(function(resolve, reject) {
             if(typeof PushNotification === 'undefined') {
-                console.log('push notifications unavailable at the platform');
+                L.info('push notifications unavailable at the platform');
                 reject('push notifications unavailable at the platform');
             }
-            console.log('enabling push notifications');
+            L.info('enabling push notifications');
             var push = PushNotification.init({
              'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}} );
             push.on('registration', function(data) {
-                console.log( 'push notification reg.id: ' + data.registrationId );
+                L.info( 'push notification reg.id: ' + data.registrationId );
                 if( window.device && window.device.platform ) {
                     var platform = window.device.platform.toLowerCase();
                     var to_send = {};
                     to_send[platform] = data.registrationId;
                     Peerio.Net.registerMobileDevice( to_send );
-                    window.console.log(to_send);
+                    window.L.info(to_send);
                     api.push = push;
                     resolve(to_send);
                 }
             });
             push.on('notification', function(data) {
-                console.log( 'push notification message: ' + data.message );
-                console.log( 'push notification title: ' + data.title );
-                console.log( 'push notification count: ' + data.count );
+                L.info( 'push notification message: ' + data.message );
+                L.info( 'push notification title: ' + data.title );
+                L.info( 'push notification count: ' + data.count );
             });
 
             push.on('error', function(e) {
-                console.log( 'push notification error: ' + e.message );
+                L.info( 'push notification error: ' + e.message );
                 reject( 'push notification error: ' + e.message );
             });
-            console.log('push notifications enabled');
+            L.info('push notifications enabled');
         });
     };
 
@@ -212,10 +212,10 @@ Peerio.NativeAPI.init = function () {
         return new Promise(function(resolve, reject) {
             if(api.push) {
                 api.push.unregister(function() {
-                    console.log( 'push unregister succeeded');
+                    L.info( 'push unregister succeeded');
                     resolve('unregister success');
                 }, function() {
-                    console.log( 'push unregister failed');
+                    L.info( 'push unregister failed');
                     reject('unregister failed');
                 });
             } else {
