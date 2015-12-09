@@ -33,7 +33,7 @@ Peerio.ActionExtension.init = function () {
         'TabBarHide',          // show tab bar requested
         'SendCurrentMessage',  // user wants to send the message that he is currently typing
         'TransitionTo',        // a hack to allow out of router context components to navigate
-        'SetPin',              // request transition to the set pin view
+        'SetPassphrase',       // window with the passphrase worked out and returned some value to check
         //------- HARDWARE/OS ACTIONS
         'HardMenuButton',      // hardware "menu" button was pressed
         'HardBackButton',      // hardware "back" button was pressed
