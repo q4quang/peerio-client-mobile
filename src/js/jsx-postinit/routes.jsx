@@ -28,6 +28,7 @@ Peerio.UI.Routes = (
                 <Route name="enter_confirm" path="/app/settings/account/enter_confirm" handler={Peerio.UI.EnterConfirm} />
             </Route>
             <Route name="preference_settings" path="/app/settings/preferences" handler={Peerio.UI.PreferenceSettings} />
+            <Route name="settings_2fa" path="/app/settings/settings_2fa" handler={Peerio.UI.Settings2FA} />
 
             <Route name='add_contact' path="/app/add_contact" handler={Peerio.UI.AddContact}/>
             <Route name="add_contact_search" path="/app/add_contact_search/:id" handler={Peerio.UI.AddContactSearch}/>

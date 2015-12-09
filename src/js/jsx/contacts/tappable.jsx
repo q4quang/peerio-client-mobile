@@ -32,7 +32,7 @@
             setTimeout(this.props.onTap, 200);
         },
         render: function () {
-            var tag = this.props.element || 'span';
+            var tag = this.props.element || this.props.tag || 'span';
             var props = _.assign({onTouchStart: this.handleTouchStart, onTouchEnd: this.handleTouchEnd}, this.props);
             props.className = this.props.className + ' ' + this.state.tapState;
             var reactElement = React.createElement(tag, props, this.props.children);

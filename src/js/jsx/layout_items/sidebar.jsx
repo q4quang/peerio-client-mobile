@@ -64,15 +64,9 @@
             var quota = Peerio.Helpers.formatBytes(user.settings.quota.total);
             var quotaPercent = Math.floor(user.settings.quota.user / (user.settings.quota.total / 100));
 
-            pinNode = <li onTouchStart={this.toggleAndTransition.bind(this, 'set_pin')}>
-                        <i className="fa fa-lock"></i> Set/remove PIN code</li>;
-
-            if (user.settings.twoFactorAuth)
-                twoFactor =
-                    <li><i className="fa fa-mobile"></i> {user.settings.twoFactorAuth} Disable two factor auth</li>;
-            else
-                twoFactor =
-                    <li><i className="fa fa-mobile"></i> {user.settings.twoFactorAuth} Enable two factor auth</li>;
+            pinNode = Peerio.user.PINIsSet ? 'Remove PIN code' : 'Set PIN code';
+            
+            twoFactor = user.settings.twoFactorAuth ? 'Disable two factor auth' : 'Enable two factor auth';
 
             if (Peerio)
                 return (
@@ -106,8 +100,18 @@
 
                                 <h3 className="subhead">Security</h3>
                                 <ul>
-                                    {pinNode}
-                                    {twoFactor}
+                                    <Peerio.UI.Tappable tag='li'
+                                        className="info-small"
+                                        onTap={this.toggleAndTransition.bind(this, 'set_pin')}>
+                                        <i className="fa fa-lock"/>
+                                        <span>{pinNode}</span>
+                                    </Peerio.UI.Tappable>
+                                    <Peerio.UI.Tappable tag='li'
+                                        className="info-small"
+                                        onTap={this.toggleAndTransition.bind(this, 'settings_2fa')}>
+                                        <i className="fa fa-mobile"/>
+                                        <span>{twoFactor}</span>
+                                    </Peerio.UI.Tappable>
                                 </ul>
                                 <h3 className="subhead">Account</h3>
                                 <ul>

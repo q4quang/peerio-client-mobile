@@ -75,7 +75,15 @@ Click the sidebar in the example to toggle the `.open` state.
     transition-duration: .7s;
   }
   .fa-mobile {
+    // this was a hack placed before me by an unknown author
+    // to make sure the mobile icon is visible
+    // @seavan
     font-size: 1.5em;
+    // this is a hack I place here in my right mind
+    // to make sure that "Enable two factor auth" looks consistent
+    // with remove pin code
+    // @seavan
+    margin-right: 0.35em;
   }
   .sidebar-footer-text{
     margin-top: 1rem;
