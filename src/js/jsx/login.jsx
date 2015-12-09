@@ -130,7 +130,7 @@
 
                     <div className="content-wrapper-login">
                         <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
-                        <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"
+                        <img className="logo" src="media/img/peerio-logo-white-beta.png" alt="Peerio"
                              onTouchEnd={devmode.summon}/>
 
                         <form className="loginForm" onSubmit={this.handleSubmit}>
