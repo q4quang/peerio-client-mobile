@@ -18,11 +18,8 @@
 // just initializing the object
 PeerioDebug = {};
 
-// disables error reporting to peerio remote error collector tool
-// this has effect at loading time only, changing it after page load will not work
-PeerioDebug.noErrorReporting = true;
-
 // this will be typed into login form as default value
 PeerioDebug.user = '';
 PeerioDebug.pass = '';
 
+PeerioDebug.server = '';
