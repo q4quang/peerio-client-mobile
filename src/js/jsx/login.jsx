@@ -191,9 +191,6 @@
                                     <option value="">english</option>
                                 </select>
                             </div>*/}
-                            <div className="text-input-group">
-                                <label className="info-label col-4" htmlFor="language-select">BETA</label>
-                            </div>
                         </form>
                     </div>
                 </div>
