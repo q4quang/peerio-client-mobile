@@ -24,7 +24,9 @@ Peerio.UI.Routes = (
             <Route name="new_message" path="/app/new_message/:id?" handler={Peerio.UI.NewMessage} />
 
             <Route name="upload" path="/app/upload" handler={Peerio.UI.Upload} />
-            <Route name="account_settings" path="/app/settings/account" handler={Peerio.UI.AccountSettings} />
+            <Route name="account_settings" path="/app/settings/account" handler={Peerio.UI.AccountSettings}>
+                <Route name="enter_confirm" path="/app/settings/account/enter_confirm" handler={Peerio.UI.EnterConfirm} />
+            </Route>
             <Route name="preference_settings" path="/app/settings/preferences" handler={Peerio.UI.PreferenceSettings} />
 
             <Route name='add_contact' path="/app/add_contact" handler={Peerio.UI.AddContact}/>

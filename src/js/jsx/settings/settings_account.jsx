@@ -2,6 +2,8 @@
     'use strict';
 
     Peerio.UI.AccountSettings = React.createClass({
+        mixins: [ReactRouter.Navigation],
+
         getInitialState: function () {
             return {
                 newAddressText: '',
@@ -43,19 +45,28 @@
             this.setState({newAddressText: event.target.value});
         },
 
+        clearAddressText: function() {
+            this.setState({newAddressText: ''});
+        },
+
         confirmAddress: function (address, code) {
+            var self = this;
+            this.clearAddressText();
             Peerio.user.confirmAddress(address, code)
                 .then(() => {
-                    this.setState({addresses: this.getAddresses()});
+                    self.setState({addresses: self.getAddresses()});
                     Peerio.Action.showAlert({text: 'Address authorized'});
                 });
         },
 
-        removeAddress: function (address) {
+        removeAddress: function (address, code) {
+            var self = this;
+            this.clearAddressText();
             Peerio.user.removeAddress(address)
                 .then(() => {
-                    self.setState({addresses: this.getAddresses()});
-                    Peerio.Action.showAlert({text: 'Address removed'});
+                    self.setState({addresses: self.getAddresses()});
+                    // prevent alert from showing when prompt is used as cancel
+                    if(!code) Peerio.Action.showAlert({text: 'Address removed'});
                 });
         },
 
@@ -66,25 +77,19 @@
         addNewAddress: function () {
             //TODO: valid email or phone number.
             var newAddress = this.state.newAddressText;
-            var emailRegex = new RegExp(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
+            var emailRegex = new RegExp(/^([\w+-]+(?:\.[\w+-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
             var phoneRegex = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/i);
             var self = this;
-            if (emailRegex.test(newAddress)) {
+            if (emailRegex.test(newAddress) || phoneRegex.test(newAddress)) {
 
                 Peerio.user.validateAddress(newAddress)
                     .then((response) => {
+                        response ?
                         Peerio.user.addAddress(newAddress).then(function () {
-                            self.setState({addresses: this.getAddresses()});
-                            self.setState({newAddressText: ''});
-                            Peerio.Action.showPrompt({
-                                headline: 'Enter the code',
-                                text: 'enter the code you received via email or SMS to confirm your address.',
-                                inputType: 'password',
-                                onAccept: function (code) {
-                                    self.confirmAddress(newAddress, code);
-                                }
-                            });
-                        });
+                            self.setState({addresses: self.getAddresses()});
+                            self.transitionTo('enter_confirm');
+                        }) 
+                        :  Peerio.Action.showAlert({text: 'Sorry, that address is already taken'});
                     });
 
             } else {
@@ -165,7 +170,10 @@
                         <Peerio.UI.Tappable className="btn-link btn-danger" onTap={this.deleteAccount}>delete your
                             account</Peerio.UI.Tappable>
                     </div>
-
+                    <RouteHandler 
+                        onPrompt={this.confirmAddress.bind(this)} 
+                        onCancel={this.removeAddress.bind(this)} 
+                        address={this.state.newAddressText}/>
                 </div>
             );
         }
