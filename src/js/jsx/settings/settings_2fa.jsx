@@ -11,7 +11,8 @@
                 isEnabled2FA: false,
                 // used for the two step disabling 2FA process
                 disable2FA: false,
-                authyCode: ''
+                authyCode: '',
+                message: ''
             };
         },
 
@@ -22,7 +23,7 @@
         componentWillMount: function () {
             var self = this;
             this.updateFromSettings();
-            if(!this.state.isEnabled2FA) this.startEnable2FA();
+            if(!Peerio.user.settings.settings.twoFactorAuth) this.startEnable2FA();
         },
 
         componentDidUpdate: function(prevProps, prevState) {
@@ -74,7 +75,7 @@
                 Peerio.Net.setUp2FA().then((response) => { 
                     L.info(response); 
                     var secret = response.secret;
-                    this.setState( { code: secret } );
+                    this.setState( { code: secret, message: '' } );
                 });
             }
         },
@@ -82,10 +83,9 @@
         enable2FA: function(currentCode) {
             Peerio.Net.confirm2FA(currentCode)
             .then( (response) => {
-                Peerio.Action.showAlert({text: '2FA is enabled successfully'});
             })
             .catch( (reject) => {
-                Peerio.Action.showAlert({text: 'Code is incorrect. Please try again.'});
+                this.setState({message: 'Code is incorrect. Please try again.'});
             })
             .finally( () => {
                 this.setState({ authyCode: '' });
@@ -96,12 +96,10 @@
             Peerio.Net.validate2FA( currentCode, Peerio.user.username, Peerio.user.settings.publicKeyString )
             .then( () => {
                 Peerio.Net.updateSettings( { twoFactorAuth: false } ).then( () => {
-                    Peerio.Action.showAlert({text: '2FA is disabled successfully'});
-                    this.setState({ disable2FA: false });
                 });
             })
             .catch( (reject) => {
-                Peerio.Action.showAlert({text: 'Code is incorrect. Please try again.'});
+                this.setState({message: 'Code is incorrect. Please try again.'});
             })
             .finally( () => {
                 this.setState({ authyCode: '' });
@@ -110,7 +108,8 @@
 
         startDisable2FA: function() {
             this.setState({
-                disable2FA: true
+                disable2FA: true,
+                message: ''
             });
         },
         //--- RENDER
@@ -157,6 +156,9 @@
                                     onChange={this.onChangeAuthy}
                                     value={this.state.authyCode}/>
                             </div>) : null }
+                            <p className="info-small col-12"> 
+                                {this.state.message}
+                            </p>
                         </div>
                     </div>
                 );

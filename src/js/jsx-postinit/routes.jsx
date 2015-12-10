@@ -7,6 +7,7 @@ Peerio.UI.Routes = (
         <Route name="signup" path="signup" handler={Peerio.UI.Signup}>
             <Route name="set_passphrase" path="/signup/set_passphrase" handler={Peerio.UI.SetPassphrase} />
         </Route>
+        <Route name="two_factor_auth_prompt" path="/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
         <Route name="app" path="app" handler={Peerio.UI.App}>
 
             <Route name='tabs' handler={Peerio.UI.Tabs}>
