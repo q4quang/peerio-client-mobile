@@ -8,45 +8,48 @@
             return {
                 clipboardSuccess: false,
                 code: '',
+                isEnabled2FA: false,
                 // used for the two step disabling 2FA process
                 disable2FA: false,
                 authyCode: ''
             };
         },
 
-        isEnabled2FA: function() {
-            return Peerio.user.settings.settings.twoFactorAuth;
+        updateFromSettings: function() {
+            this.setState({ isEnabled2FA: Peerio.user.settings.settings.twoFactorAuth });
         },
 
         componentWillMount: function () {
             var self = this;
-            if(!this.isEnabled2FA()) {
-                /* trying to get a new code right away */
-                Peerio.Net.setUp2FA().then((response) => { 
-                    L.info(response); 
-                    var secret = response.secret;
-                    self.setState( { code: secret } );
-                    // we try to copy code to buffer
-                    // if we fail, we focus on the code input
-                    // to make it easier for user to copy
-                    // if we succeed, we focus on 
-                    // authenticator input
-                    var element = React.findDOMNode(this.refs.generatedCode);
-                    Peerio.NativeAPI.copyToClipboard(secret)
-                    .then( () => {
-                        this.setState( { clipboardSuccess: true } );
-                        element = React.findDOMNode(this.refs.authenticatorCode);
-                    })
-                    .finally( () => {
-                        element.focus();
-                        element.select();
-                    });
+            this.updateFromSettings();
+            if(!this.state.isEnabled2FA) this.startEnable2FA();
+        },
+
+        componentDidUpdate: function(prevProps, prevState) {
+            if(!this.state.isEnabled2FA && prevState.isEnabled2FA)  {
+                this.startEnable2FA();
+            }
+            if(!this.state.isEnabled2FA && prevState.code != this.state.code) {
+                // we try to copy code to buffer
+                // if we fail, we focus on the code input
+                // to make it easier for user to copy
+                // if we succeed, we focus on 
+                // authenticator input
+                var element = React.findDOMNode(this.refs.generatedCode);
+                Peerio.NativeAPI.copyToClipboard(this.state.code)
+                .then( () => {
+                    this.setState( { clipboardSuccess: true } );
+                    element = React.findDOMNode(this.refs.authenticatorCode);
+                })
+                .finally( () => {
+                    element.focus();
+                    element.select();
                 });
             }
         },
 
         componentDidMount: function () {
-            Peerio.Dispatcher.onSettingsUpdated(this.forceUpdate.bind(this, null));
+            Peerio.Dispatcher.onSettingsUpdated(this.updateFromSettings.bind(this));
         },
 
         onChangeAuthy: function () {
@@ -62,6 +65,17 @@
             if(currentCode.length == 6) {
                 this.state.disable2FA ?
                     this.disable2FA(currentCode) : this.enable2FA(currentCode);
+            }
+        },
+
+        startEnable2FA: function() {
+            if(!this.state.isEnabled2FA) {
+                /* trying to get a new code right away */
+                Peerio.Net.setUp2FA().then((response) => { 
+                    L.info(response); 
+                    var secret = response.secret;
+                    this.setState( { code: secret } );
+                });
             }
         },
 
@@ -107,7 +121,7 @@
                 return (
                     <div className="content-padded no-scroll-hack">
                         <div className="info-label">Two Factor Authentication (2FA)</div>
-                        <div>{ this.isEnabled2FA() ? (
+                        <div>{ this.state.isEnabled2FA ? (
                             <div>
                                 <Peerio.UI.Tappable element="div" className="btn-lrg" 
                                     onTap={this.startDisable2FA}> 
@@ -130,7 +144,7 @@
                                         <i className="fa fa-circle-o-notch fa-spin"></i>
                                     </div>)}
                                 </div>
-                            </div>)} { this.state.disable2FA || !this.isEnabled2FA() ? (
+                            </div>)} { this.state.disable2FA || !this.state.isEnabled2FA ? (
                             <div>
                                 <p className="info-small col-12"> 
                                     Enter the six digit code that appears in the app:
