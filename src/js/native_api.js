@@ -165,6 +165,30 @@ Peerio.NativeAPI.init = function () {
         });
     };
 
+    api.pluginsAvailable = function() {
+        return !(typeof cordova === 'undefined'
+            || typeof cordova.plugins === 'undefined'
+               || typeof cordova.plugins.clipboard === 'undefined');
+    };
+
+    api.copyToClipboard = function(text) {
+        return new Promise( (resolve, reject) => {
+            if(!api.pluginsAvailable()) {
+                L.info('clipboard is unavailable on the platform');
+                reject('clipboard is unavailable on the platform');
+            } else {
+                var clipboard = cordova.plugins.clipboard;
+                clipboard.copy(text, () => {
+                    L.info('copied successfully');
+                    resolve('copied successfully');
+                }, () => {
+                    L.info('copy failed');
+                    reject('copy failed');
+                });
+            }
+        });
+    };
+
     /**
      * Enables push notifications (if possible on the platform)
      * @returns {bool} - whether enabling notifications was successful or not
@@ -172,8 +196,8 @@ Peerio.NativeAPI.init = function () {
     api.enablePushNotifications = function () {
         return new Promise(function(resolve, reject) {
             if(typeof PushNotification === 'undefined') {
-                L.info('push notifications unavailable at the platform');
-                reject('push notifications unavailable at the platform');
+                L.info('push notifications are unavailable on the platform');
+                reject('push notifications are unavailable on the platform');
             }
             L.info('enabling push notifications');
             var push = PushNotification.init({
