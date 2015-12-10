@@ -21,11 +21,9 @@
         handleTransition: function(){
             this.transitionTo.apply(this, arguments);
         },
-        handle2FA: function(cachedRequest) {
+        handle2FA: function() {
             L.info('2fa requested');
             L.info(cachedRequest);
-            // TODO: this is awful, need to find a better way
-            Peerio.user.cachedRequest = cachedRequest;
             this.transitionTo('/2fa');
         },
         render: function () {

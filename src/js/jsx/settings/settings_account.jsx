@@ -5,6 +5,22 @@
         mixins: [ReactRouter.Navigation],
 
         getInitialState: function () {
+            return this.getSettings(); 
+        },
+
+        componentDidMount: function () {
+            this.subscriptions = [
+                Peerio.Dispatcher.onSettingsUpdated(() => {
+                    this.setState( { addresses: this.getAddresses(), newAddressText: '' } );
+                })
+            ];
+        },
+
+        componentWillUnmount: function () {
+            Peerio.Dispatcher.unsubscribe(this.subscriptions);
+        },
+
+        getSettings: function() {
             return {
                 newAddressText: '',
                 firstName: Peerio.user.settings.firstName,
@@ -12,6 +28,7 @@
                 addresses: this.getAddresses()
             };
         },
+
         getAddresses: function () {
             var addresses = [];
 

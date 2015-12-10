@@ -50,7 +50,13 @@
         },
 
         componentDidMount: function () {
-            Peerio.Dispatcher.onSettingsUpdated(this.updateFromSettings.bind(this));
+            this.subscriptions = [
+                Peerio.Dispatcher.onSettingsUpdated(this.updateFromSettings.bind(this))
+            ];
+        },
+
+        componentWillUnmount: function () {
+            Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
 
         onChangeAuthy: function () {
