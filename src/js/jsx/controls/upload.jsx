@@ -5,7 +5,7 @@
     handleTakePicture: function (camera) {
       Peerio.NativeAPI.takePicture(camera)
         .then(function (fileUrl) {
-          return Peerio.Files.upload(fileUrl)
+          return Peerio.user.uploadFile(fileUrl)
             .finally(function () {
               if (camera) Peerio.NativeAPI.cleanupCamera();
             });

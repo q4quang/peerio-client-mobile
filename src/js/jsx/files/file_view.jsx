@@ -12,38 +12,38 @@
       Peerio.Dispatcher.unsubscribe(this.subscription);
     },
     handleOpen: function () {
-      Peerio.FileSystem.openFileWithOS(Peerio.Files.cache[this.props.params.id])
+      Peerio.FileSystem.openFileWithOS(Peerio.user.files.dict[this.props.params.id])
         .catch(function (err) {
           alert('Failed to open file. ' + err);
         });
     },
     handleDownload: function () {
-      Peerio.Files.download(Peerio.Files.cache[this.props.params.id]);
+      Peerio.user.files.dict[this.props.params.id].download();
     },
     handleRemoveLocal: function () {
       Peerio.Action.showConfirm({
         headline: 'Remove file from this device?',
         text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
-        onAccept: Peerio.Files.deleteFromCache.bind(this, this.props.params.id)
+        onAccept: ()=>Peerio.user.files.dict[this.props.params.id].deleteFromCache
       });
     },
     handleRemove: function () {
       Peerio.Action.showConfirm({
         headline: 'Remove this file?',
         text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
-        onAccept: Peerio.Files.delete.bind(this, this.props.params.id)
+        onAccept: ()=>Peerio.user.files.dict[this.props.params.id].remove()
       });
     },
     handleNuke: function () {
       Peerio.Action.showConfirm({
         headline: 'Destroy file completely?',
         text: 'This file will be deleted from your device, cloud and from the clouds of other users who you have shared it with.',
-        onAccept: Peerio.Files.nuke.bind(this, this.props.params.id)
+        onAccept: ()=>Peerio.user.files.dict[this.props.params.id].nuke
       });
     },
     render: function () {
       var H = Peerio.Helpers;
-      var file = Peerio.Files.cache[this.props.params.id];
+      var file = Peerio.user.files.dict[this.props.params.id];
       if (!file) {
         this.goBack();
         return null;
