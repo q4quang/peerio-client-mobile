@@ -27,6 +27,7 @@ Peerio.UI.Routes = (
             <Route name="upload" path="/app/upload" handler={Peerio.UI.Upload} />
             <Route name="account_settings" path="/app/settings/account" handler={Peerio.UI.AccountSettings}>
                 <Route name="enter_confirm" path="/app/settings/account/enter_confirm" handler={Peerio.UI.EnterConfirm} />
+                <Route name="account_settings_2fa_prompt" path="/app/settings/account/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
             </Route>
             <Route name="preference_settings" path="/app/settings/preferences" handler={Peerio.UI.PreferenceSettings} />
             <Route name="settings_2fa" path="/app/settings/settings_2fa" handler={Peerio.UI.Settings2FA} />

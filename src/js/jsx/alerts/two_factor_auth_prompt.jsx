@@ -45,6 +45,9 @@
                                 .then( () => {
                                     Peerio.Net.retryCached2FARequest();
                                     this.removeDialog();
+                                    if(this.props.on2FA) {
+                                        this.props.on2FA();
+                                    }
                                 })
                                 .catch( () => {
                                     this.setState({

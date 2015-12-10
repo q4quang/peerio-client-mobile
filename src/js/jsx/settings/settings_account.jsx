@@ -11,7 +11,7 @@
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onSettingsUpdated(() => {
-                    this.setState( { addresses: this.getAddresses(), newAddressText: '' } );
+                    this.setState( { addresses: this.getAddresses() } );
                 })
             ];
         },
@@ -90,15 +90,22 @@
         setPrimaryAddress: function (address) {
             Peerio.user.setPrimaryAddress(address);
         },
+        
+        confirm2FA: function(address) {
+            this.setState({newAddressText: address});
+            this.addNewAddress(true);
+        },
 
-        addNewAddress: function () {
+        addNewAddress: function (skip2FA) {
             //TODO: valid email or phone number.
             var newAddress = this.state.newAddressText;
             var emailRegex = new RegExp(/^([\w+-]+(?:\.[\w+-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
             var phoneRegex = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/i);
             var self = this;
             if (emailRegex.test(newAddress) || phoneRegex.test(newAddress)) {
-
+                if(!skip2FA && Peerio.user.settings.settings.twoFactorAuth) {
+                    return this.transitionTo('/app/settings/account/2fa');
+                }
                 Peerio.user.validateAddress(newAddress)
                     .then((response) => {
                         response ?
@@ -108,7 +115,6 @@
                         }) 
                         :  Peerio.Action.showAlert({text: 'Sorry, that address is already taken'});
                     });
-
             } else {
                 Peerio.Action.showAlert({text: 'Sorry, that doesn\'t look like a valid email or phone number.'});
             }
@@ -188,6 +194,7 @@
                             account</Peerio.UI.Tappable>
                     </div>
                     <RouteHandler 
+                        on2FA={this.confirm2FA.bind(this, this.state.newAddressText)}
                         onPrompt={this.confirmAddress.bind(this)} 
                         onCancel={this.removeAddress.bind(this)} 
                         address={this.state.newAddressText}/>
