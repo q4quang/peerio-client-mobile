@@ -73,6 +73,10 @@
                 .then(() => {
                     self.setState({addresses: self.getAddresses()});
                     Peerio.Action.showAlert({text: 'Address authorized'});
+                })
+                .catch(() => {
+                    Peerio.Action.showAlert({text: 'Error authorizing address'});
+                    this.removeAddress(address, code);
                 });
         },
 

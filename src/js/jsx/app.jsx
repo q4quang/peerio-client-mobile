@@ -23,7 +23,6 @@
         },
         handle2FA: function() {
             L.info('2fa requested');
-            L.info(cachedRequest);
             this.transitionTo('/2fa');
         },
         render: function () {
