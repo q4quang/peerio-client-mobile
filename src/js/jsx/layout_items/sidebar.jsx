@@ -66,7 +66,7 @@
 
             pinNode = Peerio.user.PINIsSet ? 'Remove PIN code' : 'Set PIN code';
             
-            twoFactor = user.settings.twoFactorAuth ? 'Disable two factor auth' : 'Enable two factor auth';
+            twoFactor = user.settings.settings.twoFactorAuth ? 'Disable two factor auth' : 'Enable two factor auth';
 
             if (Peerio)
                 return (
