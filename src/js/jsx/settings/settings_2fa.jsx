@@ -8,16 +8,19 @@
             return {
                 clipboardSuccess: false,
                 code: '',
-                enabled2FA: Peerio.user.settings.settings.twoFactorAuth,
                 // used for the two step disabling 2FA process
                 disable2FA: false,
                 authyCode: ''
             };
         },
 
+        isEnabled2FA: function() {
+            return Peerio.user.settings.settings.twoFactorAuth;
+        },
+
         componentWillMount: function () {
             var self = this;
-            if(!this.state.enabled2FA) {
+            if(!this.isEnabled2FA()) {
                 /* trying to get a new code right away */
                 Peerio.Net.setUp2FA().then((response) => { 
                     L.info(response); 
@@ -43,20 +46,7 @@
         },
 
         componentDidMount: function () {
-        },
-
-        removeDialog: function() {
-            // this.replaceWith('/app/settings/account');
-        },
-
-        cancel: function () {
-            // this.props.onCancel(this.props.address, this.refs.textInput.getDOMNode().value);
-            this.removeDialog();
-        },
-
-        ok: function () {
-            // this.props.onPrompt(this.props.address, this.refs.textInput.getDOMNode().value);
-            this.removeDialog();
+            Peerio.Dispatcher.onSettingsUpdated(this.forceUpdate.bind(this, null));
         },
 
         onChangeAuthy: function () {
@@ -79,7 +69,6 @@
             Peerio.Net.confirm2FA(currentCode)
             .then( (response) => {
                 Peerio.Action.showAlert({text: '2FA is enabled successfully'});
-                this.setState( { enabled2FA: true } );                    
             })
             .catch( (reject) => {
                 Peerio.Action.showAlert({text: 'Code is incorrect. Please try again.'});
@@ -94,7 +83,7 @@
             .then( () => {
                 Peerio.Net.updateSettings( { twoFactorAuth: false } ).then( () => {
                     Peerio.Action.showAlert({text: '2FA is disabled successfully'});
-                    this.setState({ disable2FA: false, enabled2FA: false });
+                    this.setState({ disable2FA: false });
                 });
             })
             .catch( (reject) => {
@@ -118,7 +107,7 @@
                 return (
                     <div className="content-padded no-scroll-hack">
                         <div className="info-label">Two Factor Authentication (2FA)</div>
-                        <div>{ this.state.enabled2FA ? (
+                        <div>{ this.isEnabled2FA() ? (
                             <div>
                                 <Peerio.UI.Tappable element="div" className="btn-lrg" 
                                     onTap={this.startDisable2FA}> 
@@ -141,7 +130,7 @@
                                         <i className="fa fa-circle-o-notch fa-spin"></i>
                                     </div>)}
                                 </div>
-                            </div>)} { this.state.disable2FA || !this.state.enabled2FA ? (
+                            </div>)} { this.state.disable2FA || !this.isEnabled2FA() ? (
                             <div>
                                 <p className="info-small col-12"> 
                                     Enter the six digit code that appears in the app:
