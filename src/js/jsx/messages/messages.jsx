@@ -10,13 +10,10 @@
 
         },
         componentDidMount: function () {
-            Peerio.Messages.getAllConversations();
 
             this.subscriptions =
                 [
-                    Peerio.Dispatcher.onMessageAdded(function () {
-                        this.forceUpdate();
-                    }.bind(this)),
+                    Peerio.Dispatcher.onMessageAdded(this.forceUpdate.bind(this, null)),
                     Peerio.Dispatcher.onConversationsUpdated(this.forceUpdate.bind(this, null))
                 ];
             //used to format timestamp
@@ -31,13 +28,13 @@
             Peerio.Messages.removeConversation(id);
         },
         render: function () {
-            var nodes = Peerio.Messages.cache
+            var nodes = Peerio.user.messages
                 ? this.renderNodes()
                 : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
             //New account placeholder
             //TODO: when new user has no contacts, add contact popup should appear instead of transitioning to contacts page.
-            if (Peerio.Messages.cache && Peerio.Messages.cache.length === 0) {
+            if (Peerio.user.messages && Peerio.user.messages.arr.length === 0) {
                 var intro_content = Peerio.user.contacts.arr.length > 1
                     ? <div>
                     <p>Peerio lets you send messages securely. Try it out by sending a message to one of your
@@ -70,7 +67,7 @@
             );
         },
         renderNodes: function () {
-            return Peerio.Messages.cache.map(function (conv) {
+            return Peerio.user.messages.arr.map(function (conv) {
                 // building name to display for conversation item.
                 // it should be in format "John Smith +3"
                 // and it should not display current user's name,

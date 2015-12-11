@@ -1,0 +1,94 @@
+.sync {
+  background-color: color(p-blue-dark-10);
+  color: white;
+}
+
+.sync-logo {
+  width: 90%;
+  margin-bottom: 80px;
+}
+
+.sync-title {
+  margin-bottom: 30px;
+}
+
+.sync-info-icon {
+  font-size: 200%;
+  opacity: 0.5;
+  margin-right: 10px;
+}
+
+.sync-info {
+  padding: 3px 15px 3px 10px;
+  background-color: color(p-blue-dark-5);
+  display: flex;
+}
+
+.sync-info-text {
+  opacity: .8;
+}
+
+.sync-progress-caption {
+  width: 100%;
+  text-align: center;
+  margin: 45px 0 5px;
+}
+
+.sync-progress {
+  width: 100%;
+  height: 20px;
+  background-color: color(p-blue-dark-5);
+  margin-bottom: 50px;
+  animation: progress-bg-animation 3s ease-out infinite;
+}
+
+.sync-progress-bar {
+  //transition: width 0.5s ease;
+  height: 100%;
+  background-image: linear-gradient(135deg, color(p-blue-light-20) 25%, color(p-blue-light-10) 25%,
+          color(p-blue-light-10) 50%, color(p-blue-light-20) 50%,
+          color(p-blue-light-20) 75%, color(p-blue-light-10) 75%,
+          color(p-blue-light-10) 100%);
+  animation: progress-animation 3s linear infinite;
+  background-size: 40px 40px;
+}
+
+@keyframes progress-animation {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 40px;
+  }
+}
+@keyframes progress-bg-animation {
+  0% {
+    background-color: color(p-blue-dark-5);
+  }
+  50% {
+    background-color: color(p-blue);
+  }
+  100%{
+    background-color: color(p-blue-dark-5);
+  }
+}
+
+.fade-appear {
+  opacity: 0.01;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transition: opacity .25s ease-in;
+}
+
+.fade-leave {
+//  visibility: hidden;
+//  height: 0px;
+//  width: 0px;
+
+  opacity: 1.0;
+}
+.fade-leave.fade-leave-active {
+  opacity: 0;
+}

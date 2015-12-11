@@ -56,6 +56,7 @@
         },
         handleLoginFail: function (message) {
             L.error(message);
+            Peerio.user = null;
             Peerio.Action.showAlert({text: 'Login failed. Please check your username and passphrase/PIN.' + (message ? (' Error message: ' + message) : '')});
             this.setState({waitingForLogin: false});
         },
@@ -185,12 +186,12 @@
                                 sign up
                             </Peerio.UI.Tappable>)}
                             {/*
-                            <div className="text-input-group">
-                                <label className="info-label col-4" htmlFor="language-select">Language:</label>
-                                <select id="language-select" className="select-input col-8">
-                                    <option value="">english</option>
-                                </select>
-                            </div>*/}
+                             <div className="text-input-group">
+                             <label className="info-label col-4" htmlFor="language-select">Language:</label>
+                             <select id="language-select" className="select-input col-8">
+                             <option value="">english</option>
+                             </select>
+                             </div>*/}
                         </form>
                     </div>
                 </div>
