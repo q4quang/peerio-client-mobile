@@ -21,10 +21,6 @@
     <preference name="StatusBarBackgroundColor" value="#233445" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="xwalkVersion" value="15+" />
-    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
-    <preference name="xwalkMode" value="embedded" />
-    <preference name="xwalkMultipleApk" value="true" />
     <platform name="android">
         <allow-intent href="market:*" />
         <splash density="hdpi" src="res/screen/android/drawable-hdpi/splash.9.png" />
@@ -101,4 +97,8 @@
         <variable name="WKWEBVIEW_SERVER_PORT" value="53741" />
     </plugin>
     <plugin name="cordova-plugin-keyboard" spec="master@https://github.com/cjpearson/cordova-plugin-keyboard" />
+    <preference name="xwalkVersion" value="15+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="true" />
 </widget>

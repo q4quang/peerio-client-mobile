@@ -39,7 +39,7 @@
   height: 20px;
   background-color: color(p-blue-dark-5);
   margin-bottom: 50px;
-  animation: progress-bg-animation 3s ease-out infinite;
+  animation: progress-bg-animation 2s cubic-bezier(0, 0.64, 0.32, 0.9) infinite;
 }
 
 .sync-progress-bar {
