@@ -23,7 +23,7 @@
         componentWillMount: function () {
             var self = this;
             this.updateFromSettings();
-            if(!Peerio.user.settings.settings.twoFactorAuth) this.startEnable2FA();
+            if(!Peerio.user.settings.twoFactorAuth) this.startEnable2FA();
         },
 
         componentDidUpdate: function(prevProps, prevState) {
@@ -99,7 +99,7 @@
         },
 
         disable2FA: function(currentCode) {
-            Peerio.Net.validate2FA( currentCode, Peerio.user.username, Peerio.user.settings.publicKeyString )
+            Peerio.Net.validate2FA( currentCode, Peerio.user.username, Peerio.user.publicKey )
             .then( () => {
                 Peerio.Net.updateSettings( { twoFactorAuth: false } ).then( () => {
                 });

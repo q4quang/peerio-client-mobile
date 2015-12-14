@@ -41,7 +41,7 @@
                 Peerio.Net.
                     validate2FA( currentCode, 
                                 Peerio.user.username, 
-                                Peerio.user.settings.publicKeyString )
+                                Peerio.user.publicKey)
                                 .then( () => {
                                     Peerio.Net.retryCached2FARequest();
                                     this.removeDialog();

@@ -60,13 +60,13 @@
             var twoFactor;
             var user = Peerio.user;
             if (!user || !user.settings) return null;
-            var quotaUsed = Peerio.Helpers.formatBytes(user.settings.quota.user);
-            var quota = Peerio.Helpers.formatBytes(user.settings.quota.total);
-            var quotaPercent = Math.floor(user.settings.quota.user / (user.settings.quota.total / 100));
+            var quotaUsed = Peerio.Helpers.formatBytes(user.quota.user);
+            var quota = Peerio.Helpers.formatBytes(user.quota.total);
+            var quotaPercent = Math.floor(user.quota.user / (user.quota.total / 100));
 
             pinNode = Peerio.user.PINIsSet ? 'Remove PIN code' : 'Set PIN code';
             
-            twoFactor = user.settings.settings.twoFactorAuth ? 'Disable two factor auth' : 'Enable two factor auth';
+            twoFactor = user.settings.twoFactorAuth ? 'Disable two factor auth' : 'Enable two factor auth';
 
             if (Peerio)
                 return (

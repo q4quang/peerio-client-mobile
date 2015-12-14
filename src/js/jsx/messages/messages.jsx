@@ -83,11 +83,12 @@
                     var displayName = '';
                     for (var i = 0; i < conv.participants.length; i++) {
                         var username = conv.participants[i];
-                        if (username === Peerio.user.username) continue;
+                        if (username === Peerio.user.username && conv.participants.length>1) continue;
                         var contact = Peerio.user.contacts.dict[username];
                         displayName = (contact && contact.fullName) || '';
                         break;
                     }
+                    if(conv.participants.length===0)
                     //displayName = displayName || Peerio.user.fullName;
                     if (conv.participants.length > 2) {
                         displayName += ' [+' + (conv.participants.length - 2) + ']';
@@ -100,7 +101,7 @@
                     <Peerio.UI.MessagesItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
                                             unread={conv.unreadCount} fullName={conv.displayName}
                                             username={conv.username}
-                                            fileCount={0} timeStamp={moment(+conv.lastTimestamp)}
+                                            hasFiles={conv.hasFiles} timeStamp={moment(+conv.lastTimestamp)}
                                             messageCount={0} subject={conv.subject}
                                             onSwipe={this.toggleSwipe} swiped={this.state.swiped}
                                             currentYear={this.state.currentYear}
@@ -150,13 +151,11 @@
                                       className="list-item-swipe-wrapper">
 
                         <div className="list-item-thumb">
-                            {this.props.fileCount ?
+                            {this.props.hasFiles ?
                                 (<div className="icon-with-label">
                                     <i className={'fa fa-paperclip attachment'}></i>
-                                    <span
-                                        className="icon-label">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
                                 </div>)
-                                : ''}
+                                : null}
                         </div>
 
                         <div className="list-item-content">
