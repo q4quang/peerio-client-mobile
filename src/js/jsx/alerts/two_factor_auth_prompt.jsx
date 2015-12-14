@@ -41,10 +41,15 @@
                 Peerio.Net.
                     validate2FA( currentCode, 
                                 Peerio.user.username, 
-                                Peerio.user.settings.publicKeyString )
+                                Peerio.user.publicKey )
                                 .then( () => {
+                                    Peerio.Action.twoFactorAuthResend();
+
+                                    // TODO: move this logic to event handlers
                                     Peerio.Net.retryCached2FARequest();
                                     this.removeDialog();
+
+                                    // TODO: replace this with gloval action/event 
                                     if(this.props.on2FA) {
                                         this.props.on2FA();
                                     }

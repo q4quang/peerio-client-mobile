@@ -2,8 +2,11 @@ Peerio.UI.NotFound = React.createClass({render: function () {return (<div>Route 
 
 Peerio.UI.Routes = (
     <Route name='root' path='/' handler={Peerio.UI.Root}>
-        <DefaultRoute handler={Peerio.UI.Login}/>
+        <DefaultRoute name="index" path="/" handler={Peerio.UI.Index}/>
         <NotFoundRoute handler={Peerio.UI.NotFound}/>
+        <Route name="login" path="/login" handler={Peerio.UI.Login}>
+            <Route name="login_2fa" path="/login/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
+        </Route>
         <Route name="signup" path="signup" handler={Peerio.UI.Signup}>
             <Route name="set_passphrase" path="/signup/set_passphrase" handler={Peerio.UI.SetPassphrase} />
         </Route>

@@ -85,7 +85,7 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
     right: 0;
     bottom: 0;
     overflow: hidden;
-    z-index: 100;
+    z-index: 10000;
     padding: 10px;
 }
 
