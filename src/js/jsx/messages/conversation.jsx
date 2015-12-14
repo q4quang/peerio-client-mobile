@@ -130,12 +130,12 @@
                     </div>
                 );
             });
-            conversation.exParticipants.forEach(function (username) {
+            conversation.exParticipants.forEach(function (item) {
 
                 participants.push(
-                    <div key={username} className='former-participant'>
-                        <Peerio.UI.Avatar username={username}/>
-                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername')}
+                    <div key={item.u} className='former-participant'>
+                        <Peerio.UI.Avatar username={item.u}/>
+                        {Peerio.user.contacts.getPropValByKey(item.u, 'fullNameAndUsername')}
                     </div>
                 );
             });
