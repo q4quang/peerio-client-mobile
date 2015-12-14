@@ -3,34 +3,36 @@
   "version": "1.0.0",
   "description": "peerio-client-mobile",
   "dependencies": {
-    "babel-plugin-syntax-function-bind": "^6.0.2",
-    "babel-plugin-transform-es2015-arrow-functions": "^6.0.2",
-    "babel-plugin-transform-es2015-block-scoped-functions": "^6.0.2",
-    "babel-plugin-transform-es2015-block-scoping": "^6.0.9",
-    "babel-plugin-transform-es2015-destructuring": "^6.0.2",
-    "babel-plugin-transform-es2015-for-of": "^6.0.2",
-    "babel-plugin-transform-es2015-function-name": "^6.0.2",
-    "babel-plugin-transform-es2015-shorthand-properties": "^6.0.2",
-    "babel-plugin-transform-es2015-spread": "^6.0.2",
-    "babel-plugin-transform-function-bind": "^6.0.2",
-    "babel-plugin-transform-object-assign": "^6.0.2",
-    "babel-preset-react": "^6.0.12",
+    "babel-plugin-syntax-function-bind": "*",
+    "babel-plugin-transform-es2015-arrow-functions": "*",
+    "babel-plugin-transform-es2015-block-scoped-functions": "*",
+    "babel-plugin-transform-es2015-block-scoping": "*",
+    "babel-plugin-transform-es2015-destructuring": "*",
+    "babel-plugin-transform-es2015-for-of": "*",
+    "babel-plugin-transform-es2015-function-name": "*",
+    "babel-plugin-transform-es2015-shorthand-properties": "*",
+    "babel-plugin-transform-es2015-spread": "*",
+    "babel-plugin-transform-function-bind": "*",
+    "babel-plugin-transform-object-assign": "*",
+    "babel-preset-react": "*",
     "browser-sync": "*",
     "gulp": "*",
     "gulp-autoprefixer": "*",
-    "gulp-babel": "^6.0.0",
-    "gulp-clean": "^0.3.1",
+    "gulp-babel": "*",
+    "gulp-clean": "*",
     "gulp-css-globbing": "*",
     "gulp-react": "*",
-    "gulp-sass": "^2.1.0",
+    "gulp-sass": "*",
     "gulp-sourcemaps": "*",
     "gulp-xml-editor": "*",
     "inquirer": "*",
     "lodash": "*",
     "minimist": "*",
-    "run-sequence": "^1.1.4",
+    "run-sequence": "*",
     "semver": "*",
-    "shelljs": "*"
+    "shelljs": "*",
+    "gulp-inject": "*",
+    "stream-series": "*"
   },
   "repository": {
     "type": "git",
@@ -41,9 +43,5 @@
   "bugs": {
     "url": "https://github.com/PeerioTechnologies/peerio-client-mobile/issues"
   },
-  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
-  "devDependencies": {
-    "gulp-inject": "^3.0.0",
-    "stream-series": "^0.1.1"
-  }
+  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile"
 }

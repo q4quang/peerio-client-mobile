@@ -4,19 +4,22 @@
     Peerio.UI.Messages = React.createClass({
         mixins: [ReactRouter.Navigation],
         getInitialState: function () {
-            return {currentYear: new Date().getFullYear()};
+            return {
+                currentYear: new Date().getFullYear(),
+                messages: null
+            };
         },
         componentWillMount: function () {
-
+            Peerio.Messages.getAllConversations()
+                .then(arr=> {
+                    this.setState({messages: arr});
+                });
         },
         componentDidMount: function () {
-            Peerio.Messages.getAllConversations();
 
             this.subscriptions =
                 [
-                    Peerio.Dispatcher.onMessageAdded(function () {
-                        this.forceUpdate();
-                    }.bind(this)),
+                    Peerio.Dispatcher.onMessageAdded(this.forceUpdate.bind(this, null)),
                     Peerio.Dispatcher.onConversationsUpdated(this.forceUpdate.bind(this, null))
                 ];
             //used to format timestamp
@@ -31,13 +34,14 @@
             Peerio.Messages.removeConversation(id);
         },
         render: function () {
-            var nodes = Peerio.Messages.cache
-                ? this.renderNodes()
+            var messages = this.state.messages;
+            var nodes = messages
+                ? this.renderNodes(messages)
                 : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
             //New account placeholder
             //TODO: when new user has no contacts, add contact popup should appear instead of transitioning to contacts page.
-            if (Peerio.Messages.cache && Peerio.Messages.cache.length === 0) {
+            if (messages && messages.length === 0) {
                 var intro_content = Peerio.user.contacts.arr.length > 1
                     ? <div>
                     <p>Peerio lets you send messages securely. Try it out by sending a message to one of your
@@ -69,24 +73,25 @@
                 </div>
             );
         },
-        renderNodes: function () {
-            return Peerio.Messages.cache.map(function (conv) {
+        renderNodes: function (messages) {
+            return messages.map(function (conv) {
                 // building name to display for conversation item.
                 // it should be in format "John Smith +3"
                 // and it should not display current user's name,
                 // unless he is the only one left in conversation
                 if (!conv.username) {
                     var displayName = '';
-                    for (var i = 0; i < conv.allParticipants.length; i++) {
-                        var username = conv.allParticipants[i];
-                        if (username === Peerio.user.username) continue;
+                    for (var i = 0; i < conv.participants.length; i++) {
+                        var username = conv.participants[i];
+                        if (username === Peerio.user.username && conv.participants.length>1) continue;
                         var contact = Peerio.user.contacts.dict[username];
                         displayName = (contact && contact.fullName) || '';
                         break;
                     }
+                    if(conv.participants.length===0)
                     //displayName = displayName || Peerio.user.fullName;
-                    if (conv.allParticipants.length > 2) {
-                        displayName += ' [+' + (conv.allParticipants.length - 2) + ']';
+                    if (conv.participants.length > 2) {
+                        displayName += ' [+' + (conv.participants.length - 2) + ']';
                     }
                     conv.displayName = displayName;
                     conv.username = username;
@@ -94,10 +99,10 @@
 
                 return (
                     <Peerio.UI.MessagesItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
-                                            unread={conv.isModified} fullName={conv.displayName}
+                                            unread={conv.unreadCount} fullName={conv.displayName}
                                             username={conv.username}
-                                            fileCount={conv.fileCount} timeStamp={moment(+conv.lastTimestamp)}
-                                            messageCount={conv.messageCount} subject={conv.original.subject}
+                                            hasFiles={conv.hasFiles} timeStamp={moment(+conv.lastTimestamp)}
+                                            messageCount={0} subject={conv.subject}
                                             onSwipe={this.toggleSwipe} swiped={this.state.swiped}
                                             currentYear={this.state.currentYear}
                                             destroyConversation={this.destroyConversation.bind(this, conv.id)}/>
@@ -146,18 +151,16 @@
                                       className="list-item-swipe-wrapper">
 
                         <div className="list-item-thumb">
-                            {this.props.fileCount ?
+                            {this.props.hasFiles ?
                                 (<div className="icon-with-label">
                                     <i className={'fa fa-paperclip attachment'}></i>
-                                    <span
-                                        className="icon-label">{this.props.fileCount > 0 ? this.props.fileCount : null}</span>
                                 </div>)
-                                : ''}
+                                : null}
                         </div>
 
                         <div className="list-item-content">
                             <div className="list-item-sup">{this.props.username}</div>
-                            {this.props.fullName&&<div className="list-item-title">{this.props.fullName}</div>}
+                            {this.props.fullName && <div className="list-item-title">{this.props.fullName}</div>}
                             <div className="list-item-description">{this.props.subject}</div>
                         </div>
 

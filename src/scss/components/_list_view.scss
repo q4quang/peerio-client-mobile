@@ -99,13 +99,15 @@ a 'swipe to delete' action.
 $list-item-height: 70px;
 
 .list-view {
+  transform: translate3d(0,0,0);
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   .list-item {
-    transition: all 1s linear;
+    transform: translate3d(0,0,0);
+    //transition: all 1s linear;
     min-height: $list-item-height;
     max-height: $list-item-height;
     display: flex;
@@ -125,7 +127,7 @@ $list-item-height: 70px;
       transform: translateX(-50px);
     }
     &.on-touchstart {
-      background-color: darken(color(list-item-bg), 10%);
+     // background-color: darken(color(list-item-bg), 5%);
     }
     .list-item-content {
       flex-grow: 1;

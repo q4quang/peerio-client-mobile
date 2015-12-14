@@ -19,8 +19,8 @@ Peerio.NativeAPI.init = function () {
     var initializers = {};
 
     // Hardware/OS event handlers
-    document.addEventListener('pause', Peerio.Action.pause, true);
-    document.addEventListener('resume', Peerio.Action.resume, true);
+    document.addEventListener('pause', Peerio.Action.pause, false);
+    document.addEventListener('resume', Peerio.Action.resume, false);
     document.addEventListener('backbutton', Peerio.Action.hardBackButton, true);
     document.addEventListener('menubutton', Peerio.Action.hardMenuButton, true);
     //window.document.addEventListener('offline', this.setOffline, false);

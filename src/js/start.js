@@ -16,6 +16,20 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
     // Main function executes when all systems are ready (dom, device)
     function main() {
+        // we want this to be executed ASAP, so we don't use Actions but add explicit handlers instead
+        document.addEventListener('pause', function(){
+           console.log('UI PAUSE');
+            if(Peerio.Net){
+                Peerio.Net.pauseConnection();
+            }
+        }, true);
+        document.addEventListener('resume', function(){
+            console.log('UI RESUME');
+            if(Peerio.Net){
+                Peerio.Net.resumeConnection();
+            }
+        }, true);
+
         // todo: rethink
         Peerio.runtime = {};
 

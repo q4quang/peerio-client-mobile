@@ -18,75 +18,76 @@
  *
  */
 (function () {
-  'use strict';
+    'use strict';
 
-  Peerio.UI.ModalManager = React.createClass({
-    getInitialState: function () {
-      return {
-        activeModals: []
-      };
-    },
+    Peerio.UI.ModalManager = React.createClass({
+        getInitialState: function () {
+            return {
+                activeModals: []
+            };
+        },
 
-    componentWillMount: function () {
-      // when adding a new modal, just add it here, everything else is universal
-      this.subscriptios = [
-        Peerio.Dispatcher.onShowAlert(this.showModal.bind(this, Peerio.UI.Alert)),
-        Peerio.Dispatcher.onShowConfirm(this.showModal.bind(this, Peerio.UI.Confirm)),
-        Peerio.Dispatcher.onShowPrompt(this.showModal.bind(this, Peerio.UI.Prompt)),
-        Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect)),
-        Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect)),
-        Peerio.Dispatcher.onShowFileUpload(this.showModal.bind(this, Peerio.UI.Upload)),
+        componentWillMount: function () {
+            // when adding a new modal, just add it here, everything else is universal
+            this.subscriptios = [
+                Peerio.Dispatcher.onShowAlert(this.showModal.bind(this, Peerio.UI.Alert)),
+                Peerio.Dispatcher.onShowConfirm(this.showModal.bind(this, Peerio.UI.Confirm)),
+                Peerio.Dispatcher.onShowPrompt(this.showModal.bind(this, Peerio.UI.Prompt)),
+                Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect)),
+                Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect)),
+                Peerio.Dispatcher.onShowFileUpload(this.showModal.bind(this, Peerio.UI.Upload)),
+                Peerio.Dispatcher.onSyncStarted(this.showModal.bind(this, Peerio.UI.Sync)),
 
-        Peerio.Dispatcher.onRemoveModal(this.removeModal)
-      ];
-    },
+                Peerio.Dispatcher.onRemoveModal(this.removeModal)
+            ];
+        },
 
-    componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.subscriptios);
-    },
+        componentWillUnmount: function () {
+            Peerio.Dispatcher.unsubscribe(this.subscriptios);
+        },
 
-    // generic function to show modal
-    showModal: function (component, modal) {
-      modal = modal || {};
-      modal.id = modal.id || uuid.v4();
-      var props = _.assign({
-        key: modal.id,
-        onClose: this.removeModal.bind(this, modal.id)
-      }, modal);
-      modal.component = React.createElement(component, props);
+        // generic function to show modal
+        showModal: function (component, modal) {
+            modal = modal || {};
+            modal.id = modal.id || uuid.v4();
+            var props = _.assign({
+                key: modal.id,
+                onClose: this.removeModal.bind(this, modal.id)
+            }, modal);
+            modal.component = React.createElement(component, props);
 
-      this.addModal(modal);
-    },
+            this.addModal(modal);
+        },
 
-    // adds a modal to rendered stack, {component: jsx code, id: id }
-    addModal: function (modal) {
-      this.setState(function (prevState) {
-        prevState.activeModals.push(modal);
-      });
-    },
+        // adds a modal to rendered stack, {component: jsx code, id: id }
+        addModal: function (modal) {
+            this.setState(function (prevState) {
+                prevState.activeModals.push(modal);
+            });
+        },
 
-    // removes any rendered modal by id
-    removeModal: function (id) {
-      for (var i = 0; i < this.state.activeModals.length; i++) {
-        if (this.state.activeModals[i].id === id) {
-          this.setState(function (prevState) {
-            // it's ok to access mutable 'i' in here, because once it's found it will not change
-            prevState.activeModals.splice(i, 1);
-          });
-          return;
+        // removes any rendered modal by id
+        removeModal: function (id) {
+            for (var i = 0; i < this.state.activeModals.length; i++) {
+                if (this.state.activeModals[i].id === id) {
+                    this.setState(function (prevState) {
+                        // it's ok to access mutable 'i' in here, because once it's found it will not change
+                        prevState.activeModals.splice(i, 1);
+                    });
+                    return;
+                }
+            }
+        },
+
+        render: function () {
+            if (this.state.activeModals.length === 0) return null;
+
+            var nodes = [];
+            for (var i = 0; i < this.state.activeModals.length; i++)
+                nodes.push(this.state.activeModals[i].component);
+
+            return (<div className={Peerio.runtime.platform}>{nodes}</div>);
         }
-      }
-    },
-
-    render: function () {
-      if (this.state.activeModals.length === 0) return null;
-
-      var nodes = [];
-      for (var i = 0; i < this.state.activeModals.length; i++)
-        nodes.push(this.state.activeModals[i].component);
-
-      return (<div className={Peerio.runtime.platform}>{nodes}</div>);
-    }
-  });
+    });
 
 }());

@@ -5,7 +5,7 @@
         mixins: [ReactRouter.Navigation, ReactRouter.State],
         componentWillMount: function () {
 
-            var conversation = Peerio.Messages.cache[this.props.params.id];
+            var conversation = Peerio.user.messages.dict[this.props.params.id];
 
             //TODO:fix when fileIDs are exposed to conversation.fileIDs
             var files = [];
