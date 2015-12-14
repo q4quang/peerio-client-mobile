@@ -11,7 +11,7 @@ Peerio.UI.Routes = (
         <Route name="app" path="app" handler={Peerio.UI.App}>
 
             <Route name='tabs' handler={Peerio.UI.Tabs}>
-                <Route name='messages' handler={Peerio.UI.Messages}/>
+                <Route name='messages' handler={Peerio.UI.Conversations}/>
                 <Route name='files' handler={Peerio.UI.Files}/>
                 <Route name='contacts' handler={Peerio.UI.Contacts}/>
 
