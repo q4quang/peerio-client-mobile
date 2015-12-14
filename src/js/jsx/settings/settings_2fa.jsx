@@ -17,7 +17,7 @@
         },
 
         updateFromSettings: function() {
-            this.setState({ isEnabled2FA: Peerio.user.settings.settings.twoFactorAuth });
+            this.setState({ isEnabled2FA: Peerio.user.settings.twoFactorAuth });
         },
 
         componentWillMount: function () {
