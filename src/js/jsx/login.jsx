@@ -77,7 +77,7 @@
             }
             L.error(message);
             Peerio.user = null;
-            Peerio.Action.showAlert({text: 'Login failed. Please check your username and passphrase/PIN.' + (message ? (' Error message: ' + message) : '')});
+            Peerio.Action.showAlert({text: 'Login failed. ' + (message ? (' Error message: ' + message) : '')});
         },
         // show/hide passphrase
         handlePassphraseShowTap: function () {
