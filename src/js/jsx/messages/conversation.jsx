@@ -14,7 +14,7 @@
         },
         componentWillMount: function () {
             Peerio.Messages.getConversation(this.props.params.id)
-                .then(c =>this.setState({conversation: c}));
+                .then(c =>this.setState({conversation: c}),this.disableIfLastParticipant);  //todo, also call disable.. on conv update
         },
         componentDidMount: function () {
 
@@ -44,7 +44,6 @@
             // to update relative timestamps
             this.renderInterval = window.setInterval(this.forceUpdate.bind(this), 20000);
 
-            this.disableIfLastParticipant();
         },
         componentWillUnmount: function () {
             window.clearInterval(this.renderInterval);
@@ -115,11 +114,11 @@
         ,
         //----- RENDER
         render: function () {
+            // todo: loading state
+            if (!this.state.conversation) return null;
             // todo: more sophisticated logic for sending receipts, involving scrolling message into view detection
             // todo: also not trying to send receipts that were already sent?
             //Peerio.Data.sendReceipts(this.props.conversationId);
-            // todo: loading state
-            if (!this.state.conversation) return null;
             var conversation = this.state.conversation;
             var participants = conversation.participants.map(function (username) {
                 if (username === Peerio.user.username) return null;

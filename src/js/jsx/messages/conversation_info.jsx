@@ -3,49 +3,39 @@
 
     Peerio.UI.ConversationInfo = React.createClass({
         mixins: [ReactRouter.Navigation, ReactRouter.State],
+        getInitialState: function () {
+            return {conversation: null};
+        },
         componentWillMount: function () {
-
-            var conversation = Peerio.user.messages.dict[this.props.params.id];
-
-            //TODO:fix when fileIDs are exposed to conversation.fileIDs
-            var files = [];
-            _.each(conversation.messages, function (message) {
-                _.each(message.fileIDs, function (messageFileID) {
-                    files.push(Peerio.user.files.dict[messageFileID]);
+            // todo make fileIds and message count retrieval driven by Conversation
+            Promise.all([
+                    Peerio.Messages.getConversation(this.props.params.id, true),
+                    Peerio.Messages.getConversationFileIds(this.props.params.id),
+                    Peerio.Messages.getConversationMessageCount(this.props.params.id)
+                ])
+                .spread((conversation, fileIds, msgCount)=> {
+                    this.setState({conversation: conversation, fileIds: fileIds, msgCount: msgCount});
                 });
-            });
-            this.setState({conversation: conversation, files: files});
+
         },
         render: function () {
+            var conv = this.state.conversation;
 
-            var c = this.state.conversation;
-            var f = this.state.files;
-            var info = {
-                subject: c.original.subject,
-                timestamp: c.original.moment.format('L'),
-                messageCount: c.messageCount,
-                fileCount: c.fileCount,
-                participantCount: c.allParticipants.length,
-                participants: c.allParticipants.map(function (p) {
-                    return ( <ContactNode username={p} events={c.events}/> );
-                }),
-                files: f.map(function (f) {
-                    return ( <FileNode file={f}/> );
-                })
-            };
+            if (!conv || !this.state.fileIds) return null;
 
             return (
                 <div className="content-padded">
 
-                    <h1 className="headline">{info.subject}</h1>
+                    <h1 className="headline">{conv.subject}</h1>
 
                     <h2 className="subhead">
-                        <span className="icon-with-label"><i className="fa fa-calendar-o"/>&nbsp;{info.timestamp}</span>
                         <span className="icon-with-label"><i
-                            className="fa fa-comment-o"/>&nbsp;{info.messageCount}</span>
-                        <span className="icon-with-label"><i className="fa fa-file-o"/>&nbsp;{info.fileCount}</span>
+                            className="fa fa-calendar-o"/>&nbsp;{conv.createdMoment.format('L')}</span>
                         <span className="icon-with-label"><i
-                            className="fa fa-users"/>&nbsp;{info.participantCount}</span>
+                            className="fa fa-comment-o"/>&nbsp;{this.state.msgCount}</span>
+                        <span className="icon-with-label"><i className="fa fa-file-o"/>&nbsp;{this.state.fileIds.length}</span>
+                        <span className="icon-with-label"><i
+                            className="fa fa-users"/>&nbsp;{conv.participants.length + conv.exParticipants.length}</span>
                     </h2>
 
                     <br/>
@@ -55,7 +45,8 @@
             </span>
 
                     <div className="compact-list-view">
-                        {info.participants}
+                        {conv.participants.map(p => <ContactNode username={p}/>)}
+                        {conv.exParticipants.map(p => <ContactNode username={p.u} leftAt={p.moment}/>) }
                     </div>
 
                     <br/>
@@ -64,7 +55,7 @@
               Shared Files
             </span>
                     <div className="compact-list-view">
-                        {info.files}
+                        { this.state.fileIds.map(f =>  <FileNode id={f}/>)}
                     </div>
                 </div>
             );
@@ -74,23 +65,27 @@
     //FileNode renders a single file in the conversation info component.
     var FileNode = React.createClass({
         mixins: [ReactRouter.Navigation],
+        getInitialState: function () {
+            return {file: Peerio.user.files.dict[this.props.id]};
+        },
         openFileView: function (id) {
             this.transitionTo('file', {id: id});
         },
         render: function () {
-            var icon = Peerio.Helpers.getFileIconByName(this.props.file.name);
-            var timestamp = moment(this.props.file.timestamp).format('L');
-            var sharedBy = this.props.file.sender || this.props.file.creator;
+            var f = this.state.file
+            // todo, maybe notice?
+            if (!f) return null;
+
             return (
-                <Peerio.UI.Tappable onTap={this.openFileView.bind(this, this.props.file.shortId)}>
+                <Peerio.UI.Tappable onTap={this.openFileView.bind(this, f.shortId)}>
                     <div className="list-item">
                         <div className="list-item-thumb">
-                            <i className={'file-type fa fa-'+icon}></i>
+                            <i className={'file-type fa fa-' + Peerio.Helpers.getFileIconByName(f.name)}></i>
                         </div>
                         <div className="list-item-content txt-sm">
-                            <span>{this.props.file.name}</span>
+                            <span>{f.name}</span>
                             <div className="list-item-description">
-                                Shared by <em>{sharedBy}</em>&nbsp;&bull;&nbsp;{timestamp}
+                                Shared by <em>{f.sender || f.creator}</em>&nbsp;&bull;&nbsp;{f.moment.format('L')}
                             </div>
                         </div>
                     </div>
@@ -102,41 +97,24 @@
     //ContactNode renders a single contact in the conversation info component.
     var ContactNode = React.createClass({
         mixins: [ReactRouter.Navigation],
-        componentWillMount: function () {
-            var props = this.props;
-            var contact = Peerio.user.contacts.dict[props.username];
-            if (!contact) contact = {username: props.username, fullName: ''};
-
-            contact.event = {};
-
-            //_.each provides 'undefined' handling.
-            _.each(this.props.events, function (event) {
-                if (props.username === event.participant) {
-                    contact = Peerio.user.contacts.dict[props.username];
-                    contact.event = event;
-                }
-            });
-            this.setState({username: this.props.username, contact: contact});
-        },
-        openContactView: function (username) {
-            this.transitionTo('contact', {id: username});
+        openContactView: function () {
+            this.transitionTo('contact', {id: this.props.username});
         },
         render: function () {
-            var timestamp = this.state.contact.event.timestamp ? moment(this.state.contact.event.timestamp).calendar() : false;
-            var removed = this.state.contact.event.type == 'remove';
             var eventInfo = false;
-            if (removed) {
-                eventInfo = <div className="list-item-description">removed : {timestamp}</div>;
+            if (this.props.leftAt) {
+                eventInfo = <div className="list-item-description">left : {this.props.leftAt.calendar()}</div>;
             }
             return (
-                <Peerio.UI.Tappable onTap={this.openContactView.bind(this, this.state.contact.username)}>
+                <Peerio.UI.Tappable onTap={this.openContactView.bind(this, this.props.username)}>
                     <div className="contact list-item">
                         <div className="list-item-thumb">
-                            <Peerio.UI.Avatar username={this.state.username}/>
+                            <Peerio.UI.Avatar username={this.props.username}/>
                         </div>
                         <div className="list-item-content">
-                            <span className={removed ? 'text-crossout':''}>{this.state.contact.fullName}
-                                ({this.state.contact.username})</span>
+                            <span
+                                className={this.props.leftAt ? 'text-crossout':''}>{Peerio.user.contacts.getPropValByKey(this.props.username, 'fullName')}
+                                ({this.props.username})</span>
                             {eventInfo}
                         </div>
                     </div>
