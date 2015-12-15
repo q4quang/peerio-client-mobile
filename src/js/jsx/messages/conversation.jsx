@@ -8,22 +8,24 @@
         getInitialState: function () {
             return {
                 // unsent attachments to the message that will be sent next, if user taps "send"
-                attachments: []
+                attachments: [],
+                conversation: null
             };
         },
         componentWillMount: function () {
-            this.setState({conversation: Peerio.Messages.cache[this.props.params.id]});
+            Peerio.Messages.getConversation(this.props.params.id)
+                .then(c =>this.setState({conversation: c}));
         },
         componentDidMount: function () {
 
-            Peerio.Messages.markAsRead(this.state.conversation);
+            // Peerio.Messages.markAsRead(this.state.conversation);
 
             this.subscriptions = [
 
                 Peerio.Dispatcher.onMessageAdded(function (conversationID) {
                     if (this.props.params.id === conversationID) {
                         this.forceUpdate();
-                        Peerio.Messages.markAsRead(this.state.conversation);
+                        // Peerio.Messages.markAsRead(this.state.conversation);
                     }
                 }.bind(this)),
 
@@ -39,16 +41,10 @@
 
             ];
 
-            Peerio.Messages.loadAllConversationMessages(this.props.params.id)
-                .then(this.forceUpdate.bind(this, null))
-                .then(function () {
-                    Peerio.Messages.markAsRead(this.state.conversation);
-                }.bind(this));
             // to update relative timestamps
             this.renderInterval = window.setInterval(this.forceUpdate.bind(this), 20000);
 
             this.disableIfLastParticipant();
-
         },
         componentWillUnmount: function () {
             window.clearInterval(this.renderInterval);
@@ -71,7 +67,7 @@
         sendMessage: function () {
             var node = this.refs.reply.getDOMNode();
             if (node.value.isEmpty()) return;
-            Peerio.Messages.sendMessage(this.state.conversation.participants, '', node.value, this.state.attachments, this.state.conversation.id);
+            //Peerio.Messages.sendMessage(this.state.conversation.participants, '', node.value, this.state.attachments, this.state.conversation.id);
             node.value = '';
             this.resizeTextAreaAsync();
             this.setState({attachments: []});
@@ -97,22 +93,26 @@
             }, 500);
         },
         disableIfLastParticipant: function () {
-            /* If user is last participant in conversation, disable text entry */
-            /* unless the user started a conversation with themselves. */
-            var moreThanOneParticipant = this.state.conversation.allParticipants;
-            var noParticipantsLeft = _.without(this.state.conversation.participants, Peerio.user.username).length == 0;
-
-            if (moreThanOneParticipant.length > 1 && noParticipantsLeft) {
-                this.setState({
-                    textEntryDisabled: true,
-                    placeholderText: 'There are no participants left in this conversation'
-                });
-            } else if (moreThanOneParticipant.length == 1) {
-                this.setState({placeholderText: 'You are the only person in this conversation.'});
-            } else {
+            // If I'm the only one who has left in this conversation
+            if (this.state.conversation.participants.length === 1) {
+                // But there were other people before
+                if (this.state.conversation.exParticipants.length > 0) {
+                    // then disable reply
+                    this.setState({
+                        textEntryDisabled: true,
+                        placeholderText: 'There are no participants left in this conversation'
+                    });
+                } else {
+                    // otherwise just inform user that this was never shared with anyone
+                    this.setState({placeholderText: 'You are the only person in this conversation.'});
+                }
+            }
+            else {
+                // normal case
                 this.setState({placeholderText: 'Type your message...'});
             }
-        },
+        }
+        ,
         //----- RENDER
         render: function () {
             // todo: more sophisticated logic for sending receipts, involving scrolling message into view detection
@@ -121,7 +121,8 @@
             // todo: loading state
             if (!this.state.conversation) return null;
             var conversation = this.state.conversation;
-            var participants = _.without(conversation.participants, Peerio.user.username).map(function (username) {
+            var participants = conversation.participants.map(function (username) {
+                if (username === Peerio.user.username) return null;
                 return (
                     <div key={username}>
                         <Peerio.UI.Avatar username={username}/>
@@ -129,12 +130,12 @@
                     </div>
                 );
             });
-            conversation.formerParticipants.forEach(function (username) {
+            conversation.exParticipants.forEach(function (item) {
 
                 participants.push(
-                    <div key={username} className='former-participant'>
-                        <Peerio.UI.Avatar username={username}/>
-                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername')}
+                    <div key={item.u} className='former-participant'>
+                        <Peerio.UI.Avatar username={item.u}/>
+                        {Peerio.user.contacts.getPropValByKey(item.u, 'fullNameAndUsername')}
                     </div>
                 );
             });
@@ -144,9 +145,9 @@
             // this causes unwanted scroll when typing into text box
             return (
                 <div>
-                    <Peerio.UI.ConversationHead subject={conversation.original.subject} participants={participants}
+                    <Peerio.UI.ConversationHead subject={conversation.subject} participants={participants}
                                                 activeParticipantsCount={conversation.participants.length}
-                                                allParticipantsCount={conversation.allParticipants.length}
+                                                allParticipantsCount={conversation.participants.length+conversation.exParticipants.length}
                                                 conversationId={conversation.id}/>
 
                     <div className="content with-reply-box without-tab-bar" ref="content" key="content">
@@ -172,7 +173,7 @@
                 </div>
             );
         },
-        sanitizingOptions: {ALLOWED_TAGS: [], ALLOWED_ATTR: []},
+
         // render helper, returns react nodes for messages
         buildNodes: function () {
             // will be the same for all ack nodes
@@ -187,14 +188,14 @@
                     sender = {username: item.sender, fullName: item.sender};
                 }
 
-                var isAck = item.message === Peerio.ACK_MSG;
+                var isAck = item.body === Peerio.ACK_MSG;
                 var isSelf = Peerio.user.username === sender.username;
 
                 //TIMESTAMP
                 var prevMessage = index ? this.state.conversation.messages[index - 1] : false;
-                var isSameDay = moment(item.timestamp).isSame(prevMessage.timestamp, 'day');
+                var isSameDay = item.moment.isSame(prevMessage.moment, 'day');
                 var timestampHTML = ( isSameDay && prevMessage ) ? false :
-                    <Peerio.UI.ConversationTimestamp timestamp={item.timestamp}/>;
+                    <Peerio.UI.ConversationTimestamp timestamp={item.moment}/>;
                 //END TIMESTAMP
 
                 // will be undefined or ready to render root element for receipts
@@ -210,10 +211,12 @@
                 if (isAck) {
                     thisAck = ack;
                 } else {
-                    var filesCount = (item.fileIDs && item.fileIDs.length) ?
-                        <div className="file-count">{item.fileIDs.length} files attached.</div> : null;
+                    var filesCount = item.files.length ?
+                        <div className="file-count">{item.files.length} files attached.</div> : null;
+
                     body = (<div className="body">{filesCount}
-                        <Peerio.UI.Linkify text={item.message} onOpen={Peerio.NativeAPI.openInBrowser}></Peerio.UI.Linkify>
+                        <Peerio.UI.Linkify text={item.body}
+                                           onOpen={Peerio.NativeAPI.openInBrowser}></Peerio.UI.Linkify>
                     </div>);
                 }
                 var itemClass = React.addons.classSet({
@@ -303,7 +306,7 @@
             var momentTimestamp = moment(+timestamp);
             var relativeTime = momentTimestamp.calendar(renderStartTs, {sameElse: 'MMMM DD, YYYY'});
             var absoluteTime = momentTimestamp.format('MMMM DD YYYY, h:mm A');
-            var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ? 
+            var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ?
                 momentTimestamp.format('MMM Do') : momentTimestamp.format('MMM Do YYYY');
 
             return <div className="headline-divider"

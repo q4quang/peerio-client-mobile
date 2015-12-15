@@ -1,18 +1,18 @@
 (function () {
     'use strict';
 
-    Peerio.UI.Messages = React.createClass({
+    Peerio.UI.Conversations = React.createClass({
         mixins: [ReactRouter.Navigation],
         getInitialState: function () {
             return {
                 currentYear: new Date().getFullYear(),
-                messages: null
+                conversations: null
             };
         },
         componentWillMount: function () {
             Peerio.Messages.getAllConversations()
                 .then(arr=> {
-                    this.setState({messages: arr});
+                    this.setState({conversations: arr});
                 });
         },
         componentDidMount: function () {
@@ -34,14 +34,14 @@
             Peerio.Messages.removeConversation(id);
         },
         render: function () {
-            var messages = this.state.messages;
-            var nodes = messages
-                ? this.renderNodes(messages)
+            var conversations = this.state.conversations;
+            var nodes = conversations
+                ? this.renderNodes(conversations)
                 : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
             //New account placeholder
             //TODO: when new user has no contacts, add contact popup should appear instead of transitioning to contacts page.
-            if (messages && messages.length === 0) {
+            if (conversations && conversations.length === 0) {
                 var intro_content = Peerio.user.contacts.arr.length > 1
                     ? <div>
                     <p>Peerio lets you send messages securely. Try it out by sending a message to one of your
@@ -73,8 +73,8 @@
                 </div>
             );
         },
-        renderNodes: function (messages) {
-            return messages.map(function (conv) {
+        renderNodes: function (conversations) {
+            return conversations.map(function (conv) {
                 // building name to display for conversation item.
                 // it should be in format "John Smith +3"
                 // and it should not display current user's name,
@@ -98,7 +98,7 @@
                 }
 
                 return (
-                    <Peerio.UI.MessagesItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
+                    <Peerio.UI.ConversationsItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
                                             unread={conv.unreadCount} fullName={conv.displayName}
                                             username={conv.username}
                                             hasFiles={conv.hasFiles} timeStamp={moment(+conv.lastTimestamp)}
@@ -115,7 +115,7 @@
     /**
      * Message list item component
      */
-    Peerio.UI.MessagesItem = React.createClass({
+    Peerio.UI.ConversationsItem = React.createClass({
         getInitialState: function () {
             return {swiped: false};
         },
