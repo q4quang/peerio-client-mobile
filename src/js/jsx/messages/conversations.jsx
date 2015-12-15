@@ -35,7 +35,20 @@
         },
         render: function () {
             var conversations = this.state.conversations;
-            var nodes = conversations
+			if(conversations.length == 0) {
+				mockConversation = {
+					id: 1,
+					unreadCount: 6,
+					username: 'seavan111',
+					hasFiles: false,
+					lastTimestamp: 0,
+					displayName: 'test test test'
+				};
+				for(var i = 0; i < 1000; ++i) {
+					conversations.push(mockConversation);
+				}
+			}
+			var nodes = conversations
                 ? this.renderNodes(conversations)
                 : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
