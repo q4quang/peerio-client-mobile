@@ -19,9 +19,9 @@
 
         getSettings: function() {
             return {
-                notifyNewContact: Peerio.user.settings.settings.receiveContactNotifications,
-                notifyNewMessage: Peerio.user.settings.settings.receiveMessageNotifications,
-                notifyContactRequest: Peerio.user.settings.settings.receiveContactRequestNotifications
+                notifyNewContact: Peerio.user.settings.receiveContactNotifications,
+                notifyNewMessage: Peerio.user.settings.receiveMessageNotifications,
+                notifyContactRequest: Peerio.user.settings.receiveContactRequestNotifications
             };
         },
 
@@ -75,7 +75,7 @@
                     <p>
                         <Peerio.UI.Tappable key='notify-new-contact' onTap={this.setNotifyNewContact}>
                             <span className="col-10">
-                                Tell me when I get new contacts:</span>
+                                Notify me when I receive a contact request:</span>
                             <span type="checkbox" className={this.state.notifyNewContact 
                                 ? 'checkbox-input checked': 'checkbox-input'}></span>
                         </Peerio.UI.Tappable>
@@ -83,7 +83,7 @@
                     <p>
                         <Peerio.UI.Tappable key='notify-new-contact-request' onTap={this.setNotifyNewContactRequest}>
                             <span className="col-10">
-                                Inform me when I get contact requests:</span>
+                                Notify me when invites I send are accepted:</span>
                             <span type="checkbox" className={this.state.notifyContactRequest 
                                 ? 'checkbox-input checked': 'checkbox-input'}></span>
                         </Peerio.UI.Tappable>

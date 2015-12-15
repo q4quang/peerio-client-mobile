@@ -35,7 +35,7 @@
         },
         render: function () {
             var conversations = this.state.conversations;
-            var nodes = conversations
+			var nodes = conversations
                 ? this.renderNodes(conversations)
                 : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
 
