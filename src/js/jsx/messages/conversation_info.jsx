@@ -21,7 +21,7 @@
         render: function () {
             var conv = this.state.conversation;
 
-            if (!conv || !this.state.fileIds) return null;
+            if (!conv || !this.state.fileIds) return <Peerio.UI.FullViewSpinner/>;
 
             return (
                 <div className="content-padded">
