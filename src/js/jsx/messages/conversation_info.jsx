@@ -45,8 +45,8 @@
             </span>
 
                     <div className="compact-list-view">
-                        {conv.participants.map(p => <ContactNode username={p}/>)}
-                        {conv.exParticipants.map(p => <ContactNode username={p.u} leftAt={p.moment}/>) }
+                        {conv.participants.map(p => <ContactNode username={p} key={p}/>)}
+                        {conv.exParticipants.map(p => <ContactNode username={p.u} leftAt={p.moment} key={p.u}/>) }
                     </div>
 
                     <br/>
@@ -55,7 +55,7 @@
               Shared Files
             </span>
                     <div className="compact-list-view">
-                        { this.state.fileIds.map(f =>  <FileNode id={f}/>)}
+                        { this.state.fileIds.map(f =>  <FileNode id={f} key={f}/>)}
                     </div>
                 </div>
             );
