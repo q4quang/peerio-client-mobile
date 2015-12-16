@@ -38,7 +38,17 @@
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onSetPassphrase(this.processReturnedPassphrase),
+                Peerio.Dispatcher.onDisconnected(this.handleDisconnect)
             ];
+        },
+
+        componentWillUnmount: function () {
+            Peerio.Dispatcher.unsubscribe(this.subscriptions);
+        },
+
+        handleDisconnect: function() {
+            L.info('signup received disconnect');
+            this.transitionTo('/connection_lost');
         },
 
         processReturnedPassphrase : function() {
