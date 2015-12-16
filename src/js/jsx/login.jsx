@@ -75,6 +75,11 @@
                 console.log('Handling 2FA');
                 return;
             }
+
+            if( message && message.error === 411 ) {
+                message  = "Bad credentials";
+            }
+
             L.error(message);
             Peerio.user = null;
             Peerio.Action.showAlert({text: 'Login failed. ' + (message ? (' Error message: ' + message) : '')});
