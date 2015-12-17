@@ -18,7 +18,10 @@
         });
     },
     handleDownload: function () {
-      Peerio.user.files.dict[this.props.params.id].download();
+      Peerio.user.files.dict[this.props.params.id].download()
+      .catch( (error) => {
+          Peerio.Action.showAlert({text: 'Unable to download a file: ' + error});
+      });
     },
     handleRemoveLocal: function () {
       Peerio.Action.showConfirm({
