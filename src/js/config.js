@@ -20,6 +20,9 @@ Peerio.Config.init = function () {
 
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
+        // network timeout for send to socket function
+        cfg.networkTimeout = 10000;
+
         cfg.cpuCount = navigator.hardwareConcurrency || 1;
         // if client will not receive pings for pingTimeout, connection will be considered broken
         cfg.pingTimeout = 50000;

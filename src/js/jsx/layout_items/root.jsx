@@ -6,6 +6,16 @@
             Peerio.Dispatcher.onPause(Peerio.Net.pauseConnection);
             Peerio.Dispatcher.onResume(Peerio.Net.resumeConnection);
 
+            Peerio.Dispatcher.onSetOnline( () => {
+                L.info('Navigator tells me that he got the connection back');
+                Peerio.Net.resumeConnection();
+            });
+
+            Peerio.Dispatcher.onSetOffline( () => {
+                L.info('Navigator tells me that he is offline');
+                Peerio.Net.pauseConnection();
+            });
+
             Peerio.Dispatcher.onKeyboardDidShow(function () {
                 if (!document.activeElement)return;
                 var el = document.activeElement;

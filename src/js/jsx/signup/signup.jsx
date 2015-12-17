@@ -38,7 +38,6 @@
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onSetPassphrase(this.processReturnedPassphrase),
-                Peerio.Dispatcher.onDisconnected(this.handleDisconnect)
             ];
         },
 
@@ -169,7 +168,7 @@
                             </ReactCSSTransitionGroup>
                         </form>
                     </div>
-                    <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup.bind(this)}/>
+                    <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup}/>
                 </div>
             );
         },
