@@ -15,6 +15,10 @@
                 //todo: terrible, transfer this through router
                 Peerio.autoLogin = {username: this.state.username, passphrase: this.state.passphrase};
                 this.transitionTo('root');
+            })
+            .catch( (error) => {
+                Peerio.Action.showAlert({text: 'Error creating account: ' + error});
+                this.setState( this.getInitialState );
             });
         },
 
@@ -43,11 +47,6 @@
 
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
-        },
-
-        handleDisconnect: function() {
-            L.info('signup received disconnect');
-            this.transitionTo('/connection_lost');
         },
 
         processReturnedPassphrase : function() {
