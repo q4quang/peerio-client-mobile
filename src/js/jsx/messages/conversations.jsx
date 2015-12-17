@@ -37,7 +37,7 @@
             var conversations = this.state.conversations;
 			var nodes = conversations
                 ? this.renderNodes(conversations)
-                : Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
+                : <Peerio.UI.FullViewSpinner/>;
 
             //New account placeholder
             //TODO: when new user has no contacts, add contact popup should appear instead of transitioning to contacts page.

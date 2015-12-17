@@ -115,7 +115,7 @@
         //----- RENDER
         render: function () {
             // todo: loading state
-            if (!this.state.conversation) return null;
+            if (!this.state.conversation) return <Peerio.UI.FullViewSpinner/>;
             // todo: more sophisticated logic for sending receipts, involving scrolling message into view detection
             // todo: also not trying to send receipts that were already sent?
             //Peerio.Data.sendReceipts(this.props.conversationId);
