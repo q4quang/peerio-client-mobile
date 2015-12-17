@@ -55,7 +55,13 @@
                 onClose: this.removeModal.bind(this, modal.id)
             }, modal);
             modal.component = React.createElement(component, props);
-
+           
+            // bluring active elemtn and hiding keyboard
+            // so our modal looks normal and not like always
+            if(document.activeElement) {
+                document.activeElement.blur();
+            }
+            Peerio.NativeAPI.hideKeyboard();
             this.addModal(modal);
         },
 
