@@ -5,9 +5,9 @@
 
         render: function () {
             return <div
-                style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, height: '100%', 'background-color': '#eee'}}>
+                style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, height: '100%', backgroundColor: '#eee'}}>
                 <div
-                    style={{position: 'absolute', top: '45%', 'font-size': '2em', left: '50%', 'margin-left': '-.52em', color:'#2281C5'}}
+                    style={{position: 'absolute', top: '45%', fontSize: '2em', left: '50%', marginLeft: '-.52em', color:'#58D0C7'}}
                     className="fa fa-circle-o-notch fa-spin"></div>
             </div>;
         }

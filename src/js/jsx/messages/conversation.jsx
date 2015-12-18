@@ -13,8 +13,14 @@
             };
         },
         componentWillMount: function () {
-            Peerio.Messages.getConversation(this.props.params.id)
-                .then(c =>this.setState({conversation: c}),this.disableIfLastParticipant);  //todo, also call disable.. on conv update
+            Peerio.Conversation(this.props.params.id)
+                .load()
+                .then(c => c.loadAllMessages())
+                .then(c => this.setState({conversation: c}, this.disableIfLastParticipant)) //todo, also call disable on conv update
+                .catch(err => {
+                    Peerio.Action.showAlert({text: 'Failed to load covnersations'});
+                    L.error('Failed to load conversations. {0}', err);
+                });
         },
         componentDidMount: function () {
 

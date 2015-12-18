@@ -7,16 +7,12 @@
             return {conversation: null};
         },
         componentWillMount: function () {
-            // todo make fileIds and message count retrieval driven by Conversation
-            Promise.all([
-                    Peerio.Messages.getConversation(this.props.params.id, true),
-                    Peerio.Messages.getConversationFileIds(this.props.params.id),
-                    Peerio.Messages.getConversationMessageCount(this.props.params.id)
-                ])
-                .spread((conversation, fileIds, msgCount)=> {
-                    this.setState({conversation: conversation, fileIds: fileIds, msgCount: msgCount});
+            Peerio.Conversation(this.props.params.id)
+                .load()
+                .then(c => c.loadStats())
+                .then(c => {
+                    this.setState({conversation: c, fileIds: c.fileIds, msgCount: c.messageCount});
                 });
-
         },
         render: function () {
             var conv = this.state.conversation;

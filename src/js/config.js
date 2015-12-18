@@ -18,7 +18,7 @@ Peerio.Config.init = function () {
 
         var cfg = Peerio.Config = {};
 
-        cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
+        cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://hocuspocus.peerio.com';
 
         // network timeout for send to socket function
         cfg.networkTimeout = 10000;

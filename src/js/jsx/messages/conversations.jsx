@@ -6,13 +6,17 @@
         getInitialState: function () {
             return {
                 currentYear: new Date().getFullYear(),
-                conversations: null
+                conversations: null,
+                lastTimestamp: Number.MAX_SAFE_INTEGER
             };
         },
         componentWillMount: function () {
-            Peerio.Messages.getAllConversations()
+            Peerio.Conversation.getNextPage(this.state.lastTimestamp)
                 .then(arr=> {
-                    this.setState({conversations: arr});
+                    this.setState({
+                        conversations: arr,
+                        lastTimestamp: arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER
+                    });
                 });
         },
         componentDidMount: function () {
@@ -33,9 +37,34 @@
         destroyConversation: function (id) {
             Peerio.Messages.removeConversation(id);
         },
+        onscroll: function (ev) {
+            //console.log(ev.target.scrollTop);
+            if (this.state.loading || this.lastRequested === this.state.lastTimestamp) {
+                console.log('already loading page');
+                return;
+            }
+            if ((ev.target.clientHeight - ev.target.scrollTop) > 300) {
+               // console.log('scroll more');
+                return;
+            }
+            console.log('loading page: ' + this.state.lastTimestamp);
+            this.setState({loading:  true});
+            this.lastRequested = this.state.lastTimestamp;
+            Peerio.Conversation.getPage(this.state.lastTimestamp)
+                .then(arr=> {
+                    console.log('page loaded ' + this.lastTimestamp + ' new ts: ' + arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER);
+                    arr = this.state.conversations.concat(arr);
+                    //arr.splice(0,10);
+                    this.setState({
+                        conversations: arr,
+                        lastTimestamp: arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER,
+                        loading: false
+                    }, ()=>{ });
+                });
+        },
         render: function () {
             var conversations = this.state.conversations;
-			var nodes = conversations
+            var nodes = conversations
                 ? this.renderNodes(conversations)
                 : <Peerio.UI.FullViewSpinner/>;
 
@@ -68,8 +97,9 @@
             }
 
             return (
-                <div className="content list-view" id="Messages" ref="messageList">
+                <div className="content list-view" id="Messages" ref="messageList" onScroll={this.onscroll}>
                     {nodes}
+                    <div className="list-item" style={{visibility:(this.state.loading?'visible':'hidden')}}>LOADING</div>
                 </div>
             );
         },
@@ -83,29 +113,29 @@
                     var displayName = '';
                     for (var i = 0; i < conv.participants.length; i++) {
                         var username = conv.participants[i];
-                        if (username === Peerio.user.username && conv.participants.length>1) continue;
+                        if (username === Peerio.user.username && conv.participants.length > 1) continue;
                         var contact = Peerio.user.contacts.dict[username];
                         displayName = (contact && contact.fullName) || '';
                         break;
                     }
-                    if(conv.participants.length===0)
+                    if (conv.participants.length === 0)
                     //displayName = displayName || Peerio.user.fullName;
-                    if (conv.participants.length > 2) {
-                        displayName += ' [+' + (conv.participants.length - 2) + ']';
-                    }
+                        if (conv.participants.length > 2) {
+                            displayName += ' [+' + (conv.participants.length - 2) + ']';
+                        }
                     conv.displayName = displayName;
                     conv.username = username;
                 }
 
                 return (
                     <Peerio.UI.ConversationsItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
-                                            unread={conv.unreadCount} fullName={conv.displayName}
-                                            username={conv.username}
-                                            hasFiles={conv.hasFiles} timeStamp={moment(+conv.lastTimestamp)}
-                                            messageCount={0} subject={conv.subject}
-                                            onSwipe={this.toggleSwipe} swiped={this.state.swiped}
-                                            currentYear={this.state.currentYear}
-                                            destroyConversation={this.destroyConversation.bind(this, conv.id)}/>
+                                                 unread={conv.unreadCount} fullName={conv.displayName}
+                                                 username={conv.username}
+                                                 hasFiles={conv.hasFiles} timeStamp={moment(+conv.lastTimestamp)}
+                                                 messageCount={0} subject={conv.subject}
+                                                 onSwipe={this.toggleSwipe} swiped={this.state.swiped}
+                                                 currentYear={this.state.currentYear}
+                                                 destroyConversation={this.destroyConversation.bind(this, conv.id)}/>
                 );
             }.bind(this));
 
@@ -145,41 +175,43 @@
                 'swiped': this.state.swiped,
                 'list-item-animation-leave': this.state.destroyAnimation
             });
+            //<React.addons.CSSTransitionGroup style={{width:'100%', display:'flex'}} transitionName="fade" transitionAppear={true}
+            //                                 transitionAppearTimeout={250}>
             return (
                 <Peerio.UI.Tappable element="div" onTap={this.props.onTap} key={this.props.key} className={classes}>
                     <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe}
                                       className="list-item-swipe-wrapper">
 
-                        <div className="list-item-thumb">
-                            {this.props.hasFiles ?
-                                (<div className="icon-with-label">
-                                    <i className={'fa fa-paperclip attachment'}></i>
-                                </div>)
-                                : null}
-                        </div>
-
-                        <div className="list-item-content">
-                            <div className="list-item-sup">{this.props.username}</div>
-                            {this.props.fullName && <div className="list-item-title">{this.props.fullName}</div>}
-                            <div className="list-item-description">{this.props.subject}</div>
-                        </div>
-
-                        <div className="list-item-content text-right">
-                            <div className="list-item-description">
-                                {this.props.currentYear == this.props.timeStamp.year() ? this.props.timeStamp.format('MMM D') : this.props.timeStamp.format('MMM D, YYYY')}
+                            <div className="list-item-thumb">
+                                {this.props.hasFiles ?
+                                    (<div className="icon-with-label">
+                                        <i className={'fa fa-paperclip attachment'}></i>
+                                    </div>)
+                                    : null}
                             </div>
-                            <div className="list-item-description">
-                                {this.props.timeStamp.format('h:mm a')}
+
+                            <div className="list-item-content">
+                                <div className="list-item-sup">{this.props.username}</div>
+                                {this.props.fullName && <div className="list-item-title">{this.props.fullName}</div>}
+                                <div className="list-item-description">{this.props.subject}</div>
                             </div>
-                        </div>
 
-                        <div className="list-item-forward">
-                            <i className="fa fa-chevron-right"></i>
-                        </div>
+                            <div className="list-item-content text-right">
+                                <div className="list-item-description">
+                                    {this.props.currentYear == this.props.timeStamp.year() ? this.props.timeStamp.format('MMM D') : this.props.timeStamp.format('MMM D, YYYY')}
+                                </div>
+                                <div className="list-item-description">
+                                    {this.props.timeStamp.format('h:mm a')}
+                                </div>
+                            </div>
 
-                        <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
-                            <i className="fa fa-trash-o"></i>
-                        </Peerio.UI.Tappable>
+                            <div className="list-item-forward">
+                                <i className="fa fa-chevron-right"></i>
+                            </div>
+
+                            <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
+                                <i className="fa fa-trash-o"></i>
+                            </Peerio.UI.Tappable>
 
                     </Peerio.UI.Swiper>
                 </Peerio.UI.Tappable>
