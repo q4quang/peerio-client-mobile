@@ -5,39 +5,19 @@
         propTypes: {
             // amount of items loaded
             pageCount: React.PropTypes.number,
-
             // loading margin 
             loadMargin: React.PropTypes.number,
-
-            /**
-             * Get the next page of elements
-             * @param lastElement last loaded element (can be null)
-             * @param count amount of items requested 
-             * @returns collection of elements suitable for onRenderItem
-             **/
-            onGetPage: React.PropTypes.func.isRequired,
-
-            /**
-             * Gets item id 
-             * @param item current item to check 
-             **/
-            onGetItemId: React.PropTypes.func.isRequired,
-
-            /**
-             * Renders item 
-             * @param item current item to render 
-             **/
-            onRenderItem: React.PropTypes.func.isRequired
+            // item property name, representing unique item key
+            itemKeyName: React.PropTypes.string
         },
 
-
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 // number of items loaded per page
-                pageCount: 10,
+                pageCount: 20,
                 lastPageZeroLength: false,
                 // is current loading in progress flag
-                loading: false,
+                loading: false
                 // hash table to check if the item is already loaded
             };
         },
@@ -45,59 +25,65 @@
         itemsHash: {},
 
         getInitialState: function () {
+            this.loadNextPageStateAwareThrottled = _.throttle(this.loadNextPageStateAware, 1000, {trailing: false});
             return {
                 items: []
             };
         },
 
-        getLastItem: function() {
-            if( this.state.items.length > 0 ) {
-                return this.state.items[this.state.items.length - 1];
-            }
+        getLastItem: function () {
+            var i = this.state.items;
+            return i.length > 0 ? i[i.length - 1] : null;
         },
 
-        hasMoreItems: function() {
+        hasMoreItems: function () {
             return !this.state.lastPageZeroLength;
         },
 
-        loadNextPageStateAware: function() {
-            if(this.loading) return;
-            if(!this.hasMoreItems()) return;
+        loadNextPageStateAware: function () {
+            if (this.loading) return;
+            if (!this.hasMoreItems()) return;
             this.loading = true;
 
-            window.setTimeout( () => {
-            this.props.onGetPage(
-                this.getLastItem(), this.props.pageCount)
-                .then( (itemsPage) => {
+            this.props.onGetPage(this.getLastItem(), this.props.pageCount)
+                .then(itemsPage => {
                     var items = this.state.items;
-                    var newItems = false;
-                    for(var i = 0; i < itemsPage.length; ++i) {
+                    var modified = false;
+                    for (var i = 0; i < itemsPage.length; ++i) {
                         var item = itemsPage[i];
-                        var key = this.props.onGetItemId(item);
-                        if(this.itemsHash.hasOwnProperty( key )) continue;
+                        var key = item[this.props.itemKeyName];
 
-                        newItems = true;
+                        var existingItem = this.itemsHash[key];
+                        if (existingItem) {
+                            // same item - paging collision
+                            if (item.lastTimestamp === existingItem.lastTimestamp)
+                                continue;
+                            // same item but updated, removing stale item
+                            items.splice(items.indexOf(existingItem), 1);
+                        }
+
                         this.itemsHash[key] = item;
                         items.push(item);
+                        modified = true;
                     }
 
-                    this.setState( {
+                    this.setState({
                         items: items,
-                        lastPageZeroLength: !newItems 
+                        lastPageZeroLength: !modified
+                    }, ()=> {
+                        this.loading = false;
                     });
-                    this.loading = false;
+
                 });
-            }, 500);
         },
 
         componentWillMount: function () {
             this.itemsHash = {};
-            this.loadNextPageStateAware();
+            this.loadNextPageStateAwareThrottled();
         },
-        
+
         onscroll: function (ev) {
-           if ((ev.target.scrollHeight - ev.target.clientHeight - ev.target.scrollTop) > 30) {
-               // console.log('scroll more');
+            if (this.loading || (ev.target.scrollHeight - ev.target.clientHeight - ev.target.scrollTop) > 30) {
                 return;
             }
             this.loadNextPageStateAware();
@@ -105,20 +91,23 @@
 
         render: function () {
             var nodes = this.state.items ? this.renderNodes(this.state.items) : null;
-            var loader = this.hasMoreItems() ? (
-                <div className="text-center"><i className="fa fa-circle-o-notch fa-spin"></i></div>
-            ) : null;
+
+            var loader = this.hasMoreItems() ? (<div className="list-item">
+                <span className="fa fa-circle-o-notch fa-spin" style={{margin:'auto',color: '#278FDA'}}></span>
+            </div>) : null;
 
             return (
-				<div className="content list-view" id="Messages" onScroll={this.onscroll}>
+                <div className="content list-view" id="Messages" ref="messages" onScroll={this.onscroll}>
                     {nodes}
                     {loader}
-				</div>
+                </div>
             );
         },
 
         renderNodes: function (items) {
-            return items.map(this.props.onRenderItem);
+            return items.map(item=> {
+                return React.createElement(this.props.itemComponent, {key: item[this.props.itemKeyName], item: item});
+            });
         }
     });
 }());
