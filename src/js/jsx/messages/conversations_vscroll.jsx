@@ -2,6 +2,18 @@
     'use strict';
 
     Peerio.UI.ConversationsVScroll = React.createClass({
+        componentDidMount: function () {
+            this.subscriptions =
+                [
+                    Peerio.Dispatcher.onMessageAdded(this.forceUpdate.bind(this, null)),
+                    Peerio.Dispatcher.onConversationsUpdated(this.forceUpdate.bind(this, null))
+                ];
+            //used to format timestamp
+        },
+        componentWillUnmount: function () {
+            Peerio.Dispatcher.unsubscribe(this.subscriptions);
+        },
+ 
         propTypes: {
             onOpenConversation: React.PropTypes.func.isRequired,
             onDestroyConversation: React.PropTypes.func.isRequired,
@@ -22,7 +34,8 @@
             return {
                 currentYear: new Date().getFullYear(),
                 lastTimestamp: Number.MAX_SAFE_INTEGER,
-                hasMoreItems: true,
+                tryLoading: true,
+                hasOnceLoadedItems: false,
                 conversations: null
             };
         },
@@ -37,34 +50,11 @@
 
             return Peerio.Conversation.getNextPage(lastTimestamp)
             .then(arr => {
+                this.setState({ 
+                    tryLoading: this.state.hasOnceLoadedItems || (arr.length > 0),
+                    hasOnceLoadedItems: this.state.hasOnceLoadedItems || arr.length > 0});
                 return arr;
             });
-        },
-
-        // MOCK function
-        getPageMock: function(lastItem, count) {
-            var start = lastItem ? lastItem.id : 0;
-            return this.generateSomeConversations(start, count);
-        },
-
-        // MOCK function
-        getMaxCount: function() {
-            return 50;
-        },
-        // MOCK function
-        generateSomeConversations: function(start, count) {
-            var conv = [];
-            for(i = start; i < Math.min(start + count, this.getMaxCount()); ++i) {
-                conv.push( {
-                    id: i,
-                    unreadCount: 0,
-                    username: 'anri ' + i,
-                    hasFiles: false,
-                    subject: 'some subject ' + i,
-                    lastTimestamp: new Date()
-                });
-            }
-            return conv;
         },
 
         renderItem: function(conv) {
@@ -108,12 +98,12 @@
         },
 
         render: function () {
-            return (
+            return this.state.tryLoading ? (
                 <Peerio.UI.VScroll 
                 onGetPage={this.getPage} 
                 onGetItemId={this.getItemId} 
                 onRenderItem={this.renderItem}/>
-            );
+            ) : <Peerio.UI.ConversationsPlaceholder/>;
         },
     });
 }());
