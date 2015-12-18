@@ -54,7 +54,7 @@
                 .then(arr=> {
                     console.log('page loaded ' + this.lastTimestamp + ' new ts: ' + arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER);
                     arr = this.state.conversations.concat(arr);
-                    arr = arr.length > 20 ? arr.splice(0,arr.length - 10) : arr;
+                    //arr = arr.length > 20 ? arr.splice(0,arr.length - 10) : arr;
                     this.setState({
                         conversations: arr,
                         lastTimestamp: arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER,

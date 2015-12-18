@@ -66,7 +66,8 @@
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             Peerio.NativeAPI.enablePushNotifications();
-            this.transitionTo('messages');
+            //this.transitionTo('messages');
+            this.transitionTo('vscroll');
         },
         handleLoginFail: function (message) {
             this.setState({waitingForLogin: false});
@@ -77,7 +78,7 @@
             }
 
             if( message && message.error === 411 ) {
-                message  = "Bad credentials";
+                message  = 'Bad credentials';
             }
 
             L.error(message);

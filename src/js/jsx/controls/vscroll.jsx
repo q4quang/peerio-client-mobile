@@ -1,223 +1,107 @@
 (function () {
     'use strict';
 
-    Peerio.UI.Conversations = React.createClass({
-        mixins: [ReactRouter.Navigation],
-        getInitialState: function () {
+    Peerio.UI.VScroll = React.createClass({
+        propTypes: {
+            // amount of items loaded
+            pageCount: React.PropTypes.number,
+
+            // loading margin 
+            loadMargin: React.PropTypes.number,
+
+            /**
+             * Get the next page of elements
+             * @param lastElement last loaded element (can be null)
+             * @param count amount of items requested 
+             * @returns collection of elements suitable for onRenderItem
+             **/
+            onGetPage: React.PropTypes.func.isRequired,
+
+            /**
+             * Tests if there are some more items available to load
+             * @param lastElement last loaded element (can be null
+             * @returns bool
+             **/
+            onHasMoreItems: React.PropTypes.func.isRequired,
+
+             /**
+             * Tests if there are some more items available to load
+             * @param lastElement last loaded element (can be null
+             **/
+            onRenderItem: React.PropTypes.func.isRequired
+        },
+
+        // is current loading in progress flag
+        loading: false,
+
+        getDefaultProps: function() {
             return {
-                currentYear: new Date().getFullYear(),
-                conversations: null,
-                lastTimestamp: Number.MAX_SAFE_INTEGER
+                // number of items loaded per page
+                pageCount: 10
             };
         },
-        componentWillMount: function () {
-            Peerio.Conversation.getNextPage(this.state.lastTimestamp)
-                .then(arr=> {
-                    this.setState({
-                        conversations: arr,
-                        lastTimestamp: arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER
-                    });
-                });
-        },
-        componentDidMount: function () {
 
-            this.subscriptions =
-                [
-                    Peerio.Dispatcher.onMessageAdded(this.forceUpdate.bind(this, null)),
-                    Peerio.Dispatcher.onConversationsUpdated(this.forceUpdate.bind(this, null))
-                ];
-            //used to format timestamp
+        getInitialState: function () {
+            return {
+                items: []
+            };
         },
-        componentWillUnmount: function () {
-            Peerio.Dispatcher.unsubscribe(this.subscriptions);
-        },
-        openConversation: function (id) {
-            this.transitionTo('conversation', {id: id});
-        },
-        destroyConversation: function (id) {
-            Peerio.Messages.removeConversation(id);
-        },
-        onscroll: function (ev) {
-            //console.log(ev.target.scrollTop);
-            if (this.state.loading || this.lastRequested === this.state.lastTimestamp) {
-                console.log('already loading page');
-                return;
+
+        getLastItem: function() {
+            if( this.state.items.length > 0 ) {
+                return this.state.items[this.state.items.length - 1];
             }
-            if ((ev.target.clientHeight - ev.target.scrollTop) > 300) {
+        },
+
+        hasMoreItems: function() {
+            return this.props.onHasMoreItems(this.getLastItem());
+        },
+
+        loadNextPageStateAware: function() {
+            if(this.loading) return;
+            if(!this.hasMoreItems()) return;
+            this.loading = true;
+
+            var timeout = window.setTimeout( () => {
+                var itemsPage = 
+                    this.props.onGetPage(
+                        this.getLastItem(), this.props.pageCount);
+                var items = this.state.items.concat(itemsPage);
+                this.setState( {
+                    items: items
+                });
+                this.loading = false;
+            }, 1000);
+        },
+
+        componentWillMount: function () {
+            this.loadNextPageStateAware();
+        },
+        
+        onscroll: function (ev) {
+           if ((ev.target.scrollHeight - ev.target.clientHeight - ev.target.scrollTop) > 30) {
                // console.log('scroll more');
                 return;
             }
-            console.log('loading page: ' + this.state.lastTimestamp);
-            this.setState({loading:  true});
-            this.lastRequested = this.state.lastTimestamp;
-            Peerio.Conversation.getNextPage(this.state.lastTimestamp)
-                .then(arr=> {
-                    console.log('page loaded ' + this.lastTimestamp + ' new ts: ' + arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER);
-                    arr = this.state.conversations.concat(arr);
-                    arr = arr.length > 20 ? arr.splice(0,arr.length - 10) : arr;
-                    this.setState({
-                        conversations: arr,
-                        lastTimestamp: arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER,
-                        loading: false
-                    }, ()=>{ });
-                });
+            this.loadNextPageStateAware();
         },
+
         render: function () {
-            var conversations = this.state.conversations;
-            var nodes = conversations
-                ? this.renderNodes(conversations)
-                : <Peerio.UI.FullViewSpinner/>;
-
-            //New account placeholder
-            //TODO: when new user has no contacts, add contact popup should appear instead of transitioning to contacts page.
-            if (conversations && conversations.length === 0) {
-                var intro_content = Peerio.user.contacts.arr.length > 1
-                    ? <div>
-                    <p>Peerio lets you send messages securely. Try it out by sending a message to one of your
-                        contacts.</p>
-                    <Peerio.UI.Tappable element="div" className="btn-md"
-                                        onTap={this.transitionTo.bind(this, 'new_message')}>
-                        <i className="fa fa-pencil"></i>&nbsp;Send a new message
-                    </Peerio.UI.Tappable>
-                </div>
-                    : <div>
-                    <p>Peerio lets you send messages securely. Add a contact and try it out.</p>
-                    <Peerio.UI.Tappable element="div" className="btn-md"
-                                        onTap={this.transitionTo.bind(this, 'contacts', null, {trigger:true})}>
-                        <i className="fa fa-user-plus"></i>&nbsp;Add a contact
-                    </Peerio.UI.Tappable>
-                </div>;
-
-                nodes = <div className="content-intro">
-                    <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
-                    <h1 className="headline-lrg">Welcome to Peerio!</h1>
-                    {intro_content}
-                    <img src="media/img/paper-plane.png"/>
-                </div>;
-            }
+            var nodes = this.state.items ? this.renderNodes(this.state.items) : null;
+            var loader = this.hasMoreItems() ? (
+                <div className="text-center"><i className="fa fa-circle-o-notch fa-spin"></i></div>
+            ) : null;
 
             return (
-                <div className="content list-view" id="Messages" ref="messageList" onScroll={this.onscroll}>
+				<div className="content list-view" id="Messages" onScroll={this.onscroll}>
                     {nodes}
-                    <div className="list-item" style={{visibility:(this.state.loading?'visible':'hidden')}}>LOADING</div>
-                </div>
+                    {loader}
+				</div>
             );
         },
-        renderNodes: function (conversations) {
-            return conversations.map(function (conv) {
-                // building name to display for conversation item.
-                // it should be in format "John Smith +3"
-                // and it should not display current user's name,
-                // unless he is the only one left in conversation
-                if (!conv.username) {
-                    var displayName = '';
-                    for (var i = 0; i < conv.participants.length; i++) {
-                        var username = conv.participants[i];
-                        if (username === Peerio.user.username && conv.participants.length > 1) continue;
-                        var contact = Peerio.user.contacts.dict[username];
-                        displayName = (contact && contact.fullName) || '';
-                        break;
-                    }
-                    if (conv.participants.length === 0)
-                    //displayName = displayName || Peerio.user.fullName;
-                        if (conv.participants.length > 2) {
-                            displayName += ' [+' + (conv.participants.length - 2) + ']';
-                        }
-                    conv.displayName = displayName;
-                    conv.username = username;
-                }
 
-                return (
-                    <Peerio.UI.ConversationsItem onTap={this.openConversation.bind(this, conv.id)} key={conv.id}
-                                                 unread={conv.unreadCount} fullName={conv.displayName}
-                                                 username={conv.username}
-                                                 hasFiles={conv.hasFiles} timeStamp={moment(+conv.lastTimestamp)}
-                                                 messageCount={0} subject={conv.subject}
-                                                 onSwipe={this.toggleSwipe} swiped={this.state.swiped}
-                                                 currentYear={this.state.currentYear}
-                                                 destroyConversation={this.destroyConversation.bind(this, conv.id)}/>
-                );
-            }.bind(this));
-
+        renderNodes: function (items) {
+            return items.map(this.props.onRenderItem);
         }
     });
-
-    /**
-     * Message list item component
-     */
-    Peerio.UI.ConversationsItem = React.createClass({
-        getInitialState: function () {
-            return {swiped: false};
-        },
-        closeSwipe: function () {
-            this.setState({swiped: false});
-        },
-        openSwipe: function () {
-            this.setState({swiped: true});
-        },
-        destroyConversationAfterAnimate: function () {
-            setTimeout(this.props.destroyConversation, 600);
-        },
-        destroyConversation: function () {
-            this.setState({destroyAnimation: true}, this.destroyConversationAfterAnimate);
-        },
-        showDestroyDialog: function () {
-            Peerio.Action.showConfirm({
-                text: 'are you sure you want do delete this conversation? You will no longer receive messages or files within this conversation.',
-                onAccept: this.destroyConversation
-            });
-        },
-        render: function () {
-            var cx = React.addons.classSet;
-            var classes = cx({
-                'list-item': true,
-                'unread': this.props.unread,
-                'swiped': this.state.swiped,
-                'list-item-animation-leave': this.state.destroyAnimation
-            });
-            //<React.addons.CSSTransitionGroup style={{width:'100%', display:'flex'}} transitionName="fade" transitionAppear={true}
-            //                                 transitionAppearTimeout={250}>
-            return (
-                <Peerio.UI.Tappable element="div" onTap={this.props.onTap} key={this.props.key} className={classes}>
-                    <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe}
-                                      className="list-item-swipe-wrapper">
-
-                            <div className="list-item-thumb">
-                                {this.props.hasFiles ?
-                                    (<div className="icon-with-label">
-                                        <i className={'fa fa-paperclip attachment'}></i>
-                                    </div>)
-                                    : null}
-                            </div>
-
-                            <div className="list-item-content">
-                                <div className="list-item-sup">{this.props.username}</div>
-                                {this.props.fullName && <div className="list-item-title">{this.props.fullName}</div>}
-                                <div className="list-item-description">{this.props.subject}</div>
-                            </div>
-
-                            <div className="list-item-content text-right">
-                                <div className="list-item-description">
-                                    {this.props.currentYear == this.props.timeStamp.year() ? this.props.timeStamp.format('MMM D') : this.props.timeStamp.format('MMM D, YYYY')}
-                                </div>
-                                <div className="list-item-description">
-                                    {this.props.timeStamp.format('h:mm a')}
-                                </div>
-                            </div>
-
-                            <div className="list-item-forward">
-                                <i className="fa fa-chevron-right"></i>
-                            </div>
-
-                            <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
-                                <i className="fa fa-trash-o"></i>
-                            </Peerio.UI.Tappable>
-
-                    </Peerio.UI.Swiper>
-                </Peerio.UI.Tappable>
-
-            );
-        }
-    });
-
 }());
