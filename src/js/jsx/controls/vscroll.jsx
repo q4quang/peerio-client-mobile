@@ -30,16 +30,19 @@
             onRenderItem: React.PropTypes.func.isRequired
         },
 
-        // is current loading in progress flag
-        loading: false,
 
         getDefaultProps: function() {
             return {
                 // number of items loaded per page
                 pageCount: 10,
-                lastPageZeroLength: false
+                lastPageZeroLength: false,
+                // is current loading in progress flag
+                loading: false,
+                // hash table to check if the item is already loaded
             };
         },
+
+        itemsHash: {},
 
         getInitialState: function () {
             return {
@@ -56,9 +59,6 @@
         hasMoreItems: function() {
             return !this.state.lastPageZeroLength;
         },
-
-        // hash table to check if the item is already loaded
-        itemsHash: {},
 
         loadNextPageStateAware: function() {
             if(this.loading) return;
@@ -91,6 +91,7 @@
         },
 
         componentWillMount: function () {
+            this.itemsHash = {};
             this.loadNextPageStateAware();
         },
         
