@@ -50,7 +50,7 @@
             console.log('loading page: ' + this.state.lastTimestamp);
             this.setState({loading:  true});
             this.lastRequested = this.state.lastTimestamp;
-            Peerio.Conversation.getPage(this.state.lastTimestamp)
+            Peerio.Conversation.getNextPage(this.state.lastTimestamp)
                 .then(arr=> {
                     console.log('page loaded ' + this.lastTimestamp + ' new ts: ' + arr.length > 0 ? arr[arr.length - 1].lastTimestamp : Number.MAX_SAFE_INTEGER);
                     arr = this.state.conversations.concat(arr);
