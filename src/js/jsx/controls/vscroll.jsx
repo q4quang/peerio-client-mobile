@@ -18,15 +18,14 @@
             onGetPage: React.PropTypes.func.isRequired,
 
             /**
-             * Tests if there are some more items available to load
-             * @param lastElement last loaded element (can be null
-             * @returns bool
+             * Gets item id 
+             * @param item current item to check 
              **/
-            onHasMoreItems: React.PropTypes.func.isRequired,
+            onGetItemId: React.PropTypes.func.isRequired,
 
-             /**
-             * Tests if there are some more items available to load
-             * @param lastElement last loaded element (can be null
+            /**
+             * Renders item 
+             * @param item current item to render 
              **/
             onRenderItem: React.PropTypes.func.isRequired
         },
@@ -37,7 +36,8 @@
         getDefaultProps: function() {
             return {
                 // number of items loaded per page
-                pageCount: 10
+                pageCount: 10,
+                lastPageZeroLength: false
             };
         },
 
@@ -54,24 +54,40 @@
         },
 
         hasMoreItems: function() {
-            return this.props.onHasMoreItems(this.getLastItem());
+            return !this.state.lastPageZeroLength;
         },
+
+        // hash table to check if the item is already loaded
+        itemsHash: {},
 
         loadNextPageStateAware: function() {
             if(this.loading) return;
             if(!this.hasMoreItems()) return;
             this.loading = true;
 
-            var timeout = window.setTimeout( () => {
-                var itemsPage = 
-                    this.props.onGetPage(
-                        this.getLastItem(), this.props.pageCount);
-                var items = this.state.items.concat(itemsPage);
-                this.setState( {
-                    items: items
+            window.setTimeout( () => {
+            this.props.onGetPage(
+                this.getLastItem(), this.props.pageCount)
+                .then( (itemsPage) => {
+                    var items = this.state.items;
+                    var newItems = false;
+                    for(var i = 0; i < itemsPage.length; ++i) {
+                        var item = itemsPage[i];
+                        var key = this.props.onGetItemId(item);
+                        if(this.itemsHash.hasOwnProperty( key )) continue;
+
+                        newItems = true;
+                        this.itemsHash[key] = item;
+                        items.push(item);
+                    }
+
+                    this.setState( {
+                        items: items,
+                        lastPageZeroLength: !newItems 
+                    });
+                    this.loading = false;
                 });
-                this.loading = false;
-            }, 1000);
+            }, 500);
         },
 
         componentWillMount: function () {

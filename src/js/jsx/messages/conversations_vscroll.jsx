@@ -21,13 +21,24 @@
         getInitialState: function () {
             return {
                 currentYear: new Date().getFullYear(),
+                lastTimestamp: Number.MAX_SAFE_INTEGER,
+                hasMoreItems: true,
+                conversations: null
             };
         },
 
-        // MOCK function
-        hasMoreItemsMock: function(lastItem) {
-            var start = lastItem ? lastItem.id : 0;
-            return start < this.getMaxCount() - 1;
+        getItemId: function (item) {
+            return item.id;
+        },
+
+        getPage: function (lastItem, pageSize) {
+            var lastTimestamp = lastItem ? 
+                lastItem.lastTimestamp : Number.MAX_SAFE_INTEGER; 
+
+            return Peerio.Conversation.getNextPage(lastTimestamp)
+            .then(arr => {
+                return arr;
+            });
         },
 
         // MOCK function
@@ -99,8 +110,8 @@
         render: function () {
             return (
                 <Peerio.UI.VScroll 
-                onHasMoreItems={this.hasMoreItemsMock} 
-                onGetPage={this.getPageMock} 
+                onGetPage={this.getPage} 
+                onGetItemId={this.getItemId} 
                 onRenderItem={this.renderItem}/>
             );
         },
