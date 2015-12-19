@@ -107,7 +107,7 @@
             var phoneRegex = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/i);
             var self = this;
             if (emailRegex.test(newAddress) || phoneRegex.test(newAddress)) {
-                if(!skip2FA && Peerio.user.settings.settings.twoFactorAuth) {
+                if(!skip2FA && Peerio.user.settings.twoFactorAuth) {
                     return this.transitionTo('/app/settings/account/2fa');
                 }
                 Peerio.user.validateAddress(newAddress)
