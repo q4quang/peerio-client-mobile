@@ -38,7 +38,8 @@
             });
 
             if (currentCode.length == 6) {
-                Peerio.Net.validate2FA(currentCode, Peerio.user.username, Peerio.user.publicKey)
+                var userData = Peerio.User.get2FAUserData();
+                Peerio.Net.validate2FA(currentCode, userData.username, userData.publicKey)
                     .then(() => {
                         Peerio.Action.twoFactorAuthResend();
 

@@ -68,21 +68,19 @@
             Peerio.NativeAPI.enablePushNotifications();
             this.transitionTo('messages');
         },
-        handleLoginFail: function (message) {
+        handleLoginFail: function (error) {
             this.setState({waitingForLogin: false});
             // if we got a 2FA request
-            if(message.error && message.error == 424) {
+            if(error && error.code === 424) {
                 console.log('Handling 2FA');
                 return;
             }
 
-            if( message && message.error === 411 ) {
-                message  = 'Bad credentials';
+            if( error && error.code === 411 ) {
+                // we don't need to do anything here now
             }
 
-            L.error(message);
-            Peerio.user = null;
-            Peerio.Action.showAlert({text: 'Login failed. ' + (message ? (' Error message: ' + message) : '')});
+            Peerio.Action.showAlert({text: 'Login failed. ' + (error ? (' Error message: ' + error.message) : '')});
         },
         // show/hide passphrase
         handlePassphraseShowTap: function () {
