@@ -41,16 +41,15 @@
                 var userData = Peerio.User.get2FAUserData();
                 Peerio.Net.validate2FA(currentCode, userData.username, userData.publicKey)
                     .then(() => {
+                        if( !this.props.manual ) {
+                            Peerio.Net.retryCached2FARequest();
+                        }
                         Peerio.Action.twoFactorAuthResend();
-
-                        // TODO: move this logic to event handlers
-                        Peerio.Net.retryCached2FARequest();
-                        this.removeDialog();
-
                         // TODO: replace this with gloval action/event
                         if (this.props.on2FA) {
                             this.props.on2FA();
                         }
+                        this.removeDialog();
                     })
                     .catch(() => {
                         this.setState({

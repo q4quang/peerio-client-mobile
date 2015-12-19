@@ -12,7 +12,7 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onSettingsUpdated(() => {
                     this.setState( { addresses: this.getAddresses() } );
-                })
+                }) 
             ];
         },
 

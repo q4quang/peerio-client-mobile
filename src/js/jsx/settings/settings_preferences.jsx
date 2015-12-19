@@ -94,6 +94,7 @@
                 <div className="text-input-group col-12">
                     <Peerio.UI.Tappable element="div" className="btn-sm" onTap={this.setDevicePin}>Set/remove device PIN</Peerio.UI.Tappable>
                 </div>
+                <RouteHandler/>
                 {/* TODO: two factor authentication */}
                 {/*
                     <div>

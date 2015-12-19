@@ -17,7 +17,7 @@
         },
 
         updateFromSettings: function() {
-            this.setState({ isEnabled2FA: Peerio.user.settings.twoFactorAuth });
+            this.setState({ isEnabled2FA: Peerio.user.settings.twoFactorAuth, message: '' });
         },
 
         componentWillMount: function () {
@@ -89,6 +89,7 @@
         enable2FA: function(currentCode) {
             Peerio.Net.confirm2FA(currentCode)
             .then( (response) => {
+                this.setState({message: ''});
             })
             .catch( (reject) => {
                 this.setState({message: 'Code is incorrect. Please try again.'});

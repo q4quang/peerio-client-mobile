@@ -150,7 +150,7 @@
 
             return (
                 <div>
-                    <RouteHandler/>
+                    <RouteHandler manual={true}/>
                     <div className="page-wrapper-login">
 
                         <div className="content-wrapper-login">
