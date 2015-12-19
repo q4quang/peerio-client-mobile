@@ -3,17 +3,15 @@
     // Main component, entry point for React app
     Peerio.UI.Root = React.createClass({
         componentWillMount: function () {
-            Peerio.Dispatcher.onPause(Peerio.Net.pauseConnection);
-            Peerio.Dispatcher.onResume(Peerio.Net.resumeConnection);
 
             Peerio.Dispatcher.onSetOnline( () => {
-                L.info('Navigator tells me that he got the connection back');
-                Peerio.Net.resumeConnection();
+                L.info('ONLINE event received from Navigator. Connecting socket. ');
+                Peerio.Socket.connect();
             });
 
             Peerio.Dispatcher.onSetOffline( () => {
-                L.info('Navigator tells me that he is offline');
-                Peerio.Net.pauseConnection();
+                L.info('OFFLINE event received from Navigator. Connecting socket. ');
+                Peerio.Socket.disconnect();
             });
 
             Peerio.Dispatcher.onKeyboardDidShow(function () {

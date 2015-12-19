@@ -19,14 +19,15 @@ Peerio.ACK_MSG = ':::peerioAck:::';
         // we want this to be executed ASAP, so we don't use Actions but add explicit handlers instead
         document.addEventListener('pause', function(){
            console.log('UI PAUSE');
-            if(Peerio.Net){
-                Peerio.Net.pauseConnection();
+            if(Peerio.Socket){
+                Peerio.Socket.disconnect();
             }
         }, true);
         document.addEventListener('resume', function(){
             console.log('UI RESUME');
-            if(Peerio.Net){
-                Peerio.Net.resumeConnection();
+            if(Peerio.Socket){
+                Peerio.Socket.connect();
+                Peerio.Socket.ensureWorkerAlive();
             }
         }, true);
 
