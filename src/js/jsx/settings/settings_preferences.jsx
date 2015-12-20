@@ -55,8 +55,8 @@
                     this.state.notifyContactRequest)
                 .catch( (error) => {
                     Peerio.Action.showAlert({text: 'Save failed. ' + (error ? (' Error message: ' + error.message) : '')});
-                })
-                .finally( () => { this.resetSettings(); } );
+                    this.resetSettings(); 
+                });
             }, 1000);
             this.doUpdate();
         },        

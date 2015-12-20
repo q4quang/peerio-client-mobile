@@ -41,7 +41,7 @@
                 progressValue: perc,
                 message: message,
                 lastStart: lastStart,
-                estimate: isFinite(estimate) ? moment.duration(estimate, "milliseconds").humanize() : '...'
+                estimate: isFinite(estimate) ? moment.duration(estimate, 'milliseconds').humanize() : '...'
             });
             // Xs = 0.05
         },
@@ -52,6 +52,13 @@
             if (!this.state.doRender) {
                 window.setTimeout(()=> {
                     if (!this.isMounted()) return;
+                    // bluring active elemtn and hiding keyboard
+                    // so our modal looks normal and not like always
+                    if(document.activeElement) {
+                        document.activeElement.blur();
+                    }
+                    Peerio.NativeAPI.hideKeyboard();
+ 
                     this.setState({doRender: true});
                 }, 2000);
                 return null;
