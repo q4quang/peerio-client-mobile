@@ -12,13 +12,30 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onSettingsUpdated(() => {
                     this.setState( { addresses: this.getAddresses() } );
-                }) 
+                }),
+//                Peerio.Dispatcher.onTwoFactorAuthReject( this.resetSettings.bind(this) ),
+                Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
+                Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend)
+
             ];
         },
 
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
+
+        handle2FA: function(resolve, reject) {
+            this.resolve2FA = resolve;
+            this.reject2FA = reject;
+            L.info('2fa requested');
+            this.transitionTo('account_settings_2fa_prompt');
+        },
+
+        handle2FAResend: function() {
+            L.info('2fa resend requested');
+            this.resolve2FA('succesfully entered 2fa code');
+        },
+
 
         getSettings: function() {
             return {
@@ -197,11 +214,7 @@
                         <Peerio.UI.Tappable className="btn-link btn-danger" onTap={this.deleteAccount}>delete your
                             account</Peerio.UI.Tappable>
                     </div>
-                    <RouteHandler 
-                        on2FA={this.confirm2FA.bind(this, this.state.newAddressText)}
-                        onPrompt={this.confirmAddress.bind(this)} 
-                        onCancel={this.removeAddress.bind(this)} 
-                        address={this.state.newAddressText}/>
+                    <RouteHandler/>
                 </div>
             );
         }
