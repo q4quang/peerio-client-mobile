@@ -9,16 +9,19 @@
 
         componentDidMount: function () {
             this.subscriptions = [
-                Peerio.Dispatcher.onSettingsUpdated( () => {
-                    this.setState(this.getSettings());
-                }),
+                Peerio.Dispatcher.onSettingsUpdated( this.resetSettings.bind(this) ),
+                Peerio.Dispatcher.onTwoFactorAuthReject( this.resetSettings.bind(this) ),
                 Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
-                Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend),
+                Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend)
             ];
         },
 
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
+        },
+
+        resetSettings: function() {
+            this.setState(this.getSettings());
         },
 
         getSettings: function() {
@@ -45,13 +48,17 @@
             Peerio.Action.transitionTo('set_pin', null, {});
         },
         doUpdateNotificationSettings: function(){
-            this.doUpdateNotificationSettings = this.doUpdateName || _.throttle(function(){
+            this.doUpdate = this.doUpdate || _.throttle(function(){
                 return Peerio.user.setNotifications(
                     this.state.notifyNewMessage, 
                     this.state.notifyNewContact,
-                    this.state.notifyContactRequest);
+                    this.state.notifyContactRequest)
+                .catch( (error) => {
+                    Peerio.Action.showAlert({text: 'Save failed. ' + (error ? (' Error message: ' + error.message) : '')});
+                })
+                .finally( () => { this.resetSettings(); } );
             }, 1000);
-            this.doUpdateNotificationSettings();
+            this.doUpdate();
         },        
         setNotifyNewContact: function() {
             this.setState({notifyNewContact: !this.state.notifyNewContact});
