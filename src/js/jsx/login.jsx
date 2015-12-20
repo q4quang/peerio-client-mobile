@@ -25,7 +25,8 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onPause(this.cleanPassphrase),
                 Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
-                Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend)
+                Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend),
+                Peerio.Dispatcher.onTwoFactorAuthReject(this.handle2FAReject)
             ];
             if (!Peerio.autoLogin) {
                 Peerio.Auth.getSavedLogin()
@@ -48,14 +49,24 @@
             }
         },
 
-        handle2FA: function() {
+        handle2FA: function(resolve, reject) {
+            this.resolve2FA = resolve;
+            this.reject2FA = reject;
             L.info('2fa requested');
             this.transitionTo('/login/2fa');
         },
 
         handle2FAResend: function() {
             L.info('2fa resend requested');
-            this.handleSubmit();
+            this.resolve2FA('succesfully entered 2fa code');
+        },
+
+        handle2FAReject: function() {
+            L.info('2fa rejected by user');
+            this.reject2FA({
+                code: 411, // any special code for user cancel?
+                message: '2FA authentication cancelled by user'
+            });
         },
 
         cleanPassphrase: function () {

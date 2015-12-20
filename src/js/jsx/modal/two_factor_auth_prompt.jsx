@@ -61,6 +61,7 @@
         },
 
         removeDialog: function () {
+            Peerio.Action.twoFactorAuthReject();
             this.goBack();
         },
 
