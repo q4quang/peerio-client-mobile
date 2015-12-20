@@ -11,7 +11,6 @@ Peerio.UI.Routes = (
         <Route name="signup" path="signup" handler={Peerio.UI.Signup}>
             <Route name="set_passphrase" path="/signup/set_passphrase" handler={Peerio.UI.SetPassphrase} />
         </Route>
-        <Route name="two_factor_auth_prompt" path="/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
         <Route name="app" path="app" handler={Peerio.UI.App}>
 
             <Route name='tabs' handler={Peerio.UI.Tabs}>
@@ -32,7 +31,9 @@ Peerio.UI.Routes = (
                 <Route name="enter_confirm" path="/app/settings/account/enter_confirm" handler={Peerio.UI.EnterConfirm} />
                 <Route name="account_settings_2fa_prompt" path="/app/settings/account/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
             </Route>
-            <Route name="preference_settings" path="/app/settings/preferences" handler={Peerio.UI.PreferenceSettings} />
+            <Route name="preference_settings" path="/app/settings/preferences" handler={Peerio.UI.PreferenceSettings}>
+                <Route name="preference_settings_2fa_prompt" path="/app/settings/preferences/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
+            </Route>
             <Route name="settings_2fa" path="/app/settings/settings_2fa" handler={Peerio.UI.Settings2FA} />
 
             <Route name='add_contact' path="/app/add_contact" handler={Peerio.UI.AddContact}/>

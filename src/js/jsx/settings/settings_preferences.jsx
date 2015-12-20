@@ -1,6 +1,8 @@
 (function () {
 
     Peerio.UI.PreferenceSettings = React.createClass({        
+        mixins: [ReactRouter.Navigation],
+
         getInitialState: function(){
             return this.getSettings();
         },        
@@ -9,7 +11,9 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onSettingsUpdated( () => {
                     this.setState(this.getSettings());
-                })
+                }),
+                Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
+                Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend),
             ];
         },
 
@@ -25,6 +29,17 @@
             };
         },
 
+        handle2FA: function(resolve, reject) {
+            this.resolve2FA = resolve;
+            this.reject2FA = reject;
+            L.info('2fa requested');
+            this.transitionTo('preference_settings_2fa_prompt');
+        },
+
+        handle2FAResend: function() {
+            L.info('2fa resend requested');
+            this.resolve2FA('succesfully entered 2fa code');
+        },
 
         setDevicePin: function() {
             Peerio.Action.transitionTo('set_pin', null, {});

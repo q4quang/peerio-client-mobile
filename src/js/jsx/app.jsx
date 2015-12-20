@@ -6,8 +6,7 @@
         componentWillMount: function(){
             this.subscriptions = [
                 Peerio.Dispatcher.onHardBackButton(this.handleHardwareBack),
-                Peerio.Dispatcher.onTransitionTo(this.handleTransition),
-                Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA)
+                Peerio.Dispatcher.onTransitionTo(this.handleTransition)
             ];
         },
         componentWillUnmount: function(){
@@ -20,10 +19,6 @@
         // hack to allow out of router context components to navigate
         handleTransition: function(){
             this.transitionTo.apply(this, arguments);
-        },
-        handle2FA: function() {
-            L.info('2fa requested');
-            this.transitionTo('/2fa');
         },
         render: function () {
             return (
