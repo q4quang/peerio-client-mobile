@@ -68,20 +68,20 @@
     </div>
     <div id="devmode-content">
         <div class="devlog-full-width devlog-controls">
-            <select onchange="devmode.changeLogLevel(event)" id="devmode-log-level">
+            <select onchange="devmode.changeLogLevel(event)" id="devmode-log-level" tabindex="-1">
                 <option value="0">Errors</option>
                 <option value="1">Info</option>
                 <option value="2">Verbose</option>
                 <option value="3">Silly</option>
             </select>
             <span class="devlog-divider"></span>
-            <input type="checkbox" id="devmode-bench" onchange="devmode.changeLogBenchmark(event)"/>&nbsp;<label
+            <input type="checkbox" id="devmode-bench" onchange="devmode.changeLogBenchmark(event)" tabindex="-1"/>&nbsp;<label
                 for="devmode-bench">Benchmarks</label>
             <span class="devlog-divider"></span>
-            log limit <input onchange="devmode.changeLogLimit(event)" id="devmode-log-limit" type="text" size="7"
+            log limit <input onchange="devmode.changeLogLimit(event)" tabindex="-1" id="devmode-log-limit" type="text" size="7"
                              value="123" style="color: #000000;border: none;padding: 0px 2px;"/>
         </div>
-        <button onclick="devmode.send()" class="devlog-full-width">Send log by email</button>
+        <button onclick="devmode.send()" tabindex="-1" class="devlog-full-width">Send log by email</button>
         <div id="devmode-log"></div>
     </div>
 </div>
