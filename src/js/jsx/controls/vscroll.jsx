@@ -48,7 +48,6 @@
             this.props.onGetPage(this.getLastItem(), this.props.pageCount)
                 .then(itemsPage => {
                     var items = this.state.items;
-                    var modified = false;
                     for (var i = 0; i < itemsPage.length; ++i) {
                         var item = itemsPage[i];
                         var key = item[this.props.itemKeyName];
@@ -64,12 +63,13 @@
 
                         this.itemsHash[key] = item;
                         items.push(item);
-                        modified = true;
                     }
-
                     this.setState({
                         items: items,
-                        lastPageZeroLength: !modified
+                        // we do not account for duplicates here, cause the only time
+                        // it would mean something is the rare occasion when the last
+                        // element has duplicate right before him
+                        lastPageZeroLength: itemsPage.length < this.props.pageCount 
                     }, ()=> {
                         this.loading = false;
                     });
