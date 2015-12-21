@@ -27,24 +27,8 @@
             // Peerio.Messages.markAsRead(this.state.conversation);
 
             this.subscriptions = [
-
-                Peerio.Dispatcher.onMessageAdded(function (conversationID) {
-                    if (this.props.params.id === conversationID) {
-                        this.forceUpdate();
-                        // Peerio.Messages.markAsRead(this.state.conversation);
-                    }
-                }.bind(this)),
-
-                Peerio.Dispatcher.onReceiptAdded(function (conversationID) {
-                    if (this.props.params.id === conversationID) {
-                        this.forceUpdate();
-                        //Peerio.Messages.markAsRead(this.state.conversation);
-                    }
-                }.bind(this)),
-
                 Peerio.Dispatcher.onBigGreenButton(this.sendMessage),
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection)
-
             ];
 
             // to update relative timestamps

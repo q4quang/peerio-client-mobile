@@ -3,11 +3,7 @@
 
     Peerio.UI.Conversations = React.createClass({
         componentDidMount: function () {
-            this.subscriptions =
-                [
-                    Peerio.Dispatcher.onMessageAdded(this.forceUpdate.bind(this, null)),
-                    Peerio.Dispatcher.onConversationsUpdated(this.forceUpdate.bind(this, null))
-                ];
+            this.subscriptions = [];
         },
 
         componentWillUnmount: function () {
@@ -17,7 +13,7 @@
         getInitialState: function () {
             if (!Date.currentYear) Date.currentYear = new Date().getFullYear();
             return {
-                lastTimestamp: Number.MAX_SAFE_INTEGER,
+                lastSeqID: Number.MAX_SAFE_INTEGER,
                 tryLoading: true,
                 hasOnceLoadedItems: false,
                 conversations: null
@@ -25,9 +21,9 @@
         },
 
         getPage: function (lastItem, pageSize) {
-            var lastTimestamp = lastItem ? lastItem.lastTimestamp : Number.MAX_SAFE_INTEGER;
+            var lastSeqID = lastItem ? lastItem.lastSeqID : Number.MAX_SAFE_INTEGER;
 
-            return Peerio.Conversation.getNextPage(lastTimestamp, pageSize)
+            return Peerio.Conversation.getNextPage(lastSeqID, pageSize)
                 .then(arr => {
                     this.setState({
                         tryLoading: this.state.hasOnceLoadedItems || arr.length > 0,
@@ -38,8 +34,8 @@
         },
 
         getPrevPage: function (lastItem, pageSize) {
-            var lastTimestamp = lastItem ? lastItem.lastTimestamp : 0;
-            return Peerio.Conversation.getPrevPage(lastTimestamp, pageSize);
+            var lastSeqID = lastItem ? lastItem.lastSeqID : 0;
+            return Peerio.Conversation.getPrevPage(lastSeqID, pageSize);
         },
 
 
