@@ -116,8 +116,20 @@
                 // normal case
                 this.setState({placeholderText: 'Type your message...'});
             }
-        }
-        ,
+        },
+
+        getPage: function (lastItem, pageSize) {
+            return new Promise( (resolve, reject) => {
+                resolve( this.state.conversation.messages.slice(0, 10));
+            });
+        },
+
+        getPrevPage: function (lastItem, pageSize) {
+            return new Promise( (resolve, reject) => {
+                resolve( [] );
+            });
+        },
+
         //----- RENDER
         render: function () {
             // todo: loading state
@@ -144,22 +156,33 @@
                     </div>
                 );
             });
+/*                    (<div className="content with-reply-box without-tab-bar" ref="content" key="content">
+                        <div className="conversation">
+                        {nodes{
+                        </div>
+                    </div>) */
 
             var nodes = this.buildNodes();
             // note: reply has fixed positioning and should not be nested in .content,
             // this causes unwanted scroll when typing into text box
             return (
                 <div>
-                    <Peerio.UI.ConversationHead subject={conversation.subject} participants={participants}
-                                                activeParticipantsCount={conversation.participants.length}
-                                                allParticipantsCount={conversation.participants.length+conversation.exParticipants.length}
-                                                conversationId={conversation.id}/>
-
-                    <div className="content with-reply-box without-tab-bar" ref="content" key="content">
-                        <div className="conversation">
-                            {nodes}
-                        </div>
-                    </div>
+                    <Peerio.UI.ConversationHead 
+                    subject={conversation.subject} 
+                    participants={participants}
+                    activeParticipantsCount={conversation.participants.length}
+                    allParticipantsCount={conversation.participants.length+conversation.exParticipants.length}
+                    conversationId={conversation.id}/>
+ 
+                    <Peerio.UI.VScroll 
+                    onGetPage={this.getPage} 
+                    onGetPrevPage={this.getPrevPage} 
+                    itemKeyName='id' 
+                    itemComponent={Peerio.UI.ConversationItem}
+                    itemParentData={conversation}
+                    className="content with-reply-box without-tab-bar conversation" ref="content" key="content"
+                    />
+                                                
                     <div id="reply">
                         <div className="reply-ack">
                             <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
@@ -249,110 +272,5 @@
         }
     });
 
-    Peerio.UI.ConversationReceipt = React.createClass({
-        getInitialState: function () {
-            return {showUsers: false};
-        },
-        toggle: function () {
-            this.setState({showUsers: !this.state.showUsers});
-        },
-        render: function () {
-            var participants = this.props.participants;
-            var receipts = this.props.receipts;
-
-            /*read by all others when only 1 other participant */
-            if (participants.length - 1 <= 1 && receipts.length == participants.length - 1)
-                receipts = (
-                    <div className="receipts">Read &nbsp;
-                        <i className="fa fa-check"></i>
-                    </div>);
-
-            /*read by all others when more than 1 participant */
-            else if (receipts.length == participants.length - 1 /*read by all others - self */)
-                receipts = (
-                    <div className="receipts"
-                         onTouchEnd={this.toggle}>{this.state.showUsers ? receipts.join(' \u2022\ ') : 'Read by  all'}&nbsp;
-                        <i className="fa fa-check"></i>
-                    </div>);
-
-            /*read by 1 participant when more than 1 participants */
-            else if (receipts.length === 1 /*seen by one*/)
-                receipts = (
-                    <div className="receipts">Read by {receipts}&nbsp;
-                        <i className="fa fa-check"></i>
-                    </div>);
-
-            /*read by some participant */
-            else if (receipts.length)
-                receipts = (
-                    <div className="receipts"
-                         onTouchEnd={this.toggle}>{ this.state.showUsers ? receipts.join(' \u2022\ ') : 'Read by ' + receipts.length }&nbsp;
-                        <i className="fa fa-check"></i>
-                    </div>);
-
-            else
-                receipts = null;
-
-
-            return receipts;
-        }
-    });
-
-    Peerio.UI.ConversationTimestamp = React.createClass({
-        getInitialState: function () {
-            return {relativeTime: true};
-        },
-        toggleRelative: function () {
-            this.setState({relativeTime: !this.state.relativeTime});
-        },
-        render: function () {
-            var timestamp = this.props.timestamp;
-            var renderStartTs = moment();
-            var momentTimestamp = moment(+timestamp);
-            var relativeTime = momentTimestamp.calendar(renderStartTs, {sameElse: 'MMMM DD, YYYY'});
-            var absoluteTime = momentTimestamp.format('MMMM DD YYYY, h:mm A');
-            var messageDate = (momentTimestamp.isSame(renderStartTs, 'year')) ?
-                momentTimestamp.format('MMM Do') : momentTimestamp.format('MMM Do YYYY');
-
-            return <div className="headline-divider"
-                        onTouchEnd={this.toggleRelative}>{this.state.relativeTime ? relativeTime : absoluteTime }</div>;
-        }
-    });
-
-    Peerio.UI.ConversationHead = React.createClass({
-        mixins: [ReactRouter.Navigation, ReactRouter.State],
-        getInitialState: function () {
-            return {open: false};
-        },
-        toggle: function () {
-            this.setState({open: !this.state.open});
-        },
-        openInfo: function () {
-            this.transitionTo('conversation_info', {id: this.props.conversationId});
-        },
-        render: function () {
-            var counter = this.props.allParticipantsCount - 1;
-            if (this.props.activeParticipantsCount !== this.props.allParticipantsCount) {
-                counter = this.props.activeParticipantsCount - 1 + '/' + counter;
-            }
-            return (
-                <Peerio.UI.Tappable onTap={this.toggle}>
-                    <div id="conversation-head">
-                        <div
-                            className={'participants' + (this.state.open ? ' open' : '')}>{this.props.participants}</div>
-
-                        <div className="counter">
-                            <i className="fa fa-users"></i> {counter}
-                        </div>
-                        <Peerio.UI.Tappable onTap={this.openInfo}>
-                            <i className="info fa fa-info-circle"></i>
-                        </Peerio.UI.Tappable>
-
-                        <div className="subject">{this.props.subject}</div>
-                    </div>
-                </Peerio.UI.Tappable>
-            );
-        }
-    });
 
 }());

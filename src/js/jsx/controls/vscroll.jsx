@@ -137,6 +137,7 @@
         componentDidUpdate: function() {
             if(this.scrollIntoItem) {
                 this.refs[this.scrollIntoItem].getDOMNode().scrollIntoView();
+                this.scrollIntoItem = null;
             }
         },
         componentWillMount: function () {
@@ -168,7 +169,7 @@
             </div>) : null;
 
             return (
-                <div className="content list-view" id="Messages" ref="messages" onScroll={this.onscroll}>
+                <div className={ this.props.className ? this.props.className : 'content list-view'} id="Messages" ref="messages" onScroll={this.onscroll}>
                     {loaderTop}
                     {nodes}
                     {loader}
@@ -177,10 +178,14 @@
         },
 
         renderNodes: function (items) {
-            return items.map(item=> {
-                return React.createElement(this.props.itemComponent, 
+            return items.map( (item, index, array) => {
+                return React.createElement(this.props.itemComponent,
                                            {key: item[this.props.itemKeyName], 
-                                               ref: item[this.props.itemKeyName], item: item});
+                                               ref: item[this.props.itemKeyName], 
+                                               item: item,
+                                               index: index,
+                                               prevItem: index > 0 ? array[index-1] : false,
+                                               itemParentData: this.props.itemParentData});
             });
         }
     });
