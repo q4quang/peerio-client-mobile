@@ -37,10 +37,15 @@
                 });
         },
 
+        getPrevPage: function (lastItem, pageSize) {
+            var lastTimestamp = lastItem ? lastItem.lastTimestamp : 0;
+            return Peerio.Conversation.getPrevPage(lastTimestamp, pageSize);
+        },
+
 
         render: function () {
             return this.state.tryLoading ? (
-                <Peerio.UI.VScroll onGetPage={this.getPage} itemKeyName='id' itemComponent={Peerio.UI.ConversationsItem}/>)
+                <Peerio.UI.VScroll onGetPage={this.getPage} onGetPrevPage={this.getPrevPage} itemKeyName='id' itemComponent={Peerio.UI.ConversationsItem}/>)
                 : <Peerio.UI.ConversationsPlaceholder/>;
         }
     });
