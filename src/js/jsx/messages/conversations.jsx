@@ -45,7 +45,14 @@
 
         render: function () {
             return this.state.tryLoading ? (
-                <Peerio.UI.VScroll onGetPage={this.getPage} onGetPrevPage={this.getPrevPage} itemKeyName='id' itemComponent={Peerio.UI.ConversationsItem}/>)
+                <Peerio.UI.VScroll 
+                className='content list-view'
+                id='Messages'
+                ref='Messages'
+                onGetPage={this.getPage} 
+                onGetPrevPage={this.getPrevPage} 
+                itemKeyName='id' 
+                itemComponent={Peerio.UI.ConversationsItem}/>)
                 : <Peerio.UI.ConversationsPlaceholder/>;
         }
     });

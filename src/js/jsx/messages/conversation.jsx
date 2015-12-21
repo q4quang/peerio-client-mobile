@@ -56,7 +56,7 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         componentDidUpdate: function () {
-            this.scrollToBottom();
+//            this.scrollToBottom();
         },
         //----- CUSTOM FN
         openFileSelect: function () {
@@ -120,13 +120,21 @@
 
         getPage: function (lastItem, pageSize) {
             return new Promise( (resolve, reject) => {
-                resolve( this.state.conversation.messages.slice(0, 10));
+                var startIndex = lastItem ? 
+                    this.state.conversation.messages.indexOf(lastItem) : 0;
+                startIndex = startIndex == -1 ? 0 : startIndex;
+                var itemsPage = this.state.conversation.messages.slice(startIndex, startIndex + pageSize);
+                resolve( itemsPage ) ;
             });
         },
 
         getPrevPage: function (lastItem, pageSize) {
             return new Promise( (resolve, reject) => {
-                resolve( [] );
+                var startIndex = (lastItem ? 
+                    this.state.conversation.messages.indexOf(lastItem) : 0) - pageSize;
+                startIndex = startIndex < 0 ? 0 : startIndex;
+                var itemsPage = this.state.conversation.messages.slice(startIndex, startIndex + pageSize).reverse();
+                resolve( itemsPage ) ;
             });
         },
 
@@ -148,21 +156,14 @@
                 );
             });
             conversation.exParticipants.forEach(function (item) {
-
                 participants.push(
                     <div key={item.u} className='former-participant'>
-                        <Peerio.UI.Avatar username={item.u}/>
-                        {Peerio.user.contacts.getPropValByKey(item.u, 'fullNameAndUsername')}
+                    <Peerio.UI.Avatar username={item.u}/>
+                    {Peerio.user.contacts.getPropValByKey(item.u, 'fullNameAndUsername')}
                     </div>
                 );
             });
-/*                    (<div className="content with-reply-box without-tab-bar" ref="content" key="content">
-                        <div className="conversation">
-                        {nodes{
-                        </div>
-                    </div>) */
 
-            var nodes = this.buildNodes();
             // note: reply has fixed positioning and should not be nested in .content,
             // this causes unwanted scroll when typing into text box
             return (
@@ -184,93 +185,22 @@
                     />
                                                 
                     <div id="reply">
-                        <div className="reply-ack">
-                            <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
-                        </div>
+                    <div className="reply-ack">
+                    <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
+                    </div>
 
-            <textarea className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
-                      rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
-                      disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}
-                      onFocus={this.scrollToBottom}></textarea>
+                    <textarea className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
+                    rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
+                    disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}
+                    onFocus={this.scrollToBottom}></textarea>
 
-                        <div className="reply-attach">
-                            <i className="fa fa-paperclip icon-btn"
-                               onTouchEnd={this.openFileSelect}>{this.state.attachments.length || ''}</i>
-                        </div>
+                    <div className="reply-attach">
+                    <i className="fa fa-paperclip icon-btn"
+                    onTouchEnd={this.openFileSelect}>{this.state.attachments.length || ''}</i>
+                    </div>
                     </div>
                 </div>
             );
-        },
-
-        // render helper, returns react nodes for messages
-        buildNodes: function () {
-            // will be the same for all ack nodes
-            var ack = (<i className="fa fa-thumbs-o-up ack-icon"></i>);
-            var nodes = [];
-
-            this.state.conversation.messages.forEach(function (item, index) {
-                // figuring out render details
-                var sender = Peerio.user.contacts.dict[item.sender];
-                // mocking contact for deleted contacts todo: ugly!
-                if (!sender) {
-                    sender = {username: item.sender, fullName: item.sender};
-                }
-
-                var isAck = item.body === Peerio.ACK_MSG;
-                var isSelf = Peerio.user.username === sender.username;
-
-                //TIMESTAMP
-                var prevMessage = index ? this.state.conversation.messages[index - 1] : false;
-                var isSameDay = item.moment.isSame(prevMessage.moment, 'day');
-                var timestampHTML = ( isSameDay && prevMessage ) ? false :
-                    <Peerio.UI.ConversationTimestamp timestamp={item.moment}/>;
-                //END TIMESTAMP
-
-                // will be undefined or ready to render root element for receipts
-                var receipts;
-                // does this node need receipts?
-                if (!isSelf) {
-                } else {
-                    receipts = <Peerio.UI.ConversationReceipt receipts={item.receipts}
-                                                              participants={this.state.conversation.participants}/>;
-                }
-                var body, thisAck;
-                // ack message will have and ack icon and no body
-                if (isAck) {
-                    thisAck = ack;
-                } else {
-                    var filesCount = item.files.length ?
-                        <div className="file-count">{item.files.length} files attached.</div> : null;
-
-                    body = (<div className="body">{filesCount}
-                        <Peerio.UI.Linkify text={item.body}
-                                           onOpen={Peerio.NativeAPI.openInBrowser}></Peerio.UI.Linkify>
-                    </div>);
-                }
-                var itemClass = React.addons.classSet({
-                    'item': true,
-                    'self': isSelf,
-                    'ack': isAck
-                });
-
-                var avatarHTML = (isSelf) ? false : <Peerio.UI.Avatar username={sender.username}/>;
-                nodes.push(
-                    <div className={itemClass} ts={item.timestamp} key={item.id}>
-                        {timestampHTML}
-                        <div className="head">
-                            {thisAck}
-                            {avatarHTML}
-                            <span className="names">{sender.fullName}</span>
-                        </div>
-                        {body}
-                        {receipts}
-                    </div>
-                );
-            }.bind(this));
-
-            return nodes;
         }
     });
-
-
 }());

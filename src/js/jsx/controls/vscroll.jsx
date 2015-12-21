@@ -169,7 +169,11 @@
             </div>) : null;
 
             return (
-                <div className={ this.props.className ? this.props.className : 'content list-view'} id="Messages" ref="messages" onScroll={this.onscroll}>
+                <div 
+                className={this.props.className}
+                id={this.props.id}
+                ref={this.props.ref} 
+                onScroll={this.onscroll}>
                     {loaderTop}
                     {nodes}
                     {loader}
