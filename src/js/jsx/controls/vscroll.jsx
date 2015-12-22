@@ -67,7 +67,7 @@
 
         },
         // parent component calls this
-        deleteItems: function () {
+        deleteItems: function (items) {
 
         },
 
@@ -75,7 +75,6 @@
             var i = this.state.items;
             return i.length > 0 ? i[0] : null;
         },
-
 
         getLastItem: function () {
             var i = this.state.items;
@@ -176,16 +175,16 @@
         render: function () {
             var nodes = this.state.items ? this.renderNodes(this.state.items) : null;
 
-            var loaderTop = this.hasHiddenItems() ? (<div className="list-item">
-                <span className="fa fa-circle-o-notch fa-spin" style={{margin:'auto',color: '#278FDA'}}></span>
+            var loaderTop = this.hasHiddenItems() ? (<div className="list-item loader-item">
+                <span className="fa fa-circle-o-notch fa-spin"></span>
             </div>) : null;
 
-            var loader = this.hasMoreItems() ? (<div className="list-item">
-                <span className="fa fa-circle-o-notch fa-spin" style={{margin:'auto',color: '#278FDA'}}></span>
+            var loader = this.hasMoreItems() ? (<div className="list-item loader-item">
+                <span className="fa fa-circle-o-notch fa-spin"></span>
             </div>) : null;
 
             return (
-                <div className={this.props.className} id="vscroll" ref="vscroll" onScroll={this.onscroll}>
+                <div className={'vscroll ' + this.props.className} id="vscroll" ref="vscroll" onScroll={this.onscroll}>
                     {loaderTop}
                     {nodes}
                     {loader}
