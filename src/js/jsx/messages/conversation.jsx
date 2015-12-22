@@ -72,14 +72,14 @@
             node.style.height = node.scrollHeight + 'px';
         },
         scrollToBottom: function () {
-            if (!this.refs.content)return;
+            // if (!this.refs.content)return;
             //bug #153 https://github.com/PeerioTechnologies/peerio-client-mobile/issues/153
             //on android, webview doesn't resize until after focus,
             //so we set a delay and hope the webview is resized by the time we scroll.
-            var contentNode = this.refs.content.getDOMNode();
-            setTimeout(function () {
-                TweenLite.to(contentNode, .5, {scrollTo: {y: contentNode.scrollHeight}});
-            }, 500);
+            //var contentNode = this.refs.content.getDOMNode();
+            //setTimeout(function () {
+            //    TweenLite.to(contentNode, .5, {scrollTo: {y: contentNode.scrollHeight}});
+            //}, 500);
         },
         disableIfLastParticipant: function () {
             // If I'm the only one who has left in this conversation

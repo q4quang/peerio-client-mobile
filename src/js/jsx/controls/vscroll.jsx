@@ -14,8 +14,6 @@
         itemsHash: {},
 
         getInitialState: function () {
-            this.loadNextPageStateAwareThrottled = _.throttle(this.loadNextPageStateAware, 1000, {trailing: false});
-            this.loadPrevPageStateAwareThrottled = _.throttle(this.loadPrevPageStateAware, 1000, {trailing: false});
             return {
                 items: []
             };
@@ -40,12 +38,15 @@
             this.renderedItemsLimit = nextProps.pageCount * 2;
         },
 
-        componentDidMount: function() {
-            this.updateScroll = window.setInterval( () => { this.onscroll(); }, 500 );
+        componentDidMount: function () {
+            this.updateScroll = window.setInterval(() => {
+                if (!this.isMounted()) return;
+                this.onscroll();
+            }, 1000);
         },
 
-        componentWillUnmount: function() {
-            if(this.updateScroll) {
+        componentWillUnmount: function () {
+            if (this.updateScroll) {
                 window.clearInterval(this.updateScroll);
                 this.updateScroll = null;
             }
@@ -54,26 +55,25 @@
         componentWillMount: function () {
             this.itemsHash = {};
             this.props.reverse ?
-                this.loadPrevPageStateAwareThrottled() :
-                this.loadNextPageStateAwareThrottled();
+                this.loadPrevPageStateAware() :
+                this.loadNextPageStateAware();
             this.renderedItemsLimit = this.props.pageCount * 2;
         },
 
         componentDidUpdate: function () {
-            if (this.scrollIntoItem) {
+            if (false && this.scrollIntoItem) {
                 var item = this.refs[this.scrollIntoItem.key];
-                if( item ) {
+                if (item) {
                     item = item.getDOMNode();
-                    var item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
-                    var alignToTop = this.scrollIntoItem.alignToTop;
-                    if(item) {
-                        item.scrollIntoView(alignToTop);
+                    item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
+                    if (item) {
+                        item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: "smooth"});
                     }
                 }
                 this.scrollIntoItem = null;
             }
 
-            // we should scrol after the initial page load
+            // we should scroll after the initial page load
             if ((Object.keys(this.itemsHash).length > 0) && !this.alreadyUpdated && this.props.reverse) {
                 var scrollContainer = this.refs.vscroll.getDOMNode();
                 scrollContainer.scrollTop = scrollContainer.scrollHeight;
@@ -100,25 +100,25 @@
             return i.length > 0 ? i[i.length - 1] : null;
         },
 
-        hasHiddenItems: function () {
+        hasMoreItemsTop: function () {
             return this.state.upperItem != null;
         },
 
-        hasMoreItems: function () {
+        hasMoreItemsBottom: function () {
             return !this.state.lastPageZeroLength;
         },
 
         loadPageStateAware: function (append, onGetPage) {
             if (this.loading) return;
-            if (!(this.hasMoreItems() || this.hasHiddenItems())) return;
+            if (!(this.hasMoreItemsBottom() || this.hasMoreItemsTop())) return;
             this.loading = true;
 
             onGetPage().then(itemsPage => {
                 var items = this.state.items;
                 var i, item;
-                var firstItem = this.state.items.length > 0 ? 
+                var firstItem = this.state.items.length > 0 ?
                     this.state.items[0] : null;
-                var lastItem = this.state.items.length > 0 ? 
+                var lastItem = this.state.items.length > 0 ?
                     this.state.items[this.state.items.length - 1] : null;
                 var upperItem = this.state.upperItem;
 
@@ -139,12 +139,14 @@
                 // remember the current top item to scroll into it
                 this.scrollIntoItem = null;
 
-                if(append) {
-                    this.scrollIntoItem = lastItem ? { 
-                        key: lastItem[this.props.itemKeyName], alignToTop: false } : null;
+                if (append) {
+                    this.scrollIntoItem = lastItem ? {
+                        key: lastItem[this.props.itemKeyName], alignToTop: false
+                    } : null;
                 } else {
                     this.scrollIntoItem = firstItem ? {
-                        key: firstItem[this.props.itemKeyName], alignToTop: true } : null;
+                        key: firstItem[this.props.itemKeyName], alignToTop: true
+                    } : null;
                 }
 
                 // need to remove excessive elements
@@ -203,17 +205,14 @@
                 this.loadPrevPageStateAware();
             }
         },
+        spinner: (<div className="list-item loader-item"><span className="fa fa-circle-o-notch fa-spin"></span></div>),
 
         render: function () {
             var nodes = this.state.items ? this.renderNodes(this.state.items) : null;
 
-            var loaderTop = this.hasHiddenItems() ? (<div className="list-item loader-item">
-                <span className="fa fa-circle-o-notch fa-spin"></span>
-            </div>) : null;
+            var loaderTop = this.hasMoreItemsTop() ? this.spinner : null;
 
-            var loader = this.hasMoreItems() ? (<div className="list-item loader-item">
-                <span className="fa fa-circle-o-notch fa-spin"></span>
-            </div>) : null;
+            var loader = this.hasMoreItemsBottom() ? this.spinner : null;
 
             return (
                 <div className={'vscroll ' + this.props.className} id="vscroll" ref="vscroll">
