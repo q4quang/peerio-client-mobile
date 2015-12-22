@@ -50,7 +50,12 @@
 
         componentDidUpdate: function () {
             if (this.scrollIntoItem) {
-                this.refs[this.scrollIntoItem].getDOMNode().scrollIntoView();
+                var item = this.refs[this.scrollIntoItem.key];
+                if( item ) {
+                    item = item.getDOMNode();
+                    var item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
+                    if(item) item.scrollIntoView(this.scrollIntoItem.alignToTop);
+                }
                 this.scrollIntoItem = null;
             }
 
@@ -97,6 +102,10 @@
             onGetPage().then(itemsPage => {
                 var items = this.state.items;
                 var i, item;
+                var firstItem = this.state.items.length > 0 ? 
+                    this.state.items[0] : null;
+                var lastItem = this.state.items.length > 0 ? 
+                    this.state.items[this.state.items.length - 1] : null;
                 var upperItem = this.state.upperItem;
 
                 for (i = 0; i < itemsPage.length; ++i) {
@@ -114,7 +123,15 @@
                 }
 
                 // remember the current top item to scroll into it
-                this.scrollIntoItem = !append && upperItem ? upperItem[this.props.itemKeyName] : null;
+                this.scrollIntoItem = null;
+
+                if(append) {
+                    this.scrollIntoItem = lastItem ? { 
+                        key: lastItem[this.props.itemKeyName], alignToTop: false } : null;
+                } else {
+                    this.scrollIntoItem = upperItem ? {
+                        key: upperItem[this.props.itemKeyName], alignToTop: true } : null;
+                }
 
                 // need to remove excessive elements
                 if (items.length > this.renderedItemsLimit) {
