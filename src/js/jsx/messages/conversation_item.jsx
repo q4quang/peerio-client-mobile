@@ -10,6 +10,8 @@
             var item = this.props.item;
             var prevMessage = this.props.prevItem;
             var conversation = this.props.itemParentData;
+            // will be the same for all ack nodes
+            var ack = (<i className="fa fa-thumbs-o-up ack-icon"></i>);
 
             // figuring out render details
             var sender = Peerio.user.contacts.dict[item.sender];
