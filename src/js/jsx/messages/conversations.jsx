@@ -3,7 +3,9 @@
 
     Peerio.UI.Conversations = React.createClass({
         componentDidMount: function () {
-            this.subscriptions = [];
+            this.subscriptions = [
+                Peerio.Dispatcher.onConversationsUpdated(this.handleConversationsUpdated)
+            ];
         },
 
         componentWillUnmount: function () {
@@ -18,6 +20,20 @@
                 hasOnceLoadedItems: false,
                 conversations: null
             };
+        },
+
+        handleConversationsUpdated: function (data) {
+            if (data.updateAllConversations) {
+                this.refs.Messages.refresh();
+                return;
+            }
+            if (data.deleted) {
+                if (data.deleted.length)
+                    this.refs.Messages.deleteItems(data.deleted);
+                else
+                    this.refs.Messages.refreshPage();
+            }
+
         },
 
         getPage: function (lastItem, pageSize) {
@@ -41,14 +57,14 @@
 
         render: function () {
             return this.state.tryLoading ? (
-                <Peerio.UI.VScroll 
-                className='content list-view'
-                id='Messages'
-                ref='Messages'
-                onGetPage={this.getPage} 
-                onGetPrevPage={this.getPrevPage} 
-                itemKeyName='id' 
-                itemComponent={Peerio.UI.ConversationsItem}/>)
+                <Peerio.UI.VScroll
+                    className='content list-view'
+                    id='Messages'
+                    ref='Messages'
+                    onGetPage={this.getPage}
+                    onGetPrevPage={this.getPrevPage}
+                    itemKeyName='id'
+                    itemComponent={Peerio.UI.ConversationsItem}/>)
                 : <Peerio.UI.ConversationsPlaceholder/>;
         }
     });

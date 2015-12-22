@@ -10,6 +10,16 @@
             // item property name, representing unique item key
             itemKeyName: React.PropTypes.string
         },
+        // hash table to check if the item is already loaded
+        itemsHash: {},
+
+        getInitialState: function () {
+            this.loadNextPageStateAwareThrottled = _.throttle(this.loadNextPageStateAware, 1000, {trailing: false});
+            this.loadPrevPageStateAwareThrottled = _.throttle(this.loadPrevPageStateAware, 1000, {trailing: false});
+            return {
+                items: []
+            };
+        },
 
         getDefaultProps: function () {
             return {
@@ -21,20 +31,44 @@
                 // is current loading in progress flag
                 loading: false,
                 // if we deleted top items in our virtual scroll,
-                // save the topmost item timestamp here
+                // save the topmost item
                 upperItem: null
             };
         },
 
-        // hash table to check if the item is already loaded
-        itemsHash: {},
+        componentWillReceiveProps: function (nextProps) {
+            this.renderedItemsLimit = nextProps.pageCount * 2;
+        },
 
-        getInitialState: function () {
-            this.loadNextPageStateAwareThrottled = _.throttle(this.loadNextPageStateAware, 1000, {trailing: false});
-            this.loadPrevPageStateAwareThrottled = _.throttle(this.loadPrevPageStateAware, 1000, {trailing: false});
-            return {
-                items: []
-            };
+        componentWillMount: function () {
+            this.itemsHash = {};
+            this.props.reverse ?
+                this.loadPrevPageStateAwareThrottled() :
+                this.loadNextPageStateAwareThrottled();
+            this.renderedItemsLimit = this.props.pageCount * 2;
+        },
+
+        componentDidUpdate: function () {
+            if (this.scrollIntoItem) {
+                this.refs[this.scrollIntoItem].getDOMNode().scrollIntoView();
+                this.scrollIntoItem = null;
+            }
+
+            // we should scrol after the initial page load
+            if ((Object.keys(this.itemsHash).length > 0) && !this.alreadyUpdated && this.props.reverse) {
+                var scrollContainer = this.refs['vscroll'].getDOMNode();
+                scrollContainer.scrollTop = scrollContainer.scrollHeight;
+                this.alreadyUpdated = true;
+            }
+        },
+
+        // parent component calls this
+        refreshPage: function () {
+
+        },
+        // parent component calls this
+        deleteItems: function () {
+
         },
 
         getFirstItem: function () {
@@ -58,117 +92,83 @@
 
         loadPageStateAware: function (append, onGetPage) {
             if (this.loading) return;
-            if (! (this.hasMoreItems() || this.hasHiddenItems()) ) return;
+            if (!(this.hasMoreItems() || this.hasHiddenItems())) return;
             this.loading = true;
 
             onGetPage().then(itemsPage => {
-                    var items = this.state.items;
+                var items = this.state.items;
+                var i, item;
+                var upperItem = this.state.upperItem;
 
-                    var upperItem = this.state.upperItem;
+                for (i = 0; i < itemsPage.length; ++i) {
+                    item = itemsPage[i];
+                    var key = item[this.props.itemKeyName];
 
-                    for (var i = 0; i < itemsPage.length; ++i) {
-                        var item = itemsPage[i];
-                        var key = item[this.props.itemKeyName];
-
-                        var existingItem = this.itemsHash[key];
-                        if (existingItem) {
-                            // same item - paging collision
-                            if (item.seqID === existingItem.seqID)
-                                continue;
-                            // same item but updated, removing stale item
-                            items.splice(items.indexOf(existingItem), 1);
-                        }
-
-                        this.itemsHash[key] = item;
-                        append ? items.push(item) : items.splice(0, 0, item);
-                    }
-                    // let the user scroll two screens before removing items
-                    var renderedItemsLimit = this.props.pageCount * 2; 
-
-                    // remember the current top item to scroll into it
-                    if(!append && upperItem) {
-                        this.scrollIntoItem = upperItem[this.props.itemKeyName];    
-                    } else {
-                        this.scrollIntoItem = null;
+                    var existingItem = this.itemsHash[key];
+                    if (existingItem) {
+                        // updated item received, removing stale item
+                        items.splice(items.indexOf(existingItem), 1);
                     }
 
-                    if( items.length > renderedItemsLimit ) {
-                        var start = append ? items.length - renderedItemsLimit : 0;
-                        var take = renderedItemsLimit;
-                        items = items.slice(start, take);
-                        upperItem = items[0];
-                    }
+                    this.itemsHash[key] = item;
+                    append ? items.push(item) : items.unshift(item);
+                }
 
-                    // update hash accordingly 
-                    this.itemsHash = [];
-                    for(var i = 0; i < items.length; ++i) {
-                        var item = items[i];
-                        this.itemsHash[item[this.props.itemKeyName]] = item;
-                    }
-                   
-                    // horrible
-                    if( !append && this.props.reverse ) {
-                        upperItem = items[0];
-                    }
-                    
-                    this.setState({
-                        upperItem: 
-                            append || (itemsPage.length >= this.props.pageCount) ? upperItem : null,
-                        items: items,
-                        // we do not account for duplicates here, cause the only time
-                        // it would mean something is the rare occasion when the last
-                        // element has duplicate right before him
-                        lastPageZeroLength: append && (itemsPage.length < this.props.pageCount) || (items.length < this.props.pageCount)
-                    }, ()=> {
-                        this.loading = false;
-                        
-                   });
+                // remember the current top item to scroll into it
+                this.scrollIntoItem = !append && upperItem ? upperItem[this.props.itemKeyName] : null;
 
-                });
+                // need to remove excessive elements
+                if (items.length > this.renderedItemsLimit) {
+                    // will delete this much
+                    var deleteCount = items.length - this.renderedItemsLimit;
+                    // removing from items array
+                    var deleted = items.splice(append ? 0 : -deleteCount, deleteCount);
+                    // removing from hash
+                    for (i = 0; i < deleted.length; i++)
+                        delete this.itemsHash[deleted[i][this.props.itemKeyName]];
+
+                    upperItem = items[0];
+                }
+
+                // horrible
+                if (!append && this.props.reverse) {
+                    upperItem = items[0];
+                }
+
+                this.setState({
+                    upperItem: append || (itemsPage.length >= this.props.pageCount) ? upperItem : null,
+                    items: items,
+                    lastPageZeroLength: append && (itemsPage.length < this.props.pageCount) || (items.length < this.props.pageCount)
+                }, () => this.loading = false);
+
+            });
         },
 
         loadPrevPageStateAware: function () {
-            this.loadPageStateAware( false,  
-                                    () => { return this.props.onGetPrevPage(
-                                        this.getFirstItem(), this.props.pageCount); 
-                                    });
+            this.loadPageStateAware(false,
+                () => {
+                    return this.props.onGetPrevPage(
+                        this.getFirstItem(), this.props.pageCount);
+                });
         },
 
         loadNextPageStateAware: function () {
-            this.loadPageStateAware( true,  
-                                    () => { return this.props.onGetPage(
-                                        this.getLastItem(), this.props.pageCount); } );
+            this.loadPageStateAware(true,
+                () => {
+                    return this.props.onGetPage(
+                        this.getLastItem(), this.props.pageCount);
+                });
         },
 
-        componentDidUpdate: function() {
-            if(this.scrollIntoItem) {
-                this.refs[this.scrollIntoItem].getDOMNode().scrollIntoView();
-                this.scrollIntoItem = null;
-            }
-
-            // we should scrol after the initial page load
-            if((Object.keys(this.itemsHash).length > 0) && !this.alreadyUpdated && this.props.reverse) {
-                var scrollContainer = this.refs['vscroll'].getDOMNode();
-                scrollContainer.scrollTop = scrollContainer.scrollHeight;
-                this.alreadyUpdated = true;
-            }
-        },
-
-        componentWillMount: function () {
-            this.itemsHash = {};
-            this.props.reverse ? 
-                this.loadPrevPageStateAwareThrottled() :
-                this.loadNextPageStateAwareThrottled();
-        },
 
         onscroll: function (ev) {
             // thirty is a magic number which was calculated
             // using virgin's blood and a pair of Mayan dice
-            if( (ev.target.scrollHeight - ev.target.clientHeight - ev.target.scrollTop) <= 30) {
+            if ((ev.target.scrollHeight - ev.target.clientHeight - ev.target.scrollTop) <= 30) {
                 this.loadNextPageStateAware();
             }
 
-            if( ev.target.scrollTop == 0) {
+            if (ev.target.scrollTop == 0) {
                 this.loadPrevPageStateAware();
             }
         },
@@ -185,11 +185,7 @@
             </div>) : null;
 
             return (
-                <div 
-                className={this.props.className}
-                id="vscroll"
-                ref="vscroll" 
-                onScroll={this.onscroll}>
+                <div className={this.props.className} id="vscroll" ref="vscroll" onScroll={this.onscroll}>
                     {loaderTop}
                     {nodes}
                     {loader}
@@ -198,14 +194,16 @@
         },
 
         renderNodes: function (items) {
-            return items.map( (item, index, array) => {
+            return items.map((item, index, array) => {
                 return React.createElement(this.props.itemComponent,
-                                           {key: item[this.props.itemKeyName], 
-                                               ref: item[this.props.itemKeyName], 
-                                               item: item,
-                                               index: index,
-                                               prevItem: index > 0 ? array[index-1] : false,
-                                               itemParentData: this.props.itemParentData});
+                    {
+                        key: item[this.props.itemKeyName],
+                        ref: item[this.props.itemKeyName],
+                        item: item,
+                        index: index,
+                        prevItem: index > 0 ? array[index - 1] : false,
+                        itemParentData: this.props.itemParentData
+                    });
             });
         }
     });
