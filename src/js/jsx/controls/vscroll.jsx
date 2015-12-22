@@ -40,6 +40,17 @@
             this.renderedItemsLimit = nextProps.pageCount * 2;
         },
 
+        componentDidMount: function() {
+            this.updateScroll = window.setInterval( () => { this.onscroll(); }, 500 );
+        },
+
+        componentWillUnmount: function() {
+            if(this.updateScroll) {
+                window.clearInterval(this.updateScroll);
+                this.updateScroll = null;
+            }
+        },
+
         componentWillMount: function () {
             this.itemsHash = {};
             this.props.reverse ?
@@ -64,7 +75,7 @@
 
             // we should scrol after the initial page load
             if ((Object.keys(this.itemsHash).length > 0) && !this.alreadyUpdated && this.props.reverse) {
-                var scrollContainer = this.refs['vscroll'].getDOMNode();
+                var scrollContainer = this.refs.vscroll.getDOMNode();
                 scrollContainer.scrollTop = scrollContainer.scrollHeight;
                 this.alreadyUpdated = true;
             }
@@ -180,14 +191,15 @@
         },
 
 
-        onscroll: function (ev) {
+        onscroll: function () {
+            var node = this.refs.vscroll.getDOMNode();
             // thirty is a magic number which was calculated
             // using virgin's blood and a pair of Mayan dice
-            if ((ev.target.scrollHeight - ev.target.clientHeight - ev.target.scrollTop) <= 30) {
+            if ((node.scrollHeight - node.clientHeight - node.scrollTop) < node.clientHeight) {
                 this.loadNextPageStateAware();
             }
 
-            if (ev.target.scrollTop == 0) {
+            if (node.scrollTop < node.clientHeight) {
                 this.loadPrevPageStateAware();
             }
         },
@@ -204,7 +216,7 @@
             </div>) : null;
 
             return (
-                <div className={'vscroll ' + this.props.className} id="vscroll" ref="vscroll" onScroll={this.onscroll}>
+                <div className={'vscroll ' + this.props.className} id="vscroll" ref="vscroll">
                     {loaderTop}
                     {nodes}
                     {loader}
