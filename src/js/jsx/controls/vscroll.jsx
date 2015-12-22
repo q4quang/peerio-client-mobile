@@ -63,6 +63,9 @@
 
             onGetPage().then(itemsPage => {
                     var items = this.state.items;
+
+                    var upperItem = this.state.upperItem;
+
                     for (var i = 0; i < itemsPage.length; ++i) {
                         var item = itemsPage[i];
                         var key = item[this.props.itemKeyName];
@@ -81,8 +84,6 @@
                     }
                     // let the user scroll two screens before removing items
                     var renderedItemsLimit = this.props.pageCount * 2; 
-
-                    var upperItem = this.state.upperItem;
 
                     // remember the current top item to scroll into it
                     if(!append && upperItem) {
@@ -104,7 +105,11 @@
                         var item = items[i];
                         this.itemsHash[item[this.props.itemKeyName]] = item;
                     }
-
+                   
+                    // horrible
+                    if( !append && this.props.reverse ) {
+                        upperItem = items[0];
+                    }
                     this.setState({
                         upperItem: 
                             append || (itemsPage.length >= this.props.pageCount) ? upperItem : null,
@@ -139,10 +144,20 @@
                 this.refs[this.scrollIntoItem].getDOMNode().scrollIntoView();
                 this.scrollIntoItem = null;
             }
+
+            // we should scrol after the initial page load
+            if((Object.keys(this.itemsHash).length > 0) && !this.alreadyUpdated && this.props.reverse) {
+                var scrollContainer = this.refs['vscroll'].getDOMNode();
+                scrollContainer.scrollTop = scrollContainer.scrollHeight;
+                this.alreadyUpdated = true;
+            }
         },
+
         componentWillMount: function () {
             this.itemsHash = {};
-            this.loadNextPageStateAwareThrottled();
+            this.props.reverse ? 
+                this.loadPrevPageStateAwareThrottled() :
+                this.loadNextPageStateAwareThrottled();
         },
 
         onscroll: function (ev) {
@@ -171,8 +186,8 @@
             return (
                 <div 
                 className={this.props.className}
-                id={this.props.id}
-                ref={this.props.ref} 
+                id="vscroll"
+                ref="vscroll" 
                 onScroll={this.onscroll}>
                     {loaderTop}
                     {nodes}
