@@ -54,7 +54,10 @@
                 if( item ) {
                     item = item.getDOMNode();
                     var item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
-                    if(item) item.scrollIntoView(this.scrollIntoItem.alignToTop);
+                    var alignToTop = this.scrollIntoItem.alignToTop;
+                    if(item) {
+                        item.scrollIntoView(alignToTop);
+                    }
                 }
                 this.scrollIntoItem = null;
             }
@@ -129,8 +132,8 @@
                     this.scrollIntoItem = lastItem ? { 
                         key: lastItem[this.props.itemKeyName], alignToTop: false } : null;
                 } else {
-                    this.scrollIntoItem = upperItem ? {
-                        key: upperItem[this.props.itemKeyName], alignToTop: true } : null;
+                    this.scrollIntoItem = firstItem ? {
+                        key: firstItem[this.props.itemKeyName], alignToTop: true } : null;
                 }
 
                 // need to remove excessive elements

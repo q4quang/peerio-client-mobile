@@ -285,9 +285,14 @@ $list-item-height: 70px;
 
 .vscroll .loader-item {
     text-align: center;
+    min-height: 70px;
 }
 
 .vscroll .loader-item .fa-spin {
     margin: auto;
     color: #278FDA;
+}
+
+.vscroll, .vscroll > * {
+    transform: translate3d(0,0,0);
 }
