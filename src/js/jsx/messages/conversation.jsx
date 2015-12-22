@@ -120,20 +120,24 @@
 
         getPage: function (lastItem, pageSize) {
             return new Promise( (resolve, reject) => {
-                var startIndex = lastItem ? 
-                    this.state.conversation.messages.indexOf(lastItem) : 0;
-                startIndex = startIndex == -1 ? 0 : startIndex;
-                var itemsPage = this.state.conversation.messages.slice(startIndex, startIndex + pageSize);
+                var ds = this.state.conversation.messages;
+                var rightIndex = lastItem ? 
+                    ds.indexOf(lastItem) + pageSize + 1 : ds.length;
+                var startIndex = rightIndex - pageSize;
+                startIndex = startIndex < 0 ? 0 : startIndex;
+                var itemsPage = ds.slice(startIndex, rightIndex);
                 resolve( itemsPage ) ;
             });
         },
 
         getPrevPage: function (lastItem, pageSize) {
             return new Promise( (resolve, reject) => {
+                var ds = this.state.conversation.messages;
                 var startIndex = (lastItem ? 
-                    this.state.conversation.messages.indexOf(lastItem) : 0) - pageSize;
+                    ds.indexOf(lastItem) - pageSize : ds.length - pageSize);
+                var rightIndex = startIndex + pageSize;
                 startIndex = startIndex < 0 ? 0 : startIndex;
-                var itemsPage = this.state.conversation.messages.slice(startIndex, startIndex + pageSize).reverse();
+                var itemsPage = ds.slice(startIndex, rightIndex).reverse();
                 resolve( itemsPage ) ;
             });
         },
@@ -181,7 +185,10 @@
                     itemKeyName='id' 
                     itemComponent={Peerio.UI.ConversationItem}
                     itemParentData={conversation}
-                    className="content with-reply-box without-tab-bar conversation" ref="content" key="content"
+                    className="content with-reply-box without-tab-bar conversation" 
+                    ref="content" 
+                    key="content"
+                    reverse="true"
                     />
                                                 
                     <div id="reply">
