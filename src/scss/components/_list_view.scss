@@ -282,3 +282,12 @@ $list-item-height: 70px;
     width: 100%;
   }
 }
+
+.vscroll .loader-item {
+    text-align: center;
+}
+
+.vscroll .loader-item .fa-spin {
+    margin: auto;
+    color: #278FDA;
+}

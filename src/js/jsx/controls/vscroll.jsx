@@ -176,17 +176,17 @@
         render: function () {
             var nodes = this.state.items ? this.renderNodes(this.state.items) : null;
 
-            var loaderTop = this.hasHiddenItems() ? (<div className="list-item">
-                <span className="fa fa-circle-o-notch fa-spin" style={{margin:'auto',color: '#278FDA'}}></span>
+            var loaderTop = this.hasHiddenItems() ? (<div className="list-item loader-item">
+                <span className="fa fa-circle-o-notch fa-spin"></span>
             </div>) : null;
 
-            var loader = this.hasMoreItems() ? (<div className="list-item">
-                <span className="fa fa-circle-o-notch fa-spin" style={{margin:'auto',color: '#278FDA'}}></span>
+            var loader = this.hasMoreItems() ? (<div className="list-item loader-item">
+                <span className="fa fa-circle-o-notch fa-spin"></span>
             </div>) : null;
 
             return (
                 <div 
-                className={this.props.className}
+                className={'vscroll ' + this.props.className}
                 id="vscroll"
                 ref="vscroll" 
                 onScroll={this.onscroll}>
