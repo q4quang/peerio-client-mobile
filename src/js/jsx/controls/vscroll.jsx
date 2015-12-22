@@ -110,6 +110,7 @@
                     if( !append && this.props.reverse ) {
                         upperItem = items[0];
                     }
+                    
                     this.setState({
                         upperItem: 
                             append || (itemsPage.length >= this.props.pageCount) ? upperItem : null,
@@ -117,7 +118,7 @@
                         // we do not account for duplicates here, cause the only time
                         // it would mean something is the rare occasion when the last
                         // element has duplicate right before him
-                        lastPageZeroLength: append && (itemsPage.length < this.props.pageCount)
+                        lastPageZeroLength: append && (itemsPage.length < this.props.pageCount) || (items.length < this.props.pageCount)
                     }, ()=> {
                         this.loading = false;
                         
