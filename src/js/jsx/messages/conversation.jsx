@@ -15,7 +15,6 @@
         componentWillMount: function () {
             Peerio.Conversation(this.props.params.id)
                 .load()
-                .then(c => c.loadAllMessages())
                 .then(c => this.setState({conversation: c}, this.disableIfLastParticipant)) //todo, also call disable on conv update
                 .catch(err => {
                     Peerio.Action.showAlert({text: 'Failed to load covnersations'});
@@ -102,7 +101,19 @@
             }
         },
 
+        getPrevPage: function (lastItem, pageSize) {
+            var lastSeqID = lastItem ? lastItem.seqID : Number.MAX_SAFE_INTEGER;
+
+            return Peerio.Conversation.getNextMessagesPage(this.props.params.id, lastSeqID, pageSize);
+        },
+
         getPage: function (lastItem, pageSize) {
+            var lastSeqID = lastItem ? lastItem.seqID : 0;
+            return Peerio.Conversation.getPrevMessagesPage(this.props.params.id, lastSeqID, pageSize);
+        },
+
+
+        getPageMock: function (lastItem, pageSize) {
             return new Promise( (resolve, reject) => {
                 var ds = this.state.conversation.messages;
                 var rightIndex = lastItem ? 
@@ -114,7 +125,7 @@
             });
         },
 
-        getPrevPage: function (lastItem, pageSize) {
+        getPrevPageMock: function (lastItem, pageSize) {
             return new Promise( (resolve, reject) => {
                 var ds = this.state.conversation.messages;
                 var startIndex = (lastItem ? 

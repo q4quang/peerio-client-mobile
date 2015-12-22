@@ -197,12 +197,12 @@
             var node = this.refs.vscroll.getDOMNode();
             // thirty is a magic number which was calculated
             // using virgin's blood and a pair of Mayan dice
-            if ((node.scrollHeight - node.clientHeight - node.scrollTop) < node.clientHeight) {
-                this.loadNextPageStateAware();
+            if ((node.scrollHeight - node.clientHeight - node.scrollTop) < 30) {
+                this.loadNextPageStateAwareThrottled();
             }
 
-            if (node.scrollTop < node.clientHeight) {
-                this.loadPrevPageStateAware();
+            if (node.scrollTop == 0) {
+                this.loadPrevPageStateAwareThrottled();
             }
         },
         spinner: (<div className="list-item loader-item"><span className="fa fa-circle-o-notch fa-spin"></span></div>),
