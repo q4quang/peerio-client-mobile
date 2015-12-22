@@ -70,7 +70,7 @@
                         var existingItem = this.itemsHash[key];
                         if (existingItem) {
                             // same item - paging collision
-                            if (item.lastTimestamp === existingItem.lastTimestamp)
+                            if (item.seqID === existingItem.seqID)
                                 continue;
                             // same item but updated, removing stale item
                             items.splice(items.indexOf(existingItem), 1);

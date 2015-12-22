@@ -21,7 +21,7 @@
         },
 
         getPage: function (lastItem, pageSize) {
-            var lastSeqID = lastItem ? lastItem.lastSeqID : Number.MAX_SAFE_INTEGER;
+            var lastSeqID = lastItem ? lastItem.seqID : Number.MAX_SAFE_INTEGER;
 
             return Peerio.Conversation.getNextPage(lastSeqID, pageSize)
                 .then(arr => {
@@ -34,7 +34,7 @@
         },
 
         getPrevPage: function (lastItem, pageSize) {
-            var lastSeqID = lastItem ? lastItem.lastSeqID : 0;
+            var lastSeqID = lastItem ? lastItem.seqID : 0;
             return Peerio.Conversation.getPrevPage(lastSeqID, pageSize);
         },
 

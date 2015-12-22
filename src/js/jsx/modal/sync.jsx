@@ -23,6 +23,19 @@
                 Peerio.Dispatcher.onSyncEnded(this.props.onClose)
             ];
         },
+        componentDidMount: function(){
+            window.setTimeout(()=> {
+                if (!this.isMounted()) return;
+                // blurring active element and hiding keyboard
+                // we don't need keyboard when modal is active
+                if(document.activeElement) {
+                    document.activeElement.blur();
+                }
+                Peerio.NativeAPI.hideKeyboard();
+
+                this.setState({doRender: true});
+            }, 2000);
+        },
         updateProgress: function (current, max, message) {
             var lastStart = this.state.lastStart && this.state.message === message ? this.state.lastStart : Date.now();
 
@@ -49,20 +62,8 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         render: function () {
-            if (!this.state.doRender) {
-                window.setTimeout(()=> {
-                    if (!this.isMounted()) return;
-                    // bluring active elemtn and hiding keyboard
-                    // so our modal looks normal and not like always
-                    if(document.activeElement) {
-                        document.activeElement.blur();
-                    }
-                    Peerio.NativeAPI.hideKeyboard();
- 
-                    this.setState({doRender: true});
-                }, 2000);
-                return null;
-            }
+            if (!this.state.doRender) return null;
+
             var progressDetails = this.state.max > 1 ? '(' + this.state.current + '/' + this.state.max + ')' : '';
 
             var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
