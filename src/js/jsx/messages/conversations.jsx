@@ -58,7 +58,6 @@
             return Peerio.Conversation.getRange(from, to);
         },
 
-
         render: function () {
             return this.state.tryLoading ? (
                 <Peerio.UI.VScroll

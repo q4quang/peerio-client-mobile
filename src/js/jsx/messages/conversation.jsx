@@ -28,7 +28,8 @@
 
             this.subscriptions = [
                 Peerio.Dispatcher.onBigGreenButton(this.reply),
-                Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection)
+                Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
+                Peerio.Dispatcher.onConversationsUpdated(this.handleMessagesUpdated)
             ];
 
             // to update relative timestamps
@@ -43,6 +44,23 @@
 //            this.scrollToBottom();
         },
         //----- CUSTOM FN
+        handleConversationsUpdated: function (data) {
+            if (data.updateAllConversations || data.updated === []
+               || (data.updated && data.updated.indexOf(this.props.params.id) != -1) ) {
+                this.refs.content.refresh();
+                return;
+            }
+            if (data.deleted) {
+                if (data.deleted.length && data.deleted.indexOf(this.props.params.id) != -1)
+                    this.goBack();
+                else 
+                    Peerio.Conversation(this.props.params.id)
+                    .load().catch( err => {
+                        this.goBack();
+                    });
+            }
+        },
+
         openFileSelect: function () {
             Peerio.Action.showFileSelect({preselected: this.state.attachments.slice()});
         },
@@ -129,6 +147,11 @@
             return Peerio.Conversation.getPrevMessagesPage(this.props.params.id, lastSeqID, pageSize);
         },
 
+        getItemsRange: function(from, to){
+            // here from and to must be reversed
+            return Peerio.Conversation.getMessagesRange(this.props.params.id, to, from);
+        },
+
         //----- RENDER
         render: function () {
             // todo: loading state
@@ -169,6 +192,7 @@
                     <Peerio.UI.VScroll
                         onGetPage={this.getPage}
                         onGetPrevPage={this.getPrevPage}
+                        onGetItemsRange={this.getItemsRange}
                         itemKeyName='id'
                         itemComponent={Peerio.UI.ConversationItem}
                         itemParentData={conversation}
