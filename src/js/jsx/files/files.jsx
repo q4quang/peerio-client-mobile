@@ -5,10 +5,22 @@
         mixins: [ReactRouter.Navigation],
 
         componentDidMount: function () {
-            this.subscription = Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null));
+            this.subscriptions = [
+                Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null)),
+                Peerio.Dispatcher.onUnreadStateChanged(this.handleUnreadStateChange.bind(this))
+            ];
         },
         componentWillUnmount: function () {
-            Peerio.Dispatcher.unsubscribe(this.subscription);
+            Peerio.Dispatcher.unsubscribe(this.subscriptions);
+        },
+        handleUnreadStateChange: function () {
+            if(!Peerio.user.unreadState.contacts) return;
+
+            window.setTimeout(()=> {
+                if (this.isMounted() && Peerio.user.unreadState.contacts)
+                    Peerio.user.setContactsUnreadState(false);
+            }, 2000);
+
         },
         openFileView: function (id) {
             this.transitionTo('file', {id: id});

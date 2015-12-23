@@ -5,15 +5,27 @@
         mixins: [ReactRouter.Navigation, ReactRouter.State],
         componentDidMount: function () {
             this.subscriptions = [Peerio.Dispatcher.onBigGreenButton(this.handleAddContact),
-                Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this, null))
+                Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this, null)),
+                Peerio.Dispatcher.onUnreadStateChanged(this.handleUnreadStateChange.bind(this))
             ];
             if (this.getQuery().trigger) {
                 this.replaceWith('contacts');
                 this.handleAddContact();
             }
+
+            this.handleUnreadStateChange();
         },
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
+        },
+        handleUnreadStateChange: function () {
+            if(!Peerio.user.unreadState.contacts) return;
+
+            window.setTimeout(()=> {
+                if (this.isMounted() && Peerio.user.unreadState.contacts)
+                    Peerio.user.setContactsUnreadState(false);
+            }, 2000);
+
         },
         //addContactCallback: function (name) {
         //  Peerio.Contacts.addContact(name);
@@ -40,7 +52,8 @@
                     </div>
                     <div className="list-item-content">
                         <div className="list-item-title">{item.fullName}</div>
-                        <div className="list-item-description">{item.username} { item.isMe ? '(You)' : ''} { sentRequest ? '(invited)' : null } { receivedRequest ? '(requests authorization)' : null }</div>
+                        <div
+                            className="list-item-description">{item.username} { item.isMe ? '(You)' : ''} { sentRequest ? '(invited)' : null } { receivedRequest ? '(requests authorization)' : null }</div>
                         { receivedRequest ? <i className="fa fa-user-plus status"></i> : null }
                     </div>
                     <div className="list-item-forward">
