@@ -29,12 +29,14 @@ $avatar-size: 29px;
 
 .conversation {
   margin-top: 36px;
-  padding-bottom: 80px;
+  bottom: 105px !important;
   color: color(p-blue-darker);
   user-select: initial;
   .item {
     width: 100%;
-    padding: $msg-distance $big-side-distance 0 $edge-distance;
+    padding: 0 $big-side-distance 0 $edge-distance;
+    margin-bottom: 15px;
+    
     padding-left:$avatar-size + 5px;
     position: relative;
     .headline-divider{

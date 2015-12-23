@@ -15,24 +15,21 @@
 
         getInitialState: function () {
             return {
-                items: []
+                items: [],
+                noMoreBottomItems: this.props.reverse,
+                upperItem: this.props.reverse
             };
         },
 
         getDefaultProps: function () {
             return {
                 // number of items loaded per page
-                pageCount: 20,
-                // if the last oage request yielded a
-                // result.length < pageSize
-                lastPageZeroLength: false,
-                // is current loading in progress flag
-                loading: false,
-                // if we deleted top items in our virtual scroll,
-                // save the topmost item
-                upperItem: null
-            };
+                pageCount: 20
+           };
         },
+
+        // is current loading in progress flag
+        loading: false,
 
         componentWillReceiveProps: function (nextProps) {
             this.renderedItemsLimit = nextProps.pageCount * 2;
@@ -42,7 +39,7 @@
             this.updateScroll = window.setInterval(() => {
                 if (!this.isMounted()) return;
                 this.onscroll();
-            }, 1000);
+            }, 1000);  
         },
 
         componentWillUnmount: function () {
@@ -66,6 +63,8 @@
                 if (item) {
                     item = item.getDOMNode();
                     item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
+                    item = item.className != 'bottomScrollHook' && !this.scrollIntoItem.alignToTop && 
+                        item.nextSibling.className == 'bottomScrollHook' ? item.nextSibling : item;
                     if (item) {
                         item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: 'smooth'});
                     }
@@ -80,11 +79,16 @@
                 this.alreadyUpdated = true;
             }
         },
-
+        
+        reset: function() {
+//            this.setState( this.getInitialState(), () => this.componentWillMount() );
+        },
         // parent component calls this
         refresh: function (callback) {
 
             if (this.loading) this.doRefresh = true;
+            // we block auto scrolling into last view item
+            this.scrollIntoItem = null;
             this.loading = true;
             this.doRefresh = false;
             // in case view was empty there is nothing to refresh, we load page as usual
@@ -142,12 +146,13 @@
         },
 
         hasMoreItemsBottom: function () {
-            return !this.state.lastPageZeroLength;
+            return !this.state.noMoreBottomItems;
         },
 
         loadPage: function (append, onGetPage) {
             if (this.loading) return;
-            if (!(this.hasMoreItemsBottom() || this.hasMoreItemsTop())) return;
+            if (append && !this.hasMoreItemsBottom()) return;
+            if (!append && !this.hasMoreItemsTop()) return;
             this.loading = true;
 
             onGetPage().then(itemsPage => {
@@ -186,6 +191,8 @@
                     } : null;
                 }
 
+                var noMoreBottomItems = this.state.noMoreBottomItems;
+
                 // need to remove excessive elements
                 if (items.length > this.renderedItemsLimit) {
                     // will delete this much
@@ -197,6 +204,7 @@
                         delete this.itemsHash[deleted[i][this.props.itemKeyName]];
 
                     upperItem = items[0];
+                    noMoreBottomItems = false;
                 }
 
                 // horrible
@@ -204,10 +212,12 @@
                     upperItem = items[0];
                 }
 
+                noMoreBottomItems = append && (itemsPage.length < this.props.pageCount) || noMoreBottomItems;
+
                 this.setState({
                     upperItem: append || (itemsPage.length >= this.props.pageCount) ? upperItem : null,
                     items: items,
-                    lastPageZeroLength: append && (itemsPage.length < this.props.pageCount) || (items.length < this.props.pageCount)
+                    noMoreBottomItems: noMoreBottomItems
                 }, () => {
                     this.loading = false;
                     this.doRefresh && this.refresh();
@@ -224,12 +234,19 @@
                 });
         },
 
-        loadNextPage: function () {
-            this.loadPage(true,
-                () => {
-                    return this.props.onGetPage(
-                        this.getLastItem(), this.props.pageCount);
-                });
+        loadNextPage: function (force) {
+            var call = function() {
+                return this.loadPage(true,
+                              () => this.props.onGetPage(
+                    this.getLastItem(), this.props.pageCount));
+            }.bind(this);
+
+            if(force) {
+                this.scrollIntoItem = null;
+                this.setState({ noMoreBottomItems: false }, () => call());
+            } else {
+                call();
+            }
         },
 
         onscroll: function () {
@@ -240,7 +257,7 @@
                 this.loadNextPage();
             }
 
-            if (node.scrollTop == 0) {
+            if (node.scrollTop < 30) {
                 this.loadPrevPage();
             }
         },
@@ -253,10 +270,13 @@
 
             var loader = this.hasMoreItemsBottom() ? this.spinner : null;
 
+            var bottomScrollHook = (<div className="bottomScrollHook"></div>);
+
             return (
                 <div className={'vscroll ' + this.props.className} id="vscroll" ref="vscroll">
                     {loaderTop}
                     {nodes}
+                    {bottomScrollHook}
                     {loader}
                 </div>
             );

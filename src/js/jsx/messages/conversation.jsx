@@ -47,7 +47,8 @@
         handleMessagesUpdated: function (data) {
             if (data.updateAllConversations || data.updated === []
                || (data.updated && data.updated.indexOf(this.props.params.id) != -1) ) {
-                this.refs.content.refresh(()=>this.scrollToBottom());
+                this.refs.content.loadNextPage(true);
+//                this.refs.content.refresh(()=>this.scrollToBottom());
                 return;
             }
             if (data.deleted) {
@@ -106,11 +107,12 @@
             node.style.height = node.scrollHeight + 'px';
         },
         scrollToBottom: function () {
-             if (!this.refs.content)return;
+            if (!this.refs.content) return;
             var contentNode = this.refs.content.getDOMNode();
             setTimeout(function () {
+//                contentNode.scrollTop = contentNode.scrollHeight;
                 TweenLite.to(contentNode, .3, {scrollTo: {y: contentNode.scrollHeight}});
-            }, 200);
+            }, 200);  
         },
         disableIfLastParticipant: function () {
             // If I'm the only one who has left in this conversation
