@@ -67,7 +67,7 @@
                     item = item.getDOMNode();
                     item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
                     if (item) {
-                        item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: "smooth"});
+                        item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: 'smooth'});
                     }
                 }
                 this.scrollIntoItem = null;
@@ -198,11 +198,11 @@
             // thirty is a magic number which was calculated
             // using virgin's blood and a pair of Mayan dice
             if ((node.scrollHeight - node.clientHeight - node.scrollTop) < 30) {
-                this.loadNextPageStateAwareThrottled();
+                this.loadNextPageStateAware();
             }
 
             if (node.scrollTop == 0) {
-                this.loadPrevPageStateAwareThrottled();
+                this.loadPrevPageStateAware();
             }
         },
         spinner: (<div className="list-item loader-item"><span className="fa fa-circle-o-notch fa-spin"></span></div>),
