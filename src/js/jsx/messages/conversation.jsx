@@ -47,7 +47,7 @@
         handleMessagesUpdated: function (data) {
             if (data.updateAllConversations || data.updated === []
                || (data.updated && data.updated.indexOf(this.props.params.id) != -1) ) {
-                this.refs.content.refresh();
+                this.refs.content.refresh(()=>this.scrollToBottom());
                 return;
             }
             if (data.deleted) {
@@ -106,14 +106,11 @@
             node.style.height = node.scrollHeight + 'px';
         },
         scrollToBottom: function () {
-            // if (!this.refs.content)return;
-            //bug #153 https://github.com/PeerioTechnologies/peerio-client-mobile/issues/153
-            //on android, webview doesn't resize until after focus,
-            //so we set a delay and hope the webview is resized by the time we scroll.
-            //var contentNode = this.refs.content.getDOMNode();
-            //setTimeout(function () {
-            //    TweenLite.to(contentNode, .5, {scrollTo: {y: contentNode.scrollHeight}});
-            //}, 500);
+             if (!this.refs.content)return;
+            var contentNode = this.refs.content.getDOMNode();
+            setTimeout(function () {
+                TweenLite.to(contentNode, .3, {scrollTo: {y: contentNode.scrollHeight}});
+            }, 200);
         },
         disableIfLastParticipant: function () {
             // If I'm the only one who has left in this conversation
@@ -180,6 +177,7 @@
 
             // note: reply has fixed positioning and should not be nested in .content,
             // this causes unwanted scroll when typing into text box
+            //TODO: textarea onfocus was set to scrollToBottom but was triggerred on every element focus 0_0
             return (
                 <div>
                     <Peerio.UI.ConversationHead
@@ -210,8 +208,7 @@
                         <textarea
                             className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
                             rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
-                            disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}
-                            onFocus={this.scrollToBottom}></textarea>
+                            disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}></textarea>
 
                         <div className="reply-attach">
                             <i className="fa fa-paperclip icon-btn"

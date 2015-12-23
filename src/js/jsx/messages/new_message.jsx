@@ -30,7 +30,7 @@
             }
 
             try {
-                Peerio.Messages.sendMessage(this.state.recipients, this.refs.subject.getDOMNode().value,
+                Peerio.Conversation().reply(this.state.recipients, this.refs.subject.getDOMNode().value,
                                             this.refs.message.getDOMNode().value, this.state.attachments);
             } catch(err) {
                 Peerio.Action.showAlert({ text: 'Error sending message ' + err});

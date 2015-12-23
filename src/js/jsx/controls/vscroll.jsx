@@ -82,7 +82,7 @@
         },
 
         // parent component calls this
-        refresh: function () {
+        refresh: function (callback) {
 
             if (this.loading) this.doRefresh = true;
             this.loading = true;
@@ -105,7 +105,10 @@
                     this.setState({
                         items: items,
                         upperItem: items.length && items[0] || null
-                    }, () => this.loading = false);
+                    }, () => {
+                        this.loading = false;
+                        if(callback)callback();
+                    });
                 });
         },
 
