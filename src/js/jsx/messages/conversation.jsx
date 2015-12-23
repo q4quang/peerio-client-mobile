@@ -44,7 +44,7 @@
 //            this.scrollToBottom();
         },
         //----- CUSTOM FN
-        handleConversationsUpdated: function (data) {
+        handleMessagesUpdated: function (data) {
             if (data.updateAllConversations || data.updated === []
                || (data.updated && data.updated.indexOf(this.props.params.id) != -1) ) {
                 this.refs.content.refresh();
