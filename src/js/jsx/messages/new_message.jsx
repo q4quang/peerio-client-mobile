@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.NewMessage = React.createClass({
-        mixins:[ReactRouter.Navigation],
+        mixins: [ReactRouter.Navigation],
         //--- REACT EVENTS
         getInitialState: function () {
             var recipients = this.props.params.id ? [this.props.params.id] : [];
@@ -15,7 +15,7 @@
                 Peerio.Dispatcher.onBigGreenButton(this.send)
             ];
 
-            if(this.state.recipients.length == 0) {
+            if (this.state.recipients.length == 0) {
                 this.openContactSelect();
             }
         },
@@ -26,15 +26,14 @@
         send: function () {
             //todo validation
             if (!this.state.recipients.length) {
-                return Peerio.Action.showAlert({text:'Please select at least one contact to send your message to.'});
+                return Peerio.Action.showAlert({text: 'Please select at least one contact to send your message to.'});
             }
 
-            try {
-                Peerio.Conversation().reply(this.state.recipients, this.refs.subject.getDOMNode().value,
-                                            this.refs.message.getDOMNode().value, this.state.attachments);
-            } catch(err) {
-                Peerio.Action.showAlert({ text: 'Error sending message ' + err});
-            }
+
+            Peerio.Conversation().reply(this.state.recipients, this.refs.message.getDOMNode().value,
+                this.state.attachments, this.refs.subject.getDOMNode().value).catch(err => {
+                Peerio.Action.showAlert({text: 'Error sending message ' + err});
+            });
             this.goBack();
         },
         openContactSelect: function () {
@@ -58,27 +57,27 @@
             });
             return (
                 <div className="content without-tab-bar">
-                <div id="new-message">
-                <div className="recipients" onTouchEnd={this.openContactSelect}>
-                <div className="to">To:</div>
-                <div className="names">{r}</div>
-                <div className="add-btn">
-                <i className="fa fa-list"></i>
+                    <div id="new-message">
+                        <div className="recipients" onTouchEnd={this.openContactSelect}>
+                            <div className="to">To:</div>
+                            <div className="names">{r}</div>
+                            <div className="add-btn">
+                                <i className="fa fa-list"></i>
                 <span
-                className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
-                </div>
-                </div>
-                <div className="subject-inputs">
-                <input type="text" ref="subject" className="subject" placeholder="Subject"/>
+                    className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
+                            </div>
+                        </div>
+                        <div className="subject-inputs">
+                            <input type="text" ref="subject" className="subject" placeholder="Subject"/>
 
-                <div className="attach-btn" onTouchEnd={this.openFileSelect}>
-                <i className="fa fa-paperclip"></i>
+                            <div className="attach-btn" onTouchEnd={this.openFileSelect}>
+                                <i className="fa fa-paperclip"></i>
                 <span
-                className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
-                </div>
-                </div>
-                <textarea ref="message" className="message" placeholder="Type your message"></textarea>
-                </div>
+                    className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
+                            </div>
+                        </div>
+                        <textarea ref="message" className="message" placeholder="Type your message"></textarea>
+                    </div>
                 </div>
             );
         }
