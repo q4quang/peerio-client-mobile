@@ -67,7 +67,7 @@
                     item = item.getDOMNode();
                     item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
                     if (item) {
-                        item.scrollIntoView(this.scrollIntoItem.alignToTop, {behavior: "smooth"});
+                        item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: 'smooth'});
                     }
                 }
                 this.scrollIntoItem = null;
@@ -106,7 +106,7 @@
                         items: items,
                         upperItem: items.length && items[0] || null
                     }, () => this.loading = false);
-                })
+                });
         },
 
         // parent component calls this

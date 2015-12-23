@@ -27,7 +27,7 @@
       Peerio.Action.showConfirm({
         headline: 'Remove file from this device?',
         text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
-        onAccept: ()=>Peerio.user.files.dict[this.props.params.id].deleteFromCache
+        onAccept: ()=>Peerio.user.files.dict[this.props.params.id].deleteFromCache()
       });
     },
     handleRemove: function () {
@@ -41,7 +41,7 @@
       Peerio.Action.showConfirm({
         headline: 'Destroy file completely?',
         text: 'This file will be deleted from your device, cloud and from the clouds of other users who you have shared it with.',
-        onAccept: ()=>Peerio.user.files.dict[this.props.params.id].nuke
+        onAccept: ()=>Peerio.user.files.dict[this.props.params.id].nuke()
       });
     },
     render: function () {
