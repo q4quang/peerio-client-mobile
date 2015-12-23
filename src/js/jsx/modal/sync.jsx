@@ -34,7 +34,7 @@
                 Peerio.NativeAPI.hideKeyboard();
 
                 this.setState({doRender: true});
-            }, 2000);
+            }, 3000);
         },
         updateProgress: function (current, max, message) {
             var lastStart = this.state.lastStart && this.state.message === message ? this.state.lastStart : Date.now();

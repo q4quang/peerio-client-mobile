@@ -54,6 +54,10 @@
             return Peerio.Conversation.getPrevPage(lastSeqID, pageSize);
         },
 
+        getItemsRange: function(from, to){
+            return Peerio.Conversation.getRange(from, to);
+        },
+
 
         render: function () {
             return this.state.tryLoading ? (
@@ -63,6 +67,7 @@
                     ref='Messages'
                     onGetPage={this.getPage}
                     onGetPrevPage={this.getPrevPage}
+                    onGetItemsRange={this.getItemsRange}
                     itemKeyName='id'
                     itemComponent={Peerio.UI.ConversationsItem}/>)
                 : <Peerio.UI.ConversationsPlaceholder/>;
