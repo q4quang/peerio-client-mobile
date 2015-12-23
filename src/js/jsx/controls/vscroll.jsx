@@ -55,19 +55,19 @@
         componentWillMount: function () {
             this.itemsHash = {};
             this.props.reverse ?
-                this.loadPrevPageStateAware() :
-                this.loadNextPageStateAware();
+                this.loadPrevPage() :
+                this.loadNextPage();
             this.renderedItemsLimit = this.props.pageCount * 2;
         },
 
         componentDidUpdate: function () {
-            if (false && this.scrollIntoItem) {
+            if (this.scrollIntoItem) {
                 var item = this.refs[this.scrollIntoItem.key];
                 if (item) {
                     item = item.getDOMNode();
                     item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
                     if (item) {
-                        item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: "smooth"});
+                        item.scrollIntoView(this.scrollIntoItem.alignToTop, {behavior: "smooth"});
                     }
                 }
                 this.scrollIntoItem = null;
@@ -82,8 +82,31 @@
         },
 
         // parent component calls this
-        refreshPage: function () {
+        refresh: function () {
 
+            if (this.loading) this.doRefresh = true;
+            this.loading = true;
+            this.doRefresh = false;
+            // in case view was empty there is nothing to refresh, we load page as usual
+            if (this.state.items.length === 0) {
+                this.loading = false;
+                this.props.reverse ?
+                    this.loadPrevPage() :
+                    this.loadNextPage();
+                return;
+            }
+
+            this.props.onGetItemsRange(this.getFirstItem().seqID, this.getLastItem().seqID)
+                .then(items=> {
+                    this.itemsHash = {};
+                    for (var i = 0; i < items.length; i++) {
+                        this.itemsHash[items[i][this.props.itemKeyName]] = items[i];
+                    }
+                    this.setState({
+                        items: items,
+                        upperItem: items.length && items[0] || null
+                    }, () => this.loading = false);
+                })
         },
         // parent component calls this
         deleteItems: function (items) {
@@ -108,7 +131,7 @@
             return !this.state.lastPageZeroLength;
         },
 
-        loadPageStateAware: function (append, onGetPage) {
+        loadPage: function (append, onGetPage) {
             if (this.loading) return;
             if (!(this.hasMoreItemsBottom() || this.hasMoreItemsTop())) return;
             this.loading = true;
@@ -171,38 +194,40 @@
                     upperItem: append || (itemsPage.length >= this.props.pageCount) ? upperItem : null,
                     items: items,
                     lastPageZeroLength: append && (itemsPage.length < this.props.pageCount) || (items.length < this.props.pageCount)
-                }, () => this.loading = false);
+                }, () => {
+                    this.loading = false;
+                    this.doRefresh && this.refresh();
+                });
 
             });
         },
 
-        loadPrevPageStateAware: function () {
-            this.loadPageStateAware(false,
+        loadPrevPage: function () {
+            this.loadPage(false,
                 () => {
                     return this.props.onGetPrevPage(
                         this.getFirstItem(), this.props.pageCount);
                 });
         },
 
-        loadNextPageStateAware: function () {
-            this.loadPageStateAware(true,
+        loadNextPage: function () {
+            this.loadPage(true,
                 () => {
                     return this.props.onGetPage(
                         this.getLastItem(), this.props.pageCount);
                 });
         },
 
-
         onscroll: function () {
             var node = this.refs.vscroll.getDOMNode();
             // thirty is a magic number which was calculated
             // using virgin's blood and a pair of Mayan dice
             if ((node.scrollHeight - node.clientHeight - node.scrollTop) < 30) {
-                this.loadNextPageStateAwareThrottled();
+                this.loadNextPage();
             }
 
             if (node.scrollTop == 0) {
-                this.loadPrevPageStateAwareThrottled();
+                this.loadPrevPage();
             }
         },
         spinner: (<div className="list-item loader-item"><span className="fa fa-circle-o-notch fa-spin"></span></div>),
