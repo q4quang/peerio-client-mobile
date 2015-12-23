@@ -133,9 +133,11 @@
             Peerio.NativeAPI.hideKeyboard();
             // TODO validate input
             Peerio.user = Peerio.User.create(userNode.value);
+            Peerio.NativeAPI.preventSleep();
             Peerio.user.login(passNode.value)
             .then(this.handleLoginSuccess)
-            .catch(this.handleLoginFail);
+            .catch(this.handleLoginFail)
+            .finally(Peerio.NativeAPI.allowSleep);
         },
         // change focus to passphrase input on enter
         handleKeyDownLogin: function (e) {

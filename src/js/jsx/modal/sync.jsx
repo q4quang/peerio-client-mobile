@@ -77,7 +77,7 @@
                             <div className="fa fa-info-circle sync-info-icon"></div>
                             <div className="sync-info-text">
                                 For optimal experience and performance Peerio stores some of your encrypted data on your
-                                device. This may take a moment if you have a lot of new messages.
+                                device. This may take a moment if you have a lot of messages.
                             </div>
                         </div>
 

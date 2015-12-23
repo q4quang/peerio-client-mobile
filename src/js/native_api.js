@@ -132,6 +132,26 @@ Peerio.NativeAPI.init = function () {
         return console.log.bind(console, getGenericMsg('disableScrollingInShrinkView'));
     };
 
+    api.preventSleep = function () {
+        window.plugins.insomnia.keepAwake();
+    };
+
+    initializers.preventSleep = function(){
+        if(window.plugins && window.plugins.insomnia) return;
+
+        return console.log.bind(console, getGenericMsg('preventSleep'));
+    };
+
+    api.allowSleep = function () {
+        window.plugins.insomnia.allowSleepAgain();
+    };
+
+    initializers.allowSleep = function(){
+        if(window.plugins && window.plugins.insomnia) return;
+
+        return console.log.bind(console, getGenericMsg('allowSleep'));
+    };
+
 
 
     /**
