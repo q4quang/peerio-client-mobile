@@ -96,7 +96,7 @@
                 return;
             }
 
-            this.props.onGetItemsRange(this.getFirstItem().seqID, this.getLastItem().seqID)
+            this.props.onGetItemsRange(this.getLastItem().seqID, this.getFirstItem().seqID)
                 .then(items=> {
                     this.itemsHash = {};
                     for (var i = 0; i < items.length; i++) {
