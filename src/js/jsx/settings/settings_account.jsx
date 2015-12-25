@@ -40,8 +40,8 @@
         getSettings: function() {
             return {
                 newAddressText: '',
-                firstName: Peerio.user.settings.firstName,
-                lastName: Peerio.user.settings.lastName,
+                firstName: Peerio.user.firstName,
+                lastName: Peerio.user.lastName,
                 addresses: this.getAddresses()
             };
         },
