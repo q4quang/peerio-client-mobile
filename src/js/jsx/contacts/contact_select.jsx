@@ -55,6 +55,9 @@
 
       return (
         <div className="modal contact-select">
+            <p className="info-label">
+            Please select your recipients
+            </p>
           <ul className="contact-list">
             {contacts}
           </ul>

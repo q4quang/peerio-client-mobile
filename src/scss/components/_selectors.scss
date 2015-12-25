@@ -54,14 +54,14 @@ $buttons-height:125px;
   overflow-x: hidden;
   overflow-y: scroll;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   background-color: white;
   ul {
-    position: absolute;
+/*    position: absolute; 
     top: 0;
     left: 0;
     right: 0;
-    bottom: $buttons-height;
+    bottom: $buttons-height; */
     list-style: none;
     margin: 0;
     padding: 0;
@@ -79,9 +79,11 @@ $buttons-height:125px;
   .contact {
     padding: 10px;
     font-size: 1rem;
-    border-bottom: 1px solid darken(color(list-item-bg), 5%);
+/*  are you sure we need that many borders? 
+    border-bottom: 1px solid darken(color(list-item-bg), 5%); */
     position: relative;
-    background-color: color(list-item-bg);
+/*  and backgrounds? 
+    background-color: color(list-item-bg); */
     .checkbox-input{
       margin-right: 10px;
     }
