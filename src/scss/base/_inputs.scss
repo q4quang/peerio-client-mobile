@@ -200,3 +200,35 @@ $text-input-fontsize: 1rem;
   color: #BD8B8B;
   font-weight: bold;
 }
+
+/** trying to refactor settings look a little bit, let's call it rectangular **/
+.content-padded.rectangular {
+    background: #EFEFEF !important;
+    .text-input {
+        border: 1px solid #DFDFDF;
+        background: white;
+        padding: 10px;
+    }
+
+    .text-input:focus {
+        border: 1px solid #2795D0;
+    }
+
+    .text-input-label {
+        font-size: 80%;
+        position: static;
+        margin-left: 5px;
+        
+    }
+
+    .text-input-group {
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .text-mono {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
+

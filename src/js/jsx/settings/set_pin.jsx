@@ -90,7 +90,7 @@
             }
 
             return (
-                <div className="content-padded">
+                <div className="content-padded without-tab-bar">
                     <div className="info-label">Device PIN</div>
 
                     <Peerio.UI.TalkativeProgress
