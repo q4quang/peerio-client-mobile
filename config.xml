@@ -38,7 +38,8 @@
         <preference name="AndroidPersistentFileLocation" value="Internal" />
         <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
         <preference name="AndroidLaunchMode" value="singleTop" />
-        <preference name="android-minSdkVersion" value="15" />
+        <preference name="android-minSdkVersion" value="16" />
+        <preference name="android-targetSdkVersion" value="23" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -103,4 +104,6 @@
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
     <plugin name="nl.x-services.plugins.insomnia" spec="~4.0.1" />
+    <plugin name="cordova-plugin-safariviewcontroller" spec="~1.2.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.1.1" />
 </widget>

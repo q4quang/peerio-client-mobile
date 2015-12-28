@@ -16,7 +16,7 @@ Peerio.NativeAPI.init = function () {
     delete Peerio.NativeAPI.init;
 
     var cordova = window.cordova;
-    var initializers = {};
+    var safariView = window.SafariViewController;
 
     // Hardware/OS event handlers
     document.addEventListener('pause', Peerio.Action.pause, false);
@@ -33,111 +33,82 @@ Peerio.NativeAPI.init = function () {
 
 
     //----- internal helpers
-    function getGenericMsg(name) {
-        return (name ? name + ': ' : '') + 'Native API not available';
-    }
-
-    function getFileApiGenericInitializer(name) {
-        return function () {
-            if (cordova && cordova.file) return;
-
-            return Promise.reject.bind(null, getGenericMsg(name));
-        };
-    }
-
     /**
      * Opens url in inAppBrowser
      * @param url
      */
     api.openInBrowser = function (url) {
-        if (!window.SafariViewController) {
-            cordova.InAppBrowser.open(url, '_blank', 'location=yes');
+        var open = cordova.InAppBrowser.open || window.open;
+
+        if (!safariView) {
+            open && open(url, '_blank', 'location=yes');
             return;
         }
 
-        SafariViewController.isAvailable(function (available) {
+        safariView.isAvailable(function (available) {
             if (!available) {
-                cordova.InAppBrowser.open(url, '_blank', 'location=yes');
+                open && open(url, '_blank', 'location=yes');
                 return;
             }
-            SafariViewController.show({
-                    'url': url,
-                    'enterReaderModeIfAvailable': false
-                },
+            safariView.show({'url': url, 'enterReaderModeIfAvailable': false},
                 function (msg) {
-                    // success callback
-                },
+                }, // success callbacl
                 function (msg) {
                     L.error(msg);
                 });
         });
     };
 
-    initializers.openInBrowser = function () {
-        if (window.SafariViewController || cordova && cordova.InAppBrowser) return;
 
-        return window.open;
-    };
+    function isKeyboardPluginAvailable() {
+        if (window.Keyboard) return true;
+        L.info('Native API: Keyboard plugin not available.');
+        return false;
+    }
 
     /**
      * Hide software keyboard
      */
     api.hideKeyboard = function () {
+        if (!isKeyboardPluginAvailable()) return;
+
         Keyboard.hide();
-    };
-
-    initializers.hideKeyboard = function () {
-        if (window.Keyboard && Keyboard.hide)
-            return;
-
-        return console.log.bind(console, getGenericMsg('hideKeyboard'));
     };
 
     /**
      * For IOS only. Hides 'accessory bar' with 'next', 'previous' and 'done' buttons.
      */
     api.hideKeyboardAccessoryBar = function (hide) {
+        if (!isKeyboardPluginAvailable()) return;
         Keyboard.hideFormAccessoryBar(hide);
     };
 
-    initializers.hideKeyboardAccessoryBar = function () {
-        if (window.Keyboard && Keyboard.hideFormAccessoryBar)
-            return;
-
-        return console.log.bind(console, getGenericMsg('hideKeyboardAccessoryBar'));
-    };
     /**
      *  When keyboard is open, shrinks the webview instead of viewport
      */
     api.shrinkViewOnKeyboardOpen = function (shrink) {
+        if (!isKeyboardPluginAvailable()) return;
         Keyboard.shrinkView(shrink);
-    };
-
-    initializers.shrinkViewOnKeyboardOpen = function () {
-        if (window.Keyboard && Keyboard.shrinkView)
-            return;
-
-        return console.log.bind(console, getGenericMsg('shrinkViewOnKeyboardOpen'));
     };
 
     ////
     api.disableScrollingInShrinkView = function (disable) {
+        if (!isKeyboardPluginAvailable()) return;
         Keyboard.disableScrollingInShrinkView(disable);
     };
 
-    initializers.disableScrollingInShrinkView = function () {
-        if (window.Keyboard && Keyboard.disableScrollingInShrinkView)
-            return;
-
-        return console.log.bind(console, getGenericMsg('disableScrollingInShrinkView'));
-    };
+    function isInsomniaPluginAvailable(){
+        if(window.plugins && window.plugins.insomnia) return true;
+        L.info('Native API: Insomnia plugin not available.');
+        return false;
+    }
 
     api.preventSleep = function () {
         window.plugins.insomnia.keepAwake();
     };
 
-    initializers.preventSleep = function(){
-        if(window.plugins && window.plugins.insomnia) return;
+    initializers.preventSleep = function () {
+        if (window.plugins && window.plugins.insomnia) return;
 
         return console.log.bind(console, getGenericMsg('preventSleep'));
     };
@@ -146,12 +117,11 @@ Peerio.NativeAPI.init = function () {
         window.plugins.insomnia.allowSleepAgain();
     };
 
-    initializers.allowSleep = function(){
-        if(window.plugins && window.plugins.insomnia) return;
+    initializers.allowSleep = function () {
+        if (window.plugins && window.plugins.insomnia) return;
 
         return console.log.bind(console, getGenericMsg('allowSleep'));
     };
-
 
 
     /**
@@ -185,15 +155,15 @@ Peerio.NativeAPI.init = function () {
         });
     };
 
-    api.pluginsAvailable = function() {
+    api.pluginsAvailable = function () {
         return !(typeof cordova === 'undefined'
-            || typeof cordova.plugins === 'undefined'
-               || typeof cordova.plugins.clipboard === 'undefined');
+        || typeof cordova.plugins === 'undefined'
+        || typeof cordova.plugins.clipboard === 'undefined');
     };
 
-    api.copyToClipboard = function(text) {
-        return new Promise( (resolve, reject) => {
-            if(!api.pluginsAvailable()) {
+    api.copyToClipboard = function (text) {
+        return new Promise((resolve, reject) => {
+            if (!api.pluginsAvailable()) {
                 L.info('clipboard is unavailable on the platform');
                 reject('clipboard is unavailable on the platform');
             } else {
@@ -211,38 +181,38 @@ Peerio.NativeAPI.init = function () {
 
     /**
      * Enables push notifications (if possible on the platform)
-     * @returns {bool} - whether enabling notifications was successful or not
+     * @returns {Promise<bool>} - whether enabling notifications was successful or not
      */
     api.enablePushNotifications = function () {
-        return new Promise(function(resolve, reject) {
-            if(typeof PushNotification === 'undefined') {
+        return new Promise(function (resolve, reject) {
+            if (typeof PushNotification === 'undefined') {
                 L.info('push notifications are unavailable on the platform');
                 reject('push notifications are unavailable on the platform');
             }
             L.info('enabling push notifications');
-            var push = PushNotification.init({
-             'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}} );
-            push.on('registration', function(data) {
-                L.info( 'push notification reg.id: ' + data.registrationId );
-                if( window.device && window.device.platform ) {
+            var push = PushNotification.init({'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}});
+
+            push.on('registration', function (data) {
+                L.info('push notification reg.id: ' + data.registrationId);
+                if (window.device && window.device.platform) {
                     var platform = window.device.platform.toLowerCase();
                     var to_send = {};
                     to_send[platform] = data.registrationId;
-                    Peerio.Net.registerMobileDevice( to_send );
+                    Peerio.Net.registerMobileDevice(to_send);
                     window.L.info(to_send);
                     api.push = push;
                     resolve(to_send);
                 }
             });
-            push.on('notification', function(data) {
-                L.info( 'push notification message: ' + data.message );
-                L.info( 'push notification title: ' + data.title );
-                L.info( 'push notification count: ' + data.count );
+            push.on('notification', function (data) {
+                L.info('push notification message: ' + data.message);
+                L.info('push notification title: ' + data.title);
+                L.info('push notification count: ' + data.count);
             });
 
-            push.on('error', function(e) {
-                L.info( 'push notification error: ' + e.message );
-                reject( 'push notification error: ' + e.message );
+            push.on('error', function (e) {
+                L.info('push notification error: ' + e.message);
+                reject('push notification error: ' + e.message);
             });
             L.info('push notifications enabled');
         });
@@ -252,14 +222,14 @@ Peerio.NativeAPI.init = function () {
      * Disables push notifications
      * @returns Promise
      */
-    api.disablePushNotifications = function() {
-        return new Promise(function(resolve, reject) {
-            if(api.push) {
-                api.push.unregister(function() {
-                    L.info( 'push unregister succeeded');
+    api.disablePushNotifications = function () {
+        return new Promise(function (resolve, reject) {
+            if (api.push) {
+                api.push.unregister(function () {
+                    L.info('push unregister succeeded');
                     resolve('unregister success');
-                }, function() {
-                    L.info( 'push unregister failed');
+                }, function () {
+                    L.info('push unregister failed');
                     reject('unregister failed');
                 });
             } else {
@@ -292,7 +262,7 @@ Peerio.NativeAPI.init = function () {
     /**
      * It was like this in the existing code
      */
-    api.signOut = function() {
+    api.signOut = function () {
         window.location.reload();
     };
 //--------------------------------------------------------------------------------------------------------------------
