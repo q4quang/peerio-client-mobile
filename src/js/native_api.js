@@ -31,7 +31,6 @@ Peerio.NativeAPI.init = function () {
     window.addEventListener('keyboardWillHide', Peerio.Action.keyboardWillHide, true);
     window.addEventListener('keyboardDidHide', Peerio.Action.keyboardDidHide, true);
 
-
     //----- internal helpers
     function getGenericMsg(name) {
         return (name ? name + ': ' : '') + 'Native API not available';
@@ -61,15 +60,13 @@ Peerio.NativeAPI.init = function () {
                 return;
             }
             SafariViewController.show({
-                    'url': url,
-                    'enterReaderModeIfAvailable': false
-                },
-                function (msg) {
-                    // success callback
-                },
-                function (msg) {
-                    L.error(msg);
-                });
+                'url': url,
+                'enterReaderModeIfAvailable': false
+            }, function (msg) {
+                // success callback
+            }, function (msg) {
+                L.error(msg);
+            });
         });
     };
 
@@ -87,8 +84,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     initializers.hideKeyboard = function () {
-        if (window.Keyboard && Keyboard.hide)
-            return;
+        if (window.Keyboard && Keyboard.hide) return;
 
         return console.log.bind(console, getGenericMsg('hideKeyboard'));
     };
@@ -101,8 +97,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     initializers.hideKeyboardAccessoryBar = function () {
-        if (window.Keyboard && Keyboard.hideFormAccessoryBar)
-            return;
+        if (window.Keyboard && Keyboard.hideFormAccessoryBar) return;
 
         return console.log.bind(console, getGenericMsg('hideKeyboardAccessoryBar'));
     };
@@ -114,8 +109,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     initializers.shrinkViewOnKeyboardOpen = function () {
-        if (window.Keyboard && Keyboard.shrinkView)
-            return;
+        if (window.Keyboard && Keyboard.shrinkView) return;
 
         return console.log.bind(console, getGenericMsg('shrinkViewOnKeyboardOpen'));
     };
@@ -126,8 +120,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     initializers.disableScrollingInShrinkView = function () {
-        if (window.Keyboard && Keyboard.disableScrollingInShrinkView)
-            return;
+        if (window.Keyboard && Keyboard.disableScrollingInShrinkView) return;
 
         return console.log.bind(console, getGenericMsg('disableScrollingInShrinkView'));
     };
@@ -136,8 +129,8 @@ Peerio.NativeAPI.init = function () {
         window.plugins.insomnia.keepAwake();
     };
 
-    initializers.preventSleep = function(){
-        if(window.plugins && window.plugins.insomnia) return;
+    initializers.preventSleep = function () {
+        if (window.plugins && window.plugins.insomnia) return;
 
         return console.log.bind(console, getGenericMsg('preventSleep'));
     };
@@ -146,20 +139,18 @@ Peerio.NativeAPI.init = function () {
         window.plugins.insomnia.allowSleepAgain();
     };
 
-    initializers.allowSleep = function(){
-        if(window.plugins && window.plugins.insomnia) return;
+    initializers.allowSleep = function () {
+        if (window.plugins && window.plugins.insomnia) return;
 
         return console.log.bind(console, getGenericMsg('allowSleep'));
     };
-
-
 
     /**
      * Get app version from config.xml
      * @param {function(string)} callback
      */
     api.getAppVersion = function () {
-        return (window.AppVersion && AppVersion.version) || 'n/a';
+        return window.AppVersion && AppVersion.version || 'n/a';
     };
 
     /**
@@ -169,39 +160,36 @@ Peerio.NativeAPI.init = function () {
      */
     api.takePicture = function (camera) {
         return new Promise(function (resolve, reject) {
-            navigator.camera.getPicture(resolve, reject,
-                { // please, don't change properties without (re)reading docs on them first and testing result after
-                    // yes, Anri, especially you!
-                    sourceType: camera ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
-                    destinationType: Camera.DestinationType.FILE_URI,
-                    encodingType: Camera.EncodingType.JPEG,
-                    mediaType: Camera.MediaType.ALLMEDIA,
-                    cameraDirection: Camera.Direction.BACK,
-                    allowEdit: false,
-                    correctOrientation: true,
-                    saveToPhotoAlbum: false,
-                    quality: 90
-                });
+            navigator.camera.getPicture(resolve, reject, { // please, don't change properties without (re)reading docs on them first and testing result after
+                // yes, Anri, especially you!
+                sourceType: camera ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
+                destinationType: Camera.DestinationType.FILE_URI,
+                encodingType: Camera.EncodingType.JPEG,
+                mediaType: Camera.MediaType.ALLMEDIA,
+                cameraDirection: Camera.Direction.BACK,
+                allowEdit: false,
+                correctOrientation: true,
+                saveToPhotoAlbum: false,
+                quality: 90
+            });
         });
     };
 
-    api.pluginsAvailable = function() {
-        return !(typeof cordova === 'undefined'
-            || typeof cordova.plugins === 'undefined'
-               || typeof cordova.plugins.clipboard === 'undefined');
+    api.pluginsAvailable = function () {
+        return !(typeof cordova === 'undefined' || typeof cordova.plugins === 'undefined' || typeof cordova.plugins.clipboard === 'undefined');
     };
 
-    api.copyToClipboard = function(text) {
-        return new Promise( (resolve, reject) => {
-            if(!api.pluginsAvailable()) {
+    api.copyToClipboard = function (text) {
+        return new Promise(function (resolve, reject) {
+            if (!api.pluginsAvailable()) {
                 L.info('clipboard is unavailable on the platform');
                 reject('clipboard is unavailable on the platform');
             } else {
                 var clipboard = cordova.plugins.clipboard;
-                clipboard.copy(text, () => {
+                clipboard.copy(text, function () {
                     L.info('copied successfully');
                     resolve('copied successfully');
-                }, () => {
+                }, function () {
                     L.info('copy failed');
                     reject('copy failed');
                 });
@@ -214,36 +202,39 @@ Peerio.NativeAPI.init = function () {
      * @returns {bool} - whether enabling notifications was successful or not
      */
     api.enablePushNotifications = function () {
-        return new Promise(function(resolve, reject) {
-            if(typeof PushNotification === 'undefined') {
+        return new Promise(function (resolve, reject) {
+            if (typeof PushNotification === 'undefined') {
                 L.info('push notifications are unavailable on the platform');
                 reject('push notifications are unavailable on the platform');
             }
             L.info('enabling push notifications');
             var push = PushNotification.init({
-             'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}} );
-            push.on('registration', function(data) {
-                L.info( 'push notification reg.id: ' + data.registrationId );
-                if( window.device && window.device.platform ) {
+                'ios': { 'alert': 'true', 'badge': 'true', 'sound': 'true' },
+                'android': { 'senderID': Peerio.Config.push.android.senderId }
+            });
+            push.on('registration', function (data) {
+                L.info('push notification reg.id: ' + data.registrationId);
+                if (window.device && window.device.platform) {
                     var platform = window.device.platform.toLowerCase();
                     var to_send = {};
                     to_send[platform] = data.registrationId;
-                    Peerio.Net.registerMobileDevice( to_send );
+                    Peerio.Net.registerMobileDevice(to_send);
                     window.L.info(to_send);
                     api.push = push;
                     resolve(to_send);
                 }
             });
-            push.on('notification', function(data) {
-                L.info( 'push notification message: ' + data.message );
-                L.info( 'push notification title: ' + data.title );
-                L.info( 'push notification count: ' + data.count );
+            push.on('notification', function (data) {
+                L.info('push notification message: ' + data.message);
+                L.info('push notification title: ' + data.title);
+                L.info('push notification count: ' + data.count);
             });
 
-            push.on('error', function(e) {
-                L.info( 'push notification error: ' + e.message );
-                reject( 'push notification error: ' + e.message );
+            push.on('error', function (e) {
+                L.info('push notification error: ' + e.message);
+                reject('push notification error: ' + e.message);
             });
+
             L.info('push notifications enabled');
         });
     };
@@ -252,14 +243,14 @@ Peerio.NativeAPI.init = function () {
      * Disables push notifications
      * @returns Promise
      */
-    api.disablePushNotifications = function() {
-        return new Promise(function(resolve, reject) {
-            if(api.push) {
-                api.push.unregister(function() {
-                    L.info( 'push unregister succeeded');
+    api.disablePushNotifications = function () {
+        return new Promise(function (resolve, reject) {
+            if (api.push) {
+                api.push.unregister(function () {
+                    L.info('push unregister succeeded');
                     resolve('unregister success');
-                }, function() {
-                    L.info( 'push unregister failed');
+                }, function () {
+                    L.info('push unregister failed');
                     reject('unregister failed');
                 });
             } else {
@@ -268,9 +259,26 @@ Peerio.NativeAPI.init = function () {
         });
     };
 
+    /**
+     * Sets badge number 
+     */
+    api.setPushBadge = function(number) {
+        api.push && api.push.setApplicationIconBadgeNumber( () => {
+            L.info('push badge number set');
+        }, (e) => {
+            L.error('error setting push badge number');
+        }, number);
+    };
+
+    /**
+     * Clears badge
+     */
+    api.clearPushBadge = function() {
+        api.setPushBadge(0);
+    };
+
     initializers.takePicture = function () {
-        if (navigator.camera)
-            return;
+        if (navigator.camera) return;
 
         return console.log.bind(console, getGenericMsg('takePicture'));
     };
@@ -283,8 +291,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     initializers.cleanupCamera = function () {
-        if (navigator.camera)
-            return;
+        if (navigator.camera) return;
 
         return console.log.bind(console, getGenericMsg('cleanupCamera'));
     };
@@ -292,10 +299,10 @@ Peerio.NativeAPI.init = function () {
     /**
      * It was like this in the existing code
      */
-    api.signOut = function() {
+    api.signOut = function () {
         window.location.reload();
     };
-//--------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------
     _.forOwn(initializers, function (fn, name) {
         // if initializer returns alternative function
         // (usually a mock that is safe to call)
