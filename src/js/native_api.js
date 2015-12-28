@@ -32,7 +32,7 @@ Peerio.NativeAPI.init = function () {
     window.addEventListener('keyboardDidHide', Peerio.Action.keyboardDidHide, true);
 
 
-    //----- internal helpers
+
     /**
      * Opens url in inAppBrowser
      * @param url
@@ -51,8 +51,7 @@ Peerio.NativeAPI.init = function () {
                 return;
             }
             safariView.show({'url': url, 'enterReaderModeIfAvailable': false},
-                function (msg) {
-                }, // success callbacl
+                function (msg) {}, // success callbakc
                 function (msg) {
                     L.error(msg);
                 });
@@ -123,13 +122,12 @@ Peerio.NativeAPI.init = function () {
         return console.log.bind(console, getGenericMsg('allowSleep'));
     };
 
-
     /**
      * Get app version from config.xml
      * @param {function(string)} callback
      */
     api.getAppVersion = function () {
-        return (window.AppVersion && AppVersion.version) || 'n/a';
+        return window.AppVersion && AppVersion.version || 'n/a';
     };
 
     /**
@@ -139,8 +137,7 @@ Peerio.NativeAPI.init = function () {
      */
     api.takePicture = function (camera) {
         return new Promise(function (resolve, reject) {
-            navigator.camera.getPicture(resolve, reject,
-                { // please, don't change properties without (re)reading docs on them first and testing result after
+            navigator.camera.getPicture(resolve, reject, { // please, don't change properties without (re)reading docs on them first and testing result after
                     // yes, Anri, especially you!
                     sourceType: camera ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
                     destinationType: Camera.DestinationType.FILE_URI,
@@ -156,9 +153,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     api.pluginsAvailable = function () {
-        return !(typeof cordova === 'undefined'
-        || typeof cordova.plugins === 'undefined'
-        || typeof cordova.plugins.clipboard === 'undefined');
+        return !(typeof cordova === 'undefined' || typeof cordova.plugins === 'undefined' || typeof cordova.plugins.clipboard === 'undefined');
     };
 
     api.copyToClipboard = function (text) {
@@ -168,10 +163,10 @@ Peerio.NativeAPI.init = function () {
                 reject('clipboard is unavailable on the platform');
             } else {
                 var clipboard = cordova.plugins.clipboard;
-                clipboard.copy(text, () => {
+                clipboard.copy(text, function () {
                     L.info('copied successfully');
                     resolve('copied successfully');
-                }, () => {
+                }, function () {
                     L.info('copy failed');
                     reject('copy failed');
                 });
@@ -190,8 +185,10 @@ Peerio.NativeAPI.init = function () {
                 reject('push notifications are unavailable on the platform');
             }
             L.info('enabling push notifications');
-            var push = PushNotification.init({'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'}});
-
+            var push = PushNotification.init({
+                'ios': { 'alert': 'true', 'badge': 'true', 'sound': 'true' },
+                'android': { 'senderID': Peerio.Config.push.android.senderId }
+            });
             push.on('registration', function (data) {
                 L.info('push notification reg.id: ' + data.registrationId);
                 if (window.device && window.device.platform) {
@@ -214,6 +211,7 @@ Peerio.NativeAPI.init = function () {
                 L.info('push notification error: ' + e.message);
                 reject('push notification error: ' + e.message);
             });
+
             L.info('push notifications enabled');
         });
     };
@@ -238,9 +236,26 @@ Peerio.NativeAPI.init = function () {
         });
     };
 
+    /**
+     * Sets badge number 
+     */
+    api.setPushBadge = function(number) {
+        api.push && api.push.setApplicationIconBadgeNumber( () => {
+            L.info('push badge number set');
+        }, (e) => {
+            L.error('error setting push badge number');
+        }, number);
+    };
+
+    /**
+     * Clears badge
+     */
+    api.clearPushBadge = function() {
+        api.setPushBadge(0);
+    };
+
     initializers.takePicture = function () {
-        if (navigator.camera)
-            return;
+        if (navigator.camera) return;
 
         return console.log.bind(console, getGenericMsg('takePicture'));
     };
@@ -253,8 +268,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     initializers.cleanupCamera = function () {
-        if (navigator.camera)
-            return;
+        if (navigator.camera) return;
 
         return console.log.bind(console, getGenericMsg('cleanupCamera'));
     };

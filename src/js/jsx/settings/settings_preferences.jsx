@@ -74,7 +74,7 @@
         },                
         render: function(){
             return (
-                <div className="content-padded">
+                <div className="content-padded without-tab-bar">
                     {/* TODO: add language selection
                         <div className="text-input-group">
                         <label className="info-label col-4">Language:</label>

@@ -76,19 +76,25 @@
         handleLoginSuccess: function () {
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
-            Peerio.NativeAPI.enablePushNotifications();
+            Peerio.NativeAPI.enablePushNotifications().then( () => Peerio.NativeAPI.clearPushBadge() );
             this.transitionTo('messages');
         },
         handleLoginFail: function (error) {
             this.setState({waitingForLogin: false});
             // if we got a 2FA request
-            if(error && error.code === 424) {
+            if( error && error.code === 424 ) {
                 console.log('Handling 2FA');
                 return;
             }
 
             if( error && error.code === 411 ) {
                 // we don't need to do anything here now
+            }
+
+            if( error && error.code === 404 ) {
+                // should override it as "bad credentials"
+                // maybe this should be done at server side
+                error.message = 'Bad credentials';
             }
 
             Peerio.Action.showAlert({text: 'Login failed. ' + (error ? (' Error message: ' + error.message) : '')});

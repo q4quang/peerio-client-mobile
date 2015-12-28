@@ -40,8 +40,8 @@
         getSettings: function() {
             return {
                 newAddressText: '',
-                firstName: Peerio.user.settings.firstName,
-                lastName: Peerio.user.settings.lastName,
+                firstName: Peerio.user.firstName,
+                lastName: Peerio.user.lastName,
                 addresses: this.getAddresses()
             };
         },
@@ -162,10 +162,11 @@
         render: function () {
             var deleteAccountStyle = { 'margin-top': '2em'};
             return (
-                <div className="content-padded flex-col">
+                <div>
+                <div className="without-tab-bar content-padded rectangular flex-col">
                     <div className="flex-col-1">
-
-                        <div className="text-input-group col-12">
+                        <div className="text-input-group">
+                            <label className="text-input-label" htmlFor="first-name">First Name</label>
                             <input className="text-input"
                                    id="first-name"
                                    type="text"
@@ -174,10 +175,10 @@
                                    onChange={this.updateFirstName}
                                    onBlur={this.updateFirstName}
                             />
-                            <label className="text-input-label" htmlFor="first-name">First Name</label>
                         </div>
-                        <div className="text-input-group col-12">
-                            <input className="text-input"
+                        <div className="text-input-group">
+                            <label className="text-input-label rectangular" htmlFor="first-name">Last Name</label>
+                            <input className="text-input rectangular"
                                    id="last-name"
                                    type="text"
                                    required="required"
@@ -185,36 +186,41 @@
                                    onChange={this.updateLastName}
                                    onBlur={this.updateLastName}
                             />
-                            <label className="text-input-label" htmlFor="first-name">Last Name</label>
                         </div>
-
-                        <div className="info-label col-8">Addresses</div>
-                        <div className="subhead-inline col-2">primary</div>
-                        <div className="subhead-inline col-2">remove</div>
-                        { this.state.addresses.map((address, index) =>
+                        <div className="text-input-group">
+                            <div className="info-label">Addresses</div>
+                            <div className="col-8">&nbsp;</div>
+                            <div className="subhead-inline col-2">primary</div>
+                            <div className="subhead-inline col-2">remove</div>
+                            { this.state.addresses.map((address, index) =>
                         <Peerio.UI.AccountSettingsItem key={index} id={index}
                                                        data={address}
                                                        removeAddress={this.removeAddress}
                                                        setPrimaryAddress={this.setPrimaryAddress}/>) }
-                        <div>
-                            <div className="col-8">
-                                <input type="text" className="text-input" placeholder="add phone or email"
-                                       onChange={this.onAddressChange} value={this.state.newAddressText}/>
-                            </div>
-                            <div className="col-4 text-center">
-                                <Peerio.UI.Tappable className="btn-sm" onTap={this.addNewAddress}>
-                                    add
-                                </Peerio.UI.Tappable>
+                            <div>
+                                <div className="col-8">
+                                    <input type="text" className="text-input" placeholder="add phone or email"
+                                           onChange={this.onAddressChange} value={this.state.newAddressText}/>
+                                </div>
+                                <div className="col-4 text-center">
+                                    <Peerio.UI.Tappable className="btn-sm" onTap={this.addNewAddress}>
+                                        add
+                                    </Peerio.UI.Tappable>
+                                </div>
                             </div>
                         </div>
-                        <hr/>
-                        <div className="info-label">Your public key:</div>
-                        <span className="text-mono">{Peerio.user.publicKey}</span>
-                        <div className="info-label" style={deleteAccountStyle}>Delete your account</div>
-                        <Peerio.UI.Tappable className="btn-link btn-danger" onTap={this.deleteAccount}>delete your
-                            account</Peerio.UI.Tappable>
+                        <div className="text-input-group">
+                            <div className="info-label">Your public key:</div>
+                            <span className="text-mono">{Peerio.user.publicKey}</span>
+                        </div>
+                        <div className="text-input-group">
+                            <div className="info-label">Delete your account</div>
+                            <Peerio.UI.Tappable className="btn-link btn-danger" onTap={this.deleteAccount}>delete your
+                                account</Peerio.UI.Tappable>
+                        </div>
                     </div>
-                    <RouteHandler/>
+                </div>
+                <RouteHandler/>
                 </div>
             );
         }

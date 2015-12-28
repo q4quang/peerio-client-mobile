@@ -14,7 +14,7 @@
         },
 
         cancel: function () {
-            this.props.onCancel(this.props.address, this.refs.textInput.getDOMNode().value);
+            this.props.onCancel && this.props.onCancel(this.props.address, this.refs.textInput.getDOMNode().value);
             this.removeDialog();
         },
 
