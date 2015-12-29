@@ -76,7 +76,9 @@
         handleLoginSuccess: function () {
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
-            Peerio.NativeAPI.enablePushNotifications().then( () => Peerio.NativeAPI.clearPushBadge() );
+            Peerio.NativeAPI.enablePushNotifications()
+            .catch( (error) => L.error(error) )
+            .finally( () => Peerio.NativeAPI.clearPushBadge() );
             this.transitionTo('messages');
         },
         handleLoginFail: function (error) {
