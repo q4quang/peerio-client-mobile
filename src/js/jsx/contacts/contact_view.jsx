@@ -93,7 +93,7 @@
                         <div className="info-block">
                             <div className="info-label">State:</div>
                             <div className="col-12 info-content">{ this.contact.isMe ? 'This is you!' :
-                                (this.contact.isRequest ? 'Pending: ' + (this.contact.isRecievedRequest ? 'you received request.' : 'you sent request')
+                                (this.contact.isRequest ? 'Pending: ' + (this.contact.isReceivedRequest ? 'you received request.' : 'you sent request')
                                     : 'Established contact')}</div>
                         </div>
 
