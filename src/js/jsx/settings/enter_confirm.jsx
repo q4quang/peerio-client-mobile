@@ -6,25 +6,20 @@
 
         componentDidMount: function () {
             var element = React.findDOMNode(this.refs.textInput);
-            element.focus(); //TODO: looks like it works on ios but not android.
-        },
-
-        removeDialog: function() {
-            this.replaceWith('/app/settings/account');
+            //TODO: looks like it works on ios but not android.
+            element && element.focus(); 
         },
 
         cancel: function () {
-            this.props.onCancel && this.props.onCancel(this.props.address, this.refs.textInput.getDOMNode().value);
-            this.removeDialog();
+            this.props.onCancel(this.props.address, this.refs.textInput.getDOMNode().value);
         },
 
         ok: function () {
             this.props.onPrompt(this.props.address, this.refs.textInput.getDOMNode().value);
-            this.removeDialog();
         },
         //--- RENDER
         render: function () {
-            return (
+            return !this.props.visible ? null : (
                 <div className="content-inline-dialog">
                     <div className="info-label">
                         Please enter the code you received on your e-mail or phone
