@@ -1,42 +1,42 @@
-(function() {
+(function () {
     'use strict';
 
     Peerio.UI.AccountSettings = React.createClass({
         mixins: [ReactRouter.Navigation],
 
-        getInitialState: function() {
+        getInitialState: function () {
             return this.getSettings();
         },
 
-        componentDidMount: function() {
+        componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onSettingsUpdated(() => {
-                    this.setState({ addresses: this.getAddresses() });
+                    this.setState({addresses: this.getAddresses()});
                 }),
                 Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
                 Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend),
             ];
         },
 
-        componentWillUnmount: function() {
+        componentWillUnmount: function () {
             this.updateName();
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
 
-        handle2FA: function(resolve, reject) {
+        handle2FA: function (resolve, reject) {
             this.resolve2FA = resolve;
             this.reject2FA = reject;
             L.info('2fa requested');
             this.transitionTo('account_settings_2fa_prompt');
         },
 
-        handle2FAResend: function() {
+        handle2FAResend: function () {
             L.info('2fa resend requested');
             this.resolve2FA('succesfully entered 2fa code');
         },
 
 
-        getSettings: function() {
+        getSettings: function () {
             return {
                 newAddressText: '',
                 firstName: Peerio.user.firstName,
@@ -45,7 +45,7 @@
             };
         },
 
-        getAddresses: function() {
+        getAddresses: function () {
             var addresses = [];
 
             if (Peerio.user.addresses) {
@@ -57,62 +57,62 @@
             }
             return addresses;
         },
-        updateName: function() {
-            this.doUpdateName = this.doUpdateName || _.throttle(function() {
-                return Peerio.user.setName(this.state.firstName, this.state.lastName);
-            }, 1000);
+        updateName: function () {
+            this.doUpdateName = this.doUpdateName || _.throttle(function () {
+                    return Peerio.user.setName(this.state.firstName, this.state.lastName);
+                }, 1000);
             this.doUpdateName();
         },
 
-        updateFirstName: function(event) {
-            this.setState({ firstName: event.target.value });
+        updateFirstName: function (event) {
+            this.setState({firstName: event.target.value});
         },
 
-        updateLastName: function(event) {
-            this.setState({ lastName: event.target.value });
+        updateLastName: function (event) {
+            this.setState({lastName: event.target.value});
         },
 
-        onAddressChange: function(event) {
-            this.setState({ newAddressText: event.target.value });
+        onAddressChange: function (event) {
+            this.setState({newAddressText: event.target.value});
         },
 
-        clearAddressText: function() {
-            this.setState({ newAddressText: '' });
+        clearAddressText: function () {
+            this.setState({newAddressText: ''});
         },
 
-        confirmAddress: function(address, code) {
+        confirmAddress: function (address, code) {
             this.clearAddressText();
-            this.setState({ confirmationDialogVisible: false });
+            this.setState({confirmationDialogVisible: false});
             Peerio.user.confirmAddress(address, code)
                 .then(() => {
-                    this.setState({ addresses: this.getAddresses() });
-                    Peerio.Action.showAlert({ text: 'Address authorized' });
+                    this.setState({addresses: this.getAddresses()});
+                    Peerio.Action.showAlert({text: 'Address authorized'});
                 })
                 .catch(() => {
-                    Peerio.Action.showAlert({ text: 'Error authorizing address' });
+                    Peerio.Action.showAlert({text: 'Error authorizing address'});
                     this.removeAddress(address, code);
                 });
         },
 
-        removeAddress: function(address, code) {
-            this.setState({ confirmationDialogVisible: false });
+        removeAddress: function (address, code) {
+            this.setState({confirmationDialogVisible: false});
             this.clearAddressText();
             Peerio.user.removeAddress(address)
                 .then(() => {
-                    this.setState({ addresses: this.getAddresses() });
+                    this.setState({addresses: this.getAddresses()});
                 });
         },
 
-        setPrimaryAddress: function(address) {
+        setPrimaryAddress: function (address) {
             Peerio.user.setPrimaryAddress(address);
         },
 
-        confirm2FA: function(address) {
-            this.setState({ newAddressText: address });
+        confirm2FA: function (address) {
+            this.setState({newAddressText: address});
             this.addNewAddress(true);
         },
 
-        addNewAddress: function(skip2FA) {
+        addNewAddress: function (skip2FA) {
             //TODO: valid email or phone number.
             var newAddress = this.state.newAddressText;
             var emailRegex = new RegExp(/^([\w+-]+(?:\.[\w+-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
@@ -126,26 +126,28 @@
                     .then((response) => {
                         response ?
                             Peerio.user.addAddress(newAddress).then(() => {
-                                this.setState({ addresses: self.getAddresses(),
-                                    confirmationDialogVisible: true });
-                            }) : Peerio.Action.showAlert({ text: 'Sorry, that address is already taken' });
+                                this.setState({
+                                    addresses: self.getAddresses(),
+                                    confirmationDialogVisible: true
+                                });
+                            }) : Peerio.Action.showAlert({text: 'Sorry, that address is already taken'});
                     });
             } else {
-                Peerio.Action.showAlert({ text: 'Sorry, that doesn\'t look like a valid email or phone number.' });
+                Peerio.Action.showAlert({text: 'Sorry, that doesn\'t look like a valid email or phone number.'});
             }
 
         },
 
-        deleteAccount: function() {
+        deleteAccount: function () {
             Peerio.Action.showConfirm({
                 headline: 'Delete account',
                 text: 'Are you sure you want to delete account?',
-                onAccept: function() {
-                    Peerio.user.closeAccount().then(function() {
+                onAccept: function () {
+                    Peerio.user.closeAccount().then(function () {
                         Peerio.Action.showAlert({
                             text: 'Account deleted. Signing out.',
-                            onClose: function(code) {
-                                Peerio.NativeAPI.signOut();
+                            onClose: function () {
+                                window.location.reload();
                             }
                         });
                     });
@@ -153,14 +155,13 @@
             });
         },
 
-        render: function() {
-            var deleteAccountStyle = { 'margin-top': '2em' };
+        render: function () {
             var addressItems = this.state.addresses.map(
                 (address, index) =>
-                <Peerio.UI.AccountSettingsItem key={index} id={index}
-                    data={address}
-                    removeAddress={ this.removeAddress }
-                    setPrimaryAddress={ this.setPrimaryAddress }/>); 
+                    <Peerio.UI.AccountSettingsItem key={index} id={index}
+                                                   data={address}
+                                                   removeAddress={ this.removeAddress }
+                                                   setPrimaryAddress={ this.setPrimaryAddress }/>);
 
             return (
                 <div>
@@ -169,32 +170,32 @@
                             <div className="text-input-group col-12">
                                 <label className="text-input-label" htmlFor="first-name">First Name</label>
                                 <input className="text-input"
-                                    id="first-name"
-                                    type="text"
-                                    required="required"
-                                    value={ this.state.firstName }
-                                    onChange={ this.updateFirstName }
-                                    onBlur={ this.updateFirstName }
+                                       id="first-name"
+                                       type="text"
+                                       required="required"
+                                       value={ this.state.firstName }
+                                       onChange={ this.updateFirstName }
+                                       onBlur={ this.updateFirstName }
                                 />
                             </div>
                             <div className="text-input-group col-12">
                                 <label className="text-input-label rectangular" htmlFor="first-name">Last Name</label>
                                 <input className="text-input rectangular"
-                                    id="last-name"
-                                    type="text"
-                                    required="required"
-                                    value={ this.state.lastName }
-                                    onChange={ this.updateLastName }
-                                    onBlur={ this.updateLastName }
+                                       id="last-name"
+                                       type="text"
+                                       required="required"
+                                       value={ this.state.lastName }
+                                       onChange={ this.updateLastName }
+                                       onBlur={ this.updateLastName }
                                 />
                             </div>
                             <div className="text-input-group">
                                 <div className="info-label">Addresses</div>
-                                {addressItems} 
+                                {addressItems}
                                 <div>
                                     <div className="col-8">
                                         <input type="text" className="text-input" placeholder="add phone or email"
-                                            onChange={ this.onAddressChange } value={ this.state.newAddressText }/>
+                                               onChange={ this.onAddressChange } value={ this.state.newAddressText }/>
                                     </div>
                                     <div className="col-4 text-center">
                                         <Peerio.UI.Tappable className="btn-sm btn-block" onTap={ this.addNewAddress }>
@@ -209,14 +210,15 @@
                             </div>
                             <div className="text-input-group">
                                 <div className="info-label">Delete your account</div>
-                                <Peerio.UI.Tappable className="btn-link btn-danger" onTap={ this.deleteAccount }>delete your
+                                <Peerio.UI.Tappable className="btn-link btn-danger" onTap={ this.deleteAccount }>delete
+                                    your
                                     account</Peerio.UI.Tappable>
                             </div>
                         </div>
                     </div>
                     <RouteHandler/>
-                    <Peerio.UI.EnterConfirm 
-                        onPrompt={ this.confirmAddress } 
+                    <Peerio.UI.EnterConfirm
+                        onPrompt={ this.confirmAddress }
                         onCancel={ this.removeAddress }
                         address={ this.state.newAddressText }
                         visible={ this.state.confirmationDialogVisible }/>

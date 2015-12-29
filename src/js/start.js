@@ -55,9 +55,9 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
             Peerio.NativeAPI.init();
 
-            Peerio.NativeAPI.hideKeyboardAccessoryBar(false);
-            Peerio.NativeAPI.shrinkViewOnKeyboardOpen(true);
-            Peerio.NativeAPI.disableScrollingInShrinkView(true);
+            Peerio.NativeAPI.showKeyboardAccessoryBar();
+            Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
+            Peerio.NativeAPI.disableScrollingInShrinkView();
 
             Peerio.FileSystemPlugin.init();
 
