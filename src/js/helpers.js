@@ -232,4 +232,11 @@ Peerio.Helpers.init = function () {
         var i = Math.floor(Math.log(bytes) / Math.log(k));
         return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
     };
+
+    /**
+     * Validates first or last name in signup and settings
+     */
+    api.isNameValid = function(name) {
+        return !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i);
+    };
 };

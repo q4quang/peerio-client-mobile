@@ -98,7 +98,7 @@
         validateFirstName: function () {
             var name = this.refs.firstName.getDOMNode().value;
             this.setState({
-                firstNameValid: !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i),
+                firstNameValid: Peerio.Helpers.isNameValid(name),
                 firstName: name
             });
         },
@@ -106,7 +106,7 @@
         validateLastName: function () {
             var name = this.refs.lastName.getDOMNode().value;
             this.setState({
-                lastNameValid: !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i),
+                lastNameValid: Peerio.Helpers.isNameValid(name),
                 lastName: name
             });
         },
