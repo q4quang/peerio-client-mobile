@@ -43,8 +43,6 @@ Peerio.ActionExtension.init = function () {
         'KeyboardWillShow',
         'KeyboardDidShow',
         'KeyboardWillHide',
-        'KeyboardDidHide',
-        'SetOnline',
-        'SetOffline'
+        'KeyboardDidHide'
     ].forEach(Peerio.Action.add);
 };

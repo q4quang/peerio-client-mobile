@@ -4,12 +4,12 @@
     Peerio.UI.Root = React.createClass({
         componentWillMount: function () {
 
-            Peerio.Dispatcher.onSetOnline( () => {
+            Peerio.Dispatcher.onOnline( () => {
                 L.info('ONLINE event received from Navigator. Connecting socket. ');
                 Peerio.Socket.connect();
             });
 
-            Peerio.Dispatcher.onSetOffline( () => {
+            Peerio.Dispatcher.onOffline( () => {
                 L.info('OFFLINE event received from Navigator. Connecting socket. ');
                 Peerio.Socket.disconnect();
             });
