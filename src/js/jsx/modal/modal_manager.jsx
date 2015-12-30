@@ -29,7 +29,7 @@
 
         componentWillMount: function () {
             // when adding a new modal, just add it here, everything else is universal
-            this.subscriptios = [
+            this.subscriptions = [
                 Peerio.Dispatcher.onShowAlert(this.showModal.bind(this, Peerio.UI.Alert)),
                 Peerio.Dispatcher.onShowConfirm(this.showModal.bind(this, Peerio.UI.Confirm)),
                 Peerio.Dispatcher.onShowPrompt(this.showModal.bind(this, Peerio.UI.Prompt)),
@@ -43,7 +43,7 @@
         },
 
         componentWillUnmount: function () {
-            Peerio.Dispatcher.unsubscribe(this.subscriptios);
+            Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
 
         // generic function to show modal
@@ -80,20 +80,21 @@
         },
 
         render: function () {
+            var className = Peerio.runtime.platform + ' modal_container';
             if (this.state.activeModals.length === 0) return null;
 
             // bluring active elemtn and hiding keyboard
             // so our modal looks normal and not like always
-            if(document.activeElement) {
+            /*            if(document.activeElement) {
                 document.activeElement.blur();
             }
-            Peerio.NativeAPI.hideKeyboard();
+            Peerio.NativeAPI.hideKeyboard(); */
 
             var nodes = [];
             for (var i = 0; i < this.state.activeModals.length; i++)
                 nodes.push(this.state.activeModals[i].component);
 
-            return (<div className={Peerio.runtime.platform}>{nodes}</div>);
+            return (<div className={className}>{nodes}</div>);
         }
     });
 

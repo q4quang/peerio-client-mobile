@@ -65,11 +65,13 @@
         },
 
         updateFirstName: function (event) {
-            this.setState({firstName: event.target.value});
+            var name = event.target.value;
+            Peerio.Helpers.isNameValid(name) && this.setState({firstName: name });
         },
 
         updateLastName: function (event) {
-            this.setState({lastName: event.target.value});
+            var name = event.target.value;
+            Peerio.Helpers.isNameValid(name) && this.setState({lastName: name });
         },
 
         onAddressChange: function (event) {

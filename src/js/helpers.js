@@ -204,6 +204,14 @@ Peerio.Helpers.init = function () {
             api.fileTypeByExt[ext] = type.type;
         });
     });
+
+    api.getFileName = function(filePath) {
+        return filePath.replace(/^.*[\\\/]/, '');
+    };
+
+    api.getFileNameWithoutExtension = function(filePath) {
+        return api.getFileName(filePath).replace(/\..*?$/, '');
+    };
     /**
      * Extracts extension from file name
      * @param fileName
@@ -231,5 +239,12 @@ Peerio.Helpers.init = function () {
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         var i = Math.floor(Math.log(bytes) / Math.log(k));
         return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
+    };
+
+    /**
+     * Validates first or last name in signup and settings
+     */
+    api.isNameValid = function(name) {
+        return !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i);
     };
 };

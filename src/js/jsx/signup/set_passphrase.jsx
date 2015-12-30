@@ -21,8 +21,10 @@
 
         validatePassPhrase: function () {
             var passphrase_confirmed = event.target.value === this.props.passphrase;
+            var passphrase_alert = event.target.value.length && !passphrase_confirmed;
             this.setState({
-                passphrase_valid: passphrase_confirmed
+                passphrase_valid: passphrase_confirmed,
+                passphrase_alert: passphrase_alert
             });
         },
 
@@ -37,11 +39,11 @@
         //--- RENDER
         render: function () {
             var createPassPhrase = this.state.passphrase_valid ?
-                <Peerio.UI.Tappable element="div" className="btn-lrg" 
+                (<Peerio.UI.Tappable element="div" className="btn-lrg" 
                     onTap={this.passPhraseIsValid}> 
                     Create my account
-                </Peerio.UI.Tappable>
-                    : null;
+                </Peerio.UI.Tappable>) : null;
+            var passphraseMsg = this.state.passphrase_alert && 'Passphrase does not match';
 
                     return (
                         <div className="content-inline-dialog">
@@ -54,6 +56,7 @@
                                     autoCapitalize="off" spellCheck="false"
                                     onChange={this.validatePassPhrase}>
                                 </textarea>
+                                <p className="info-small text-center">{passphraseMsg}</p>
                                 {createPassPhrase}
                                 <Peerio.UI.Tappable element="div" className="btn-subtle" 
                                     onTap={this.removeDialog}> 
