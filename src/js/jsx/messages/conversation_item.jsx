@@ -43,7 +43,7 @@
                 thisAck = ack;
             } else {
                 var filesCount = item.files.length ?
-                    <div className="file-count">{item.files.length} files attached.</div> : null;
+                    <div className="file-count">{item.files.length} {item.files.length > 1 ? 'files' : 'file'} attached.</div> : null;
 
                 body = (<div className="body">{filesCount}
                         <Peerio.UI.Linkify text={item.body}
