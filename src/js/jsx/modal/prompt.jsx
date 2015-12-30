@@ -15,6 +15,18 @@
     'use strict';
 
     Peerio.UI.Prompt = React.createClass({
+        statics: {
+            show: function(params) {
+                return new Promise( (resolve, reject) => {
+                    Peerio.Action.showPrompt({
+                        headline: params.headline,
+                        text: params.text,
+                        onAccept: resolve,
+                        onCancel: reject
+                    });
+                });
+            }
+        },
         getInitialState: function () {
             return {promptValue: ''};
         },
@@ -29,7 +41,7 @@
 
             var btns = this.props.btns || <div>
                     <div className="col-6">
-                        <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
                     </div>
                     <div className="col-6">
                         <Peerio.UI.Tappable element="div" className="btn-lrg"
@@ -61,9 +73,15 @@
                 </div>
             );
         },
+
+        handleCancel: function(ev) {
+            this.props.onClose();
+            this.props.onCancel && this.props.onCancel('user pressed cancel');
+        },
+
         handleAction: function (ev) {
             this.props.onClose();
-            this.props.onAccept(this.state.promptValue);
+            this.props.onAccept && this.props.onAccept(this.state.promptValue);
         }
     });
 
