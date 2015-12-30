@@ -20,6 +20,12 @@ Peerio.Config.init = function () {
 
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
+        cfg.push = {
+            android: {
+                senderId: '605156423279'
+            }
+        };
+
         // network timeout for send to socket function
         cfg.networkTimeout = 10000;
 
