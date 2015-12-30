@@ -204,6 +204,14 @@ Peerio.Helpers.init = function () {
             api.fileTypeByExt[ext] = type.type;
         });
     });
+
+    api.getFileName = function(filePath) {
+        return filePath.replace(/^.*[\\\/]/, '');
+    };
+
+    api.getFileNameWithoutExtension = function(filePath) {
+        return api.getFileName(filePath).replace(/\..*?$/, '');
+    };
     /**
      * Extracts extension from file name
      * @param fileName

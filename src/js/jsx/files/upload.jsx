@@ -4,8 +4,26 @@
   Peerio.UI.Upload = React.createClass({
     handleTakePicture: function (camera) {
       Peerio.NativeAPI.takePicture(camera)
-        .then(function (fileUrl) {
-          return Peerio.user.uploadFile(fileUrl)
+      .then( (fileUrl) => {
+          return new Promise( (resolve, reject) => {
+              var fileExtension = Peerio.Helpers.getFileExtension(fileUrl);
+              var fileName = Peerio.Helpers.getFileNameWithoutExtension(fileUrl);
+              Peerio.UI.Prompt.show({
+                  text: 'Enter filename:', 
+                  promptValue: fileName,
+                  minLength: 1
+              })
+              .then( (fileName) => {
+                  resolve({
+                      fileUrl: fileUrl,
+                      fileName: fileName + '.' + fileExtension
+                  });
+              })
+              .catch(reject);
+          });
+      })
+        .then(function (file) {
+          return Peerio.user.uploadFile(file)
             .finally(function () {
               if (camera) Peerio.NativeAPI.cleanupCamera();
             });

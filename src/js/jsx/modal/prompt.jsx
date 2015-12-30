@@ -18,34 +18,36 @@
         statics: {
             show: function(params) {
                 return new Promise( (resolve, reject) => {
-                    Peerio.Action.showPrompt({
-                        headline: params.headline,
-                        text: params.text,
-                        onAccept: resolve,
-                        onCancel: reject
-                    });
+                    params.onAccept = resolve;
+                    params.onCancel = reject;
+                    Peerio.Action.showPrompt(params);
                 });
             }
         },
         getInitialState: function () {
-            return {promptValue: ''};
+            return {promptValue: this.props.promptValue};
         },
         updatePromptValue: function (event) {
             this.setState({promptValue: event.target.value});
         },
+        isValueValid: function() {
+            return (this.props.minLength > 0) == 
+                (this.state.promptValue && this.state.promptValue.length >= this.props.minLength);
+        },
         componentDidMount: function () {
-            var element = React.findDOMNode(this.refs.promptInput);
-            element.focus(); //TODO: looks like it works on ios but not android.
+            var input = this.refs.promptInput.getDOMNode();
+            input.focus();
         },
         render: function () {
-
             var btns = this.props.btns || <div>
                     <div className="col-6">
                         <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
                     </div>
                     <div className="col-6">
-                        <Peerio.UI.Tappable element="div" className="btn-lrg"
-                                            onTap={this.handleAction}>OK</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable 
+                            element="div" 
+                            className={'btn-lrg ' + (this.isValueValid() ? null : 'btn-subtle')}
+                            onTap={this.isValueValid() ? this.handleAction : null}>OK</Peerio.UI.Tappable>
                     </div>
                 </div>;
 
