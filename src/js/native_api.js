@@ -23,8 +23,6 @@ Peerio.NativeAPI.init = function () {
     document.addEventListener('resume', Peerio.Action.resume, false);
     document.addEventListener('backbutton', Peerio.Action.hardBackButton, true);
     document.addEventListener('menubutton', Peerio.Action.hardMenuButton, true);
-    window.addEventListener('offline', Peerio.Action.setOffline, false);
-    window.addEventListener('online', Peerio.Action.setOnline, false);
     window.addEventListener('keyboardHeightWillChange', Peerio.Action.viewShrink, true);
     window.addEventListener('keyboardWillShow', Peerio.Action.keyboardWillShow, true);
     window.addEventListener('keyboardDidShow', Peerio.Action.keyboardDidShow, true);
