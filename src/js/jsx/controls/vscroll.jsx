@@ -79,6 +79,10 @@
                 this.alreadyUpdated = true;
             }
         },
+
+        scrollToBottom: function() {
+            this.refs.bottomScrollHook.getDOMNode().scrollIntoView(false, {behaviour: 'smooth'});
+        },
         
         reset: function() {
 //            this.setState( this.getInitialState(), () => this.componentWillMount() );
@@ -270,7 +274,7 @@
 
             var loader = this.hasMoreItemsBottom() ? this.spinner : null;
 
-            var bottomScrollHook = (<div className="bottomScrollHook"></div>);
+            var bottomScrollHook = (<div className="bottomScrollHook" ref="bottomScrollHook"></div>);
 
             return (
                 <div className={'vscroll ' + this.props.className} id="vscroll" ref="vscroll">

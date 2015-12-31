@@ -29,7 +29,8 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onBigGreenButton(this.reply),
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
-                Peerio.Dispatcher.onConversationsUpdated(this.handleMessagesUpdated)
+                Peerio.Dispatcher.onConversationsUpdated(this.handleMessagesUpdated),
+                Peerio.Dispatcher.onKeyboardDidShow(() => this.refs.content.scrollToBottom())
             ];
 
             // to update relative timestamps
