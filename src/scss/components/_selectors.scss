@@ -37,7 +37,7 @@ item with the `.selected` class. Selector also has special styles for positionin
 
 */
 
-$buttons-height:125px;
+$buttons-height:120px;
 
 .contact-select-container {
   position: absolute;
@@ -57,11 +57,11 @@ $buttons-height:125px;
   padding: 10px;
   background-color: white;
   ul {
-/*    position: absolute; 
-    top: 0;
+    position: absolute; 
+    top: 30px;
     left: 0;
     right: 0;
-    bottom: $buttons-height; */
+    bottom: $buttons-height; 
     list-style: none;
     margin: 0;
     padding: 0;
