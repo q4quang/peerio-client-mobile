@@ -61,7 +61,7 @@
         },
         inviteByEmail: function () {
             Peerio.Net.inviteUserAddress(this.state.searchString);
-            Peerio.Action.showAlert({text: 'We\'ve sent an invite email to' + this.state.searchString});
+            Peerio.Action.showAlert({text: 'We\'ve sent an invite email to ' + this.state.searchString});
         },
         handleAddContact: function () {
             if (this.selectedUsers.length === 0) {
