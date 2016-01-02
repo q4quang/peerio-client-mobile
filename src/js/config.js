@@ -20,12 +20,21 @@ Peerio.Config.init = function () {
 
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
-        // network timeout for send to socket function
-        cfg.serverResponseTimeout = 15000;
+        cfg.dbPrefix = /\/\/(.*)\.peerio\.com/.exec(cfg.webSocketServer)[1];
+        if (cfg.dbPrefix === 'app') cfg.dbPrefix = '';
+
+        cfg.push = {
+            android: {
+                senderId: '605156423279'
+            }
+        };
 
         cfg.cpuCount = navigator.hardwareConcurrency || 1;
         // if client will not receive pings for pingTimeout, connection will be considered broken
         cfg.pingTimeout = 50000;
+
+        // network timeout for send to socket function
+        cfg.serverResponseTimeout = 15000;
 
         cfg.appVersion = 'n/a';
 
@@ -33,11 +42,6 @@ Peerio.Config.init = function () {
         // This secret key will be used for low-importance data encryption to store in on device.
         cfg.lowImportanceDeviceKey = 'f0905d253a79'; // change this to reset TinyDB values due to inability to decrypt them anymore :-D
 
-        cfg.push = {
-            android: {
-                senderId: '605156423279'
-            }
-        };
 
         // using cordova AppVersion plugin if available
         if (window.AppVersion && AppVersion.version)
