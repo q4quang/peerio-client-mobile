@@ -27,17 +27,7 @@
             }, 2000);
 
         },
-        //addContactCallback: function (name) {
-        //  Peerio.Contacts.addContact(name);
-        //  //TODO: add success/fail alert.
-        //},
         handleAddContact: function () {
-            //add contact prompt
-            //Peerio.Action.showPrompt({headline: 'Add Contact',
-            //  text: 'Please enter username of the contact you want to add',
-            //  onAccept: this.addContactCallback
-            //});
-            //Transition to add/import contact screen.
             this.transitionTo('add_contact');
         },
         openContactView: function (id) {
