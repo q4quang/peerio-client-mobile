@@ -65,32 +65,31 @@
                 return null;
             }
 
-            var buttonNode = this.contact.isMe ? null : (
-                <div>
-                    { this.contact.isReceivedRequest ? (
-                        <span>
-                                <Peerio.UI.Tappable element="div" className="btn-md btn-safe"
-                                                    onTap={this.handleAccept}>Accept contact request
-                                </Peerio.UI.Tappable>
-                                <Peerio.UI.Tappable element="div" className="btn-md btn-danger"
-                                                    onTap={this.handleReject}>Reject contact request
-                                </Peerio.UI.Tappable>
-                        </span>) : null
-                    }
+            var buttons = [];
 
+            if (!this.contact.isMe) {
+                if (this.contact.isReceivedRequest) {
+                    buttons.push(
+                        <Peerio.UI.Tappable element="div" className="btn-md btn-safe"
+                                            onTap={this.handleAccept}>Accept contact request
+                        </Peerio.UI.Tappable>,
+                        <Peerio.UI.Tappable element="div" className="btn-md btn-danger"
+                                            onTap={this.handleReject}>Reject contact request
+                        </Peerio.UI.Tappable>);
+
+                } else buttons.push(
                     <Peerio.UI.Tappable element="div" className="btn-md btn-danger" onTap={this.handleRemove}>
                         Remove contact
-                    </Peerio.UI.Tappable>
-                </div>
-            );
+                    </Peerio.UI.Tappable>);
+            }
 
             var status = 'Established contact.';
 
-            if(this.contact.isMe) {
+            if (this.contact.isMe) {
                 status = 'This is you';
             } else if (this.contact.isReceivedRequest) {
                 status = 'Pending: you received request';
-            } else if (this.contact.isRequest){
+            } else if (this.contact.isRequest) {
                 status = 'Pending: you sent request';
             }
 
@@ -99,7 +98,8 @@
                 <div className="content-padded contact-view">
 
                     <div className="col-2 col-first">
-                        <Peerio.UI.Avatar size="big" username={this.contact.username} className="contact-view-avatar"/>
+                        <Peerio.UI.Avatar size="big" username={this.contact.username}
+                                          className="contact-view-avatar"/>
                     </div>
                     <div className="col-10">
                         <span className="headline">{this.contact.fullName}</span>
@@ -127,7 +127,7 @@
 
                     </div>
 
-                    {buttonNode}
+                    <div>{buttons}</div>
 
                 </div>
             );
