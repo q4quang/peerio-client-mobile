@@ -14,11 +14,11 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         handleUnreadStateChange: function () {
-            if(!Peerio.user.unreadState.contacts) return;
+            if(!Peerio.user.unreadState.files) return;
 
             window.setTimeout(()=> {
-                if (this.isMounted() && Peerio.user.unreadState.contacts)
-                    Peerio.user.setContactsUnreadState(false);
+                if (this.isMounted() && Peerio.user.unreadState.files)
+                    Peerio.user.setFilesUnreadState(false);
             }, 2000);
 
         },
