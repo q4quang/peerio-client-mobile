@@ -22,8 +22,8 @@
             if (file.size / 1024 / 1024 > 100) {
 
                 Peerio.Action.showConfirm({
-                    headline: 'File size warning',
-                    text: 'Hey, we are sorry, Peerio is in beta and downloading files with size more then 100Mb is not recommended, your app might crash. Do you want to give it a try?',
+                    headline: 'Beta warning',
+                    text: 'Downloading files over 100MB may cause Peerio to crash. We are working to solve this issue. Would you still like to try downloading this file?',
                     onAccept: ()=>this.doDownload(file)
                 });
             } else this.doDownload(file);
