@@ -20,7 +20,8 @@
         removePinModal: function () {
             Peerio.user.removePIN()
                 .then(()=>Peerio.Action.showAlert({text: 'Your PIN has been removed'}))
-                .catch(()=>Peerio.Action.showAlert({text: 'Failed to remove PIN'}));
+                .catch(()=>Peerio.Action.showAlert({text: 'Failed to remove PIN'}))
+                .finally(()=>this.forceUpdate());
         },
         removePIN: function () {
             Peerio.Action.showConfirm({

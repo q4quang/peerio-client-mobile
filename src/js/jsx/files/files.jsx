@@ -9,6 +9,7 @@
                 Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null)),
                 Peerio.Dispatcher.onUnreadStateChanged(this.handleUnreadStateChange.bind(this))
             ];
+            this.handleUnreadStateChange();
         },
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
