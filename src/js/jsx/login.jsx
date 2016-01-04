@@ -30,9 +30,9 @@
             ];
             if (!Peerio.autoLogin) {
                 Peerio.Auth.getSavedLogin()
-                .then(function (data) {
-                    this.setState({savedLogin: data});
-                }.bind(this));
+                    .then(function (data) {
+                        this.setState({savedLogin: data});
+                    }.bind(this));
             }
         },
         componentWillUnmount: function () {
@@ -49,19 +49,19 @@
             }
         },
 
-        handle2FA: function(resolve, reject) {
+        handle2FA: function (resolve, reject) {
             this.resolve2FA = resolve;
             this.reject2FA = reject;
             L.info('2fa requested');
             this.transitionTo('/login/2fa');
         },
 
-        handle2FAResend: function() {
+        handle2FAResend: function () {
             L.info('2fa resend requested');
             this.resolve2FA('succesfully entered 2fa code');
         },
 
-        handle2FAReject: function() {
+        handle2FAReject: function () {
             L.info('2fa rejected by user');
             this.reject2FA({
                 code: 411, // any special code for user cancel?
@@ -77,23 +77,23 @@
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             Peerio.NativeAPI.enablePushNotifications()
-            .catch( (error) => L.error(error) )
-            .finally( () => Peerio.NativeAPI.clearPushBadge() );
+                .catch(error => L.error('Error enabling push notifications. {0}', error))
+                .finally(() => Peerio.NativeAPI.clearPushBadge());
             this.transitionTo('messages');
         },
         handleLoginFail: function (error) {
             this.setState({waitingForLogin: false});
             // if we got a 2FA request
-            if( error && error.code === 424 ) {
+            if (error && error.code === 424) {
                 console.log('Handling 2FA');
                 return;
             }
 
-            if( error && error.code === 411 ) {
+            if (error && error.code === 411) {
                 // we don't need to do anything here now
             }
 
-            if( error && error.code === 404 ) {
+            if (error && error.code === 404) {
                 // should override it as "bad credentials"
                 // maybe this should be done at server side
                 error.message = 'Bad credentials';
@@ -116,8 +116,8 @@
             var element = this.refs.passphrase.getDOMNode();
             var width = element.offsetWidth;
             element.style.fontSize = Math.max(
-                Math.min(width / (element.value.length * this.factor), this.maxFontSize),
-                this.minFontSize) + 'rem';
+                    Math.min(width / (element.value.length * this.factor), this.maxFontSize),
+                    this.minFontSize) + 'rem';
         },
         // initiate login
         handleSubmit: function (e) {
@@ -143,9 +143,9 @@
             Peerio.user = Peerio.User.create(userNode.value);
             Peerio.NativeAPI.preventSleep();
             Peerio.user.login(passNode.value)
-            .then(this.handleLoginSuccess)
-            .catch(this.handleLoginFail)
-            .finally(Peerio.NativeAPI.allowSleep);
+                .then(this.handleLoginSuccess)
+                .catch(this.handleLoginFail)
+                .finally(Peerio.NativeAPI.allowSleep);
         },
         // change focus to passphrase input on enter
         handleKeyDownLogin: function (e) {
@@ -177,37 +177,38 @@
                         <div className="content-wrapper-login">
                             <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
                             <img className="logo" src="media/img/peerio-logo-white-beta.png" alt="Peerio"
-                                onTouchEnd={devmode.summon}/>
+                                 onTouchEnd={devmode.summon}/>
 
                             <form className="loginForm" onSubmit={this.handleSubmit}>
                                 {this.state.savedLogin
                                     ?
-                                        (<Peerio.UI.Tappable element="div" className="saved-login"
-                                            onTap={this.clearLogin}>{this.state.savedLogin.firstName || this.state.savedLogin.username}
-                                            <div className="note">Welcome back.
-                                                <br/>
-                                                Tap here to change or forget username.
-                                            </div>
-                                        </Peerio.UI.Tappable>)
-                                            :
-                                                (<div className="slim-input">
-                                                    <input defaultValue={debugUserName} id="username" ref="username"
-                                                        onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
-                                                        autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                                                        spellCheck="false"/>
+                                    (<Peerio.UI.Tappable element="div" className="saved-login"
+                                                         onTap={this.clearLogin}>{this.state.savedLogin.firstName || this.state.savedLogin.username}
+                                        <div className="note">Welcome back.
+                                            <br/>
+                                            Tap here to change or forget username.
+                                        </div>
+                                    </Peerio.UI.Tappable>)
+                                    :
+                                    (<div className="slim-input">
+                                        <input defaultValue={debugUserName} id="username" ref="username"
+                                               onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
+                                               autoComplete="off" autoCorrect="off" autoCapitalize="off"
+                                               spellCheck="false"/>
 
-                                                    <div>
-                                                        <label htmlFor="username">username</label>
-                                                    </div>
-                                                </div>)
+                                        <div>
+                                            <label htmlFor="username">username</label>
+                                        </div>
+                                    </div>)
                                 }
                                 <div id="passphrase-input" className="slim-input">
                                     <div>
-                                        <input defaultValue={debugPassword} id="password" ref="passphrase" key="passphrase"
-                                            type={passInputType} onChange={this.handlePassphraseChange}
-                                            onKeyDown={this.handleKeyDownPass}
-                                            maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                                            spellCheck="false"/>
+                                        <input defaultValue={debugPassword} id="password" ref="passphrase"
+                                               key="passphrase"
+                                               type={passInputType} onChange={this.handlePassphraseChange}
+                                               onKeyDown={this.handleKeyDownPass}
+                                               maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off"
+                                               spellCheck="false"/>
                                         <label htmlFor="password">passphrase or pin</label>
                                         <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap}>
                                             <i className={'pull-right fa ' + eyeIcon}></i>
@@ -219,29 +220,29 @@
                                         enabled={this.state.waitingForLogin}/>
                                 </div>
                                 <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-lrg btn-safe"
-                                    onTap={this.handleSubmit}>
+                                                    onTap={this.handleSubmit}>
                                     {this.state.waitingForLogin ?
                                         <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
-                                    </Peerio.UI.Tappable>
+                                </Peerio.UI.Tappable>
 
-                                    {this.state.waitingForLogin
-                                        ? null
-                                        : (<Peerio.UI.Tappable element="div" className="btn-lrg"
-                                            onTap={this.transitionTo.bind(this,'signup')}>
-                                            sign up
-                                        </Peerio.UI.Tappable>)}
-                                        {/*
-                                            <div className="text-input-group">
-                                            <label className="info-label col-4" htmlFor="language-select">Language:</label>
-                                            <select id="language-select" className="select-input col-8">
-                                            <option value="">english</option>
-                                            </select>
-                                            </div>*/}
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-           );
+                                {this.state.waitingForLogin
+                                    ? null
+                                    : (<Peerio.UI.Tappable element="div" className="btn-lrg"
+                                                           onTap={this.transitionTo.bind(this,'signup')}>
+                                    sign up
+                                </Peerio.UI.Tappable>)}
+                                {/*
+                                 <div className="text-input-group">
+                                 <label className="info-label col-4" htmlFor="language-select">Language:</label>
+                                 <select id="language-select" className="select-input col-8">
+                                 <option value="">english</option>
+                                 </select>
+                                 </div>*/}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            );
         }
     });
 
