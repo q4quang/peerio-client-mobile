@@ -46,7 +46,7 @@
             if (!newPin) return;
             var self = this;
             self.setState({ inProgress: true });
-            Peerio.Auth.setPIN(newPin, Peerio.user.username, Peerio.user.passphrase)
+            Peerio.user.setPIN(newPin, Peerio.user.username, Peerio.user.passphrase)
                 .then(() => {
                     Peerio.Action.showAlert({text: 'Your PIN is set'});
                     self.setState({ pinIsSet: true });
