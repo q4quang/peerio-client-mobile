@@ -5,19 +5,20 @@
     Peerio.UI.ContactView = React.createClass({
         mixins: [ReactRouter.Navigation],
         componentWillMount: function () {
-            this.contact = Peerio.user.contacts.dict[this.props.params.id];
             this.subscriptions = [
                 Peerio.Dispatcher.onBigGreenButton(this.startConversationWithContact),
                 Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this, null))];
+        },
+
+        componentWillUnmount: function () {
+            Peerio.Dispatcher.unsubscribe(this.subscriptions);
+            Peerio.Action.showBigGreenButton();
         },
 
         startConversationWithContact: function () {
             this.transitionTo('new_message', {id: this.contact.username});
         },
 
-        componentWillUnmount: function () {
-            Peerio.Dispatcher.unsubscribe(this.subscriptions);
-        },
 
         handleAccept: function () {
             this.contact.accept().catch(function (ex) {
@@ -64,6 +65,10 @@
                 this.goBack();
                 return null;
             }
+            if(this.contact.isRequest)
+                Peerio.Action.hideBigGreenButton();
+            else
+                Peerio.Action.showBigGreenButton();
 
             var buttons = [];
 
