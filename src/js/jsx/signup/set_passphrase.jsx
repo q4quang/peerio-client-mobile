@@ -56,7 +56,7 @@
                                     autoCapitalize="off" spellCheck="false"
                                     onChange={this.validatePassPhrase}>
                                 </textarea>
-                                <p className="info-small text-center">{passphraseMsg}</p>
+                                <p className="info-small text-center red-bold">{passphraseMsg}</p>
                                 {createPassPhrase}
                                 <Peerio.UI.Tappable element="div" className="btn-subtle" 
                                     onTap={this.removeDialog}> 
