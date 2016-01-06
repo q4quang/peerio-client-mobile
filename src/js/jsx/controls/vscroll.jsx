@@ -64,7 +64,7 @@
                     item = item.getDOMNode();
                     item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
                     item = item.className != 'bottomScrollHook' && !this.scrollIntoItem.alignToTop && 
-                        item.nextSibling.className == 'bottomScrollHook' ? item.nextSibling : item;
+                        item.nextSibling && item.nextSibling.className == 'bottomScrollHook' ? item.nextSibling : item;
                     if (item) {
                         item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: 'smooth'});
                     }
