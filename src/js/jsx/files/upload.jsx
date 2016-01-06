@@ -4,37 +4,55 @@
     Peerio.UI.Upload = React.createClass({
         handleTakePicture: function (camera) {
             Peerio.NativeAPI.takePicture(camera)
-                .then((fileUrl) => {
-                    return new Promise((resolve, reject) => {
-                        var fileExtension = Peerio.Helpers.getFileExtension(fileUrl);
-                        var fileName = Peerio.Helpers.getFileNameWithoutExtension(fileUrl);
-                        Peerio.UI.Prompt.show({
-                                text: 'Enter filename:',
-                                promptValue: fileName,
-                                minLength: 1
-                            })
-                            .then((fileName) => {
-                                resolve({
-                                    fileUrl: fileUrl,
-                                    fileName: fileName + '.' + fileExtension
-                                });
-                            })
-                            .catch(reject);
-                    });
+                .then(this.confirmFileSize)
+                .then(this.promptForFileName)
+                .then(function (fileInfo) {
+                    return Peerio.user.uploadFile(fileInfo)
+                        .then(function () {
+                            Peerio.Action.showAlert({text: 'Upload complete'});
+                        })
+                        .catch(function (err) {
+                            Peerio.Action.showAlert({text: 'Upload failed. ' + err});
+                        })
                 })
-                .then(function (file) {
-                    return Peerio.user.uploadFile(file)
-                        .finally(function () {
-                            if (camera) Peerio.NativeAPI.cleanupCamera();
-                        });
+                // this catch handles user cancel on confirm/prompt
+                .catch(()=> {
                 })
-                .then(function () {
-                    Peerio.Action.showAlert({text: 'Upload complete'});
-                })
-                .catch(function (err) {
-                    Peerio.Action.showAlert({text: 'Upload failed. ' + err});
+                .finally(function () {
+                    if (camera) Peerio.NativeAPI.cleanupCamera();
                 });
             this.props.onClose();
+        },
+        promptForFileName: function (fileUrl) {
+            var fileExtension = Peerio.Helpers.getFileExtension(fileUrl);
+            var fileName = Peerio.Helpers.getFileNameWithoutExtension(fileUrl);
+            return Peerio.UI.Prompt.show({
+                    text: 'Enter filename:',
+                    promptValue: fileName,
+                    minLength: 1
+                })
+                .then((fileName) => {
+                    return {
+                        fileUrl: fileUrl,
+                        fileName: fileName + '.' + fileExtension
+                    }
+                });
+        },
+        confirmFileSize: function (fileUrl) {
+            return Peerio.FileSystem.plugin.getByURL(fileUrl)
+                .then(Peerio.FileSystem.plugin.getFileProperties)
+                .then(file => {
+                    if (file.size / 1024 / 1024 < 100) return fileUrl;
+                    return new Promise((resolve, reject) => {
+                        Peerio.Action.showConfirm({
+                            headline: 'Beta warning',
+                            text: 'Uploading files over 100MB may cause Peerio to crash. We are working to solve this issue. Would you still like to try uploading this file?',
+                            onAccept: ()=>resolve(fileUrl),
+                            onReject: reject
+                        });
+                    });
+                });
+
         },
         render: function () {
             return (

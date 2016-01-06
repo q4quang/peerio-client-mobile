@@ -20,7 +20,7 @@
 
             var btns = this.props.btns || <div>
                     <div className="col-6">
-                        <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
                     </div>
                     <div className="col-6">
                         <Peerio.UI.Tappable element="div" className="btn-lrg"
@@ -52,6 +52,10 @@
         handleAction: function () {
             this.props.onClose();
             this.props.onAccept();
+        },
+        handleCancel: function(){
+            this.props.onClose();
+            this.props.onReject && this.props.onReject();
         }
     });
 
