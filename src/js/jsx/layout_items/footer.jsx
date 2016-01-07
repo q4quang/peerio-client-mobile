@@ -42,16 +42,15 @@
                 greenButton = (
                     <Peerio.UI.Tappable element="div" className="accept-button"
                                         onTap={greenButton.action || Peerio.Action.bigGreenButton}>
-                        <i className={'fa fa-'+greenButton.icon}/>&nbsp;{greenButton.name}
+                        <i className={'fa fa-'+greenButton.icon}/> {greenButton.name}
                     </Peerio.UI.Tappable>);
 
             return (
                 <div id="footer">
                     <Peerio.UI.Tappable element="div" id="global-back" className={this.isAppRoot() ? 'hide' : ''}
                                         onTap={this.goBack}>
-                        <i className="fa fa-chevron-left"></i>&nbsp;back
+                        <i className="fa fa-chevron-left"></i> back
                     </Peerio.UI.Tappable>
-                    <div className="toolbar-fill"></div>
                     {greenButton}
                 </div>
             );
