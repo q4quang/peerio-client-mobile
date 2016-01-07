@@ -11,8 +11,8 @@ Peerio.UI.Routes = (
         <Route name="signup" path="signup" handler={Peerio.UI.Signup}>
             <Route name="set_passphrase" path="/signup/set_passphrase" handler={Peerio.UI.SetPassphrase} />
         </Route>
+        <Route name="setup_wizard" path="setup_wizard" handler={Peerio.UI.SetupWizard}/>
         <Route name="app" path="app" handler={Peerio.UI.App}>
-
             <Route name='tabs' handler={Peerio.UI.Tabs}>
                 <Route name='messages' handler={Peerio.UI.Conversations}/>
                 <Route name='files' handler={Peerio.UI.Files}/>

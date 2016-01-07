@@ -79,7 +79,8 @@
             Peerio.NativeAPI.enablePushNotifications()
                 .catch(error => L.error('Error enabling push notifications. {0}', error))
                 .finally(() => Peerio.NativeAPI.clearPushBadge());
-            this.transitionTo('messages');
+                // this.transitionTo('messages');
+            this.transitionTo('setup_wizard');
         },
         handleLoginFail: function (error) {
             this.setState({waitingForLogin: false});
