@@ -29,9 +29,13 @@
 
 #sidemenu-toggle, #app-lock, #search {
   display: table-cell;
-  width: 45px;
+  width: 48px;
   vertical-align: middle;
   text-align: center;
+
+  i.fa {
+    margin: 0;
+  }
 }
 
 // navbar section: search block

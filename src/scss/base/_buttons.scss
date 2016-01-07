@@ -36,7 +36,7 @@ Footer Buttons                                       | Button Class/ID
 */
 
 
-@mixin button-ripple(){
+@mixin button-ripple() {
   position: relative;
   &:after{
     content: " ";
@@ -53,7 +53,7 @@ Footer Buttons                                       | Button Class/ID
     background-repeat: no-repeat;
   }
 
-  &.on-touchstart:after{
+  &.on-touchstart:after {
     background-size: 1000%;
     transition: background-size 0.2s ease-in, opacity 0.2s ease-in 0.1s;
     opacity: 0;
@@ -62,7 +62,6 @@ Footer Buttons                                       | Button Class/ID
 
 .btn {
   @include button-ripple;
-  @include button-text-shadow;
   padding: 0.5em;
   font-size: 0.8em;
   text-align: center;
@@ -71,7 +70,7 @@ Footer Buttons                                       | Button Class/ID
   border-radius: 3px;
   color: white;
   width: 100%;
-  background-color: #2795D0;
+  background-color: #2795d0;
 }
 
 .btn-subtle{
@@ -128,7 +127,7 @@ Footer Buttons                                       | Button Class/ID
   background-color:color(danger);
 }
 
-.btn-link.btn-danger{
+.btn-link.btn-danger {
   background-color: transparent;
   text-decoration: underline;
   color: color(danger);
@@ -141,33 +140,41 @@ button:disabled , .btn-disabled {
 }
 
 //green footer button
-.accept-button{
+.accept-button,
+#global-back {
   @include button-ripple;
-  @include button-text-shadow;
-  display:table-cell;
-  padding:0 15px 0 15px;
-  vertical-align: middle;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding:0 8px;
   white-space: nowrap;
-  background-color: color(footer-btn-color);
   color:white;
-  min-width: 120px;
-  text-align: center;
+  height: 48px;
+
+  i{
+    margin-right: $small-margin;
+  }
+}
+
+.accept-button {
+  background-color: color(footer-btn-color);
 }
 
 //footer back button
-#global-back{
-  @include button-ripple;
-  @include button-text-shadow;
-  display: table-cell;
-  vertical-align: middle;
-  width: 100%;
-  text-align: left;
-  padding-left:10px;
-  padding-right: 30px;
-  white-space: nowrap;
-  text-transform:uppercase;
+#global-back {
+  flex-grow: 0;
+  justify-content: flex-start;
+  text-transform:capitalize;
   transition: background-color 0.1s ease-in;
+  padding: 0 $base-padding;
+
   &.on-touchstart {
     background-color: #26384A;
+  }
+
+  &:only-child {
+    flex-grow: 1;
   }
 }

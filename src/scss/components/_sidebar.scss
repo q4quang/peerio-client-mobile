@@ -30,8 +30,8 @@ Click the sidebar in the example to toggle the `.open` state.
 .sidebar {
   position: absolute;
   z-index: $z-sidebar;
-  transition: transform .3s cubic-bezier(.43,.01,.49,.95);
-  transform: translateX(-101%);
+  transition: transform .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translate3d(-101%, 0, 0);
   width: 80%;
   top: $navbar-height;
   bottom: 0;
@@ -41,7 +41,12 @@ Click the sidebar in the example to toggle the `.open` state.
   font-size: 1rem;
   overflow-x: hidden;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
   .sidebar-header{
+    margin-bottom: $base-margin;
+
     @media screen and ( max-height: 480px ){
       width: 150px;
       text-align: left;
@@ -58,8 +63,7 @@ Click the sidebar in the example to toggle the `.open` state.
     color: white;
     opacity: 0.5;
   }
-  display: flex;
-  flex-direction: column;
+
   .flex-1{
     flex-grow: 1;
   }
@@ -67,24 +71,20 @@ Click the sidebar in the example to toggle the `.open` state.
     flex-grow: 0;
   }
   .avatar{
-    margin-bottom: 0.5rem;
+    margin-right: 16px;
   }
 
   &.open {
-    transform: translateX(0);
-    transition-duration: .7s;
+    transform: translate3d(0, 0, 0);
+    transition-duration: .3s
   }
   .fa-mobile {
     // this was a hack placed before me by an unknown author
     // to make sure the mobile icon is visible
     // @seavan
     font-size: 1.5em;
-    // this is a hack I place here in my right mind
-    // to make sure that "Enable two factor auth" looks consistent
-    // with remove pin code
-    // @seavan
-    margin-right: 0.35em;
   }
+
   .sidebar-footer-text{
     margin-top: 1rem;
     .feedback{
@@ -98,11 +98,18 @@ Click the sidebar in the example to toggle the `.open` state.
 
   ul{
     list-style: none;
-    padding:0 1em;
-    margin: 0.5em 0 0 0;
+    padding:0 $base-padding;
+    margin:0 0 $small-margin;
     li {
-      margin-bottom: 0.7em;
+      height: 48px;
+      line-height: 48px;
       font-weight: 100;
+
+      i.fa {
+        margin-right: $base-margin;
+        width: 24px;
+        text-align: center;
+      }
     }
   }
 }
@@ -124,7 +131,7 @@ Click the sidebar in the example to toggle the `.open` state.
   &.open {
     left:0;
     background-color: #000;
-    transition: opacity 200ms 500ms linear;
+    transition: opacity 200ms ease;
     opacity: 0.4;
   }
 }
