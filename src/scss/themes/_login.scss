@@ -1,6 +1,6 @@
 
 .page-wrapper-login{
-  background-color: #2281C5;
+  background-color: color(p-blue);
   color: white;
   .select-input{
     border: none;
@@ -11,13 +11,7 @@
 }
 
 .content-wrapper-signup{
-  background-color: #2281C5;
-  color: white;
-}
-
-
-.content-wrapper-signup{
-  background-color: #2281C5;
+  background-color: color(p-blue);
   color: white;
 
   .text-input, .select-input{
