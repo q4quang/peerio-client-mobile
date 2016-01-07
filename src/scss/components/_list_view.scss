@@ -111,7 +111,7 @@ $list-item-height: 70px;
     min-height: $list-item-height;
     max-height: $list-item-height;
     display: flex;
-    padding-left: 0px;
+    padding-left: $base-padding;
     padding-right: 5px;
     flex-direction: row;
     align-items: center;
@@ -221,6 +221,7 @@ $list-item-height: 70px;
 
 .file-type.fa {
   font-size: 24px;
+  margin-right: $base-margin;
   opacity: 0.8;
 }
 

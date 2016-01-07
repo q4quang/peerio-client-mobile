@@ -5,10 +5,10 @@ $small-phone: "(max-width : 320px)" !default;
 $phone: "(max-width : 500px)" !default;
 $tablet: "(min-width : 501px)" !default;
 
-$navbar-height: 40px;
+$navbar-height: 56px;
 $navbar-font-size:20px;
-$tabbar-height: 35px;
-$footer-height: 45px;
+$tabbar-height: 48px;
+$footer-height: 48px;
 $reply-height: 35px;
 
 $item-height: 5rem;
@@ -23,3 +23,11 @@ $z-content:100;
 
 // various
 $list-item-padding-left: 20px;
+
+
+// Layout
+$base-spacing: 16px;
+$base-margin: $base-spacing;
+$small-margin: $base-margin/2;
+$base-padding: $base-spacing;
+$small-padding: $base-padding/2;
