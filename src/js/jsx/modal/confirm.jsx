@@ -15,6 +15,15 @@
     'use strict';
 
     Peerio.UI.Confirm = React.createClass({
+        statics: {
+            show: function(params) {
+                return new Promise( (resolve, reject) => {
+                    params.onAccept = resolve;
+                    params.onReject = reject;
+                    Peerio.Action.showConfirm(params);
+                });
+            }
+        },
 
         render: function () {
 
@@ -51,7 +60,7 @@
         },
         handleAction: function () {
             this.props.onClose();
-            this.props.onAccept();
+            this.props.onAccept && this.props.onAccept();
         },
         handleCancel: function(){
             this.props.onClose();

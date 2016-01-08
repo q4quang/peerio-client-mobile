@@ -32,7 +32,9 @@
                 .then(() => { return this.props.onSuccess && this.props.onSuccess(newAddress); })
                 .catch((error) => {
                     L.error(error);
-                    Peerio.Action.showAlert({text: 'Error authorizing address'});
+                    (error && error.code === 406) ?
+                        Peerio.Action.showAlert({text: 'Wrong confirmation code. Please try again.'}) :
+                        Peerio.Action.showAlert({text: 'Error adding address. Please contact support.'});
                     Peerio.user.removeAddress(newAddress);
                 })
                 : Peerio.UI.Alert.show({text: 'Sorry, that address is already taken'});

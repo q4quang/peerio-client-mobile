@@ -1,14 +1,8 @@
 (function () {
     'use strict';
     Peerio.UI.AccountSettingsItem = React.createClass({
-        getInitialState: function() {
-            return {
-                isPrimary: this.props.data.isPrimary
-            };
-        },
 
         setPrimaryAddress: function(address) {
-            this.setState({isPrimary: true});
             this.props.setPrimaryAddress(address);
         },
 
@@ -19,14 +13,14 @@
 
             return <div>
                      <div>
-                        <div className="col-8">
+                        <div className="col-8" onClick={this.setPrimaryAddress.bind(this, address.value)}>
                             <span className="text-mono">{address.value}</span>
                         </div>
                         <div className="col-2 text-center" onClick={this.setPrimaryAddress.bind(this, address.value)}>
                             <input type="radio"
                                    name="address_default"
                                    className="sr-only radio-button"
-                                   checked={this.state.isPrimary}/>
+                                   checked={this.props.data.isPrimary}/>
                             <label htmlFor={'address_default_'+index}
                                    className="radio-label"></label>
                         </div>
