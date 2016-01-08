@@ -32,7 +32,7 @@ Button                                            | Button Class
 Footer Buttons                                       | Button Class/ID
 ---------------------------------------------------- | -----------------
 <div id="global-back">Global Back Button</div>       | `#global-back`
-<div class="accept-button">Global Action Button</div>| `.accept-button`
+<div class="btn-global-action">Global Action Button</div>| `.btn-global-action`
 */
 
 
@@ -72,7 +72,8 @@ Footer Buttons                                       | Button Class/ID
   width: 100%;
   background-color: #2795d0;
 }
-
+// looking at the style guide, this button style doesn't offer much affordance. I would consider removing it.
+// What good is a button that the user doens't know is a button?
 .btn-subtle{
   background-color: transparent;
   width: 100%;
@@ -139,8 +140,7 @@ button:disabled , .btn-disabled {
   color: white;
 }
 
-//green footer button
-.accept-button,
+.btn-global-action,
 #global-back {
   @include button-ripple;
   display: flex;
@@ -158,7 +158,7 @@ button:disabled , .btn-disabled {
   }
 }
 
-.accept-button {
+.btn-global-action {
   background-color: color(footer-btn-color);
 }
 

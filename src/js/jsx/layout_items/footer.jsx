@@ -40,7 +40,7 @@
             var greenButton = this.state.greenButtonIsVisible ? this.mainButtonActions[this.getRouteName()] : null;
             if (greenButton)
                 greenButton = (
-                    <Peerio.UI.Tappable element="div" className="accept-button"
+                    <Peerio.UI.Tappable element="div" className="btn-global-action"
                                         onTap={greenButton.action || Peerio.Action.bigGreenButton}>
                         <i className={'fa fa-'+greenButton.icon}/> {greenButton.name}
                     </Peerio.UI.Tappable>);
