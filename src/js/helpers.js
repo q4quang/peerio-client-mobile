@@ -247,4 +247,14 @@ Peerio.Helpers.init = function () {
     api.isNameValid = function(name) {
         return !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i);
     };
+
+    api.isValidEmail = function(val) {
+        var emailRegex = new RegExp(/^([\w+-]+(?:\.[\w+-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
+        return emailRegex.test(val);
+    };
+
+    api.isValidPhone = function(val) {
+        var phoneRegex = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/i);
+        return phoneRegex.test(val);
+    };
 };

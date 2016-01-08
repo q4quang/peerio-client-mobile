@@ -2,20 +2,13 @@
     'use strict';
 
     Peerio.UI.SetPin = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [ReactRouter.Navigation, Peerio.UI.AutoFocusMixin],
 
         getInitialState: function () {
             return {
                 inProgress: false,
                 newPin: null
             };
-        },
-
-        componentDidMount: function () {
-            if (!Peerio.user.PINIsSet) {
-                window.setTimeout( () => this.refs.newPinText.getDOMNode().focus(), 
-                                  this.props.focusDelay ? this.props.focusDelay : 100);
-            }
         },
 
         removePinModal: function () {
@@ -81,7 +74,7 @@
                             Passcode must be 6 digits or longer
                         </p>
                         <input className="text-input text-center"
-                               type="password" required="required" ref="newPinText"
+                               type="password" required="required" ref="textEdit"
                                placeholder="Enter a device passcode"
                                pattern="[0-9]*"
                                value={this.state.newPin}

@@ -13,7 +13,10 @@
             Peerio.Auth.signup(this.state.username, this.state.passphrase, this.state.firstName, this.state.lastName)
             .then(() => {
                 //todo: terrible, transfer this through router
-                Peerio.autoLogin = {username: this.state.username, passphrase: this.state.passphrase};
+                Peerio.autoLogin = { 
+                    username: this.state.username, 
+                    passphrase: this.state.passphrase
+                };
                 this.transitionTo('root');
             })
             .catch( (error) => {

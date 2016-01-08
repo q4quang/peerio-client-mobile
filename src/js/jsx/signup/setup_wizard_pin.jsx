@@ -14,7 +14,7 @@
                 <div>
                     <p className="info-small">Setting a passcode allows you to login from this device without entering your passphrase.</p>
                     <p className="info-small">Set a passcode?</p>
-                    <Peerio.UI.SetPin hideHeader={true} {...this.props} focusDelay={1000}/>
+                    <Peerio.UI.SetPin hideHeader={true} {...this.props} autoFocus={true} focusDelay={1000}/>
                 </div>
             );
         },
