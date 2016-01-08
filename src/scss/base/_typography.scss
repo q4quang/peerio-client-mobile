@@ -71,7 +71,7 @@ Text Style                                                                  | cl
   font-size: 0.9rem;
   text-transform: uppercase;
   margin: 0.2em 0;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  border-bottom: $divider-dark;
   padding-bottom: 5px;
   opacity: 0.6;
 }

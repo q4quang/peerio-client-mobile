@@ -26,12 +26,11 @@ $list-item-padding-left: 20px;
 
 
 // Layout
-$base-spacing: 16px;
-$base-margin: $base-spacing;
-$small-margin: $base-margin/2;
-$base-padding: $base-spacing;
-$small-padding: $base-padding/2;
+$margin-base: 16px;
+$margin-small: $margin-base/2;
+$padding-base: 16px;
+$padding-small: $padding-base/2;
 
 // borders
-$light-divider: 1px solid rgba(255,255,255,0.12);
-$dark-divider: 1px solid rgba(0,0,0,0.12);
+$divider-light: 1px solid rgba(255,255,255,0.12);
+$divider-dark: 1px solid rgba(0,0,0,0.12);
