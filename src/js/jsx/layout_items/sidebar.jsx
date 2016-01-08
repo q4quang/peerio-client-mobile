@@ -74,9 +74,9 @@
                         <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
 
                             <div className="flex-0 sidebar-header flex-col">
-                                <div className="flex-row"> 
+                                <div className="flex-row">
                                     <Peerio.UI.Avatar size="big" username={user.username}/>
-                                    <div className="col-9 col-last">
+                                    <div className="col-9 col-first">
                                       <h3 className="headline-md">{user.firstName} {user.lastName}</h3>
                                       <span className="subhead-inline">{user.username}</span>
                                     </div>

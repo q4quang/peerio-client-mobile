@@ -51,25 +51,27 @@ $grid-columns:12;
   }
 }
 
-.col-first{
+.col-first {
   padding-left:0;
 }
-.col-last{
+
+.col-last {
   padding-right:0;
 }
 
-.flex-row{
+.flex-row {
   display: flex;
   flex-direction: row;
 }
-.flex-col{
+.flex-col {
   display: flex;
   flex-direction: column;
 }
-.flex-col-1{
+
+.flex-col-1 {
   flex-grow: 1;
 }
 
-.flex-col-0{
+.flex-col-0 {
   flex-grow: 0;
 }
