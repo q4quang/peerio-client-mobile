@@ -131,6 +131,13 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
   text-overflow: ellipsis;
 }
 
+.animate-appear {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
 .animate-enter {
   animation-name: bounceInRight;
   animation-duration: 1s;
@@ -139,8 +146,8 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 }
 
 .animate-leave {
-  animation-name: bounceOutLeft;
-  animation-duration: 1s;
+  animation-name: fadeOut;
+  animation-duration: 0.2s;
   animation-fill-mode: forwards;
 
 }
@@ -187,4 +194,8 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 
 @mixin button-text-shadow(){
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.italic {
+    font-style: italic;
 }

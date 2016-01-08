@@ -19,4 +19,11 @@
     border-color: white;
   }
 
+  .content-padded {
+      background: transparent;
+      position: static;
+      top: auto; left: auto; right: auto; bottom: auto;
+      padding: 0px;
+  }
+
 }

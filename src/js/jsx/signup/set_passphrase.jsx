@@ -43,7 +43,7 @@
                     onTap={this.passPhraseIsValid}> 
                     Create my account
                 </Peerio.UI.Tappable>) : null;
-            var passphraseMsg = this.state.passphrase_alert && 'Passphrase does not match';
+            var passphraseMsg = this.state.passphrase_alert ? 'Passphrase does not match' : null;
 
                     return (
                         <div className="content-inline-dialog">

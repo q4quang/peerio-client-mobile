@@ -15,13 +15,26 @@
     'use strict';
 
     Peerio.UI.Alert = React.createClass({
+        statics: {
+            show: function(params) {
+                return new Promise( (resolve, reject) => {
+                    params.onAccept = resolve;
+                    Peerio.Action.showAlert(params);
+                });
+            }
+        },
 
+        handleAction: function() {
+            this.props.onClose();
+            this.props.onAccept && this.props.onAccept();
+        },
+ 
         render: function () {
 
             var btns = this.props.btns ||
                 (<div>
                     <Peerio.UI.Tappable element="div" className="btn-lrg"
-                                        onTap={this.props.onClose}>OK</Peerio.UI.Tappable>
+                                        onTap={this.handleAction}>OK</Peerio.UI.Tappable>
                 </div>);
 
             var text = this.props.text || '';

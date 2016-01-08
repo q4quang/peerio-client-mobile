@@ -39,6 +39,10 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         componentDidMount: function () {
+            // we assume that autoLogin was set by
+            // signup function. we want to show setup wizard
+            // if it is true
+            this.nextRoute = Peerio.autoLogin ? 'setup_wizard' : 'messages';
             if (Peerio.autoLogin) {
                 var autoLogin = Peerio.autoLogin;
                 // in case smth fails we clean this first
@@ -79,7 +83,7 @@
             Peerio.NativeAPI.enablePushNotifications()
                 .catch(error => L.error('Error enabling push notifications. {0}', error))
                 .finally(() => Peerio.NativeAPI.clearPushBadge());
-            this.transitionTo('messages');
+            this.transitionTo(this.nextRoute);
         },
         handleLoginFail: function (error) {
             this.setState({waitingForLogin: false});
