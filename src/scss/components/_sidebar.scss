@@ -36,7 +36,7 @@ Click the sidebar in the example to toggle the `.open` state.
   top: $navbar-height;
   bottom: 0;
   background-color: color(sidebar-bg-color);
-  padding: 20px 10px;
+  padding: 0 $base-padding $base-padding;
   color: white;
   font-size: 1rem;
   overflow-x: hidden;
@@ -45,7 +45,23 @@ Click the sidebar in the example to toggle the `.open` state.
   flex-direction: column;
 
   .sidebar-header{
-    margin-bottom: $base-margin;
+    margin: 0px #{-$base-padding};
+    height: 104px;
+    background: #333;
+    padding: 0 $base-padding;
+    flex-shrink: 0;
+    justify-content: center;
+
+
+    .info-label {
+      text-transform: capitalize;
+      color: rgba(255,255,255,0.7);
+      font-weight: 300;
+    }
+
+    .headline-md {
+      @include ellipses;
+    }
 
     @media screen and ( max-height: 480px ){
       width: 150px;
@@ -56,7 +72,21 @@ Click the sidebar in the example to toggle the `.open` state.
         margin-right: 10px;
       }
     }
+
+    .storage-info {
+      margin-top: $small-margin;
+      margin-left: $base-margin*4;
+    }
   }
+
+  .subhead {
+    border: none;
+    height: 48px;
+    line-height: 48px;
+    text-transform: capitalize;
+    margin: 0;
+  }
+
   .app-version{
     position: static;
     font-size: 70%;
@@ -72,6 +102,7 @@ Click the sidebar in the example to toggle the `.open` state.
   }
   .avatar{
     margin-right: 16px;
+    flex-shirk: 0;
   }
 
   &.open {
@@ -86,7 +117,7 @@ Click the sidebar in the example to toggle the `.open` state.
   }
 
   .sidebar-footer-text{
-    margin-top: 1rem;
+    margin-top: $small-margin;
     .feedback{
       float: right;
       font-size: 70%;
@@ -98,8 +129,12 @@ Click the sidebar in the example to toggle the `.open` state.
 
   ul{
     list-style: none;
-    padding:0 $base-padding;
+    padding:0;
     margin:0 0 $small-margin;
+
+    &:not(:last-of-type) {
+      border-bottom: $light-divider;
+    }
     li {
       height: 48px;
       line-height: 48px;
