@@ -1,6 +1,7 @@
 #footer{
   position: absolute;
-  display: table;
+  display: flex;
+  flex-direction: row;
   bottom: 0;
   left:0;
   right:0;
@@ -8,11 +9,6 @@
   height: $footer-height;
   color: white;
   background-color: color(p-blue-darker);
-  font-size: 13px;;
+  font-size: 13px;
   z-index: $z-tabbar;
-}
-
-.toolbar-fill{
-  display:table-cell;
-  width:100%;
 }

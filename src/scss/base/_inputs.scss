@@ -87,14 +87,14 @@ $text-input-fontsize: 1rem;
   height: 1.5em;
   width: 1.5em;
   background-color: transparent;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   margin-left: 0.5em;
   box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09);
 }
 
 .select-input {
   border: none;
-  border-color:#D6D6D6;
+  border-color:#d6d6d6;
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-radius: 0;
@@ -133,7 +133,7 @@ $text-input-fontsize: 1rem;
   border: none;
   //seperating border props lets us change color in themes
   //without effecting border width and style.
-  border-color:#D6D6D6;
+  border-color:#d6d6d6;
   border-bottom-style: solid;
   border-bottom-width: 2px;
   width: 100%;
@@ -175,7 +175,7 @@ $text-input-fontsize: 1rem;
   visibility: visible;
   content: '';
   background: #fff;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   display: inline-block;
   vertical-align: middle;
   width: 20px;
@@ -197,28 +197,28 @@ $text-input-fontsize: 1rem;
 }
 
 .placeholder-warning::-webkit-input-placeholder {
-  color: #BD8B8B;
+  color: #bd8b8b;
   font-weight: bold;
 }
 
 /** trying to refactor settings look a little bit, let's call it rectangular **/
 .content-padded.rectangular {
-    background: #EFEFEF !important;
+    background: #efefef !important;
     .text-input {
-        border: 1px solid #DFDFDF;
+        border: 1px solid #dfdfdf;
         background: white;
         padding: 10px;
     }
 
     .text-input:focus {
-        border: 1px solid #2795D0;
+        border: 1px solid #2795d0;
     }
 
     .text-input-label {
         font-size: 80%;
         position: static;
         margin-left: 5px;
-        
+
     }
 
     .text-input-group {
@@ -231,4 +231,3 @@ $text-input-fontsize: 1rem;
         word-wrap: break-word;
     }
 }
-

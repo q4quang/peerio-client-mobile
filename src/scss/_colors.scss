@@ -1,6 +1,6 @@
 // base colors
-$p-blue: #2281C5;
-$p-green: #95D583;
+$p-blue: #2281c5;
+$p-green: #95d583;
 
 $colors: (
   // base colors
@@ -25,7 +25,7 @@ $colors: (
         p-blue-dark-20:  darken($p-blue, 20%),
         p-blue-dark-25:  darken($p-blue, 25%),
         p-blue-dark-30:  darken($p-blue, 30%),
-        p-blue-darker:   #334455,
+        p-blue-darker:   #345,
 
   //light green
         p-green-light-5:   lighten($p-green, 5%),
@@ -47,21 +47,21 @@ $colors: (
         p-green-dark-45: darken($p-green, 45%),
 
   // mix colors
-        p-blue-greenish-light: #A2EEFC,
-        sidebar-bg-color: #44494D,
+        p-blue-greenish-light: #a2eefc,
+        sidebar-bg-color: #44494d,
 
   //component colors
         message-self-bg: lighten($p-blue, 49%),
         message-other-bg: #f5f5f5,
-        list-item-bg: #EEE,
-        list-item-delete-bg: #B55353,
-        footer-btn-color: #5EA767,
+        list-item-bg: #eee,
+        list-item-delete-bg: #b55353,
+        footer-btn-color: #5ea767,
 
   //text colors
-        meta-text-light: #A9A9A9,
+        meta-text-light: #a9a9a9,
         meta-text-dark: #888,
         body-text: #444,
-        danger: #BD3535
+        danger: #bd3535
 );
 
 @function color($key) {

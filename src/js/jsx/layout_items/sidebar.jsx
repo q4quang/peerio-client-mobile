@@ -65,7 +65,7 @@
             var quotaPercent = Math.floor(user.quota.user / (user.quota.total / 100));
 
             pinNode = Peerio.user.PINIsSet ? 'Remove PIN code' : 'Set PIN code';
-            
+
             twoFactor = user.settings.twoFactorAuth ? 'Disable two factor auth' : 'Enable two factor auth';
 
             if (Peerio)
@@ -73,66 +73,66 @@
                     <div>
                         <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
 
-                            <div className="flex-0 centered-text sidebar-header">
+                            <div className="flex-0 sidebar-header">
                                 <Peerio.UI.Avatar size="big" username={user.username}/>
-                                <h3 className="headline-md">{user.firstName} {user.lastName}</h3>
-                                <span className="subhead-inline">{user.username}</span>
+                                <div className="col-9 col-last">
+                                  <h3 className="headline-md">{user.firstName} {user.lastName}</h3>
+                                  <span className="subhead-inline">{user.username}</span>
+                                </div>
                             </div>
 
                             <div className="flex-1" ref="menu">
-                                <ul className="flex-row">
-                                    <Peerio.UI.Tappable tag='li' onTap={this.handleNewMessage}
-                                                        className="icon-with-label flex-col-1">
-                                        <i className="fa fa-pencil circle"/>
-                                        <span className="icon-label">New Message</span>
-                                    </Peerio.UI.Tappable>
-                                    <Peerio.UI.Tappable tag="li" onTap={this.handleUpload}
-                                                        className="icon-with-label flex-col-1">
-                                        <i className="fa fa-cloud-upload circle"/>
-                                        <span className="icon-label">Upload File</span>
-                                    </Peerio.UI.Tappable>
-                                    <Peerio.UI.Tappable tag="li" onTap={this.handleAddContact}
-                                                        className="icon-with-label flex-col-1">
-                                        <i className="fa fa-user-plus circle"/>
-                                        <span className="icon-label">Add Contact</span>
-                                    </Peerio.UI.Tappable>
-                                </ul>
+                                {
+                                //  <ul className="flex-row">
+                                //     <Peerio.UI.Tappable tag='li' onTap={this.handleNewMessage}
+                                //                         className="icon-with-label flex-col-1">
+                                //         <i className="fa fa-pencil circle"/>
+                                //         <span className="icon-label">New Message</span>
+                                //     </Peerio.UI.Tappable>
+                                //     <Peerio.UI.Tappable tag="li" onTap={this.handleUpload}
+                                //                         className="icon-with-label flex-col-1">
+                                //         <i className="fa fa-cloud-upload circle"/>
+                                //         <span className="icon-label">Upload File</span>
+                                //     </Peerio.UI.Tappable>
+                                //     <Peerio.UI.Tappable tag="li" onTap={this.handleAddContact}
+                                //                         className="icon-with-label flex-col-1">
+                                //         <i className="fa fa-user-plus circle"/>
+                                //         <span className="icon-label">Add Contact</span>
+                                //     </Peerio.UI.Tappable>
+                                // </ul>
+                                }
 
                                 <h3 className="subhead">Security</h3>
                                 <ul>
                                     <Peerio.UI.Tappable tag='li'
-                                        className="info-small"
                                         onTap={this.toggleAndTransition.bind(this, 'set_pin')}>
                                         <i className="fa fa-lock"/>
                                         <span>{pinNode}</span>
                                     </Peerio.UI.Tappable>
                                     <Peerio.UI.Tappable tag='li'
-                                        className="info-small"
                                         onTap={this.toggleAndTransition.bind(this, 'settings_2fa')}>
                                         <i className="fa fa-mobile"/>
                                         <span>{twoFactor}</span>
                                     </Peerio.UI.Tappable>
                                 </ul>
                                 <h3 className="subhead">Account</h3>
+
                                 <ul>
-                                    <li>
-                                        <span className="info-label">Storage</span>
-                    <span className="info-small"><i className="fa fa-tachometer"></i>{quotaUsed} / {quota}
-                        ({quotaPercent}%) used</span>
-                                    </li>
+                                     <Peerio.UI.Tappable tag="li"
+                                        onTap={this.toggleAndTransition.bind(this, 'account_settings')}>
+                                        <i className="fa fa-user"></i> Profile
+                                     </Peerio.UI.Tappable>
+
+                                     <Peerio.UI.Tappable tag="li"
+                                        onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
+                                        <i className="fa fa-cog"></i> Preferences
+                                     </Peerio.UI.Tappable>
                                 </ul>
-                                <div className="col-6 col-first">
-                                     <Peerio.UI.Tappable element="div" className="btn-md txt-sm"
-                                     onTap={this.toggleAndTransition.bind(this, 'account_settings')}><i
-                                     className="fa fa-user"></i> Profile
-                                     </Peerio.UI.Tappable>
-                                </div>
-                                <div className="col-6 col-last">
-                                    <Peerio.UI.Tappable element="div" className="btn-md txt-sm"
-                                     onTap={this.toggleAndTransition.bind(this, 'preference_settings')}><i
-                                     className="fa fa-cog"></i> Preferences
-                                     </Peerio.UI.Tappable>
-                                </div>
+                            </div>
+
+                            <div>
+                                <span className="info-label">Storage</span>
+                                {quotaUsed} / {quota} ({quotaPercent}%) used
                             </div>
 
                             <div className="flex-0">
