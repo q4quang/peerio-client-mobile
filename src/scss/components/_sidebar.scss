@@ -30,13 +30,13 @@ Click the sidebar in the example to toggle the `.open` state.
 .sidebar {
   position: absolute;
   z-index: $z-sidebar;
-  transition: transform .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
   transform: translate3d(-101%, 0, 0);
   width: 80%;
   top: $navbar-height;
   bottom: 0;
   background-color: color(sidebar-bg-color);
-  padding: 20px 10px;
+  padding: 0 $padding-base $padding-base;
   color: white;
   font-size: 1rem;
   overflow-x: hidden;
@@ -45,7 +45,23 @@ Click the sidebar in the example to toggle the `.open` state.
   flex-direction: column;
 
   .sidebar-header{
-    margin-bottom: $base-margin;
+    margin: 0px #{-$padding-base};
+    height: 104px;
+    background: #333;
+    padding: 0 $padding-base;
+    flex-shrink: 0;
+    justify-content: center;
+
+
+    .info-label {
+      text-transform: capitalize;
+      color: rgba(255,255,255,0.7);
+      font-weight: 300;
+    }
+
+    .headline-md {
+      @include ellipses;
+    }
 
     @media screen and ( max-height: 480px ){
       width: 150px;
@@ -56,7 +72,22 @@ Click the sidebar in the example to toggle the `.open` state.
         margin-right: 10px;
       }
     }
+
+    .storage-info {
+      font-size: 14px;
+      margin-top: $margin-small;
+      margin-left: 58px;
+    }
   }
+
+  .subhead {
+    border: none;
+    height: 48px;
+    line-height: 48px;
+    text-transform: capitalize;
+    margin: 0;
+  }
+
   .app-version{
     position: static;
     font-size: 70%;
@@ -71,12 +102,13 @@ Click the sidebar in the example to toggle the `.open` state.
     flex-grow: 0;
   }
   .avatar{
-    margin-right: 16px;
+    margin-right: $margin-base;
+    flex-shrink: 0;
   }
 
   &.open {
     transform: translate3d(0, 0, 0);
-    transition-duration: .3s
+    transition-duration: 300ms
   }
   .fa-mobile {
     // this was a hack placed before me by an unknown author
@@ -86,7 +118,7 @@ Click the sidebar in the example to toggle the `.open` state.
   }
 
   .sidebar-footer-text{
-    margin-top: 1rem;
+    margin-top: $margin-small;
     .feedback{
       float: right;
       font-size: 70%;
@@ -98,15 +130,19 @@ Click the sidebar in the example to toggle the `.open` state.
 
   ul{
     list-style: none;
-    padding:0 $base-padding;
-    margin:0 0 $small-margin;
+    padding:0;
+    margin:0 0 $margin-small;
+
+    &:not(:last-of-type) {
+      border-bottom: $divider-light;
+    }
     li {
       height: 48px;
       line-height: 48px;
       font-weight: 100;
 
       i.fa {
-        margin-right: $base-margin;
+        margin-right: $margin-base;
         width: 24px;
         text-align: center;
       }
