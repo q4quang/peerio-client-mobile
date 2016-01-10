@@ -256,8 +256,8 @@ Peerio.NativeAPI.init = function () {
 
         return new Promise(function (resolve, reject) {
             var push = PushNotification.init({
-                'ios': {'alert': 'true', 'badge': 'true', 'sound': 'true'},
-                'android': {'senderID': Peerio.Config.push.android.senderId}
+                'ios': {'alert': true, 'badge': true, 'sound': true, 'clearBadge': true},
+                'android': {'senderID': Peerio.Config.push.android.senderId, 'clearNotifications': true}
             });
 
             api.push = push;
@@ -308,6 +308,10 @@ Peerio.NativeAPI.init = function () {
      * Sets badge number
      */
     api.setPushBadge = function (number) {
+        if(Peerio.runtime.platform != 'ios') {
+            L.info('setting badge number is only available on iOS (sorry!)');
+            return;
+        }
         api.push && api.push.setApplicationIconBadgeNumber(
             () => L.info('push badge number set'),
             e => L.error('error setting push badge number. {0}', e),
