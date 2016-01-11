@@ -20,7 +20,6 @@
 /debug.js
 
 # Cordova platform generated files
-/platforms/android/
-/platforms/ios/
+/platforms
 /plugins
 GENERATED_CHANGELOG.md
