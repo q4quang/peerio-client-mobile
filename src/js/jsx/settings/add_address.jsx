@@ -24,20 +24,34 @@
             Peerio.user.validateAddress(newAddress)
             .then((response) => {
                 L.info(response);
-                response ?
+                // if server said address is ok to add
+                if(response) {
                     Peerio.user.addAddress(newAddress)
-                .then(() => Peerio.UI.Prompt.show({text: 'Please enter the code you received'}))
-                .then((code) => Peerio.user.confirmAddress(newAddress, code))
-                .then(() => Peerio.UI.Alert.show({text: 'Address authorized'}))
-                .then(() => { return this.props.onSuccess && this.props.onSuccess(newAddress); })
-                .catch((error) => {
-                    L.error(error);
-                    (error && error.code === 406) ?
-                        Peerio.Action.showAlert({text: 'Wrong confirmation code. Please try again.'}) :
-                        Peerio.Action.showAlert({text: 'Error adding address. Please contact support.'});
-                    Peerio.user.removeAddress(newAddress);
-                })
-                : Peerio.UI.Alert.show({text: 'Sorry, that address is already taken'});
+                    .then( () => {
+                        var addAndEnter = () => {
+                            return Peerio.UI.Prompt.show({text: 'Please enter the code you received'})
+                            .then((code) => Peerio.user.confirmAddress(newAddress, code))
+                            .then(() => Peerio.UI.Alert.show({text: 'Address authorized'}))
+                            .then(() => { return this.props.onSuccess && this.props.onSuccess(newAddress); })
+                            .catch((error) => {
+                                L.error(error);
+                                if (error && error.code === 406) {
+                                    return Peerio.UI.Confirm.show({text: 'Confirmation code does not match. Would you like to try again?'})
+                                    .then( () => addAndEnter() );
+                                } else {
+                                    Peerio.Action.showAlert({text: 'Error adding address. Please contact support.'});
+                                    return Promise.reject(error);
+                                }
+                            });
+                        };
+                        return addAndEnter()
+                        .catch( (error) =>  {
+                            Peerio.user.removeAddress(newAddress);
+                        });
+                    });
+               } else {
+                    Peerio.UI.Alert.show({text: 'Sorry, that address is already taken'});
+                }
             });
         },
 
