@@ -49,9 +49,7 @@ Click the sidebar in the example to toggle the `.open` state.
     height: 104px;
     background: #333;
     padding: 0 $padding-base;
-    flex-shrink: 0;
     justify-content: center;
-
 
     .info-label {
       text-transform: capitalize;
@@ -59,7 +57,8 @@ Click the sidebar in the example to toggle the `.open` state.
       font-weight: 300;
     }
 
-    .headline-md {
+    .headline-md,
+    .subhead-inline {
       @include ellipses;
     }
 
@@ -90,17 +89,8 @@ Click the sidebar in the example to toggle the `.open` state.
 
   .app-version{
     position: static;
-    font-size: 70%;
-    color: white;
-    opacity: 0.5;
   }
 
-  .flex-1{
-    flex-grow: 1;
-  }
-  .flex-0{
-    flex-grow: 0;
-  }
   .avatar{
     margin-right: $margin-base;
     flex-shrink: 0;
@@ -117,16 +107,16 @@ Click the sidebar in the example to toggle the `.open` state.
     font-size: 1.5em;
   }
 
-  .sidebar-footer-text{
-    margin-top: $margin-small;
-    .feedback{
-      float: right;
-      font-size: 70%;
-      opacity: 0.8;
-      text-decoration: underline;
-      color: white;
-    }
-  }
+  // .sidebar-footer-text{
+  //   margin-top: $margin-small;
+  //   .feedback{
+  //     float: right;
+  //     font-size: 70%;
+  //     opacity: 0.8;
+  //     text-decoration: underline;
+  //     color: white;
+  //   }
+  // }
 
   ul{
     list-style: none;
