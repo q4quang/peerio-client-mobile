@@ -34,6 +34,12 @@ This doesn't
 <div class="col-6"></div> <div class="col-6"></div>
 ```
 */
+/* TODO: more alignment class
+    ex. flex-justify-align-center {
+          @extend .flex-justify-center;
+          @extend .flex-align-center;
+        }
+*/
 
 $grid-columns:12;
 
@@ -68,10 +74,26 @@ $grid-columns:12;
   flex-direction: column;
 }
 
-.flex-col-1 {
+.flex-grow-1 {
   flex-grow: 1;
 }
 
-.flex-col-0 {
+.flex-grow-0 {
   flex-grow: 0;
+}
+
+.flex-shrink-1 {
+  flex-shrink: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-justify-center {
+  justify-content: center;
 }

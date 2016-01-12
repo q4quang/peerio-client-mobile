@@ -34,6 +34,13 @@ Text Style                                                                  | cl
 
 */
 
+/*
+  TODO:
+  review typography styling and and naming convention.
+  add more direction on how to use each class and some usecase demos
+
+*/
+
 .headline{
   display: block;
   margin: 0;
@@ -118,9 +125,10 @@ Text Style                                                                  | cl
 }
 
 .text-mono{
+  @include ellipses();
+  
   font-family: monospace;
   font-size:0.8em;
-  @include ellipses();
 }
 
 .text-crossout{
@@ -166,10 +174,6 @@ Text Style                                                                  | cl
 
 .no-border {
     border: 0;
-}
-
-.full-width {
-    width: 100%;
 }
 
 .red-bold {
