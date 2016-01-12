@@ -3,13 +3,17 @@
  */
 // combined with .modal class, this is a top-level
 // full-screen wrapper for login page
-
+.loginForm{
+  @extend .flex-col;
+  justify-content: center;
+  align-items: center;
+}
 .app-version{
-  color: #73b3e0;
+  color: $white-30;
   position: absolute;
-  left: 5px;
-  top: 2px;
-  font-size: 80%;
+  left: 8px;
+  top: 4px;
+  font-size: 12px;
 }
 .logo {
   display: block;
@@ -17,12 +21,13 @@
   margin: 0 auto 25px auto;
 }
 .saved-login{
-  color: white;
+  color: $white-100;
   background-color: #1d6ab5;
-  margin: -10px -100% 12px -100%;
-  padding: 5px 0 10px 0;
+  margin: $margin-base 0;
+  padding: 16px 0;
   font-size: 1.5em;
   text-align: center;
+  width: 200%;
   .note{
     font-size: 0.9rem;
     margin-top: 5px;
@@ -35,4 +40,5 @@
   text-align: center;
   color: color(p-blue-light-40);
   height:15px;
+  margin-top: $margin-base;
 }
