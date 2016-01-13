@@ -289,9 +289,7 @@
                 <h1 className="headline-lrg">Your Passphrase</h1>
 
                 <p className='info'>This is your secure randomly generated passphrase. If you lose it, you
-                    will<strong>&nbsp;
-                        permanently&nbsp;</strong>
-                    lose access to your account.</p>
+                    will <strong>permanently</strong> lose access to your account.</p>
 
                 <p className="txt-lrg">
                     {this.state.passphrase}
@@ -330,8 +328,7 @@
                 <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.showModal}> I'll remember my
                     passphrase</Peerio.UI.Tappable>
                   <Peerio.UI.Tappable element='div' className="btn-dark" onTap={this.generatePassphrase}> I don't like
-                    this
-                    passphrase</Peerio.UI.Tappable>
+                    this passphrase</Peerio.UI.Tappable>
 
                 <Peerio.UI.Tappable element='div' className="btn-back" onTap={this.handlePreviousStep}><i
                         className="fa fa-chevron-left"></i>back

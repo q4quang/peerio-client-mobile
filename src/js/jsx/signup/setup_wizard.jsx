@@ -5,7 +5,7 @@
 
     Peerio.UI.SetupWizard = React.createClass({
         mixins: [ReactRouter.Navigation],
-       
+
         getInitialState: function () {
             return {
                 activeStep: 0
@@ -14,10 +14,10 @@
 
         componentWillMount: function () {
             this.steps = [
-                Peerio.UI.SetupWizardStart, 
-                Peerio.UI.SetupWizardPin, 
+                Peerio.UI.SetupWizardStart,
+                Peerio.UI.SetupWizardPin,
                 Peerio.UI.SetupWizardEmail,
-                Peerio.UI.SetupWizardCoupon, 
+                Peerio.UI.SetupWizardCoupon,
             ];
         },
 
@@ -31,12 +31,12 @@
             }
             this.setState( { activeStep: this.state.activeStep + 1 } );
         },
-        
+
         render: function () {
             var currentStep = React.createElement(
                 this.steps[this.state.activeStep], { key: 'step' + this.state.activeStep, onSuccess: this.handleNextStep });
             var button = (
-                <Peerio.UI.Tappable element='div' className="btn-lrg" 
+                <Peerio.UI.Tappable element='div' className="btn-lrg"
                     key={'next' + this.state.activeStep} onTap={this.handleNextStep}>
                     next
                 </Peerio.UI.Tappable>
@@ -56,8 +56,8 @@
                         </div>
                         <div>
                             <div>
-                                <ReactCSSTransitionGroup 
-                                    transitionName="animate" 
+                                <ReactCSSTransitionGroup
+                                    transitionName="animate"
                                     transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
                                     <fieldset  key={'cont'+this.state.activeStep} style={ {position: 'absolute'}}>
                                         {currentStep}
@@ -67,7 +67,7 @@
                                 </ReactCSSTransitionGroup>
                             </div>
                             <div className="text-center">
-                                <p>&nbsp;</p>
+                                <p> </p>
                             </div>
                         </div>
                     </div>
@@ -77,6 +77,3 @@
     });
 
 }());
-
-
-

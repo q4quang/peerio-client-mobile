@@ -73,13 +73,13 @@
             var downloadStateNode = null, buttonsNode = null;
             if (file.downloadState) {
                 var ds = file.downloadState;
-                downloadStateNode = (<div className="info-banner">{ds.stateName}&nbsp;{ds.percent}</div>);
+                downloadStateNode = (<div className="info-banner">{ds.stateName} {ds.percent}</div>);
             } else {
                 buttonsNode = (
                     <div className="flex-col flex-justify-center">
                         {file.cached ? <div className="btn-safe" onTouchEnd={this.handleOpen}>Open</div>
                             : <div className="btn-md btn-safe" onTouchEnd={this.handleDownload}><i
-                            className="fa fa-cloud-download">&nbsp;</i>Download</div>}
+                            className="fa fa-cloud-download"> </i>Download</div>}
 
                         {file.cached ?
                             <div className="btn-danger" onTouchEnd={this.handleRemoveLocal}><i
@@ -111,7 +111,7 @@
                         </div>
                     </div>
 
-                    <hr className="col-12"/>
+                    <hr />
 
                     <div className="info-table">
                         <div className="info-row">
