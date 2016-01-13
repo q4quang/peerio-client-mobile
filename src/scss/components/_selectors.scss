@@ -55,13 +55,13 @@ $buttons-height:120px;
   overflow-y: scroll;
   margin: 0;
   padding: 10px;
-  background-color: white;
+  background-color: $white-100;
   ul {
-    position: absolute; 
+    position: absolute;
     top: 30px;
     left: 0;
     right: 0;
-    bottom: $buttons-height; 
+    bottom: $buttons-height;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -73,16 +73,17 @@ $buttons-height:120px;
     bottom: 0;
     left: 0;
     right: 0;
+    padding: $padding-small;
     // height: $buttons-height;
-    background-color: darken(color(list-item-bg), 5%);
+    background-color: #eee; // TODO create more colors for palatte
   }
   .contact {
     padding: 10px;
     font-size: 1rem;
-/*  are you sure we need that many borders? 
+/*  are you sure we need that many borders?
     border-bottom: 1px solid darken(color(list-item-bg), 5%); */
     position: relative;
-/*  and backgrounds? 
+/*  and backgrounds?
     background-color: color(list-item-bg); */
     .checkbox-input{
       margin-right: 10px;
@@ -93,7 +94,7 @@ $buttons-height:120px;
   }
   .contact.selected{
     background-color: color(p-blue-light-20);
-    color: white;
+    color: $white-100;
     .checkbox-input{
       display: inline-block;
     }
@@ -101,7 +102,7 @@ $buttons-height:120px;
       background-color: color(p-blue-light-20);
     }
     .username{
-      color: white;
+      color: $white-100;
     }
   }
   .username {
@@ -125,8 +126,4 @@ $buttons-height:120px;
       top: 10px;
     }
   }
-}
-
-.file-upload{
-  padding: 50% 10px 0 10px;
 }
