@@ -122,12 +122,12 @@
 
                         <div className="info-block">
                             <div className="info-label">State:</div>
-                            <div className="col-12 info-content">{status}</div>
+                            <div className="width-full info-content">{status}</div>
                         </div>
 
                         <div className="info-block">
                             <div className="info-label">Primary address:</div>
-                            <div className="col-12 info-content">{this.contact.primaryAddress || 'N/A'}</div>
+                            <div className="width-full info-content">{this.contact.primaryAddress || 'N/A'}</div>
                         </div>
 
                     </div>
