@@ -129,12 +129,12 @@
 
             return (
                 <div>
-                    <div className="without-tab-bar content-padded rectangular flex-col">
-                        <div className="flex-col-1">
-                            <div className="text-input-group col-12">
-                                <label className="text-input-label" htmlFor="first-name">First Name</label>
-                                <input className="text-input"
-                                       id="first-name"
+                    <div className="without-tab-bar content-padded">
+                        <div class="info-label">Profile</div>
+                        <div className="flex-col flex-justify-center">
+                            <div className="input-group">
+                                <label htmlFor="first-name">First Name</label>
+                                <input id="first-name"
                                        type="text"
                                        required="required"
                                        value={ this.state.firstName }
@@ -142,10 +142,9 @@
                                        onBlur={ this.updateFirstName }
                                 />
                             </div>
-                            <div className="text-input-group col-12">
-                                <label className="text-input-label rectangular" htmlFor="first-name">Last Name</label>
-                                <input className="text-input rectangular"
-                                       id="last-name"
+                            <div className="input-group">
+                                <label htmlFor="first-name">Last Name</label>
+                                <input id="last-name"
                                        type="text"
                                        required="required"
                                        value={ this.state.lastName }
@@ -153,22 +152,20 @@
                                        onBlur={ this.updateLastName }
                                 />
                             </div>
-                            <div className="text-input-group">
-                                <div className="info-label">Addresses</div>
+                            <div className="input-group">
+                                <label>Addresses</label>
                                     {addressHint}
                                     {addressItems}
                                 <Peerio.UI.AddAddress ref="addAddress" />
                             </div>
-                            <div className="text-input-group">
+                            <div className="input-group">
                                 <div className="info-label">Your public key:</div>
-                                <span className="text-mono col-8">{ Peerio.user.publicKey }</span>
+                                <span className="text-mono col-8 col-first">{ Peerio.user.publicKey }</span>
                             </div>
-                            <div className="text-input-group">
-                                <div className="info-label">Delete your account</div>
-                                <Peerio.UI.Tappable className="btn-link btn-danger" onTap={ this.deleteAccount }>delete
-                                    your
-                                    account</Peerio.UI.Tappable>
-                            </div>
+                            <Peerio.UI.Tappable className="btn-danger" onTap={ this.deleteAccount }>
+                              delete your account
+                            </Peerio.UI.Tappable>
+
                         </div>
                     </div>
                     <RouteHandler/>

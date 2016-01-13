@@ -75,15 +75,15 @@
             if (!this.contact.isMe) {
                 if (this.contact.isReceivedRequest) {
                     buttons.push(
-                        <Peerio.UI.Tappable element="div" className="btn-md btn-safe"
+                        <Peerio.UI.Tappable element="div" className="btn-safe"
                                             onTap={this.handleAccept}>Accept contact request
                         </Peerio.UI.Tappable>,
-                        <Peerio.UI.Tappable element="div" className="btn-md btn-danger"
+                        <Peerio.UI.Tappable element="div" className="btn-danger"
                                             onTap={this.handleReject}>Reject contact request
                         </Peerio.UI.Tappable>);
 
                 } else buttons.push(
-                    <Peerio.UI.Tappable element="div" className="btn-md btn-danger" onTap={this.handleRemove}>
+                    <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleRemove}>
                         Remove contact
                     </Peerio.UI.Tappable>);
             }
@@ -132,7 +132,7 @@
 
                     </div>
 
-                    <div>{buttons}</div>
+                    <div className="flex-col flex-justify-start">{buttons}</div>
 
                 </div>
             );
@@ -141,4 +141,3 @@
     });
 
 }());
-

@@ -29,10 +29,10 @@
 
             var btns = this.props.btns || <div>
                     <div className="col-6">
-                        <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
                     </div>
                     <div className="col-6">
-                        <Peerio.UI.Tappable element="div" className="btn-lrg"
+                        <Peerio.UI.Tappable element="div" className="btn-safe"
                                             onTap={this.handleAction}>OK</Peerio.UI.Tappable>
                     </div>
                 </div>;
@@ -68,5 +68,5 @@
         }
     });
 
-    
+
 }());
