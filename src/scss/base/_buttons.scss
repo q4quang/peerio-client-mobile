@@ -76,12 +76,12 @@ Footer Buttons                                       | Button Class/ID
   text-transform: uppercase;
   cursor: pointer;
 
-  // &:first-of-type {
-  //   margin-left: 0;
-  // }
-  // &:last-of-type {
-  //   margin-right: 0;
-  // }
+  i:first-child {
+    margin-right: $margin-small;
+  }
+  &:last-child {
+    margin-left: $margin-small;
+  }
 }
 
 .btn-primary {
