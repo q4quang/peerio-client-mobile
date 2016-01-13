@@ -130,7 +130,7 @@
             return (
                 <div>
                     <div className="without-tab-bar content-padded">
-                        <div class="info-label">Profile</div>
+                        <div className="headline-lrg">Profile</div>
                         <div className="flex-col flex-justify-center">
                             <div className="input-group">
                                 <label htmlFor="first-name">First Name</label>

@@ -37,7 +37,10 @@ A row of inputs or selects should be wrapped in `.flex-row`.
   @extend .width-full;
 
   position: relative;
-  height: 72px;
+  // TODO: fix this.
+  // Some input groups grow into a list. Re work how these items build or rework out the styling works.
+  // ex. Addresses field in Profile
+  min-height: 72px;
   padding: $padding-base 0 $padding-small;
 }
 
