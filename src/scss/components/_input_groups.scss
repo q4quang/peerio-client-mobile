@@ -5,81 +5,50 @@ name: input_groups
 category: Components
 ---
 
-An input group is a combination of an input and a label. Both `.text-input` and `.text-input-label` are base styles,
-however when placed inside a `.text-input-group` their behaviour is modified.
+An input group is a combination of an input and a label. Both `input` and `.input-label` are base styles,
+however when placed inside a `.input-group` their behaviour is modified.
 
 The **pop-up label** effect can be achieved with pure css by adding a 'required' attribute to the corresponding input,
 however this could have adverse effects in some cases, so it can also be acheived by added the `.up` class to the label
-with javascript. This effect only exists when both `.text-input` and `.text-input-label` are inside a `.text-input-group`.
+with javascript. This effect only exists when both `input` and `label` are inside a `.input-group`.
+
+A row of inputs or selects should be wrapped in `.flex-row`.
+**needs further testing**
 
 ```html_example
-<div class="text-input-group col-6">
-  <input type="text" class="text-input" required id="text-input" />
-  <label class="text-input-label" for="text-input">Text Input Group Label</label>
+<div class="input-group">
+  <input type="text" required id="input" />
+  <label for="input">Text Input Group Label</label>
 </div>
-<div class="text-input-group col-5">
-  <select class="select-input" required id="text-input-2">
+<div class="input-group">
+  <label for="input-2">Select Input Group Label</label>
+  <select class="select-input" required id="input-2">
     <option>Select Option</option>
   </select>
-  <label class="text-input-label" for="text-input-2">Select Input Group Label</label>
 </div>
 
 ```
 
 */
-.text-input-group{
+
+// TODO update docs
+
+.input-group {
+  @extend .width-full;
+
   position: relative;
-  margin: 0.5rem 0;
-  font-size: $text-input-fontsize;
-  font-weight: 200;
-
-  .text-input:focus + .text-input-label,
-  .text-input:not([value=""]) + .text-input-label,
-  .select-input:focus + .text-input-label,
-  .text-input-label.up{
-    font-size: 0.8rem;
-    top: -0.5rem;
-  }
-
-
+  height: 72px;
+  padding: $padding-base 0 $padding-small;
 }
 
-.slim-input {
-  position: relative;
-  width: 100%;
-  margin: auto auto 15px;
-  color: #fff;
-  // text or passphrase
-  input {
-    width: 100%;
-    min-height: 4rem;
-    margin: 0;
-    padding: 5px;
-    background: none;
-    background-color: color(p-blue-light-5);
-    border: none;
-    border-radius: 0;
-    font-size: 2rem;
-    font-weight: 100;
-    transition: all 300ms ease;
-    &:focus {
-      outline: none;
+.flex-row {
+  .input-group {
+    margin: 0 #{$margin-small/2};
+    &:first-child {
+      margin-left: 0;
     }
-  }
-  label {
-    display: block;
-    width: 80%;
-    font-size: 1.2rem;
-    font-variant: small-caps;
-    color: color(p-blue-light-40);
-  }
-  // "show passphrase" button
-  // padding helps to trigger touch event better
-  i {
-    position: absolute;
-    bottom: -26px;
-    right: -13px;
-    font-size: 2em;
-    padding: 3px 15px 15px 15px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
