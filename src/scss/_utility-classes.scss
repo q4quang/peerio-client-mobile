@@ -130,10 +130,14 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 
 }
 
-@mixin ellipses(){
+@mixin ellipses() {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.text-overflow {
+  @include ellipses();
 }
 
 .animate-appear {

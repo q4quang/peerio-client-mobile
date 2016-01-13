@@ -74,7 +74,7 @@
                         <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
 
                             <div className="flex-grow-0 flex-shrink-0 sidebar-header flex-col">
-                                <div className="flex-row">
+                                <div className="flex-row text-overflow">
                                     <Peerio.UI.Avatar size="big" username={user.username}/>
                                     <div className="flex-col">
                                     {/* TODO: fix text-overflow */}

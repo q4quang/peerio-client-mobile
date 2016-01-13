@@ -68,7 +68,7 @@
                 return;
             }
             _.each(this.selectedUsers, function (username) {
-                // todo: this should be added to local contact list until server response
+                // TODO: this should be added to local contact list until server response
                 Peerio.Contact(username).add();
             });
 
@@ -105,19 +105,22 @@
             }
 
             return (
-                <div className="content-padded">
+                <div className="content-padded without-tab-bar">
+                    <div className="flex-col flex-justify-start">
+
                     <h1 className="headline-lrg">Contact Search</h1>
-
-                    <input type="search" className="text-input-primary" placeholder="email/username/phone"
-                           ref="searchInput"/>
-                    <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.handleSearchForContacts}>
-                        Search again
+                    <div className="input-group">
+                      // NOTE: maybe clear the search on a null return - paul
+                        <input type="search" placeholder="email/username/phone" ref="searchInput"/>
+                    </div>
+                    <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
+                        <i className="fa fa-search"></i> Search again
                     </Peerio.UI.Tappable>
-
                     <div className="list-view">
                         {resultNode}
                     </div>
-                </div>);
+                </div>
+              </div>);
         }
     });
 
