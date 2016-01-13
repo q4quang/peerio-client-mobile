@@ -158,7 +158,7 @@
             if (!this.state.conversation) return <Peerio.UI.FullViewSpinner/>;
             // todo: more sophisticated logic for sending receipts, involving scrolling message into view detection
             // todo: also not trying to send receipts that were already sent?
-            //Peerio.Data.sendReceipts(this.props.conversationId);
+            //Peerio.Data.sendReceipts(this.props.conversationID);
             var conversation = this.state.conversation;
             var participants = conversation.participants.map(function (username) {
                 if (username === Peerio.user.username) return null;
@@ -188,7 +188,7 @@
                         participants={participants}
                         activeParticipantsCount={conversation.participants.length}
                         allParticipantsCount={conversation.participants.length+conversation.exParticipants.length}
-                        conversationId={conversation.id}/>
+                        conversationID={conversation.id}/>
 
                     <Peerio.UI.VScroll
                         onGetPage={this.getPage}

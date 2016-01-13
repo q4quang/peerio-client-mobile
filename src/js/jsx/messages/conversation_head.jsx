@@ -10,7 +10,7 @@
             this.setState({open: !this.state.open});
         },
         openInfo: function () {
-            this.transitionTo('conversation_info', {id: this.props.conversationId});
+            this.transitionTo('conversation_info', {id: this.props.conversationID});
         },
         render: function () {
             var counter = this.props.allParticipantsCount - 1;
