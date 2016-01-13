@@ -1,3 +1,6 @@
+// TODO: divide in to separate var files.
+@import "colors";
+
 $roboto-font-path:"../media/fonts/Roboto/" !default;
 $opensans-font-path:"../media/fonts/OpenSans/" !default;
 
@@ -32,5 +35,8 @@ $padding-base: 16px;
 $padding-small: $padding-base/2;
 
 // borders
-$divider-light: 1px solid rgba(255,255,255,0.12);
-$divider-dark: 1px solid rgba(0,0,0,0.12);
+$border-light: 1px solid $white-12;
+$border-dark: 1px solid $black-12;
+
+$radius-default: 2px;
+$radius-circle: 50%;

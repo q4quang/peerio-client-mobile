@@ -127,12 +127,12 @@
             if (item.downloadState) {
                 var ds = item.downloadState;
                 downloadStateNode = (
-                    <div className="download">{ds.stateName}&nbsp;
+                    <div className="download">{ds.stateName}
                         {ds.percent}
                     </div>);
             }
 
-            var cacheState = item.cached ? <i className="fa fa-floppy-o p-blue-dark-10">&nbsp;</i> : null;
+            var cacheState = item.cached ? <i className="fa fa-floppy-o p-blue-dark-10"> </i> : null;
 
             var timestamp = moment(item.timestamp).calendar();
 
@@ -144,7 +144,7 @@
                     <div className="list-item-content">
                         <div className="list-item-title">{cacheState} {this.props.item.name}</div>
                         <div
-                            className="list-item-description">{this.props.item.humanSize}&nbsp;&bull;&nbsp;{timestamp}</div>
+                            className="list-item-description">{this.props.item.humanSize} &bull; {timestamp}</div>
                         {downloadStateNode}
                     </div>
                     <div className="list-item-forward">

@@ -25,7 +25,7 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
     overflow-x: hidden;
     overflow-y: auto;
     z-index: $z-content;
-    background-color: white;
+    background-color: $white-100;
     //Smooth scrolling on iOS
     -webkit-overflow-scrolling: touch;
 }
@@ -57,7 +57,7 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 
 .content-padded{
     @extend .content;
-    padding: 10px;
+    padding: $padding-base;
 }
 .content-intro{
     padding: 20px;
@@ -89,7 +89,7 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 }
 
 .content-inline-dialog {
-    background: white;
+    background: $white-100;
     position: absolute;
     top: 0px;
     left: 0;
@@ -103,7 +103,7 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 .content-inline-dialog input, .content-inline-dialog input * {
 }
 
-/* some hacks here, need testing 
+/* some hacks here, need testing
  * you don't actually need fieldset to be 100% height in signup
  * it messes up with positioning
  */

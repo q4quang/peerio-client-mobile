@@ -45,8 +45,8 @@
           var intro_content = (<div className="content-intro">
                                 <h1 className="headline-lrg">Peerio Contacts</h1>
                                 <p>It looks like you have not added any contacts yet. Click below to get started.</p>
-                                <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.addContact}>
-                                  <i className="fa fa-user-plus"></i>&nbsp;Add a contact
+                                <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.addContact}>
+                                  <i className="fa fa-user-plus"></i>Add a contact
                                 </Peerio.UI.Tappable>
                                 <img src="media/img/contacts.png"/>
                               </div>);
@@ -56,14 +56,14 @@
       return (
         <div className="modal contact-select">
             <p className="info-label">
-            Please select your recipients
+            Select your recipients
             </p>
           <ul className="contact-list">
             {contacts}
           </ul>
-          <div className="buttons col-12">
-            <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.accept}>OK</Peerio.UI.Tappable>
-            <Peerio.UI.Tappable element="div" className="btn-lrg btn-dark" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+          <div className="buttons flex-col">
+            <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.accept}>OK</Peerio.UI.Tappable>
+            <Peerio.UI.Tappable element="div" className="btn-dark" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
           </div>
         </div>
       );

@@ -56,7 +56,7 @@
             var setPinButton = !this.state.inProgress && this.pinIsSane() ? (
                 <Peerio.UI.Tappable
                     element="div"
-                    className="btn-sm"
+                    className="btn-primary"
                     onTap={this.setDevicePin}>Set device passcode</Peerio.UI.Tappable>
             ) : null;
             if (Peerio.user.PINIsSet) {
@@ -64,16 +64,16 @@
                     (<div>
                         <Peerio.UI.Tappable
                             element="div"
-                            className="btn-sm"
+                            className="btn-danger"
                             onTap={this.removePIN}>Remove existing passcode</Peerio.UI.Tappable>
                     </div>);
             } else {
                 pinUI =
-                    (<div>
+                    (<div className="flex-col flex-justify-center">
                         <p className="info-small italic">
                             Passcode must be 6 digits or longer
                         </p>
-                        <input className="text-input text-center"
+                        <input className="text-center"
                                type="password" required="required" ref="textEdit"
                                placeholder="Enter a device passcode"
                                pattern="[0-9]*"

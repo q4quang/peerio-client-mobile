@@ -62,53 +62,50 @@ Footer Buttons                                       | Button Class/ID
 
 .btn {
   @include button-ripple;
-  padding: 0.5em;
-  font-size: 0.8em;
+  padding: 0 $padding-small;
+  display: inline-block;
+  font-size: 14px;
   text-align: center;
-  margin-bottom: 0.5em;
-  margin-top: 0.5em;
-  border-radius: 3px;
-  color: white;
-  width: 100%;
+  margin: $margin-small;
+  border-radius: $radius-default;
+  color: $white-100;
+  min-width: 64px;
+  height: 36px;
+  min-height: 36px;
+  line-height: 36px;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  i:first-child {
+    margin-right: $margin-small;
+  }
+  &:last-child {
+    margin-left: $margin-small;
+  }
+}
+
+.btn-primary {
+  @extend .btn;
   background-color: #2795d0;
+}
+
+.btn-back {
+  @extend .btn;
+  @extend .flex-shrink-0;
+  width: 85px;
+  margin: $margin-small 0;
+
+
+  i {
+    font-size: 20px;
+    padding: 2px;
+    margin-right: $margin-small;
+  }
 }
 // looking at the style guide, this button style doesn't offer much affordance. I would consider removing it.
 // What good is a button that the user doens't know is a button?
 .btn-subtle{
-  background-color: transparent;
-  width: 100%;
-  text-align: center;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  color: inherit;
-}
-
-.btn-lrg{
   @extend .btn;
-  font-size:  1.2rem;
-  width: 100%;
-  font-weight: 100;
-}
-
-.btn-md{
-  @extend .btn;
-  font-size: 1em;
-  padding: 0.7em;
-}
-
-.btn-sm{
-  @extend .btn;
-  font-size: 0.9rem;
-}
-
-.btn-lrg-back{
-  @extend .btn-lrg;
-  background-color: transparent;
-  opacity: 0.8;
-  > .fa {
-    position: relative;
-    left: -5px;
-  }
 }
 
 .btn-dark{
@@ -119,12 +116,10 @@ Footer Buttons                                       | Button Class/ID
 .btn-safe {
   @extend .btn;
   background-color: color(p-green);
-  color: white;
 }
 
 .btn-danger {
   @extend .btn;
-  color: white;
   background-color:color(danger);
 }
 
@@ -136,8 +131,11 @@ Footer Buttons                                       | Button Class/ID
 }
 
 button:disabled , .btn-disabled {
-  background-color: rgba(103, 103, 103, 0.69);
-  color: white;
+  @extend .btn;
+  color: $black-12;
+  background-color: $black-12;
+  cursor: default;
+
 }
 
 .btn-global-action,
@@ -148,10 +146,12 @@ button:disabled , .btn-disabled {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding:0 8px;
+  padding:0 $padding-base;
   white-space: nowrap;
   color:white;
   height: 48px;
+  font-size: 14px;
+  text-transform: uppercase;
 
   i{
     margin-right: $margin-small;
@@ -166,7 +166,6 @@ button:disabled , .btn-disabled {
 #global-back {
   flex-grow: 0;
   justify-content: flex-start;
-  text-transform:capitalize;
   transition: background-color 100ms ease-in;
   padding: 0 $padding-base;
 

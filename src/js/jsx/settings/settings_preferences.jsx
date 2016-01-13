@@ -1,11 +1,11 @@
 (function () {
 
-    Peerio.UI.PreferenceSettings = React.createClass({        
+    Peerio.UI.PreferenceSettings = React.createClass({
         mixins: [ReactRouter.Navigation],
 
         getInitialState: function(){
             return this.getSettings();
-        },        
+        },
 
         componentDidMount: function () {
             this.subscriptions = [
@@ -50,16 +50,16 @@
         doUpdateNotificationSettings: function(){
             this.doUpdate = this.doUpdate || _.throttle(function(){
                 return Peerio.user.setNotifications(
-                    this.state.notifyNewMessage, 
+                    this.state.notifyNewMessage,
                     this.state.notifyNewContact,
                     this.state.notifyContactRequest)
                 .catch( (error) => {
                     Peerio.Action.showAlert({text: 'Save failed. ' + (error ? (' Error message: ' + error.message) : '')});
-                    this.resetSettings(); 
+                    this.resetSettings();
                 });
             }, 1000);
             this.doUpdate();
-        },        
+        },
         setNotifyNewContact: function() {
             this.setState({notifyNewContact: !this.state.notifyNewContact});
             this.doUpdateNotificationSettings();
@@ -71,7 +71,7 @@
         setNotifyNewContactRequest: function() {
             this.setState({notifyContactRequest: !this.state.notifyContactRequest});
             this.doUpdateNotificationSettings();
-        },                
+        },
         render: function(){
             return (
                 <div className="content-padded without-tab-bar">
@@ -82,7 +82,7 @@
                             <Peerio.UI.Tappable key='notify-new-message' onTap={this.setNotifyNewMessage}>
                                 <span className="col-10">
                                     Notify me of new messages:</span>
-                                <span type="checkbox" className={this.state.notifyNewMessage 
+                                <span type="checkbox" className={this.state.notifyNewMessage
                                     ? 'checkbox-input checked': 'checkbox-input'}></span>
                             </Peerio.UI.Tappable>
                         </p>
@@ -90,7 +90,7 @@
                             <Peerio.UI.Tappable key='notify-new-contact' onTap={this.setNotifyNewContact}>
                                 <span className="col-10">
                                     Notify me when I receive a contact request:</span>
-                                <span type="checkbox" className={this.state.notifyNewContact 
+                                <span type="checkbox" className={this.state.notifyNewContact
                                     ? 'checkbox-input checked': 'checkbox-input'}></span>
                             </Peerio.UI.Tappable>
                         </p>
@@ -98,16 +98,11 @@
                             <Peerio.UI.Tappable key='notify-new-contact-request' onTap={this.setNotifyNewContactRequest}>
                                 <span className="col-10">
                                     Notify me when invites I send are accepted:</span>
-                                <span type="checkbox" className={this.state.notifyContactRequest 
+                                <span type="checkbox" className={this.state.notifyContactRequest
                                     ? 'checkbox-input checked': 'checkbox-input'}></span>
                             </Peerio.UI.Tappable>
                         </p>
                     </p>
-
-                    <div className="info-label">Device PIN</div>
-                    <div className="text-input-group col-12">
-                        <Peerio.UI.Tappable element="div" className="btn-sm" onTap={this.setDevicePin}>Set/remove device PIN</Peerio.UI.Tappable>
-                    </div>
                     <RouteHandler/>
                 </div>
             );

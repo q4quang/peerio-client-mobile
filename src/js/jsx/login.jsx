@@ -194,36 +194,36 @@
                                         </div>
                                     </Peerio.UI.Tappable>)
                                     :
-                                    (<div className="slim-input">
-                                        <input defaultValue={debugUserName} id="username" ref="username"
-                                               onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
-                                               autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                                               spellCheck="false"/>
-
-                                        <div>
-                                            <label htmlFor="username">username</label>
+                                    (<div className="login-input">
+                                        <label htmlFor="username">username</label>
+                                        <div className="input-group flex-row">
+                                            <input defaultValue={debugUserName} id="username" ref="username"
+                                                onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
+                                                autoComplete="off" autoCorrect="off" autoCapitalize="off"
+                                                spellCheck="false"/>
                                         </div>
                                     </div>)
                                 }
-                                <div id="passphrase-input" className="slim-input">
-                                    <div>
-                                        <input defaultValue={debugPassword} id="password" ref="passphrase"
-                                               key="passphrase"
-                                               type={passInputType} onChange={this.handlePassphraseChange}
-                                               onKeyDown={this.handleKeyDownPass}
-                                               maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                                               spellCheck="false"/>
-                                        <label htmlFor="password">passphrase or pin</label>
-                                        <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap}>
-                                            <i className={'pull-right fa ' + eyeIcon}></i>
-                                        </Peerio.UI.Tappable>
-                                    </div>
+                                <div className="login-input">
+                                      <label htmlFor="password">passphrase or pin</label>
+                                      <div className="input-group flex-row">
+                                          <input defaultValue={debugPassword} id="password" ref="passphrase"
+                                             key="passphrase"
+                                             type={passInputType} onChange={this.handlePassphraseChange}
+                                             onKeyDown={this.handleKeyDownPass}
+                                             maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off"
+                                             spellCheck="false"/>
+                                           <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap} element="i"
+                                               className={'flex-shrink-0 fa ' + eyeIcon}>
+                                           </Peerio.UI.Tappable>
+                                      </div>
+
                                 </div>
                                 <div id="login-process-state">
                                     <Peerio.UI.TalkativeProgress
                                         enabled={this.state.waitingForLogin}/>
                                 </div>
-                                <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-lrg btn-safe"
+                                <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-safe width-full"
                                                     onTap={this.handleSubmit}>
                                     {this.state.waitingForLogin ?
                                         <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
@@ -231,12 +231,12 @@
 
                                 {this.state.waitingForLogin
                                     ? null
-                                    : (<Peerio.UI.Tappable element="div" className="btn-lrg"
+                                    : (<Peerio.UI.Tappable element="div" className="btn width-full"
                                                            onTap={this.transitionTo.bind(this,'signup')}>
                                     sign up
                                 </Peerio.UI.Tappable>)}
                                 {/*
-                                 <div className="text-input-group">
+                                 <div className="input-group">
                                  <label className="info-label col-4" htmlFor="language-select">Language:</label>
                                  <select id="language-select" className="select-input col-8">
                                  <option value="">english</option>

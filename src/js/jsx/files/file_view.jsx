@@ -73,27 +73,25 @@
             var downloadStateNode = null, buttonsNode = null;
             if (file.downloadState) {
                 var ds = file.downloadState;
-                downloadStateNode = (<div className="info-banner">{ds.stateName}&nbsp;{ds.percent}</div>);
+                downloadStateNode = (<div className="info-banner">{ds.stateName} {ds.percent}</div>);
             } else {
                 buttonsNode = (
-                    <div>
-                        {file.cached ? <div className="btn btn-safe" onTouchEnd={this.handleOpen}>Open</div>
+                    <div className="flex-col flex-justify-center">
+                        {file.cached ? <div className="btn-safe" onTouchEnd={this.handleOpen}>Open</div>
                             : <div className="btn-md btn-safe" onTouchEnd={this.handleDownload}><i
-                            className="fa fa-cloud-download">&nbsp;</i>Download</div>}
+                            className="fa fa-cloud-download"> </i>Download</div>}
 
                         {file.cached ?
-                            <div className="btn btn-danger" onTouchEnd={this.handleRemoveLocal}><i
-                                className="fa fa-trash-o"></i>&nbsp;Remove from this device</div> : null }
+                            <div className="btn-danger" onTouchEnd={this.handleRemoveLocal}><i
+                                className="fa fa-trash-o"></i>Remove from your device</div> : null }
 
                         {file.cached ?
-                            <div className="btn btn-danger" onTouchEnd={this.handleRemove}>Remove from this device and
-                                your
-                                cloud</div>
+                            <div className="btn-danger" onTouchEnd={this.handleRemove}>Remove from your device and cloud</div>
                             :
-                            <div className="btn btn-danger" onTouchEnd={this.handleRemove}>Remove from your cloud</div>}
+                            <div className="btn-danger" onTouchEnd={this.handleRemove}>Remove from your cloud</div>}
 
                         {file.creator === Peerio.user.username ?
-                            <div className="btn btn-danger" onTouchEnd={this.handleNuke}>Unshare and remove from all
+                            <div className="btn-danger" onTouchEnd={this.handleNuke}>Unshare and remove from all
                                 clouds</div> : null }
                     </div>);
             }
@@ -113,7 +111,7 @@
                         </div>
                     </div>
 
-                    <hr className="col-12"/>
+                    <hr />
 
                     <div className="info-table">
                         <div className="info-row">

@@ -114,12 +114,12 @@ $list-item-height: 70px;
     padding-right: $padding-small;
     flex-direction: row;
     align-items: center;
-    border-bottom: $divider-dark;
+    border-bottom: $border-dark;
     background-color: color(list-item-bg);
     position: relative;
     transition: transform 300ms ease-out, background-color 100ms ease-in;
     &.unread {
-      background-color: #fff;
+      background-color: $white;
       border-left: 5px solid color(p-green);
 
       .list-item-swipe-wrapper {
@@ -198,7 +198,7 @@ $list-item-height: 70px;
       width: 50px;
       z-index: -1;
       height: 100%;
-      color: #fff;
+      color: $white;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -267,7 +267,7 @@ $list-item-height: 70px;
   margin: 0;
   .list-item {
     padding: 0 0 0.2em 0;
-    border-bottom: $divider-light
+    border-bottom: $border-light
   }
   .list-item:last-child {
     border-bottom: 1px solid transparent;

@@ -75,15 +75,15 @@
             if (!this.contact.isMe) {
                 if (this.contact.isReceivedRequest) {
                     buttons.push(
-                        <Peerio.UI.Tappable element="div" className="btn-md btn-safe"
+                        <Peerio.UI.Tappable element="div" className="btn-safe"
                                             onTap={this.handleAccept}>Accept contact request
                         </Peerio.UI.Tappable>,
-                        <Peerio.UI.Tappable element="div" className="btn-md btn-danger"
+                        <Peerio.UI.Tappable element="div" className="btn-danger"
                                             onTap={this.handleReject}>Reject contact request
                         </Peerio.UI.Tappable>);
 
                 } else buttons.push(
-                    <Peerio.UI.Tappable element="div" className="btn-md btn-danger" onTap={this.handleRemove}>
+                    <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleRemove}>
                         Remove contact
                     </Peerio.UI.Tappable>);
             }
@@ -111,7 +111,7 @@
                         <span
                             className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(You)' : ''}</span>
                     </div>
-                    <hr className="col-12"/>
+                    <hr />
 
                     <div className="info-blocks">
 
@@ -122,17 +122,17 @@
 
                         <div className="info-block">
                             <div className="info-label">State:</div>
-                            <div className="col-12 info-content">{status}</div>
+                            <div className="width-full info-content">{status}</div>
                         </div>
 
                         <div className="info-block">
                             <div className="info-label">Primary address:</div>
-                            <div className="col-12 info-content">{this.contact.primaryAddress || 'N/A'}</div>
+                            <div className="width-full info-content">{this.contact.primaryAddress || 'N/A'}</div>
                         </div>
 
                     </div>
 
-                    <div>{buttons}</div>
+                    <div className="flex-col flex-justify-start">{buttons}</div>
 
                 </div>
             );
@@ -141,4 +141,3 @@
     });
 
 }());
-

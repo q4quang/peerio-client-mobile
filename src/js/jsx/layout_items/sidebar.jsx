@@ -64,7 +64,7 @@
             var quota = Peerio.Helpers.formatBytes(user.quota.total);
             var quotaPercent = Math.floor(user.quota.user / (user.quota.total / 100));
 
-            pinNode = Peerio.user.PINIsSet ? 'Remove PIN code' : 'Set PIN code';
+            pinNode = Peerio.user.PINIsSet ? 'Remove passcode' : 'Set passcode';
 
             twoFactor = user.settings.twoFactorAuth ? 'Disable two factor auth' : 'Enable two factor auth';
 
@@ -73,10 +73,11 @@
                     <div>
                         <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
 
-                            <div className="flex-0 sidebar-header flex-col">
-                                <div className="flex-row">
+                            <div className="flex-grow-0 flex-shrink-0 sidebar-header flex-col">
+                                <div className="flex-row text-overflow">
                                     <Peerio.UI.Avatar size="big" username={user.username}/>
-                                    <div className="col-9 col-first">
+                                    <div className="flex-col">
+                                    {/* TODO: fix text-overflow */}
                                       <h3 className="headline-md">{user.firstName} {user.lastName}</h3>
                                       <span className="subhead-inline">{user.username}</span>
                                     </div>
@@ -87,27 +88,7 @@
                                 </div>
                             </div>
 
-                            <div className="flex-1" ref="menu">
-                                {
-                                //  <ul className="flex-row">
-                                //     <Peerio.UI.Tappable tag='li' onTap={this.handleNewMessage}
-                                //                         className="icon-with-label flex-col-1">
-                                //         <i className="fa fa-pencil circle"/>
-                                //         <span className="icon-label">New Message</span>
-                                //     </Peerio.UI.Tappable>
-                                //     <Peerio.UI.Tappable tag="li" onTap={this.handleUpload}
-                                //                         className="icon-with-label flex-col-1">
-                                //         <i className="fa fa-cloud-upload circle"/>
-                                //         <span className="icon-label">Upload File</span>
-                                //     </Peerio.UI.Tappable>
-                                //     <Peerio.UI.Tappable tag="li" onTap={this.handleAddContact}
-                                //                         className="icon-with-label flex-col-1">
-                                //         <i className="fa fa-user-plus circle"/>
-                                //         <span className="icon-label">Add Contact</span>
-                                //     </Peerio.UI.Tappable>
-                                // </ul>
-                                }
-
+                            <div className="flex-grow-1" ref="menu">
                                 <h3 className="subhead">Security</h3>
                                 <ul>
                                     <Peerio.UI.Tappable tag='li'
@@ -138,17 +119,15 @@
 
 
 
-                            <div className="flex-0">
-                                <Peerio.UI.Tappable element="div" className="btn-dark btn-md"
+                            <div className="flex-grow-0 flex-col flex-align-center">
+                                <Peerio.UI.Tappable element="div" className="btn-dark width-full"
                                                     onTap={this.signOut}><i
                                     className="fa fa-power-off"></i> Sign Out
                                 </Peerio.UI.Tappable>
-                                <div className="sidebar-footer-text">
-                                    <div className="app-version">Peerio
-                                        version: {Peerio.NativeAPI.getAppVersion()}</div>
-                                </div>
                             </div>
-
+                            <div className="app-version">
+                                Peerio version: {Peerio.NativeAPI.getAppVersion()}
+                            </div>
                         </Peerio.UI.Swiper>
 
                         <div id="sidebar-dimmer" ref="dimmer" className={className} onTouchStart={this.toggle}></div>

@@ -4,8 +4,9 @@
  *  DON'T EDIT IT - GO TO THE SCSS SOURCE
  */
 
+//All variables, mixins and blocks should be imported to the vars file. - paul
 @import "vars";
-@import "colors";
+
 @import "utility-classes";
 @import "login_screen";
 @import "animation_keyframes";

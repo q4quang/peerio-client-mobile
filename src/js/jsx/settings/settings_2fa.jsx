@@ -34,7 +34,7 @@
                 // we try to copy code to buffer
                 // if we fail, we focus on the code input
                 // to make it easier for user to copy
-                // if we succeed, we focus on 
+                // if we succeed, we focus on
                 // authenticator input
                 var element = React.findDOMNode(this.refs.generatedCode);
                 Peerio.NativeAPI.copyToClipboard(this.state.code)
@@ -78,8 +78,8 @@
         startEnable2FA: function() {
             if(!this.state.isEnabled2FA) {
                 /* trying to get a new code right away */
-                Peerio.Net.setUp2FA().then((response) => { 
-                    L.info(response); 
+                Peerio.Net.setUp2FA().then((response) => {
+                    L.info(response);
                     var secret = response.secret;
                     this.setState( { code: secret, message: '' } );
                 });
@@ -125,23 +125,21 @@
                 'The following key has been copied to your clipboard. Please paste it in your authenticator app:' : 'Paste the following secret key into your authenticator app:';
 
                 return (
-                    <div className="content-padded no-scroll-hack without-tab-bar">
-                        <div className="info-label">Two Factor Authentication (2FA)</div>
-                        <div>{ this.state.isEnabled2FA ? (
-                            <div>
-                                <Peerio.UI.Tappable element="div" className="btn-lrg" 
-                                    onTap={this.startDisable2FA}> 
-                                    Disable 2FA
-                                </Peerio.UI.Tappable>
-                            </div>
+                    <div className="content-padded no-scroll-hack without-tab-bar flex-col flex-align-center">
+                        <div className="info-label width-full">Two Factor Authentication (2FA)</div>
+                        { this.state.isEnabled2FA ? (
+                              <Peerio.UI.Tappable element="div" className="btn-danger width-full"
+                                  onTap={this.startDisable2FA}>
+                                  Disable 2FA
+                              </Peerio.UI.Tappable>
                             ) : (
                             <div>
-                                <p className="info-small col-12"> 
+                                <p className="info-small width-full">
                                     {pasteMessage}
                                 </p>
                                 <div className="text-center">{this.state.code ? (
-                                    <input className="no-border full-width text-center" 
-                                        ref="generatedCode" 
+                                    <input className="no-border width-full text-center"
+                                        ref="generatedCode"
                                         autoComplete="off" autoCorrect="off"
                                         autoCapitalize="off" spellCheck="false"
                                         value={this.state.code} readOnly="true"/>
@@ -152,21 +150,20 @@
                                 </div>
                             </div>)} { this.state.disable2FA || !this.state.isEnabled2FA ? (
                             <div>
-                                <p className="info-small col-12"> 
+                                <p className="info-small width-full">
                                     Enter the six digit code that appears in the app:
                                 </p>
-                                <input 
-                                    className="txt-lrg text-center" 
-                                    ref="authenticatorCode" 
+                                <input
+                                    className="txt-lrg text-center"
+                                    ref="authenticatorCode"
                                     autoComplete="off" autoCorrect="off"
                                     autoCapitalize="off" spellCheck="false"
                                     onChange={this.onChangeAuthy}
                                     value={this.state.authyCode}/>
                             </div>) : null }
-                            <p className="info-small col-12"> 
+                            <p className="info-small width-full">
                                 {this.state.message}
                             </p>
-                        </div>
                     </div>
                 );
         }

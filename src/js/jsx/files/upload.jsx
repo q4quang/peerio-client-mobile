@@ -56,15 +56,15 @@
         },
         render: function () {
             return (
-                <div className="modal contact-select file-upload">
-                    <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture} className="btn-lrg">
+                <div className="modal contact-select flex-col flex-justify-center">
+                    <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture} className="btn-primary">
                         <i className="fa fa-th"></i> Pick from photo library
                     </Peerio.UI.Tappable>
                     <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture.bind(this,true)}
-                                        className="btn-lrg">
+                                        className="btn-primary">
                         <i className="fa fa-camera-retro"></i> Take a new picture
                     </Peerio.UI.Tappable>
-                    <Peerio.UI.Tappable element="div" onTap={this.props.onClose} className="btn-lrg btn-dark">
+                    <Peerio.UI.Tappable element="div" onTap={this.props.onClose} className="btn-dark">
                         <i className="fa fa-times"></i> Cancel
                     </Peerio.UI.Tappable>
                 </div>

@@ -1,7 +1,24 @@
 // base colors
-$p-blue: #2281c5;
-$p-green: #95d583;
+// change names to primary/accent
+$p-blue: #2281c5; // primary
+$p-green: #95d583; // accent?
 
+// text colors
+$black: #000;
+$black-87: rgba($black, 0.87);
+$black-54: rgba($black, 0.54);
+$black-38: rgba($black, 0.38);
+$black-12: rgba($black, 0.12);
+
+$white: #fff;
+$white-100: rgba($white, 1);
+$white-70: rgba($white, 0.70);
+$white-30: rgba($white, 0.30);
+$white-12: rgba($white, 0.12);
+
+//  Less is more, we currently only use about 10 of the p-blues light and dark
+//  and 1 of the greens.
+// TODO: trim the color palette to 10 primary variations and 4 accents
 $colors: (
   // base colors
         p-blue:$p-blue,
@@ -51,6 +68,7 @@ $colors: (
         sidebar-bg-color: #44494d,
 
   //component colors
+        // why is this better than p-blue-light-50?
         message-self-bg: lighten($p-blue, 49%),
         message-other-bg: #f5f5f5,
         list-item-bg: #eee,

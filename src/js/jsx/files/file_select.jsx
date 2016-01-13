@@ -85,16 +85,19 @@
 
             return (
                 <div className="modal contact-select">
+                  <p className="info-label">
+                  Select your files
+                  </p>
                     <ul className="contact-list">
                         {uploads}
                         {files}
                     </ul>
-                    <div className="buttons col-12">
-                        <Peerio.UI.Tappable element="div" className="btn-lrg"
+                    <div className="buttons flex-col">
+                        <Peerio.UI.Tappable element="div" className="btn-safe"
                                             onTap={this.accept}>OK</Peerio.UI.Tappable>
-                        <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.upload}>Upload new
+                                          <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.upload}>Upload new
                             file</Peerio.UI.Tappable>
-                        <Peerio.UI.Tappable element="div" className="btn-lrg btn-dark"
+                          <Peerio.UI.Tappable element="div" className="btn-dark"
                                             onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
     Peerio.UI.AddAddress = React.createClass({
 
         mixins: [Peerio.UI.AutoFocusMixin],
-       
+
         getInitialState: function () {
             return {
             };
@@ -13,7 +13,7 @@
         addNewAddress: function (skip2FA) {
             var newAddress = this.refs.textEdit.getDOMNode().value;
 
-            if ( !Peerio.Helpers.isValidEmail(newAddress) 
+            if ( !Peerio.Helpers.isValidEmail(newAddress)
                 && !Peerio.Helpers.isValidPhone(newAddress) )
             return Peerio.UI.Alert.show({text: 'Sorry, that doesn\'t look like a valid email or phone number.'});
 
@@ -58,12 +58,12 @@
         render: function () {
            return (
                <div>
-                   <div className="col-8">
-                       <input type="text" className="text-input" placeholder="add phone or email"
+                   <div className="col-8 col-first">
+                       <input type="text" placeholder="add phone or email"
                            ref="textEdit"/>
                    </div>
-                   <div className="col-4 text-center">
-                       <Peerio.UI.Tappable className="btn-sm btn-block" onTap={ this.addNewAddress }>
+                   <div className="col-4 col-last">
+                       <Peerio.UI.Tappable className="btn-primary" onTap={ this.addNewAddress }>
                            add
                        </Peerio.UI.Tappable>
                    </div>
@@ -73,6 +73,3 @@
     });
 
 }());
-
-
-

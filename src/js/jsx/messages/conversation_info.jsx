@@ -24,32 +24,30 @@
 
                     <h1 className="headline">{conv.subject}</h1>
 
-                    <h2 className="subhead">
+                    <div className="subhead">
                         <span className="icon-with-label"><i
-                            className="fa fa-calendar-o"/>&nbsp;{conv.createdMoment.format('L')}</span>
+                            className="fa fa-calendar-o"/> {conv.createdMoment.format('L')}</span>
                         <span className="icon-with-label"><i
-                            className="fa fa-comment-o"/>&nbsp;{this.state.msgCount}</span>
-                        <span className="icon-with-label"><i className="fa fa-file-o"/>&nbsp;{this.state.fileIDs.length}</span>
+                            className="fa fa-comment-o"/> {this.state.msgCount}</span>
+                        <span className="icon-with-label"><i className="fa fa-file-o"/> {this.state.fileIDs.length}</span>
                         <span className="icon-with-label"><i
-                            className="fa fa-users"/>&nbsp;{conv.participants.length + conv.exParticipants.length}</span>
-                    </h2>
+                            className="fa fa-users"/> {conv.participants.length + conv.exParticipants.length}</span>
+                        </div>
 
-                    <br/>
-
-            <span className="info-label">
+            <div className="info-label">
               Participants
-            </span>
+            </div>
 
                     <div className="compact-list-view">
                         {conv.participants.map(p => <ContactNode username={p} key={p}/>)}
                         {conv.exParticipants.map(p => <ContactNode username={p.u} leftAt={p.moment} key={p.u}/>) }
                     </div>
 
-                    <br/>
 
-            <span className="info-label">
+
+            <div className="info-label">
               Shared Files
-            </span>
+            </div>
                     <div className="compact-list-view">
                         { this.state.fileIDs.map(f =>  <FileNode id={f} key={f}/>)}
                     </div>
@@ -81,7 +79,7 @@
                         <div className="list-item-content txt-sm">
                             <span>{f.name}</span>
                             <div className="list-item-description">
-                                Shared by <em>{f.sender || f.creator}</em>&nbsp;&bull;&nbsp;{f.moment.format('L')}
+                                Shared by <em>{f.sender || f.creator}</em> &bull; {f.moment.format('L')}
                             </div>
                         </div>
                     </div>

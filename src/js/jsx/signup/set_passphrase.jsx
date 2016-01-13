@@ -39,8 +39,8 @@
         //--- RENDER
         render: function () {
             var createPassPhrase = this.state.passphrase_valid ?
-                (<Peerio.UI.Tappable element="div" className="btn-lrg" 
-                    onTap={this.passPhraseIsValid}> 
+                (<Peerio.UI.Tappable element="div" className="btn-safe"
+                    onTap={this.passPhraseIsValid}>
                     Create my account
                 </Peerio.UI.Tappable>) : null;
             var passphraseMsg = this.state.passphrase_alert ? 'Passphrase does not match' : null;
@@ -49,17 +49,17 @@
                         <div className="content-inline-dialog">
                             <div className="info-label">Please enter the passphrase</div>
                             <div>
-                                <textarea 
-                                    className="txt-lrg textarea-transparent" 
-                                    ref="passPhraseInput" 
+                                <textarea
+                                    className="txt-lrg textarea-transparent"
+                                    ref="passPhraseInput"
                                     autoFocus="true" autoComplete="off" autoCorrect="off"
                                     autoCapitalize="off" spellCheck="false"
                                     onChange={this.validatePassPhrase}>
                                 </textarea>
                                 <p className="info-small text-center red-bold">{passphraseMsg}</p>
                                 {createPassPhrase}
-                                <Peerio.UI.Tappable element="div" className="btn-subtle" 
-                                    onTap={this.removeDialog}> 
+                                <Peerio.UI.Tappable element="div" className="btn-primary"
+                                    onTap={this.removeDialog}>
                                     Let me see my passphrase again
                                 </Peerio.UI.Tappable>
                             </div>

@@ -13,8 +13,8 @@
             Peerio.Auth.signup(this.state.username, this.state.passphrase, this.state.firstName, this.state.lastName)
             .then(() => {
                 //todo: terrible, transfer this through router
-                Peerio.autoLogin = { 
-                    username: this.state.username, 
+                Peerio.autoLogin = {
+                    username: this.state.username,
                     passphrase: this.state.passphrase
                 };
                 this.transitionTo('root');
@@ -180,8 +180,9 @@
         },
         renderSMS: function () {
             return (<div>
-                <div className="text-input-group col-6">
-                    <select className="select-input" name="phone_country_code" id="phone_country_code"
+                <div className="input-group col-6">
+                  <label htmlFor="phone_country_code">Country</label>
+                    <select name="phone_country_code" id="phone_country_code"
                         required="required">
                         <option value="" disabled selected>Country</option>
                         <option value="1">USA</option>
@@ -191,12 +192,12 @@
                         <option value="1">Not Spain</option>
                         <option value="1">United Kingdom</option>
                     </select>
-                    <label className="text-input-label" htmlFor="phone_country_code">Country</label>
+
                 </div>
 
-                <div className="text-input-group col-6">
-                    <input className="text-input" type="tel" name="user_phone" id="user_phone" required="required"/>
-                    <label className="text-input-label" htmlFor="user_phone">Phone number</label>
+                <div className="input-group col-6">
+                    <label htmlFor="user_phone">Phone number</label>
+                    <input type="tel" name="user_phone" id="user_phone" required="required"/>
                 </div>
                 <Peerio.UI.Tappable className="btn-md btn-safe" onTap={this.handleSMSCode}> Send SMS
                     code</Peerio.UI.Tappable>
@@ -206,174 +207,155 @@
             return (<div>
                 <img src="media/img/captcha-example.jpg"/>
 
-                <div className="text-input-group">
-                    <input className="text-input" type="text" name="user_captcha" id="user_captcha"
-                        required="required"/>
-                    <label className="text-input-label" htmlFor="user_captcha">Enter captcha text</label>
+                <div className="input-group">
+                    <label htmlFor="user_captcha">Enter captcha text</label>
+                    <input type="text" name="user_captcha" id="user_captcha" required="required"/>
                 </div>
             </div>);
         },
         renderSMSSent: function () {
-            return (<div className="text-input-group">
-                <input className="text-input" type="tel" name="sms_code" id="sms_code" required="required"/>
-                <label className="text-input-label" htmlFor="sms_code">Enter SMS Code</label>
+            return (<div className="input-group">
+                <label htmlFor="sms_code">Enter SMS Code</label>
+                <input type="tel" name="sms_code" id="sms_code" required="required"/>
             </div>);
         },
         renderStep0: function (authMethod) {
-            return (<fieldset key={'singup-step-0'} className="animate-enter">
-                <h1 className="headline-lrg">Basic Information</h1>
+            return (<fieldset key={'signup-step-0'} className="animate-enter">
+                          <h1 className="headline-lrg">Basic Information</h1>
 
-                <div className="text-input-group">
-                    <input className="text-input" type="text" value={this.state.username} name="user_name"
-                        id="user_name"
-                        ref='username' required="required" autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                        spellCheck="false"
-                        onChange={this.validateUsername}/>
-                    {
-                        (this.state.usernameValid === null || this.state.usernameValid === true)
-                            ? <label
-                                className={this.state.username.length > 0 ? 'text-input-label up' : 'text-input-label'}
-                                htmlFor="user_name">Desired username</label>
-                            :
-                                <label className={this.state.username.length > 0  ? 'text-input-label up' : 'text-input-label'}
-                                    style={{color: '#FF7272', fontWeight:600}} htmlFor="user_name">Please
-                                    pick a different username</label>
-                                }
-                            </div>
+                          <div className="input-group">
+                              {(this.state.usernameValid === null || this.state.usernameValid === true)
+                                  ? <label htmlFor="user_name">Desired username</label>
+                                  : <label style={{color: '#FF7272', fontWeight:600}} htmlFor="user_name">Please pick a different username</label>
+                              }
+                              <input type="text" value={this.state.username} name="user_name"
+                                  id="user_name"
+                                  ref='username' required="required" autoComplete="off" autoCorrect="off" autoCapitalize="off"
+                                  spellCheck="false"
+                                  onChange={this.validateUsername}/>
+                          </div>
 
-                            <div className="text-input-group">
-                                <input className="text-input" type="text" name="user_first_name" id="user_first_name"
-                                    value={this.state.firstName}
-                                    ref="firstName"
-                                    onChange={this.validateFirstName} autoComplete="off" autoCorrect="off" autoCapitalize="off"
+                          <div className="input-group">
+                              {(this.state.firstNameValid === null || this.state.firstNameValid === true)
+                                  ? <label htmlFor="user_first_name">First name</label>
+                                  : <label htmlFor="user_first_name" style={{color: '#FF7272', fontWeight:600}}>Invalid name</label>
+                              }
+                              <input type="text" name="user_first_name" id="user_first_name"
+                                  value={this.state.firstName}
+                                  ref="firstName"
+                                  onChange={this.validateFirstName} autoComplete="off" autoCorrect="off" autoCapitalize="off"
+                                  spellCheck="false"/>
+                          </div>
+
+                          <div className="input-group">
+                              {(this.state.lastNameValid === null || this.state.lastNameValid === true)
+                                  ? <label htmlFor="user_last_name">Last name</label>
+                                  : <label htmlFor="user_last_name" style={{color: '#FF7272', fontWeight:600}}>Invalid name</label>
+                              }
+                                <input type="text" name="user_last_name" id="user_last_name" ref="lastName"
+                                    value={this.state.lastName}
+                                    onChange={this.validateLastName} autoComplete="off" autoCorrect="off" autoCapitalize="off"
                                     spellCheck="false"/>
-                                {(this.state.firstNameValid === null || this.state.firstNameValid === true)
-                                    ? <label
-                                        className={this.state.firstName.length > 0  ? 'text-input-label up' : 'text-input-label'}
-                                        htmlFor="user_first_name">First name</label>
-                                    : <label
-                                        className={this.state.firstName.length > 0  ? 'text-input-label up' : 'text-input-label'}
-                                        htmlFor="user_first_name" style={{color: '#FF7272', fontWeight:600}}>Invalid
-                                        name</label>}
-                                </div>
+                          </div>
 
-                                <div className="text-input-group">
-                                    <input className="text-input" type="text" name="user_last_name" id="user_last_name" ref="lastName"
-                                        value={this.state.lastName}
-                                        onChange={this.validateLastName} autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                                        spellCheck="false"/>
-                                    {(this.state.lastNameValid === null || this.state.lastNameValid === true)
-                                        ? <label
-                                            className={this.state.lastName.length > 0  ? 'text-input-label up' : 'text-input-label'}
-                                            htmlFor="user_last_name">Last name</label>
-                                        : <label
-                                            className={this.state.firstName.length > 0  ? 'text-input-label up' : 'text-input-label'}
-                                            htmlFor="user_last_name" style={{color: '#FF7272', fontWeight:600}}>Invalid
-                                            name</label>}
-                                    </div>
+                          {/* <h2 className="headline-sm">authenticate via:</h2>
 
-                                    {/* <h2 className="headline-sm">authenticate via:</h2>
+                              <div className="centered-text">
+                              <input type="radio" name="auth_method" id="auth_captcha" value="captcha" className="sr-only radio-button"
+                              onChange={this.handleAuthMethod.bind(this, "captcha")}/>
+                              <label className="radio-label" htmlFor="auth_captcha">captcha</label>
 
-                                        <div className="centered-text">
-                                        <input type="radio" name="auth_method" id="auth_captcha" value="captcha" className="sr-only radio-button"
-                                        onChange={this.handleAuthMethod.bind(this, "captcha")}/>
-                                        <label className="radio-label" htmlFor="auth_captcha">captcha</label>
+                              <input type="radio" name="auth_method" id="auth_sms" value="sms" className="sr-only radio-button"
+                                  onChange={this.handleAuthMethod.bind(this, "sms")}/>
+                                  <label className="radio-label" htmlFor="auth_sms">SMS</label>
+                                  </div>
 
-                                        <input type="radio" name="auth_method" id="auth_sms" value="sms" className="sr-only radio-button"
-                                            onChange={this.handleAuthMethod.bind(this, "sms")}/>
-                                            <label className="radio-label" htmlFor="auth_sms">SMS</label>
-                                            </div>
+                                  {authMethod}*/}
+                          <div className="flex-row">
+                              <Peerio.UI.Tappable element='div' className="btn-back"
+                                  onTap={this.handlePreviousStep}><i
+                                      className="fa fa-chevron-left"></i>back
+                              </Peerio.UI.Tappable>
 
-                                            {authMethod}*/}
-                                    <div className="col-4 col-first">
-                                        <Peerio.UI.Tappable element='div' className="btn-lrg btn-lrg-back"
-                                            onTap={this.handlePreviousStep}><i
-                                                className="fa fa-chevron-left"></i>back
-                                        </Peerio.UI.Tappable>
-                                    </div>
-                                    <div className="col-8 col-last">
-                                        {this.state.usernameValid === true && this.state.firstNameValid && this.state.lastNameValid
-                                            ? <Peerio.UI.Tappable element='div' className="btn-lrg" onTap={this.handleNextStep}>
-                                                continue</Peerio.UI.Tappable>
-                                            : null }
-                                        </div>
-                                        </fieldset>);
+                              {this.state.usernameValid === true && this.state.firstNameValid && this.state.lastNameValid
+                                  ? <Peerio.UI.Tappable element='div' className="btn-safe width-full" onTap={this.handleNextStep}>
+                                      continue</Peerio.UI.Tappable>
+                                  : null }
+                          </div>
+                      </fieldset>);
         },
         renderStep1: function () {
-            return ( <fieldset key={'singup-step-1'}>
+            return ( <fieldset key={'signup-step-1'}>
                 <h1 className="headline-lrg">Your Passphrase</h1>
 
                 <p className='info'>This is your secure randomly generated passphrase. If you lose it, you
-                    will<strong>&nbsp;
-                        permanently&nbsp;</strong>
-                    lose access to your account.</p>
+                    will <strong>permanently</strong> lose access to your account.</p>
 
                 <p className="txt-lrg">
                     {this.state.passphrase}
                 </p>
+                <div className="flex-row">
+                    <div className="input-group">
+                        <label>Language</label>
+                        <select ref="lang" onChange={this.generatePassphrase}>
+                            <option value="en">English</option>
+                            <option value="fr">Francais</option>
+                            <option value="de">Deutsch</option>
+                            <option value="es">Español</option>
+                            <option value="it">Italiano</option>
+                            <option value="ru">Русский</option>
+                            <option value="zh-CN">汉语</option>
+                            <option value="nb-NO">Norsk (Bokmål)</option>
+                            <option value="tr">Türkçe</option>
+                            <option value="hu">Magyar</option>
+                        </select>
 
-                <div className="text-input-group col-6">
-                    <select className="select-input" ref="lang" onChange={this.generatePassphrase}>
-                        <option value="en">English</option>
-                        <option value="fr">Francais</option>
-                        <option value="de">Deutsch</option>
-                        <option value="es">Español</option>
-                        <option value="it">Italiano</option>
-                        <option value="ru">Русский</option>
-                        <option value="zh-CN">汉语</option>
-                        <option value="nb-NO">Norsk (Bokmål)</option>
-                        <option value="tr">Türkçe</option>
-                        <option value="hu">Magyar</option>
-                    </select>
-                    <label className="text-input-label-static">Language</label>
+                    </div>
+
+                    <div className="input-group">
+                        <label>Length</label>
+                        <select ref="wordCount" onChange={this.generatePassphrase}>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="8">7</option>
+                            <option value="8">8</option>
+                            <option value="8">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div className="text-input-group col-6">
-                    <select className="select-input" ref="wordCount" onChange={this.generatePassphrase}>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="8">7</option>
-                        <option value="8">8</option>
-                        <option value="8">9</option>
-                        <option value="10">10</option>
-                    </select>
-                    <label className="text-input-label-static">Length</label>
-                </div>
-
-                <Peerio.UI.Tappable element='div' className="btn-lrg" onTap={this.showModal}> I'll remember my
+                <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.showModal}> I'll remember my
                     passphrase</Peerio.UI.Tappable>
-                <Peerio.UI.Tappable element='div' className="btn-subtle" onTap={this.generatePassphrase}> I don't like
-                    this
-                    passphrase</Peerio.UI.Tappable>
+                  <Peerio.UI.Tappable element='div' className="btn-dark" onTap={this.generatePassphrase}> I don't like
+                    this passphrase</Peerio.UI.Tappable>
 
-                <Peerio.UI.Tappable element='div' className="btn-md btn-lrg-back" onTap={this.handlePreviousStep}><i
+                <Peerio.UI.Tappable element='div' className="btn-back" onTap={this.handlePreviousStep}><i
                         className="fa fa-chevron-left"></i>back
                 </Peerio.UI.Tappable>
 
             </fieldset>);
         },
         renderStep3: function () {
-            return (  <fieldset key={'singup-step-3'}>
+            return (  <fieldset key={'signup-step-3'}>
                 <h1 className="headline-lrg">Set a device passcode</h1>
 
                 <p> Instead of entering your passphrase each time you login, you can set a shorter passcode for this
                     device.
                     Only set passcodes on devices you trust. </p>
 
-                <div className="text-input-group">
-                    <input className="text-input" type="text" name="user_device_passcode" id="user_device_passcode"
+                <div className="input-group">
+                    <label htmlFor="user_device_passcode">Device passcode</label>
+                    <input type="text" name="user_device_passcode" id="user_device_passcode"
                         required="required"/>
-                    <label className="text-input-label" htmlFor="user_device_passcode">Device passcode</label>
+
                 </div>
-                <Peerio.UI.Tappable element="div" className="btn-lrg" onTap={this.handleNextStep}>Login with this device
+                <Peerio.UI.Tappable element="div" className="btn" onTap={this.handleNextStep}>Login with this device
                     passcode</Peerio.UI.Tappable>
-                <Peerio.UI.Tappable element="div" className="btn-subtle" onTap={this.handleNextStep}>Login without a
+                <Peerio.UI.Tappable element="div" className="btn" onTap={this.handleNextStep}>Login without a
                     device passcode</Peerio.UI.Tappable>
             </fieldset>);
         }
     });
 
 }());
-
-
-
