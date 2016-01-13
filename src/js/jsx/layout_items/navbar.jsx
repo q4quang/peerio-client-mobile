@@ -36,7 +36,7 @@
         connectionClass = this.state.loading ? 'loading' : 'connected';
 
       return (
-        <div id="navbar">
+        <div id="navbar" className="flex-row flex-align-center">
           <div id="sidemenu-toggle" ref="toggle" onTouchStart={this.handleSidebarToggle}>
             <i className="fa fa-bars"></i>
           </div>
@@ -46,7 +46,6 @@
           {/* not sure why but the spacer doesn't work correcly on iOS
             TODO: replace table with floats
           */}
-          <div className="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
             <div id="app-lock">
               <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>

@@ -111,7 +111,7 @@
                         <span
                             className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(You)' : ''}</span>
                     </div>
-                    <hr className="col-12"/>
+                    <hr />
 
                     <div className="info-blocks">
 
