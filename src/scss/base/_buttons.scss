@@ -74,6 +74,7 @@ Footer Buttons                                       | Button Class/ID
   line-height: 36px;
   font-size: 16px;
   text-transform: uppercase;
+  cursor: pointer;
 
   // &:first-of-type {
   //   margin-left: 0;
@@ -133,6 +134,7 @@ button:disabled , .btn-disabled {
   @extend .btn;
   color: $black-12;
   background-color: $black-12;
+  cursor: default;
 
 }
 
