@@ -79,13 +79,12 @@
     min-height: $recipients-height;
   }
   .subject {
-    flex-grow:1;
-    border-top: 1px solid color(list-item-bg);
-    border-bottom: 1px solid color(list-item-bg);
+
+    border-top: $border-dark;
+    border-bottom: $border-dark;
     -webkit-appearance: none; // removes weird inner shadow on ios
-    border-right: none;
-    border-left: none;
-    padding-left: 5px;
+    padding-left: $padding-small;
+    height: 40px;
     &:focus {
       background-color: lighten(color(list-item-bg), 5%);
     }
