@@ -56,6 +56,22 @@ Text inputs are full-width by default. They can be contained using layout classe
 
 */
 
+/*
+  TODO:
+  Fix input and labeling inconsistencies by minimizing available classes and styling tags directly.
+  Use classes for modifying tag styling.
+  Current Issues include:
+  -  some labels have colons,
+  -  some labels are input placeholders
+  -  some labels are bold uppercase, some labels are normal capitalized, sometimes all in the same screen
+  -  some label fields are styled with underlines
+  -  some are styled with borders
+
+  FIND AND REPLACE/REMOVE/RESTYLE.
+
+*/
+
+
 $text-input-padding: 0.5em;
 $text-input-fontsize: 1rem;
 
@@ -87,41 +103,13 @@ $text-input-fontsize: 1rem;
   height: 1.5em;
   width: 1.5em;
   background-color: transparent;
-  border: 1px solid #eaeaea;
+  border: $border-light;
   margin-left: 0.5em;
   box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09);
 }
 
-.select-input {
-  border: none;
-  border-color:#d6d6d6;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-radius: 0;
-  background-color: rgba(0, 0, 0, 0);
-  padding: $text-input-padding;
-  font-size: $text-input-fontsize;
-  -webkit-appearance: none;
-  width: 100%;
-  color: inherit;
-  height: 40px;
-  border-radius: 3px;
-  .text-input-label-static{
-    @extend .text-input-label;
-    font-size: 0.8rem;
-    top: -0.5rem;
-  }
-}
-
 .select-input > option {
-  color: black;
-}
-
-
-
-
-#passphrase-input{
-  margin-bottom: 30px;
+  color: $black-87;
 }
 
 .textarea-transparent{
@@ -139,9 +127,6 @@ $text-input-fontsize: 1rem;
   width: 100%;
   font-size: inherit;//from text-input-group
   font-weight: 200;
-  padding: $text-input-padding;
-  padding-bottom: 0.2em;
-  padding-top: 0.7em;
   transition: border-color 150ms ease-in;
   background-color: transparent;
   height: 40px;
@@ -150,7 +135,7 @@ $text-input-fontsize: 1rem;
 
 .text-input-primary{
   @extend .text-input;
-  border: 1px solid #D6D6D6;
+  border: $border-light;
   padding: 0.5em;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -161,8 +146,7 @@ $text-input-fontsize: 1rem;
 .text-input-label{
   font-size: inherit;
   position: absolute;
-  top: $text-input-padding;
-  left: $text-input-padding;
+  top: 0;
   color: inherit;
   transition: top 150ms ease-out, color 150ms ease-out;
 }
@@ -175,7 +159,7 @@ $text-input-fontsize: 1rem;
   visibility: visible;
   content: '';
   background: #fff;
-  border: 1px solid #eaeaea;
+  border: $border-light;
   display: inline-block;
   vertical-align: middle;
   width: 20px;
@@ -184,6 +168,7 @@ $text-input-fontsize: 1rem;
   line-height: 18px;
   box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09);
 }
+
 .checkbox-input:checked:after,
 .checkbox-input.checked:after{
   content: "\f00c";
@@ -202,30 +187,14 @@ $text-input-fontsize: 1rem;
 }
 
 /** trying to refactor settings look a little bit, let's call it rectangular **/
-.content-padded.rectangular {
+.content-padded{
     background: #efefef !important;
-    .text-input {
-        border: 1px solid #dfdfdf;
-        background: white;
-        padding: 10px;
-    }
-
-    .text-input:focus {
-        border: 1px solid #2795d0;
-    }
 
     .text-input-label {
         font-size: 80%;
         position: static;
-        margin-left: 5px;
-
     }
-
-    .text-input-group {
-        margin-top: 0;
-        margin-bottom: 15px;
-    }
-
+    // TODO: find out where is text-mono used?
     .text-mono {
         white-space: pre-wrap;
         word-wrap: break-word;

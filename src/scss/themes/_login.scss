@@ -12,10 +12,10 @@
 
 .content-wrapper-signup{
   background-color: color(p-blue);
-  color: white;
+  color: $white-100;
 
-  .text-input, .select-input{
-    color: white;
+  input, select{
+    color: $white-100;
     border-color: $white-12;
 
     &:focus {
@@ -34,7 +34,7 @@
 .login-input {
   width: 100%;
   color: $white-100;
-  margin-bottom: 16px;
+  margin-bottom: $margin-base;
   // text or passphrase
   .input-group{
     width: 100%;

@@ -124,7 +124,7 @@ Click the sidebar in the example to toggle the `.open` state.
     margin:0 0 $margin-small;
 
     &:not(:last-of-type) {
-      border-bottom: $divider-light;
+      border-bottom: $border-light;
     }
     li {
       height: 48px;

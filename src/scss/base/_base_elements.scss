@@ -24,18 +24,23 @@ label {
   font-size: 12px;
 }
 
-input {
+input, select {
   height: 32px;
   line-height: 32px;
   font-size: 16px;
   width: 100%;
   background: transparent;
   border: 0;
-  border-bottom: $divider-dark;
+  border-bottom: $border-dark;
 
   &:focus {
     border-bottom: 1px solid color(p-blue);
   }
+}
+
+select{
+  border-radius: 0;
+  -webkit-appearance: none;
 }
 
 // HACK: placeholder not disappearing on focus in textarea
@@ -60,7 +65,8 @@ input[type="search"]{
  */
 button:focus,
 input:focus,
-textarea:focus{
+textarea:focus,
+select:focus{
   outline: none;
 }
 textarea:focus::-webkit-input-placeholder {
@@ -124,7 +130,7 @@ hr{
   clear: both;
   height:0;
   margin-top: 1rem;
-  border: $divider-dark;
+  border: $border-dark;
   box-sizing: border-box;
   @include clearfix();
 }
