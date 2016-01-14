@@ -98,7 +98,7 @@ The only difference between the three are whether they have one or two button an
     min-height: 120px;
     display: flex;
     flex-direction: column;
-    animation: scaleIn 300ms ease-in;
+    animation: scaleIn $speed-normal ease-in;
   }
   .alert-content-text{
     flex-grow: 1;

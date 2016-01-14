@@ -54,11 +54,11 @@
         }
 
       return (
-        <div className="modal contact-select">
+        <div className="modal item-select">
             <p className="info-label">
             Select your recipients
             </p>
-          <ul className="contact-list">
+          <ul>
             {contacts}
           </ul>
           <div className="buttons flex-col">

@@ -117,7 +117,7 @@ $list-item-height: 70px;
     border-bottom: $border-dark;
     background-color: color(list-item-bg);
     position: relative;
-    transition: transform 300ms ease-out, background-color 100ms ease-in;
+    transition: transform $speed-normal ease-out, background-color 100ms ease-in;
     &.unread {
       background-color: $white;
       border-left: 5px solid color(p-green);
@@ -286,7 +286,7 @@ $list-item-height: 70px;
   animation-timing-function: ease-out;
 
   .list-item-swipe-content {
-    transition: width 300ms ease-out;
+    transition: width $speed-normal ease-out;
     width: 100%;
   }
 }
