@@ -24,7 +24,10 @@
                 return window.PeerioTouchIdKeychain.getValue( 
                 Peerio.UI.TouchId.keyname(username))
                 .then( (keyPair) => {
-                    return JSON.parse(keyPair);
+                    var keyPair = JSON.parse(keyPair);
+                    keyPair.publicKey = Peerio.Util.toInt8Array(keyPair.publicKey);
+                    keyPair.secretKey = Peerio.Util.toInt8Array(keyPair.secretKey);
+                    return keyPair;
                 });
                 
             },
