@@ -3,7 +3,7 @@
 
     Peerio.UI.SetupWizardPin = React.createClass({
         mixins: [ReactRouter.Navigation],
-       
+
         getInitialState: function () {
             return {
             };
@@ -21,6 +21,3 @@
     });
 
 }());
-
-
-
