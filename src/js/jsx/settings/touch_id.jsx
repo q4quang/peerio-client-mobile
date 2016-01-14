@@ -10,18 +10,35 @@
                 return Peerio.user.username + '_private';
             },
 
+            touchidname: function(username) {
+                return Peerio.user.username + '_touchid';
+            },
+
+            hasTouchID: function(username) {
+                return Peerio.TinyDB.getObject(Peerio.UI.TouchId.touchidname(username));
+            },
+
+            setHasTouchID: function(username, value) {
+                value ? 
+                    Peerio.TinyDB.setObject(Peerio.UI.TouchId.touchidname(username), true) :
+                    Peerio.TinyDB.removeItem(Peerio.UI.TouchId.touchidname(username));
+            },
+
             saveKeyPair: function() {
                 return window.PeerioTouchIdKeychain.saveValue(
                     Peerio.UI.TouchId.pubkeyname(), Peerio.user.keyPair.publicKey) 
-                .then( () => window.PeerioTouchIdKeychain.saveValue(
-                    Peerio.UI.TouchId.secretkeyname(), Peerio.user.keyPair.secretKey) );
+                    //                    .then( () => window.PeerioTouchIdKeychain.saveValue(
+                    //  Peerio.UI.TouchId.secretkeyname(), Peerio.user.keyPair.secretKey) )
+                    .then( () => Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, true) );
             },
 
             clearKeyPair: function() {
                 return window.PeerioTouchIdKeychain.deleteValue(
                     Peerio.UI.TouchId.pubkeyname())
-                    .then( () => window.PeerioTouchIdKeychain
-                          .deleteValue(Peerio.UI.TouchId.secretkeyname()) );
+                    //.then( () => {
+                    //   window.PeerioTouchIdKeychain.deleteValue(Peerio.UI.TouchId.secretkeyname());
+                    //})
+                    .then( () => Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false) );
             }
         },
 
@@ -36,22 +53,14 @@
                     this.setState( { visible: true } );
                 });
 
-                // check if key exists already by trying to delete it
-                Peerio.UI.TouchId.clearKeyPair()
-                .catch( (error) => Promise.reject() )
-                .then( () => Peerio.UI.TouchId.saveKeyPair() )
-                .then( () => {
-                    this.setState({enabled: true});
-                })
-                .catch( (error) => {
-                    L.error(error);
-                    Peerio.UI.TouchId.clearKeyPair();
-                });
+                Peerio.UI.TouchId.hasTouchID(Peerio.user.username)
+                .then( (value) => this.setState({enabled: !!value}) );
             }
         },
 
         enableTouchId: function() {
-            this.state.enabled ? 
+            var enabled = !this.state.enabled;
+            enabled ? 
                 Peerio.UI.TouchId.saveKeyPair()
             .then( () => {
                 this.setState({enabled: true});
