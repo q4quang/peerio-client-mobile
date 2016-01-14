@@ -30,9 +30,17 @@
             ];
             if (!Peerio.autoLogin) {
                 Peerio.Auth.getSavedLogin()
-                    .then(function (data) {
-                        this.setState({savedLogin: data});
-                    }.bind(this));
+                .then( (data) => {
+                    this.setState({savedLogin: data});
+                    Peerio.UI.TouchId.hasTouchID(data.username)
+                    .then( (hasTouchID) => {
+                        hasTouchID && Peerio.UI.TouchId.getKeyPair(data.username)
+                        .then( (keyPair) => {
+                            this.keyPair = keyPair;
+                            this.handleSubmit();
+                        });
+                    });
+                });
             }
         },
         componentWillUnmount: function () {
@@ -146,7 +154,7 @@
             // TODO validate input
             Peerio.user = Peerio.User.create(userNode.value);
             Peerio.NativeAPI.preventSleep();
-            Peerio.user.login(passNode.value)
+            Peerio.user.login(passNode.value, this.keyPair)
                 .then(this.handleLoginSuccess)
                 .catch(this.handleLoginFail)
                 .finally(Peerio.NativeAPI.allowSleep);

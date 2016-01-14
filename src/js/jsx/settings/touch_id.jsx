@@ -2,16 +2,12 @@
     'use strict';
     Peerio.UI.TouchId = React.createClass({
         statics: {
-            pubkeyname: function() {
-                return Peerio.user.username + '_public';
-            },
-
-            secretkeyname: function() {
-                return Peerio.user.username + '_private';
+            keyname: function(username) {
+                return (username ? username : Peerio.user.username) + '_keypair';
             },
 
             touchidname: function(username) {
-                return Peerio.user.username + '_touchid';
+                return (username ? username : Peerio.user.username) + '_touchid';
             },
 
             hasTouchID: function(username) {
@@ -19,25 +15,35 @@
             },
 
             setHasTouchID: function(username, value) {
-                value ? 
+                return value ? 
                     Peerio.TinyDB.setObject(Peerio.UI.TouchId.touchidname(username), true) :
                     Peerio.TinyDB.removeItem(Peerio.UI.TouchId.touchidname(username));
+            },
+            
+            getKeyPair: function(username) {
+                return window.PeerioTouchIdKeychain.getValue( 
+                Peerio.UI.TouchId.keyname(username))
+                .then( (keyPair) => {
+                    return JSON.parse(keyPair);
+                });
+                
             },
 
             saveKeyPair: function() {
                 return window.PeerioTouchIdKeychain.saveValue(
-                    Peerio.UI.TouchId.pubkeyname(), Peerio.user.keyPair.publicKey) 
-                    //                    .then( () => window.PeerioTouchIdKeychain.saveValue(
-                    //  Peerio.UI.TouchId.secretkeyname(), Peerio.user.keyPair.secretKey) )
-                    .then( () => Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, true) );
+                    Peerio.UI.TouchId.keyname(), 
+                    JSON.stringify(Peerio.user.keyPair)
+                ) 
+                .catch( (error) => {
+                    Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false);
+                    return Promise.reject(error);
+                })
+                .then( () => Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, true) );
             },
 
             clearKeyPair: function() {
                 return window.PeerioTouchIdKeychain.deleteValue(
-                    Peerio.UI.TouchId.pubkeyname())
-                    //.then( () => {
-                    //   window.PeerioTouchIdKeychain.deleteValue(Peerio.UI.TouchId.secretkeyname());
-                    //})
+                    Peerio.UI.TouchId.keyname())
                     .then( () => Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false) );
             }
         },
@@ -61,7 +67,9 @@
         enableTouchId: function() {
             var enabled = !this.state.enabled;
             enabled ? 
-                Peerio.UI.TouchId.saveKeyPair()
+                Peerio.UI.TouchId.clearKeyPair()
+            .catch( (error) => L.info(error) )
+            .then( () => Peerio.UI.TouchId.saveKeyPair())
             .then( () => {
                 this.setState({enabled: true});
             }) : Peerio.UI.TouchId.clearKeyPair()
