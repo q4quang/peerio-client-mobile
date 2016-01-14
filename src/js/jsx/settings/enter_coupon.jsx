@@ -8,7 +8,7 @@
             var coupon = this.refs.textEdit.getDOMNode().value;
             Peerio.user.redeemCouponCode(coupon)
             .then( () => {
-                return Peerio.UI.Alert.show({text: 'The coupon is successfully activated!'}); 
+                return Peerio.UI.Alert.show({text: 'The coupon is successfully activated!'});
             })
             .then( () => { this.props.onSuccess && this.props.onSuccess(coupon); } )
             .catch( (error) => {
@@ -19,13 +19,12 @@
 
         render: function () {
            return (
-               <div>
-                   <div className="col-8">
-                       <input type="text" className="text-input" placeholder="enter coupon code"
-                           ref="textEdit"/>
-                   </div>
-                   <div className="col-4 text-center">
-                       <Peerio.UI.Tappable className="btn-sm btn-block" onTap={ this.redeemCoupon }>
+               <div className="content-padded without-tab-bar flex-col flex-justify-start">
+                   <p className="info-small">If you have a promotional code, please enter it below.</p>
+                   <div className="flex-row flex-align-center">
+                       <input type="text" placeholder="enter coupon code" ref="textEdit"/>
+
+                       <Peerio.UI.Tappable className="btn-primary" onTap={ this.redeemCoupon }>
                            redeem
                        </Peerio.UI.Tappable>
                    </div>
@@ -35,6 +34,3 @@
     });
 
 }());
-
-
-
