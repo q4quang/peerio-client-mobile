@@ -58,11 +58,10 @@
         render: function () {
            return (
                <div>
-                   <div className="col-8 col-first">
+                   <div className="flex-row flex-align-center">
                        <input type="text" placeholder="add phone or email"
                            ref="textEdit"/>
-                   </div>
-                   <div className="col-4 col-last">
+
                        <Peerio.UI.Tappable className="btn-primary" onTap={ this.addNewAddress }>
                            add
                        </Peerio.UI.Tappable>
