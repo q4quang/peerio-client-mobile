@@ -110,7 +110,9 @@
 
                     <h1 className="headline-lrg">Contact Search</h1>
                     <div className="input-group">
-                      // NOTE: maybe clear the search on a null return - paul
+                      {
+                        // NOTE: maybe clear the search on a null return - paul
+                      }
                         <input type="search" placeholder="email/username/phone" ref="searchInput"/>
                     </div>
                     <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
