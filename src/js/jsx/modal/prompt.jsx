@@ -31,7 +31,7 @@
             this.setState({promptValue: event.target.value});
         },
         isValueValid: function() {
-            return (this.props.minLength > 0) == 
+            return (this.props.minLength > 0) ==
                 (this.state.promptValue && this.state.promptValue.length >= this.props.minLength);
         },
         componentDidMount: function () {
@@ -39,39 +39,36 @@
             input.focus();
         },
         render: function () {
-            var btns = this.props.btns || <div>
-                    <div className="col-6">
-                        <Peerio.UI.Tappable element="div" className="btn-lrg btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
-                    </div>
-                    <div className="col-6">
-                        <Peerio.UI.Tappable 
-                            element="div" 
-                            className={'btn-lrg ' + (this.isValueValid() ? null : 'btn-subtle')}
+            var btns = this.props.btns ||
+                  <div>
+                        <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable
+                            element="div"
+                            className={(this.isValueValid() ? 'btn-safe' : 'btn-disabled')}
                             onTap={this.isValueValid() ? this.handleAction : null}>OK</Peerio.UI.Tappable>
-                    </div>
-                </div>;
+                  </div>;
 
             var text = this.props.text || 'confirm text';
             var inputType = this.props.inputType || 'text';
             return (
                 <div>
-                    <div className="modal alert text-center">
-                        <div className="alert-content">
-                            <div className="headline-lrg">
-                                {this.props.headline}
-                            </div>
-                            <div className="alert-content-text">
-                                {text}
-                                <input type={inputType} className="text-input centered-text" ref="promptInput"
+                    <div className="modal alert-wrapper">
+                        <div className="alert">
+                            <div className="alert-content">
+                                <div className="headline-lrg" style={{display: !this.props.headline ? 'none;' : null}}>
+                                    {this.props.headline}
+                                </div>
+                                <p>{text}</p>
+                                <input type={inputType} ref="promptInput"
                                        autoCorrect="off" autoCapitalize="off" spellCheck="false"
                                        value={this.state.promptValue} onChange={this.updatePromptValue}/>
                             </div>
-                            <div className="alert-content-btns">
+                            <div className="alert-btns">
                                 {btns}
                             </div>
                         </div>
                     </div>
-                    <div className="modal dim-background"></div>
+                    <div className="dim-background"></div>
                 </div>
             );
         },

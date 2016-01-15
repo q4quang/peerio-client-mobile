@@ -27,34 +27,31 @@
 
         render: function () {
 
-            var btns = this.props.btns || <div>
-                    <div className="col-6">
+            var btns = this.props.btns ||
+                    <div>
                         <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
-                    </div>
-                    <div className="col-6">
-                        <Peerio.UI.Tappable element="div" className="btn-safe"
-                                            onTap={this.handleAction}>OK</Peerio.UI.Tappable>
-                    </div>
-                </div>;
+                        <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleAction}>OK</Peerio.UI.Tappable>
+                    </div>;
 
             var text = this.props.text || 'confirm text';
 
             return (
                 <div>
-                    <div className="modal alert text-center">
-                        <div className="alert-content">
-                            <div className="headline-lrg">
-                                {this.props.headline}
+                    <div className="modal alert-wrapper">
+                        <div className="alert">
+
+                            <div className="alert-content">
+                                <div className="headline-lrg" style={{display: !this.props.headline ? 'none;' : null}}>
+                                    {this.props.headline}
+                                </div>
+                                <p>{text}</p>
                             </div>
-                            <div className="alert-content-text">
-                                {text}
-                            </div>
-                            <div className="alert-content-btns">
+                            <div className="alert-btns">
                                 {btns}
                             </div>
                         </div>
                     </div>
-                    <div className="modal dim-background"></div>
+                    <div className="dim-background"></div>
                 </div>
             );
         },

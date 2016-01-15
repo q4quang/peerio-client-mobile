@@ -83,33 +83,46 @@ The only difference between the three are whether they have one or two button an
 
 */
 
-.alert {
+.alert-wrapper {
   z-index: $z-alert;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #333;
-  &>.alert-content {
+  color: $black-87;
+  top: 0;
+
+  .alert {
+    border-radius: $radius-default;
     max-width: 90%;
     min-width: 80%;
     background: white;
-    padding: 10px;
     font-size: 1.1rem;
     min-height: 120px;
     display: flex;
     flex-direction: column;
     animation: scaleIn $speed-normal ease-in;
   }
-  .alert-content-text{
+  .alert-content {
+    padding: 24px;
     flex-grow: 1;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+
+    .headline-lrg {
+      margin-bottom: 20px;
+    }
   }
-  .alert-content-btns{
+  .alert-btns {
     flex-grow: 0;
+    height: 52px;
+    text-align: right;
+
+    [class^="btn-"] {
+      margin-left: 0;
+    }
+
   }
-  &+.dim-background{
+  + .dim-background {
     z-index: ($z-alert - 1);
-    animation: scaleIn 200ms ease-in;
+    animation: scaleIn $speed-normal ease-in;
+    opacity: 0.5;
   }
 }
