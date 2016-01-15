@@ -84,11 +84,11 @@
             }
 
             return (
-                <div className="modal contact-select">
+                <div className="modal item-select">
                   <p className="info-label">
                   Select your files
                   </p>
-                    <ul className="contact-list">
+                    <ul>
                         {uploads}
                         {files}
                     </ul>

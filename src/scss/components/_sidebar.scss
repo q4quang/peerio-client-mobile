@@ -36,7 +36,6 @@ Click the sidebar in the example to toggle the `.open` state.
   top: $navbar-height;
   bottom: 0;
   background-color: color(sidebar-bg-color);
-  padding: 0 $padding-base $padding-base;
   color: white;
   font-size: 1rem;
   overflow-x: hidden;
@@ -44,11 +43,17 @@ Click the sidebar in the example to toggle the `.open` state.
   display: flex;
   flex-direction: column;
 
+  .sidebar-header,
+  .sidebar-menu,
+  .app-version {
+    padding: 0 $padding-base;
+  }
+
   .sidebar-header{
-    margin: 0px #{-$padding-base};
+    margin: 0px;
     height: 104px;
     background: #333;
-    padding: 0 $padding-base;
+
     justify-content: center;
 
     .info-label {
@@ -89,6 +94,7 @@ Click the sidebar in the example to toggle the `.open` state.
 
   .app-version{
     position: static;
+    margin-bottom: $margin-small;
   }
 
   .avatar{
@@ -98,7 +104,7 @@ Click the sidebar in the example to toggle the `.open` state.
 
   &.open {
     transform: translate3d(0, 0, 0);
-    transition-duration: 300ms
+    transition-duration: $speed-normal
   }
   .fa-mobile {
     // this was a hack placed before me by an unknown author
@@ -117,6 +123,9 @@ Click the sidebar in the example to toggle the `.open` state.
   //     color: white;
   //   }
   // }
+  .sidebar-menu {
+      overflow-y: auto;
+  }
 
   ul{
     list-style: none;
@@ -138,6 +147,10 @@ Click the sidebar in the example to toggle the `.open` state.
       }
     }
   }
+
+  .sign-out {
+    margin: 0 $margin-small;
+  }
 }
 // dark semi-transulent div under sidemenu
 // it dims the content part that is not covered by sidemenu
@@ -150,7 +163,7 @@ Click the sidebar in the example to toggle the `.open` state.
   bottom:0;
   right: 0;
   width: 100%;
-  z-index: ($z-sidebar - 1);
+  z-index: #{$z-sidebar - 1};
   background-color: #000;
   transition: none;
   opacity: 0;

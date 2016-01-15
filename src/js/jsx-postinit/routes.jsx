@@ -35,6 +35,7 @@ Peerio.UI.Routes = (
                 <Route name="preference_settings_2fa_prompt" path="/app/settings/preferences/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
             </Route>
             <Route name="settings_2fa" path="/app/settings/settings_2fa" handler={Peerio.UI.Settings2FA} />
+            <Route name="enter_coupon" path="/app/settings/enter_coupon" handler={Peerio.UI.EnterCoupon} />
 
             <Route name='add_contact' path="/app/add_contact" handler={Peerio.UI.AddContact}/>
             <Route name="add_contact_search" path="/app/add_contact_search/:id" handler={Peerio.UI.AddContactSearch}/>
@@ -44,4 +45,3 @@ Peerio.UI.Routes = (
         </Route>
     </Route>
 );
-

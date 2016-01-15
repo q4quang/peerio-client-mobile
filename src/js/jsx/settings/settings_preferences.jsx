@@ -103,6 +103,13 @@
                             </Peerio.UI.Tappable>
                         </p>
                     </p>
+                    <div className="info-label">Touch ID</div>
+                    <Peerio.UI.TouchId/>
+                    <br/>
+                    <div className="info-label">Device PIN</div>
+                    <div className="text-input-group col-12">
+                        <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.setDevicePin}>Set/remove device PIN</Peerio.UI.Tappable>
+                    </div>
                     <RouteHandler/>
                 </div>
             );

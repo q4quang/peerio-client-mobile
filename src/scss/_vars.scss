@@ -17,12 +17,14 @@ $reply-height: 35px;
 $item-height: 5rem;
 
 // z-indexes
-$z-alert:600;
-$z-login:500;
-$z-navbar:400;
-$z-sidebar:300;
-$z-tabbar:200;
-$z-content:100;
+//  TODO: SOON, fix z-index weirdness. Start by removing all z-indexs and adding back where needed.
+$z-alert:7;
+$z-login:6;
+$z-navbar:5;
+$z-sidebar:4;
+$z-items-modal:2;
+$z-tabbar:2;
+$z-content:1;
 
 // various
 $list-item-padding-left: 20px;
@@ -40,3 +42,9 @@ $border-dark: 1px solid $black-12;
 
 $radius-default: 2px;
 $radius-circle: 50%;
+
+
+// transition speeds
+$speed-fast: 150ms;
+$speed-normal: 300ms;
+$speed-slow: 600ms;

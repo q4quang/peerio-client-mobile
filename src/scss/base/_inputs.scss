@@ -188,13 +188,7 @@ $text-input-fontsize: 1rem;
 
 /** trying to refactor settings look a little bit, let's call it rectangular **/
 .content-padded{
-    background: #efefef !important;
-
-    .text-input-label {
-        font-size: 80%;
-        position: static;
-    }
-    // TODO: find out where is text-mono used?
+    // TODO: find out where is text-mono used? - paul
     .text-mono {
         white-space: pre-wrap;
         word-wrap: break-word;

@@ -68,7 +68,7 @@
                 </div>;
                 contacts.push(intro_content);
             }
-            //todo: by order, username
+            //TODO: by order, username
             return (
                 <div className="content" id="contact-list">
                     <ul className="list-view">

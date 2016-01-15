@@ -1,16 +1,16 @@
 /*doc
 ---
-title: File / Contact Selector
+title: Item Selector
 name: selectors
 category: Components
 ---
 
-Contact / File selector is silimar to the list view but with simpler markup and the option to highlight a selected
-item with the `.selected` class. Selector also has special styles for positioning buttons below the list.
+Item selector is silimar to the list view but with simpler markup and the option to highlight a selected
+item (ex. contact, file, etc.) with the `.selected` class. Selector also has special styles for positioning buttons below the list.
 
 ```html_example
-<div class="contact-select-container" style="height: 180px;position:relative;margin-bottom:160px;">
-<ul class="contact-select">
+<div class="item-select-container" style="height: 180px;position:relative;margin-bottom:160px;">
+<ul class="item-select">
   <li class="contact">
     <span type="checkbox" class="checkbox-input"></span>
     <div class="avatar"></div> Test User 1
@@ -39,7 +39,7 @@ item with the `.selected` class. Selector also has special styles for positionin
 
 $buttons-height:120px;
 
-.contact-select-container {
+.item-select-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -47,10 +47,10 @@ $buttons-height:120px;
   bottom: 0;
 }
 
-.contact-select {
-  z-index: 600;
+.item-select {
+  z-index: $z-items-modal;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
   margin: 0;
@@ -112,7 +112,7 @@ $buttons-height:120px;
   }
 }
 
-.contact-select.file-select {
+.item-select.file-select {
   width: auto;
   height: auto;
   position: fixed;

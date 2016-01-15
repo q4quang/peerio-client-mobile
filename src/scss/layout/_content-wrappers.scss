@@ -34,7 +34,7 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 }
 .content-wrapper-login{
     @include content-wrapper(0, 0);
-    padding: 20px;
+    padding: $padding-base $padding-base 20px;
     max-width: 400px;
     margin: 0 auto;
     background-color: transparent;
@@ -71,17 +71,17 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
   }
 }
 
-.ios.modal_container, .ios.modal_container > div {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
+// .ios.modal-container, .ios.modal-container > div {
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     left: 0;
+//     bottom: 0;
+// }
 
 .modal {
     position: absolute;
-    top: 0;
+    top: $navbar-height;
     right: 0;
     left: 0;
     bottom: 0;

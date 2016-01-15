@@ -72,14 +72,12 @@
                 return (
                     <div>
                         <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
-
                             <div className="flex-grow-0 flex-shrink-0 sidebar-header flex-col">
                                 <div className="flex-row text-overflow">
                                     <Peerio.UI.Avatar size="big" username={user.username}/>
                                     <div className="flex-col">
-                                    {/* TODO: fix text-overflow */}
-                                      <h3 className="headline-md">{user.firstName} {user.lastName}</h3>
-                                      <span className="subhead-inline">{user.username}</span>
+                                        <h3 className="headline-md">{user.firstName} {user.lastName}</h3>
+                                        <span className="subhead-inline">{user.username}</span>
                                     </div>
                                 </div>
                                 <div className="storage-info">
@@ -88,7 +86,7 @@
                                 </div>
                             </div>
 
-                            <div className="flex-grow-1" ref="menu">
+                            <div className="flex-grow-1 sidebar-menu" ref="menu">
                                 <h3 className="subhead">Security</h3>
                                 <ul>
                                     <Peerio.UI.Tappable tag='li'
@@ -114,13 +112,18 @@
                                         onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
                                         <i className="fa fa-cog"></i> Preferences
                                      </Peerio.UI.Tappable>
+
+                                     <Peerio.UI.Tappable tag="li"
+                                        onTap={this.toggleAndTransition.bind(this, 'enter_coupon')}>
+                                        <i className="fa fa-certificate"></i> Redeem Coupon
+                                     </Peerio.UI.Tappable>
                                 </ul>
                             </div>
 
 
 
-                            <div className="flex-grow-0 flex-col flex-align-center">
-                                <Peerio.UI.Tappable element="div" className="btn-dark width-full"
+                            <div className="flex-col flex-justify-center sign-out">
+                                <Peerio.UI.Tappable element="div" className="btn-dark"
                                                     onTap={this.signOut}><i
                                     className="fa fa-power-off"></i> Sign Out
                                 </Peerio.UI.Tappable>

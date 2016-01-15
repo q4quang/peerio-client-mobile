@@ -51,7 +51,7 @@
     border-radius: 0;
     font-size: 16px;
     font-weight: 100;
-    transition: all 300ms ease;
+    transition: all $speed-normal ease;
     &:focus {
       outline: none;
       border: 0;
