@@ -23,7 +23,7 @@
         },
 
         handleConversationsUpdated: function (data) {
-            if (data.updateAllConversations) {
+            if (data.updated) {
                 this.refs.Messages.refresh();
                 return;
             }
@@ -31,7 +31,7 @@
                 if (data.deleted.length)
                     this.refs.Messages.deleteItems(data.deleted);
                 else
-                    this.refs.Messages.refreshPage();
+                    this.refs.Messages.refresh();
             }
 
         },

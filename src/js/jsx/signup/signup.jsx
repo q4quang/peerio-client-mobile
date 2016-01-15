@@ -39,7 +39,7 @@
                 firstName: '',
                 lastNameValid: null,
                 lastName: '',
-                activeModalId: null
+                activeModalID: null
             };
         },
         componentDidMount: function () {

@@ -17,14 +17,14 @@
     componentWillMount: function () {
       var d = Peerio.Dispatcher;
       var fn = Peerio.Helpers.getStateUpdaterFn;
-      this.subscrIds = [d.onConnected(fn(this, {socketConnected: true})),
+      this.subscrIDs = [d.onConnected(fn(this, {socketConnected: true})),
         d.onDisconnected(fn(this, {socketConnected: false})),
         d.onLoading(fn(this, {loading: true})),
         d.onLoadingDone(fn(this, {loading: false}))];
     },
     componentWillUnmount: function () {
-      Peerio.Dispatcher.unsubscribe(this.subscrIds);
-      this.subscrIds = null;
+      Peerio.Dispatcher.unsubscribe(this.subscrIDs);
+      this.subscrIDs = null;
     },
     handleSidebarToggle: function(){
       Peerio.Action.sidebarToggle();

@@ -256,8 +256,8 @@ Peerio.NativeAPI.init = function () {
 
         return new Promise(function (resolve, reject) {
             var push = PushNotification.init({
-                'ios': {'alert': true, 'badge': true, 'sound': true, 'clearBadge': true},
-                'android': {'senderID': Peerio.Config.push.android.senderId, 'clearNotifications': true}
+                ios: {alert: true, badge: true, sound: true, clearBadge: true},
+                android: {senderID: Peerio.Config.push.android.senderID, clearNotifications: true}
             });
 
             api.push = push;

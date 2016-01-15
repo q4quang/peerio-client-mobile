@@ -41,17 +41,17 @@
 
             return (
                 <div>
-                    <div className="modal alert text-center">
-                        <div className="alert-content">
-                            <div className="alert-content-text">
-                                {text}
+                    <div className="modal alert-wrapper">
+                        <div className="alert">
+                            <div className="alert-content">
+                                <p>{text}</p>
                             </div>
-                            <div className="alert-content-btns">
+                            <div className="alert-btns">
                                 {btns}
                             </div>
                         </div>
                     </div>
-                    <div className="modal dim-background"></div>
+                    <div className="dim-background"></div>
                 </div>
             );
         }

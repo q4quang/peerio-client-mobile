@@ -20,14 +20,14 @@
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscription);
         },
-        toggle: function (fileId) {
+        toggle: function (fileID) {
 
             this.setState(function (prevState) {
-                var ind = prevState.selection.indexOf(fileId);
+                var ind = prevState.selection.indexOf(fileID);
                 if (ind >= 0)
                     prevState.selection.splice(ind, 1);
                 else
-                    prevState.selection.push(fileId);
+                    prevState.selection.push(fileID);
             });
         },
         accept: function () {

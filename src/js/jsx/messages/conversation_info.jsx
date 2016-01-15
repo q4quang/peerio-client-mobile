@@ -11,13 +11,13 @@
                 .load()
                 .then(c => c.loadStats())
                 .then(c => {
-                    this.setState({conversation: c, fileIds: c.fileIds, msgCount: c.messageCount});
+                    this.setState({conversation: c, fileIDs: c.fileIDs, msgCount: c.messageCount});
                 });
         },
         render: function () {
             var conv = this.state.conversation;
 
-            if (!conv || !this.state.fileIds) return <Peerio.UI.FullViewSpinner/>;
+            if (!conv || !this.state.fileIDs) return <Peerio.UI.FullViewSpinner/>;
 
             return (
                 <div className="content-padded">
@@ -29,7 +29,7 @@
                             className="fa fa-calendar-o"/> {conv.createdMoment.format('L')}</span>
                         <span className="icon-with-label"><i
                             className="fa fa-comment-o"/> {this.state.msgCount}</span>
-                        <span className="icon-with-label"><i className="fa fa-file-o"/> {this.state.fileIds.length}</span>
+                        <span className="icon-with-label"><i className="fa fa-file-o"/> {this.state.fileIDs.length}</span>
                         <span className="icon-with-label"><i
                             className="fa fa-users"/> {conv.participants.length + conv.exParticipants.length}</span>
                         </div>
@@ -49,7 +49,7 @@
               Shared Files
             </div>
                     <div className="compact-list-view">
-                        { this.state.fileIds.map(f =>  <FileNode id={f} key={f}/>)}
+                        { this.state.fileIDs.map(f =>  <FileNode id={f} key={f}/>)}
                     </div>
                 </div>
             );
@@ -71,7 +71,7 @@
             if (!f) return null;
 
             return (
-                <Peerio.UI.Tappable onTap={this.openFileView.bind(this, f.shortId)}>
+                <Peerio.UI.Tappable onTap={this.openFileView.bind(this, f.shortID)}>
                     <div className="list-item">
                         <div className="list-item-thumb">
                             <i className={'file-type fa fa-' + Peerio.Helpers.getFileIconByName(f.name)}></i>

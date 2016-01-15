@@ -25,7 +25,7 @@ Peerio.Config.init = function () {
 
         cfg.push = {
             android: {
-                senderId: '605156423279'
+                senderID: '605156423279'
             }
         };
 

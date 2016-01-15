@@ -25,7 +25,7 @@
             <div className="vertical-center">
             </div>
           </div>
-          <div className="modal dim-background"></div>
+          <div className="dim-background"></div>
         </div>,
         this.portal);
     },

@@ -68,12 +68,12 @@ Peerio.Helpers.init = function () {
 
     /**
      * Safely iterates through conversation, calling function on each message
-     * @param conversationId {string}   - Id of the conversation to iterate
+     * @param conversationID {string}   - Id of the conversation to iterate
      * @param fn             {function(message)} - function to call for each message in conversation
      */
-    api.forEachMessage = function (conversationId, fn) {
+    api.forEachMessage = function (conversationID, fn) {
         if (!Peerio.user || !Peerio.user.conversations) return;
-        var m = Peerio.user.conversations.hasOwnProperty(conversationId) ? Peerio.user.conversations[conversationId].messages : null;
+        var m = Peerio.user.conversations.hasOwnProperty(conversationID) ? Peerio.user.conversations[conversationID].messages : null;
         if (m === null) return;
 
         for (var id in m) {

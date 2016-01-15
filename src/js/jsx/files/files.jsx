@@ -32,7 +32,7 @@
                 Peerio.user.files.arr.forEach(function (item) {
                     nodes.push(
                         <Peerio.UI.FileItem className="list-item" item={item}
-                                            onTap={this.openFileView.bind(this, item.shortId)}>
+                                            onTap={this.openFileView.bind(this, item.shortID)}>
                         </Peerio.UI.FileItem>
                     );
                 }.bind(this));
@@ -95,10 +95,10 @@
             this.setState({swiped: true});
         },
         destroyFileAfterAnimate: function () {
-            var fileId = this.props.item.shortId;
+            var fileID = this.props.item.shortID;
             this.setState({destroyAnimation: true}, function () {
                 setTimeout(function () {
-                    Peerio.user.files.dict[fileId].remove()
+                    Peerio.user.files.dict[fileID].remove()
                 }, 600);
             });
         },
@@ -136,7 +136,7 @@
 
             var timestamp = moment(item.timestamp).calendar();
 
-            return (<Peerio.UI.Tappable element="li" className={classes} key={item.shortId} onTap={this.props.onTap}>
+            return (<Peerio.UI.Tappable element="li" className={classes} key={item.shortID} onTap={this.props.onTap}>
                 <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe}
                                   className="list-item-swipe-wrapper">
                     <i className={item.icon}></i>

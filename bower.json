@@ -18,7 +18,6 @@
     "normalize.css": "*",
     "font-awesome": "*",
     "react": "0.13.x",
-    "is_js": "*",
     "gsap": "*",
     "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git",
     "react-router": "~0.13.3"
