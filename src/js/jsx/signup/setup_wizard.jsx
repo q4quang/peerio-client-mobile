@@ -36,7 +36,7 @@
             var currentStep = React.createElement(
                 this.steps[this.state.activeStep], { key: 'step' + this.state.activeStep, onSuccess: this.handleNextStep });
             var button = (
-                <Peerio.UI.Tappable element='div' className="btn-lrg"
+                <Peerio.UI.Tappable element='div' className="btn-safe"
                     key={'next' + this.state.activeStep} onTap={this.handleNextStep}>
                     next
                 </Peerio.UI.Tappable>
@@ -59,15 +59,12 @@
                                 <ReactCSSTransitionGroup
                                     transitionName="animate"
                                     transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
-                                    <fieldset  key={'cont'+this.state.activeStep} style={ {position: 'absolute'}}>
+                                    <fieldset  key={'cont'+this.state.activeStep} className="flex-col">
                                         {currentStep}
                                         <br/>
                                         {button}
                                     </fieldset>
                                 </ReactCSSTransitionGroup>
-                            </div>
-                            <div className="text-center">
-                                <p> </p>
                             </div>
                         </div>
                     </div>

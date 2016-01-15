@@ -55,7 +55,7 @@
                 onClose: this.removeModal.bind(this, modal.id)
             }, modal);
             modal.component = React.createElement(component, props);
-           
+
             this.addModal(modal);
         },
 
@@ -80,7 +80,7 @@
         },
 
         render: function () {
-            var className = Peerio.runtime.platform + ' modal_container';
+            var className = Peerio.runtime.platform;
             if (this.state.activeModals.length === 0) return null;
 
             // bluring active elemtn and hiding keyboard

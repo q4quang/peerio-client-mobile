@@ -60,6 +60,11 @@ input[type="search"]{
   -webkit-appearance: none;
 }
 
+// styles placeholder content
+::-webkit-input-placeholder {
+  color: $black-54;
+}
+
 /*
   This is fine for mobile, but we don't want to carry this styling over to desktop client
   without adding some type of styling to delineate focused items for keyboard users.

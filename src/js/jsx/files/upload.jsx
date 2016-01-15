@@ -56,7 +56,7 @@
         },
         render: function () {
             return (
-                <div className="modal contact-select flex-col flex-justify-center">
+                <div className="modal item-select flex-col flex-justify-center">
                     <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture} className="btn-primary">
                         <i className="fa fa-th"></i> Pick from photo library
                     </Peerio.UI.Tappable>
