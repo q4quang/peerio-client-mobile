@@ -63,6 +63,7 @@
                 if (item) {
                     item = item.getDOMNode();
                     item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
+                    if(!item) return;
                     item = item.className != 'bottomScrollHook' && !this.scrollIntoItem.alignToTop && 
                         item.nextSibling && item.nextSibling.className == 'bottomScrollHook' ? item.nextSibling : item;
                     if (item) {
