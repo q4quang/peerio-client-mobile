@@ -46,7 +46,7 @@
         },
         //----- CUSTOM FN
         handleMessagesUpdated: function (data) {
-            if (data.updateAllConversations || data.updated === []
+            if (data.updateAllConversations || ( !data.updated && !data.updated.length )
                || (data.updated && data.updated.indexOf(this.props.params.id) != -1) ) {
                 this.refs.content.loadNextPage(true);
 //                this.refs.content.refresh(()=>this.scrollToBottom());
