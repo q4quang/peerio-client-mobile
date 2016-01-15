@@ -46,18 +46,16 @@
         },
         //----- CUSTOM FN
         handleMessagesUpdated: function (data) {
-            if (data.updateAllConversations || data.updated === []
-               || (data.updated && data.updated.indexOf(this.props.params.id) != -1) ) {
+            if (data.updated && (data.updated.length === 0 || data.updated.indexOf(this.props.params.id) != -1)) {
                 this.refs.content.loadNextPage(true);
 //                this.refs.content.refresh(()=>this.scrollToBottom());
-                return;
             }
             if (data.deleted) {
                 if (data.deleted.length && data.deleted.indexOf(this.props.params.id) != -1)
                     this.goBack();
-                else 
+                else
                     Peerio.Conversation(this.props.params.id)
-                    .load().catch( err => {
+                        .load().catch(err => {
                         this.goBack();
                     });
             }
@@ -113,7 +111,7 @@
             setTimeout(function () {
 //                contentNode.scrollTop = contentNode.scrollHeight;
                 TweenLite.to(contentNode, .3, {scrollTo: {y: contentNode.scrollHeight}});
-            }, 200);  
+            }, 200);
         },
         disableIfLastParticipant: function () {
             // If I'm the only one who has left in this conversation
@@ -147,7 +145,7 @@
             return Peerio.Conversation.getPrevMessagesPage(this.props.params.id, lastSeqID, pageSize);
         },
 
-        getItemsRange: function(from, to){
+        getItemsRange: function (from, to) {
             // here from and to must be reversed
             return Peerio.Conversation.getMessagesRange(this.props.params.id, to, from);
         },
