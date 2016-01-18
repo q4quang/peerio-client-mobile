@@ -126,7 +126,7 @@
 
                 return (
                     <div className="content no-scroll-hack without-tab-bar flex-col">
-                        <div className="subhead">Two Factor Authentication (2FA)</div>
+                        <div className="headline">Two Factor Authentication (2FA)</div>
                         { this.state.isEnabled2FA ? (
                               <Peerio.UI.Tappable element="div" className="btn-danger width-full"
                                   onTap={this.startDisable2FA}>

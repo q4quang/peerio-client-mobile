@@ -149,13 +149,13 @@
             if (this.state.availableContacts.length === 0) {
                 return (
                     <div className="content without-tab-bar">
-                        <h1 className="headline-lrg">Contact Import</h1>
+                        <div className="headline">Contact Import</div>
                         <div className="peerio-loader"></div>
                     </div>);
             }
 
             return (<div className="content without-tab-bar">
-                <h1 className="headline-lrg">Contact Import</h1>
+                <div className="headline">Contact Import</div>
                 <div className="headline-divider">Your Friends on Peerio</div>
                 <div className="compact-list-view">
                     {contactRequestList}

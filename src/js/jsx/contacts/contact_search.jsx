@@ -108,7 +108,7 @@
                 <div className="content without-tab-bar">
                     <div className="flex-col flex-justify-start">
 
-                    <h1 className="headline-lrg">Contact Search</h1>
+                    <div className="headline">Contact Search</div>
                     <div className="input-group">
                       {
                         // NOTE: maybe clear the search on a null return - paul

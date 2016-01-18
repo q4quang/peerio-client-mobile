@@ -20,7 +20,7 @@ Peerio.UI.AddContact = React.createClass({
     </Peerio.UI.Tappable>;
     return  (<div className="content without-tab-bar">
         <div className="flex-col flex-justify-start">
-            <h1 className="subhead">Add Contact</h1>
+            <div className="headline">Add Contact</div>
             <div  className="input-group">
               <input type="text" onChange={this.updateSearchString} placeholder="Search by username, email or phone" value={this.state.searchString}/>
             </div>

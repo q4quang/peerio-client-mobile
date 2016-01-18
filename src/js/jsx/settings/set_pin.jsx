@@ -51,7 +51,7 @@
         render: function () {
             var pinUI = '';
             var header = !!this.props.hideHeader ? null : (
-                <div className="subhead">Device passcode</div>
+                <div className="headline">Device passcode</div>
             );
             var setPinButton = !this.state.inProgress && this.pinIsSane() ? (
                 <Peerio.UI.Tappable

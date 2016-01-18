@@ -55,7 +55,7 @@
 
             if (contacts.length === 1 && outRequests === 0 && inRequests === 0) {
                 var intro_content = <div className="content-intro" key="intro">
-                    <h1 className="headline-lrg">Peerio Contacts</h1>
+                    <div className="headline">Peerio Contacts</div>
 
                     <p>Add a contact to send your first message.Click the button below to get started.</p>
                     <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.handleAddContact}>

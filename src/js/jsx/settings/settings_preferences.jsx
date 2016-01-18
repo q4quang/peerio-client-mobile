@@ -75,6 +75,7 @@
         render: function(){
             return (
                 <div className="content without-tab-bar">
+                    <div className="headline">Preferences</div>
                     <div className="subhead">Notifications</div>
                     <ul>
                         <Peerio.UI.Tappable key='notify-new-message'

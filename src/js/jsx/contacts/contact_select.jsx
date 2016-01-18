@@ -42,7 +42,7 @@
 
         if (Peerio.user.contacts.arr.length === 1) {
           var intro_content = (<div className="content-intro">
-                                <h1 className="headline-lrg">Peerio Contacts</h1>
+                                <div className="headline">Peerio Contacts</div>
                                 <p>It looks like you have not added any contacts yet. Click below to get started.</p>
                                 <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.addContact}>
                                   <i className="fa fa-user-plus"></i>Add a contact

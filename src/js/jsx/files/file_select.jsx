@@ -72,7 +72,7 @@
                 var intro_content = (<div className="content-intro">
                     <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
 
-                    <h1 className="headline-lrg">Peerio File Storage!</h1>
+                  <div className="headline">Peerio File Storage!</div>
 
                     <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
 
@@ -84,7 +84,7 @@
 
             return (
                 <div className="modal item-select">
-                  <div className="subhead">
+                  <div className="headline">
                   Select your files
                 </div>
                     <ul>

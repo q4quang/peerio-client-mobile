@@ -221,7 +221,7 @@
         },
         renderStep0: function (authMethod) {
             return (<fieldset key={'signup-step-0'} className="animate-enter">
-                          <h1 className="headline-lrg">Basic Information</h1>
+                          <div className="headline">Basic Information</div>
 
                           <div className="input-group">
                               {(this.state.usernameValid === null || this.state.usernameValid === true)
@@ -286,7 +286,7 @@
         },
         renderStep1: function () {
             return ( <fieldset key={'signup-step-1'}>
-                <h1 className="headline-lrg">Your Passphrase</h1>
+                <div className="headline">Your Passphrase</div>
 
                 <p className='info'>This is your secure randomly generated passphrase. If you lose it, you
                     will <strong>permanently</strong> lose access to your account.</p>
@@ -338,7 +338,7 @@
         },
         renderStep3: function () {
             return (  <fieldset key={'signup-step-3'}>
-                <h1 className="headline-lrg">Set a device passcode</h1>
+                <div className="headline">Set a device passcode</div>
 
                 <p> Instead of entering your passphrase each time you login, you can set a shorter passcode for this
                     device.

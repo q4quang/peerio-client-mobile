@@ -22,7 +22,7 @@
             return (
                 <div className="content">
 
-                    <h1 className="headline">{conv.subject}</h1>
+                    <div className="headline">{conv.subject}</div>
 
                     <div className="subhead">
                         <span className="icon-with-label"><i
