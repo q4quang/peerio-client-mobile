@@ -19,6 +19,7 @@
   display: block;
   width: 100%;
   margin: 0 auto 25px auto;
+  padding: $padding-base $padding-base 0;
 }
 .saved-login{
   color: $white-100;
@@ -27,12 +28,12 @@
   padding: 16px 0;
   font-size: 1.5em;
   text-align: center;
-  width: 200%;
+  width: 100%;
   .note{
     font-size: 0.9rem;
     margin-top: 5px;
     padding: 0 5px;
-    color: #93c5ea;
+    color: $white-70;
   }
 }
 
