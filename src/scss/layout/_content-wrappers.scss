@@ -25,7 +25,7 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
     overflow-x: hidden;
     overflow-y: auto;
     z-index: $z-content;
-    background-color: $white-100;
+    background-color: #f0f0f0;
     //Smooth scrolling on iOS
     -webkit-overflow-scrolling: touch;
 }
@@ -34,7 +34,6 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 }
 .content-wrapper-login{
     @include content-wrapper(0, 0);
-    padding: $padding-base $padding-base 20px;
     max-width: 400px;
     margin: 0 auto;
     background-color: transparent;
@@ -55,10 +54,6 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
     @include content-wrapper($top: $navbar-height + $tabbar-height, $bottom: $footer-height);
 }
 
-.content-padded{
-    @extend .content;
-    padding: $padding-base;
-}
 .content-intro{
     padding: 20px;
     margin-top: auto;

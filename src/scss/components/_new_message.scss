@@ -52,7 +52,7 @@
 
   .attach-btn {
     min-width: 48px;
-    border-top: 1px solid white;
+    border-top: $border-dark;
     font-size: 188%;
     background-color: color(list-item-bg);
     color: color(meta-text-dark);
@@ -81,7 +81,7 @@
   .subject {
 
     border-top: $border-dark;
-    border-bottom: $border-dark;
+    border-bottom: 0;
     -webkit-appearance: none; // removes weird inner shadow on ios
     padding-left: $padding-small;
     height: 40px;
@@ -95,7 +95,8 @@
     top: 80px;
     bottom: 0;
     padding: 10px 5px;
-    border: none;
+    border: 0;
+    border-top: $border-dark;
     flex-grow:1;
     &:focus {
       background-color: lighten(color(list-item-bg), 5%);

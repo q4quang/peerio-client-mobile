@@ -98,11 +98,11 @@ $avatar-size: 29px;
     &.ack {
       .head {
         padding-left: 50px;
-        border-radius: 0 $radius-default $radius-default 0;
+        border-radius: $radius-right;
       }
       &.self {
         .head {
-          border-radius: $radius-default 0 0 $radius-default;
+          border-radius: $radius-left;
           padding-left: 50px;
         }
         .ack-icon {
