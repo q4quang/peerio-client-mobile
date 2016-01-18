@@ -31,12 +31,11 @@
         var isSelected = this.state.selection.indexOf(c.username) >= 0 ;
 
         contacts.push(
-            <Peerio.UI.Tappable onTap={this.toggle.bind(this, c.username)} key={c.username}>
-              <li className={isSelected ? 'contact selected' : 'contact'}>
-                <span type="checkbox" className={isSelected ? 'checkbox-input checked' : 'checkbox-input' }></span>
-                <Peerio.UI.Avatar username={c.username}/> {c.fullName}
-                <span className="username">({c.username})</span>
-              </li>
+            <Peerio.UI.Tappable element="li" onTap={this.toggle.bind(this, c.username)} key={c.username}>
+                <Peerio.UI.Avatar username={c.username} className="flex-shrink-0"/>
+                <div className="text-overflow">{c.fullName}</div>
+                <div className="caption flex-grow-1 margin-small">({c.username})</div>
+                <div type="checkbox" className={isSelected ? 'checkbox-input checked' : 'checkbox-input' }></div>
             </Peerio.UI.Tappable>
         );
       }.bind(this));
@@ -55,9 +54,9 @@
 
       return (
         <div className="modal item-select">
-            <p className="info-label">
+            <div className="subhead">
             Select your recipients
-            </p>
+          </div>
           <ul>
             {contacts}
           </ul>

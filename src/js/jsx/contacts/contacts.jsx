@@ -37,18 +37,15 @@
             return (
                 <Peerio.UI.Tappable element="li" className="list-item"
                                     onTap={this.openContactView.bind(this, item.username)} key={item.username}>
-                    <div className="list-item-thumb">
-                        <Peerio.UI.Avatar username={item.username}/>
-                    </div>
+                    <Peerio.UI.Avatar username={item.username}/>
+
                     <div className="list-item-content">
                         <div className="list-item-title">{item.fullName}</div>
                         <div
                             className="list-item-description">{item.username} { item.isMe ? '(You)' : ''} { sentRequest ? '(invited)' : null } { receivedRequest ? '(requests authorization)' : null }</div>
                         { receivedRequest ? <i className="fa fa-user-plus status"></i> : null }
                     </div>
-                    <div className="list-item-forward">
-                        <i className="fa fa-chevron-right"></i>
-                    </div>
+                    <i className="fa fa-chevron-right"></i>
                 </Peerio.UI.Tappable>);
         },
         render: function () {
