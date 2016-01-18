@@ -32,7 +32,7 @@
                 Peerio.Auth.getSavedLogin()
                 .then( (data) => {
                     this.setState({savedLogin: data});
-                    Peerio.UI.TouchId.hasTouchID(data.username)
+                    data && data.username && Peerio.UI.TouchId.hasTouchID(data.username)
                     .then( (hasTouchID) => {
                         hasTouchID && Peerio.UI.TouchId.getKeyPair(data.username)
                         .then( (keyPair) => {
