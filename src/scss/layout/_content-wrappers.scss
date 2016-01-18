@@ -15,54 +15,67 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 `content-wrapper.without-tab-bar`.
  */
 
-@mixin content-wrapper($top, $bottom){
-    position: absolute;
-    top: $top;
-    bottom: $bottom;
-    right: 0;
-    left:0;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    z-index: $z-content;
-    background-color: #f0f0f0;
-    //Smooth scrolling on iOS
-    -webkit-overflow-scrolling: touch;
+@mixin content-wrapper($top, $bottom) {
+  position: absolute;
+  top: $top;
+  bottom: $bottom;
+  right: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: $z-content;
+  background-color: #f0f0f0;
+  //Smooth scrolling on iOS
+  -webkit-overflow-scrolling: touch;
 }
-.page-wrapper-login{
-    @include content-wrapper(0, 0);
+
+.page-wrapper-login {
+  @include content-wrapper(0, 0);
 }
-.content-wrapper-login{
-    @include content-wrapper(0, 0);
-    max-width: 400px;
-    margin: 0 auto;
-    background-color: transparent;
+
+.content-wrapper-login {
+  @include content-wrapper(0, 0);
+
+  background-color: transparent;
+  margin: 0 auto;
+  max-width: 400px;
+
 }
-.content-wrapper-signup{
-    @include content-wrapper(0, 0);
+
+.content-wrapper-signup {
+  @include content-wrapper(0, 0);
+
+  fieldset {
+    height: auto;
+  }
 }
 
 .content.with-reply-box {
-    @include content-wrapper($top: $navbar-height + $tabbar-height, $bottom: $footer-height + $reply-height);
+  @include content-wrapper($top: $navbar-height + $tabbar-height, $bottom: $footer-height + $reply-height);
 }
 
 .content.without-tab-bar, .without-tab-bar  {
-    @include content-wrapper($top:  $navbar-height, $bottom: $footer-height);
+  @include content-wrapper($top:  $navbar-height, $bottom: $footer-height);
 }
 
 .content {
-    @include content-wrapper($top: $navbar-height + $tabbar-height, $bottom: $footer-height);
+  @include content-wrapper($top: $navbar-height + $tabbar-height, $bottom: $footer-height);
 }
 
-.content-intro{
-    padding: 20px;
-    margin-top: auto;
-    margin-bottom: auto;
-    .peerio-logo{
-        width: 30%;
-        margin: 0 auto;
-        display: block;
-        margin-bottom: 20px;
+.content-intro {
+  margin-top: auto;
+  margin-bottom: auto;
+
+  .paper-plane-padding {
+    padding: $padding-small #{$padding-base * 2} 0 0;
+  }
+
+  .peerio-logo {
+    width: 30%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
   }
 }
 
@@ -75,37 +88,22 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 // }
 
 .modal {
-    position: absolute;
-    top: $navbar-height;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
+  position: absolute;
+  top: $navbar-height;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 
 .content-inline-dialog {
-    background: $white-100;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    z-index: 10000;
-    padding: 10px;
-}
-
-.content-inline-dialog input, .content-inline-dialog input * {
-}
-
-/* some hacks here, need testing
- * you don't actually need fieldset to be 100% height in signup
- * it messes up with positioning
- */
-.content-wrapper-signup fieldset {
-    height: auto;
-}
-
-.btn-block {
-    display: block;
+  background: $white-100;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 10000;
+  padding: 10px;
 }

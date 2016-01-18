@@ -1,55 +1,63 @@
-/**
- *   Shared/universal rules
- */
-
+//   Shared/universal rules
  //  Note: list tags are found in _list_view.scss
+
 html {
   // Root font size. All other font sizes should be in rem units
+  box-sizing: border-box;
   font-size: 15px;
   user-select: none;
-  box-sizing: border-box;
+
+  * {
+    ::-webkit-inner-spin-button,
+  [type=number]::-webkit-outer-spin-button {
+  }  -webkit-margin-collapse: separate;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent; // for some Androids
+
+ }
 }
 
-*, *:before, *:after {
-  user-select: inherit;
+*,
+*:before,
+*:after {
   box-sizing: border-box;
-}
-html * {
-  -webkit-margin-collapse: separate;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-tap-highlight-color: transparent; /* For some Androids */
-  -webkit-overflow-scrolling: touch;
+  user-select: inherit;
 }
 
 body {
-  font-family: OpenSans, sans-serif;
-  color: $black-87;
-  font-weight: 300;
   background-color: color(p-blue-darker);
+  color: $black-87;
+  font-family: OpenSans, sans-serif;
+  font-weight: 300;
+
+  .ios {
+    //margin-top: 20px;
+  }
 }
 
 label {
   font-size: 12px;
 }
 
-input, select {
-  height: 32px;
-  line-height: 32px;
-  font-size: 16px;
-  width: 100%;
+input,
+select {
   background: transparent;
   border: 0;
   border-bottom: $border-dark;
+  font-size: 16px;
+  height: 32px;
+  line-height: 32px;
   padding: 0;
+  width: 100%;
 
   &:focus {
     border-bottom: 1px solid color(p-blue);
   }
 }
 
-select{
-  border-radius: 0;
+select {
   -webkit-appearance: none;
+  border-radius: 0;
 }
 
 // HACK: placeholder not disappearing on focus in textarea
@@ -58,77 +66,89 @@ input:focus::-webkit-input-placeholder {
 }
 
 // except inputs, they can be text-selected
-input, textarea {
+input,
+textarea {
+  border-radius: 0;
+  box-sizing: border-box;
   user-select: initial;
-  border-radius:0;
-  box-sizing: border-box;
 }
 
-input[type="search"]{
-  box-sizing: border-box;
+[type="search"] {
   -webkit-appearance: none;
+  box-sizing: border-box;
 }
 
+[type="number"] {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[password] {
+    -webkit-text-security: disc;
+  }
+}
 // styles placeholder content
 ::-webkit-input-placeholder {
   color: $black-54;
 }
 
-/*
-  This is fine for mobile, but we don't want to carry this styling over to desktop client
-  without adding some type of styling to delineate focused items for keyboard users.
- */
+
+//  This is fine for mobile, but we don't want to carry this styling over to desktop client
+//  without adding some type of styling to delineate focused items for keyboard users.
+
 button:focus,
 input:focus,
 textarea:focus,
-select:focus{
+select:focus {
   outline: none;
 }
+
 textarea:focus::-webkit-input-placeholder {
   color: transparent;
 }
 
+.ios-titlebar {
+  background-color: color(p-blue-darker);
+  height: 20px;
 
-body.ios{
-  //margin-top: 20px;
-}
-
-.ios-titlebar{
   position: fixed;
   top: 0;
+  right: 0;
   left: 0;
-  right:0;
-  height: 20px;
-  background-color: color(p-blue-darker);
+
   z-index: 10000000000; // wtf?
 }
 
-button{
+button {
   background-color: color(p-blue-darker);
-  border: none;
-  color: white;
+  border: 0;
+  color: $white-100;
   font-size: 1rem;
   font-weight: 400;
   //  text-shadow: 2px 2px 3px $p-blue-dark-20;
-  text-align: center;
   padding: 0;
+  text-align: center;
 }
 // Universal link styling
 a {
   color: color(p-blue);
   text-decoration: none;
+
   &:active {
     color: color(p-blue);
   }
 }
 
-fieldset{
-  border: none;
+fieldset {
+  border: 0;
+  height: 100%;
   margin: 0;
-  padding: 20px;
+  padding: 0;
   position: absolute;
   width: 100%;
-  height: 100%;
+
 }
 
 
@@ -136,20 +156,23 @@ img {
   max-width: 100%;
 }
 
-hr{
-  width: 100%;
-  clear: both;
-  height:0;
-  margin: $margin-small 0 $margin-base;
+hr {
+  @include clearfix();
+
   border: 0;
   border-bottom: $border-dark;
   box-sizing: border-box;
-  @include clearfix();
+  clear: both;
+  height: 0;
+  margin: $margin-small 0 $margin-base;
+  width: 100%;
+
 }
 
-p{
-  margin-top:0.2em;
-  margin-bottom:0.7em;
+p {
+  margin-bottom: .7em;
+  margin-top: .2em;
+  padding: 0 $padding-base;
 }
 
 

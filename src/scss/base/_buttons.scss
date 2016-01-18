@@ -42,7 +42,7 @@ Footer Buttons                                       | Button Class/ID
     content: " ";
     display: block;
     position: absolute;
-    left:0;
+    left: 0;
     right: 0;
     top: 0;
     bottom: 0;
@@ -69,7 +69,6 @@ Footer Buttons                                       | Button Class/ID
   left: 0;
   right: 0;
   padding: $padding-small;
-
 }
 
 
@@ -179,8 +178,8 @@ button:disabled , .btn-disabled {
 #global-back {
   flex-grow: 0;
   justify-content: flex-start;
-  transition: background-color 100ms ease-in;
   padding: 0 $padding-base;
+  transition: background-color 100ms ease-in;
 
   &.on-touchstart {
     background-color: #26384A;
