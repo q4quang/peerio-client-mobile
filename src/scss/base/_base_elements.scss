@@ -60,6 +60,20 @@ input[type="search"]{
   -webkit-appearance: none;
 }
 
+input:focus, input {
+    &[type="number"] {
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        &[data-password="yes"] {
+            -webkit-text-security: disc;
+        }
+    }
+}
+
 // styles placeholder content
 ::-webkit-input-placeholder {
   color: $black-54;
