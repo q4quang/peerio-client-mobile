@@ -295,7 +295,7 @@
                     {this.state.passphrase}
                 </p>
                 <div className="flex-row">
-                    <div className="input-group">
+                    <div className="input-group flex-grow-1">
                         <label>Language</label>
                         <select ref="lang" onChange={this.generatePassphrase}>
                             <option value="en">English</option>
@@ -324,15 +324,15 @@
                         </select>
                     </div>
                 </div>
-
-                <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.showModal}> I'll remember my
-                    passphrase</Peerio.UI.Tappable>
-                  <Peerio.UI.Tappable element='div' className="btn-dark" onTap={this.generatePassphrase}> I don't like
-                    this passphrase</Peerio.UI.Tappable>
-
-                <Peerio.UI.Tappable element='div' className="btn-back" onTap={this.handlePreviousStep}><i
-                        className="fa fa-chevron-left"></i>back
-                </Peerio.UI.Tappable>
+                <div className="buttons">
+                  <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.showModal}> I'll remember my
+                      passphrase</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element='div' className="btn-dark" onTap={this.generatePassphrase}> I don't like
+                      this passphrase</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element='div' className="btn-back" onTap={this.handlePreviousStep}><i
+                            className="fa fa-chevron-left"></i>back
+                    </Peerio.UI.Tappable>
+                </div>
 
             </fieldset>);
         },

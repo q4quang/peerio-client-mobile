@@ -101,19 +101,19 @@
 
             return (
                 <div className="content contact-view without-tab-bar">
-
-                    <div className="flex-row flex-shrink-0 margin-small padding-small">
-                        <Peerio.UI.Avatar size="big" username={this.contact.username}
-                                          className="contact-view-avatar"/>
-
-                        <div className="flex-col">
-                            <div className="headline">{this.contact.fullName}</div>
-                            <div
-                                className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(You)' : ''}</div>
-                        </div>
-                    </div>
-
                     <ul className="flex-list">
+                        <li>
+                            <div className="flex-row">
+                                <Peerio.UI.Avatar size="big" username={this.contact.username}
+                                                  className="contact-view-avatar"/>
+
+                                <div className="flex-col">
+                                    <div className="headline">{this.contact.fullName}</div>
+                                    <div
+                                        className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(You)' : ''}</div>
+                                </div>
+                            </div>
+                        </li>
 
                         <li>
                             <label>Public Key</label>

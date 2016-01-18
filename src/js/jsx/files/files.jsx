@@ -65,7 +65,7 @@
                         <div className="content-intro">
                             <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
 
-                            <h1 className="headline-lrg">Peerio File Storage!</h1>
+                            <div className="headline">Peerio File Storage!</div>
 
                             <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
                             <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}}
