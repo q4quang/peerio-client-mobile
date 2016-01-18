@@ -1,6 +1,8 @@
 /**
  *   Shared/universal rules
  */
+
+ //  Note: list tags are found in _list_view.scss
 html {
   // Root font size. All other font sizes should be in rem units
   font-size: 15px;
@@ -17,6 +19,13 @@ html * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: transparent; /* For some Androids */
   -webkit-overflow-scrolling: touch;
+}
+
+body {
+  font-family: OpenSans, sans-serif;
+  color: $black-87;
+  font-weight: 300;
+  background-color: color(p-blue-darker);
 }
 
 label {
@@ -78,11 +87,7 @@ select:focus{
 textarea:focus::-webkit-input-placeholder {
   color: transparent;
 }
-body {
-  font-family: OpenSans, sans-serif;
-  color: color(body-text);
-  background-color: color(p-blue-darker);
-}
+
 
 body.ios{
   //margin-top: 20px;
@@ -146,4 +151,6 @@ p{
   margin-top:0.2em;
   margin-bottom:0.7em;
 }
+
+
 // universal components

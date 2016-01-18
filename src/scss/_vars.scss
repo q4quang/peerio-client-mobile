@@ -42,6 +42,8 @@ $border-dark: 1px solid $black-12;
 
 $radius-default: 2px;
 $radius-circle: 50%;
+$radius-left: $radius-default 0 0 $radius-default;
+$radius-right:  0 $radius-default $radius-default 0;
 
 
 // transition speeds
