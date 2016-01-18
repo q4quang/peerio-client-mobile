@@ -246,7 +246,7 @@
                                 }
                                 <div className="login-input">
                                     <label htmlFor="password">
-                                        {this.state.isPin ? 'passcode' : 'passphrase'}
+                                        {this.state.isPin ? 'passcode' : 'passphrase or passcode'}
                                     </label>
                                     <div className="input-group flex-row">
                                         {passInput}
