@@ -72,22 +72,22 @@
                 return (
                     <div>
                         <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
-                            <div className="flex-grow-0 flex-shrink-0 sidebar-header flex-col">
-                                <div className="flex-row text-overflow">
+                            <ul className="flex-grow-0 flex-shrink-0 sidebar-header flex-col">
+                                <li className="flex-row text-overflow">
                                     <Peerio.UI.Avatar size="big" username={user.username}/>
-                                    <div className="flex-col">
-                                        <h3 className="headline-md">{user.firstName} {user.lastName}</h3>
-                                        <span className="subhead-inline">{user.username}</span>
+                                    <div className="text-overflow">
+                                        <div className="headline-md">{user.firstName} {user.lastName}</div>
+                                        <div className="subhead-inline">{user.username}</div>
                                     </div>
-                                </div>
-                                <div className="storage-info">
-                                    <span className="info-label">Storage</span>
-                                    {quotaUsed} / {quota} ({quotaPercent}%)
-                                </div>
-                            </div>
+                                </li>
+                                <li className="storage-info flex-col flex-align-start">
+                                    <label>Storage</label>
+                                    <div>{quotaUsed} / {quota} ({quotaPercent}%)</div>
+                                </li>
+                            </ul>
 
-                            <div className="flex-grow-1 sidebar-menu" ref="menu">
-                                <h3 className="subhead">Security</h3>
+                            <div className="flex-col flex-grow-1 sidebar-menu" ref="menu">
+                                <div className="subhead-light">Settings</div>
                                 <ul>
                                     <Peerio.UI.Tappable tag='li'
                                         onTap={this.toggleAndTransition.bind(this, 'set_pin')}>
@@ -99,10 +99,7 @@
                                         <i className="fa fa-mobile"/>
                                         <span>{twoFactor}</span>
                                     </Peerio.UI.Tappable>
-                                </ul>
-                                <h3 className="subhead">Account</h3>
 
-                                <ul>
                                      <Peerio.UI.Tappable tag="li"
                                         onTap={this.toggleAndTransition.bind(this, 'account_settings')}>
                                         <i className="fa fa-user"></i> Profile
@@ -118,16 +115,16 @@
                                         <i className="fa fa-certificate"></i> Redeem Coupon
                                      </Peerio.UI.Tappable>
                                 </ul>
+                                <div className="flex-grow-1"></div>
+                                { /* signout */}
+                                <ul>
+                                    <Peerio.UI.Tappable element="li"
+                                                        onTap={this.signOut}><i
+                                        className="fa fa-power-off"></i> Sign Out
+                                    </Peerio.UI.Tappable>
+                                </ul>
                             </div>
 
-
-
-                            <div className="flex-col flex-justify-center sign-out">
-                                <Peerio.UI.Tappable element="div" className="btn-dark"
-                                                    onTap={this.signOut}><i
-                                    className="fa fa-power-off"></i> Sign Out
-                                </Peerio.UI.Tappable>
-                            </div>
                             <div className="app-version">
                                 Peerio version: {Peerio.NativeAPI.getAppVersion()}
                             </div>
