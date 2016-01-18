@@ -35,13 +35,16 @@
                             .then(() => { return this.props.onSuccess && this.props.onSuccess(newAddress); })
                             .catch((error) => {
                                 L.error(error);
-                                if (error && error.code === 406) {
-                                    return Peerio.UI.Confirm.show({text: 'Confirmation code does not match. Would you like to try again?'})
-                                    .then( () => addAndEnter() );
-                                } else {
-                                    Peerio.Action.showAlert({text: 'Error adding address. Please contact support.'});
-                                    return Promise.reject(error);
+                                if (error && error.code) {
+                                    if (error.code === 406) {
+                                        return Peerio.UI.Confirm.show({text: 'Confirmation code does not match. Would you like to try again?'})
+                                        .then( () => addAndEnter() );
+                                    }
+                                    else {
+                                        Peerio.Action.showAlert({text: 'Error adding address. Please contact support.'});
+                                    }
                                 }
+                                return Promise.reject(error);
                             });
                         };
                         return addAndEnter()
