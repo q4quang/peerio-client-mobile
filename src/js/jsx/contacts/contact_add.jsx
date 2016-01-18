@@ -24,6 +24,11 @@ Peerio.UI.AddContact = React.createClass({
             <div  className="input-group">
               <input type="text" onChange={this.updateSearchString} placeholder="Search by username, email or phone" value={this.state.searchString}/>
             </div>
+            {
+              /*TODO: address layout issues when using buttons wrapper class here
+                  currently buttons overlap other content when wrapped in buttons class
+               */
+             }
             {searchButton}
             <p className="line-across">or</p>
             <p className="centered-text">

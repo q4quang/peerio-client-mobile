@@ -233,7 +233,7 @@
                                     <Peerio.UI.TalkativeProgress
                                         enabled={this.state.waitingForLogin}/>
                                 </div>
-                                <div className="flex-col padding-small width-full">
+                                <div className="buttons">
                                     <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-safe"
                                                         onTap={this.handleSubmit}>
                                         {this.state.waitingForLogin ?

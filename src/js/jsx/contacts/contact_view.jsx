@@ -132,7 +132,7 @@
 
                     </ul>
 
-                    <div className="flex-col padding-small width-full">
+                    <div className="buttons">
                       {buttons}
                     </div>
 

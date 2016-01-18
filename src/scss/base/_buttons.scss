@@ -60,6 +60,19 @@ Footer Buttons                                       | Button Class/ID
   }
 }
 
+
+// used for stacked full width buttons
+.buttons {
+  @extend .flex-col;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: $padding-small;
+
+}
+
+
 .btn {
   @include button-ripple;
   padding: 0 $padding-small;

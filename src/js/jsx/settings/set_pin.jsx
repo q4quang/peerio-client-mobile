@@ -92,7 +92,7 @@
                     />
                     {pinUI}
 
-                    <div className="flex-col padding-small width-full">
+                    <div className="buttons">
                       {setPinButton}
                     </div>
                 </div>

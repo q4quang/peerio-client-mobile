@@ -162,7 +162,7 @@
                                 <div className="info-label">Your public key:</div>
                                 <span className="text-mono col-8 col-first">{ Peerio.user.publicKey }</span>
                             </div>
-                            <div className="flex-col padding-small width-full">
+                            <div className="buttons">
                               <Peerio.UI.Tappable className="btn-danger" onTap={ this.deleteAccount }>
                                 delete your account
                               </Peerio.UI.Tappable>

@@ -53,18 +53,14 @@ $buttons-height:120px;
   overflow-x: hidden;
   overflow-y: scroll;
   background-color: $white-100;
-  
+
   ul {
     overflow-x: hidden;
     overflow-y: scroll;
   }
+  
   .buttons {
-    position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
-    padding: $padding-small;
-    // height: $buttons-height;
     background-color: #eee; // TODO create more colors for palatte
   }
   .contact {
