@@ -15,13 +15,13 @@
             },
 
             setHasTouchID: function(username, value) {
-                return value ? 
+                return value ?
                     Peerio.TinyDB.setObject(Peerio.UI.TouchId.touchidname(username), true) :
                     Peerio.TinyDB.removeItem(Peerio.UI.TouchId.touchidname(username));
             },
-            
+
             getKeyPair: function(username) {
-                return window.PeerioTouchIdKeychain.getValue( 
+                return window.PeerioTouchIdKeychain.getValue(
                 Peerio.UI.TouchId.keyname(username))
                 .then( (keyPair) => {
                     var keyPair = JSON.parse(keyPair);
@@ -29,14 +29,14 @@
                     keyPair.secretKey = Peerio.Util.toInt8Array(keyPair.secretKey);
                     return keyPair;
                 });
-                
+
             },
 
             saveKeyPair: function() {
                 return window.PeerioTouchIdKeychain.saveValue(
-                    Peerio.UI.TouchId.keyname(), 
+                    Peerio.UI.TouchId.keyname(),
                     JSON.stringify(Peerio.user.keyPair)
-                ) 
+                )
                 .catch( (error) => {
                     Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false);
                     return Promise.reject(error);
@@ -69,7 +69,7 @@
 
         enableTouchId: function() {
             var enabled = !this.state.enabled;
-            enabled ? 
+            enabled ?
                 Peerio.UI.TouchId.clearKeyPair()
             .catch( (error) => L.info(error) )
             .then( () => Peerio.UI.TouchId.saveKeyPair())
@@ -85,14 +85,17 @@
 
 
             return this.state.visible ? (
-                <div onClick={this.enableTouchId}>
-                    <span className="col-10">Enable fingerprint identification</span>
-                    <span type="checkbox" className={this.state.enabled 
-                        ? 'checkbox-input checked': 'checkbox-input'}></span>
-                </div>
-            ) : ( /* todo: beautify markup */
-            <div className="col-12" style={{'margin-bottom': '1em'}}>
-            Fingerprint identification unavailable</div>
+                <ul>
+                    <li onClick={this.enableTouchId}>
+                        <div type="checkbox" className={this.state.enabled
+                            ? 'checkbox-input checked': 'checkbox-input'}></div>
+                        <div>Enable fingerprint identification</div>
+                    </li>
+                </ul>
+            ) : (
+                <ul>
+                    <li>Fingerprint identification unavailable</li>
+                </ul>
             );
         }
     });

@@ -19,15 +19,16 @@
 
         render: function () {
            return (
-               <div className="content-padded without-tab-bar flex-col flex-justify-start">
-                   <p className="info-small">If you have a promotional code, please enter it below.</p>
-                   <div className="flex-row flex-align-center">
-                       <input type="text" placeholder="enter coupon code" ref="textEdit"/>
-
-                       <Peerio.UI.Tappable className="btn-primary" onTap={ this.redeemCoupon }>
-                           redeem
-                       </Peerio.UI.Tappable>
-                   </div>
+               <div className="content without-tab-bar flex-col flex-justify-start">
+                  <div className="input-group">
+                      <label>If you have a promotional code, please enter it below.</label>
+                      <div className="flex-row flex-align-center">
+                          <input type="text" placeholder="enter coupon code" ref="textEdit"/>
+                          <Peerio.UI.Tappable className="btn-primary" onTap={ this.redeemCoupon }>
+                             redeem
+                          </Peerio.UI.Tappable>
+                      </div>
+                  </div>
                </div>
             );
         },

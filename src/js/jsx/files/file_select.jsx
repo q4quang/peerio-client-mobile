@@ -44,12 +44,11 @@
                 var isSelected = this.state.selection.indexOf(f.id) >= 0;
 
                 files.push(
-                    <Peerio.UI.Tappable key={f.id} onTap={this.toggle.bind(this,f.id)}>
-                        <li className={isSelected ? 'contact selected' : 'contact'}>
-                            <span type="checkbox"
-                                  className={isSelected ? 'checkbox-input checked' : 'checkbox-input' }></span>
-                            <span className="username">{f.name}</span>
-                        </li>
+                    <Peerio.UI.Tappable key={f.id} onTap={this.toggle.bind(this,f.id)} element="li"
+                        className={isSelected ? 'selected' : null }>
+                            <div type="checkbox"
+                                  className={ 'checkbox-input ' + (isSelected ? 'checked' : null )}></div>
+                                <div className="username">{f.name}</div>
                     </Peerio.UI.Tappable>
                 );
             }.bind(this));
@@ -85,12 +84,12 @@
 
             return (
                 <div className="modal item-select">
-                  <p className="info-label">
+                  <div className="subhead">
                   Select your files
-                  </p>
+                </div>
                     <ul>
-                        {uploads}
                         {files}
+                        {uploads}
                     </ul>
                     <div className="buttons flex-col">
                         <Peerio.UI.Tappable element="div" className="btn-safe"

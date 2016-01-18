@@ -56,7 +56,7 @@
             var setPinButton = !this.state.inProgress && this.pinIsSane() ? (
                 <Peerio.UI.Tappable
                     element="div"
-                    className="btn-primary"
+                    className="btn-safe"
                     onTap={this.setDevicePin}>Set device passcode</Peerio.UI.Tappable>
             ) : null;
             if (Peerio.user.PINIsSet) {
@@ -79,9 +79,7 @@
                                pattern="[0-9]*"
                                value={this.state.newPin}
                                inputmode="numeric"
-                               onChange={this.newPinChange}
-                        />
-                        {setPinButton}
+                               onChange={this.newPinChange}/>
                     </div>);
             }
 
@@ -93,6 +91,10 @@
                         showSpin="true"
                     />
                     {pinUI}
+
+                    <div className="flex-col padding-small width-full">
+                      {setPinButton}
+                    </div>
                 </div>
 
             );

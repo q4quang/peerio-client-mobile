@@ -132,7 +132,9 @@
 
                     </ul>
 
-                    <div className="flex-col flex-justify-start">{buttons}</div>
+                    <div className="flex-col padding-small width-full">
+                      {buttons}
+                    </div>
 
                 </div>
             );

@@ -88,6 +88,14 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
   transform: translateY(-50%);
 }
 
+.margin-small {
+  margin: $margin-small;
+}
+
+.padding-small {
+  padding: $padding-small;
+}
+
 .width-full {
   width: 100%;
 }
@@ -140,12 +148,6 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
   @include ellipses();
 }
 
-// .animate-appear {
-//   animation-name: fadeIn;
-//   animation-duration: 1s;
-//   opacity: 0;
-//   animation-fill-mode: forwards;
-// }
 
 .animate-enter {
   animation-name: bounceInRight;
@@ -161,28 +163,6 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 
 }
 
-
-// .page-animate-enter,
-// .page-animate-leave,
-// .page-animate-reverse-enter,
-// .page-animate-reverse-leave{
-//   animation-name: slideInRight;
-//   animation-duration: $speed-normal;
-//   animation-fill-mode: forwards;
-//   animation-timing-function: ease-out;
-// }
-//
-// .page-animate-leave{
-//   animation-name: slideOutLeft;
-// }
-//
-// .page-animate-reverse-enter{
-//   animation-name: slideInLeft;
-// }
-//
-// .page-animate-reverse-leave{
-//   animation-name: slideOutRight;
-// }
 
 .italic {
     font-style: italic;
