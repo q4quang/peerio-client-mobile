@@ -67,7 +67,7 @@
             if (!file.humanSize) file.humanSize = H.bytesToSize(file.size);
 
             var sender = file.sender ? (<div className="info-row">
-                <div className="info-label">Sent to you by</div>
+                <label>Shared by</label>
                 <div className="info-content">{file.sender}</div>
             </div>) : null;
             var downloadStateNode = null, buttonsNode = null;
@@ -99,7 +99,7 @@
             // TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
 
             return (
-                <div className="content-padded">
+                <div className="content">
                     <div className="head">
                         <div className="col-1 col-first">
                             <i className={'file-type fa fa-' + file.icon}></i>
@@ -111,36 +111,35 @@
                         </div>
                     </div>
 
-                    <hr />
-
+                    // TODO: update markup and remove info-table styling
                     <div className="info-table">
                         <div className="info-row">
-                            <div className="info-label">File Name</div>
+                            <label>File Name</label>
                             <div className="info-content">{file.name}</div>
                         </div>
 
                         <div className="info-row">
-                            <div className="info-label">File Size</div>
+                            <label>File Size</label>
                             <div className="info-content">{file.humanSize}</div>
                         </div>
 
                         <div className="info-row">
-                            <div className="info-label">File Type</div>
+                            <label>File Type</label>
                             <div className="info-content">{Peerio.Helpers.getFileTypeByName(file.name)}</div>
                         </div>
 
                         <div className="info-row">
-                            <div className="info-label">Location</div>
+                            <label>Location</label>
                             <div
                                 className="info-content">{file.cached ? 'On this device and in the cloud' : 'In the cloud'}</div>
                         </div>
                         <div className="info-row">
-                            <div className="info-label">Owner</div>
+                            <label>Owner</label>
                             <div
                                 className="info-content">{file.creator === Peerio.user.username ? 'You' : file.creator}</div>
                         </div>
                         <div className="info-row">
-                            <div className="info-label">Uploaded at</div>
+                            <label>Uploaded at</label>
                             <div className="info-content">{new Date(file.timestamp).toLocaleString()}</div>
                         </div>
 

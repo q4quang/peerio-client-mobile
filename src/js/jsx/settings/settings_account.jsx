@@ -129,8 +129,8 @@
 
             return (
                 <div>
-                    <div className="without-tab-bar content-padded">
-                        <div className="headline-lrg">Profile</div>
+                    <div className="without-tab-bar content">
+                        <div className="subhead">Profile</div>
                         <div className="flex-col flex-justify-center">
                             <div className="input-group">
                                 <label htmlFor="first-name">First Name</label>

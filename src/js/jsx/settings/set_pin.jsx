@@ -51,7 +51,7 @@
         render: function () {
             var pinUI = '';
             var header = !!this.props.hideHeader ? null : (
-                <div className="info-label">Device passcode</div>
+                <div className="subhead">Device passcode</div>
             );
             var setPinButton = !this.state.inProgress && this.pinIsSane() ? (
                 <Peerio.UI.Tappable
@@ -69,10 +69,10 @@
                     </div>);
             } else {
                 pinUI =
-                    (<div className="flex-col flex-justify-center">
-                        <p className="info-small italic">
+                    (<div className="input-group flex-col flex-justify-center">
+                        <label>
                             Passcode must be 6 digits or longer
-                        </p>
+                        </label>
                         <input className="text-center"
                                type="password" required="required" ref="textEdit"
                                placeholder="Enter a device passcode"
@@ -86,7 +86,7 @@
             }
 
             return (
-                <div className="content-padded without-tab-bar">
+                <div className="content without-tab-bar">
                     {header}
                     <Peerio.UI.TalkativeProgress
                         enabled={this.state.inProgress}
@@ -94,6 +94,7 @@
                     />
                     {pinUI}
                 </div>
+
             );
         }
     });

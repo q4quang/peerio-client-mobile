@@ -105,7 +105,7 @@
             }
 
             return (
-                <div className="content-padded without-tab-bar">
+                <div className="content without-tab-bar">
                     <div className="flex-col flex-justify-start">
 
                     <h1 className="headline-lrg">Contact Search</h1>

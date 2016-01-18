@@ -125,43 +125,43 @@
                 'The following key has been copied to your clipboard. Please paste it in your authenticator app:' : 'Paste the following secret key into your authenticator app:';
 
                 return (
-                    <div className="content-padded no-scroll-hack without-tab-bar flex-col flex-align-center">
-                        <div className="info-label width-full">Two Factor Authentication (2FA)</div>
+                    <div className="content no-scroll-hack without-tab-bar flex-col">
+                        <div className="subhead">Two Factor Authentication (2FA)</div>
                         { this.state.isEnabled2FA ? (
                               <Peerio.UI.Tappable element="div" className="btn-danger width-full"
                                   onTap={this.startDisable2FA}>
                                   Disable 2FA
                               </Peerio.UI.Tappable>
                             ) : (
-                            <div>
-                                <p className="info-small width-full">
+                            <div className="input-group">
+                                <label>
                                     {pasteMessage}
-                                </p>
-                                <div className="text-center">{this.state.code ? (
-                                    <input className="no-border width-full text-center"
+                                </label>
+                                {this.state.code ? (
+                                    <input className="no-border width-full"
                                         ref="generatedCode"
                                         autoComplete="off" autoCorrect="off"
                                         autoCapitalize="off" spellCheck="false"
                                         value={this.state.code} readOnly="true"/>
                                     ) : (
-                                    <div>
+                                    <div className="text-center">
                                         <i className="fa fa-circle-o-notch fa-spin"></i>
                                     </div>)}
-                                </div>
+
                             </div>)} { this.state.disable2FA || !this.state.isEnabled2FA ? (
-                            <div>
-                                <p className="info-small width-full">
+                            <div className="input-group">
+                                <label>
                                     Enter the six digit code that appears in the app:
-                                </p>
+                                </label>
                                 <input
-                                    className="txt-lrg text-center"
+                                    className="text-center"
                                     ref="authenticatorCode"
                                     autoComplete="off" autoCorrect="off"
                                     autoCapitalize="off" spellCheck="false"
                                     onChange={this.onChangeAuthy}
                                     value={this.state.authyCode}/>
                             </div>) : null }
-                            <p className="info-small width-full">
+                            <p className="caption margin-small padding-small">
                                 {this.state.message}
                             </p>
                     </div>

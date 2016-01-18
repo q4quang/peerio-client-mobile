@@ -20,7 +20,7 @@
             if (!conv || !this.state.fileIDs) return <Peerio.UI.FullViewSpinner/>;
 
             return (
-                <div className="content-padded">
+                <div className="content">
 
                     <h1 className="headline">{conv.subject}</h1>
 
