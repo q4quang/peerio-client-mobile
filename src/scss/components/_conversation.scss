@@ -79,9 +79,22 @@ $avatar-size: 29px;
       word-wrap: break-word;
       //box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.2);
     }
-    .file-count{
-      font-size: 10px;
+    .file-list{
+      font-size: .8em;
       color: color(meta-text-light);
+      margin-bottom: 5px;
+      .file-list-item{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        color: color(meta-text-dark);
+        padding: 8px;
+        background-color: color(message-other-bg-file);;
+
+        margin-top: 3px;
+        margin-left: -5px;
+        margin-right: -5px;
+      }
     }
 
     .receipts {
@@ -151,6 +164,14 @@ $avatar-size: 29px;
           position: absolute;
           right: 2px;
           bottom: 16px;
+        }
+      }
+      .file-list{
+
+        .file-list-item{
+          background-color: color(message-self-bg-file);
+          margin-left: -7px;
+          margin-right: -15px;
         }
       }
     }

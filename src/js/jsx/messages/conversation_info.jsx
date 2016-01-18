@@ -7,49 +7,62 @@
             return {conversation: null};
         },
         componentWillMount: function () {
+            Peerio.Dispatcher.onConversationsUpdated(this.loadConversation);
+            this.loadConversation();
+        },
+        componentWillUnmout: function () {
+            Peerio.Dispatcher.unsubscribe(this.loadConversation);
+        },
+        loadConversation: function (event) {
+            if (event
+                && event.updated && event.updated.length && event.updated.indexOf(this.props.params.id) === -1
+                && event.deleted && event.deleted.length && event.deleted.indexOf(this.props.params.id) === -1)
+                return;
+
             Peerio.Conversation(this.props.params.id)
                 .load()
                 .then(c => c.loadStats())
                 .then(c => {
-                    this.setState({conversation: c, fileIDs: c.fileIDs, msgCount: c.messageCount});
-                });
+                    this.setState({conversation: c});
+                })
+                .catch(()=>this.goBack());
         },
         render: function () {
-            var conv = this.state.conversation;
+            var c = this.state.conversation;
 
-            if (!conv || !this.state.fileIDs) return <Peerio.UI.FullViewSpinner/>;
+            if (!c) return <Peerio.UI.FullViewSpinner/>;
 
             return (
                 <div className="content-padded">
 
-                    <h1 className="headline">{conv.subject}</h1>
+                    <h1 className="headline">{c.subject}</h1>
 
                     <div className="subhead">
                         <span className="icon-with-label"><i
-                            className="fa fa-calendar-o"/> {conv.createdMoment.format('L')}</span>
+                            className="fa fa-calendar-o"/> {c.createdMoment.format('L')}</span>
                         <span className="icon-with-label"><i
-                            className="fa fa-comment-o"/> {this.state.msgCount}</span>
-                        <span className="icon-with-label"><i className="fa fa-file-o"/> {this.state.fileIDs.length}</span>
+                            className="fa fa-comment-o"/> {c.messageCount}</span>
                         <span className="icon-with-label"><i
-                            className="fa fa-users"/> {conv.participants.length + conv.exParticipants.length}</span>
-                        </div>
+                            className="fa fa-file-o"/> {c.fileIDs.length}</span>
+                        <span className="icon-with-label"><i
+                            className="fa fa-users"/> {c.participants.length + c.exParticipantsArr.length}</span>
+                    </div>
 
-            <div className="info-label">
-              Participants
-            </div>
+                    <div className="info-label">
+                        Participants
+                    </div>
 
                     <div className="compact-list-view">
-                        {conv.participants.map(p => <ContactNode username={p} key={p}/>)}
-                        {conv.exParticipants.map(p => <ContactNode username={p.u} leftAt={p.moment} key={p.u}/>) }
+                        {c.participants.map(u => <ContactNode username={u} key={u}/>)}
+                        {c.exParticipantsArr.map(u => <ContactNode username={u} leftAt={c.exParticipants[u].moment} key={u}/>) }
                     </div>
 
 
-
-            <div className="info-label">
-              Shared Files
-            </div>
+                    <div className="info-label">
+                        Shared Files
+                    </div>
                     <div className="compact-list-view">
-                        { this.state.fileIDs.map(f =>  <FileNode id={f} key={f}/>)}
+                        { c.fileIDs.map(f => <FileNode id={f} key={f}/>)}
                     </div>
                 </div>
             );
@@ -66,7 +79,7 @@
             this.transitionTo('file', {id: id});
         },
         render: function () {
-            var f = this.state.file
+            var f = this.state.file;
             // todo, maybe notice?
             if (!f) return null;
 

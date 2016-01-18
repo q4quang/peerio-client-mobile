@@ -4,7 +4,7 @@
     /**
      * Message list item component
      */
-    Peerio.UI.ConversationsItem = React.createClass({
+    Peerio.UI.ConversationsListItem = React.createClass({
         mixins: [ReactRouter.Navigation],
 
         getInitialState: function () {
@@ -39,16 +39,11 @@
             // unless he is the only one left in conversation
 
             if (!conv.username) {
-                var displayName = '';
-                for (var i = 0; i < conv.participants.length; i++) {
-                    var username = conv.participants[i];
-                    if (username === Peerio.user.username && conv.participants.length > 1) continue;
-                    var contact = Peerio.user.contacts.dict[username];
-                    displayName = (contact && contact.fullName) || '';
-                    break;
-                }
-                if (conv.participants.length > 2) {
-                    displayName += ' [+' + (conv.participants.length - 2) + ']';
+                var username = conv.participants[0] || conv.exParticipantsArr[0];
+                var contact = Peerio.user.contacts.dict[username];
+                var displayName = (contact && contact.fullName) || '';
+                if (conv.participants.length > 1) {
+                    displayName += ' [+' + (conv.participants.length - 1) + ']';
                 }
                 conv.displayName = displayName;
                 conv.username = username;

@@ -201,13 +201,15 @@
                     onKeyDown={this.handleKeyDownPass}
                     data-password={!this.state.passphraseVisible ? 'yes': 'no'}
                     autoFocus
+                    defaultValue={debugUserName}
                     />
             ) : (
                 <Peerio.UI.PasswordInput 
                     id="password" 
                     ref="passphrase"
                     key="passphrase"
-                    type={passInputType} 
+                    type={passInputType}
+                    defaultValue={debugPassword}
                     onChange={this.handlePassphraseChange}
                     onKeyDown={this.handleKeyDownPass}
                     />

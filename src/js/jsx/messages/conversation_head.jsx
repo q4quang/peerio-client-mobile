@@ -10,28 +10,45 @@
             this.setState({open: !this.state.open});
         },
         openInfo: function () {
-            this.transitionTo('conversation_info', {id: this.props.conversationID});
+            this.transitionTo('conversation_info', {id: this.props.conversation.id});
         },
         render: function () {
-            var counter = this.props.allParticipantsCount - 1;
-            if (this.props.activeParticipantsCount !== this.props.allParticipantsCount) {
-                counter = this.props.activeParticipantsCount - 1 + '/' + counter;
-            }
+            var c = this.props.conversation;
+            var counter = c.exParticipantsArr.length
+                ? c.participants.length + '/' + (c.participants.length + c.exParticipantsArr.length)
+                : c.participants.length;
+
+            var participants = c.participants.map(function (username) {
+                return (
+                    <div key={username}>
+                        <Peerio.UI.Avatar username={username}/>
+                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername')}
+                    </div>
+                );
+            });
+            c.exParticipantsArr.forEach(function (username) {
+                participants.push(
+                    <div key={username} className='former-participant'>
+                        <Peerio.UI.Avatar username={username}/>
+                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername')}
+                    </div>
+                );
+            });
             return (
                 <Peerio.UI.Tappable onTap={this.toggle}>
-                <div id="conversation-head">
-                <div
-                className={'participants' + (this.state.open ? ' open' : '')}>{this.props.participants}</div>
+                    <div id="conversation-head">
+                        <div
+                            className={'participants' + (this.state.open ? ' open' : '')}>{participants}</div>
 
-                <div className="counter">
-                <i className="fa fa-users"></i> {counter}
-                </div>
-                <Peerio.UI.Tappable onTap={this.openInfo}>
-                <i className="info fa fa-info-circle"></i>
-                </Peerio.UI.Tappable>
+                        <div className="counter">
+                            <i className="fa fa-users"></i> {counter}
+                        </div>
+                        <Peerio.UI.Tappable onTap={this.openInfo}>
+                            <i className="info fa fa-info-circle"></i>
+                        </Peerio.UI.Tappable>
 
-                <div className="subject">{this.props.subject}</div>
-                </div>
+                        <div className="subject">{c.subject}</div>
+                    </div>
                 </Peerio.UI.Tappable>
             );
         }

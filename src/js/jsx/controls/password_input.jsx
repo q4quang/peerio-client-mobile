@@ -5,8 +5,9 @@
         mixins: [Peerio.UI.AutoFocusMixin],
 
         render: function () {
+
            return (
-               <input 
+            <input
                    {...this.props}
                    maxLength="256" 
                    autoComplete="off" 
@@ -14,7 +15,7 @@
                    autoCapitalize="off"
                    spellCheck="false"/>
            );
-        },
+        }
     });
 
 }());
