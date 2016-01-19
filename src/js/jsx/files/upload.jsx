@@ -13,7 +13,7 @@
                         })
                         .catch(function (err) {
                             Peerio.Action.showAlert({text: 'Upload failed. ' + err});
-                        })
+                        });
                 })
                 // this catch handles user cancel on confirm/prompt
                 .catch(()=> {
@@ -25,6 +25,7 @@
         },
         promptForFileName: function (fileUrl) {
             var fileExtension = Peerio.Helpers.getFileExtension(fileUrl);
+            fileExtension = fileExtension ? fileExtension : 'jpg';
             var fileName = Peerio.Helpers.getFileNameWithoutExtension(fileUrl);
             return Peerio.UI.Prompt.show({
                     text: 'Enter filename:',
@@ -35,7 +36,7 @@
                     return {
                         fileUrl: fileUrl,
                         fileName: fileName + '.' + fileExtension
-                    }
+                    };
                 });
         },
         confirmFileSize: function (fileUrl) {

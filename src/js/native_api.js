@@ -209,10 +209,9 @@ Peerio.NativeAPI.init = function () {
         if (!isCameraAvailable()) return Promise.reject();
 
         return new Promise(function (resolve, reject) {
+            camera ? 
             navigator.camera.getPicture(resolve, reject, {
-                // please, don't change properties without (re)reading docs on them first and testing result afterwards.
-                // yes, Anri, especially you!
-                sourceType: camera ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
+                sourceType: Camera.PictureSourceType.CAMERA,
                 destinationType: Camera.DestinationType.FILE_URI,
                 encodingType: Camera.EncodingType.JPEG,
                 mediaType: Camera.MediaType.ALLMEDIA,
@@ -221,6 +220,10 @@ Peerio.NativeAPI.init = function () {
                 correctOrientation: true,
                 saveToPhotoAlbum: false,
                 quality: 90
+            }) : navigator.camera.getPicture(resolve, reject, {
+                sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                destinationType: Camera.DestinationType.FILE_URI,
+                encodingType: Camera.EncodingType.JPEG
             });
         });
     };
