@@ -1,0 +1,42 @@
+// this style sheet might belong elsewhere. all need to evalutate class naming. - paul
+
+.pin-pad {
+  @extend .flex-col;
+
+  top: 0;
+  position: fixed;
+  background: color(p-blue-light-5);
+  z-index: 1;
+  padding: $padding-base;
+}
+
+.pin-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid $white-30;
+  margin: 8px;
+
+  &.active {
+    background: $white-100;
+  }
+}
+
+.number-key,
+.pin-pad-key {
+  min-height: 72px;
+  min-width: 72px;
+
+  text-align: center;
+  margin: $margin-small;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-key {
+  border: $border-light;
+  border-radius: $radius-circle;
+  font-size: 22px;
+}

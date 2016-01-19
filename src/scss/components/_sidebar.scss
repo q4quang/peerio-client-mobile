@@ -32,7 +32,7 @@ Click the sidebar in the example to toggle the `.open` state.
   z-index: $z-sidebar;
   transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
   transform: translate3d(-101%, 0, 0);
-  width: 80%;
+  width: calc(100% - 56px);
   top: $navbar-height;
   bottom: 0;
   background-color: color(sidebar-bg-color);
@@ -42,12 +42,6 @@ Click the sidebar in the example to toggle the `.open` state.
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-
-  .sidebar-header,
-  .sidebar-menu,
-  .app-version {
-    padding: 0 $padding-base;
-  }
 
   .sidebar-header{
     margin: 0px;
@@ -84,17 +78,10 @@ Click the sidebar in the example to toggle the `.open` state.
     }
   }
 
-  .subhead {
-    border: none;
-    height: 48px;
-    line-height: 48px;
-    text-transform: capitalize;
-    margin: 0;
-  }
-
   .app-version{
     position: static;
     margin-bottom: $margin-small;
+    padding: 0 $padding-base;
   }
 
   .avatar{
@@ -128,24 +115,11 @@ Click the sidebar in the example to toggle the `.open` state.
   }
 
   ul{
-    list-style: none;
-    padding:0;
-    margin:0 0 $margin-small;
 
     &:not(:last-of-type) {
       border-bottom: $border-light;
     }
-    li {
-      height: 48px;
-      line-height: 48px;
-      font-weight: 100;
 
-      i.fa {
-        margin-right: $margin-base;
-        width: 24px;
-        text-align: center;
-      }
-    }
   }
 
   .sign-out {

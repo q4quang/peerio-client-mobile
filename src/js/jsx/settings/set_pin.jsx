@@ -51,17 +51,17 @@
         render: function () {
             var pinUI = '';
             var header = !!this.props.hideHeader ? null : (
-                <div className="info-label">Device passcode</div>
+                <div className="headline">Device passcode</div>
             );
             var setPinButton = !this.state.inProgress && this.pinIsSane() ? (
                 <Peerio.UI.Tappable
                     element="div"
-                    className="btn-primary"
+                    className="btn-safe"
                     onTap={this.setDevicePin}>Set device passcode</Peerio.UI.Tappable>
             ) : null;
             if (Peerio.user.PINIsSet) {
                 pinUI =
-                    (<div>
+                    (<div className="buttons">
                         <Peerio.UI.Tappable
                             element="div"
                             className="btn-danger"
@@ -69,31 +69,34 @@
                     </div>);
             } else {
                 pinUI =
-                    (<div className="flex-col flex-justify-center">
-                        <p className="info-small italic">
+                    (<div className="input-group flex-col flex-justify-center">
+                        <label>
                             Passcode must be 6 digits or longer
-                        </p>
+                        </label>
                         <input className="text-center"
                                type="password" required="required" ref="textEdit"
                                placeholder="Enter a device passcode"
                                pattern="[0-9]*"
                                value={this.state.newPin}
                                inputmode="numeric"
-                               onChange={this.newPinChange}
-                        />
-                        {setPinButton}
+                               onChange={this.newPinChange}/>
                     </div>);
             }
 
             return (
-                <div className="content-padded without-tab-bar">
+                <div className="content without-tab-bar">
                     {header}
                     <Peerio.UI.TalkativeProgress
                         enabled={this.state.inProgress}
                         showSpin="true"
                     />
+
                     {pinUI}
+                    <div className="buttons">
+                      {setPinButton}
+                    </div>
                 </div>
+
             );
         }
     });

@@ -187,25 +187,24 @@
         },
         //--- RENDER
         render: function () {
-            var eyeIcon = 'fa-' + (this.state.passphraseVisible ? 'eye-slash' : 'eye');
+            var eyeIcon = this.state.passphraseVisible ? 'visibility_off' : 'visibility';
             var debugUserName = window.PeerioDebug ? window.PeerioDebug.user : '';
             var debugPassword = window.PeerioDebug ? window.PeerioDebug.pass : '';
             var passInputType = this.state.passphraseVisible ? 'text' : 'password';
 
-            var passInput = this.state.isPin ? (
-                <Peerio.UI.PinInput 
-                    id="password" 
+            var passInput = !window.PeerioDebug && this.state.isPin ? (
+                <Peerio.UI.PinInput
+                    id="password"
                     ref="passphrase"
                     key="passphrase"
                     onChange={this.handlePassphraseChange}
                     onKeyDown={this.handleKeyDownPass}
                     data-password={!this.state.passphraseVisible ? 'yes': 'no'}
                     autoFocus
-                    defaultValue={debugUserName}
-                    />
+                    defaultValue={debugUserName}/>
             ) : (
-                <Peerio.UI.PasswordInput 
-                    id="password" 
+                <Peerio.UI.PasswordInput
+                    id="password"
                     ref="passphrase"
                     key="passphrase"
                     type={passInputType}
@@ -237,8 +236,8 @@
                                     </Peerio.UI.Tappable>)
                                     :
                                     (<div className="login-input">
-                                        <label htmlFor="username">username</label>
-                                        <div className="input-group flex-row">
+                                        <div className="input-group">
+                                            <label htmlFor="username">username</label>
                                             <input defaultValue={debugUserName} id="username" ref="username"
                                                 onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
                                                 autoComplete="off" autoCorrect="off" autoCapitalize="off"
@@ -247,33 +246,36 @@
                                     </div>)
                                 }
                                 <div className="login-input">
-                                    <label htmlFor="password">
-                                        {this.state.isPin ? 'passcode' : 'passphrase or passcode'}
-                                    </label>
-                                    <div className="input-group flex-row">
-                                        {passInput}
-                                        <Peerio.UI.Tappable 
-                                            onTap={this.handlePassphraseShowTap} element="i"
-                                            className={'flex-shrink-0 fa ' + eyeIcon}>
-                                        </Peerio.UI.Tappable>
-                                    </div>
+                                      <div className="input-group">
+                                          <label htmlFor="password">
+                                              {this.state.isPin ? 'passcode' : 'passphrase or passcode'}
+                                          </label>
+                                          <div className="input-control">
+                                              {passInput}
+                                               <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap} element="i"
+                                                   className='flex-shrink-0 material-icons'> {eyeIcon}
+                                               </Peerio.UI.Tappable>
+                                          </div>
+                                      </div>
                                 </div>
                                 <div id="login-process-state">
                                     <Peerio.UI.TalkativeProgress
                                         enabled={this.state.waitingForLogin}/>
                                 </div>
-                                <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-safe width-full"
-                                                    onTap={this.handleSubmit}>
-                                    {this.state.waitingForLogin ?
-                                        <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
-                                </Peerio.UI.Tappable>
+                                <div className="buttons">
+                                    <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-safe"
+                                                        onTap={this.handleSubmit}>
+                                        {this.state.waitingForLogin ?
+                                            <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
+                                    </Peerio.UI.Tappable>
 
-                                {this.state.waitingForLogin
-                                    ? null
-                                    : (<Peerio.UI.Tappable element="div" className="btn width-full"
-                                                           onTap={this.transitionTo.bind(this,'signup')}>
-                                    sign up
-                                </Peerio.UI.Tappable>)}
+                                    {this.state.waitingForLogin
+                                        ? null
+                                        : (<Peerio.UI.Tappable element="div" className="btn-primary"
+                                                               onTap={this.transitionTo.bind(this,'signup')}>
+                                        sign up
+                                    </Peerio.UI.Tappable>)}
+                                </div>
                                 {/*
                                  <div className="input-group">
                                  <label className="info-label col-4" htmlFor="language-select">Language:</label>

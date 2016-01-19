@@ -106,8 +106,12 @@ The only difference between the three are whether they have one or two button an
     padding: 24px;
     flex-grow: 1;
 
-    .headline-lrg {
+    .headline{
+      padding: 0;
       margin-bottom: 20px;
+    }
+    p {
+      padding: 0
     }
   }
   .alert-btns {

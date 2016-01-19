@@ -129,8 +129,8 @@
 
             return (
                 <div>
-                    <div className="without-tab-bar content-padded">
-                        <div className="headline-lrg">Profile</div>
+                    <div className="without-tab-bar content">
+                        <div className="headline">Profile</div>
                         <div className="flex-col flex-justify-center">
                             <div className="input-group">
                                 <label htmlFor="first-name">First Name</label>
@@ -162,9 +162,11 @@
                                 <div className="info-label">Your public key:</div>
                                 <span className="text-mono col-8 col-first">{ Peerio.user.publicKey }</span>
                             </div>
-                            <Peerio.UI.Tappable className="btn-danger" onTap={ this.deleteAccount }>
-                              delete your account
-                            </Peerio.UI.Tappable>
+                            <div className="buttons">
+                              <Peerio.UI.Tappable className="btn-danger" onTap={ this.deleteAccount }>
+                                delete your account
+                              </Peerio.UI.Tappable>
+                            </div>
 
                         </div>
                     </div>

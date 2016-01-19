@@ -13,7 +13,7 @@
                         })
                         .catch(function (err) {
                             Peerio.Action.showAlert({text: 'Upload failed. ' + err});
-                        })
+                        });
                 })
                 // this catch handles user cancel on confirm/prompt
                 .catch(()=> {
@@ -25,6 +25,7 @@
         },
         promptForFileName: function (fileUrl) {
             var fileExtension = Peerio.Helpers.getFileExtension(fileUrl);
+            fileExtension = fileExtension ? fileExtension : 'jpg';
             var fileName = Peerio.Helpers.getFileNameWithoutExtension(fileUrl);
             return Peerio.UI.Prompt.show({
                     text: 'Enter filename:',
@@ -35,7 +36,7 @@
                     return {
                         fileUrl: fileUrl,
                         fileName: fileName + '.' + fileExtension
-                    }
+                    };
                 });
         },
         confirmFileSize: function (fileUrl) {
@@ -57,16 +58,18 @@
         render: function () {
             return (
                 <div className="modal item-select flex-col flex-justify-center">
-                    <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture} className="btn-primary">
-                        <i className="fa fa-th"></i> Pick from photo library
-                    </Peerio.UI.Tappable>
-                    <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture.bind(this,true)}
-                                        className="btn-primary">
-                        <i className="fa fa-camera-retro"></i> Take a new picture
-                    </Peerio.UI.Tappable>
-                    <Peerio.UI.Tappable element="div" onTap={this.props.onClose} className="btn-dark">
-                        <i className="fa fa-times"></i> Cancel
-                    </Peerio.UI.Tappable>
+                    <div className="buttons">
+                        <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture} className="btn-primary">
+                            <i className="material-icons">photo_library</i> Pick from photo library
+                        </Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture.bind(this,true)}
+                                            className="btn-primary">
+                            <i className="material-icons">photo_camera</i> Take a new picture
+                        </Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" onTap={this.props.onClose} className="btn-dark">
+                            <i className="material-icons">close</i> Cancel
+                        </Peerio.UI.Tappable>
+                    </div>
                 </div>
             );
 

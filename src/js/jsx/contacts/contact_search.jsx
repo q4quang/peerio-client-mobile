@@ -105,10 +105,10 @@
             }
 
             return (
-                <div className="content-padded without-tab-bar">
+                <div className="content without-tab-bar">
                     <div className="flex-col flex-justify-start">
 
-                    <h1 className="headline-lrg">Contact Search</h1>
+                    <div className="headline">Contact Search</div>
                     <div className="input-group">
                       {
                         // NOTE: maybe clear the search on a null return - paul
@@ -116,7 +116,7 @@
                         <input type="search" placeholder="email/username/phone" ref="searchInput"/>
                     </div>
                     <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
-                        <i className="fa fa-search"></i> Search again
+                        <i className="material-icons">search</i> Search again
                     </Peerio.UI.Tappable>
                     <div className="list-view">
                         {resultNode}

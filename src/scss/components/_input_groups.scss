@@ -34,24 +34,23 @@ A row of inputs or selects should be wrapped in `.flex-row`.
 // TODO update docs
 
 .input-group {
-  @extend .width-full;
-
   position: relative;
   // TODO: fix this.
-  // Some input groups grow into a list. Re work how these items build or rework out the styling works.
+  // Some input groups grow into a list. Rework how these items build or rework how the styling works.
   // ex. Addresses field in Profile
   min-height: 72px;
   padding: $padding-base 0 $padding-small;
+  margin: 0 $margin-base;
 }
-
+// this is when you have a row of inputs
 .flex-row {
   .input-group {
     margin: 0 #{$margin-small/2};
     &:first-child {
-      margin-left: 0;
+      margin-left: $margin-base;
     }
     &:last-child {
-      margin-right: 0;
+      margin-right: $margin-base;
     }
   }
 }

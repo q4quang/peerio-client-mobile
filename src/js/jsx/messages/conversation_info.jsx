@@ -33,10 +33,8 @@
             if (!c) return <Peerio.UI.FullViewSpinner/>;
 
             return (
-                <div className="content-padded">
-
-                    <h1 className="headline">{c.subject}</h1>
-
+                <div className="content">
+                    <div className="headline">{cc.subject}</div>
                     <div className="subhead">
                         <span className="icon-with-label"><i
                             className="fa fa-calendar-o"/> {c.createdMoment.format('L')}</span>

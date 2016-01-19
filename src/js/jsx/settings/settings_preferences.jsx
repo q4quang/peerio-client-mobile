@@ -74,42 +74,41 @@
         },
         render: function(){
             return (
-                <div className="content-padded without-tab-bar">
-                    <div className="info-label">Notifications</div>
-                    <p className="radio-input-group">
-                        <p>You will only get notifications on your primary address (email or phone).</p>
-                        <p>
-                            <Peerio.UI.Tappable key='notify-new-message' onTap={this.setNotifyNewMessage}>
-                                <span className="col-10">
-                                    Notify me of new messages:</span>
-                                <span type="checkbox" className={this.state.notifyNewMessage
-                                    ? 'checkbox-input checked': 'checkbox-input'}></span>
-                            </Peerio.UI.Tappable>
-                        </p>
-                        <p>
-                            <Peerio.UI.Tappable key='notify-new-contact' onTap={this.setNotifyNewContact}>
-                                <span className="col-10">
-                                    Notify me when I receive a contact request:</span>
-                                <span type="checkbox" className={this.state.notifyNewContact
-                                    ? 'checkbox-input checked': 'checkbox-input'}></span>
-                            </Peerio.UI.Tappable>
-                        </p>
-                        <p>
-                            <Peerio.UI.Tappable key='notify-new-contact-request' onTap={this.setNotifyNewContactRequest}>
-                                <span className="col-10">
-                                    Notify me when invites I send are accepted:</span>
-                                <span type="checkbox" className={this.state.notifyContactRequest
-                                    ? 'checkbox-input checked': 'checkbox-input'}></span>
-                            </Peerio.UI.Tappable>
-                        </p>
-                    </p>
-                    <div className="info-label">Touch ID</div>
+                <div className="content without-tab-bar">
+                    <div className="headline">Preferences</div>
+                    <div className="subhead">Notifications</div>
+                    <ul>
+                        <Peerio.UI.Tappable key='notify-new-message'
+                                            element="li"
+                                            className="flex-row"
+                                            onTap={this.setNotifyNewMessage}>
+                            <div type="checkbox" className={this.state.notifyNewMessage
+                                ? 'checkbox-input checked': 'checkbox-input'}></div>
+                              <div>You receive a new message</div>
+                        </Peerio.UI.Tappable>
+
+                        <Peerio.UI.Tappable key='notify-new-contact'
+                                            element="li"
+                                            className="flex-row"
+                                            onTap={this.setNotifyNewContact}>
+                            <div type="checkbox" className={this.state.notifyNewContact
+                                ? 'checkbox-input checked': 'checkbox-input'}></div>
+                              <div>You receive a contact request</div>
+                        </Peerio.UI.Tappable>
+
+                        <Peerio.UI.Tappable key='notify-new-contact-request'
+                                            element="li"
+                                            className="flex-row"
+                                            onTap={this.setNotifyNewContactRequest}>
+                            <div type="checkbox" className={this.state.notifyContactRequest
+                                ? 'checkbox-input checked': 'checkbox-input'}></div>
+                              <div>Your invite is accepted</div>
+                        </Peerio.UI.Tappable>
+
+                        <li className="caption" style={{height:'64px'}}>You will only recieve notifications on your primary address (email or phone).</li>
+                    </ul>
+                    <div className="subhead">Touch ID</div>
                     <Peerio.UI.TouchId/>
-                    <br/>
-                    <div className="info-label">Device PIN</div>
-                    <div className="text-input-group col-12">
-                        <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.setDevicePin}>Set/remove device PIN</Peerio.UI.Tappable>
-                    </div>
                     <RouteHandler/>
                 </div>
             );

@@ -23,7 +23,7 @@
     }
   }
 
-  .content-padded {
+  .content {
       background: transparent;
       position: static;
       top: auto; left: auto; right: auto; bottom: auto;
@@ -35,21 +35,42 @@
   width: 100%;
   color: $white-100;
   margin-bottom: $margin-base;
+
   // text or passphrase
   .input-group{
-    width: 100%;
-    background-color: color(p-blue-light-5);
-    min-height: 48px;
-    padding: 0;
+    // stying for inputs with controls.
+    // TODO: move to input group styling.
+    input {
+      background-color: color(p-blue-light-5);
+      min-height: 48px;
+      border-radius: $radius-default;
+    }
+
+    .input-control {
+      input {
+        border-radius: $radius-left;
+      }
+
+      @extend .flex-row;
+
+      i {
+        background-color: color(p-blue-light-5);
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
+        font-size: 20px;
+        text-align: center;
+        border-radius: $radius-right;
+      }
+
+    }
   }
   input {
     width: 100%;
-    margin: $margin-small;
-    padding: 0;
+    padding: 0 $padding-small;
     background: transparent;
     border: none;
     border-radius: 0;
-    font-size: 16px;
     font-weight: 100;
     transition: all $speed-normal ease;
     &:focus {
@@ -59,18 +80,8 @@
   }
   label {
     display: block;
-    width: 80%;
-    font-size: 1.2rem;
+    font-size: 14px;
     font-variant: small-caps;
-    color: color(p-blue-light-40);
-  }
-  // "show passphrase" button
-  // padding helps to trigger touch event better
-  i {
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-    font-size: 20px;
-    text-align: center;
+    color: $white-70;
   }
 }

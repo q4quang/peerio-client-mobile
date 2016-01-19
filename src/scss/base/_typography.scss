@@ -25,11 +25,11 @@ Text Style                                                                  | cl
 <div class="centered-text">centered text</div>                              | `centered-text`
 
 ```html_example
-<h1 class="headline-lrg">Headline with a subhead</h1>
+<div class="headline-lrg">Headline with a subhead</div>
 <h2 class="subhead">subhead</h2>
 
-<h1 class="headline-md">Headline with inline-subhead</h1>
-<h1 class="subhead-inline">Inline subheads are very small</h1>
+<div class="headline-md">Headline with inline-subhead</div>
+<div class="subhead-inline">Inline subheads are very small</div>
 ```
 
 */
@@ -41,55 +41,61 @@ Text Style                                                                  | cl
 
 */
 
-.headline{
+.headline {
   display: block;
   margin: 0;
-  padding: 0;
-  line-height: 1.2em;
+  padding: $padding-small $padding-base;
   font-size: 1.5rem;
   font-weight: 100;
 }
 
-.headline-sm{
+.headline-sm {
   @extend .headline;
   font-size: 1.1rem;
   margin-bottom: 0.5em;
 }
 
-.headline-md{
+.headline-md {
   @extend .headline;
   font-size: 1.2rem;
   //margin-bottom: 0.5em;
 }
 
-.headline-lrg{
+.headline-lrg {
   @extend .headline;
   font-size: 1.6rem;
 }
-.headline-sub{
+.headline-sub {
   @extend .headline;
   font-weight: bold;
   font-size: 0.9em;
   text-transform: uppercase;
 }
 
-.subhead{
-  font-weight: 400;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  margin: 0.2em 0;
-  border-bottom: $border-dark;
-  padding-bottom: 5px;
-  opacity: 0.6;
+.subhead {
+  font-weight: 300;
+  font-size: 14px;
+  height: 48px;
+  line-height: 48px;
+  padding-left: $padding-base;
+  text-transform: capitalize;
+  color: $black-54;
+
+}
+
+.subhead-light {
+  @extend .subhead;
+  color: $white-70;
 }
 
 .subhead-inline{
-  font-weight: bold;
   font-size: 0.7em;
+  font-weight: bold;
+
   text-transform: uppercase;
 }
 
-.txt-lrg{
+.txt-lrg {
   display: block;
   font-size: 1.5rem;
   z-index: 1;
@@ -98,16 +104,18 @@ Text Style                                                                  | cl
   width: 100%;
   font-weight: 800;
   -webkit-user-select: text;
-  user-select: text;//to make text copy/paste-able
+  user-select: text; //to make text copy/paste-able
 }
-.txt-sm{
+
+.txt-sm {
   font-size: 0.9em;
 }
 .centered-text{
   text-align: center;
   margin-bottom: 1rem;
 }
-.info-label{
+
+.info-label {
   display: block;
   text-transform: uppercase;
   font-size: 0.8rem;
@@ -115,28 +123,30 @@ Text Style                                                                  | cl
   line-height: 1.5em;
   font-weight: 600;
 }
-.info-small{
+
+.info-small {
   font-weight: 200;
   font-size: 0.9rem;
   line-height: 1.2em;
-  .fa{
+
+  .fa {
     margin-right: 0.5em;
   }
 }
 
-.text-mono{
+.text-mono {
   @include ellipses();
-  
+
   font-family: monospace;
   font-size:0.8em;
 }
 
-.text-crossout{
+.text-crossout {
   opacity: 0.6;
   text-decoration: line-through;
 }
 
-.line-across{
+.line-across {
   display: flex;
   justify-content: center;
   color: inherit;
@@ -144,11 +154,10 @@ Text Style                                                                  | cl
   margin-bottom: 0.5em;
   &:before, &:after{
     content: " ";
-    border-bottom: 1px solid;
+    border-bottom: $border-dark;
     flex-grow: 1;
     align-self: center;
-    margin:0 10px;
-    opacity: 0.15;
+    margin:0 $margin-base;
   }
 }
 
@@ -172,11 +181,17 @@ Text Style                                                                  | cl
   margin: 0px 1rem;
 }
 
-.no-border {
+.no-border,
+.no-border:focus {
     border: 0;
 }
 
 .red-bold {
     color: rgb(255, 114, 114);
     font-weight: 600;
+}
+
+.caption {
+  font-size: 12px;
+  color: $black-38;
 }

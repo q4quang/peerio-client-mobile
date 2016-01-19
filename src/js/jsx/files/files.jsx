@@ -47,8 +47,8 @@
                     var u = file.uploadState;
                     uploadNodes.push(
                         <div className="list-item">
-                            <i className="list-item-thumb file-type fa fa-cloud-upload"></i>
-                            <div className="list-item-content">
+                            <i className="list-item-thumb file-type material-icons">cloud_upload</i>
+                          <div className="list-item-content">
                                 <div
                                     className="list-item-title"><i
                                     className="fa fa-circle-o-notch fa-spin"></i> {u.stateName} {u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''}
@@ -65,7 +65,7 @@
                         <div className="content-intro">
                             <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
 
-                            <h1 className="headline-lrg">Peerio File Storage!</h1>
+                            <div className="headline">Peerio File Storage!</div>
 
                             <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
                             <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}}
@@ -141,17 +141,17 @@
                                   className="list-item-swipe-wrapper">
                     <i className={item.icon}></i>
 
-                    <div className="list-item-content">
+                    <div className="list-item-content flex-col flex-justify-center">
                         <div className="list-item-title">{cacheState} {this.props.item.name}</div>
                         <div
                             className="list-item-description">{this.props.item.humanSize} &bull; {timestamp}</div>
                         {downloadStateNode}
                     </div>
                     <div className="list-item-forward">
-                        <i className="fa fa-chevron-right"></i>
+                        <i className="material-icons">chevron_right</i>
                     </div>
                     <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
-                        <i className="fa fa-trash-o"></i>
+                        <i className="material-icons">delete</i>
                     </Peerio.UI.Tappable>
                 </Peerio.UI.Swiper>
             </Peerio.UI.Tappable>);

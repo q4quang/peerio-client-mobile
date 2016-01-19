@@ -1,44 +1,43 @@
 .sync {
-  background-color: color(p-blue-dark-10);
-  color: white;
-}
+  background-color: color(p-blue);
+  color: $white-100;
+  z-index: 10;
 
-.sync-logo {
-  width: 90%;
-  margin: 0 auto 80px auto;
+  position: absolute;
+  top: 0;
+
 }
 
 .sync-title {
-  margin-bottom: 30px;
+  margin-bottom: #{$margin-base * 2};
 }
 
 .sync-info-icon {
-  font-size: 2em;
-  opacity: 0.5;
-  width:4.5em;
+  font-size: 44px;
+  color: $white-70;
+  width:44px;
+  height: 44px;
+  padding: 2px;
+  margin-right: $margin-small;
 }
 
 .sync-info {
-  padding: 3px 15px 3px 10px;
-  background-color: color(p-blue-dark-5);
+  padding: $padding-base $padding-base 20px;
+  background-color: color(p-blue-dark-10);
   display: flex;
-}
-
-.sync-info-text {
-  opacity: .8;
 }
 
 .sync-progress-caption {
   width: 100%;
   text-align: center;
-  margin: 45px 0 5px;
+  margin: #{$margin-base * 2} 0 $margin-small;
 }
 
 .sync-progress {
   width: 100%;
-  height: 20px;
+  height: 32px;
   background-color: color(p-blue-dark-5);
-  margin-bottom: 50px;
+  margin-bottom: #{$margin-base * 4};
   animation: progress-bg-animation 2s cubic-bezier(0, 0.64, 0.32, 0.9) infinite;
 }
 
@@ -50,7 +49,7 @@
           color(p-blue-light-20) 75%, color(p-blue-light-10) 75%,
           color(p-blue-light-10) 100%);
   animation: progress-animation 3s linear infinite;
-  background-size: 40px 40px;
+  background-size: 24px 24px;
 }
 
 @keyframes progress-animation {
@@ -58,7 +57,7 @@
     background-position: 0;
   }
   to {
-    background-position: 40px;
+    background-position: 64px;
   }
 }
 @keyframes progress-bg-animation {

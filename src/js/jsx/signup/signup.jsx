@@ -221,7 +221,7 @@
         },
         renderStep0: function (authMethod) {
             return (<fieldset key={'signup-step-0'} className="animate-enter">
-                          <h1 className="headline-lrg">Basic Information</h1>
+                          <div className="headline">Basic Information</div>
 
                           <div className="input-group">
                               {(this.state.usernameValid === null || this.state.usernameValid === true)
@@ -274,7 +274,7 @@
                           <div className="flex-row">
                               <Peerio.UI.Tappable element='div' className="btn-back"
                                   onTap={this.handlePreviousStep}><i
-                                      className="fa fa-chevron-left"></i>back
+                                      className="material-icons">chevron_left</i>back
                               </Peerio.UI.Tappable>
 
                               {this.state.usernameValid === true && this.state.firstNameValid && this.state.lastNameValid
@@ -286,7 +286,7 @@
         },
         renderStep1: function () {
             return ( <fieldset key={'signup-step-1'}>
-                <h1 className="headline-lrg">Your Passphrase</h1>
+                <div className="headline">Your Passphrase</div>
 
                 <p className='info'>This is your secure randomly generated passphrase. If you lose it, you
                     will <strong>permanently</strong> lose access to your account.</p>
@@ -295,7 +295,7 @@
                     {this.state.passphrase}
                 </p>
                 <div className="flex-row">
-                    <div className="input-group">
+                    <div className="input-group flex-grow-1">
                         <label>Language</label>
                         <select ref="lang" onChange={this.generatePassphrase}>
                             <option value="en">English</option>
@@ -324,21 +324,21 @@
                         </select>
                     </div>
                 </div>
-
-                <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.showModal}> I'll remember my
-                    passphrase</Peerio.UI.Tappable>
-                  <Peerio.UI.Tappable element='div' className="btn-dark" onTap={this.generatePassphrase}> I don't like
-                    this passphrase</Peerio.UI.Tappable>
-
-                <Peerio.UI.Tappable element='div' className="btn-back" onTap={this.handlePreviousStep}><i
-                        className="fa fa-chevron-left"></i>back
-                </Peerio.UI.Tappable>
+                <div className="buttons">
+                  <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.showModal}> I'll remember my
+                      passphrase</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element='div' className="btn-dark" onTap={this.generatePassphrase}> I don't like
+                      this passphrase</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element='div' className="btn-back" onTap={this.handlePreviousStep}><i
+                            className="material-icons">chevron_left</i>back
+                    </Peerio.UI.Tappable>
+                </div>
 
             </fieldset>);
         },
         renderStep3: function () {
             return (  <fieldset key={'signup-step-3'}>
-                <h1 className="headline-lrg">Set a device passcode</h1>
+                <div className="headline">Set a device passcode</div>
 
                 <p> Instead of entering your passphrase each time you login, you can set a shorter passcode for this
                     device.

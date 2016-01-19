@@ -25,7 +25,7 @@
                                    className="radio-label"></label>
                         </div>
                         <div className="col-2 text-center">
-                            <i className="fa fa-trash-o" onClick={removeAddress.bind(this, address.value)}/>
+                            <i className="material-icons" onClick={removeAddress.bind(this, address.value)}>delete</i>
                         </div>
                     </div>
 

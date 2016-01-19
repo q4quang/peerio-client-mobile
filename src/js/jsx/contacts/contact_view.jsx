@@ -100,39 +100,41 @@
 
 
             return (
-                <div className="content-padded contact-view">
+                <div className="content contact-view without-tab-bar">
+                    <ul className="flex-list">
+                        <li>
+                            <div className="flex-row">
+                                <Peerio.UI.Avatar size="big" username={this.contact.username}
+                                                  className="contact-view-avatar"/>
 
-                    <div className="col-2 col-first">
-                        <Peerio.UI.Avatar size="big" username={this.contact.username}
-                                          className="contact-view-avatar"/>
+                                <div className="flex-col">
+                                    <div className="headline">{this.contact.fullName}</div>
+                                    <div
+                                        className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(You)' : ''}</div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <label>Public Key</label>
+                            <div className="text-mono width-full">{this.contact.publicKey}</div>
+                        </li>
+
+                        <li>
+                            <label>State:</label>
+                            <div>{status}</div>
+                        </li>
+
+                        <li>
+                            <label>Primary address:</label>
+                            <div>{this.contact.primaryAddress || 'N/A'}</div>
+                        </li>
+
+                    </ul>
+
+                    <div className="buttons">
+                      {buttons}
                     </div>
-                    <div className="col-10">
-                        <span className="headline">{this.contact.fullName}</span>
-                        <span
-                            className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(You)' : ''}</span>
-                    </div>
-                    <hr />
-
-                    <div className="info-blocks">
-
-                        <div className="info-block">
-                            <div className="info-label">Public Key</div>
-                            <div className="text-mono">{this.contact.publicKey}</div>
-                        </div>
-
-                        <div className="info-block">
-                            <div className="info-label">State:</div>
-                            <div className="width-full info-content">{status}</div>
-                        </div>
-
-                        <div className="info-block">
-                            <div className="info-label">Primary address:</div>
-                            <div className="width-full info-content">{this.contact.primaryAddress || 'N/A'}</div>
-                        </div>
-
-                    </div>
-
-                    <div className="flex-col flex-justify-start">{buttons}</div>
 
                 </div>
             );

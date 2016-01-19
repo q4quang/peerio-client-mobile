@@ -98,6 +98,63 @@ a 'swipe to delete' action.
 
 $list-item-height: 70px;
 
+ul {
+  padding: 0;
+  margin: $margin-small 0 0;
+  list-style: none;
+
+  &.flex-list {
+    li {
+      @extend .flex-col;
+      @extend .flex-align-start;
+
+      height: auto;
+      padding: $padding-small $padding-base;
+
+      label {
+        margin-bottom: #{$margin-small/2};
+      }
+    }
+  }
+}
+
+li {
+  @extend .flex-row;
+  @extend .flex-align-center;
+
+  font-size: 16px;
+  height: 48px;
+  padding: 0 $padding-base;
+
+  //with avatar,icon, checkbox,etc text should start at 72px from the left
+  // TODO add styles for multi line list items
+
+  .checkbox-input,
+  .avatar {
+    &:first-child {
+      margin-right: 32px;
+    }
+  }
+
+  .headline {
+    padding: 0;
+  }
+
+  .checkbox-input:last-child {
+    margin-left: 16px;
+  }
+
+  i {
+      margin-right: #{$margin-base * 2};
+      width: 24px;
+      text-align: center;
+
+      &:last-child {
+        margin: 0 0 0 auto;
+      }
+  }
+}
+
 .list-view {
   transform: translate3d(0,0,0);
   display: flex;
@@ -171,20 +228,13 @@ $list-item-height: 70px;
       text-align: center;
       align-self: center;
 
-      .avatar {
-        height: 29px;
-        width: 29px;
-        line-height: 8px;
-        font-size: 16px;
-        margin-right: $margin-base;
-      }
     }
 
     .list-item-forward {
       flex: 0 0 20px;
       text-align: center;
       align-self: center;
-      padding-left: $padding-small;
+
       .fa-chevron-right {
         opacity: 0.4;
       }
@@ -204,6 +254,10 @@ $list-item-height: 70px;
       justify-content: center;
       font-size: 24px;
       overflow: hidden;
+
+      > i:only-child {
+        margin: 0 auto;
+      }
     }
 
     .download {

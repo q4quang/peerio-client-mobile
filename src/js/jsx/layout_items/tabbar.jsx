@@ -22,17 +22,17 @@
                 <div id="tabbar">
                     <Peerio.UI.TabBarButton text="Messages" active={tab === 'messages'}
                                             onActivate={this.transitionTo.bind(this, 'messages')}
-                                            icon="comments-o"
+                                            icon="forum"
                                             showBadge={Peerio.user.unreadState.conversations}/>
 
                     <Peerio.UI.TabBarButton text="Files" active={tab === 'files'}
                                             onActivate={this.transitionTo.bind(this, 'files')}
-                                            icon="files-o"
+                                            icon="insert_drive_file"
                                             showBadge={Peerio.user.unreadState.files}/>
 
                     <Peerio.UI.TabBarButton text="Contacts" active={tab === 'contacts'}
                                             onActivate={this.transitionTo.bind(this, 'contacts')}
-                                            icon="users"
+                                            icon="people"
                                             showBadge={Peerio.user.unreadState.contacts}/>
 
                 </div>
@@ -62,7 +62,7 @@
 
             return (
                 <Peerio.UI.Tappable element="div" ref="tab" className={tabClasses} onTap={this.onTabTap}>
-                    <i className={'tab-icon fa fa-'+this.props.icon}></i>
+                    <i className="tab-icon material-icons">{this.props.icon}</i>
                     {this.props.text}
                     <i className={badgeClasses}></i>
                 </Peerio.UI.Tappable>

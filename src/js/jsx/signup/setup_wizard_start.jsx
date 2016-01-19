@@ -7,7 +7,7 @@
         render: function () {
            return (
                 <div>
-                    <h1 className="headline-lrg text-center">Welcome to Peerio!</h1>
+                    <div className="headline text-center">Welcome to Peerio!</div>
                     <p className="info-small text-center">Let's get started.</p>
                 </div>
             );
