@@ -48,7 +48,7 @@
                     uploadNodes.push(
                         <div className="list-item">
                             <i className="list-item-thumb file-type fa fa-cloud-upload"></i>
-                            <div className="list-item-content">
+                          <div className="list-item-content">
                                 <div
                                     className="list-item-title"><i
                                     className="fa fa-circle-o-notch fa-spin"></i> {u.stateName} {u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''}
@@ -141,7 +141,7 @@
                                   className="list-item-swipe-wrapper">
                     <i className={item.icon}></i>
 
-                    <div className="list-item-content">
+                    <div className="list-item-content flex-col flex-justify-center">
                         <div className="list-item-title">{cacheState} {this.props.item.name}</div>
                         <div
                             className="list-item-description">{this.props.item.humanSize} &bull; {timestamp}</div>

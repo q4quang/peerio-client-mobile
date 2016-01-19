@@ -66,19 +66,20 @@
             if (!file.icon) file.icon = 'list-item-thumb file-type fa fa-' + H.getFileIconByName(file.name) + (file.cached ? ' cached' : '');
             if (!file.humanSize) file.humanSize = H.bytesToSize(file.size);
 
-            var sender = file.sender ? (<div className="info-row">
+            var sender = file.sender ? (
+              <li>
                 <label>Shared by</label>
                 <div className="info-content">{file.sender}</div>
-            </div>) : null;
+              </li>) : null;
             var downloadStateNode = null, buttonsNode = null;
             if (file.downloadState) {
                 var ds = file.downloadState;
                 downloadStateNode = (<div className="info-banner">{ds.stateName} {ds.percent}</div>);
             } else {
                 buttonsNode = (
-                    <div className="flex-col flex-justify-center">
+                    <div className="buttons">
                         {file.cached ? <div className="btn-safe" onTouchEnd={this.handleOpen}>Open</div>
-                            : <div className="btn-md btn-safe" onTouchEnd={this.handleDownload}><i
+                            : <div className="btn-safe" onTouchEnd={this.handleDownload}><i
                             className="fa fa-cloud-download"> </i>Download</div>}
 
                         {file.cached ?
@@ -99,53 +100,50 @@
             // TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
 
             return (
-                <div className="content">
-                    <div className="head">
-                        <div className="col-1 col-first">
+                <div className="content without-tab-bar">
+                    <ul>
+                        <li>
                             <i className={'file-type fa fa-' + file.icon}></i>
-                        </div>
-                        <div className="col-11">
-              <span className="headline-md">
-                {file.name}
-              </span>
-                        </div>
-                    </div>
+                            <div className="headline-md">
+                              {file.name}
 
-                    // TODO: update markup and remove info-table styling
-                    <div className="info-table">
-                        <div className="info-row">
+                            </div>
+                        </li>
+                    </ul>
+                    <ul className="flex-list">
+                        <li>
                             <label>File Name</label>
                             <div className="info-content">{file.name}</div>
-                        </div>
-
-                        <div className="info-row">
+                        </li>
+                        <li>
                             <label>File Size</label>
                             <div className="info-content">{file.humanSize}</div>
-                        </div>
+                        </li>
 
-                        <div className="info-row">
+                        <li>
                             <label>File Type</label>
                             <div className="info-content">{Peerio.Helpers.getFileTypeByName(file.name)}</div>
-                        </div>
+                        </li>
 
-                        <div className="info-row">
+                        <li>
                             <label>Location</label>
                             <div
                                 className="info-content">{file.cached ? 'On this device and in the cloud' : 'In the cloud'}</div>
-                        </div>
-                        <div className="info-row">
+                        </li>
+                        <li>
                             <label>Owner</label>
-                            <div
-                                className="info-content">{file.creator === Peerio.user.username ? 'You' : file.creator}</div>
-                        </div>
-                        <div className="info-row">
+                            <div className="info-content">
+                                {file.creator === Peerio.user.username ? 'You' : file.creator}
+                            </div>
+                        </li>
+                        <li>
                             <label>Uploaded at</label>
                             <div className="info-content">{new Date(file.timestamp).toLocaleString()}</div>
-                        </div>
+                          </li>
 
                         {sender}
 
-                    </div>
+                    </ul>
 
                     {downloadStateNode || buttonsNode}
 
