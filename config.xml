@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="100006" id="com.peerio" ios-CFBundleVersion="27" version="1.9.1">
+<widget android-versionCode="100006" id="com.peerio"  version="1.10.0">
     <name>Peerio</name>
     <description>
         Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end
@@ -93,7 +93,6 @@
     <plugin name="cordova-plugin-camera" spec="~2" />
     <plugin name="cordova-plugin-whitelist" spec="*" />
     <plugin name="cordova-plugin-email" spec="~1" />
-    <plugin name="nl.x-services.plugins.insomnia" spec="~4" />
     <plugin name="io.litehelpers.cordova.sqlcipher" spec="https://github.com/litehelpers/Cordova-sqlcipher-adapter" />
     <plugin name="phonegap-plugin-push" spec="~1" />
     <plugin name="cordova-plugin-safariviewcontroller" spec="~1" />
@@ -104,6 +103,7 @@
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
+    <plugin name="nl.x-services.plugins.insomnia" spec="~4.0.1" />
     <plugin name="com.telerik.plugins.wkwebview" spec="~0.6.7">
         <variable name="WKWEBVIEW_SERVER_PORT" value="53741" />
     </plugin>
