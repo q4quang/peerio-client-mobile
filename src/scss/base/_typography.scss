@@ -44,8 +44,7 @@ Text Style                                                                  | cl
 .headline {
   display: block;
   margin: 0;
-  padding: $padding-base;
-  line-height: 1.2em;
+  padding: $padding-small $padding-base;
   font-size: 1.5rem;
   font-weight: 100;
 }

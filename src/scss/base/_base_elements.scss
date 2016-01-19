@@ -85,7 +85,7 @@ textarea {
     margin: 0;
   }
 
-  &[ata-password="yes"] {
+  &[data-password="yes"] {
     -webkit-text-security: disc;
   }
 }
