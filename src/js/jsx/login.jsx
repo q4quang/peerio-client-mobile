@@ -192,7 +192,7 @@
             var debugPassword = window.PeerioDebug ? window.PeerioDebug.pass : '';
             var passInputType = this.state.passphraseVisible ? 'text' : 'password';
 
-            var passInput = this.state.isPin ? (
+            var passInput = !window.PeerioDebug && this.state.isPin ? (
                 <Peerio.UI.PinInput
                     id="password"
                     ref="passphrase"
