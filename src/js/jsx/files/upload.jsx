@@ -58,16 +58,16 @@
         render: function () {
             return (
                 <div className="modal item-select flex-col flex-justify-center">
-                    <div className="buttons"> 
+                    <div className="buttons">
                         <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture} className="btn-primary">
-                            <i className="fa fa-th"></i> Pick from photo library
+                            <i className="material-icons">photo_library</i> Pick from photo library
                         </Peerio.UI.Tappable>
                         <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture.bind(this,true)}
                                             className="btn-primary">
-                            <i className="fa fa-camera-retro"></i> Take a new picture
+                            <i className="material-icons">photo_camera</i> Take a new picture
                         </Peerio.UI.Tappable>
                         <Peerio.UI.Tappable element="div" onTap={this.props.onClose} className="btn-dark">
-                            <i className="fa fa-times"></i> Cancel
+                            <i className="material-icons">close</i> Cancel
                         </Peerio.UI.Tappable>
                     </div>
                 </div>

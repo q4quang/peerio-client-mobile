@@ -75,7 +75,7 @@ Footer Buttons                                       | Button Class/ID
 .btn {
   @include button-ripple;
   padding: 0 $padding-small;
-  display: inline-block;
+  display: inline-block;;
   font-size: 14px;
   text-align: center;
   margin: $margin-small;
@@ -87,6 +87,10 @@ Footer Buttons                                       | Button Class/ID
   line-height: 36px;
   text-transform: uppercase;
   cursor: pointer;
+
+  span {
+    vertical-align: top;
+  }
 
   i:first-child {
     margin-right: $margin-small;

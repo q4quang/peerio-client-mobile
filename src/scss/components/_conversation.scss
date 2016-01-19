@@ -88,7 +88,7 @@ $avatar-size: 29px;
         white-space: nowrap;
         overflow: hidden;
         color: color(meta-text-dark);
-        padding: 8px;
+        padding: $padding-small;
         background-color: color(message-other-bg-file);;
 
         margin-top: 3px;
@@ -131,7 +131,7 @@ $avatar-size: 29px;
       position: absolute;
       left: 15px;
       top: -7px;
-      background-color: white;
+      background-color: $white-100;
     }
 
     &.self {

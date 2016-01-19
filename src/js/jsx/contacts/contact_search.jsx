@@ -116,7 +116,7 @@
                         <input type="search" placeholder="email/username/phone" ref="searchInput"/>
                     </div>
                     <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
-                        <i className="fa fa-search"></i> Search again
+                        <i className="material-icons">search</i> Search again
                     </Peerio.UI.Tappable>
                     <div className="list-view">
                         {resultNode}

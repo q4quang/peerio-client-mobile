@@ -87,11 +87,11 @@
                         </div>
 
                         <div className="list-item-forward">
-                            <i className="fa fa-chevron-right"></i>
+                            <i className="material-icons">chevron_right</i>
                         </div>
 
                         <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
-                            <i className="fa fa-trash-o"></i>
+                            <i className="material-icons">delete</i>
                         </Peerio.UI.Tappable>
 
                     </Peerio.UI.Swiper>

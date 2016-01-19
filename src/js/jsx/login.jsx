@@ -187,7 +187,7 @@
         },
         //--- RENDER
         render: function () {
-            var eyeIcon = 'fa-' + (this.state.passphraseVisible ? 'eye-slash' : 'eye');
+            var eyeIcon = this.state.passphraseVisible ? 'visibility_off' : 'visibility';
             var debugUserName = window.PeerioDebug ? window.PeerioDebug.user : '';
             var debugPassword = window.PeerioDebug ? window.PeerioDebug.pass : '';
             var passInputType = this.state.passphraseVisible ? 'text' : 'password';
@@ -253,7 +253,7 @@
                                           <div className="input-control">
                                               {passInput}
                                                <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap} element="i"
-                                                   className={'flex-shrink-0 fa ' + eyeIcon}>
+                                                   className='flex-shrink-0 material-icons'> {eyeIcon}
                                                </Peerio.UI.Tappable>
                                           </div>
                                       </div>

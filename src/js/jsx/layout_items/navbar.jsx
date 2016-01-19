@@ -38,7 +38,7 @@
       return (
         <div id="navbar" className="flex-row flex-align-center">
           <div id="sidemenu-toggle" ref="toggle" onTouchStart={this.handleSidebarToggle}>
-            <i className="fa fa-bars"></i>
+            <i className="material-icons">menu</i>
           </div>
           <div className="logo" onTouchStart={devmode.summon}>
               <img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/>
@@ -49,7 +49,7 @@
 
             <div id="app-lock">
               <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>
-                <i className="fa fa-pencil-square-o"></i>
+                <i className="material-icons">edit</i>
               </Peerio.UI.Tappable>
             </div>
 
