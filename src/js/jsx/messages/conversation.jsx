@@ -20,34 +20,39 @@
                 .catch(err => {
                     Peerio.Action.showAlert({text: 'Failed to load conversation'});
                     L.error('Failed to load conversation. {0}', err);
+                    this.goBack();
                 });
         },
         componentDidMount: function () {
-
-            // Peerio.Messages.markAsRead(this.state.conversation);
-
             this.subscriptions = [
                 Peerio.Dispatcher.onBigGreenButton(this.reply),
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
-                Peerio.Dispatcher.onConversationsUpdated(this.handleMessagesUpdated),
+                Peerio.Dispatcher.onConversationsUpdated(this.handleConversationsUpdated),
                 Peerio.Dispatcher.onKeyboardDidShow(() => this.refs.content.scrollToBottom())
             ];
 
             // to update relative timestamps
             this.renderInterval = window.setInterval(this.forceUpdate.bind(this), 20000);
-
+            //this.markAsRead();
         },
         componentWillUnmount: function () {
             window.clearInterval(this.renderInterval);
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         componentDidUpdate: function () {
-//            this.scrollToBottom();
+            if(this.state.conversation) this.markAsRead();
         },
         //----- CUSTOM FN
-        handleMessagesUpdated: function (data) {
+        markAsRead: _.throttle(function () {
+            var item = this.refs.content && this.refs.content.getLastItem();
+            if (!item) return;
+
+            this.state.conversation.markAsRead(item.seqID);
+        }, 1000),
+        handleConversationsUpdated: function (data) {
             if (data.updated && (data.updated.length === 0 || data.updated.indexOf(this.props.params.id) != -1)) {
-                this.refs.content.loadNextPage(true);
+                this.state.conversation.loadReadPositions()
+                    .then(()=>this.refs.content.loadNextPage(true));
 //                this.refs.content.refresh(()=>this.scrollToBottom());
             }
             if (data.deleted) {
@@ -115,9 +120,9 @@
         },
         disableIfLastParticipant: function () {
             // If I'm the only one who has left in this conversation
-            if (this.state.conversation.participants.length === 1) {
+            if (this.state.conversation.participants.length === 0) {
                 // But there were other people before
-                if (this.state.conversation.exParticipants.length > 0) {
+                if (this.state.conversation.exParticipantsArr.length > 0) {
                     // then disable reply
                     this.setState({
                         textEntryDisabled: true,
@@ -154,46 +159,21 @@
         render: function () {
             // todo: loading state
             if (!this.state.conversation) return <Peerio.UI.FullViewSpinner/>;
-            // todo: more sophisticated logic for sending receipts, involving scrolling message into view detection
-            // todo: also not trying to send receipts that were already sent?
-            //Peerio.Data.sendReceipts(this.props.conversationID);
             var conversation = this.state.conversation;
-            var participants = conversation.participants.map(function (username) {
-                if (username === Peerio.user.username) return null;
-                return (
-                    <div key={username}>
-                        <Peerio.UI.Avatar username={username}/>
-                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername')}
-                    </div>
-                );
-            });
-            conversation.exParticipants.forEach(function (item) {
-                participants.push(
-                    <div key={item.u} className='former-participant'>
-                        <Peerio.UI.Avatar username={item.u}/>
-                        {Peerio.user.contacts.getPropValByKey(item.u, 'fullNameAndUsername')}
-                    </div>
-                );
-            });
 
             // note: reply has fixed positioning and should not be nested in .content,
             // this causes unwanted scroll when typing into text box
-            //TODO: textarea onfocus was set to scrollToBottom but was triggerred on every element focus 0_0
+            //TODO: textarea onfocus was set to scrollToBottom but was triggered on every element focus 0_0
             return (
                 <div>
-                    <Peerio.UI.ConversationHead
-                        subject={conversation.subject}
-                        participants={participants}
-                        activeParticipantsCount={conversation.participants.length}
-                        allParticipantsCount={conversation.participants.length+conversation.exParticipants.length}
-                        conversationID={conversation.id}/>
+                    <Peerio.UI.ConversationHead conversation={conversation}/>
 
                     <Peerio.UI.VScroll
                         onGetPage={this.getPage}
                         onGetPrevPage={this.getPrevPage}
                         onGetItemsRange={this.getItemsRange}
                         itemKeyName='id'
-                        itemComponent={Peerio.UI.ConversationItem}
+                        itemComponent={Peerio.UI.Message}
                         itemParentData={conversation}
                         className="content with-reply-box without-tab-bar conversation"
                         ref="content"

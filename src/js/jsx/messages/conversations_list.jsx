@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    Peerio.UI.Conversations = React.createClass({
+    Peerio.UI.ConversationsList = React.createClass({
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onConversationsUpdated(this.handleConversationsUpdated)
@@ -54,7 +54,7 @@
             return Peerio.Conversation.getPrevPage(lastSeqID, pageSize);
         },
 
-        getItemsRange: function(from, to){
+        getItemsRange: function (from, to) {
             return Peerio.Conversation.getRange(from, to);
         },
 
@@ -68,7 +68,7 @@
                     onGetPrevPage={this.getPrevPage}
                     onGetItemsRange={this.getItemsRange}
                     itemKeyName='id'
-                    itemComponent={Peerio.UI.ConversationsItem}/>)
+                    itemComponent={Peerio.UI.ConversationsListItem}/>)
                 : <Peerio.UI.ConversationsPlaceholder/>;
         }
     });

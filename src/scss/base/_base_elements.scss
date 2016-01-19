@@ -8,13 +8,12 @@ html {
   user-select: none;
 
   * {
-    ::-webkit-inner-spin-button,
-  [type=number]::-webkit-outer-spin-button {
-  }  -webkit-margin-collapse: separate;
+    -webkit-margin-collapse: separate;
     -webkit-overflow-scrolling: touch;
-    -webkit-tap-highlight-color: transparent; // for some Androids
+    -webkit-tap-highlight-color: rgba(0, 0 ,0 ,0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
 
- }
+  }
 }
 
 *,
@@ -78,6 +77,7 @@ textarea {
   box-sizing: border-box;
 }
 
+
 [type="number"] {
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
@@ -85,10 +85,11 @@ textarea {
     margin: 0;
   }
 
-  &[password] {
+  &[ata-password="yes"] {
     -webkit-text-security: disc;
   }
 }
+
 // styles placeholder content
 ::-webkit-input-placeholder {
   color: $black-54;
@@ -174,6 +175,5 @@ p {
   margin-top: .2em;
   padding: 0 $padding-base;
 }
-
 
 // universal components

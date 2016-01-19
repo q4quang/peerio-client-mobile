@@ -13,7 +13,7 @@ Peerio.NativeAPI.init = function () {
     'use strict';
 
     var api = Peerio.NativeAPI;
-    delete Peerio.NativeAPI.init;
+    Peerio.NativeAPI.init = undefined;
 
     var cordova = window.cordova;
     var safariView = window.SafariViewController;
@@ -308,7 +308,7 @@ Peerio.NativeAPI.init = function () {
      * Sets badge number
      */
     api.setPushBadge = function (number) {
-        if(Peerio.runtime.platform != 'ios') {
+        if (Peerio.runtime.platform != 'ios') {
             L.info('setting badge number is only available on iOS (sorry!)');
             return;
         }

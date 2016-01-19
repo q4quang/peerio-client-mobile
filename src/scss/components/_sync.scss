@@ -1,10 +1,11 @@
 .sync {
   background-color: color(p-blue);
-  color: white;
+  color: $white-100;
   z-index: 10;
 
   position: absolute;
   top: 0;
+
 }
 
 .sync-title {

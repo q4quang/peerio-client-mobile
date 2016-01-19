@@ -18,7 +18,8 @@
             return {
                 passphraseVisible: false,
                 waitingForLogin: false,
-                loginError: false
+                loginError: false,
+                isPin: false
             };
         },
         componentWillMount: function () {
@@ -32,13 +33,18 @@
                 Peerio.Auth.getSavedLogin()
                 .then( (data) => {
                     this.setState({savedLogin: data});
-                    Peerio.UI.TouchId.hasTouchID(data.username)
+                    data && data.username && Peerio.UI.TouchId.hasTouchID(data.username)
                     .then( (hasTouchID) => {
                         hasTouchID && Peerio.UI.TouchId.getKeyPair(data.username)
                         .then( (keyPair) => {
                             this.keyPair = keyPair;
                             this.handleSubmit();
                         });
+                    });
+
+                    data && data.username && Peerio.Auth.getPinForUser(data.username)
+                    .then( (pin) => {
+                        this.setState({ isPin: !!pin });
                     });
                 });
             }
@@ -109,7 +115,12 @@
                 // should override it as "bad credentials"
                 // maybe this should be done at server side
                 error.message = 'Bad credentials';
+
+                // maybe user entered wrong pin, so allow him
+                // to enter a passphrase
             }
+
+            this.setState( { isPin: false } );
 
             Peerio.Action.showAlert({text: 'Login failed. ' + (error ? (' Error message: ' + error.message) : '')});
         },
@@ -181,6 +192,28 @@
             var debugPassword = window.PeerioDebug ? window.PeerioDebug.pass : '';
             var passInputType = this.state.passphraseVisible ? 'text' : 'password';
 
+            var passInput = this.state.isPin ? (
+                <Peerio.UI.PinInput
+                    id="password"
+                    ref="passphrase"
+                    key="passphrase"
+                    onChange={this.handlePassphraseChange}
+                    onKeyDown={this.handleKeyDownPass}
+                    data-password={!this.state.passphraseVisible ? 'yes': 'no'}
+                    autoFocus
+                    defaultValue={debugUserName}/>
+            ) : (
+                <Peerio.UI.PasswordInput
+                    id="password"
+                    ref="passphrase"
+                    key="passphrase"
+                    type={passInputType}
+                    defaultValue={debugPassword}
+                    onChange={this.handlePassphraseChange}
+                    onKeyDown={this.handleKeyDownPass}
+                    />
+            );
+
             return (
                 <div>
                     <RouteHandler manual={true}/>
@@ -214,20 +247,16 @@
                                 }
                                 <div className="login-input">
                                       <div className="input-group">
-                                          <label htmlFor="password">passphrase or pin</label>
+                                          <label htmlFor="password">
+                                              {this.state.isPin ? 'passcode' : 'passphrase or passcode'}
+                                          </label>
                                           <div className="input-control">
-                                              <input defaultValue={debugPassword} id="password" ref="passphrase"
-                                                 key="passphrase"
-                                                 type={passInputType} onChange={this.handlePassphraseChange}
-                                                 onKeyDown={this.handleKeyDownPass}
-                                                 maxLength="256" autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                                                 spellCheck="false"/>
+                                              {passInput}
                                                <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap} element="i"
                                                    className={'flex-shrink-0 fa ' + eyeIcon}>
                                                </Peerio.UI.Tappable>
                                           </div>
                                       </div>
-
                                 </div>
                                 <div id="login-process-state">
                                     <Peerio.UI.TalkativeProgress
