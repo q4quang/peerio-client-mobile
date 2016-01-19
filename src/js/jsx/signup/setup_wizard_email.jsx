@@ -12,6 +12,7 @@
         render: function () {
            return (
                 <div>
+                    <div className="headline">Contact Info</div>
                   <p>Help your contacts find you on Peerio, receive notifications, and enable support services by adding your email address or phone number. </p>
                     <div className="input-group">
                         <label>Email Address / Phone Number</label>
