@@ -61,7 +61,7 @@
             ) : null;
             if (Peerio.user.PINIsSet) {
                 pinUI =
-                    (<div>
+                    (<div className="buttons">
                         <Peerio.UI.Tappable
                             element="div"
                             className="btn-danger"
@@ -90,8 +90,8 @@
                         enabled={this.state.inProgress}
                         showSpin="true"
                     />
-                    {pinUI}
 
+                    {pinUI}
                     <div className="buttons">
                       {setPinButton}
                     </div>
