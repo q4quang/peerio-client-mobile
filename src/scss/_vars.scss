@@ -1,12 +1,12 @@
 // TODO: divide in to separate var files.
-@import "colors";
+@import 'colors';
 
-$roboto-font-path:"../media/fonts/Roboto/" !default;
-$opensans-font-path:"../media/fonts/OpenSans/" !default;
+$roboto-font-path:'../media/fonts/Roboto/' !default;
+$opensans-font-path:'../media/fonts/OpenSans/' !default;
 
-$small-phone: "(max-width : 320px)" !default;
-$phone: "(max-width : 500px)" !default;
-$tablet: "(min-width : 501px)" !default;
+$small-phone: '(max-width : 320px)' !default;
+$phone: '(max-width : 500px)' !default;
+$tablet: '(min-width : 501px)' !default;
 
 $navbar-height: 56px;
 $navbar-font-size:20px;

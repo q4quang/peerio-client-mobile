@@ -5,16 +5,16 @@ $p-green: #95d583; // accent?
 
 // text colors
 $black: #000;
-$black-87: rgba($black, 0.87);
-$black-54: rgba($black, 0.54);
-$black-38: rgba($black, 0.38);
-$black-12: rgba($black, 0.12);
+$black-87: rgba($black, .87);
+$black-54: rgba($black, .54);
+$black-38: rgba($black, .38);
+$black-12: rgba($black, .12);
 
 $white: #fff;
 $white-100: rgba($white, 1);
-$white-70: rgba($white, 0.70);
-$white-30: rgba($white, 0.30);
-$white-12: rgba($white, 0.12);
+$white-70: rgba($white, .70);
+$white-30: rgba($white, .30);
+$white-12: rgba($white, .12);
 
 //  Less is more, we currently only use about 10 of the p-blues light and dark
 //  and 1 of the greens.
