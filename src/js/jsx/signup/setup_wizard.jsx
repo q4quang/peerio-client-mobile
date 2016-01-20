@@ -21,7 +21,7 @@
             ];
 
             this.stepButtons = [
-              'get started', 'next', 'almost done','finish'
+              'get started', 'skip', 'no thanks','finish'
             ];
         },
 

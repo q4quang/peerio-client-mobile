@@ -58,8 +58,9 @@ $buttons-height:120px;
     overflow-x: hidden;
     overflow-y: scroll;
   }
-  
+
   .buttons {
+    position: absolute;
     bottom: 0;
     background-color: #eee; // TODO create more colors for palatte
   }

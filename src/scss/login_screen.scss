@@ -7,6 +7,10 @@
   @extend .flex-col;
   justify-content: center;
   align-items: center;
+
+  .buttons {
+    position: absolute;
+  }
 }
 .app-version{
   color: $white-30;
