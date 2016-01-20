@@ -16,6 +16,7 @@
   border-radius: 50%;
   border: 1px solid $white-30;
   margin: 8px;
+  transition: background $speed-slow;
 
   &.active {
     background: $white-100;
@@ -36,6 +37,8 @@
 }
 
 .number-key {
+  @include round-ripple;
+  
   border: $border-light;
   border-radius: $radius-circle;
   font-size: 22px;
