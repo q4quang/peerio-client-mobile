@@ -30,6 +30,7 @@
         },
 
         newPinChange: function (event) {
+            if(event.target.value.length > Peerio.UI.PinInput.getPinLength()) return;
             this.setState({newPin: event.target.value});
         },
 
@@ -67,14 +68,15 @@
                             className="btn-danger"
                             onTap={this.removePIN}>Remove existing passcode</Peerio.UI.Tappable>
                     </div>);
-            } else {
+            } else if(!this.state.inProgress) {
                 pinUI =
                     (<div className="input-group flex-col flex-justify-center">
                         <label>
-                            Passcode must be 6 digits or longer
+                            Passcode must be 6 digits 
                         </label>
                         <input className="text-center"
-                               type="password" required="required" ref="textEdit"
+                               type="number" required="required" ref="textEdit"
+                               data-password="yes"
                                placeholder="Enter a device passcode"
                                pattern="[0-9]*"
                                value={this.state.newPin}

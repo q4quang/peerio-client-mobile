@@ -33,6 +33,7 @@
                 Peerio.Auth.getSavedLogin()
                 .then( (data) => {
                     this.setState({savedLogin: data});
+
                     data && data.username && Peerio.UI.TouchId.hasTouchID(data.username)
                     .then( (hasTouchID) => {
                         hasTouchID && Peerio.UI.TouchId.getKeyPair(data.username)
@@ -142,30 +143,45 @@
                     Math.min(width / (element.value.length * this.factor), this.maxFontSize),
                     this.minFontSize) + 'rem';
         },
+
+        handlePinChangeUser: function() {
+            this.setState( { isPin: false }, () => { 
+                this.setState({ savedLogin: null }); 
+            });
+        },
+
+        handlePinTouchID: function() {
+            this.setState( { isPin: false }, () => {
+            });
+        },
+
+        handlePinEnter: function(pin) {
+            this.setState( { isPin: false } );
+            this.handleSubmit(null, pin);
+        },
+
         // initiate login
-        handleSubmit: function (e) {
+        handleSubmit: function (e, passOrPin) {
             if (e) e.preventDefault();
 
             if (this.state.waitingForLogin) return;
             this.setState({waitingForLogin: true});
-            // getting login from input or from previously saved data
-            var userNode;
-            if (this.state.savedLogin) {
-                userNode = {value: this.state.savedLogin.username};
-            } else {
-                userNode = this.refs.username.getDOMNode();
-                userNode.blur();
-            }
 
-            // getting passphrase
-            var passNode = this.refs.passphrase.getDOMNode();
-            passNode.blur();
+            // getting username, if not provided
+            var userNode = this.refs.username ? this.refs.username.getDOMNode() : null;
+            userNode && userNode.blur();
+            // getting passphrase, if not provided in the args
+            var passNode = this.refs.passphrase ? this.refs.passphrase.getDOMNode() : null;
+            passNode && passNode.blur();
+
+            var userValue = userNode ? userNode.value : this.state.savedLogin.username;
+            var passValue = passNode ? passNode.value : passOrPin;
             // hiding software keyboard
             Peerio.NativeAPI.hideKeyboard();
             // TODO validate input
-            Peerio.user = Peerio.User.create(userNode.value);
+            Peerio.user = Peerio.User.create(userValue);
             Peerio.NativeAPI.preventSleep();
-            Peerio.user.login(passNode.value, this.keyPair)
+            Peerio.user.login(passValue, this.keyPair)
                 .then(this.handleLoginSuccess)
                 .catch(this.handleLoginFail)
                 .finally(Peerio.NativeAPI.allowSleep);
@@ -192,16 +208,12 @@
             var debugPassword = window.PeerioDebug ? window.PeerioDebug.pass : '';
             var passInputType = this.state.passphraseVisible ? 'text' : 'password';
 
-            var passInput = !window.PeerioDebug && this.state.isPin ? (
+            var passInput = /* !window.PeerioDebug && */ this.state.isPin ? (
                 <Peerio.UI.PinInput
-                    id="password"
-                    ref="passphrase"
-                    key="passphrase"
-                    onChange={this.handlePassphraseChange}
-                    onKeyDown={this.handleKeyDownPass}
-                    data-password={!this.state.passphraseVisible ? 'yes': 'no'}
-                    autoFocus
-                    defaultValue={debugUserName}/>
+                    onEnterPin={this.handlePinEnter}
+                    onChangeUser={this.handlePinChangeUser}
+                    onTouchID={this.handlePinTouchID}
+                    />
             ) : (
                 <Peerio.UI.PasswordInput
                     id="password"
@@ -227,7 +239,7 @@
                             <form className="loginForm" onSubmit={this.handleSubmit}>
                                 {this.state.savedLogin
                                     ?
-                                    (<Peerio.UI.Tappable element="div" className="saved-login"
+                                    (<Peerio.UI.Tappable ref="savedLogin" element="div" className="saved-login"
                                                          onTap={this.clearLogin}>{this.state.savedLogin.firstName || this.state.savedLogin.username}
                                         <div className="note">Welcome back.
                                             <br/>
