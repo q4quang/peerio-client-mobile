@@ -12,8 +12,8 @@
         render: function () {
            return (
                 <div>
-                    <p className="info-small">Setting a passcode allows you to login from this device without entering your passphrase.</p>
-                    <p className="info-small">Set a passcode?</p>
+                    <div className="headline">Set a passcode</div>
+                  <p>This allows you to login <strong>from this device</strong> without entering your passphrase.</p>
                     <Peerio.UI.SetPin hideHeader={true} {...this.props} autoFocus={true} focusDelay={1000}/>
                 </div>
             );
