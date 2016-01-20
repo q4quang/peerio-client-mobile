@@ -74,7 +74,7 @@
                              onTouchEnd={devmode.summon} />
 
                         <div className="sync-info">
-                            <div className="fa fa-info-circle sync-info-icon"></div>
+                            <div className="material-icons sync-info-icon">info_outline</div>
                             <div className="sync-info-text">
                                 For optimal experience and performance Peerio stores some of your encrypted data on your
                                 device. This may take a moment if you have a lot of messages.

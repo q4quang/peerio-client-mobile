@@ -47,12 +47,11 @@
     }
 
     .input-control {
+      @extend .flex-row;
+
       input {
         border-radius: $radius-left;
       }
-
-      @extend .flex-row;
-
       i {
         background-color: color(p-blue-light-5);
         width: 48px;
@@ -62,7 +61,6 @@
         text-align: center;
         border-radius: $radius-right;
       }
-
     }
   }
   input {
