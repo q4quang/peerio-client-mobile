@@ -78,13 +78,13 @@
             } else {
                 buttonsNode = (
                     <div className="buttons">
-                        {file.cached ? <div className="btn-safe" onTouchEnd={this.handleOpen}>Open</div>
-                            : <div className="btn-safe" onTouchEnd={this.handleDownload}><i
-                            className="fa fa-cloud-download"> </i>Download</div>}
+                      {file.cached ? <div className="btn-safe" onTouchEnd={this.handleOpen}>Open</div>
+                      : <div className="btn-safe" onTouchEnd={this.handleDownload}>
+                    <i className="material-icons">cloud_download</i>Download</div>}
 
                         {file.cached ?
                             <div className="btn-danger" onTouchEnd={this.handleRemoveLocal}><i
-                                className="fa fa-trash-o"></i>Remove from your device</div> : null }
+                                className="material-icons">delete</i>Remove from your device</div> : null }
 
                         {file.cached ?
                             <div className="btn-danger" onTouchEnd={this.handleRemove}>Remove from your device and cloud</div>

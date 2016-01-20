@@ -91,23 +91,23 @@
                                 <ul>
                                     <Peerio.UI.Tappable tag='li'
                                         onTap={this.toggleAndTransition.bind(this, 'set_pin')}>
-                                        <i className="fa fa-lock"/>
+                                        <i className="material-icons">lock</i>
                                         <span>{pinNode}</span>
                                     </Peerio.UI.Tappable>
                                     <Peerio.UI.Tappable tag='li'
                                         onTap={this.toggleAndTransition.bind(this, 'settings_2fa')}>
-                                        <i className="fa fa-mobile"/>
+                                        <i className="material-icons">smartphone</i>
                                         <span>{twoFactor}</span>
                                     </Peerio.UI.Tappable>
 
                                      <Peerio.UI.Tappable tag="li"
                                         onTap={this.toggleAndTransition.bind(this, 'account_settings')}>
-                                        <i className="fa fa-user"></i> Profile
+                                        <i className="material-icons">person</i> Profile
                                      </Peerio.UI.Tappable>
 
                                      <Peerio.UI.Tappable tag="li"
                                         onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
-                                        <i className="fa fa-cog"></i> Preferences
+                                        <i className="material-icons">settings</i> Preferences
                                      </Peerio.UI.Tappable>
 
                                      <Peerio.UI.Tappable tag="li"
@@ -120,7 +120,7 @@
                                 <ul>
                                     <Peerio.UI.Tappable element="li"
                                                         onTap={this.signOut}><i
-                                        className="fa fa-power-off"></i> Sign Out
+                                        className="material-icons">power_settings_new</i> Sign Out
                                     </Peerio.UI.Tappable>
                                 </ul>
                             </div>

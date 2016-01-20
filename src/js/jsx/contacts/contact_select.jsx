@@ -45,7 +45,7 @@
                                 <div className="headline">Peerio Contacts</div>
                                 <p>It looks like you have not added any contacts yet. Click below to get started.</p>
                                 <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.addContact}>
-                                  <i className="fa fa-user-plus"></i>Add a contact
+                                  <i className="material-icons">person_add</i>Add a contact
                                 </Peerio.UI.Tappable>
                                 <img src="media/img/contacts.png"/>
                               </div>);

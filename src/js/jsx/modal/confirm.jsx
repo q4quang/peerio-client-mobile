@@ -41,7 +41,7 @@
                         <div className="alert">
 
                             <div className="alert-content">
-                                <div className="headline" style={{display: !this.props.headline ? 'none;' : null}}>
+                                <div className="headline" style={{display: !this.props.headline ? 'none' : null}}>
                                     {this.props.headline}
                                 </div>
                                 <p>{text}</p>

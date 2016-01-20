@@ -43,9 +43,9 @@
                         <div className="list-item-title">{item.fullName}</div>
                         <div
                             className="list-item-description">{item.username} { item.isMe ? '(You)' : ''} { sentRequest ? '(invited)' : null } { receivedRequest ? '(requests authorization)' : null }</div>
-                        { receivedRequest ? <i className="fa fa-user-plus status"></i> : null }
+                          { receivedRequest ? <i className="material-icons status">person_add</i> : null }
                     </div>
-                    <i className="fa fa-chevron-right"></i>
+                    <i className="material-icons">chevron_right</i>
                 </Peerio.UI.Tappable>);
         },
         render: function () {
@@ -59,7 +59,7 @@
 
                     <p>Add a contact to send your first message.Click the button below to get started.</p>
                     <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.handleAddContact}>
-                        <i className="fa fa-pencil"></i> Add a contact
+                        <i className="material-icons">person_add</i> Add a contact
                     </Peerio.UI.Tappable>
                     <img src="media/img/contacts.png"/>
                 </div>;

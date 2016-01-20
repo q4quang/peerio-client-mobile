@@ -47,7 +47,7 @@
                     var u = file.uploadState;
                     uploadNodes.push(
                         <div className="list-item">
-                            <i className="list-item-thumb file-type fa fa-cloud-upload"></i>
+                            <i className="list-item-thumb file-type material-icons">cloud_upload</i>
                           <div className="list-item-content">
                                 <div
                                     className="list-item-title"><i
@@ -148,10 +148,10 @@
                         {downloadStateNode}
                     </div>
                     <div className="list-item-forward">
-                        <i className="fa fa-chevron-right"></i>
+                        <i className="material-icons">chevron_right</i>
                     </div>
                     <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
-                        <i className="fa fa-trash-o"></i>
+                        <i className="material-icons">delete</i>
                     </Peerio.UI.Tappable>
                 </Peerio.UI.Swiper>
             </Peerio.UI.Tappable>);

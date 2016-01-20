@@ -274,7 +274,7 @@
                           <div className="flex-row">
                               <Peerio.UI.Tappable element='div' className="btn-back"
                                   onTap={this.handlePreviousStep}><i
-                                      className="fa fa-chevron-left"></i>back
+                                      className="material-icons">chevron_left</i>back
                               </Peerio.UI.Tappable>
 
                               {this.state.usernameValid === true && this.state.firstNameValid && this.state.lastNameValid
@@ -330,7 +330,7 @@
                     <Peerio.UI.Tappable element='div' className="btn-dark" onTap={this.generatePassphrase}> I don't like
                       this passphrase</Peerio.UI.Tappable>
                     <Peerio.UI.Tappable element='div' className="btn-back" onTap={this.handlePreviousStep}><i
-                            className="fa fa-chevron-left"></i>back
+                            className="material-icons">chevron_left</i>back
                     </Peerio.UI.Tappable>
                 </div>
 

@@ -62,7 +62,7 @@
                             <div className="to">To:</div>
                             <div className="names">{r}</div>
                             <div className="add-btn">
-                                <i className="fa fa-list"></i>
+                                <i className="material-icons">list</i>
                 <span
                     className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
                             </div>
@@ -71,7 +71,7 @@
                             <input type="text" ref="subject" className="subject" placeholder="Subject"/>
 
                             <div className="attach-btn" onTouchEnd={this.openFileSelect}>
-                                <i className="fa fa-paperclip"></i>
+                                <i className="material-icons">attach_file</i>
                 <span
                     className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
                             </div>

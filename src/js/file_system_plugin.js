@@ -27,7 +27,9 @@ Peerio.FileSystemPlugin.init = function () {
         if (root) return Promise.resolve(root);
 
         return new Promise(function (resolve, reject) {
-            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) {
+            var dataDir = Peerio.runtime.platform === 'android'
+            ? cordova.file.externalDataDirectory : cordova.file.dataDirectory;
+            window.resolveLocalFileSystemURL(dataDir, function (dir) {
                 root = dir;
                 resolve(dir);
             }, reject);

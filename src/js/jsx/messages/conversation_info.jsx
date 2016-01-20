@@ -34,7 +34,7 @@
 
             return (
                 <div className="content">
-                    <div className="headline">{cc.subject}</div>
+                    <div className="headline">{c.subject}</div>
                     <div className="subhead">
                         <span className="icon-with-label"><i
                             className="fa fa-calendar-o"/> {c.createdMoment.format('L')}</span>

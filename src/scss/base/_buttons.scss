@@ -65,7 +65,10 @@ Footer Buttons                                       | Button Class/ID
 .buttons {
   @extend .flex-col;
 
-  position: absolute;
+  // TODO re-think styling -
+  //      positioning does nothing here, but is left and right are needed when
+  //      setting postion: absolute in specific screens (ex. login, file upload)
+
   left: 0;
   right: 0;
   padding: $padding-small;
@@ -75,7 +78,7 @@ Footer Buttons                                       | Button Class/ID
 .btn {
   @include button-ripple;
   padding: 0 $padding-small;
-  display: inline-block;
+  display: inline-block;;
   font-size: 14px;
   text-align: center;
   margin: $margin-small;
@@ -87,6 +90,10 @@ Footer Buttons                                       | Button Class/ID
   line-height: 36px;
   text-transform: uppercase;
   cursor: pointer;
+
+  span {
+    vertical-align: top;
+  }
 
   i:first-child {
     margin-right: $margin-small;

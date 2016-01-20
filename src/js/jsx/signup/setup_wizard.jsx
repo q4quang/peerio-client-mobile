@@ -19,6 +19,10 @@
                 Peerio.UI.SetupWizardEmail,
                 Peerio.UI.SetupWizardCoupon,
             ];
+
+            this.stepButtons = [
+              'get started', 'skip', 'no thanks','finish'
+            ];
         },
 
         componentWillUnmount: function () {
@@ -36,10 +40,18 @@
             var currentStep = React.createElement(
                 this.steps[this.state.activeStep], { key: 'step' + this.state.activeStep, onSuccess: this.handleNextStep });
             var button = (
-                <Peerio.UI.Tappable element='div' className="btn-safe"
-                    key={'next' + this.state.activeStep} onTap={this.handleNextStep}>
-                    next
-                </Peerio.UI.Tappable>
+                <div className="buttons">
+                  <Peerio.UI.Tappable element='div' className="btn-safe"
+                  key={'next' + this.state.activeStep} onTap={this.handleNextStep}>
+                  {this.stepButtons[this.state.activeStep]}
+                  </Peerio.UI.Tappable>
+
+                  <Peerio.UI.Tappable element='div' className='btn-primary'
+                    style={{display: this.steps[this.state.activeStep] === this.steps[this.steps.length - 1] ? 'none' : null }}
+                    onTap={this.transitionTo.bind(this, 'messages')}>
+                  {this.state.activeStep === 0 ? 'maybe later' : 'Exit'}
+                    </Peerio.UI.Tappable>
+                </div>
             );
             var progressBarSteps = [];
 
@@ -61,7 +73,6 @@
                                     transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
                                     <fieldset  key={'cont'+this.state.activeStep} className="flex-col">
                                         {currentStep}
-                                        <br/>
                                         {button}
                                     </fieldset>
                                 </ReactCSSTransitionGroup>
