@@ -34,14 +34,7 @@
                 .then( (data) => {
                     this.setState({savedLogin: data});
 
-                    data && data.username && Peerio.UI.TouchId.hasTouchID(data.username)
-                    .then( (hasTouchID) => {
-                        hasTouchID && Peerio.UI.TouchId.getKeyPair(data.username)
-                        .then( (keyPair) => {
-                            this.keyPair = keyPair;
-                            this.handleSubmit();
-                        });
-                    });
+                    this.invokeTouchID(data);
 
                     data && data.username && Peerio.Auth.getPinForUser(data.username)
                     .then( (pin) => {
@@ -50,9 +43,11 @@
                 });
             }
         },
+
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
+
         componentDidMount: function () {
             // we assume that autoLogin was set by
             // signup function. we want to show setup wizard
@@ -100,6 +95,7 @@
                 .finally(() => Peerio.NativeAPI.clearPushBadge());
             this.transitionTo(this.nextRoute);
         },
+
         handleLoginFail: function (error) {
             this.setState({waitingForLogin: false});
             // if we got a 2FA request
@@ -117,10 +113,10 @@
                 // maybe this should be done at server side
                 error.message = 'Bad credentials';
 
-                // maybe user entered wrong pin, so allow him
-                // to enter a passphrase
             }
 
+            // maybe user entered wrong pin, so allow him
+            // to enter a passphrase
             this.setState( { isPin: false } );
 
             Peerio.Action.showAlert({text: 'Login failed. ' + (error ? (' Error message: ' + error.message) : '')});
@@ -144,6 +140,20 @@
                     this.minFontSize) + 'rem';
         },
 
+        invokeTouchID: function(data) {
+            data && data.username && Peerio.UI.TouchId.hasTouchID(data.username)
+            .then( (hasTouchID) => {
+                if(hasTouchID) {
+                    this.setState( { isPin: false } );
+                    Peerio.UI.TouchId.getKeyPair(data.username)
+                    .then( (keyPair) => {
+                        this.keyPair = keyPair;
+                        this.handleSubmit();
+                    });
+                }
+            });
+        },
+
         handlePinChangeUser: function() {
             this.setState( { isPin: false }, () => { 
                 this.setState({ savedLogin: null }); 
@@ -151,8 +161,7 @@
         },
 
         handlePinTouchID: function() {
-            this.setState( { isPin: false }, () => {
-            });
+            this.invokeTouchID(this.state.savedLogin);
         },
 
         handlePinEnter: function(pin) {
