@@ -194,11 +194,11 @@ li {
       overflow: hidden;
 
       .list-item-title {
-        @include ellipses();
+        @extend .flex-row;
+        @extend .flex-align-center;
 
-        font-size: 0.95rem;
+        font-size: .95rem;
         font-weight: 600;
-        margin-bottom: 0.2em;
       }
 
       .list-item-sup{

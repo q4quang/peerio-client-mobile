@@ -46,16 +46,15 @@
                 Peerio.user.uploads.forEach(function (file) {
                     var u = file.uploadState;
                     uploadNodes.push(
-                        <div className="list-item">
-                            <i className="list-item-thumb file-type material-icons">cloud_upload</i>
+                        <li className="list-item">
+                          <i className="list-item-thumb file-type material-icons">cloud_upload</i>
                           <div className="list-item-content">
-                                <div
-                                    className="list-item-title"><i
-                                    className="fa fa-circle-o-notch fa-spin"></i> {u.stateName} {u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''}
+                            <div className="list-item-title">
+                            {u.stateName} {u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''} <i className="fa fa-circle-o-notch fa-spin"></i> 
                                 </div>
                                 <div className="list-item-description">{file.name}</div>
                             </div>
-                        </div>);
+                        </li>);
                 });
             }
             /* if there are no files show a placeholder instead */
@@ -116,7 +115,6 @@
             var cx = React.addons.classSet;
             var classes = cx({
                 'list-item': true,
-                'swiped': this.state.swiped,
                 'list-item-animation-leave': this.state.destroyAnimation
             });
 
@@ -132,30 +130,26 @@
                     </div>);
             }
 
-            var cacheState = item.cached ? <i className="fa fa-floppy-o p-blue-dark-10"> </i> : null;
+            var cacheState = item.cached ? <i className="material-icons p-blue-dark-10">save</i> : null;
 
             var timestamp = moment(item.timestamp).calendar();
 
             return (<Peerio.UI.Tappable element="li" className={classes} key={item.shortID} onTap={this.props.onTap}>
-                <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe}
-                                  className="list-item-swipe-wrapper">
-                    <i className={item.icon}></i>
 
-                    <div className="list-item-content flex-col flex-justify-center">
-                        <div className="list-item-title">{cacheState} {this.props.item.name}</div>
-                        <div
-                            className="list-item-description">{this.props.item.humanSize} &bull; {timestamp}</div>
+              <i className={item.icon}></i>
+
+              <div className="list-item-content flex-col flex-justify-center">
+                  <div className="list-item-title">
+                    <div className="text-overflow">{this.props.item.name}</div>
+                    {cacheState}
+                  </div>
+                    <div className="list-item-description">{this.props.item.humanSize} &bull; {timestamp}</div>
                         {downloadStateNode}
                     </div>
                     <div className="list-item-forward">
                         <i className="material-icons">chevron_right</i>
                     </div>
-                    <Peerio.UI.Tappable className="list-item-swipe-content" onTap={this.showDestroyDialog}>
-                        <i className="material-icons">delete</i>
-                    </Peerio.UI.Tappable>
-                </Peerio.UI.Swiper>
             </Peerio.UI.Tappable>);
-
         }
     });
 

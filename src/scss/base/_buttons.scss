@@ -182,14 +182,15 @@ button:disabled , .btn-disabled {
 .btn-global-action,
 #global-back {
   @include button-ripple;
+
   display: flex;
   flex: 1 1 auto;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding:0 $padding-base;
+  padding: 0 $padding-small;
   white-space: nowrap;
-  color:white;
+  color: $white-100;
   height: 48px;
   font-size: 14px;
   text-transform: uppercase;
@@ -207,11 +208,10 @@ button:disabled , .btn-disabled {
 #global-back {
   flex-grow: 0;
   justify-content: flex-start;
-  padding: 0 $padding-base;
   transition: background-color 100ms ease-in;
 
   &.on-touchstart {
-    background-color: #26384A;
+    background-color: $black-38;
   }
 
   &:only-child {
