@@ -38,8 +38,15 @@
 
 .number-key {
   @include round-ripple;
-  
+
   border: $border-light;
   border-radius: $radius-circle;
   font-size: 22px;
+}
+
+.shake {
+  animation: shake 0.82s cubic-bezier(.26, .59, .83, .5) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
