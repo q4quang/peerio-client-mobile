@@ -3,6 +3,18 @@
     // Main component, entry point for React app
     Peerio.UI.Root = React.createClass({
         componentWillMount: function () {
+            // TODO: fix plugin
+            // text inputs and text areas lose focus after initial keyboard show
+            // we have this bloody hack to fix it
+            Peerio.Dispatcher.onKeyboardDidShow( () => {
+                if(document.activeElement && !this.keyboardHack) {
+                    var activeElement = document.activeElement;
+                    window.setTimeout( () => activeElement.blur(), 0 );
+                    window.setTimeout( () => activeElement.focus(), 0 );
+                    this.keyboardHack = true;
+                    window.setTimeout( () => { this.keyboardHack = null; }, 1000 );
+                }
+            });
 
             Peerio.Dispatcher.onOnline( () => {
                 L.info('ONLINE event received from Navigator. Connecting socket. ');
