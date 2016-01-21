@@ -2,12 +2,26 @@
 
 .pin-pad {
   @extend .flex-col;
+  @extend .flex-justify-center;
 
   top: 0;
   position: fixed;
   background: color(p-blue-light-5);
   z-index: 1;
   padding: $padding-base;
+
+  #footer {
+    @extend .flex-justify-between;
+    background: transparent;
+  }
+}
+
+.pin-code {
+  @extend  .flex-justify-center;
+  @extend  .flex-row;
+  @extend  .flex-justify-center;
+
+  margin: $margin-base;
 }
 
 .pin-indicator {
@@ -25,8 +39,8 @@
 
 .number-key,
 .pin-pad-key {
-  min-height: 72px;
-  min-width: 72px;
+  height: 72px;
+  width: 72px;
 
   text-align: center;
   margin: $margin-small;
