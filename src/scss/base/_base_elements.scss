@@ -71,25 +71,24 @@ textarea {
   box-sizing: border-box;
   user-select: initial;
 }
-
-[type="search"] {
-  -webkit-appearance: none;
-  box-sizing: border-box;
-}
-
-
-[type="number"] {
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
+input{
+  &[type="search"] {
     -webkit-appearance: none;
-    margin: 0;
+    box-sizing: border-box;
   }
 
-  &[data-password="yes"] {
-    -webkit-text-security: disc;
+  &[type="number"] {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[data-password="yes"] {
+      -webkit-text-security: disc;
+    }
   }
 }
-
 // styles placeholder content
 ::-webkit-input-placeholder {
   color: $black-54;

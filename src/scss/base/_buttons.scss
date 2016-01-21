@@ -55,7 +55,7 @@ Footer Buttons                                       | Button Class/ID
 
   &.on-touchstart:after {
     background-size: 1000%;
-    transition: background-size 200ms ease-in, opacity 200ms ease-in 100ms;
+    transition: background-size $speed-normal ease-in, opacity $speed-fast ease-in 100ms;
     opacity: 0;
   }
 }
@@ -146,6 +146,22 @@ Footer Buttons                                       | Button Class/ID
 .btn-danger {
   @extend .btn;
   background-color:color(danger);
+}
+
+.btn-icon-stacked {
+  @include button-ripple;
+
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 0;
+  flex-direction: column;
+
+  label {
+    color: $white-70;
+  }
 }
 
 .btn-link.btn-danger {

@@ -62,7 +62,7 @@
                             <div className="to">To:</div>
                             <div className="names">{r}</div>
                             <div className="add-btn">
-                                <i className="material-icons">list</i>
+                                <i className="material-icons">person</i>
                 <span
                     className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
                             </div>

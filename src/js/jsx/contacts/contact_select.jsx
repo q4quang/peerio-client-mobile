@@ -54,15 +54,19 @@
 
       return (
         <div className="modal item-select">
-            <div className="subhead">
-            Select your recipients
+          <div className="subhead">
+          Select your recipients
           </div>
           <ul>
-            {contacts}
+          {contacts}
           </ul>
-          <div className="buttons flex-col">
-            <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.accept}>OK</Peerio.UI.Tappable>
-            <Peerio.UI.Tappable element="div" className="btn-dark" onTap={this.props.onClose}>Cancel</Peerio.UI.Tappable>
+          <div id="footer">
+            <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.accept}>
+              <i className="material-icons">person_add</i>
+              <label>Add Recipients</label></Peerio.UI.Tappable>
+            <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.props.onClose}>
+              <i className="material-icons">cancel</i>
+              <label>Cancel</label></Peerio.UI.Tappable>
           </div>
         </div>
       );
