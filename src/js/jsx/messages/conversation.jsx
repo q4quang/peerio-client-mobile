@@ -28,7 +28,15 @@
                 Peerio.Dispatcher.onBigGreenButton(this.reply),
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
                 Peerio.Dispatcher.onConversationsUpdated(this.handleConversationsUpdated),
-                Peerio.Dispatcher.onKeyboardDidShow(() => this.refs.content.scrollToBottom())
+                Peerio.Dispatcher.onKeyboardDidShow( () => {
+                    if(!this.keyboardHack) {
+                        window.setTimeout( () => this.refs.reply.getDOMNode().blur(), 0 );
+                        window.setTimeout( () => this.refs.reply.getDOMNode().focus(), 0 );
+                        this.keyboardHack = true;
+                    }
+                    window.setTimeout( () => { this.keyboardHack = null; }, 1000 );
+                    this.refs.content.scrollToBottom();
+                })
             ];
 
             // to update relative timestamps

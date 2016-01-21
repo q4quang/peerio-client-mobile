@@ -24,10 +24,10 @@ Peerio.NativeAPI.init = function () {
     document.addEventListener('backbutton', Peerio.Action.hardBackButton, true);
     document.addEventListener('menubutton', Peerio.Action.hardMenuButton, true);
     window.addEventListener('keyboardHeightWillChange', Peerio.Action.viewShrink, true);
-    // window.addEventListener('keyboardWillShow', Peerio.Action.keyboardWillShow, true);
-    window.addEventListener('native.keyboardshow', Peerio.Action.keyboardDidShow, true);
-    // window.addEventListener('keyboardWillHide', Peerio.Action.keyboardWillHide, true);
-    window.addEventListener('native.keyboardhide', Peerio.Action.keyboardDidHide, true);
+    window.addEventListener('keyboardWillShow', Peerio.Action.keyboardWillShow, true);
+    window.addEventListener('keyboardDidShow', Peerio.Action.keyboardDidShow, true);
+    window.addEventListener('keyboardWillHide', Peerio.Action.keyboardWillHide, true);
+    window.addEventListener('keyboardDidHide', Peerio.Action.keyboardDidHide, true);
 
     //-- PLUGIN AVAILABILITY TESTS -------------------------------------------------------------------------------------
     // we need separate tests because cordova plugins are not using the same (window.cordova.plugins)namespace
