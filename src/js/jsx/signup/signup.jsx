@@ -35,9 +35,9 @@
                 passphrase: '',
                 passphrase_reentered: '',
                 passphrase_valid: false,
-                firstNameValid: null,
+                firstNameValid: true,
                 firstName: '',
-                lastNameValid: null,
+                lastNameValid: true,
                 lastName: '',
                 activeModalID: null
             };
