@@ -80,7 +80,7 @@
     <engine name="ios" spec="~3.9.2" />
     <engine name="android" spec="~5.0.0" />
     <plugin name="cordova-open" spec="~1" />
-    <plugin name="cordova-plugin-keyboard" spec="master@https://github.com/cjpearson/cordova-plugin-keyboard" />
+    <plugin name="ionic-plugin-keyboard" />
     <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="~1" />
     <plugin name="cordova-plugin-appversion" spec="~1" />
     <plugin name="cordova-plugin-device" spec="~1" />
@@ -103,8 +103,8 @@
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
-    <plugin name="nl.x-services.plugins.insomnia" spec="~4.0.1" />
-    <plugin name="com.telerik.plugins.wkwebview" spec="~0.6.7">
+    <plugin name="cordova-plugin-insomnia" spec="~4.0.1" />
+    <plugin name="cordova-plugin-wkwebview" spec="~0.6.7">
         <variable name="WKWEBVIEW_SERVER_PORT" value="53741" />
     </plugin>
 </widget>

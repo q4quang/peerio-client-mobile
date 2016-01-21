@@ -219,6 +219,7 @@
 
             var passInput = /* !window.PeerioDebug && */ this.state.isPin ? (
                 <Peerio.UI.PinInput
+                    username={this.state.savedLogin.firstName || this.state.savedLogin.username}
                     onEnterPin={this.handlePinEnter}
                     onChangeUser={this.handlePinChangeUser}
                     onTouchID={this.handlePinTouchID}

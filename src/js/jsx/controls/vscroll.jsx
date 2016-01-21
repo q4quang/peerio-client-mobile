@@ -68,6 +68,8 @@
                         item.nextSibling && item.nextSibling.className == 'bottomScrollHook' ? item.nextSibling : item;
                     if (item) {
                         item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: 'smooth'});
+                        var greenButton = document.getElementById('greenButton');
+                        greenButton && greenButton.scrollIntoView(false, {behaviour: 'smooth'});
                     }
                 }
                 this.scrollIntoItem = null;
