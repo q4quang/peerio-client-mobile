@@ -127,7 +127,7 @@
 
                         <li>
                             <label>Primary address:</label>
-                            <div>{this.contact.primaryAddress || 'N/A'}</div>
+                            <div>{this.contact.address || 'N/A'}</div>
                         </li>
 
                     </ul>
