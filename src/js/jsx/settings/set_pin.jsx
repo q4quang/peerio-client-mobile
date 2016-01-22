@@ -13,7 +13,6 @@
 
         removePinModal: function () {
             Peerio.user.removePIN()
-                .then(()=>Peerio.Action.showAlert({text: 'Your passcode has been removed'}))
                 .catch(()=>Peerio.Action.showAlert({text: 'Failed to remove passcode'}))
                 .finally(()=>this.forceUpdate());
         },
@@ -26,7 +25,7 @@
         },
 
         pinIsSane: function () {
-            return this.state.newPin && this.state.newPin.length > 5;
+            return this.state.newPin && this.state.newPin.length === 6;
         },
 
         newPinChange: function (event) {
@@ -40,7 +39,6 @@
             var self = this;
             self.setState({inProgress: true});
             Peerio.user.setPIN(newPin)
-                .then(() => Peerio.UI.Alert.show({text: 'Your passcode is set'}) )
                 .then(() => {
                     if(this.props.onSuccess) this.props.onSuccess();
                 })
@@ -66,13 +64,13 @@
                         <Peerio.UI.Tappable
                             element="div"
                             className="btn-danger"
-                            onTap={this.removePIN}>Remove existing passcode</Peerio.UI.Tappable>
+                            onTap={this.removePIN}>Remove passcode</Peerio.UI.Tappable>
                     </div>);
             } else if(!this.state.inProgress) {
                 pinUI =
                     (<div className="input-group flex-col flex-justify-center">
                         <label>
-                            Passcode must be 6 digits 
+                            Passcode must be 6 digits
                         </label>
                         <input className="text-center"
                                type="number" required="required" ref="textEdit"
