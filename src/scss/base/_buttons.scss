@@ -67,16 +67,10 @@ Footer Buttons                                       | Button Class/ID
   }
 }
 
-// used for stacked full width buttons
+// wrapper used for full width buttons
 .buttons {
   @extend .flex-col;
 
-  // TODO re-think styling - paul
-  //      positioning does nothing here, but is left and right are needed when
-  //      setting postion: absolute in specific screens (ex. login, file upload)
-
-  left: 0;
-  right: 0;
   padding: $padding-small;
 }
 

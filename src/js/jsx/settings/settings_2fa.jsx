@@ -138,7 +138,7 @@
                                     {pasteMessage}
                                 </label>
                                 {this.state.code ? (
-                                    <input className="no-border width-full"
+                                    <input className="no-border text-center"
                                         ref="generatedCode"
                                         autoComplete="off" autoCorrect="off"
                                         autoCapitalize="off" spellCheck="false"
