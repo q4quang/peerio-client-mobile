@@ -9,23 +9,28 @@
   align-items: center;
 
   .buttons {
+    left: 0;
+    right: 0;
     position: absolute;
   }
 }
-.app-version{
+
+.app-version {
   color: $white-30;
   position: absolute;
   left: 8px;
   top: 4px;
   font-size: 12px;
 }
+
 .logo {
   display: block;
   width: 100%;
   margin: 0 auto 25px auto;
   padding: $padding-base $padding-base 0;
 }
-.saved-login{
+
+.saved-login {
   color: $white-100;
   background-color: #1d6ab5;
   margin: $margin-base 0;

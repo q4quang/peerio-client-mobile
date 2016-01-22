@@ -12,20 +12,21 @@
             var removeAddress = this.props.removeAddress;
 
             return <div>
-                     <div>
-                        <div className="col-8" onClick={this.setPrimaryAddress.bind(this, address.value)}>
-                            <span className="text-mono">{address.value}</span>
-                        </div>
-                        <div className="col-2 text-center" onClick={this.setPrimaryAddress.bind(this, address.value)}>
-                            <input type="radio"
-                                   name="address_default"
-                                   className="sr-only radio-button"
-                                   checked={this.props.data.isPrimary}/>
-                            <label htmlFor={'address_default_'+index}
-                                   className="radio-label"></label>
-                        </div>
-                        <div className="col-2 text-center">
-                            <i className="material-icons" onClick={removeAddress.bind(this, address.value)}>delete</i>
+              <div>
+                <Peerio.UI.Tappable element="div" className="col-8" onTap={this.setPrimaryAddress.bind(this, address.value)}>
+                  <span className="text-mono">{address.value}</span>
+                </Peerio.UI.Tappable>
+                <Peerio.UI.Tappable element="div" className="col-2 text-center" onTap={this.setPrimaryAddress.bind(this, address.value)}>
+                  <input type="radio"
+                    name="address_default"
+                    className="sr-only radio-button"
+                  checked={this.props.data.isPrimary}/>
+                  <label htmlFor={'address_default_'+index}
+                  className="radio-label"></label>
+                </Peerio.UI.Tappable>
+                <div className="col-2 text-center">
+                  <Peerio.UI.Tappable element="i" className="material-icons"
+                    onTap={removeAddress.bind(this, address.value)}>delete</Peerio.UI.Tappable>
                         </div>
                     </div>
 

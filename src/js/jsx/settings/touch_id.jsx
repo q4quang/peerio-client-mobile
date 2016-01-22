@@ -83,14 +83,13 @@
 
         render: function() {
 
-
             return this.state.visible ? (
                 <ul>
-                    <li onClick={this.enableTouchId}>
-                        <div type="checkbox" className={this.state.enabled
-                            ? 'checkbox-input checked': 'checkbox-input'}></div>
+                    <Peerio.UI.Tappable element="li" onTap={this.enableTouchId}>
+                        <div type="checkbox" className={'checkbox-input ' + (this.state.enabled
+                            ? 'checked': null)}></div>
                         <div>Enable fingerprint identification</div>
-                    </li>
+                    </Peerio.UI.Tappable>
                 </ul>
             ) : (
                 <ul>

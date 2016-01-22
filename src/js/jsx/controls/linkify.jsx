@@ -12,8 +12,8 @@
             this.text = this.props.text;
             var nodes = linkify.tokenize(this.text).map(token => {
                 if (token.isLink)
-                    return <span className="message-link"
-                                 onClick={this.props.onOpen.bind(null, token.toHref())}>{token.toString()}</span>;
+                    return <Peerio.UI.Tappable element="span" className="message-link"
+                                 onTap={this.props.onOpen.bind(null, token.toHref())}>{token.toString()}</Peerio.UI.Tappable>;
                 else
                     return <span>{token.toString()}</span>;
             });
