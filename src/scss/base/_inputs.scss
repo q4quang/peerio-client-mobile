@@ -70,118 +70,52 @@ Text inputs are full-width by default. They can be contained using layout classe
   FIND AND REPLACE/REMOVE/RESTYLE.
 
 */
+.address {
+  @extend .flex-row ;
+  @extend .flex-justify-between;
+  @extend .flex-align-center;
 
+  height: 48px;
 
-$text-input-padding: 0.5em;
-$text-input-fontsize: 1rem;
-
-.radio-button:checked + .radio-label-square{
-  background-color: #2795d0;
-  color: white;
-  font-weight:bold;
+  .text-mono {
+    white-space: inherit;
+  }
 }
 
-.radio-button:checked + .radio-label:after {
-  content: " ";
-  background-color: color(p-green);
-}
-.radio-label{
-  display: inline-block;
-  padding: 0.2em 0.5em;
-  font-size: 1.2rem;
-  border-radius: 1.5em;
-  z-index: 1;
-  vertical-align: middle;
-  margin: 0 0.3em;
+.radio-button:checked + .radio-label i:after {
+  content: "radio_button_checked";
+  color: color(p-green);
 }
 
-.radio-label:after{
-  content: " ";
-  display: inline-block;
-  vertical-align: middle;
-  border-radius: 50%;
-  height: 1.5em;
-  width: 1.5em;
-  background-color: transparent;
-  border: $border-light;
-  margin-left: 0.5em;
-  box-shadow: inset 0px 1px 6px rgba(0, 0, 0, 0.09);
+.radio-label {
+  padding: 0 12px 0 0;
+
+  i:after {
+    content: "radio_button_unchecked";
+    color: $black-12;
+    transition: $speed-normal;
+  }
 }
 
-.select-input > option {
-  color: $black-87;
+.textarea-transparent {
+  border: 0;
 }
 
-.textarea-transparent{
-  border: none;
-}
-
-.text-input{
-  display: block;
-  border: none;
-  //seperating border props lets us change color in themes
-  //without effecting border width and style.
-  border-color:#d6d6d6;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  width: 100%;
-  font-size: inherit;//from text-input-group
-  font-weight: 200;
-  transition: border-color 150ms ease-in;
-  background-color: transparent;
-  height: 40px;
-  color: black;
-}
-
-.text-input-primary{
-  @extend .text-input;
-  border: $border-light;
-  padding: 0.5em;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  width: 100%;
-  box-shadow: inset 0 0 4px -1px rgba(0, 0, 0, 0.12);
-}
-
-.text-input-label{
-  font-size: inherit;
-  position: absolute;
-  top: 0;
-  color: inherit;
-  transition: top $speed-fast ease-out, color $speed-fast ease-out;
-}
-
-.checkbox-input{
-  //gold
+.checkbox-input {
   -webkit-appearance: none;
-}
-.checkbox-input:after{
-  visibility: visible;
-  content: '';
-  background: $white-100;
-  color: $white-12;
-  border: 2px solid $black-12;
-  display: inline-block;
-  width: 24px;
   height: 24px;
-  text-align: center;
-  line-height: 20px;
-  border-radius: $radius-default;
-  vertical-align: middle;
-  transition: $speed-fast ease-out;
+
+  i:after {
+    content: 'check_box_outline_blank';
+    color: $black-12;
+    transition: $speed-fast ease-out;
+  }
 }
 
-.checkbox-input:checked:after,
-.checkbox-input.checked:after{
-  border-color: color(p-green);
-  color: $white-100;
-  content: "\f00c";
-  font-family: 'FontAwesome';
-  background: color(p-green);
-}
-
-.checkbox-label{
-  color:inherit;
+.checkbox-input:checked i:after,
+.checkbox-input.checked i:after {
+  color: color(p-green);
+  content: 'check_box';
 }
 
 .placeholder-warning::-webkit-input-placeholder {
@@ -189,8 +123,7 @@ $text-input-fontsize: 1rem;
   font-weight: bold;
 }
 
-/** trying to refactor settings look a little bit, let's call it rectangular **/
-.content{
+.content {
     // TODO: find out where is text-mono used? - paul
     .text-mono {
         white-space: pre-wrap;

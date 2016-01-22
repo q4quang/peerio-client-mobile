@@ -32,10 +32,12 @@
 
         contacts.push(
             <Peerio.UI.Tappable element="li" onTap={this.toggle.bind(this, c.username)} key={c.username}>
-                <Peerio.UI.Avatar username={c.username} className="flex-shrink-0"/>
-                <div className="text-overflow">{c.fullName}</div>
-                <div className="caption flex-grow-1 margin-small">({c.username})</div>
-                <div type="checkbox" className={isSelected ? 'checkbox-input checked' : 'checkbox-input' }></div>
+              <Peerio.UI.Avatar username={c.username} className="flex-shrink-0"/>
+              <div className="text-overflow">{c.fullName}</div>
+              <div className="caption flex-grow-1 margin-small">({c.username})</div>
+              <div className={'checkbox-input ' + (isSelected ? 'checked': null)}>
+                <i className="material-icons"></i>
+              </div>
             </Peerio.UI.Tappable>
         );
       }.bind(this));

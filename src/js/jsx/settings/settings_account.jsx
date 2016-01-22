@@ -116,9 +116,9 @@
 
         render: function () {
             var addressHint = this.state.addresses.length > 1 ? (
-                <div>
-                    <p className="text-input-label">You've got more than one address. Tap one to make it primary.</p>
-                </div>
+                    <div className="caption">
+                      Tap an address to make it your primary.
+                    </div>
             ) : null;
             var addressItems = this.state.addresses.map(
                 (address, index) =>

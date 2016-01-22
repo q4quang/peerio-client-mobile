@@ -66,11 +66,6 @@ $buttons-height:120px;
     border-top: $border-dark;
   }
 
-  .buttons {
-    position: absolute;
-    bottom: 0;
-    background-color: #eee; // TODO create more colors for palatte
-  }
   .contact {
     padding: 10px;
     font-size: 1rem;
@@ -79,10 +74,10 @@ $buttons-height:120px;
     position: relative;
 /*  and backgrounds?
     background-color: color(list-item-bg); */
-    .checkbox-input{
+    .checkbox-input {
       margin-right: 10px;
     }
-    .avatar{
+    .avatar {
       margin-right: 4px;
     }
   }
