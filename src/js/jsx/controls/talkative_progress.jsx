@@ -63,7 +63,9 @@
             return (
                     this.props.enabled ?
                     <div className="text-center">
+                        {!this.props.hideText ?
                         <div>{this.state.progressMsg}</div>
+                        : null}
                         {this.props.showSpin ?
                         <div><i className="fa fa-circle-o-notch fa-spin"></i></div>
                         : null}

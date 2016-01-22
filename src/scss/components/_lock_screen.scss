@@ -21,7 +21,8 @@
   @extend  .flex-row;
   @extend  .flex-justify-center;
 
-  margin: $margin-base;
+  height: 32px;
+  margin: $margin-small;
 }
 
 .pin-indicator {

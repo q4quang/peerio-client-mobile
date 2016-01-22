@@ -117,7 +117,11 @@
 
             // maybe user entered wrong pin, so allow him
             // to enter a passphrase
-            this.setState( { isPin: false } );
+
+            if(this.state.isPin) {
+                return this.refs.pin.handleLoginFail();
+            }
+            // this.setState( { isPin: false } );
 
             Peerio.Action.showAlert({text: 'Login failed. ' + (error ? (' Error message: ' + error.message) : '')});
         },
@@ -165,7 +169,7 @@
         },
 
         handlePinEnter: function(pin) {
-            this.setState( { isPin: false } );
+            // this.setState( { isPin: false } );
             this.handleSubmit(null, pin);
         },
 
@@ -219,7 +223,9 @@
 
             var passInput = /* !window.PeerioDebug && */ this.state.isPin ? (
                 <Peerio.UI.PinInput
-                    username={this.state.savedLogin.firstName || this.state.savedLogin.username}
+                    ref="pin"
+                    username={this.state.savedLogin.username}
+                    firstname={this.state.savedLogin.firstName}
                     onEnterPin={this.handlePinEnter}
                     onChangeUser={this.handlePinChangeUser}
                     onTouchID={this.handlePinTouchID}
