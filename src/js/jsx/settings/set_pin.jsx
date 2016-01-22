@@ -13,7 +13,7 @@
 
         removePinModal: function () {
             Peerio.user.removePIN()
-                .then(()=>Peerio.Action.showAlert({text: 'Your passcode has been removed'}))
+            //     .then(()=>Peerio.Action.showAlert({text: 'Your passcode has been removed'}))
                 .catch(()=>Peerio.Action.showAlert({text: 'Failed to remove passcode'}))
                 .finally(()=>this.forceUpdate());
         },
@@ -40,7 +40,7 @@
             var self = this;
             self.setState({inProgress: true});
             Peerio.user.setPIN(newPin)
-                .then(() => Peerio.UI.Alert.show({text: 'Your passcode is set'}) )
+            //   .then(() => Peerio.UI.Alert.show({text: 'Your passcode is set'}) )
                 .then(() => {
                     if(this.props.onSuccess) this.props.onSuccess();
                 })
@@ -82,6 +82,9 @@
                                value={this.state.newPin}
                                inputmode="numeric"
                                onChange={this.newPinChange}/>
+                           <div className="buttons">
+                               {setPinButton}
+                           </div>
                     </div>);
             }
 
@@ -94,9 +97,6 @@
                     />
 
                     {pinUI}
-                    <div className="buttons">
-                      {setPinButton}
-                    </div>
                 </div>
 
             );
