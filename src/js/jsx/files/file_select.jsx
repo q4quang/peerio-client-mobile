@@ -45,9 +45,11 @@
 
                 files.push(
                     <Peerio.UI.Tappable key={f.id} onTap={this.toggle.bind(this,f.id)} element="li"
-                        className={isSelected ? 'selected' : null }>
-                            <div type="checkbox"
-                                  className={ 'checkbox-input ' + (isSelected ? 'checked' : null )}></div>
+                    className={isSelected ? 'selected' : null }>
+                      <div type="checkbox"
+                      className={ 'checkbox-input ' + (isSelected ? 'checked' : null )}>
+                        <i className="material-icons"></i>
+                            </div>
                                 <div className="username">{f.name}</div>
                     </Peerio.UI.Tappable>
                 );
