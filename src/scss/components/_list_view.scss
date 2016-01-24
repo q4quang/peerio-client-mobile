@@ -104,7 +104,7 @@ ul {
   list-style: none;
 
   &.flex-list {
-    li {
+    > li {
       @extend .flex-col;
       @extend .flex-align-start;
 
@@ -115,6 +115,14 @@ ul {
         margin-bottom: #{$margin-small/2};
       }
     }
+    > .list-item {
+      border-bottom: $border-dark;
+    }
+  }
+  ul li {
+    padding: 0;
+    height: 48px;
+    font-size: 14px;
   }
 }
 
@@ -166,13 +174,7 @@ li {
     transform: translate3d(0,0,0);
     min-height: $list-item-height;
     max-height: $list-item-height;
-    display: flex;
-    padding-left: $padding-base;
-    padding-right: $padding-small;
-    flex-direction: row;
-    align-items: center;
     border-bottom: $border-dark;
-    background-color: color(list-item-bg);
     position: relative;
     transition: transform $speed-normal ease-out, background-color 100ms ease-in;
     &.unread {
@@ -326,10 +328,6 @@ li {
   .list-item:last-child {
     border-bottom: 1px solid transparent;
   }
-}
-
-.list-item-title + .list-item-description > .nested-list {
-  padding-left: 1.5em;
 }
 
 //animation when deleting a conversations from list view.

@@ -157,13 +157,13 @@
             return (<div className="content without-tab-bar">
                 <div className="headline">Contact Import</div>
                 <div className="headline-divider">Your Friends on Peerio</div>
-                <div className="compact-list-view">
+                <ul>
                     {contactRequestList}
-                </div>
+                </ul>
                 <div className="headline-divider">Invite Your Contacts to Peerio</div>
-                <div className="flexible-list-view">
+                <ul className="flex-list">
                     {contactInviteList}
-                </div>
+                </ul>
             </div>);
         }
     });

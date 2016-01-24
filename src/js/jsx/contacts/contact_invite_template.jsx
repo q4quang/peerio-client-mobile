@@ -18,18 +18,18 @@ Peerio.UI.ContactInviteTemplate = React.createClass({
     var self = this;
     var emails = _.map(this.props.emails,function(email){
       // onTap={email.tapEvent.bind(self, email.value, contactID)}
-      return (<Peerio.UI.Tappable element="div" className="list-item" onTap={self.toggleSelection.bind(self, email)}>
-        <div className="list-item-content">{email.value}</div>
-        <div className="list-item-thumb">
-          <div className={ email.selected ? 'checkbox-input checked': 'checkbox-input'} />
-        </div>
+      return (<Peerio.UI.Tappable element="li" className="list-item" onTap={self.toggleSelection.bind(self, email)}>
+          <div className={'checkbox-input ' + (email.selected ? 'checked': null)}>
+            <i className="material-icons"></i>
+          </div>
+          <div className="list-item-content">{email.value}</div>
       </Peerio.UI.Tappable>);
     });
 
     var name = this.props.name ? <div className="list-item-title">{this.props.name}</div> : '' ;
 
     return (
-        <div className='list-item'>
+        <li className='list-item'>
           <div className="list-item-content">
             {name}
             <div className="list-item-description">
@@ -38,7 +38,7 @@ Peerio.UI.ContactInviteTemplate = React.createClass({
               </ul>
             </div>
           </div>
-        </div>
+        </li>
     );
   }
 });
