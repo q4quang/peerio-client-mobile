@@ -28,7 +28,7 @@
                 return;
             }
             this.setState( { pin: this.state.pin + num }, () => {
-                if(this.state.pin.length == this.props.pinLength) {
+                if(this.state.pin.length === this.props.pinLength) {
                     this.props.onEnterPin(this.state.pin);
                     this.setState( { pin: '', inProgress: true } );
                 }
@@ -99,6 +99,23 @@
             );
         },
 
+        deletePIN: function() {
+          this.setState( {
+              pin: this.state.pin.slice(0, -1)
+            } );
+        },
+
+        renderPINDelete: function() {
+          return (
+                <Peerio.UI.Tappable
+                    element="div"
+                    className="btn flex-justify-center flex-col"
+                    onTap={this.deletePIN}>
+                      Delete
+                </Peerio.UI.Tappable>
+          );
+        },
+
         renderProgress: function() {
             return (
                 <Peerio.UI.TalkativeProgress enabled={true} showSpin={true} hideText={true}/>
@@ -114,29 +131,35 @@
            return (
                <div className="modal pin-pad" ref="pinPad">
                  <div className="headline-md text-center margin-small padding-small text-overflow">
-                     Welcome back, <strong>{this.props.firstname}</strong>
+                   Welcome back, <strong>{this.props.firstname}</strong>
                  </div>
                  { this.state.inProgress ?
-                     this.renderProgress() :
-                     this.renderIndicators(this.state.pin.length, this.props.pinLength) }
+                 this.renderProgress() :
+                 this.renderIndicators(this.state.pin.length, this.props.pinLength) }
                  {this.renderRow( [1, 2, 3] ) }
                  {this.renderRow( [4, 5, 6] ) }
                  {this.renderRow( [7, 8, 9] ) }
-                 {this.renderRow( [
-                 0,
-                 ] ) }
+                 {this.renderRow( [0] ) }
+
                  <div id="footer">
                      {this.renderTextButton({
                          text: 'Change User',
                          handler: this.props.onChangeUser })
                      }
-                     { this.state.touchid ? this.renderTouchID() : null }
-                    {/* TODO: switch between touch ID button and this one when a pin-indicator has active class
-                 this.renderTextButton({ text: 'Delete', handler: this.props.onChangeUser })
-                 */}
+                     { this.state.touchid && !this.state.pin.length ?
+                         this.renderTouchID() :
+
+                         this.state.pin.length ?
+                         this.renderPINDelete() : null
+                     }
+                     {/*
+                         FIXME: If you tap fingerprint button to recall the touchID
+                                dialog and dismiss the touchID dialog, you're taken to login screen.
+                         TODO: Disable pin pad while validating PIN
+                      */}
                   </div>
-                 </div>);
-               }
+                </div>);
+          }
     });
 
 }());
