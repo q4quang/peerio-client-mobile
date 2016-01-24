@@ -48,7 +48,7 @@
                 <Peerio.UI.Tappable
                     tag="div"
                     className="btn"
-                    onTap={item.handler}>
+                    onTap={this.state.inProgress ? null : item.handler}>
                     <div className="number-key-content">{item.text}</div>
                 </Peerio.UI.Tappable>
             );
@@ -59,7 +59,7 @@
                 <Peerio.UI.Tappable
                     tag="div"
                     className="number-key"
-                    onTap={this.handleNumTap.bind(this, num)}>
+                    onTap={this.state.inProgress ? null : this.handleNumTap.bind(this, num)}>
                     <div className="number-key-content">{num}</div>
                 </Peerio.UI.Tappable>
             );
@@ -93,7 +93,7 @@
                 <Peerio.UI.Tappable
                     element="div"
                     className="btn flex-justify-center flex-col"
-                    onTap={this.props.onTouchID}>
+                    onTap={this.state.inProgress ? null : this.props.onTouchID}>
                     <i className="material-icons">fingerprint</i>
                 </Peerio.UI.Tappable>
             );
@@ -110,7 +110,7 @@
                 <Peerio.UI.Tappable
                     element="div"
                     className="btn flex-justify-center flex-col"
-                    onTap={this.deletePIN}>
+                    onTap={this.state.inProgress ? null : this.deletePIN}>
                       Delete
                 </Peerio.UI.Tappable>
           );
@@ -124,7 +124,7 @@
 
         componentWillMount: function() {
             Peerio.UI.TouchId.hasTouchID(this.props.username)
-            .then( (value) => this.setState({enabled: !!value}) );
+            .then( (value) => this.setState({touchid: !!value}) );
         },
 
         render: function () {
@@ -152,11 +152,6 @@
                          this.state.pin.length ?
                          this.renderPINDelete() : null
                      }
-                     {/*
-                         FIXME: If you tap fingerprint button to recall the touchID
-                                dialog and dismiss the touchID dialog, you're taken to login screen.
-                         TODO: Disable pin pad while validating PIN
-                      */}
                   </div>
                 </div>);
           }

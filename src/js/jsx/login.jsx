@@ -148,10 +148,10 @@
             data && data.username && Peerio.UI.TouchId.hasTouchID(data.username)
             .then( (hasTouchID) => {
                 if(hasTouchID) {
-                    this.setState( { isPin: false } );
                     Peerio.UI.TouchId.getKeyPair(data.username)
                     .then( (keyPair) => {
                         this.keyPair = keyPair;
+                        this.setState( { isPin: false } );
                         this.handleSubmit();
                     });
                 }
