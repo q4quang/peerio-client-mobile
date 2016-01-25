@@ -148,9 +148,9 @@
             data && data.username && Peerio.UI.TouchId.hasTouchID(data.username)
             .then( (hasTouchID) => {
                 if(hasTouchID) {
-                    Peerio.UI.TouchId.getKeyPair(data.username)
-                    .then( (keyPair) => {
-                        this.keyPair = keyPair;
+                    Peerio.UI.TouchId.getSystemPin(data.username)
+                    .then( (systemPin) => {
+                        this.systemPin = systemPin;
                         this.setState( { isPin: false } );
                         this.handleSubmit();
                     });
@@ -189,12 +189,13 @@
 
             var userValue = userNode ? userNode.value : this.state.savedLogin.username;
             var passValue = passNode ? passNode.value : passOrPin;
+            passValue = this.systemPin ? this.systemPin : passValue;
             // hiding software keyboard
             Peerio.NativeAPI.hideKeyboard();
             // TODO validate input
             Peerio.user = Peerio.User.create(userValue);
             Peerio.NativeAPI.preventSleep();
-            Peerio.user.login(passValue, this.keyPair)
+            Peerio.user.login(passValue, !!this.systemPin)
                 .then(this.handleLoginSuccess)
                 .catch(this.handleLoginFail)
                 .finally(Peerio.NativeAPI.allowSleep);

@@ -20,23 +20,18 @@
                     Peerio.TinyDB.removeItem(Peerio.UI.TouchId.touchidname(username));
             },
 
-            getKeyPair: function(username) {
+            getSystemPin: function(username) {
                 return window.PeerioTouchIdKeychain.getValue(
-                Peerio.UI.TouchId.keyname(username))
-                .then( (keyPair) => {
-                    var keyPair = JSON.parse(keyPair);
-                    keyPair.publicKey = Peerio.Util.toInt8Array(keyPair.publicKey);
-                    keyPair.secretKey = Peerio.Util.toInt8Array(keyPair.secretKey);
-                    return keyPair;
-                });
-
+                Peerio.UI.TouchId.keyname(username));
             },
 
             saveKeyPair: function() {
+                var systemPin = uuid.v4();
                 return window.PeerioTouchIdKeychain.saveValue(
                     Peerio.UI.TouchId.keyname(),
-                    JSON.stringify(Peerio.user.keyPair)
+                    systemPin
                 )
+                .then( () => Peerio.user.setPIN(systemPin, true) )
                 .catch( (error) => {
                     Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false);
                     return Promise.reject(error);
