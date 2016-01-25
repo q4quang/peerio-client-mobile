@@ -73,7 +73,7 @@ Click the sidebar in the example to toggle the `.open` state.
 
     .storage-info {
       font-size: 14px;
-      margin-top: $margin-small;
+      margin-top: #{$margin-small/2};
       margin-left: 58px;
     }
   }
@@ -84,7 +84,7 @@ Click the sidebar in the example to toggle the `.open` state.
     padding: 0 $padding-base;
   }
 
-  .avatar{
+  .avatar.big{
     margin-right: $margin-base;
     flex-shrink: 0;
   }
