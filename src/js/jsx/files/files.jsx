@@ -45,6 +45,7 @@
                 uploadNodes = [];
                 Peerio.user.uploads.forEach(function (file) {
                     var u = file.uploadState;
+                    if(!u) return;
                     uploadNodes.push(
                         <li className="list-item">
                           <i className="list-item-thumb file-type material-icons">cloud_upload</i>
