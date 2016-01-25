@@ -36,18 +36,21 @@
             });
             return (
                 <Peerio.UI.Tappable onTap={this.toggle}>
-                    <div id="conversation-head">
-                        <div
-                            className={'participants' + (this.state.open ? ' open' : '')}>{participants}</div>
+                  <div id="conversation-head">
+                    <div className={'participants' + (this.state.open ? ' open' : '')}>
+                      {participants}
+                    </div>
 
-                        <div className="counter">
-                            <i className="fa fa-users"></i> {counter}
+                    <div className="conversation-info">
+                      <div className="subject">{c.subject}</div>
+                      <div className="counter">
+                            <i className="material-icons">people</i> {counter}
                         </div>
-                        <Peerio.UI.Tappable onTap={this.openInfo}>
-                            <i className="info fa fa-info-circle"></i>
+                        <Peerio.UI.Tappable onTap={this.openInfo} className="info">
+                            <i className="material-icons">info_outline</i>
                         </Peerio.UI.Tappable>
 
-                        <div className="subject">{c.subject}</div>
+                      </div>
                     </div>
                 </Peerio.UI.Tappable>
             );

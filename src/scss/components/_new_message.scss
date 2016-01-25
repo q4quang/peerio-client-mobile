@@ -62,19 +62,7 @@
     display: flex;
     min-height: $recipients-height;
   }
-  .icon-counter {
-    font-size: 12px;
-    width: 16px;
-    height: 16px;
-    display: block;
-    border-radius: 50%;
-    background-color: $white-100;
-    text-align: center;
-    line-height: 16px;
-    position: absolute;;
-    bottom: 4px;
-    right: 4px;
-  }
+
   .subject-inputs{
     display: flex;
     min-height: $recipients-height;
@@ -104,4 +92,18 @@
     }
   }
 
+}
+
+.icon-counter {
+  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  display: block;
+  border-radius: $radius-circle;
+  background-color: $white-100;
+  text-align: center;
+  line-height: 16px;
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
 }

@@ -68,21 +68,17 @@ Icon                                       | File-type  | Code
 }
 
 .icon-with-label{
-  display: inline-block;
+  @extend .flex-row;
+
   text-align: center;
-  .fa{
-    display: inline-block;
-    height: 1em;
-    width: 1em;
-  }
-  .icon-label{
-    display: block;
-    font-size: 0.7em;
+
+  i{
+    margin-right: 4px;
   }
 }
 
 .icon-with-label + .icon-with-label{
-  margin-left: 1em;
+  margin-left: $margin-base ;
 }
 
 
