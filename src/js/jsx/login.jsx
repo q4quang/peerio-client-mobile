@@ -159,8 +159,8 @@
         },
 
         handlePinChangeUser: function() {
-            this.setState( { isPin: false }, () => { 
-                this.setState({ savedLogin: null }); 
+            this.setState( { isPin: false }, () => {
+                this.setState({ savedLogin: null });
             });
         },
 
@@ -245,23 +245,24 @@
 
             return (
                 <div>
-                    <RouteHandler manual={true}/>
-                    <div className="page-wrapper-login">
+                  <RouteHandler manual={true}/>
+                  <div className="page-wrapper-login">
 
-                        <div className="content-wrapper-login">
-                            <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
-                            <img className="logo" src="media/img/peerio-logo-white-beta.png" alt="Peerio"
-                                 onTouchEnd={devmode.summon}/>
+                    <div className="content-wrapper-login">
+                      <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
+                      <img className="logo" src="media/img/peerio-logo-white-beta.png" alt="Peerio"
+                        onTouchEnd={devmode.summon}/>
 
-                            <form className="loginForm" onSubmit={this.handleSubmit}>
-                                {this.state.savedLogin
-                                    ?
-                                    (<Peerio.UI.Tappable ref="savedLogin" element="div" className="saved-login"
-                                                         onTap={this.clearLogin}>{this.state.savedLogin.firstName || this.state.savedLogin.username}
-                                        <div className="note">Welcome back.
-                                            <br/>
-                                            Tap here to change or forget username.
-                                        </div>
+                      <form className="loginForm" onSubmit={this.handleSubmit}>
+                      {this.state.savedLogin
+                      ?
+                        (<Peerio.UI.Tappable ref="savedLogin" element="div" className="saved-login"
+                           onTap={this.clearLogin}>
+                           <div className="headline-md text-overflow">Welcome back,
+                             <strong> {this.state.savedLogin.firstName || this.state.savedLogin.username}</strong>
+                             </div>
+
+                             <div className="caption">Tap here to change or forget username.</div>
                                     </Peerio.UI.Tappable>)
                                     :
                                     (<div className="login-input">
