@@ -328,6 +328,52 @@ Peerio.NativeAPI.init = function () {
         api.setPushBadge(0);
     };
 
+    /**
+     * Get carrier info 
+     */
+    api.getCarrierInfo = function () {
+        return new Promise( (resolve, reject) => {
+            if(!window.plugins.carrier) return Promise.reject('No carrier plugin available');
+            window.plugins.carrier.getCarrierInfo(resolve, reject);
+        });
+    };
+
+    // default is Canada. HA-HA-HA (no offense to US users intended)
+    api.DEFAULT_COUNTRY = 'ca';
+    /**
+    * Get preferred language (fallbacks to locale info in plugin)
+    */
+    api.getPreferredCountry = function () {
+        return new Promise ( (resolve, reject) => {
+            if(!navigator.globalization) return reject('No globalization plugin available');
+            navigator.globalization.getPreferredLanguage( resolve, reject );
+        }).then( (data) => {
+            if(!data && !data.value) return api.DEFAULT_COUNTRY;
+            var arr = data.value.split(/-/);
+            return arr[arr.length - 1].toLowerCase();
+        });
+    };
+
+    /**
+     * Get country code (carrer info, then fallback to preferred language,
+     * then fallback to locale
+     */
+     api.getCountryCode = function() {
+         return api.getCarrierInfo()
+         .then( (data) => data.countryCode.toLowerCase() )
+         .catch( () => api.getPreferredCountry() )
+         .catch( () => Promise.resolve(api.DEFAULT_COUNTRY) );
+     };
+
+     /**
+      * Get countries for which police is allowed to force fingerprint identification on device
+      */
+     api.isForcefulFingerprintEnabled = function() {
+         return api.getCountryCode()
+         .then( (data) => data == 'us' );
+     };
+
+
     //------------------------------------------------------------------------------------------------------------------
 
 };

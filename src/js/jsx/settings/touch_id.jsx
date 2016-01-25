@@ -63,6 +63,9 @@
 
                 Peerio.UI.TouchId.hasTouchID(Peerio.user.username)
                 .then( (value) => this.setState({enabled: !!value}) );
+
+                Peerio.NativeAPI.isForcefulFingerprintEnabled()
+                .then( (value) => this.setState({fingerPrintWarning: value}) );
             }
         },
 
@@ -111,6 +114,12 @@
                         </div>
                         <div>Enable fingerprint identification</div>
                     </Peerio.UI.Tappable>
+                    { this.state.fingerPrintWarning ? (
+                    <div>
+                        <p><b>NOTE ON LAW ENFORCEMENT</b></p>
+                        <p>In Oct. 2014, a USA court ruled that a police officer can demand you to unlock your device with a fingerprint but not an alphanumeric passcode. Similar laws may exist in other national or regional jurisdictions and should be considered if law enforcement is part of your threat model.</p>
+                    </div>
+                    ) : null }
                 </ul>
             ) : (
                 <ul>
