@@ -146,7 +146,7 @@ $avatar-size: 29px;
           color: color(p-blue-light-15);
         }
         //right arrow
-        &:after{
+        &:after {
           display: block;
           content: " ";
           width: 0;
@@ -156,15 +156,13 @@ $avatar-size: 29px;
           border-left: 8px solid  color(message-self-bg);
           position: absolute;
           right: 8px;
-          bottom: 8px;
+          bottom: 20px;
         }
       }
-      .file-list{
+      .file-list {
 
-        .file-list-item{
+        .file-list-item {
           background-color: color(message-self-bg-file);
-          // margin-left: -7px;
-          // margin-right: -15px;
         }
       }
     }
