@@ -59,19 +59,19 @@
             //<React.addons.CSSTransitionGroup style={{width:'100%', display:'flex'}} transitionName="fade" transitionAppear={true}
             //                                 transitionAppearTimeout={250}>
             return (
-                <Peerio.UI.Tappable element="div" onTap={this.openConversation} className={classes}>
+                <Peerio.UI.Tappable element="li" onTap={this.openConversation} className={classes}>
                     <Peerio.UI.Swiper onSwipeLeft={this.openSwipe} onSwipeRight={this.closeSwipe}
                                       className="list-item-swipe-wrapper">
 
                         <div className="list-item-thumb">
                             {conv.hasFiles ?
                                 (<div className="icon-with-label">
-                                    <i className={'fa fa-paperclip attachment'}></i>
+                                    <i className={'material-icons'}>attach_file</i>
                                 </div>)
                                 : null}
                         </div>
 
-                        <div className="list-item-content">
+                        <div className="list-item-content flex-col flex-justify-center">
                             <div className="list-item-sup">{conv.username}</div>
                             {conv.displayName && <div className="list-item-title">{conv.displayName}</div>}
                             <div className="list-item-description">{conv.subject}</div>

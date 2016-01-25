@@ -174,34 +174,37 @@
             //TODO: textarea onfocus was set to scrollToBottom but was triggered on every element focus 0_0
             return (
                 <div>
-                    <Peerio.UI.ConversationHead conversation={conversation}/>
+                  <Peerio.UI.ConversationHead conversation={conversation}/>
 
-                    <Peerio.UI.VScroll
-                        onGetPage={this.getPage}
-                        onGetPrevPage={this.getPrevPage}
-                        onGetItemsRange={this.getItemsRange}
-                        itemKeyName='id'
-                        itemComponent={Peerio.UI.Message}
-                        itemParentData={conversation}
-                        className="content with-reply-box without-tab-bar conversation"
-                        ref="content"
-                        key="content"
-                        reverse="true"
-                    />
+                  <Peerio.UI.VScroll
+                    onGetPage={this.getPage}
+                    onGetPrevPage={this.getPrevPage}
+                    onGetItemsRange={this.getItemsRange}
+                    itemKeyName='id'
+                    itemComponent={Peerio.UI.Message}
+                    itemParentData={conversation}
+                    className="content with-reply-box without-tab-bar conversation"
+                    ref="content"
+                    key="content"
+                    reverse="true"
+                  />
 
-                    <div id="reply">
-                        <div className="reply-ack">
-                            <i className="fa fa-thumbs-o-up icon-btn" onTouchEnd={this.sendAck}></i>
-                        </div>
+                  <div id="reply">
+                    <div className="reply-ack">
+                      <i className="material-icons" onTouchEnd={this.sendAck}>thumb_up</i>
+                    </div>
 
-                        <textarea
-                            className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
-                            rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
-                            disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}></textarea>
+                    <textarea
+                      className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
+                      rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
+                      disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}></textarea>
 
-                        <div className="reply-attach">
-                            <i className="fa fa-paperclip icon-btn"
-                               onTouchEnd={this.openFileSelect}>{this.state.attachments.length || ''}</i>
+                    <div className="reply-attach">
+                      <i className="material-icons"
+                        onTouchEnd={this.openFileSelect}>
+                        attach_file
+                      </i>
+                      <div className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length || ''}</div>
                         </div>
                         {this.state.sending ? (<div id="reply-overlay"></div>) : null}
                     </div>
