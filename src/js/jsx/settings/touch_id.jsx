@@ -10,6 +10,10 @@
                 return (username ? username : Peerio.user.username) + '_touchid';
             },
 
+            bubblename: function() {
+                return Peerio.user.username + '_bubble';
+            },
+
             hasTouchID: function(username) {
                 return Peerio.TinyDB.getObject(Peerio.UI.TouchId.touchidname(username));
             },
@@ -62,11 +66,31 @@
             }
         },
 
+        hasUserSeenBubble: function() {
+            return Peerio.TinyDB.getObject(Peerio.UI.TouchId.bubblename());
+        },
+
+        setUserSeenBubble: function() {
+            return Peerio.TinyDB.setObject(Peerio.UI.TouchId.bubblename(), true);
+        },
+
+        showExclamationBubble: function() {
+            return this.hasUserSeenBubble()
+            .then( (hasSeen) => {
+                return hasSeen ? Promise.resolve(true) : 
+                    Peerio.UI.Confirm.show({
+                    text: 'Enabling TouchID requires using your keychain, would you like to proceed?'
+                });
+            })
+            .then( () => this.setUserSeenBubble() );
+        },
+
         enableTouchId: function() {
             var enabled = !this.state.enabled;
             enabled ?
                 Peerio.UI.TouchId.clearKeyPair()
             .catch( (error) => L.info(error) )
+            .then( () => this.showExclamationBubble() )
             .then( () => Peerio.UI.TouchId.saveKeyPair())
             .then( () => {
                 this.setState({enabled: true});
