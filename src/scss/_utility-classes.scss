@@ -73,8 +73,7 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 }
 
 .dim-background {
-  background: black;
-  opacity: 0.8;
+  background: $black-54;
   width: 100%;
   height: 100%;
   position: absolute;

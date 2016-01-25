@@ -127,6 +127,5 @@ The only difference between the three are whether they have one or two button an
   + .dim-background {
     z-index: ($z-alert - 1);
     animation: scaleIn $speed-normal ease-in;
-    opacity: 0.5;
   }
 }
