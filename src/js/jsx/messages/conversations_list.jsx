@@ -4,7 +4,7 @@
     Peerio.UI.ConversationsList = React.createClass({
         componentDidMount: function () {
             this.subscriptions = [
-                Peerio.Dispatcher.onConversationsUpdated(this.handleConversationsUpdated)
+                Peerio.Dispatcher.onConversationsUpdated(this.handleConversationsUpdated.bind(this))
             ];
         },
 
