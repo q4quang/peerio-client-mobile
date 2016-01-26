@@ -13,6 +13,11 @@
   #footer {
     @extend .flex-justify-between;
     background: transparent;
+
+    i {
+      line-height: 36px;
+      font-size: 22px;
+    }
   }
 }
 
