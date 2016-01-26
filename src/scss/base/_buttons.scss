@@ -80,6 +80,7 @@ Footer Buttons                                       | Button Class/ID
   padding: 0 $padding-small;
   display: inline-block;;
   font-size: 14px;
+  font-weight: 400;
   text-align: center;
   margin: $margin-small;
   border-radius: $radius-default;
@@ -175,6 +176,7 @@ button:disabled , .btn-disabled {
 #global-back {
   @include button-ripple;
 
+  font-weight: 400;
   display: flex;
   flex: 1 1 auto;
   flex-direction: row;

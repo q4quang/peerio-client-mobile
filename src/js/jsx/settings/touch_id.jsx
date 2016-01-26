@@ -49,12 +49,13 @@
                 .then( (value) => {
                     if(value) return Promise.resolve(false);
                     Peerio.UI.Confirm.show({
-                        text: 'Would you like to enable Touch ID? (enabling TouchID requires using your Apple Keychain)'
+                        text: 'Would you like to enable Touch ID?',
+                        caption: 'Touch ID requires using your Apple Keychain'
                     })
                     .then( () => Peerio.UI.TouchId.saveKeyPair() )
                     .catch( () => true )
                     .then( () => Peerio.UI.TouchId.setUserSeenOffer() );
-                    
+
                     return Promise.resolve(true);
                 });
             },
@@ -62,7 +63,7 @@
             showExclamationBubble: function() {
                 return Peerio.UI.TouchId.hasUserSeenBubble()
                 .then( (hasSeen) => {
-                    return hasSeen ? Promise.resolve(true) : 
+                    return hasSeen ? Promise.resolve(true) :
                         Peerio.UI.Confirm.show({
                         text: 'Enabling TouchID requires using your keychain, would you like to proceed?'
                     });

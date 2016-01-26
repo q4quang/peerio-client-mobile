@@ -37,14 +37,15 @@
 
             return (
                 <div>
-                    <div className="modal alert-wrapper">
-                        <div className="alert">
+                  <div className="modal alert-wrapper">
+                    <div className="alert">
 
-                            <div className="alert-content">
-                                <div className="headline" style={{display: !this.props.headline ? 'none' : null}}>
-                                    {this.props.headline}
-                                </div>
-                                <p>{text}</p>
+                      <div className="alert-content">
+                        <div className={'headline' + (!this.props.headline ? ' hide' : '')}>
+                        {this.props.headline}
+                        </div>
+                        <p>{text}</p>
+                        <div className={'caption' + (!this.props.caption ? ' hide' : '')}>{this.props.caption}</div>
                             </div>
                             <div className="alert-btns">
                                 {btns}
