@@ -75,11 +75,14 @@
                 <option value="3">Silly</option>
             </select>
             <span class="devlog-divider"></span>
-            <input type="checkbox" id="devmode-bench" onchange="devmode.changeLogBenchmark(event)" tabindex="-1"/>&nbsp;<label
-                for="devmode-bench">Benchmarks</label>
-            <span class="devlog-divider"></span>
-            log limit <input onchange="devmode.changeLogLimit(event)" tabindex="-1" id="devmode-log-limit" type="text" size="7"
-                             value="123" style="color: #000000;border: none;padding: 0px 2px;"/>
+            <input type="checkbox" id="devmode-bench" onchange="devmode.changeLogBenchmark(event)" tabindex="-1"/>
+            <label for="devmode-bench"> &ndash; Benchmarks</label>
+
+            <label class="devlog-full-width" style="
+  text-transform: capitalize;
+  margin-top: 12px;">log limit</label>
+  <input onchange="devmode.changeLogLimit(event)" tabindex="-1" id="devmode-log-limit" type="text" size="7"
+                             value="123" class="devlog-full-width"/>
         </div>
         <button onclick="devmode.send()" tabindex="-1" class="devlog-full-width">Send log by email</button>
         <div id="devmode-log"></div>
@@ -152,12 +155,12 @@
     .devlog-full-width {
         display: block;
         width: 100%;
-        margin-bottom: 20px;
+        margin: 4px 0;
     }
 
     .devlog-divider {
-        margin: 0 5px;
-        border-left: 1px solid #95D3F5;
+        display: inline-block;
+        height: 32px;
     }
 
     .devlog-controls {
@@ -166,7 +169,11 @@
 
     #devmode button {
         background-color: #57BBF1;
-        padding: 5px;
+        padding: 0 8px;
+        height: 36px;
+        margin: 8px 0;
+        border-radius: 2px;
+        text-transform: uppercase;
     }
 
     .devmode-log-item {
@@ -176,12 +183,33 @@
     .devmode-log-item:nth-child(odd) {
         background-color: #DCE1FF;
     }
-    
+
     #devmode select {
+      -webkit-appearance: menulist;
+    }
+
+    #devmode input[type="checkbox"] {
+      width: auto;
+    }
+
+    #devmode input, #devmode select {
+      vertical-align: middle;
       background: rgba(255,255,255,0.3);
       border-radius: 2px;
-      -webkit-appearance: menulist;
       padding: 0 8px;
+    }
+
+    #devmode input:focus, #devmode select:focus {
+      height: 34px;
+      border-bottom-width: 2px;
+    }
+
+    #devmode input:focus {
+      margin-bottom: 2px;
+    }
+
+    #devmode select:focus {
+      margin-bottom: -2px;
     }
 </style>
 
