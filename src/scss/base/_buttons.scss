@@ -111,13 +111,11 @@ Footer Buttons                                       | Button Class/ID
 .btn-back {
   @extend .btn;
   @extend .flex-shrink-0;
+
   width: 85px;
   margin: $margin-small 0;
 
-
   i {
-    font-size: 20px;
-    padding: 2px;
     margin-right: $margin-small;
   }
 }
