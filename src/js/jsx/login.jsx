@@ -90,6 +90,7 @@
         handleLoginSuccess: function () {
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
+            Peerio.UI.TouchId.showOfferIfNeeded();
             Peerio.NativeAPI.enablePushNotifications()
                 .catch(error => L.error('Error enabling push notifications. {0}', error))
                 .finally(() => Peerio.NativeAPI.clearPushBadge());

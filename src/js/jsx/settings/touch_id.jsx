@@ -14,6 +14,10 @@
                 return Peerio.user.username + '_bubble';
             },
 
+            offername: function() {
+                return Peerio.user.username + '_offer';
+            },
+
             hasTouchID: function(username) {
                 return Peerio.TinyDB.getObject(Peerio.UI.TouchId.touchidname(username));
             },
@@ -24,9 +28,58 @@
                     Peerio.TinyDB.removeItem(Peerio.UI.TouchId.touchidname(username));
             },
 
+            hasUserSeenOffer: function() {
+                return Peerio.TinyDB.getObject(Peerio.UI.TouchId.offername());
+            },
+
+            setUserSeenOffer: function() {
+                return Peerio.TinyDB.setObject(Peerio.UI.TouchId.offername(), true);
+            },
+
+            hasUserSeenBubble: function() {
+                return Peerio.TinyDB.getObject(Peerio.UI.TouchId.bubblename());
+            },
+
+            setUserSeenBubble: function() {
+                return Peerio.TinyDB.setObject(Peerio.UI.TouchId.bubblename(), true);
+            },
+
+            showOfferIfNeeded: function() {
+                Peerio.UI.TouchId.hasUserSeenOffer()
+                .then( (value) => {
+                    if(value) return Promise.resolve(false);
+                    Peerio.UI.Confirm.show({
+                        text: 'Would you like to enable Touch ID? (enabling TouchID requires using your Apple Keychain)'
+                    })
+                    .then( () => Peerio.UI.TouchId.saveKeyPair() )
+                    .catch( () => true )
+                    .then( () => Peerio.UI.TouchId.setUserSeenOffer() );
+                    
+                    return Promise.resolve(true);
+                });
+            },
+
+            showExclamationBubble: function() {
+                return Peerio.UI.TouchId.hasUserSeenBubble()
+                .then( (hasSeen) => {
+                    return hasSeen ? Promise.resolve(true) : 
+                        Peerio.UI.Confirm.show({
+                        text: 'Enabling TouchID requires using your keychain, would you like to proceed?'
+                    });
+                })
+                .then( () => this.setUserSeenBubble() );
+            },
+
             getSystemPin: function(username) {
                 return window.PeerioTouchIdKeychain.getValue(
                 Peerio.UI.TouchId.keyname(username));
+            },
+
+            enableTouchId: function() {
+                return Peerio.UI.TouchId.clearKeyPair()
+                .catch( (error) => L.info(error) )
+                .then( () => Peerio.UI.TouchId.showExclamationBubble() )
+                .then( () => Peerio.UI.TouchId.saveKeyPair());
             },
 
             saveKeyPair: function() {
@@ -47,6 +100,11 @@
                 return window.PeerioTouchIdKeychain.deleteValue(
                     Peerio.UI.TouchId.keyname())
                     .then( () => Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false) );
+            },
+
+            isFeatureAvailable: function() {
+                return window.PeerioTouchIdKeychain ?
+                    window.PeerioTouchIdKeychain.isFeatureAvailable() : Promise.reject(false);
             }
         },
 
@@ -55,46 +113,21 @@
         },
 
         componentWillMount: function() {
-            if( window.PeerioTouchIdKeychain ) {
-                window.PeerioTouchIdKeychain.isFeatureAvailable()
-                .then( () => {
-                    this.setState( { visible: true } );
-                });
+            Peerio.UI.TouchId.isFeatureAvailable()
+            .then( () => {
+                this.setState( { visible: true } );
 
                 Peerio.UI.TouchId.hasTouchID(Peerio.user.username)
                 .then( (value) => this.setState({enabled: !!value}) );
 
                 Peerio.NativeAPI.isForcefulFingerprintEnabled()
                 .then( (value) => this.setState({fingerPrintWarning: value}) );
-            }
-        },
-
-        hasUserSeenBubble: function() {
-            return Peerio.TinyDB.getObject(Peerio.UI.TouchId.bubblename());
-        },
-
-        setUserSeenBubble: function() {
-            return Peerio.TinyDB.setObject(Peerio.UI.TouchId.bubblename(), true);
-        },
-
-        showExclamationBubble: function() {
-            return this.hasUserSeenBubble()
-            .then( (hasSeen) => {
-                return hasSeen ? Promise.resolve(true) : 
-                    Peerio.UI.Confirm.show({
-                    text: 'Enabling TouchID requires using your keychain, would you like to proceed?'
-                });
-            })
-            .then( () => this.setUserSeenBubble() );
+            });
         },
 
         enableTouchId: function() {
             var enabled = !this.state.enabled;
-            enabled ?
-                Peerio.UI.TouchId.clearKeyPair()
-            .catch( (error) => L.info(error) )
-            .then( () => this.showExclamationBubble() )
-            .then( () => Peerio.UI.TouchId.saveKeyPair())
+            enabled ? Peerio.UI.TouchId.enableTouchId()
             .then( () => {
                 this.setState({enabled: true});
             }) : Peerio.UI.TouchId.clearKeyPair()
