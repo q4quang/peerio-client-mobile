@@ -36,21 +36,29 @@
             this.setState( { activeStep: this.state.activeStep + 1 } );
         },
 
+        handlePreviousStep: function() {
+          this.setState( { activeStep: this.state.activeStep - 1 } );
+        },
+
         render: function () {
             var currentStep = React.createElement(
                 this.steps[this.state.activeStep], { key: 'step' + this.state.activeStep, onSuccess: this.handleNextStep });
             var button = (
                 <div className="buttons">
                   <Peerio.UI.Tappable element='div' className="btn-safe"
-                  key={'next' + this.state.activeStep} onTap={this.handleNextStep}>
-                  {this.stepButtons[this.state.activeStep]}
+                    key={'next' + this.state.activeStep} onTap={this.handleNextStep}>
+                    {this.stepButtons[this.state.activeStep]}
                   </Peerio.UI.Tappable>
 
                   <Peerio.UI.Tappable element='div' className='btn-primary'
                     style={{display: this.steps[this.state.activeStep] === this.steps[this.steps.length - 1] ? 'none' : null }}
                     onTap={this.transitionTo.bind(this, 'messages')}>
-                  {this.state.activeStep === 0 ? 'maybe later' : 'Exit'}
-                    </Peerio.UI.Tappable>
+                    {this.state.activeStep === 0 ? 'maybe later' : 'Exit'}
+                  </Peerio.UI.Tappable>
+
+                  <Peerio.UI.Tappable element='div' className={'btn-back ' + (this.steps[this.state.activeStep] === this.steps[0] ? 'hide': '' )} onTap={this.handlePreviousStep} ><i
+                          className="material-icons">chevron_left</i>back
+                  </Peerio.UI.Tappable>
                 </div>
             );
             var progressBarSteps = [];
