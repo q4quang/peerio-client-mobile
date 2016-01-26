@@ -50,8 +50,7 @@
                     {this.stepButtons[this.state.activeStep]}
                   </Peerio.UI.Tappable>
 
-                  <Peerio.UI.Tappable element='div' className='btn-primary'
-                    style={{display: this.steps[this.state.activeStep] === this.steps[this.steps.length - 1] ? 'none' : null }}
+                  <Peerio.UI.Tappable element='div' className={'btn-primary ' + (this.steps[this.state.activeStep] === this.steps[this.steps.length - 1] ? 'hide' : '' )}
                     onTap={this.transitionTo.bind(this, 'messages')}>
                     {this.state.activeStep === 0 ? 'maybe later' : 'Exit'}
                   </Peerio.UI.Tappable>

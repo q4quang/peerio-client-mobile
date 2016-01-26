@@ -123,7 +123,7 @@
                 Peerio.NativeAPI.isForcefulFingerprintEnabled()
                 .then( (value) => this.setState({fingerPrintWarning: value}) );
             });
-        },
+       },
 
         enableTouchId: function() {
             var enabled = !this.state.enabled;
@@ -141,8 +141,8 @@
             return this.state.visible ? (
                 <ul>
                   <Peerio.UI.Tappable element="li" onTap={this.enableTouchId}>
-                    <div type="checkbox" className={'checkbox-input ' + (this.state.enabled
-                    ? 'checked': null)}>
+                    <div type="checkbox" className={'checkbox-input' + (this.state.enabled
+                    ? ' checked': null)}>
                         <i className="material-icons"></i>
                         </div>
                         <div>Enable fingerprint identification</div>
