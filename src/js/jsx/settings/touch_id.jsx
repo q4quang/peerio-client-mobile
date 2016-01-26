@@ -80,7 +80,7 @@
         showExclamationBubble: function() {
             return this.hasUserSeenBubble()
             .then( (hasSeen) => {
-                return hasSeen ? Promise.resolve(true) : 
+                return hasSeen ? Promise.resolve(true) :
                     Peerio.UI.Confirm.show({
                     text: 'Enabling TouchID requires using your keychain, would you like to proceed?'
                 });
@@ -108,8 +108,8 @@
             return this.state.visible ? (
                 <ul>
                   <Peerio.UI.Tappable element="li" onTap={this.enableTouchId}>
-                    <div type="checkbox" className={'checkbox-input ' + (this.state.enabled
-                    ? 'checked': null)}>
+                    <div type="checkbox" className={'checkbox-input' + (this.state.enabled
+                    ? ' checked': null)}>
                         <i className="material-icons"></i>
                         </div>
                         <div>Enable fingerprint identification</div>
