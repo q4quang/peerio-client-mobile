@@ -29,7 +29,7 @@ body {
   font-family: OpenSans, sans-serif;
   font-weight: 300;
 
-  .ios {
+  &.ios {
     //margin-top: 20px;
     // fixes modal twitch
     // TODO: consider layout refactor. The twitch doesn't seem like it should exist to begin with. - paul
