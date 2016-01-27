@@ -27,7 +27,7 @@
 
         showDestroyDialog: function () {
             Peerio.Action.showConfirm({
-                text: 'are you sure you want do delete this conversation? You will no longer receive messages or files within this conversation.',
+                text: 'Are you sure you want do delete this conversation? You will no longer receive messages or files within this conversation.',
                 onAccept: this.destroyConversation
             });
         },

@@ -66,6 +66,7 @@
   .subject-inputs{
     display: flex;
     min-height: $recipients-height;
+    border-bottom: $border-dark;
   }
   .subject {
 
@@ -85,7 +86,6 @@
     bottom: 0;
     padding: 10px 5px;
     border: 0;
-    border-top: $border-dark;
     flex-grow:1;
     &:focus {
       background-color: lighten(color(list-item-bg), 5%);
