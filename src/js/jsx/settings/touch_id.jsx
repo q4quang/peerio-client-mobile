@@ -45,7 +45,8 @@
             },
 
             showOfferIfNeeded: function() {
-                Peerio.UI.TouchId.hasUserSeenOffer()
+                Peerio.UI.TouchId.isFeatureAvailable()
+                .then( () => Peerio.UI.TouchId.hasUserSeenOffer() )
                 .then( (value) => {
                     if(value) return Promise.resolve(false);
                     Peerio.UI.Confirm.show({
