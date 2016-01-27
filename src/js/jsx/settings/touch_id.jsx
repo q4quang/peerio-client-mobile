@@ -11,11 +11,11 @@
             },
 
             bubblename: function() {
-                return Peerio.user.username + '_bubble';
+                return Peerio.user.username + '_touch_bubble';
             },
 
             offername: function() {
-                return Peerio.user.username + '_offer';
+                return Peerio.user.username + '_touch_offer';
             },
 
             hasTouchID: function(username) {
