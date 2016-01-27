@@ -143,7 +143,7 @@
                 <ul>
                   <Peerio.UI.Tappable element="li" onTap={this.enableTouchId}>
                     <div type="checkbox" className={'checkbox-input' + (this.state.enabled
-                    ? ' checked': null)}>
+                    ? ' checked': '')}>
                         <i className="material-icons"></i>
                         </div>
                         <div>Enable fingerprint identification</div>

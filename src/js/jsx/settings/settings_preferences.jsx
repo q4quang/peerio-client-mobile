@@ -83,7 +83,7 @@
                       className="flex-row"
                     onTap={this.setNotifyNewMessage}>
 
-                      <div className={'checkbox-input ' + (this.state.notifyNewMessage ? 'checked': null)}>
+                      <div className={'checkbox-input' + (this.state.notifyNewMessage ? ' checked': '')}>
                         <i className="material-icons"></i>
                       </div>
 
@@ -94,7 +94,7 @@
                       element="li"
                       className="flex-row"
                     onTap={this.setNotifyNewContact}>
-                      <div className={'checkbox-input ' + (this.state.notifyNewContact ? 'checked': null)}>
+                      <div className={'checkbox-input' + (this.state.notifyNewContact ? ' checked': '')}>
                         <i className="material-icons"></i>
                       </div>
                       <div>You receive a contact request</div>
@@ -105,7 +105,7 @@
                       className="flex-row"
                     onTap={this.setNotifyNewContactRequest}>
 
-                      <div className={'checkbox-input ' + (this.state.notifyContactRequest ? 'checked': null)}>
+                      <div className={'checkbox-input' + (this.state.notifyContactRequest ? ' checked': '')}>
                         <i className="material-icons"></i>
                       </div>
                               <div>Your invite is accepted</div>

@@ -19,7 +19,7 @@ Peerio.UI.ContactInviteTemplate = React.createClass({
     var emails = _.map(this.props.emails,function(email){
       // onTap={email.tapEvent.bind(self, email.value, contactID)}
       return (<Peerio.UI.Tappable element="li" className="list-item" onTap={self.toggleSelection.bind(self, email)}>
-          <div className={'checkbox-input ' + (email.selected ? 'checked': null)}>
+          <div className={'checkbox-input' + (email.selected ? ' checked': '')}>
             <i className="material-icons"></i>
           </div>
           <div className="list-item-content">{email.value}</div>

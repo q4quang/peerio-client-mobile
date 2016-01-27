@@ -35,7 +35,7 @@
               <Peerio.UI.Avatar username={c.username} className="flex-shrink-0"/>
               <div className="text-overflow">{c.fullName}</div>
               <div className="caption flex-grow-1 margin-small">({c.username})</div>
-              <div className={'checkbox-input ' + (isSelected ? 'checked': null)}>
+              <div className={'checkbox-input' + (isSelected ? ' checked': '')}>
                 <i className="material-icons"></i>
               </div>
             </Peerio.UI.Tappable>

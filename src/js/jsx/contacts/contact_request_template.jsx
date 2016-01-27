@@ -29,7 +29,7 @@ Peerio.UI.ContactRequestTemplate = React.createClass({
     }
     return <Peerio.UI.Tappable element="li" className='list-item' onTap={this.toggleSelection}>
 
-      <div className={'checkbox-input ' + (this.state.selected ? 'checked': null)}>
+      <div className={'checkbox-input' + (this.state.selected ? ' checked': '')}>
         <i className="material-icons"></i>
       </div>
 
