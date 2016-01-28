@@ -105,14 +105,16 @@
                     */}
 
                   <div id="footer">
-                    <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.accept}>
-                      <i className="material-icons">attach_file</i>
-                      <label>Attach</label>
-                    </Peerio.UI.Tappable>
                     <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.upload}>
                       <i className="material-icons">cloud_upload</i>
                       <label>Upload file</label>
                     </Peerio.UI.Tappable>
+
+                    <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.accept}>
+                      <i className="material-icons">attach_file</i>
+                      <label>Attach</label>
+                    </Peerio.UI.Tappable>
+
                     <Peerio.UI.Tappable element="div" className="btn-icon-stacked"
                     onTap={this.props.onClose}>
                     <i className="material-icons">cancel</i>

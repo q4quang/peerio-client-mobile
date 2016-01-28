@@ -12,7 +12,7 @@ Peerio.UI.AddContact = React.createClass({
   },
 
   getInitialState: function() {
-      return { 
+      return {
           searchString: '',
       };
   },
@@ -31,7 +31,7 @@ Peerio.UI.AddContact = React.createClass({
       :<Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.goToSearch}>
       <i className="material-icons">search</i> Search
     </Peerio.UI.Tappable>;
-    return  (<div className="content without-tab-bar">
+    return  (<div className="content without-tab-bar without-footer">
       <div className="flex-col flex-justify-start">
         <div className="headline">Add Contact</div>
         <p>{this.state.inviteCode}</p>

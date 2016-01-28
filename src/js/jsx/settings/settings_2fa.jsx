@@ -125,20 +125,22 @@
                 'The following key has been copied to your clipboard. Please paste it in your authenticator app:' : 'Paste the following secret key into your authenticator app:';
 
                 return (
-                    <div className="content no-scroll-hack without-tab-bar flex-col">
-                        <div className="headline">Two Factor Authentication (2FA)</div>
+                    <div className="content no-scroll-hack without-tab-bar flex-col without-footer">
+                        <div className="headline-md">Two Factor Authentication (2FA)</div>
                         { this.state.isEnabled2FA ? (
-                              <Peerio.UI.Tappable element="div" className="btn-danger width-full"
+                            <div className="buttons">
+                              <Peerio.UI.Tappable element="div" className="btn-danger"
                                   onTap={this.startDisable2FA}>
                                   Disable 2FA
                               </Peerio.UI.Tappable>
+                            </div>
                             ) : (
                             <div className="input-group">
                                 <label>
                                     {pasteMessage}
                                 </label>
                                 {this.state.code ? (
-                                    <input className="no-border text-center"
+                                    <input className="text-center"
                                         ref="generatedCode"
                                         autoComplete="off" autoCorrect="off"
                                         autoCapitalize="off" spellCheck="false"

@@ -55,13 +55,15 @@
         render: function () {
             var pinUI = '';
             var header = !!this.props.hideHeader ? null : (
-                <div className="headline">Device passcode</div>
+                <div className="headline-md">Device passcode</div>
             );
             var setPinButton = !this.state.inProgress && this.pinIsSane() ? (
+
                 <Peerio.UI.Tappable
                     element="div"
                     className="btn-safe"
                     onTap={this.setDevicePin}>Set device passcode</Peerio.UI.Tappable>
+
             ) : null;
             if (Peerio.user.PINIsSet) {
                 pinUI =
@@ -73,26 +75,29 @@
                     </div>);
             } else if(!this.state.inProgress) {
                 pinUI =
-                    (<div className="input-group flex-col flex-justify-center">
-                        <label>
-                            Passcode must be 6 digits
-                        </label>
-                        <input className="text-center"
-                               type="number" required="required" ref="textEdit"
-                               data-password="yes"
-                               placeholder="Enter a device passcode"
-                               pattern="[0-9]*"
-                               value={this.state.newPin}
-                               inputmode="numeric"
-                               onChange={this.newPinChange}/>
-                           <div className="buttons">
-                               {setPinButton}
-                           </div>
-                    </div>);
+                    (<div>
+                        <div className="input-group flex-col flex-justify-center">
+                          <label>
+                              Passcode must be 6 digits
+                          </label>
+                          <input className="text-center"
+                                 type="number" required="required" ref="textEdit"
+                                 data-password="yes"
+                                 placeholder="Enter a device passcode"
+                                 pattern="[0-9]*"
+                                 value={this.state.newPin}
+                                 inputmode="numeric"
+                                 onChange={this.newPinChange}/>
+                        </div>
+                        <div className="buttons">
+                            {setPinButton}
+                        </div>
+                    </div>
+                  );
             }
 
             return (
-                <div className="content without-tab-bar">
+                <div className="content without-tab-bar without-footer">
                     {header}
                     <Peerio.UI.TalkativeProgress
                         enabled={this.state.inProgress}

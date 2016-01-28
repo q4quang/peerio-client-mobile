@@ -58,9 +58,11 @@ badge.
         transform: scale(1, 0.8) translate(-50%, 0%) rotate(180deg);
       }
     }
-    .tab-icon {
+    i {
       margin-right: $margin-small;
+      color: $white-100;
     }
+
     .badge {
       position: relative;
       left: 6px;

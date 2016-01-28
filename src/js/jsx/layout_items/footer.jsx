@@ -47,10 +47,7 @@
 
             return (
                 <div id="footer">
-                    <Peerio.UI.Tappable element="div" id="global-back" className={this.isAppRoot() ? 'hide' : ''}
-                                        onTap={this.goBack}>
-                        <i className="material-icons">chevron_left</i> back
-                    </Peerio.UI.Tappable>
+
                     {greenButton}
                 </div>
             );

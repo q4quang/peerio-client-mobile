@@ -31,22 +31,23 @@ Button                                            | Button Class
 
 Footer Buttons                                       | Button Class/ID
 ---------------------------------------------------- | -----------------
-<div id="global-back">Global Back Button</div>       | `#global-back`
+
 <div class="btn-global-action">Global Action Button</div>| `.btn-global-action`
 */
 
-
+// TODO Refactor all of the i { color: $white-100} stuff.
 @mixin button-ripple() {
   position: relative;
-  &:after{
-    content: " ";
+
+  &:after {
+    content: ' ';
     display: block;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background:radial-gradient(circle, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 20%, transparent 21%);
+    background: radial-gradient(circle, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, .5) 20%, transparent 21%);
     opacity: 1;
     background-size: 0%;
     background-position: 50% 50%;
@@ -55,13 +56,14 @@ Footer Buttons                                       | Button Class/ID
 
   &.on-touchstart:after {
     background-size: 1000%;
-    transition: background-size $speed-normal ease-in, opacity $speed-fast ease-in 100ms;
     opacity: 0;
+    transition: background-size $speed-normal ease-in, opacity $speed-fast ease-in 100ms;
   }
 }
 
 @mixin round-ripple() {
   @include button-ripple;
+
   &:after {
     border-radius: $radius-circle;
   }
@@ -78,7 +80,7 @@ Footer Buttons                                       | Button Class/ID
 .btn {
   @include button-ripple;
   padding: 0 $padding-small;
-  display: inline-block;;
+  display: inline-block;
   font-size: 14px;
   font-weight: 400;
   text-align: center;
@@ -92,15 +94,20 @@ Footer Buttons                                       | Button Class/ID
   text-transform: uppercase;
   cursor: pointer;
 
-  span {
-    vertical-align: top;
+  i {
+    color: currentColor;
+
+    &:first-child {
+      margin-right: $margin-small;
+    }
+
+    &:last-child {
+      margin-left: $margin-small;
+    }
   }
 
-  i:first-child {
-    margin-right: $margin-small;
-  }
-  i:last-child {
-    margin-left: $margin-small;
+  span {
+    vertical-align: top;
   }
 }
 
@@ -113,32 +120,35 @@ Footer Buttons                                       | Button Class/ID
   @extend .btn;
   @extend .flex-shrink-0;
 
-  width: 85px;
   margin: $margin-small 0;
-
-  i {
-    margin-right: $margin-small;
-  }
+  width: 85px;
 }
+
 // looking at the style guide, this button style doesn't offer much affordance. I would consider removing it.
 // What good is a button that the user doens't know is a button?
-.btn-subtle{
+.btn-subtle {
   @extend .btn;
 }
 
-.btn-dark{
+.btn-dark {
   @extend .btn;
-  background-color: rgba(0,0,0,0.4);
+
+  background-color: rgba(0, 0, 0, .4);
 }
 
 .btn-safe {
   @extend .btn;
+
   background-color: color(p-green);
+
+  i {
+    color: $white-100;
+  }
 }
 
 .btn-danger {
   @extend .btn;
-  background-color:color(danger);
+  background-color: color(danger);
 }
 
 .btn-icon-stacked {
@@ -152,6 +162,10 @@ Footer Buttons                                       | Button Class/ID
   flex: 1 0 0;
   flex-direction: column;
 
+  i {
+    color: $white-100;
+  }
+
   label {
     color: $white-70;
   }
@@ -164,18 +178,24 @@ Footer Buttons                                       | Button Class/ID
   padding: 0;
 }
 
-button:disabled , .btn-disabled {
+button:disabled,
+.btn-disabled {
   @extend .btn;
+
   color: $black-12;
   background-color: $black-12;
   cursor: default;
 
+  i {
+    color: currentColor;
+  }
+
 }
 
-.btn-global-action,
-#global-back {
+.btn-global-action {
   @include button-ripple;
 
+  background-color: color(footer-btn-color);
   font-weight: 400;
   display: flex;
   flex: 1 1 auto;
@@ -189,26 +209,8 @@ button:disabled , .btn-disabled {
   font-size: 14px;
   text-transform: uppercase;
 
-  i{
+  i {
     margin-right: $margin-small;
-  }
-}
-
-.btn-global-action {
-  background-color: color(footer-btn-color);
-}
-
-//footer back button
-#global-back {
-  flex-grow: 0;
-  justify-content: flex-start;
-  transition: background-color 100ms ease-in;
-
-  &.on-touchstart {
-    background-color: $black-38;
-  }
-
-  &:only-child {
-    flex-grow: 1;
+    color: currentColor;
   }
 }

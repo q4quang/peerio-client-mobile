@@ -5,7 +5,7 @@
   'use strict';
 
   Peerio.UI.NavBar = React.createClass({
-    mixins: [ReactRouter.Navigation],
+    mixins: [ReactRouter.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
 
     //--- REACT EVENTS
     getInitialState: function () {
@@ -37,9 +37,17 @@
 
       return (
         <div id="navbar" className="flex-row flex-align-center">
+        {
+          this.isAppRoot() ?
           <div id="sidemenu-toggle" ref="toggle" onTouchStart={this.handleSidebarToggle}>
             <i className="material-icons">menu</i>
           </div>
+          :  <Peerio.UI.Tappable element="i" id="global-back" onTap={this.goBack}
+              className="material-icons">arrow_back
+          </Peerio.UI.Tappable>
+
+        }
+
           <div className="logo" onTouchStart={devmode.summon}>
               <img src="media/img/peerio-short-logo-white.png" className="peerio-logo"/>
           </div>

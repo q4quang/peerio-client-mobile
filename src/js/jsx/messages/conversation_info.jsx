@@ -33,7 +33,7 @@
             if (!c) return <Peerio.UI.FullViewSpinner/>;
 
             return (
-                <div className="content without-tab-bar">
+                <div className="content without-tab-bar without-footer">
                   <div className="headline">{c.subject}</div>
                   <div className="subhead flex-row">
                     <span className="icon-with-label"><i

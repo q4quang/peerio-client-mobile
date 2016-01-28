@@ -129,7 +129,7 @@
 
             return (
                 <div>
-                    <div className="without-tab-bar content">
+                    <div className="content without-tab-bar without-footer">
                         <div className="headline">Profile</div>
                         <div className="flex-col flex-justify-center">
                             <div className="input-group">

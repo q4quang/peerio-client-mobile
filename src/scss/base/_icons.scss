@@ -4,8 +4,11 @@ title: Icons
 name: Icons
 category: Base CSS
 ---
+Peerio uses Material Icons for most application icons.
+Icon reference is available at [https://design.google.com/icons/](https://design.google.com/icons/)
+Note: Material Icons are updated often. If you find that the font isn't working as expected, then try updating the font.
 
-Peerio uses fontAwesome for the majority of icon. Icons have a default font-size of 1em.
+Peerio uses fontAwesome for the file type icons.  Icons have a default font-size of 1em.
 The following icons have been colorized for different filetypes.
 
 Icon                                       | File-type  | Code
@@ -23,9 +26,10 @@ Icon                                       | File-type  | Code
 
 */
 
-.fa-file-o{
-
+.material-icons {
+  color: $black-54;
 }
+
 
 .fa-file-excel-o{
   color: #1c881c;

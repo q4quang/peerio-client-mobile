@@ -1,14 +1,13 @@
-#footer{
+#footer {
+  background: color(p-blue-darker);
   position: absolute;
   display: flex;
   flex-direction: row;
   bottom: 0;
-  left:0;
-  right:0;
+  left: 0;
+  right: 0;
   width: 100%;
   height: $footer-height;
-  color: white;
-  background-color: color(p-blue-darker);
-  font-size: 13px;
+  color: $white-100;
   z-index: $z-tabbar;
 }

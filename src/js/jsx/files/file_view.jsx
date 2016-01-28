@@ -87,12 +87,12 @@
                                 className="material-icons">delete</i>Remove from your device</div> : null }
 
                         {file.cached ?
-                            <div className="btn-danger" onTouchEnd={this.handleRemove}>Remove from your device and cloud</div>
+                            <div className="btn-danger" onTouchEnd={this.handleRemove}>Remove from your device &amp; cloud</div>
                             :
                             <div className="btn-danger" onTouchEnd={this.handleRemove}>Remove from your cloud</div>}
 
                         {file.creator === Peerio.user.username ?
-                            <div className="btn-danger" onTouchEnd={this.handleNuke}>Unshare and remove from all
+                            <div className="btn-danger" onTouchEnd={this.handleNuke}>Unshare &amp; remove from all
                                 clouds</div> : null }
                     </div>);
             }
@@ -100,7 +100,7 @@
             // TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
 
             return (
-                <div className="content without-tab-bar">
+                <div className="content without-tab-bar without-footer">
                     <ul>
                         <li>
                             <i className={'file-type fa fa-' + file.icon}></i>
