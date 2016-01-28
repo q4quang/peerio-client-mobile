@@ -112,6 +112,7 @@
                     this.resizeTextAreaAsync();
                     this.setState({attachments: [], sending: false});
                 });
+            this.setState({ empty: true});    
         },
         resizeTextAreaAsync: function () {
             setTimeout(this.resizeTextArea, 0);
