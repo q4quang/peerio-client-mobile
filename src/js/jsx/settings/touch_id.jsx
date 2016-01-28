@@ -138,23 +138,33 @@
             });
         },
 
+        showFingerPrintWarning: function () {
+          Peerio.Action.showAlert({
+            headline: 'NOTE ON LAW ENFORCEMENT',
+            text: 'In Oct. 2014, a USA court ruled that a police officer can demand you to unlock your device with a fingerprint but not an alphanumeric passcode. Similar laws may exist in other national or regional jurisdictions and should be considered if law enforcement is part of your threat model.'
+          });
+        },
+
         render: function() {
 
-            return this.state.visible ? (
+          return this.state.visible ? (
                 <ul>
-                  <Peerio.UI.Tappable element="li" onTap={this.enableTouchId}>
-                    <div type="checkbox" className={'checkbox-input' + (this.state.enabled
-                    ? ' checked': '')}>
-                        <i className="material-icons"></i>
-                        </div>
-                        <div>Enable fingerprint identification</div>
+                <li>
+                  <Peerio.UI.Tappable element="div" onTap={this.enableTouchId}
+                    className="flex-row">
+                      <div type="checkbox" className={'checkbox-input' + (this.state.enabled
+                            ? ' checked': '')}>
+                        <i className="material-icons"/>
+                      </div>
+                      <div>Enable fingerprint key</div>
                     </Peerio.UI.Tappable>
                     { this.state.fingerPrintWarning ? (
-                    <div>
-                        <p><b>NOTE ON LAW ENFORCEMENT</b></p>
-                        <p>In Oct. 2014, a USA court ruled that a police officer can demand you to unlock your device with a fingerprint but not an alphanumeric passcode. Similar laws may exist in other national or regional jurisdictions and should be considered if law enforcement is part of your threat model.</p>
-                    </div>
+                      <Peerio.UI.Tappable element="i" onTap={this.showFingerPrintWarning} className="material-icons">
+                        info_outline
+                      </Peerio.UI.Tappable>
+
                     ) : null }
+                    </li>
                 </ul>
             ) : (
                 <ul>
