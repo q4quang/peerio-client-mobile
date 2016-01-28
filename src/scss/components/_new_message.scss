@@ -1,46 +1,32 @@
+// TODO: refactor add and attach buttons - paul
+$recipients-height: 40px;
+
 #new-message {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
 
-  .recipients{
-    display: flex;
-    min-height: 40px;
-    align-items: center;
-    .names{
-      flex-grow: 1;
-    }
-  }
-
-  .name-selected{
-    font-size: 0.9em;
-    background-color: color(p-blue-light-10);
-    color: white;
-    border-radius: 3px;
-    padding: 3px 3px 3px 3px;
-    display: inline-block;
-    margin: 2px;
-    word-break: break-all;
-  }
-  .subject-inputs{
-    display: flex;
-  }
-  $recipients-height: 40px;
-
-  .to{
-    min-width: 30px;
-    text-align: center;
-  }
   .recipients {
+    display: flex;
     min-height: $recipients-height;
+    align-items: center;
     padding-right: 0;
+    max-height: 96px;
+    overflow: hidden;
+
+    .names {
+      flex-grow: 1;
+      max-height: 96px;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+
     .add-btn {
       min-width: 48px;
       min-height: $recipients-height;
       background-color: #eee;
       color: color(meta-text-dark);
-      font-size: 150%;
       display: flex;
       position: relative;
       align-items: center;
@@ -50,11 +36,33 @@
     }
   }
 
+  .name-selected {
+    font-size: .9em;
+    background-color: color(p-blue-light-10);
+    color: $white-100;
+    border-radius: 4px;
+    padding: 4px;
+    display: inline-block;
+    margin: 2px;
+    word-break: break-all;
+  }
+
+  .subject-inputs {
+    display: flex;
+    min-height: $recipients-height;
+    border-bottom: $border-dark;
+  }
+
+
+  .to {
+    min-width: 30px;
+    text-align: center;
+  }
+
   .attach-btn {
     position: relative;
     min-width: 48px;
     border-top: $border-dark;
-    font-size: 188%;
     background-color: color(list-item-bg);
     color: color(meta-text-dark);
     align-items: center;
@@ -63,18 +71,14 @@
     min-height: $recipients-height;
   }
 
-  .subject-inputs{
-    display: flex;
-    min-height: $recipients-height;
-    border-bottom: $border-dark;
-  }
   .subject {
-
     border-top: $border-dark;
     border-bottom: 0;
     -webkit-appearance: none; // removes weird inner shadow on ios
-    padding-left: $padding-small;
+    padding: 0 $padding-small;
     height: 40px;
+    text-overflow: ellipsis;
+
     &:focus {
       background-color: lighten(color(list-item-bg), 5%);
     }
@@ -84,9 +88,10 @@
     resize: none;
     top: 80px;
     bottom: 0;
-    padding: 10px 5px;
+    padding: $padding-small;
     border: 0;
-    flex-grow:1;
+    flex-grow: 1;
+
     &:focus {
       background-color: lighten(color(list-item-bg), 5%);
     }

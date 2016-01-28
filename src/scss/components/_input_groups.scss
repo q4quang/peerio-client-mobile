@@ -41,14 +41,20 @@ A row of inputs or selects should be wrapped in `.flex-row`.
   min-height: 72px;
   padding: $padding-base 0 $padding-small;
   margin: 0 $margin-base;
+
+  input {
+    margin: 0;
+  }
 }
 // this is when you have a row of inputs
 .flex-row {
   .input-group {
     margin: 0 #{$margin-small/2};
+
     &:first-child {
       margin-left: $margin-base;
     }
+
     &:last-child {
       margin-right: $margin-base;
     }

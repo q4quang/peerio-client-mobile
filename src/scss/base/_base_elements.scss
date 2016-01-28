@@ -76,6 +76,7 @@ textarea {
 }
 
 input {
+
   &[type="search"] {
     -webkit-appearance: none;
     box-sizing: border-box;
@@ -179,8 +180,4 @@ p {
   padding: 0 $padding-base;
 }
 
-
-.material-icons{
-  color: $black-54;
-}
 // universal components

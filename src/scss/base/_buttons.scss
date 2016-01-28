@@ -38,15 +38,16 @@ Footer Buttons                                       | Button Class/ID
 // TODO Refactor all of the i { color: $white-100} stuff.
 @mixin button-ripple() {
   position: relative;
-  &:after{
-    content: " ";
+
+  &:after {
+    content: ' ';
     display: block;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background:radial-gradient(circle, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 20%, transparent 21%);
+    background: radial-gradient(circle, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, .5) 20%, transparent 21%);
     opacity: 1;
     background-size: 0%;
     background-position: 50% 50%;
@@ -55,13 +56,14 @@ Footer Buttons                                       | Button Class/ID
 
   &.on-touchstart:after {
     background-size: 1000%;
-    transition: background-size $speed-normal ease-in, opacity $speed-fast ease-in 100ms;
     opacity: 0;
+    transition: background-size $speed-normal ease-in, opacity $speed-fast ease-in 100ms;
   }
 }
 
 @mixin round-ripple() {
   @include button-ripple;
+
   &:after {
     border-radius: $radius-circle;
   }
@@ -78,7 +80,7 @@ Footer Buttons                                       | Button Class/ID
 .btn {
   @include button-ripple;
   padding: 0 $padding-small;
-  display: inline-block;;
+  display: inline-block;
   font-size: 14px;
   font-weight: 400;
   text-align: center;
@@ -94,17 +96,18 @@ Footer Buttons                                       | Button Class/ID
 
   i {
     color: currentColor;
+
+    &:first-child {
+      margin-right: $margin-small;
+    }
+
+    &:last-child {
+      margin-left: $margin-small;
+    }
   }
 
   span {
     vertical-align: top;
-  }
-
-  i:first-child {
-    margin-right: $margin-small;
-  }
-  i:last-child {
-    margin-left: $margin-small;
   }
 }
 
@@ -117,27 +120,27 @@ Footer Buttons                                       | Button Class/ID
   @extend .btn;
   @extend .flex-shrink-0;
 
-  width: 85px;
   margin: $margin-small 0;
-
-  i {
-    margin-right: $margin-small;
-  }
+  width: 85px;
 }
+
 // looking at the style guide, this button style doesn't offer much affordance. I would consider removing it.
 // What good is a button that the user doens't know is a button?
-.btn-subtle{
+.btn-subtle {
   @extend .btn;
 }
 
-.btn-dark{
+.btn-dark {
   @extend .btn;
-  background-color: rgba(0,0,0,0.4);
+
+  background-color: rgba(0, 0, 0, .4);
 }
 
 .btn-safe {
   @extend .btn;
+
   background-color: color(p-green);
+
   i {
     color: $white-100;
   }
@@ -145,7 +148,7 @@ Footer Buttons                                       | Button Class/ID
 
 .btn-danger {
   @extend .btn;
-  background-color:color(danger);
+  background-color: color(danger);
 }
 
 .btn-icon-stacked {
@@ -160,7 +163,7 @@ Footer Buttons                                       | Button Class/ID
   flex-direction: column;
 
   i {
-    color: $white-100
+    color: $white-100;
   }
 
   label {

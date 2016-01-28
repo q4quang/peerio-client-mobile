@@ -64,29 +64,33 @@
 
             return (
                 <div className="content-inline-dialog no-scroll-hack">
-                    <div className="info-label">Two Factor Authentication (2FA)</div>
+                    <div className="headline-md">Two Factor Authentication (2FA)</div>
                     <div>
                         <div>
-                            <p className="info-small col-12">
+                            <p>
                                 The operation you requested is
                                 protected by 2FA. Please enter the six digit
                                 code that appears in the authenticator app:
                             </p>
-                            <input
-                                className="txt-lrg text-center"
-                                ref="authenticatorCode"
-                                autoComplete="off" autoCorrect="off"
-                                autoCapitalize="off" spellCheck="false"
-                                onChange={this.onChangeAuthy}
-                                value={this.state.authyCode}/>
+                            <div className="input-group">
+                              <input
+                                  className="txt-lrg text-center"
+                                  ref="authenticatorCode"
+                                  autoComplete="off" autoCorrect="off"
+                                  autoCapitalize="off" spellCheck="false"
+                                  onChange={this.onChangeAuthy}
+                                  value={this.state.authyCode}/>
+                            </div>
                         </div>
-                        <p className="info-small col-12">
+                        <p className="caption">
                             {this.state.message}
                         </p>
-                        <Peerio.UI.Tappable element="div" className="btn-subtle"
-                                            onTap={this.removeDialog}>
-                            Cancel
-                        </Peerio.UI.Tappable>
+                        <div className="buttons">
+                          <Peerio.UI.Tappable element="div" className="btn-danger"
+                                              onTap={this.removeDialog}>
+                              Cancel
+                          </Peerio.UI.Tappable>
+                        </div>
                     </div>
                 </div>
             );
