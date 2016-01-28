@@ -85,6 +85,10 @@
         sendAck: function () {
             this.reply(true);
         },
+
+        sendReply: function() {
+            this.reply(false);
+        },
         reply: function (ack) {
             var body, files;
             if (ack) {
@@ -211,7 +215,7 @@
 
                       { !this.state.empty ?
                           <div className="reply-send">
-                            <i className="material-icons" onTouchEnd={this.reply}>send</i>
+                            <i className="material-icons" onTouchEnd={this.sendReply}>send</i>
                           </div> :
 
                           <div className="reply-ack">
