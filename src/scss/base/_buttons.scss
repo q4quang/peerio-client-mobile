@@ -31,11 +31,11 @@ Button                                            | Button Class
 
 Footer Buttons                                       | Button Class/ID
 ---------------------------------------------------- | -----------------
-<div id="global-back">Global Back Button</div>       | `#global-back`
+
 <div class="btn-global-action">Global Action Button</div>| `.btn-global-action`
 */
 
-
+// TODO Refactor all of the i { color: $white-100} stuff.
 @mixin button-ripple() {
   position: relative;
   &:after{
@@ -92,6 +92,10 @@ Footer Buttons                                       | Button Class/ID
   text-transform: uppercase;
   cursor: pointer;
 
+  i {
+    color: currentColor;
+  }
+
   span {
     vertical-align: top;
   }
@@ -134,6 +138,9 @@ Footer Buttons                                       | Button Class/ID
 .btn-safe {
   @extend .btn;
   background-color: color(p-green);
+  i {
+    color: $white-100;
+  }
 }
 
 .btn-danger {
@@ -151,6 +158,10 @@ Footer Buttons                                       | Button Class/ID
   justify-content: center;
   flex: 1 0 0;
   flex-direction: column;
+
+  i {
+    color: $white-100
+  }
 
   label {
     color: $white-70;
@@ -170,10 +181,13 @@ button:disabled , .btn-disabled {
   background-color: $black-12;
   cursor: default;
 
+  i {
+    color: currentColor;
+  }
+
 }
 
-.btn-global-action,
-#global-back {
+.btn-global-action {
   @include button-ripple;
 
   font-weight: 400;
@@ -191,24 +205,10 @@ button:disabled , .btn-disabled {
 
   i{
     margin-right: $margin-small;
+    color: $white-100;
   }
 }
 
 .btn-global-action {
   background-color: color(footer-btn-color);
-}
-
-//footer back button
-#global-back {
-  flex-grow: 0;
-  justify-content: flex-start;
-  transition: background-color 100ms ease-in;
-
-  &.on-touchstart {
-    background-color: $black-38;
-  }
-
-  &:only-child {
-    flex-grow: 1;
-  }
 }

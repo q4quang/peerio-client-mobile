@@ -19,7 +19,7 @@
 
         render: function () {
            return (
-               <div className="content without-tab-bar flex-col flex-justify-start">
+               <div className="content without-tab-bar flex-col flex-justify-start without-footer">
                <div className="headline">Redeem Coupon</div>
                   <div className="input-group">
                       <label>If you have a promotional code, please enter it below.</label>

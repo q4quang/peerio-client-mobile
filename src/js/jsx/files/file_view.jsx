@@ -100,7 +100,7 @@
             // TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
 
             return (
-                <div className="content without-tab-bar">
+                <div className="content without-tab-bar without-footer">
                     <ul>
                         <li>
                             <i className={'file-type fa fa-' + file.icon}></i>

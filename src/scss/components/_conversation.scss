@@ -22,15 +22,17 @@ category: Components
 */
 
 $edge-distance: 0;
-$msg-distance: 15px;
+$msg-distance: 16px;
 $big-side-distance: 34px;
 $avatar-size: 29px;
 
 .conversation {
   margin-top: 36px;
-  bottom: 105px !important;
+  bottom: 64px !important;
   color: color(p-blue-darker);
   user-select: initial;
+  border-bottom: $border-dark;
+
   .item {
     width: 100%;
     padding: 0 $padding-base 0 $edge-distance;
@@ -180,6 +182,10 @@ $avatar-size: 29px;
   color: $white-100;
   line-height: 36px;
 
+  i {
+    color: $white-100;
+  }
+
   .conversation-info {
     position: absolute;
     top: 0;
@@ -203,10 +209,16 @@ $avatar-size: 29px;
 
     margin: 0 $margin-small 0 auto;
     white-space: nowrap;
+
+    i {
+      margin-right: $margin-small;
+    }
   }
 
   .info {
     height: 36px;
+    width: 36px;
+    text-align: right;
   }
 
   .participants {
@@ -235,14 +247,13 @@ $avatar-size: 29px;
 #reply {
   position: absolute;
   display: flex;
-  bottom: $footer-height;
+  bottom: 0;
   height: auto;
   left: 0;
   right: 0;
   width: 100%;
-  z-index: $z-tabbar;
-  border-top: $border-dark;
-  background-color: lighten(color(meta-text-light), 30%);
+  z-index: #{$z-tabbar + 1};
+  background-color: #f9f9f9;
 }
 
 #reply-overlay {
@@ -258,7 +269,7 @@ $avatar-size: 29px;
   opacity: 0.6;
 }
 
-.reply-ack, .reply-attach {
+.reply-ack, .reply-attach, .reply-send {
   display: block;
   position: relative;
   width: 40px;
@@ -268,7 +279,7 @@ $avatar-size: 29px;
   text-align: center;
 }
 // reply acknowledge
-.reply-ack{
+.reply-ack, .reply-send{
   i{
     background-color: color(p-blue-light-10);
     border-radius: 50%;
@@ -281,20 +292,21 @@ $avatar-size: 29px;
   }
 
 }
-
+.reply-send i {
+  background: color(p-green);
+}
 .reply-input {
-  min-height: 45px;
+  min-height: 48px;
   max-height: 150px;
-  padding: #{$padding-small/2} $padding-small 0 $padding-small;
   flex: 1 1 auto;
   overflow: scroll;
-  border: 1px solid lighten(color(meta-text-light), 28%);
-  border-radius: 5px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  border: 0;
+  margin: $margin-small 0;
+  padding: 0 $padding-small;
   align-self: center;
   user-select: initial;
   resize: none;
+  background: rgba(0, 0, 0, 0);
 
   &:focus{
     outline: none;

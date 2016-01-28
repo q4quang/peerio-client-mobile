@@ -14,6 +14,10 @@
   font-size: $navbar-font-size;
   z-index: $z-navbar;
 
+  i {
+    color: $white-100;
+  }
+
   .logo{
     @extend .flex-col;
     @extend .flex-justify-center;
@@ -33,7 +37,7 @@
   }
 }
 
-#sidemenu-toggle, #app-lock, #search {
+#sidemenu-toggle, #app-lock, #search, #global-back {
   height: 48px;
   width: 48px;
   line-height: 48px;
@@ -71,9 +75,6 @@
   text-align: center;
 }
 
-#app-lock {
-  padding-left: 10px;
-}
 
 // spacer to make the right cell go to the right
 .spacer {

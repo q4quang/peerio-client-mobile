@@ -92,7 +92,7 @@
             }
 
             return (
-                <div className="content without-tab-bar">
+                <div className="content without-tab-bar without-footer">
                     {header}
                     <Peerio.UI.TalkativeProgress
                         enabled={this.state.inProgress}

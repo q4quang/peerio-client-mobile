@@ -74,7 +74,7 @@
         },
         render: function(){
             return (
-                <div className="content without-tab-bar">
+                <div className="content without-tab-bar without-footer">
                   <div className="headline">Preferences</div>
                   <div className="subhead">Notifications</div>
                   <ul>

@@ -111,7 +111,9 @@ Click the sidebar in the example to toggle the `.open` state.
   //   }
   // }
   .sidebar-menu {
-      overflow-y: auto;
+    i {
+      color: $white-100;
+    }
   }
 
   ul{

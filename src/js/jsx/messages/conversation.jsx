@@ -10,7 +10,8 @@
                 // unsent attachments to the message that will be sent next, if user taps "send"
                 attachments: [],
                 conversation: null,
-                sending: false
+                sending: false,
+                empty: true
             };
         },
         componentWillMount: function () {
@@ -163,6 +164,11 @@
             return Peerio.Conversation.getMessagesRange(this.props.params.id, to, from);
         },
 
+        setEmpty: function () {
+          var node = this.refs.reply.getDOMNode();
+          return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
+        },
+
         //----- RENDER
         render: function () {
             // todo: loading state
@@ -175,7 +181,6 @@
             return (
                 <div>
                   <Peerio.UI.ConversationHead conversation={conversation}/>
-
                   <Peerio.UI.VScroll
                     onGetPage={this.getPage}
                     onGetPrevPage={this.getPrevPage}
@@ -190,22 +195,31 @@
                   />
 
                   <div id="reply">
-                    <div className="reply-ack">
-                      <i className="material-icons" onTouchEnd={this.sendAck}>thumb_up</i>
-                    </div>
-
-                    <textarea
-                      className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
-                      rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea}
-                      disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}></textarea>
-
                     <div className="reply-attach">
                       <i className="material-icons"
                         onTouchEnd={this.openFileSelect}>
                         attach_file
                       </i>
                       <div className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length || ''}</div>
-                        </div>
+                    </div>
+
+                      <textarea
+                        className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
+                        rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea, this.setEmpty}
+                        disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}/>
+
+
+                      { !this.state.empty ?
+                          <div className="reply-send">
+                            <i className="material-icons" onTouchEnd={this.reply}>send</i>
+                          </div> :
+
+                          <div className="reply-ack">
+                              <i className="material-icons" onTouchEnd={this.sendAck}>thumb_up</i>
+                          </div>
+                        }
+
+
                         {this.state.sending ? (<div id="reply-overlay"></div>) : null}
                     </div>
                 </div>

@@ -57,6 +57,11 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 
 .content.without-tab-bar, .without-tab-bar  {
   @include content-wrapper($top:  $navbar-height, $bottom: $footer-height);
+
+  &.without-footer {
+    bottom: 0;
+      z-index: #{$z-tabbar + 1};
+  }
 }
 
 .content {
