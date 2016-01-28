@@ -175,8 +175,10 @@ Footer Buttons                                       | Button Class/ID
   padding: 0;
 }
 
-button:disabled , .btn-disabled {
+button:disabled,
+.btn-disabled {
   @extend .btn;
+
   color: $black-12;
   background-color: $black-12;
   cursor: default;
@@ -190,6 +192,7 @@ button:disabled , .btn-disabled {
 .btn-global-action {
   @include button-ripple;
 
+  background-color: color(footer-btn-color);
   font-weight: 400;
   display: flex;
   flex: 1 1 auto;
@@ -203,12 +206,8 @@ button:disabled , .btn-disabled {
   font-size: 14px;
   text-transform: uppercase;
 
-  i{
+  i {
     margin-right: $margin-small;
-    color: $white-100;
+    color: currentColor;
   }
-}
-
-.btn-global-action {
-  background-color: color(footer-btn-color);
 }
