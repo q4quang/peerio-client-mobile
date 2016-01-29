@@ -149,25 +149,27 @@
 
           return this.state.visible ? (
                 <ul>
-                <li>
-                  <Peerio.UI.Tappable element="div" onTap={this.enableTouchId}
-                    className="flex-row">
-                      <div type="checkbox" className={'checkbox-input' + (this.state.enabled
-                            ? ' checked': '')}>
-                        <i className="material-icons"/>
-                      </div>
-                      <div>Enable fingerprint key</div>
-                    </Peerio.UI.Tappable>
-                    { this.state.fingerPrintWarning ? (
-                      <Peerio.UI.Tappable element="i" onTap={this.showFingerPrintWarning} className="material-icons">
-                        info_outline
+                  <li className="subhead">Touch ID</li>
+                  <li>
+                    <Peerio.UI.Tappable element="div" onTap={this.enableTouchId}
+                      className="flex-row">
+                        <div type="checkbox" className={'checkbox-input' + (this.state.enabled
+                              ? ' checked': '')}>
+                          <i className="material-icons"/>
+                        </div>
+                        <div>Enable fingerprint key</div>
                       </Peerio.UI.Tappable>
+                      { this.state.fingerPrintWarning ? (
+                        <Peerio.UI.Tappable element="i" onTap={this.showFingerPrintWarning} className="material-icons">
+                          info_outline
+                        </Peerio.UI.Tappable>
 
-                    ) : null }
-                    </li>
-                </ul>
+                      ) : null }
+                      </li>
+                  </ul>
             ) : (
                 <ul>
+                    <li className="subhead">Touch ID</li>
                     <li>Fingerprint identification unavailable</li>
                 </ul>
             );
