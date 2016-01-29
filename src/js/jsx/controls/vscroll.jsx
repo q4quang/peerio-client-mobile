@@ -124,18 +124,24 @@
         },
 
         // parent component calls this
-        deleteItems: function (items) {
+        deleteItems: function (deleteItems) {
+            var items = this.state.items;
+
             for (var i = 0; i < items.length; i++) {
                 var key = items[i][this.props.itemKeyName];
                 var existing = this.itemsHash[key];
                 if (!existing) continue;
-                items.splice(items.indexOf(existing), 1);
-                delete this.itemsHash[key];
+                if(deleteItems.indexOf(key) != -1) {
+                    items.splice(items.indexOf(existing), 1);
+                    delete this.itemsHash[key];
+                }
             }
             this.setState({
                 items: items,
                 upperItem: items.length && items[0] || null
             }, () => this.loading = false);
+
+            return items.length;
         },
 
         getFirstItem: function () {

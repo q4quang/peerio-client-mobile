@@ -22,7 +22,9 @@
         },
 
         destroyConversation: function () {
-            this.setState({destroyAnimation: true}, ()=> Peerio.Messages.removeConversation(this.props.item.id));
+            Peerio.user.removeConversation(this.props.item.id)
+            .then ( () =>
+                   this.setState({destroyAnimation: true} ) );
         },
 
         showDestroyDialog: function () {
