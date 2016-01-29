@@ -245,7 +245,7 @@ Peerio.Helpers.init = function () {
      * Validates first or last name in signup and settings
      */
     api.isNameValid = function(name) {
-        return !name || !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i);
+        return !name || !!name.match(/^[a-zа-яãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i);
     };
 
     api.isValidEmail = function(val) {
