@@ -157,6 +157,7 @@
                                     {addressHint}
                                     {addressItems}
                                 <Peerio.UI.AddAddress ref="addAddress" />
+                              <div className="caption">Phone requires country code</div>
                             </div>
                             <div className="input-group">
                                 <div className="info-label">Your public key:</div>
