@@ -214,7 +214,7 @@
         // change focus to passphrase input on enter
         handleUsernameChange: function (e) {
             var value = this.refs.username.getDOMNode().value;
-            Peerio.Helpers.isValidUsername(value) && this.setState( { username: value } );
+            (!value || Peerio.Helpers.isValidUsername(value)) && this.setState( { username: value } );
         },
  
         // submit form on enter

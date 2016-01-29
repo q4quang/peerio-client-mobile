@@ -264,6 +264,6 @@ Peerio.Helpers.init = function () {
     * Validated both server and client side. /^\w{1,16}$/
     */
     api.isValidUsername = function(name) {
-        return name && name.match(/^\w{1,16}$/);
+        return !!name.match(/^\w{1,16}$/);
     };
 };
