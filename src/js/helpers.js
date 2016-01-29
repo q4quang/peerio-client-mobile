@@ -257,4 +257,13 @@ Peerio.Helpers.init = function () {
         var phoneRegex = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/i);
         return phoneRegex.test(val);
     };
+
+    /**
+    * Username: 1 to 16 characters, letters, numbers
+    * and underscore. 
+    * Validated both server and client side. /^\w{1,16}$/
+    */
+    api.isValidUsername = function(name) {
+        return name && name.match(/^\w{1,16}$/);
+    };
 };
