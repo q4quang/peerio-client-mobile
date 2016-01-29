@@ -67,6 +67,7 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
   .#{$color} {
     color: $value;
   }
+  
   .#{$color}-bg {
     background-color: $value;
   }
@@ -103,9 +104,11 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 .hide {
   display: none !important;
 }
+
 .text-center {
   text-align: center;
 }
+
 .text-right {
   text-align: right;
 }
@@ -113,6 +116,7 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 .pull-left {
   float: left;
 }
+
 .pull-right {
   float: right;
 }
@@ -127,9 +131,10 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 
 //clearfix
 @mixin clearfix() {
-  &:before, &:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+  &:before,
+  &:after {
+    content: ' '; // 1
+    display: table; // 2
   }
 
   &:after {
@@ -165,5 +170,5 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 
 
 .italic {
-    font-style: italic;
+  font-style: italic;
 }

@@ -72,22 +72,21 @@
                 return (
                     <div>
                         <Peerio.UI.Swiper onSwipeLeft={this.toggle} className={className + ' sidebar'}>
-                            <ul className="flex-grow-0 flex-shrink-0 sidebar-header flex-col">
-                                <li className="flex-row text-overflow">
+                            <ul className="sidebar-header">
+                                <li>
                                     <Peerio.UI.Avatar size="big" username={user.username}/>
                                     <div className="text-overflow">
                                         <div className="headline-md">{user.firstName} {user.lastName}</div>
                                         <div className="subhead-inline">{user.username}</div>
                                     </div>
                                 </li>
-                                <li className="storage-info flex-col flex-align-start">
+                                <li className="storage-info">
                                     <label>Storage</label>
                                     <div>{quotaUsed} / {quota} ({quotaPercent}%)</div>
                                 </li>
                             </ul>
 
                             <div className="flex-col flex-grow-1 sidebar-menu" ref="menu">
-                                <div className="subhead-light">Settings</div>
                                 <ul>
                                     <Peerio.UI.Tappable tag='li'
                                         onTap={this.toggleAndTransition.bind(this, 'set_pin')}>
