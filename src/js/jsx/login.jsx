@@ -180,7 +180,6 @@
             if (e) e.preventDefault();
 
             if (this.state.waitingForLogin) return;
-            this.setState({waitingForLogin: true});
 
             // getting username, if not provided
             var userNode = this.refs.username ? this.refs.username.getDOMNode() : null;
@@ -194,9 +193,11 @@
             passValue = this.systemPin ? this.systemPin : passValue;
             // hiding software keyboard
             Peerio.NativeAPI.hideKeyboard();
-            // TODO validate input
+            if(!userValue || !userValue.length) return;
             Peerio.user = Peerio.User.create(userValue);
             Peerio.NativeAPI.preventSleep();
+
+            this.setState({waitingForLogin: true});
             Peerio.user.login(passValue, !!this.systemPin)
                 .then(this.handleLoginSuccess)
                 .catch(this.handleLoginFail)
