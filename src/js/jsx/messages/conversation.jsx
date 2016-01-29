@@ -76,6 +76,7 @@
         },
 
         openFileSelect: function () {
+            Peerio.NativeAPI.hideKeyboard();
             Peerio.Action.showFileSelect({preselected: this.state.attachments.slice()});
         },
         acceptFileSelection: function (selection) {

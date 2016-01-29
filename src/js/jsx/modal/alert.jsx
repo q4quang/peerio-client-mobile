@@ -40,18 +40,16 @@
             var text = this.props.text || '';
 
             return (
-                <div>
-                    <div className="modal alert-wrapper">
-                        <div className="alert">
-                            <div className="alert-content">
+                <div className="modal alert-wrapper">
+                    <div className="alert">
+                        <div className="alert-content">
                             <div className={'headline' + (!this.props.headline ? ' hide' : '')}>
-                              {this.props.headline}
+                                {this.props.headline}
                             </div>
-                                <p>{text}</p>
-                            </div>
-                            <div className="alert-btns">
-                                {btns}
-                            </div>
+                            <p>{text}</p>
+                        </div>
+                        <div className="alert-btns">
+                            {btns}
                         </div>
                     </div>
                     <div className="dim-background"></div>

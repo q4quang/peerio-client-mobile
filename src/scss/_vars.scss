@@ -18,11 +18,12 @@ $item-height: 5rem;
 
 // z-indexes
 //  TODO: SOON, fix z-index weirdness. Start by removing all z-indexs and adding back where needed.
-$z-alert:7;
 $z-login:6;
 $z-navbar:5;
 $z-sidebar:4;
 $z-items-modal:10;
+// TODO - z-alert should be over all types of modals
+$z-alert:11;
 $z-tabbar:2;
 $z-content:1;
 
