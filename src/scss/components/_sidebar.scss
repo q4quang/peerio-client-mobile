@@ -43,11 +43,11 @@ Click the sidebar in the example to toggle the `.open` state.
   display: flex;
   flex-direction: column;
 
-  .sidebar-header{
+  .sidebar-header {
     @extend .flex-justify-center;
 
     background: $black-38;
-    margin: 0px;
+    margin: 0;
     padding: $padding-small 0;
 
     .info-label {
@@ -82,7 +82,7 @@ Click the sidebar in the example to toggle the `.open` state.
     }
   }
 
-  .app-version{
+  .app-version {
     position: static;
     margin-bottom: $margin-small;
     padding: 0 $padding-base;

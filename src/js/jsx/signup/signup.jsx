@@ -8,7 +8,7 @@
 
         doSignup: function () {
 
-            this.setState({activeStep: 3});
+            this.setState({activeStep: 4});
 
             Peerio.Auth.signup(this.state.username, this.state.passphrase, this.state.firstName, this.state.lastName)
             .then(() => {
@@ -57,7 +57,7 @@
         },
 
         handleNextStep: function (e) {
-            if (this.state.activeStep === 0) {
+            if (this.state.activeStep === 1) {
                 this.setState({
                     username: this.refs.username.getDOMNode().value,
                     firstName: this.refs.firstName.getDOMNode().value,
@@ -66,7 +66,7 @@
             }
 
             this.setState({activeStep: ++this.state.activeStep}, function () {
-                if (this.state.activeStep === 1) this.generatePassphrase();
+                if (this.state.activeStep === 2) this.generatePassphrase();
             });
 
         },
@@ -141,7 +141,7 @@
                     authMethod = this.renderSMSSent();
                     break;
             }
-
+            steps.push(this.renderDataOptIn());
             steps.push(this.renderStep0(authMethod));
             steps.push(this.renderStep1());
             // step 2 is in modal window
@@ -159,7 +159,7 @@
 
             return (
                 <div>
-                    <div className="content-wrapper-signup">
+                    <div className="content-wrapper-signup flex-grow-1 flex-col">
                         <div className="progress-bar">
                             {progressBarSteps}
                         </div>
@@ -169,6 +169,15 @@
                                 {currentStep}
                             </ReactCSSTransitionGroup>
                         </form>
+                        <div className="flex-grow-1"></div>
+                        <div className={'flex-row' + (this.state.activeStep === 0 ? ' flex-justify-end' : ' flex-justify-between')}>
+                          <Peerio.UI.Tappable element='div' className={'btn-back' + (this.state.activeStep === 0 ? ' hide' : '')}
+                              onTap={this.handlePreviousStep}><i
+                                  className="material-icons">chevron_left</i>back
+                          </Peerio.UI.Tappable>
+
+                          <div className="btn">Exit</div>
+                        </div>
                     </div>
                     <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup}/>
                 </div>
@@ -199,7 +208,7 @@
                     <label htmlFor="user_phone">Phone number</label>
                     <input type="tel" name="user_phone" id="user_phone" required="required"/>
                 </div>
-                <Peerio.UI.Tappable className="btn-md btn-safe" onTap={this.handleSMSCode}> Send SMS
+                <Peerio.UI.Tappable className="btn-safe" onTap={this.handleSMSCode}> Send SMS
                     code</Peerio.UI.Tappable>
             </div>);
         },
@@ -219,6 +228,20 @@
                 <input type="tel" name="sms_code" id="sms_code" required="required"/>
             </div>);
         },
+
+        renderDataOptIn: function () {
+            return (
+              <div>
+                  <div className="headline">Would you like to help with usability research?</div>
+                  <p>By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio.</p>
+                  <p>We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.</p>
+                  <div className="buttons">
+                    <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.handleNextStep}>Not right now</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleNextStep}>Ok</Peerio.UI.Tappable>
+                  </div>
+              </div>);
+        },
+
         renderStep0: function (authMethod) {
             return (<fieldset key={'signup-step-0'} className="animate-enter">
                           <div className="headline">Basic Information</div>
@@ -271,14 +294,9 @@
                                   </div>
 
                                   {authMethod}*/}
-                          <div className="flex-row">
-                              <Peerio.UI.Tappable element='div' className="btn-back"
-                                  onTap={this.handlePreviousStep}><i
-                                      className="material-icons">chevron_left</i>back
-                              </Peerio.UI.Tappable>
-
+                          <div className="buttons">
                               {this.state.usernameValid === true && this.state.firstNameValid && this.state.lastNameValid
-                                  ? <Peerio.UI.Tappable element='div' className="btn-safe width-full" onTap={this.handleNextStep}>
+                                  ? <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.handleNextStep}>
                                       continue</Peerio.UI.Tappable>
                                   : null }
                           </div>
@@ -327,11 +345,8 @@
                 <div className="buttons">
                   <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.showModal}> I'll remember my
                       passphrase</Peerio.UI.Tappable>
-                    <Peerio.UI.Tappable element='div' className="btn-dark" onTap={this.generatePassphrase}> I don't like
+                    <Peerio.UI.Tappable element='div' className="btn-primary" onTap={this.generatePassphrase}> I don't like
                       this passphrase</Peerio.UI.Tappable>
-                    <Peerio.UI.Tappable element='div' className="btn-back" onTap={this.handlePreviousStep}><i
-                            className="material-icons">chevron_left</i>back
-                    </Peerio.UI.Tappable>
                 </div>
 
             </fieldset>);
