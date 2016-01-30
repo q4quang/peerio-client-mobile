@@ -51,21 +51,19 @@
             var text = this.props.text || 'confirm text';
             var inputType = this.props.inputType || 'text';
             return (
-                <div>
-                    <div className="modal alert-wrapper">
-                        <div className="alert">
-                            <div className="alert-content">
-                                <div className="headline" style={{display: !this.props.headline ? 'none' : null}}>
-                                    {this.props.headline}
-                                </div>
-                                <p>{text}</p>
-                                <input type={inputType} ref="promptInput"
-                                       autoCorrect="off" autoCapitalize="off" spellCheck="false"
-                                       value={this.state.promptValue} onChange={this.updatePromptValue}/>
+                <div className="modal alert-wrapper">
+                    <div className="alert">
+                        <div className="alert-content">
+                            <div className="headline" style={{display: !this.props.headline ? 'none' : null}}>
+                                {this.props.headline}
                             </div>
-                            <div className="alert-btns">
-                                {btns}
-                            </div>
+                            <p>{text}</p>
+                            <input type={inputType} ref="promptInput"
+                                autoCorrect="off" autoCapitalize="off" spellCheck="false"
+                                value={this.state.promptValue} onChange={this.updatePromptValue}/>
+                        </div>
+                        <div className="alert-btns">
+                            {btns}
                         </div>
                     </div>
                     <div className="dim-background"></div>

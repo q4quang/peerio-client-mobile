@@ -19,7 +19,8 @@
                 passphraseVisible: false,
                 waitingForLogin: false,
                 loginError: false,
-                isPin: false
+                isPin: false,
+                username: window.PeerioDebug ? window.PeerioDebug.user : ''
             };
         },
         componentWillMount: function () {
@@ -179,7 +180,6 @@
             if (e) e.preventDefault();
 
             if (this.state.waitingForLogin) return;
-            this.setState({waitingForLogin: true});
 
             // getting username, if not provided
             var userNode = this.refs.username ? this.refs.username.getDOMNode() : null;
@@ -193,9 +193,11 @@
             passValue = this.systemPin ? this.systemPin : passValue;
             // hiding software keyboard
             Peerio.NativeAPI.hideKeyboard();
-            // TODO validate input
+            if(!userValue || !userValue.length) return;
             Peerio.user = Peerio.User.create(userValue);
             Peerio.NativeAPI.preventSleep();
+
+            this.setState({waitingForLogin: true});
             Peerio.user.login(passValue, !!this.systemPin)
                 .then(this.handleLoginSuccess)
                 .catch(this.handleLoginFail)
@@ -208,6 +210,13 @@
                 e.preventDefault();
             }
         },
+
+        // change focus to passphrase input on enter
+        handleUsernameChange: function (e) {
+            var value = this.refs.username.getDOMNode().value;
+            (!value || Peerio.Helpers.isValidUsername(value)) && this.setState( { username: value } );
+        },
+ 
         // submit form on enter
         handleKeyDownPass: function (e) {
             if (e.key === 'Enter') this.handleSubmit();
@@ -219,7 +228,6 @@
         //--- RENDER
         render: function () {
             var eyeIcon = this.state.passphraseVisible ? 'visibility_off' : 'visibility';
-            var debugUserName = window.PeerioDebug ? window.PeerioDebug.user : '';
             var debugPassword = window.PeerioDebug ? window.PeerioDebug.pass : '';
             var passInputType = this.state.passphraseVisible ? 'text' : 'password';
 
@@ -269,10 +277,16 @@
                                     (<div className="login-input">
                                         <div className="input-group">
                                             <label htmlFor="username">username</label>
-                                            <input defaultValue={debugUserName} id="username" ref="username"
-                                                onKeyDown={this.handleKeyDownLogin} type="text" maxLength="16"
-                                                autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                                                spellCheck="false"/>
+                                            <input value={this.state.username} 
+                                                id="username" ref="username"
+                                                type="text" maxLength="16"
+                                                autoComplete="off" 
+                                                autoCorrect="off" 
+                                                autoCapitalize="off"
+                                                spellCheck="false"
+                                                onKeyDown={this.handleKeyDownLogin} 
+                                                onChange={this.handleUsernameChange} 
+                                            />
                                         </div>
                                     </div>)
                                 }

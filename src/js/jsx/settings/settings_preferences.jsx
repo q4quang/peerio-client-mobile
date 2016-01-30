@@ -72,17 +72,22 @@
             this.setState({notifyContactRequest: !this.state.notifyContactRequest});
             this.doUpdateNotificationSettings();
         },
+
+        showDataCollectionInfo: function () {
+          Peerio.Action.showAlert({
+            text: 'By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio. \n We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.'
+          });
+        },
         render: function(){
             return (
                 <div className="content without-tab-bar without-footer">
                   <div className="headline">Preferences</div>
-                  <div className="subhead">Notifications</div>
+
                   <ul>
+                    <li className="subhead">Notifications</li>
                     <Peerio.UI.Tappable key='notify-new-message'
                       element="li"
-                      className="flex-row"
                     onTap={this.setNotifyNewMessage}>
-
                       <div className={'checkbox-input' + (this.state.notifyNewMessage ? ' checked': '')}>
                         <i className="material-icons"></i>
                       </div>
@@ -92,7 +97,6 @@
 
                     <Peerio.UI.Tappable key='notify-new-contact'
                       element="li"
-                      className="flex-row"
                     onTap={this.setNotifyNewContact}>
                       <div className={'checkbox-input' + (this.state.notifyNewContact ? ' checked': '')}>
                         <i className="material-icons"></i>
@@ -102,7 +106,6 @@
 
                     <Peerio.UI.Tappable key='notify-new-contact-request'
                       element="li"
-                      className="flex-row"
                     onTap={this.setNotifyNewContactRequest}>
 
                       <div className={'checkbox-input' + (this.state.notifyContactRequest ? ' checked': '')}>
@@ -113,8 +116,20 @@
 
                         <li className="caption" style={{height:'64px'}}>You will only recieve notifications on your primary address (email or phone).</li>
                     </ul>
-                    <div className="subhead">Touch ID</div>
                     <Peerio.UI.TouchId/>
+
+                    <ul>
+                      <li className="subhead">Opt-ins</li>
+                      <li>
+                        <div className={'checkbox-input' + (this.state.dateCollection ? ' checked': '')}>
+                          <i className="material-icons"></i>
+                        </div>
+                        <div>Data collection</div>
+                        <Peerio.UI.Tappable element="i" onTap={this.showDataCollectionInfo} className="material-icons">
+                          info_outline
+                        </Peerio.UI.Tappable>
+                      </li>
+                    </ul>
                     <RouteHandler/>
                 </div>
             );

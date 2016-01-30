@@ -47,10 +47,10 @@
 
                     return (
                         <div className="content-inline-dialog">
-                            <div className="info-label">Please enter the passphrase</div>
+                            <div className="headline">Please enter the passphrase</div>
 
                             <textarea
-                                className="txt-lrg textarea-transparent"
+                                className="txt-lrg border-none margin-small padding-small"
                                 ref="passPhraseInput"
                                 autoFocus="true" autoComplete="off" autoCorrect="off"
                                 autoCapitalize="off" spellCheck="false"
@@ -63,7 +63,7 @@
                                     onTap={this.removeDialog}>
                                     Let me see my passphrase again
                                 </Peerio.UI.Tappable>
-                            </div> 
+                            </div>
                         </div>
                     );
         }

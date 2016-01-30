@@ -76,6 +76,7 @@
         },
 
         openFileSelect: function () {
+            Peerio.NativeAPI.hideKeyboard();
             Peerio.Action.showFileSelect({preselected: this.state.attachments.slice()});
         },
         acceptFileSelection: function (selection) {
@@ -101,17 +102,25 @@
                 files = this.state.attachments;
             }
             this.setState({sending: true});
-            this.state.conversation.reply(this.state.conversation.participants, body, files)
-                .catch(err => Peerio.Action.showAlert({text: 'Failed to send message. ' + (err || '')}))
-                .finally(()=> {
-                    if (ack) {
-                        this.setState({sending: false});
-                        return;
-                    }
-                    node.value = '';
-                    this.resizeTextAreaAsync();
-                    this.setState({attachments: [], sending: false});
+            this.state.conversation.reply(
+                this.state.conversation.participants, body, files)
+            .then( (msg) => {
+                msg.failed && msg.failed.length
+                && Peerio.UI.Alert.show({
+                    text: 'Failed to deliver message to following recipients: ' + msg.failed.join(', ')
                 });
+                return msg;
+            })
+            .catch(err => Peerio.Action.showAlert({text: 'Failed to send message. ' + (err || '')}))
+            .finally(()=> {
+                if (ack) {
+                    this.setState({sending: false});
+                    return;
+                }
+                node.value = '';
+                this.resizeTextAreaAsync();
+                this.setState({attachments: [], sending: false});
+            });
             this.setState({ empty: true});    
         },
         resizeTextAreaAsync: function () {

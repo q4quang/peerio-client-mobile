@@ -245,7 +245,7 @@ Peerio.Helpers.init = function () {
      * Validates first or last name in signup and settings
      */
     api.isNameValid = function(name) {
-        return !name || !!name.match(/^[a-zãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i);
+        return !name || !!name.match(/^[a-zа-яãâàâåáéèêëîïôûùüÿýçñæœößøòôõóìîíùûúà .\-']{1,20}$/i);
     };
 
     api.isValidEmail = function(val) {
@@ -256,5 +256,14 @@ Peerio.Helpers.init = function () {
     api.isValidPhone = function(val) {
         var phoneRegex = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/i);
         return phoneRegex.test(val);
+    };
+
+    /**
+    * Username: 1 to 16 characters, letters, numbers
+    * and underscore. 
+    * Validated both server and client side. /^\w{1,16}$/
+    */
+    api.isValidUsername = function(name) {
+        return !!name.match(/^\w{1,16}$/);
     };
 };

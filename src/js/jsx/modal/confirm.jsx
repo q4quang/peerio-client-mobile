@@ -36,20 +36,18 @@
             var text = this.props.text || 'confirm text';
 
             return (
-                <div>
-                  <div className="modal alert-wrapper">
+                <div className="modal alert-wrapper">
                     <div className="alert">
 
-                      <div className="alert-content">
-                        <div className={'headline' + (!this.props.headline ? ' hide' : '')}>
-                        {this.props.headline}
+                        <div className="alert-content">
+                            <div className={'headline' + (!this.props.headline ? ' hide' : '')}>
+                                {this.props.headline}
+                            </div>
+                            <p>{text}</p>
+                            <div className={'caption' + (!this.props.caption ? ' hide' : '')}>{this.props.caption}</div>
                         </div>
-                        <p>{text}</p>
-                        <div className={'caption' + (!this.props.caption ? ' hide' : '')}>{this.props.caption}</div>
-                            </div>
-                            <div className="alert-btns">
-                                {btns}
-                            </div>
+                        <div className="alert-btns">
+                            {btns}
                         </div>
                     </div>
                     <div className="dim-background"></div>

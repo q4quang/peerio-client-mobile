@@ -22,18 +22,30 @@
             };
         },
 
-        handleConversationsUpdated: function (data) {
+        updateMessages: function(data) {
             if (data.updated) {
                 this.refs.Messages.refresh();
                 return;
             }
             if (data.deleted) {
-                if (data.deleted.length)
-                    this.refs.Messages.deleteItems(data.deleted);
+                if (data.deleted.length) {
+                    (this.refs.Messages.deleteItems(data.deleted) == 0)
+                    && this.setState( { 
+                        tryLoading: false,
+                        hasOnceLoadedItems: true
+                    });
+                }
                 else
                     this.refs.Messages.refresh();
             }
+        },
 
+        handleConversationsUpdated: function (data) {
+            if(!this.refs.Messages) {
+                this.setState( { tryLoading: true } );
+            } else {
+                this.updateMessages(data);
+            }
         },
 
         getPage: function (lastItem, pageSize) {

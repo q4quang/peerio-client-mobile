@@ -101,6 +101,8 @@ The only difference between the three are whether they have one or two button an
     display: flex;
     flex-direction: column;
     animation: scaleIn $speed-normal ease-in;
+    /* to be over the built-in darkness */
+    z-index: $z-alert;
   }
   .alert-content {
     padding: 24px;
@@ -124,7 +126,7 @@ The only difference between the three are whether they have one or two button an
     }
 
   }
-  + .dim-background {
+  .dim-background {
     z-index: ($z-alert - 1);
     animation: scaleIn $speed-normal ease-in;
   }
