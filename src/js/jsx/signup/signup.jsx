@@ -176,7 +176,7 @@
                                   className="material-icons">chevron_left</i>back
                           </Peerio.UI.Tappable>
 
-                          <div className="btn">Exit</div>
+                          <Peerio.UI.Tappable className="btn" onTap={this.transitionTo.bind(this,'login')}>Exit</Peerio.UI.Tappable>
                         </div>
                     </div>
                     <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup}/>
@@ -231,7 +231,7 @@
 
         renderDataOptIn: function () {
             return (
-              <div>
+              <div className="animate-enter">
                   <div className="headline">Would you like to help with usability research?</div>
                   <p>By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio.</p>
                   <p>We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.</p>
@@ -243,7 +243,7 @@
         },
 
         renderStep0: function (authMethod) {
-            return (<fieldset key={'signup-step-0'} className="animate-enter">
+            return (<fieldset key={'signup-step-0'} className="animate-enter animate-leave">
                           <div className="headline">Basic Information</div>
 
                           <div className="input-group">
