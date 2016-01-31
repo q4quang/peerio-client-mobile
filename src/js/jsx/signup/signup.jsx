@@ -8,7 +8,7 @@
 
         doSignup: function () {
 
-            this.setState({activeStep: 4});
+            this.setState({activeStep: 3});
 
             Peerio.Auth.signup(this.state.username, this.state.passphrase, this.state.firstName, this.state.lastName)
             .then(() => {
@@ -57,7 +57,7 @@
         },
 
         handleNextStep: function (e) {
-            if (this.state.activeStep === 1) {
+            if (this.state.activeStep === 0) {
                 this.setState({
                     username: this.refs.username.getDOMNode().value,
                     firstName: this.refs.firstName.getDOMNode().value,
@@ -66,7 +66,7 @@
             }
 
             this.setState({activeStep: ++this.state.activeStep}, function () {
-                if (this.state.activeStep === 2) this.generatePassphrase();
+                if (this.state.activeStep === 1) this.generatePassphrase();
             });
 
         },
@@ -141,7 +141,7 @@
                     authMethod = this.renderSMSSent();
                     break;
             }
-            steps.push(this.renderDataOptIn());
+            //steps.push(this.renderDataOptIn());
             steps.push(this.renderStep0(authMethod));
             steps.push(this.renderStep1());
             // step 2 is in modal window
@@ -176,7 +176,7 @@
                                   className="material-icons">chevron_left</i>back
                           </Peerio.UI.Tappable>
 
-                          <div className="btn">Exit</div>
+                          <Peerio.UI.Tappable className="btn" onTap={this.transitionTo.bind(this,'login')}>Exit</Peerio.UI.Tappable>
                         </div>
                     </div>
                     <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup}/>
@@ -229,18 +229,18 @@
             </div>);
         },
 
-        renderDataOptIn: function () {
-            return (
-              <div>
-                  <div className="headline">Would you like to help with usability research?</div>
-                  <p>By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio.</p>
-                  <p>We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.</p>
-                  <div className="buttons">
-                    <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.handleNextStep}>Not right now</Peerio.UI.Tappable>
-                    <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleNextStep}>Ok</Peerio.UI.Tappable>
-                  </div>
-              </div>);
-        },
+        // renderDataOptIn: function () {
+        //     return (
+        //       <div className="animate-enter">
+        //           <div className="headline">Would you like to help with usability research?</div>
+        //           <p>By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio.</p>
+        //           <p>We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.</p>
+        //           <div className="buttons">
+        //             <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.handleNextStep}>Not right now</Peerio.UI.Tappable>
+        //             <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleNextStep}>Ok</Peerio.UI.Tappable>
+        //           </div>
+        //       </div>);
+        // },
 
         renderStep0: function (authMethod) {
             return (<fieldset key={'signup-step-0'} className="animate-enter">
