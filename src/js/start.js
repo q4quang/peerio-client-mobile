@@ -17,22 +17,23 @@ Peerio.ACK_MSG = ':::peerioAck:::';
     // Main function executes when all systems are ready (dom, device)
     function main() {
         // we want this to be executed ASAP, so we don't use Actions but add explicit handlers instead
-        document.addEventListener('pause', function(){
-           console.log('UI PAUSE');
-            if(Peerio.Socket){
+        document.addEventListener('pause', function () {
+            console.log('UI PAUSE');
+            if (Peerio.Socket) {
                 Peerio.Socket.disconnect();
             }
         }, true);
-        document.addEventListener('resume', function(){
+        document.addEventListener('resume', function () {
             console.log('UI RESUME');
-            if(Peerio.Socket){
+            if (Peerio.Socket) {
                 Peerio.Socket.connect();
                 Peerio.Socket.ensureWorkerAlive();
             }
         }, true);
 
-        // todo: rethink
+        // todo: rethink this
         Peerio.runtime = {};
+        Peerio.runtime.version = window.AppVersion && AppVersion.version || 'n/a';
 
         // platform-specific classes on body
         if (window.device) {

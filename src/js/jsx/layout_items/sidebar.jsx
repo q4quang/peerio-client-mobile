@@ -125,7 +125,7 @@
                             </div>
 
                             <div className="app-version">
-                                Peerio version: {Peerio.NativeAPI.getAppVersion()}
+                                Peerio version: {Peerio.runtime.version}
                             </div>
                         </Peerio.UI.Swiper>
 

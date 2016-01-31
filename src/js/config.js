@@ -36,16 +36,9 @@ Peerio.Config.init = function () {
         // network timeout for send to socket function
         cfg.serverResponseTimeout = 15000;
 
-        cfg.appVersion = 'n/a';
-
         // Set this dynamically to something related to device where app is currently running.
         // This secret key will be used for low-importance data encryption to store in on device.
         cfg.lowImportanceDeviceKey = 'f0905d253a79'; // change this to reset TinyDB values due to inability to decrypt them anymore :-D
-
-
-        // using cordova AppVersion plugin if available
-        if (window.AppVersion && AppVersion.version)
-            cfg.appVersion = AppVersion.version;
 
         // using cordova device plugin if available
         if (window.device && device.uuid) cfg.lowImportanceDeviceKey = device.uuid;

@@ -258,7 +258,7 @@
                   <div className="page-wrapper-login">
 
                     <div className="content-wrapper-login">
-                      <div className="app-version">Peerio version: {Peerio.NativeAPI.getAppVersion()}</div>
+                      <div className="app-version">Peerio version: {Peerio.runtime.version}</div>
                       <img className="logo" src="media/img/peerio-logo-white-beta.png" alt="Peerio"
                         onTouchEnd={devmode.summon}/>
 

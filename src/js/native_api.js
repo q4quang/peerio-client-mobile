@@ -191,14 +191,6 @@ Peerio.NativeAPI.init = function () {
 
     };
 
-    //-- DEVICE INFORMATION --------------------------------------------------------------------------------------------
-    /**
-     * Get app version from config.xml
-     */
-    api.getAppVersion = function () {
-        return window.AppVersion && AppVersion.version || 'n/a';
-    };
-
     //-- CAMERA --------------------------------------------------------------------------------------------------------
     /**
      * Takes picture from camera or photo library
