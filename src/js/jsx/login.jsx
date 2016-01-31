@@ -193,7 +193,13 @@
             passValue = this.systemPin ? this.systemPin : passValue;
             // hiding software keyboard
             Peerio.NativeAPI.hideKeyboard();
-            if(!userValue || !userValue.length) return;
+
+            // if username is empty, show user an alert
+            if(!userValue || !userValue.length) {
+                Peerio.UI.Alert.show( { text: 'Username cannot be empty' } );
+                return;
+            }
+
             Peerio.user = Peerio.User.create(userValue);
             Peerio.NativeAPI.preventSleep();
 
