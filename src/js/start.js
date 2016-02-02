@@ -47,6 +47,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             Peerio.runtime.platform = platform;
         } else Peerio.runtime.platform = 'browser';
 
+        L.info('Detected platform {0}. Version {1}', Peerio.runtime.platform, Peerio.runtime.version);
         // peerio client api
         Peerio.initAPI().then(function () {
             // order matters
