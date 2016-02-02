@@ -53,7 +53,7 @@
             var self = this;
 
             //index contacts by ID to merge with foundUsers.
-            contacts = _.indexBy(contacts, 'id');
+            contacts = _.keyBy(contacts, 'id');
 
             addressChunks.forEach(function (addressChunk) {
 
@@ -65,7 +65,7 @@
                         var foundUsers = _.filter(returnData, function (i) {
                             return i.username;
                         });
-                        foundUsers = _.indexBy(foundUsers, 'id');
+                        foundUsers = _.keyBy(foundUsers, 'id');
 
                         if (self.state.availableContacts.length) {
                             contacts = _.merge(self.state.availableContacts, foundUsers);
