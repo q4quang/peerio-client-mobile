@@ -10,4 +10,16 @@
   height: $footer-height;
   color: $white-100;
   z-index: $z-tabbar;
+
+
+  &.footer-light {
+    @extend .flex-row;
+    @extend .flex-align-center;
+    @extend .flex-justify-center;
+
+
+    background: #fafafa;
+    color: inherit;
+    border-top: $border-dark;
+  }
 }

@@ -34,15 +34,11 @@ Peerio.UI.AddContact = React.createClass({
     return  (<div className="content without-tab-bar without-footer">
       <div className="flex-col flex-justify-start">
         <div className="headline">Add Contact</div>
-        <p>{this.state.inviteCode}</p>
         <div  className="input-group">
-          <input type="text" onChange={this.updateSearchString} placeholder="Search by username, email or phone" value={this.state.searchString}/>
+          <label>Search</label>
+          <input type="text" onChange={this.updateSearchString} placeholder="username, email or phone" value={this.state.searchString}/>
         </div>
-        {
-        /*TODO: address layout issues when using buttons wrapper class here
-        currently buttons overlap other content when wrapped in buttons class
-        */
-        }
+
         <div className="buttons">
             {searchButton}
         </div>
@@ -55,6 +51,10 @@ Peerio.UI.AddContact = React.createClass({
               <i className="material-icons">import_contacts</i>  Import
             </Peerio.UI.Tappable>
           </div>
+          </div>
+          <div id="footer" className={'footer-light' + (!this.state.inviteCode ? ' hide' : '')}>Your Invite Code - <strong>{this.state.inviteCode}</strong>
+            {/* TODO: get content for info alert */}
+            <Peerio.UI.Tappable element="i" className="material-icons">info_outline</Peerio.UI.Tappable>
           </div>
         </div>);
   }
