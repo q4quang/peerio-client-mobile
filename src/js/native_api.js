@@ -68,7 +68,7 @@ Peerio.NativeAPI.init = function () {
      * @param url
      */
     api.openInBrowser = function (url) {
-        var open = cordova.InAppBrowser.open || window.open;
+        var open = cordova && cordova.InAppBrowser.open || window.open;
         try {
             if (!safariView) {
                 open && open(url, '_blank', 'location=yes');

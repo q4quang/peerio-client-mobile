@@ -29,13 +29,15 @@
                 Peerio.Dispatcher.onBigGreenButton(this.reply),
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
                 Peerio.Dispatcher.onConversationsUpdated(this.handleConversationsUpdated),
-                Peerio.Dispatcher.onKeyboardDidShow( () => {
-                    if(!this.keyboardHack) {
-                        window.setTimeout( () => this.refs.reply.getDOMNode().blur(), 0 );
-                        window.setTimeout( () => this.refs.reply.getDOMNode().focus(), 0 );
+                Peerio.Dispatcher.onKeyboardDidShow(() => {
+                    if (!this.keyboardHack) {
+                        window.setTimeout(() => this.refs.reply.getDOMNode().blur(), 0);
+                        window.setTimeout(() => this.refs.reply.getDOMNode().focus(), 0);
                         this.keyboardHack = true;
                     }
-                    window.setTimeout( () => { this.keyboardHack = null; }, 1000 );
+                    window.setTimeout(() => {
+                        this.keyboardHack = null;
+                    }, 1000);
                     this.refs.content.scrollToBottom();
                 })
             ];
@@ -49,7 +51,7 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         componentDidUpdate: function () {
-            if(this.state.conversation) this.markAsRead();
+            if (this.state.conversation) this.markAsRead();
         },
         //----- CUSTOM FN
         markAsRead: _.throttle(function () {
@@ -87,7 +89,7 @@
             this.reply(true);
         },
 
-        sendReply: function() {
+        sendReply: function () {
             this.reply(false);
         },
         reply: function (ack) {
@@ -104,24 +106,24 @@
             this.setState({sending: true});
             this.state.conversation.reply(
                 this.state.conversation.participants, body, files)
-            .then( (msg) => {
-                msg.failed && msg.failed.length
-                && Peerio.UI.Alert.show({
-                    text: 'Failed to deliver message to following recipients: ' + msg.failed.join(', ')
+                .then((msg) => {
+                    msg.failed && msg.failed.length
+                    && Peerio.UI.Alert.show({
+                        text: 'Failed to deliver message to following recipients: ' + msg.failed.join(', ')
+                    });
+                    return msg;
+                })
+                .catch(err => Peerio.Action.showAlert({text: 'Failed to send message. ' + (err || '')}))
+                .finally(()=> {
+                    if (ack) {
+                        this.setState({sending: false});
+                        return;
+                    }
+                    node.value = '';
+                    this.resizeTextAreaAsync();
+                    this.setState({attachments: [], sending: false});
                 });
-                return msg;
-            })
-            .catch(err => Peerio.Action.showAlert({text: 'Failed to send message. ' + (err || '')}))
-            .finally(()=> {
-                if (ack) {
-                    this.setState({sending: false});
-                    return;
-                }
-                node.value = '';
-                this.resizeTextAreaAsync();
-                this.setState({attachments: [], sending: false});
-            });
-            this.setState({ empty: true});    
+            this.setState({empty: true});
         },
         resizeTextAreaAsync: function () {
             setTimeout(this.resizeTextArea, 0);
@@ -179,8 +181,8 @@
         },
 
         setEmpty: function () {
-          var node = this.refs.reply.getDOMNode();
-          return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
+            var node = this.refs.reply.getDOMNode();
+            return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
         },
 
         //----- RENDER
@@ -194,43 +196,44 @@
             //TODO: textarea onfocus was set to scrollToBottom but was triggered on every element focus 0_0
             return (
                 <div>
-                  <Peerio.UI.ConversationHead conversation={conversation}/>
-                  <Peerio.UI.VScroll
-                    onGetPage={this.getPage}
-                    onGetPrevPage={this.getPrevPage}
-                    onGetItemsRange={this.getItemsRange}
-                    itemKeyName='id'
-                    itemComponent={Peerio.UI.Message}
-                    itemParentData={conversation}
-                    className="content with-reply-box without-tab-bar conversation"
-                    ref="content"
-                    key="content"
-                    reverse="true"
-                  />
+                    <Peerio.UI.ConversationHead conversation={conversation}/>
+                    <Peerio.UI.VScroll
+                        onGetPage={this.getPage}
+                        onGetPrevPage={this.getPrevPage}
+                        onGetItemsRange={this.getItemsRange}
+                        itemKeyName='id'
+                        itemComponent={Peerio.UI.Message}
+                        itemParentData={conversation}
+                        className="content with-reply-box without-tab-bar conversation"
+                        ref="content"
+                        key="content"
+                        reverse="true"
+                    />
 
-                  <div id="reply">
-                    <div className="reply-attach">
-                      <i className="material-icons"
-                        onTouchEnd={this.openFileSelect}>
-                        attach_file
-                      </i>
-                      <div className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length || ''}</div>
-                    </div>
+                    <div id="reply">
+                        <div className="reply-attach">
+                            <i className="material-icons"
+                               onTouchEnd={this.openFileSelect}>
+                                attach_file
+                            </i>
+                            <div
+                                className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length || ''}</div>
+                        </div>
 
                       <textarea
-                        className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
-                        rows="1" ref="reply" placeholder={this.state.placeholderText} onKeyUp={this.resizeTextArea, this.setEmpty}
-                        disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}/>
+                          className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
+                          rows="1" ref="reply" placeholder={this.state.placeholderText}
+                          onKeyUp={this.resizeTextArea, this.setEmpty}
+                          disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}/>
 
+                        { !this.state.empty ?
+                            <div className="reply-send">
+                                <i className="material-icons" onTouchEnd={this.sendReply}>send</i>
+                            </div> :
 
-                      { !this.state.empty ?
-                          <div className="reply-send">
-                            <i className="material-icons" onTouchEnd={this.sendReply}>send</i>
-                          </div> :
-
-                          <div className="reply-ack">
-                              <i className="material-icons" onTouchEnd={this.sendAck}>thumb_up</i>
-                          </div>
+                            <div className="reply-ack">
+                                <i className="material-icons" onTouchEnd={this.sendAck}>thumb_up</i>
+                            </div>
                         }
 
 
