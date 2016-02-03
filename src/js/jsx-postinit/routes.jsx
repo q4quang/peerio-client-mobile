@@ -37,6 +37,8 @@ Peerio.UI.Routes = (
             <Route name="settings_2fa" path="/app/settings/settings_2fa" handler={Peerio.UI.Settings2FA} />
             <Route name="enter_coupon" path="/app/settings/enter_coupon" handler={Peerio.UI.EnterCoupon} />
 
+            <Route name="share_code" path="/app/settings/share_code" handler={Peerio.UI.ShareCode} />
+
             <Route name='add_contact' path="/app/add_contact" handler={Peerio.UI.AddContact}/>
             <Route name="add_contact_search" path="/app/add_contact_search/:id" handler={Peerio.UI.AddContactSearch}/>
             <Route name="add_contact_import" path="/app/add_contact_import" handler={Peerio.UI.AddContactImport}/>
