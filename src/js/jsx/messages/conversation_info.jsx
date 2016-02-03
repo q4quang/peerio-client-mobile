@@ -56,11 +56,11 @@
                   </ul>
 
 
-
+                    { c.fileIDs.length ? (
                     <ul className="compact-list-view">
                       <li><label>Shared Files</label></li>
                       { c.fileIDs.map(f => <FileNode id={f} key={f}/>)}
-                    </ul>
+                    </ul> ) : null }
                 </div>
             );
         }
