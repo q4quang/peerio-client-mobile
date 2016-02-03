@@ -10,7 +10,7 @@
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onSettingsUpdated( this.resetSettings.bind(this) ),
-                Peerio.Dispatcher.onTwoFactorAuthReject( this.resetSettings.bind(this) ),
+                Peerio.Dispatcher.onTwoFactorAuthReject(this.handle2FAReject),
                 Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
                 Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend)
             ];
@@ -44,6 +44,10 @@
             this.resolve2FA('succesfully entered 2fa code');
         },
 
+        handle2FAReject: function() {
+            this.reject2FA && this.reject2FA('2fa cancelled by user');
+        },
+
         setDevicePin: function() {
             Peerio.Action.transitionTo('set_pin', null, {});
         },
@@ -54,7 +58,7 @@
                     this.state.notifyNewContact,
                     this.state.notifyContactRequest)
                 .catch( (error) => {
-                    Peerio.Action.showAlert({text: 'Save failed. ' + (error ? (' Error message: ' + error.message) : '')});
+                    Peerio.Action.showAlert({text: 'Save failed. ' + (error ? (' Error message: ' + (error.message ? error.message : error)) : '')});
                     this.resetSettings();
                 });
             }, 1000);

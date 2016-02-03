@@ -19,11 +19,16 @@
         componentWillMount: function () {
         },
 
+        componentWillUnmount: function () {
+            this.rejectOnUnmount && Peerio.Action.twoFactorAuthReject();
+        },
+
         componentDidUpdate: function (prevProps, prevState) {
             this.focusInput();
         },
 
         componentDidMount: function () {
+            this.rejectOnUnmount = true;
             this.focusInput();
         },
 
@@ -40,6 +45,7 @@
             if (currentCode.length == 6) {
                 Peerio.Net.validate2FA(currentCode, Peerio.user.username, Peerio.user.publicKey)
                     .then(() => {
+                        this.rejectOnUnmount = false;
                         Peerio.Action.twoFactorAuthResend();
                         this.removeDialog();
                     })

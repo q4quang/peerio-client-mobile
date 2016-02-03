@@ -15,6 +15,7 @@
                 }),
                 Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
                 Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend),
+                Peerio.Dispatcher.onTwoFactorAuthReject(this.handle2FAReject),
             ];
         },
 
@@ -33,6 +34,11 @@
         handle2FAResend: function () {
             L.info('2fa resend requested');
             this.resolve2FA('succesfully entered 2fa code');
+        },
+
+        handle2FAReject: function () {
+            L.info('2fa reject');
+            this.reject2FA('2fa rejected');
         },
 
 
