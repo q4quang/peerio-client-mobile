@@ -17,6 +17,9 @@
                 && !Peerio.Helpers.isValidPhone(newAddress) )
             return Peerio.UI.Alert.show({text: 'Sorry, that doesn\'t look like a valid email or phone number.'});
 
+            if(Peerio.Helpers.isValidPhone(newAddress)) {
+                newAddress = Peerio.Helpers.reformatPhone(newAddress);
+            }
             // TODO: add 2FA here
             /* if (!skip2FA && Peerio.user.settings.twoFactorAuth) {
                 return this.transitionTo('/app/settings/account/2fa');

@@ -258,6 +258,13 @@ Peerio.Helpers.init = function () {
         return phoneRegex.test(val);
     };
 
+    /** 
+     * Reformat phone so it is more or less the same as on server
+     */
+    api.reformatPhone = function(val) {
+        return val.replace(/[+\-\. ]/g, '').replace(/^0*/g, '');
+    };
+
     /**
     * Username: 1 to 16 characters, letters, numbers
     * and underscore. 
