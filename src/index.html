@@ -17,7 +17,7 @@
     	* todo: unsafe inline can be removed from scripts in production. browsersync needs it in development.
 	-->
     <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://ssl.gstatic.com https://*.peerio.com
+          content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://piwik.peerio.com/ https://ssl.gstatic.com https://*.peerio.com
                                 https://peerio.blob.core.windows.net https://peeriodev.blob.core.windows.net wss://*.peerio.com ws://localhost:3000;
                    media-src *;">
     <title>Peerio</title>
@@ -305,5 +305,21 @@
 
 </script>
 <!---------------- </DEVMODE CONTROL END> ---------------->
+<!-- Piwik -->
+<script type="text/javascript">
+var _paq = _paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+    var u="https://piwik.peerio.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+})();
+</script>
+<noscript><p><img src="//piwik.peerio.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
 </body>
 </html>
