@@ -4,6 +4,10 @@
   Peerio.UI.ShareCode = React.createClass({
     mixins:[ReactRouter.Navigation],
 
+    getInitialState: function() {
+        return { inviteCode: null };
+    },
+
     componentWillMount: function() {
         Peerio.user.getInviteCode()
         .then( (code) => {
