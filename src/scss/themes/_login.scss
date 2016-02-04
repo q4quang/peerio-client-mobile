@@ -15,6 +15,10 @@
   background-color: color(p-blue);
   color: $white-100;
 
+  .signup-form {
+    overflow-y: scroll;
+  }
+
   input, select{
     color: $white-100;
     border-color: $white-12;
