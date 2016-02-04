@@ -122,7 +122,7 @@
                     </ul>
                     <Peerio.UI.TouchId/>
 
-                    {/*<ul>
+                    <ul>
                       <li className="subhead">Opt-ins</li>
                       <li>
                         <div className={'checkbox-input' + (this.state.dateCollection ? ' checked': '')}>
@@ -133,7 +133,7 @@
                           info_outline
                         </Peerio.UI.Tappable>
                       </li>
-                    </ul>*/}
+                    </ul>
                     <RouteHandler/>
                 </div>
             );
