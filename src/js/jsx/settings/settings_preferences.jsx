@@ -9,7 +9,7 @@
 
         componentDidMount: function () {
             this.subscriptions = [
-                Peerio.Dispatcher.onSettingsUpdated( this.resetSettings.bind(this) ),
+                Peerio.Dispatcher.onSettingsUpdated( this.resetSettings.bind(this, null) ),
                 Peerio.Dispatcher.onTwoFactorAuthReject(this.handle2FAReject),
                 Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
                 Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend)
@@ -51,6 +51,7 @@
         setDevicePin: function() {
             Peerio.Action.transitionTo('set_pin', null, {});
         },
+
         doUpdateNotificationSettings: function(){
             this.doUpdate = this.doUpdate || _.throttle(function(){
                 return Peerio.user.setNotifications(
@@ -64,14 +65,17 @@
             }, 1000);
             this.doUpdate();
         },
+
         setNotifyNewContact: function() {
             this.setState({notifyNewContact: !this.state.notifyNewContact});
             this.doUpdateNotificationSettings();
         },
+
         setNotifyNewMessage: function() {
             this.setState({notifyNewMessage: !this.state.notifyNewMessage});
             this.doUpdateNotificationSettings();
         },
+
         setNotifyNewContactRequest: function() {
             this.setState({notifyContactRequest: !this.state.notifyContactRequest});
             this.doUpdateNotificationSettings();
@@ -82,6 +86,7 @@
             text: 'By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio. \n We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.'
           });
         },
+
         render: function(){
             return (
                 <div className="content without-tab-bar without-footer">

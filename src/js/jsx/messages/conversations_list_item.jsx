@@ -51,8 +51,7 @@
                 conv.username = username;
             }
 
-            var cx = React.addons.classSet;
-            var classes = cx({
+            var classes = classNames({
                 'list-item': true,
                 'unread': conv.unread,
                 'swiped': this.state.swiped,

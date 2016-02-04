@@ -127,6 +127,9 @@
 
                     Peerio.NativeAPI.isForcefulFingerprintEnabled()
                         .then((value) => this.setState({fingerPrintWarning: value}));
+                })
+                .catch(() => {
+                    L.info('Touch ID unavailable');
                 });
         },
 

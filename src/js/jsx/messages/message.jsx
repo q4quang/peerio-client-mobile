@@ -63,7 +63,7 @@
                     </div>
                 );
             }
-            var itemClass = React.addons.classSet({
+            var itemClass = classNames({
                 'item': true,
                 'self': isSelf,
                 'ack': isAck

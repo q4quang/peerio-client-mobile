@@ -19,6 +19,7 @@
     "font-awesome": "*",
     "react": "0.13.x",
     "gsap": "*",
+    "classnames": "*",
     "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git",
     "react-router": "~0.13.3"
   },
@@ -44,7 +45,8 @@
         "bower_components/gsap/src/minified/tweenlite.min.js",
         "bower_components/gsap/src/minified/plugins/scrolltoplugin.min.js"
       ],
-      "jssha": "bower_components/jssha/src/sha256.js"
+      "jssha": "bower_components/jssha/src/sha256.js",
+      "classnames": "bower_components/classnames/index.js"
     }
   }
 }

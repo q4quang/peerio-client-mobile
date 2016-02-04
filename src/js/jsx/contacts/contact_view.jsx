@@ -75,15 +75,27 @@
             if (!this.contact.isMe) {
                 if (this.contact.isReceivedRequest) {
                     buttons.push(
-                        <Peerio.UI.Tappable element="div" className="btn-safe"
-                                            onTap={this.handleAccept}>Accept contact request
+                        <Peerio.UI.Tappable 
+                            key="acceptButton"
+                            element="div" 
+                            className="btn-safe"
+                            onTap={this.handleAccept}>
+                            Accept contact request
                         </Peerio.UI.Tappable>,
-                        <Peerio.UI.Tappable element="div" className="btn-danger"
-                                            onTap={this.handleReject}>Reject contact request
+                        <Peerio.UI.Tappable 
+                            key="rejectButton"
+                            element="div" 
+                            className="btn-danger"
+                            onTap={this.handleReject}>
+                            Reject contact request
                         </Peerio.UI.Tappable>);
 
                 } else buttons.push(
-                    <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleRemove}>
+                    <Peerio.UI.Tappable 
+                        key="removeButton"
+                        element="div" 
+                        className="btn-danger" 
+                        onTap={this.handleRemove}>
                         Remove contact
                     </Peerio.UI.Tappable>);
             }
