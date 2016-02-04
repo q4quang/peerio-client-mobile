@@ -18,17 +18,18 @@
 
 
     render: function() {
-      return (<div className="content without-tab-bar without-footer">
-        <div className="headline">Free Data</div>
-        <p class="lrg-txt">
-          {this.state.inviteCode}</p>
-        <p className="caption">Share this code with your friends, and when they signup you both get free storage.</p>
-        <ul>
-          <li>Share option 1</li>
-          <li>Share option 2</li>
-          <li>Share option</li>
-          <li>Share more options</li>
-        </ul>
+      return (<div className="content without-tab-bar without-footer flex-col">
+        <div className="headline"> Get Free Data</div>
+        <div className="section-highlight">
+          {this.state.inviteCode} <i className="material-icons margin-small">content_copy</i>
+        </div>
+        <p className="flex-grow-1">Every time one of your contacts signs up for Peerio using your invite code, both of you will receive 250MB of bonus storage. You can earn up to 10GB of free storage this way!</p>
+
+        <div className="buttons">
+          <Peerio.UI.Tappable element="div" className="btn-safe">
+              <i className="material-icons">share</i> Share this code
+          </Peerio.UI.Tappable>
+        </div>
       </div>);
     }
   });

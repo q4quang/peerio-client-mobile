@@ -113,3 +113,15 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
   overflow: hidden;
   z-index: 100;
 }
+
+
+.section-highlight {
+  @extend .flex-row;
+  @extend .flex-justify-center;
+  @extend .flex-align-center;
+
+  background: #eee;
+  margin: #{$margin-base*2} 0;
+  padding: #{$margin-base*1.5};
+
+}
