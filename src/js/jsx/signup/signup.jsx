@@ -164,19 +164,20 @@
                             {progressBarSteps}
                         </div>
 
-                        <form className="signup-form">
-                            <ReactCSSTransitionGroup transitionName="animate">
+                        <div className="signup-form flex-col flex-grow-1">
+                            <ReactCSSTransitionGroup transitionName="animate" className="flex-shrink-0 flex-grow-1">
                                 {currentStep}
                             </ReactCSSTransitionGroup>
-                        </form>
-                        <div className="flex-grow-1"></div>
-                        <div className={'flex-row' + (this.state.activeStep === 0 ? ' flex-justify-end' : ' flex-justify-between')}>
-                          <Peerio.UI.Tappable element='div' className={'btn-back' + (this.state.activeStep === 0 ? ' hide' : '')}
-                              onTap={this.handlePreviousStep}><i
-                                  className="material-icons">chevron_left</i>back
-                          </Peerio.UI.Tappable>
 
-                          <Peerio.UI.Tappable className="btn" onTap={this.transitionTo.bind(this,'login')}>Exit</Peerio.UI.Tappable>
+
+                          <div className={'flex-row' + (this.state.activeStep === 0 ? ' flex-justify-end' : ' flex-justify-between')}>
+                            <Peerio.UI.Tappable element='div' className={'btn-back' + (this.state.activeStep === 0 ? ' hide' : '')}
+                                onTap={this.handlePreviousStep}><i
+                                    className="material-icons">chevron_left</i>back
+                            </Peerio.UI.Tappable>
+
+                            <Peerio.UI.Tappable  element="div" className="btn" onTap={this.transitionTo.bind(this,'login')}>Exit</Peerio.UI.Tappable>
+                          </div>
                         </div>
                     </div>
                     <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup}/>

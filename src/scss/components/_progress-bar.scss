@@ -13,7 +13,7 @@
     border-left-color: $bordercolor;
   }
 
-  height: $height;
+  min-height: $height;
   width: 100%;
   display: flex;
   box-shadow: 0px 0px 11px $bgcolor;
