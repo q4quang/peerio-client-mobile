@@ -2,7 +2,6 @@
   'use strict';
 
   Peerio.UI.ContactSelect = React.createClass({
-    mixins: [ReactRouter.Navigation],
     getInitialState: function () {
       return {selection: this.props.preselected || []};
     },

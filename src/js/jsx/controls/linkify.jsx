@@ -10,12 +10,15 @@
         },
         render: function () {
             this.text = this.props.text;
-            var nodes = linkify.tokenize(this.text).map(token => {
+            var nodes = linkify.tokenize(this.text).map( (token, i) => {
                 if (token.isLink)
-                    return <Peerio.UI.Tappable element="span" className="message-link"
-                                 onTap={this.props.onOpen.bind(null, token.toHref())}>{token.toString()}</Peerio.UI.Tappable>;
+                    return <Peerio.UI.Tappable 
+                        key={i}
+                        element="span" 
+                        className="message-link"
+                        onTap={this.props.onOpen.bind(null, token.toHref())}>{token.toString()}</Peerio.UI.Tappable>;
                 else
-                    return <span>{token.toString()}</span>;
+                    return <span key={i}>{token.toString()}</span>;
             });
             return (
                 <span>

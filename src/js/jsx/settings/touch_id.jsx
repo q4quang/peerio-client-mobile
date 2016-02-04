@@ -53,6 +53,8 @@
                                 text: 'Would you like to enable Touch ID?',
                                 caption: 'Touch ID requires using your Apple Keychain'
                             })
+                            .then(() => Peerio.UI.TouchId.clearKeyPair())
+                            .catch(() => true)
                             .then(() => Peerio.UI.TouchId.saveKeyPair())
                             .catch(() => true)
                             .then(() => Peerio.UI.TouchId.setUserSeenOffer());
@@ -125,6 +127,9 @@
 
                     Peerio.NativeAPI.isForcefulFingerprintEnabled()
                         .then((value) => this.setState({fingerPrintWarning: value}));
+                })
+                .catch(() => {
+                    L.info('Touch ID unavailable');
                 });
         },
 

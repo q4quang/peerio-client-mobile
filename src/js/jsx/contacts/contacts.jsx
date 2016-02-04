@@ -6,7 +6,7 @@
         componentDidMount: function () {
             this.subscriptions = [Peerio.Dispatcher.onBigGreenButton(this.handleAddContact),
                 Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this, null)),
-                Peerio.Dispatcher.onUnreadStateChanged(this.handleUnreadStateChange.bind(this))
+                Peerio.Dispatcher.onUnreadStateChanged(this.handleUnreadStateChange.bind(this, null))
             ];
             if (this.getQuery().trigger) {
                 this.replaceWith('contacts');

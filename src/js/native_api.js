@@ -245,7 +245,7 @@ Peerio.NativeAPI.init = function () {
      * @returns {Promise}
      */
     api.enablePushNotifications = function () {
-        if (!isPushNotificationAvailable()) return Promise.reject();
+        if (!isPushNotificationAvailable()) return Promise.reject('not available on the platform');
 
         L.info('Enabling push notifications.');
 

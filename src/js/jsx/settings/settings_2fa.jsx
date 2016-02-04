@@ -42,6 +42,9 @@
                     this.setState( { clipboardSuccess: true } );
                     element = React.findDOMNode(this.refs.authenticatorCode);
                 })
+                .catch( () => {
+                    L.info('Clipboard copying is not available on the platform');
+                })
                 .finally( () => {
                     element.focus();
                     element.select();
@@ -51,7 +54,7 @@
 
         componentDidMount: function () {
             this.subscriptions = [
-                Peerio.Dispatcher.onSettingsUpdated(this.updateFromSettings.bind(this))
+                Peerio.Dispatcher.onSettingsUpdated(this.updateFromSettings.bind(this, null))
             ];
         },
 

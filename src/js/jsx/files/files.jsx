@@ -7,7 +7,7 @@
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null)),
-                Peerio.Dispatcher.onUnreadStateChanged(this.handleUnreadStateChange.bind(this))
+                Peerio.Dispatcher.onUnreadStateChanged(this.handleUnreadStateChange.bind(this, null))
             ];
             this.handleUnreadStateChange();
         },
@@ -31,8 +31,11 @@
             if (Peerio.user.files) {
                 Peerio.user.files.arr.forEach(function (item) {
                     nodes.push(
-                        <Peerio.UI.FileItem className="list-item" item={item}
-                                            onTap={this.openFileView.bind(this, item.shortID)}>
+                        <Peerio.UI.FileItem 
+                            className="list-item" 
+                            key={item.shortID}
+                            item={item}
+                            onTap={this.openFileView.bind(this, item.shortID)}>
                         </Peerio.UI.FileItem>
                     );
                 }.bind(this));
@@ -98,7 +101,7 @@
             var fileID = this.props.item.shortID;
             this.setState({destroyAnimation: true}, function () {
                 setTimeout(function () {
-                    Peerio.user.files.dict[fileID].remove()
+                    Peerio.user.files.dict[fileID].remove();
                 }, 600);
             });
         },
@@ -113,8 +116,7 @@
         render: function () {
             var H = Peerio.Helpers;
             var item = this.props.item;
-            var cx = React.addons.classSet;
-            var classes = cx({
+            var classes = classNames({
                 'list-item': true,
                 'list-item-animation-leave': this.state.destroyAnimation
             });

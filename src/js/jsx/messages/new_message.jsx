@@ -53,7 +53,8 @@
         render: function () {
             var r = this.state.recipients.map(function (username) {
                 var c = Peerio.user.contacts.dict[username];
-                return <span className="name-selected">{c && c.fullName || ''} &bull; {username}</span>;
+                return <span className="name-selected" key={username}>
+                {c && c.fullName || ''} &bull; {username}</span>;
             });
             return (
                 <div className="content without-tab-bar">
