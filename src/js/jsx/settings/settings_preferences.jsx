@@ -28,7 +28,8 @@
             return {
                 notifyNewContact: Peerio.user.settings.receiveContactNotifications,
                 notifyNewMessage: Peerio.user.settings.receiveMessageNotifications,
-                notifyContactRequest: Peerio.user.settings.receiveContactRequestNotifications
+                notifyContactRequest: Peerio.user.settings.receiveContactRequestNotifications,
+                dataCollectionOptIn: Peerio.user.settings.dataCollectionOptIn
             };
         },
 
@@ -81,6 +82,10 @@
             this.doUpdateNotificationSettings();
         },
 
+        setDataCollection: function() {
+            Peerio.user.enableDataCollection(!this.state.dataCollectionOptIn);
+        },
+
         showDataCollectionInfo: function () {
           Peerio.Action.showAlert({
             text: 'By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio. \n We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.'
@@ -128,16 +133,19 @@
                     <Peerio.UI.TouchId/>
 
                     <ul>
-                      <li className="subhead">Opt-ins</li>
-                      <li>
-                        <div className={'checkbox-input' + (this.state.dateCollection ? ' checked': '')}>
-                          <i className="material-icons"></i>
-                        </div>
-                        <div>Data collection</div>
-                        <Peerio.UI.Tappable element="i" onTap={this.showDataCollectionInfo} className="material-icons">
-                          info_outline
+                        <li className="subhead">Opt-ins</li>
+                        <Peerio.UI.Tappable 
+                            key='data-collection-optin'
+                            onTap={this.setDataCollection} 
+                            element="li">
+                            <div className={'checkbox-input' + (this.state.dataCollectionOptIn ? ' checked': '')}>
+                                <i className="material-icons"></i>
+                            </div>
+                            <div>Data collection</div>
+                            <Peerio.UI.Tappable element="i" onTap={this.showDataCollectionInfo} className="material-icons">
+                                info_outline
+                            </Peerio.UI.Tappable>
                         </Peerio.UI.Tappable>
-                      </li>
                     </ul>
                     <RouteHandler/>
                 </div>

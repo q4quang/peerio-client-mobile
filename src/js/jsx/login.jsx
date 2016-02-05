@@ -54,6 +54,7 @@
             // signup function. we want to show setup wizard
             // if it is true
             this.nextRoute = Peerio.autoLogin ? 'setup_wizard' : 'messages';
+            this.enableDataOptin = Peerio.autoLogin && Peerio.DataCollection.isEnabled();
             if (Peerio.autoLogin) {
                 var autoLogin = Peerio.autoLogin;
                 // in case smth fails we clean this first
@@ -92,6 +93,7 @@
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             Peerio.UI.TouchId.showOfferIfNeeded();
+            this.enableDataOptIn && Peerio.user.enableDataOptIn();
             Peerio.NativeAPI.enablePushNotifications()
                 .catch(error => L.error('Error enabling push notifications. {0}', error))
                 .finally(() => Peerio.NativeAPI.clearPushBadge());

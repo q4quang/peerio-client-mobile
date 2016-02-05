@@ -17,6 +17,7 @@
                     username: this.state.username,
                     passphrase: this.state.passphrase
                 };
+                
                 this.transitionTo('root');
             })
             .catch( (error) => {
@@ -54,6 +55,11 @@
 
         processReturnedPassphrase : function() {
             L.info('processing returned passphrase, lol');
+        },
+
+        handleDataOptIn: function (enable) {
+            (enable ? Peerio.DataCollection.enable() : Peerio.DataCollection.disable())
+            .then( () => this.handleNextStep() );
         },
 
         handleNextStep: function (e) {
@@ -237,8 +243,8 @@
                   <p>By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio.</p>
                   <p>We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.</p>
                   <div className="buttons">
-                    <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.handleNextStep}>Not right now</Peerio.UI.Tappable>
-                    <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleNextStep}>Ok</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.handleDataOptIn.bind(this, false)}>Not right now</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleDataOptIn.bind(this, true)}>Ok</Peerio.UI.Tappable>
                   </div>
               </div>);
         },
