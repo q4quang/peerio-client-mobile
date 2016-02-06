@@ -185,6 +185,7 @@
             return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
         },
 
+
         //----- RENDER
         render: function () {
             // todo: loading state
@@ -211,6 +212,13 @@
                     />
 
                     <div id="reply">
+                        <ul className={'attached-files' + (this.state.attachments.length ? '' : ' hide')}>
+                          <li className="attached-file">
+                            file name 
+                            <i className="material-icons">highlight_off</i>
+                          </li>
+                        </ul>
+
                         <div className="reply-attach">
                             <i className="material-icons"
                                onTouchEnd={this.openFileSelect}>

@@ -312,3 +312,39 @@ $avatar-size: 29px;
     outline: none;
   }
 }
+
+
+.attached-files {
+  position: absolute;
+  top: -40px;
+  height: 40px;
+  padding: $padding-small $padding-base;
+  margin: 0;
+  overflow-x: scroll;
+  white-space: nowrap;
+
+  .attached-file {
+    @extend .flex-row;
+    @extend .flex-justify-center;
+
+    background-color: #ccc;
+    color: $black-54;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    height: 24px;
+    width: auto;
+    display: inline-flex;
+
+    i {
+      color: $white-70;
+      font-size: 18px;
+      transition: $speed-normal;
+      margin-left: $margin-small;
+
+      &:hover {
+        color: $white-100;
+      }
+    }
+  }
+}
