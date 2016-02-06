@@ -252,6 +252,7 @@
         renderStep0: function (authMethod) {
             return (<fieldset key={'signup-step-0'} className="animate-enter">
                           <div className="headline">Basic Information</div>
+                          <Peerio.UI.TrackSubState name="basic"/>
 
                           <div className="input-group">
                               {(this.state.usernameValid === null || this.state.usernameValid === true)
@@ -312,6 +313,7 @@
         renderStep1: function () {
             return ( <fieldset key={'signup-step-1'}>
                 <div className="headline">Your Passphrase</div>
+                <Peerio.UI.TrackSubState name="passphrase"/>
 
                 <p className='info'>This is your secure randomly generated passphrase. If you lose it, you
                     will <strong>permanently</strong> lose access to your account.</p>
