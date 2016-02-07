@@ -3,12 +3,13 @@
  * ------------------------------------------------------
  */
 var Peerio = this.Peerio || {};
-Peerio.DataCollection = {};
+Peerio.DataCollection = Peerio.DataCollection || {};
+Peerio.DataCollection.Signup = Peerio.DataCollection.Signup || {};
 
 Peerio.DataCollection.init = function () {
     'use strict';
 
-    var api = Peerio.DataCollection = {};
+    var api = Peerio.DataCollection;
 
     var isEnabled = false;
 
@@ -90,8 +91,11 @@ Peerio.DataCollection.init = function () {
         prevPage = path;
     };
 
-    api.trackUserAction = function() {
+    api.trackUserAction = function(category, name, value) {
         if(!api.isEnabled()) return;
+        value = value ? value : 1;
+        L.info('Tracking event category: ' + category + ', name: ' + name + ', value: ' + value);
+        window._paq.push(['trackEvent', category, name, category + '_' + name, value]);
     };
 
     api.startTimePoint = function() {
@@ -102,5 +106,22 @@ Peerio.DataCollection.init = function () {
         if(!api.isEnabled()) return;
     };
 
+    var signup = Peerio.DataCollection.Signup;
+
+    signup.trackAction = function(name, value) {
+        api.trackUserAction('signup', name, value);
+    };
+
+    signup.startSignup = function() {
+        signup.trackAction('start');
+    };
+
+    signup.successfulSignup = function() {
+        signup.trackAction('success');
+    };
+
+    signup.regeneratePassphrase = function() {
+        signup.trackAction('regeneratePassphrase');
+    };
 };
 

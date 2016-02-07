@@ -59,7 +59,10 @@
 
         handleDataOptIn: function (enable) {
             (enable ? Peerio.DataCollection.enable() : Peerio.DataCollection.disable())
-            .then( () => this.handleNextStep() );
+            .then( () => {
+                Peerio.DataCollection.Signup.startSignup();
+                this.handleNextStep();
+            });
         },
 
         handleNextStep: function (e) {
