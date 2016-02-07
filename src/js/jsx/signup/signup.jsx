@@ -128,6 +128,11 @@
         },
 
         generatePassphrase: function () {
+            if(!this.trackedGeneration) {
+                this.trackedGeneration = true; 
+            } else {
+                Peerio.DataCollection.Signup.generatePassphrase();
+            };
             Peerio.PhraseGenerator.getPassPhrase(this.refs.lang.getDOMNode().value, this.refs.wordCount.getDOMNode().value)
             .then(function (phrase) {
                 this.setState({passphrase: phrase});

@@ -120,8 +120,8 @@ Peerio.DataCollection.init = function () {
         signup.trackAction('success');
     };
 
-    signup.regeneratePassphrase = function() {
-        signup.trackAction('regeneratePassphrase');
+    signup.generatePassphrase = function() {
+        signup.trackAction('generatePassphrase');
     };
 };
 
