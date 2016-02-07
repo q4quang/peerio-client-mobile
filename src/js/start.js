@@ -61,6 +61,9 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
             Peerio.NativeAPI.disableScrollingInShrinkView();
 
+            Peerio.DataCollection.init();
+            Peerio.DataCollection.insertPiwikCode();
+
             Peerio.FileSystemPlugin.init();
 
             React.initializeTouchEvents(true);

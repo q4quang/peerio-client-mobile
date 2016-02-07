@@ -17,6 +17,7 @@
                     username: this.state.username,
                     passphrase: this.state.passphrase
                 };
+                
                 this.transitionTo('root');
             })
             .catch( (error) => {
@@ -54,6 +55,14 @@
 
         processReturnedPassphrase : function() {
             L.info('processing returned passphrase, lol');
+        },
+
+        handleDataOptIn: function (enable) {
+            (enable ? Peerio.DataCollection.enable() : Peerio.DataCollection.disable())
+            .then( () => {
+                Peerio.DataCollection.Signup.startSignup();
+                this.handleNextStep();
+            });
         },
 
         handleNextStep: function (e) {
@@ -119,6 +128,11 @@
         },
 
         generatePassphrase: function () {
+            if(!this.trackedGeneration) {
+                this.trackedGeneration = true; 
+            } else {
+                Peerio.DataCollection.Signup.generatePassphrase();
+            };
             Peerio.PhraseGenerator.getPassPhrase(this.refs.lang.getDOMNode().value, this.refs.wordCount.getDOMNode().value)
             .then(function (phrase) {
                 this.setState({passphrase: phrase});
@@ -237,8 +251,8 @@
                   <p>By enabling anonymous data collection, we will collect non-identifying and non-content information to share with researchers and improve Peerio.</p>
                   <p>We understand your data has value. When you opt in, we will add 25MB to your account everyday as thanks for your contribution.</p>
                   <div className="buttons">
-                    <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.handleNextStep}>Not right now</Peerio.UI.Tappable>
-                    <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleNextStep}>Ok</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.handleDataOptIn.bind(this, false)}>Not right now</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleDataOptIn.bind(this, true)}>Ok</Peerio.UI.Tappable>
                   </div>
               </div>);
         },
@@ -246,6 +260,7 @@
         renderStep0: function (authMethod) {
             return (<fieldset key={'signup-step-0'} className="animate-enter">
                           <div className="headline">Basic Information</div>
+                          <Peerio.UI.TrackSubState name="basic"/>
 
                           <div className="input-group">
                               {(this.state.usernameValid === null || this.state.usernameValid === true)
@@ -306,6 +321,7 @@
         renderStep1: function () {
             return ( <fieldset key={'signup-step-1'}>
                 <div className="headline">Your Passphrase</div>
+                <Peerio.UI.TrackSubState name="passphrase"/>
 
                 <p className='info'>This is your secure randomly generated passphrase. If you lose it, you
                     will <strong>permanently</strong> lose access to your account.</p>

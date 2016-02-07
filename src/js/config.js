@@ -20,6 +20,11 @@ Peerio.Config.init = function () {
 
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
+        cfg.piwik = {
+            server: 'https://piwik.peerio.com/piwik.php',
+            site: 1
+        };
+
         cfg.dbPrefix = /\/\/(.*)\.peerio\.com/.exec(cfg.webSocketServer)[1];
         if (cfg.dbPrefix === 'app') cfg.dbPrefix = '';
 
