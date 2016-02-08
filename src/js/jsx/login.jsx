@@ -228,7 +228,7 @@
             var value = this.refs.username.getDOMNode().value;
             (!value || Peerio.Helpers.isValidUsername(value)) && this.setState( { username: value } );
         },
- 
+
         // submit form on enter
         handleKeyDownPass: function (e) {
             if (e.key === 'Enter') this.handleSubmit();
@@ -271,7 +271,7 @@
 
                     <div className="content-wrapper-login">
                       <div className="app-version">Peerio version: {Peerio.runtime.version}</div>
-                      <img className="logo" src="media/img/peerio-logo-white-beta.png" alt="Peerio"
+                      <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"
                         onTouchEnd={devmode.summon}/>
 
                       <form className="loginForm" onSubmit={this.handleSubmit}>
@@ -283,21 +283,21 @@
                              <strong> {this.state.savedLogin.firstName || this.state.savedLogin.username}</strong>
                              </div>
 
-                             <div className="caption">Tap here to change or forget username.</div>
+                             <div className="caption">Tap here to change and forget username.</div>
                                     </Peerio.UI.Tappable>)
                                     :
                                     (<div className="login-input">
                                         <div className="input-group">
                                             <label htmlFor="username">username</label>
-                                            <input value={this.state.username} 
+                                            <input value={this.state.username}
                                                 id="username" ref="username"
                                                 type="text" maxLength="16"
-                                                autoComplete="off" 
-                                                autoCorrect="off" 
+                                                autoComplete="off"
+                                                autoCorrect="off"
                                                 autoCapitalize="off"
                                                 spellCheck="false"
-                                                onKeyDown={this.handleKeyDownLogin} 
-                                                onChange={this.handleUsernameChange} 
+                                                onKeyDown={this.handleKeyDownLogin}
+                                                onChange={this.handleUsernameChange}
                                             />
                                         </div>
                                     </div>)

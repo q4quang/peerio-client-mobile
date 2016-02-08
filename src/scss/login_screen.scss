@@ -1,12 +1,11 @@
-/**
- *  Login screen specific styles
- */
+//  Login screen specific styles
 // combined with .modal class, this is a top-level
 // full-screen wrapper for login page
-.loginForm{
+
+.loginForm {
   @extend .flex-col;
-  justify-content: center;
-  align-items: center;
+  @extend .flex-justify-center;
+  @extend .flex-align-center;
 
   .buttons {
     left: 0;
@@ -26,7 +25,7 @@
 .logo {
   display: block;
   width: 100%;
-  margin: 0 auto 25px auto;
+  margin: 0 auto $margin-base;
   padding: $padding-base $padding-base 0;
 }
 
@@ -37,14 +36,15 @@
   padding: $padding-small 0 $padding-base;
   text-align: center;
   width: 100%;
-  .caption{
+
+  .caption {
     color: $white-30;
   }
 }
 
-#login-process-state{
+#login-process-state {
   text-align: center;
   color: color(p-blue-light-40);
-  height:15px;
+  height: 15px;
   margin-top: $margin-base;
 }
