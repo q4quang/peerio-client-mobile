@@ -5,6 +5,7 @@
 var Peerio = this.Peerio || {};
 Peerio.DataCollection = Peerio.DataCollection || {};
 Peerio.DataCollection.Signup = Peerio.DataCollection.Signup || {};
+Peerio.DataCollection.App = Peerio.DataCollection.App || {};
 
 Peerio.DataCollection.init = function () {
     'use strict';
@@ -122,6 +123,24 @@ Peerio.DataCollection.init = function () {
 
     signup.generatePassphrase = function() {
         signup.trackAction('generatePassphrase');
+    };
+
+    var app = Peerio.DataCollection.App;
+
+    app.trackAction = function(name, value) {
+        api.trackUserAction('app', name, value);
+    };
+
+    app.openSideBar = function() {
+        app.trackAction('openSideBar');
+    };
+
+    app.closeSideBarNoAction = function() {
+        app.trackAction('closeSideBarNoAction');
+    };
+
+    app.closeSideBar = function() {
+        app.trackAction('closeSideBar');
     };
 };
 
