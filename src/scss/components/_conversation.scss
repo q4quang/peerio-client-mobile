@@ -44,10 +44,10 @@ $avatar-size: 29px;
     .headline-divider {
       position: absolute;
       left: 0;
-    }
 
-    .headline-divider + .head {
-      margin-top: 2rem;
+      + .head {
+        margin-top: 2rem;
+      }
     }
 
     .avatar {
@@ -143,20 +143,21 @@ $avatar-size: 29px;
 
     &.self {
       .head {
-        background-color:   color(message-self-bg);
-        border-radius: $radius-default 0 0 0;
+        background-color: color(message-self-bg);
+        border-radius: $radius-default 0 0;
 
       }
       .body {
         background-color: color(message-self-bg);
-        border-radius: 0 0 0 $radius-default;;
-        .message-link{
+        border-radius: 0 0 $radius-default;
+
+        .message-link {
           color: color(p-blue-light-15);
         }
         //right arrow
         &:after {
           display: block;
-          content: " ";
+          content: ' ';
           width: 0;
           height: 0;
           border-top: 8px solid rgba(0, 0, 0, 0);
@@ -236,12 +237,15 @@ $avatar-size: 29px;
     background-color: color(p-blue-darker);
     margin-top: 30px;
     padding: 4px $padding-base;
+
     &.open {
       transform: translateY(0%);
     }
+
     .avatar {
       margin: 0 $margin-base 0 0;
     }
+
     .former-participant{
       color: color(meta-text-light);
       text-decoration: line-through;
@@ -275,7 +279,9 @@ $avatar-size: 29px;
   opacity: .6;
 }
 
-.reply-ack, .reply-attach, .reply-send {
+.reply-ack,
+.reply-attach,
+.reply-send {
   display: block;
   position: relative;
   width: 40px;
@@ -285,8 +291,9 @@ $avatar-size: 29px;
   text-align: center;
 }
 // reply acknowledge
-.reply-ack, .reply-send{
-  i{
+.reply-ack,
+.reply-send {
+  i {
     background-color: color(p-blue-light-10);
     border-radius: 50%;
     height: 20px;
@@ -340,23 +347,24 @@ $avatar-size: 29px;
     @extend .flex-justify-center;
     @extend .text-overflow;
 
-    background-color: #ccc;
+    background-color: #ddd;
+    border-radius: 12px;
     color: $black-54;
-    border-radius: 4px;
-    padding: 4px;
+    display: inline-flex;
+    padding: 0 4px 0 8px;
     height: 24px;
     width: auto;
-    display: inline-flex;
     max-width: 120px;
     min-width: 88px;
     flex: 1 0 auto;
-
+    font-size: 12px;
+    margin: 0 4px 0 0;
 
     i {
-      color: $white-70;
+      color: $black-38;
       font-size: 18px;
-      transition: $speed-normal;
       margin-left: $margin-small;
+      transition: $speed-normal;
 
       &:hover {
         color: $white-100;
