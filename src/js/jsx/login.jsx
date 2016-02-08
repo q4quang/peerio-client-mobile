@@ -94,7 +94,7 @@
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             Peerio.UI.TouchId.showOfferIfNeeded();
-            Peerio.user.enableDataCollection(this.enableDataOptIn)
+            this.enableDataOptIn && Peerio.user.enableDataCollection(this.enableDataOptIn)
             .then( () => {
                 this.trackSuccessfulSignup && Peerio.DataCollection.Signup.successfulSignup();
             });
