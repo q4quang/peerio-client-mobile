@@ -41,19 +41,21 @@ $avatar-size: 29px;
     padding-left: $avatar-size + $padding-base;
     position: relative;
 
-    .headline-divider{
+    .headline-divider {
       position: absolute;
       left: 0;
     }
-    .headline-divider + .head{
+
+    .headline-divider + .head {
       margin-top: 2rem;
     }
-    .avatar{
+
+    .avatar {
       width: $avatar-size;
       height: $avatar-size;
       position: absolute;
       left: -($avatar-size+3px);
-      top:0;
+      top: 0;
     }
     .head {
       height: 22px;
@@ -67,9 +69,11 @@ $avatar-size: 29px;
       font-weight: 600;
       border-top-right-radius: $radius-default;
     }
-    .names{
-      font-size:0.8em;
+
+    .names {
+      font-size: .8em;
     }
+
     .body {
       text-align: left;
       overflow-x: auto;
@@ -80,17 +84,18 @@ $avatar-size: 29px;
       word-wrap: break-word;
       //box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.2);
     }
-    .file-list{
+
+    .file-list {
       font-size: .8em;
       color: color(meta-text-light);
       margin-bottom: 5px;
-      .file-list-item{
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+
+      .file-list-item {
+        @extend .text-overflow;
+
         color: color(meta-text-dark);
         padding: $padding-small;
-        background-color: color(message-other-bg-file);;
+        background-color: color(message-other-bg-file);
 
         margin-top: 3px;
         margin-left: -5px;
@@ -104,6 +109,7 @@ $avatar-size: 29px;
       text-align: right;
       margin-top: 2px;
       padding-right: 4px;
+
       .receipt {
         margin-left: 3px;
       }
@@ -259,14 +265,14 @@ $avatar-size: 29px;
 #reply-overlay {
   position: absolute;
   display: flex;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  width:100%;
-  height:100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: #3f3f3f;
-  opacity: 0.6;
+  opacity: .6;
 }
 
 .reply-ack, .reply-attach, .reply-send {
@@ -284,17 +290,18 @@ $avatar-size: 29px;
     background-color: color(p-blue-light-10);
     border-radius: 50%;
     height: 20px;
-    width:20px;
+    width: 20px;
     color: $white-100;
     padding: 4px;
     box-sizing: content-box;
     font-size: 20px;
   }
-
 }
+
 .reply-send i {
   background: color(p-green);
 }
+
 .reply-input {
   min-height: 48px;
   max-height: 150px;
@@ -308,33 +315,42 @@ $avatar-size: 29px;
   resize: none;
   background: rgba(0, 0, 0, 0);
 
-  &:focus{
+  &:focus {
     outline: none;
   }
 }
 
-
+// TODO refactor rename and consolidate with recipients list in new messages
+// idea for component name: pill-list > pill ? - paul
 .attached-files {
   position: absolute;
   top: -40px;
   height: 40px;
+  left: 0;
+  right: 0;
   padding: $padding-small $padding-base;
   margin: 0;
   overflow-x: scroll;
   white-space: nowrap;
+  background: #fafafa;
+  border-top: $border-dark;
 
   .attached-file {
     @extend .flex-row;
     @extend .flex-justify-center;
+    @extend .text-overflow;
 
     background-color: #ccc;
     color: $black-54;
-    -webkit-border-radius: 4px;
     border-radius: 4px;
     padding: 4px;
     height: 24px;
     width: auto;
     display: inline-flex;
+    max-width: 120px;
+    min-width: 88px;
+    flex: 1 0 auto;
+
 
     i {
       color: $white-70;

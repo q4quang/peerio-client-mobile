@@ -185,6 +185,9 @@
             return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
         },
 
+        detachFile: function () {
+          console.log('file removed');
+        },
 
         //----- RENDER
         render: function () {
@@ -214,8 +217,8 @@
                     <div id="reply">
                         <ul className={'attached-files' + (this.state.attachments.length ? '' : ' hide')}>
                           <li className="attached-file">
-                            file name 
-                            <i className="material-icons">highlight_off</i>
+                            file name
+                            <Peerio.UI.Tappable element="i" className="material-icons" onTap={this.detachFile}>highlight_off</Peerio.UI.Tappable>
                           </li>
                         </ul>
 
@@ -235,13 +238,13 @@
                           disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}/>
 
                         { !this.state.empty ?
-                            <div className="reply-send">
-                                <i className="material-icons" onTouchEnd={this.sendReply}>send</i>
-                            </div> :
+                            <Peerio.UI.Tappable element="div" className="reply-send" onTap={this.sendReply}>
+                                <i className="material-icons">send</i>
+                            </Peerio.UI.Tappable> :
 
-                            <div className="reply-ack">
-                                <i className="material-icons" onTouchEnd={this.sendAck}>thumb_up</i>
-                            </div>
+                            <Peerio.UI.Tappable element="div" className="reply-ack" onTap={this.sendAck}>
+                                <i className="material-icons">thumb_up</i>
+                            </Peerio.UI.Tappable>
                         }
 
 
