@@ -222,14 +222,11 @@
                           </li>
                         </ul>
 
-                        <div className="reply-attach">
-                            <i className="material-icons"
-                               onTouchEnd={this.openFileSelect}>
-                                attach_file
-                            </i>
+                        <Peerio.UI.Tappable element="div" className="reply-attach" onTap={this.openFileSelect}>
+                            <i className="material-icons">attach_file</i>
                             <div
                                 className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length || ''}</div>
-                        </div>
+                            </Peerio.UI.Tappable>
 
                       <textarea
                           className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
