@@ -78,26 +78,24 @@
             } else {
                 buttonsNode = (
                     <div className="buttons">
-                      {file.cached ? <div className="btn-safe" onTouchEnd={this.handleOpen}>Open</div>
-                      : <div className="btn-safe" onTouchEnd={this.handleDownload}>
-                    <i className="material-icons">cloud_download</i>Download</div>}
+                      {file.cached ? <Peerio.UI.Tappable className="btn-safe" element="div" onTap={this.handleOpen}>Open</Peerio.UI.Tappable>
+                    : <Peerio.UI.Tappable className="btn-safe" element="div" onTap={this.handleDownload}>
+                    <i className="material-icons">cloud_download</i>Download</Peerio.UI.Tappable>}
 
                         {file.cached ?
-                            <div className="btn-danger" onTouchEnd={this.handleRemoveLocal}><i
-                                className="material-icons">delete</i>Remove from your device</div> : null }
+                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemoveLocal}><i
+                                className="material-icons">delete</i>Remove from your device</Peerio.UI.Tappable> : null }
 
                         {file.cached ?
-                            <div className="btn-danger" onTouchEnd={this.handleRemove}>Remove from your device &amp; cloud</div>
+                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemove}>Remove from your device &amp; cloud</Peerio.UI.Tappable>
                             :
-                            <div className="btn-danger" onTouchEnd={this.handleRemove}>Remove from your cloud</div>}
+                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemove}>Remove from your cloud</Peerio.UI.Tappable>}
 
                         {file.creator === Peerio.user.username ?
-                            <div className="btn-danger" onTouchEnd={this.handleNuke}>Unshare &amp; remove from all
-                                clouds</div> : null }
+                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleNuke}>Unshare &amp; remove from all
+                                clouds</Peerio.UI.Tappable> : null }
                     </div>);
             }
-
-            // TODO: replace onTouchEnd with globalTapHandler mixin. these buttons need tap event, because scroll is a possibility
 
             return (
                 <div className="content without-tab-bar without-footer">

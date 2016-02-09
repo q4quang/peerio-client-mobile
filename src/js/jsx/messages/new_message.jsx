@@ -59,7 +59,7 @@
             return (
                 <div className="content without-tab-bar">
                     <div id="new-message">
-                        <div className="recipients" onTouchEnd={this.openContactSelect}>
+                        <Peerio.UI.Tappable className="recipients" onTap={this.openContactSelect}>
                             <div className="to">To:</div>
                             <div className="names">{r}</div>
                             <div className="add-btn">
@@ -67,15 +67,15 @@
                 <span
                     className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
                             </div>
-                        </div>
+                        </Peerio.UI.Tappable>
                         <div className="subject-inputs">
                             <input type="text" ref="subject" className="subject" placeholder="Subject"/>
 
-                            <div className="attach-btn" onTouchEnd={this.openFileSelect}>
+                            <Peerio.UI.Tappable className="attach-btn" onTap={this.openFileSelect}>
                                 <i className="material-icons">attach_file</i>
                 <span
                     className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
-                            </div>
+                </Peerio.UI.Tappable>
                         </div>
                         <textarea ref="message" className="message" placeholder="Type your message"></textarea>
                     </div>

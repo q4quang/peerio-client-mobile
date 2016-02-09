@@ -41,19 +41,21 @@ $avatar-size: 29px;
     padding-left: $avatar-size + $padding-base;
     position: relative;
 
-    .headline-divider{
+    .headline-divider {
       position: absolute;
       left: 0;
+
+      + .head {
+        margin-top: 2rem;
+      }
     }
-    .headline-divider + .head{
-      margin-top: 2rem;
-    }
-    .avatar{
+
+    .avatar {
       width: $avatar-size;
       height: $avatar-size;
       position: absolute;
       left: -($avatar-size+3px);
-      top:0;
+      top: 0;
     }
     .head {
       height: 22px;
@@ -67,9 +69,11 @@ $avatar-size: 29px;
       font-weight: 600;
       border-top-right-radius: $radius-default;
     }
-    .names{
-      font-size:0.8em;
+
+    .names {
+      font-size: .8em;
     }
+
     .body {
       text-align: left;
       overflow-x: auto;
@@ -80,17 +84,18 @@ $avatar-size: 29px;
       word-wrap: break-word;
       //box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.2);
     }
-    .file-list{
+
+    .file-list {
       font-size: .8em;
       color: color(meta-text-light);
       margin-bottom: 5px;
-      .file-list-item{
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+
+      .file-list-item {
+        @extend .text-overflow;
+
         color: color(meta-text-dark);
         padding: $padding-small;
-        background-color: color(message-other-bg-file);;
+        background-color: color(message-other-bg-file);
 
         margin-top: 3px;
         margin-left: -5px;
@@ -104,6 +109,7 @@ $avatar-size: 29px;
       text-align: right;
       margin-top: 2px;
       padding-right: 4px;
+
       .receipt {
         margin-left: 3px;
       }
@@ -137,20 +143,21 @@ $avatar-size: 29px;
 
     &.self {
       .head {
-        background-color:   color(message-self-bg);
-        border-radius: $radius-default 0 0 0;
+        background-color: color(message-self-bg);
+        border-radius: $radius-default 0 0;
 
       }
       .body {
         background-color: color(message-self-bg);
-        border-radius: 0 0 0 $radius-default;;
-        .message-link{
+        border-radius: 0 0 $radius-default;
+
+        .message-link {
           color: color(p-blue-light-15);
         }
         //right arrow
         &:after {
           display: block;
-          content: " ";
+          content: ' ';
           width: 0;
           height: 0;
           border-top: 8px solid rgba(0, 0, 0, 0);
@@ -230,12 +237,15 @@ $avatar-size: 29px;
     background-color: color(p-blue-darker);
     margin-top: 30px;
     padding: 4px $padding-base;
+
     &.open {
       transform: translateY(0%);
     }
+
     .avatar {
       margin: 0 $margin-base 0 0;
     }
+
     .former-participant{
       color: color(meta-text-light);
       text-decoration: line-through;
@@ -259,17 +269,19 @@ $avatar-size: 29px;
 #reply-overlay {
   position: absolute;
   display: flex;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  width:100%;
-  height:100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: #3f3f3f;
-  opacity: 0.6;
+  opacity: .6;
 }
 
-.reply-ack, .reply-attach, .reply-send {
+.reply-ack,
+.reply-attach,
+.reply-send {
   display: block;
   position: relative;
   width: 40px;
@@ -279,22 +291,24 @@ $avatar-size: 29px;
   text-align: center;
 }
 // reply acknowledge
-.reply-ack, .reply-send{
-  i{
+.reply-ack,
+.reply-send {
+  i {
     background-color: color(p-blue-light-10);
     border-radius: 50%;
     height: 20px;
-    width:20px;
+    width: 20px;
     color: $white-100;
     padding: 4px;
     box-sizing: content-box;
     font-size: 20px;
   }
-
 }
+
 .reply-send i {
   background: color(p-green);
 }
+
 .reply-input {
   min-height: 48px;
   max-height: 150px;
@@ -308,7 +322,75 @@ $avatar-size: 29px;
   resize: none;
   background: rgba(0, 0, 0, 0);
 
-  &:focus{
+  &:focus {
     outline: none;
+  }
+}
+
+// TODO refactor rename and consolidate with recipients list in new messages
+// idea for component name: pill-list > pill ? - paul
+.attached-files {
+  position: absolute;
+  top: -40px;
+  height: 40px;
+  left: 0;
+  right: 0;
+  padding: $padding-small $padding-base;
+  margin: 0;
+  overflow-x: scroll;
+  white-space: nowrap;
+  background: #fafafa;
+  border-top: $border-dark;
+
+  &.removed {
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    top: -1px;
+    transition: top $speed-normal, height $speed-normal 25ms;
+  }
+
+  .attached-file {
+    @extend .flex-row;
+    @extend .flex-justify-center;
+
+    background-color: #ddd;
+    border-radius: 12px;
+    color: $black-54;
+    display: inline-flex;
+    padding: 0 4px 0 $padding-small;
+    height: 24px;
+    width: auto;
+    max-width: 120px;
+    min-width: 88px;
+    flex: 1 0 auto;
+    font-size: 12px;
+    margin: 0 $margin-small 0 0;
+    opacity: 1;
+
+    &.removed {
+      transition: $speed-normal;
+      max-width: 0;
+      min-width: 0;
+      padding: 0;
+      margin: 0;
+      opacity: 0;
+    }
+
+    span {
+      @extend .text-overflow;
+    }
+
+
+    i {
+      color: $black-38;
+      font-size: 18px;
+      margin-left: $margin-small;
+      transition: $speed-normal;
+
+      &:hover {
+        color: $white-100;
+      }
+    }
   }
 }
