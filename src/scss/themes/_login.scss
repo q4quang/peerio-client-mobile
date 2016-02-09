@@ -1,10 +1,11 @@
 
-.page-wrapper-login{
+.page-wrapper-login {
   background-color: color(p-blue);
-  color: white;
+  color: 4white-100;
   overflow: hidden;
-  .select-input{
-    border: none;
+
+  .select-input {
+    border: 0;
     background-color: color(p-blue-light-10);
     height: 30px;
     padding: 5px;
@@ -29,10 +30,13 @@
   }
 
   .content {
-      background: transparent;
-      position: static;
-      top: auto; left: auto; right: auto; bottom: auto;
-      padding: 0px;
+    background: transparent;
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    padding: 0;
   }
 }
 
@@ -73,12 +77,13 @@
     width: 100%;
     padding: 0 $padding-small;
     background: transparent;
-    border: none;
+    border: 0;
     border-radius: 0;
     font-weight: 100;
     transition: all $speed-normal ease;
+
     &:focus {
-      outline: none;
+      outline: 0;
       border: 0;
     }
   }
