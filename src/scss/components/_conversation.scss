@@ -337,6 +337,7 @@ $avatar-size: 29px;
   right: 0;
   padding: $padding-small $padding-base;
   margin: 0;
+  overflow-y: hidden;
   overflow-x: scroll;
   white-space: nowrap;
   background: #fafafa;
