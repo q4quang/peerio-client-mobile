@@ -380,10 +380,13 @@ $avatar-size: 29px;
 
     span {
       @extend .text-overflow;
+      @extend .flex-grow-1;
     }
 
 
     i {
+      @extend .flex-shrink-0;
+
       color: $black-38;
       font-size: 18px;
       margin-left: $margin-small;
