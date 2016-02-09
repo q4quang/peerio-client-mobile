@@ -185,8 +185,12 @@
             return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
         },
 
+        // TODO make this work
+        // tapping x on attached file should remove it from attachments array
         detachFile: function () {
           console.log('file removed');
+          _.remove(this.state.attachments, Peerio.user.files.dict[id]);
+
         },
 
         //----- RENDER
@@ -216,17 +220,24 @@
 
                     <div id="reply">
                         <ul className={'attached-files' + (this.state.attachments.length ? '' : ' hide')}>
-                          <li className="attached-file">
-                            file name
-                            <Peerio.UI.Tappable element="i" className="material-icons" onTap={this.detachFile}>highlight_off</Peerio.UI.Tappable>
-                          </li>
+                          {this.state.attachments.map(id=> {
+                              var file = Peerio.user.files.dict[id];
+                              return <li className="attached-file">
+                                  { this.state.attachments.length ? file.name : null }
+                                  <Peerio.UI.Tappable element="i" className="material-icons" onTap={this.detachFile}>
+                                    highlight_off
+                                  </Peerio.UI.Tappable>
+                                </li> })
+                              }
+
                         </ul>
 
                         <Peerio.UI.Tappable element="div" className="reply-attach" onTap={this.openFileSelect}>
                             <i className="material-icons">attach_file</i>
-                            <div
-                                className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length || ''}</div>
-                            </Peerio.UI.Tappable>
+                            <div className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>
+                              {this.state.attachments.length || ''}
+                            </div>
+                        </Peerio.UI.Tappable>
 
                       <textarea
                           className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}

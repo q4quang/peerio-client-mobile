@@ -345,7 +345,6 @@ $avatar-size: 29px;
   .attached-file {
     @extend .flex-row;
     @extend .flex-justify-center;
-    @extend .text-overflow;
 
     background-color: #ddd;
     border-radius: 12px;
@@ -359,6 +358,11 @@ $avatar-size: 29px;
     flex: 1 0 auto;
     font-size: 12px;
     margin: 0 4px 0 0;
+
+    span {
+      @extend .text-overflow;
+    }
+
 
     i {
       color: $black-38;
