@@ -70,7 +70,7 @@
             return (
                 <ReactCSSTransitionGroup transitionName="fade" transitionAppear={true} transitionAppearTimeout={250}>
                     <div className="modal sync no-scroll-hack" key="sync">
-                        <img className="logo" src="media/img/peerio-logo-white-beta.png" alt="Peerio"
+                        <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"
                              onTouchEnd={devmode.summon} />
 
                         <div className="sync-info">
