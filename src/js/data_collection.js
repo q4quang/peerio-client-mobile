@@ -19,6 +19,8 @@ Peerio.DataCollection.init = function () {
 
     var prevPage = null;
 
+    var timePoints = {};
+
     api.enable = function() {
         L.info('Enabling data collection');
         isEnabled = true;
@@ -99,12 +101,25 @@ Peerio.DataCollection.init = function () {
         window._paq.push(['trackEvent', category, name, category + '_' + name, value]);
     };
 
-    api.startTimePoint = function() {
-        if(!api.isEnabled()) return;
+    api.trackUserActionDelayed = function(category, name, value) {
+        value = value ? value : 1;
+        L.info('Delayed tracking event category: ' + category + ', name: ' + name + ', value: ' + value);
+        window._paq.push(['trackEvent', category, name, category + '_' + name, value]);
     };
 
-    api.endTimePoint = function() {
-        if(!api.isEnabled()) return;
+    api.flushDelayedTracking = function() {
+    };
+
+    api.startTimePoint = function(name) {
+        timePoints[name] = Date.now();
+    };
+
+    api.endTimePoint = function(name) {
+        if(timePoints[name]) {
+            var timeSpan = Date.now() - timePoints[name];
+            delete timePoints[name];
+            api.trackUserAction('timepoints', name, timeSpan);
+        }
     };
 
     var signup = Peerio.DataCollection.Signup;
