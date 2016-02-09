@@ -12,7 +12,7 @@ Peerio.DataCollection.init = function () {
 
     var api = Peerio.DataCollection;
 
-    var isEnabled = false;
+    var isEnabled = null;
 
     // substates which we want to track
     var subStates = [];
@@ -20,6 +20,8 @@ Peerio.DataCollection.init = function () {
     var prevPage = null;
 
     var timePoints = {};
+
+    var delayedPaq = [];
 
     api.enable = function() {
         L.info('Enabling data collection');
@@ -34,6 +36,10 @@ Peerio.DataCollection.init = function () {
         api.enterNullPage();
         isEnabled = false;
         return Promise.resolve(isEnabled);
+    };
+
+    api.isUndefined = function() {
+        return !Peerio.user && (isEnabled === null);
     };
 
     api.isEnabled = function() {
@@ -94,23 +100,30 @@ Peerio.DataCollection.init = function () {
         prevPage = path;
     };
 
-    api.trackUserAction = function(category, name, value) {
-        if(!api.isEnabled()) return;
+    api.trackUserAction = function(category, name, value, delayed) {
+        if(!api.isUndefined && !api.isEnabled()) return;
         value = value ? value : 1;
+        var arr = api.isUndefined() ? delayedPaq : window._paq;
         L.info('Tracking event category: ' + category + ', name: ' + name + ', value: ' + value);
         window._paq.push(['trackEvent', category, name, category + '_' + name, value]);
     };
 
-    api.trackUserActionDelayed = function(category, name, value) {
-        value = value ? value : 1;
-        L.info('Delayed tracking event category: ' + category + ', name: ' + name + ', value: ' + value);
-        window._paq.push(['trackEvent', category, name, category + '_' + name, value]);
-    };
-
     api.flushDelayedTracking = function() {
+        if(api.isEnabled()) {
+            for(var i of delayedPaq) {
+                window._paq.push(i);
+            }
+        }
+        delayedPaq = [];
     };
 
-    api.startTimePoint = function(name) {
+    /**
+     * Starts a time point for data collection
+     * @param name unique name for the time point
+     * @param clean do nothing if we already have the same point in storage
+     */
+    api.startTimePoint = function(name, clean) {
+        if(!clean && timePoints[name]) return;
         timePoints[name] = Date.now();
     };
 

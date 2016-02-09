@@ -97,6 +97,7 @@
             this.enableDataOptIn && Peerio.user.enableDataCollection(this.enableDataOptIn)
             .then( () => {
                 this.trackSuccessfulSignup && Peerio.DataCollection.Signup.successfulSignup();
+                Peerio.DataCollection.flushDelayedTracking();
             });
             Peerio.NativeAPI.enablePushNotifications()
                 .catch(error => L.error('Error enabling push notifications. {0}', error))
@@ -143,6 +144,7 @@
         },
         // scale passphrase font
         handlePassphraseChange: function () {
+            Peerio.DataCollection.startTimePoint('login_enter_passphrase');
             if (!this.state.passphraseVisible) return;
 
             var element = this.refs.passphrase.getDOMNode();
@@ -183,6 +185,7 @@
 
         // initiate login
         handleSubmit: function (e, passOrPin) {
+            Peerio.DataCollection.endTimePoint('login_enter_passphrase');
             if (e) e.preventDefault();
 
             if (this.state.waitingForLogin) return;

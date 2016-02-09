@@ -20,6 +20,7 @@
         },
 
         validatePassPhrase: function () {
+            Peerio.DataCollection.startTimePoint('signup_enterpassphrase');
             var passphrase_confirmed = event.target.value === this.props.passphrase;
             var passphrase_alert = event.target.value.length && !passphrase_confirmed;
             this.setState({
@@ -30,6 +31,7 @@
 
         passPhraseIsValid: function () {
             if (this.state.passphrase_valid) {
+                Peerio.DataCollection.endTimePoint('signup_enterpassphrase');
                 this.removeDialog();
                 this.props.doSignup();
             } else {
