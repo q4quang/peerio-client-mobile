@@ -187,10 +187,12 @@
 
         // TODO make this work
         // tapping x on attached file should remove it from attachments array
-        detachFile: function () {
-          console.log('file removed');
-          _.remove(this.state.attachments, Peerio.user.files.dict[id]);
-
+        detachFile: function (id) {
+            var index = this.state.attachments.indexOf(id);
+            if(index != -1) {
+                this.state.attachments.splice(index, 1);
+                this.setState({attachments: this.state.attachments});
+            }
         },
 
         //----- RENDER
@@ -220,14 +222,14 @@
 
                     <div id="reply">
                         <ul className={'attached-files' + (this.state.attachments.length ? '' : ' hide')}>
-                          {this.state.attachments.map(id=> {
+                          {this.state.attachments.map(id => {
                               var file = Peerio.user.files.dict[id];
-                              return <li className="attached-file">
+                              return (<li className="attached-file">
                                   { this.state.attachments.length ? file.name : null }
-                                  <Peerio.UI.Tappable element="i" className="material-icons" onTap={this.detachFile}>
+                                  <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons" onTap={this.detachFile.bind(this, id)}>
                                     highlight_off
                                   </Peerio.UI.Tappable>
-                                </li> })
+                                </li>); })
                               }
 
                         </ul>
