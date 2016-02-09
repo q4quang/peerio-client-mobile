@@ -342,6 +342,14 @@ $avatar-size: 29px;
   background: #fafafa;
   border-top: $border-dark;
 
+  &.removed {
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    top: -1px;
+    transition: top $speed-normal, height $speed-normal 25ms;
+  }
+
   .attached-file {
     @extend .flex-row;
     @extend .flex-justify-center;
@@ -360,9 +368,8 @@ $avatar-size: 29px;
     margin: 0 $margin-small 0 0;
     opacity: 1;
 
-    transition: $speed-normal;
-
-    &.remove {
+    &.removed {
+      transition: $speed-normal;
       max-width: 0;
       min-width: 0;
       padding: 0;

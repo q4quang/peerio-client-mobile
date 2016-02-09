@@ -11,7 +11,8 @@
                 attachments: [],
                 conversation: null,
                 sending: false,
-                empty: true
+                empty: true,
+                removed: null
             };
         },
         componentWillMount: function () {
@@ -185,14 +186,16 @@
             return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
         },
 
-        // TODO make this work
-        // tapping x on attached file should remove it from attachments array
         detachFile: function (id) {
+            this.setState({removed: id});
             var index = this.state.attachments.indexOf(id);
-            if(index != -1) {
-                this.state.attachments.splice(index, 1);
-                this.setState({attachments: this.state.attachments});
-            }
+
+            setTimeout(() => {
+                if(index != -1) {
+                    this.state.attachments.splice(index, 1);
+                    this.setState({attachments: this.state.attachments});
+                      this.setState({removed: null});
+                }},350)
         },
 
         //----- RENDER
@@ -221,10 +224,11 @@
                     />
 
                     <div id="reply">
-                        <ul className={'attached-files' + (this.state.attachments.length ? '' : ' hide')}>
+                        <ul className={'attached-files' + (this.state.attachments.length ? '' : ' removed')}>
                           {this.state.attachments.map(id => {
                               var file = Peerio.user.files.dict[id];
-                              return (<li className="attached-file">
+
+                              return (<li className={'attached-file' + (this.state.removed === id ? ' removed':'')}>
                                   { this.state.attachments.length ? file.name : null }
                                   <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons" onTap={this.detachFile.bind(this, id)}>
                                     highlight_off
@@ -236,7 +240,7 @@
 
                         <Peerio.UI.Tappable element="div" className="reply-attach" onTap={this.openFileSelect}>
                             <i className="material-icons">attach_file</i>
-                            <div className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>
+                            <div className={'icon-counter' + (this.state.attachments.length ? '' : ' none')}>
                               {this.state.attachments.length || ''}
                             </div>
                         </Peerio.UI.Tappable>
