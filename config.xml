@@ -97,7 +97,7 @@
     <plugin name="cordova-plugin-email" spec="~1" />
     <plugin name="br.com.dtmtec.plugins.carrier" spec="*" />
     <plugin name="cordova-plugin-globalization" spec="*" />
-    <plugin name="cordova-plugin-privacyscreen" spec="*" />
+    <plugin name="org.devgeeks.privacyscreen" spec="https://github.com/jeroentrappers/PrivacyScreen" />
     <plugin name="io.litehelpers.cordova.sqlcipher" spec="https://github.com/litehelpers/Cordova-sqlcipher-adapter" />
     <plugin name="phonegap-plugin-push" spec="~1" />
     <plugin name="cordova-plugin-safariviewcontroller" spec="~1" />
