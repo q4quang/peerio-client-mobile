@@ -23,12 +23,12 @@
         },
         //--- CUSTOM FN
         toggle: function () {
-            this.state.open ? Peerio.DataCollection.App.closeSideBarNoAction() : Peerio.DataCollection.App.openSideBar(); 
+            this.state.open ? Peerio.DataCollection.App.closeSideBarNoAction() : Peerio.DataCollection.App.openSideBar();
             this.setState({open: !this.state.open});
         },
 
         toggleAndTransition: function (route) {
-            Peerio.DataCollection.App.closeSideBar(); 
+            Peerio.DataCollection.App.closeSideBar();
             this.setState({open: false});
             this.transitionTo(route);
         },
@@ -106,11 +106,12 @@
                                         <i className="material-icons">person</i> Profile
                                      </Peerio.UI.Tappable>
 
-                                     <Peerio.UI.Tappable tag="li"
-                                        onTap={this.toggleAndTransition.bind(this, 'share_code')}>
-                                        <i className="material-icons">share</i> Get Free Data
-                                     </Peerio.UI.Tappable>
-
+                                     {/* TODO uncomment when share plugin is implemented
+                                        <Peerio.UI.Tappable tag="li"
+                                            onTap={this.toggleAndTransition.bind(this, 'share_code')}>
+                                            <i className="material-icons">share</i> Get Free Data
+                                        </Peerio.UI.Tappable>
+                                     */}
                                      <Peerio.UI.Tappable tag="li"
                                         onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
                                         <i className="material-icons">settings</i> Preferences
