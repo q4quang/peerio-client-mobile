@@ -233,6 +233,8 @@ Peerio.NativeAPI.init = function () {
 
 
     //-- CLIPBOARD -----------------------------------------------------------------------------------------------------
+    api.isClipboardAvailable = isClipboardAvailable;
+
     api.copyToClipboard = function (text) {
         if (!isClipboardAvailable()) return Promise.reject();
 
