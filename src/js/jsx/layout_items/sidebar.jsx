@@ -23,11 +23,13 @@
         },
         //--- CUSTOM FN
         toggle: function () {
+            this.state.open ? Peerio.DataCollection.App.closeSideBarNoAction() : Peerio.DataCollection.App.openSideBar(); 
             this.setState({open: !this.state.open});
         },
 
         toggleAndTransition: function (route) {
-            this.toggle();
+            Peerio.DataCollection.App.closeSideBar(); 
+            this.setState({open: false});
             this.transitionTo(route);
         },
         //addContactCallback: function(username){

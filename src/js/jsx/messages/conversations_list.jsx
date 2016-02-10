@@ -23,7 +23,7 @@
         },
 
         updateMessages: function(data) {
-            if (data.updated) {
+            if (!data || data.updated) {
                 this.refs.Messages.refresh();
                 return;
             }

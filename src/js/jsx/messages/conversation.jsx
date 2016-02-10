@@ -11,7 +11,8 @@
                 attachments: [],
                 conversation: null,
                 sending: false,
-                empty: true
+                empty: true,
+                removed: null
             };
         },
         componentWillMount: function () {
@@ -185,6 +186,18 @@
             return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
         },
 
+        detachFile: function (id) {
+            this.setState({removed: id});
+            var index = this.state.attachments.indexOf(id);
+
+            setTimeout(() => {
+                if(index != -1) {
+                    this.state.attachments.splice(index, 1);
+                    this.setState({attachments: this.state.attachments});
+                      this.setState({removed: null});
+                }},350)
+        },
+
         //----- RENDER
         render: function () {
             // todo: loading state
@@ -211,14 +224,26 @@
                     />
 
                     <div id="reply">
-                        <div className="reply-attach">
-                            <i className="material-icons"
-                               onTouchEnd={this.openFileSelect}>
-                                attach_file
-                            </i>
-                            <div
-                                className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length || ''}</div>
-                        </div>
+                        <ul className={'attached-files' + (this.state.attachments.length ? '' : ' removed')}>
+                          {this.state.attachments.map(id => {
+                              var file = Peerio.user.files.dict[id];
+
+                              return (<li className={'attached-file' + (this.state.removed === id ? ' removed':'')}>
+                                  { this.state.attachments.length ? file.name : null }
+                                  <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons" onTap={this.detachFile.bind(this, id)}>
+                                    highlight_off
+                                  </Peerio.UI.Tappable>
+                                </li>); })
+                              }
+
+                        </ul>
+
+                        <Peerio.UI.Tappable element="div" className="reply-attach" onTap={this.openFileSelect}>
+                            <i className="material-icons">attach_file</i>
+                            <div className={'icon-counter' + (this.state.attachments.length ? '' : ' none')}>
+                              {this.state.attachments.length || ''}
+                            </div>
+                        </Peerio.UI.Tappable>
 
                       <textarea
                           className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
@@ -227,13 +252,13 @@
                           disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}/>
 
                         { !this.state.empty ?
-                            <div className="reply-send">
-                                <i className="material-icons" onTouchEnd={this.sendReply}>send</i>
-                            </div> :
+                            <Peerio.UI.Tappable element="div" className="reply-send" onTap={this.sendReply}>
+                                <i className="material-icons">send</i>
+                            </Peerio.UI.Tappable> :
 
-                            <div className="reply-ack">
-                                <i className="material-icons" onTouchEnd={this.sendAck}>thumb_up</i>
-                            </div>
+                            <Peerio.UI.Tappable element="div" className="reply-ack" onTap={this.sendAck}>
+                                <i className="material-icons">thumb_up</i>
+                            </Peerio.UI.Tappable>
                         }
 
 

@@ -54,6 +54,8 @@
             // signup function. we want to show setup wizard
             // if it is true
             this.nextRoute = Peerio.autoLogin ? 'setup_wizard' : 'messages';
+            this.enableDataOptIn = !!(Peerio.autoLogin && Peerio.DataCollection.isEnabled());
+            this.trackSuccessfulSignup = !!Peerio.autoLogin;
             if (Peerio.autoLogin) {
                 var autoLogin = Peerio.autoLogin;
                 // in case smth fails we clean this first
@@ -92,6 +94,11 @@
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             Peerio.UI.TouchId.showOfferIfNeeded();
+            this.enableDataOptIn && Peerio.user.enableDataCollection(this.enableDataOptIn)
+            .then( () => {
+                this.trackSuccessfulSignup && Peerio.DataCollection.Signup.successfulSignup();
+                Peerio.DataCollection.flushDelayedTracking();
+            });
             Peerio.NativeAPI.enablePushNotifications()
                 .catch(error => L.error('Error enabling push notifications. {0}', error))
                 .finally(() => Peerio.NativeAPI.clearPushBadge());
@@ -137,6 +144,7 @@
         },
         // scale passphrase font
         handlePassphraseChange: function () {
+            Peerio.DataCollection.startTimePoint('login_enter_passphrase');
             if (!this.state.passphraseVisible) return;
 
             var element = this.refs.passphrase.getDOMNode();
@@ -177,6 +185,7 @@
 
         // initiate login
         handleSubmit: function (e, passOrPin) {
+            Peerio.DataCollection.endTimePoint('login_enter_passphrase');
             if (e) e.preventDefault();
 
             if (this.state.waitingForLogin) return;
@@ -222,7 +231,7 @@
             var value = this.refs.username.getDOMNode().value;
             (!value || Peerio.Helpers.isValidUsername(value)) && this.setState( { username: value } );
         },
- 
+
         // submit form on enter
         handleKeyDownPass: function (e) {
             if (e.key === 'Enter') this.handleSubmit();
@@ -265,7 +274,7 @@
 
                     <div className="content-wrapper-login">
                       <div className="app-version">Peerio version: {Peerio.runtime.version}</div>
-                      <img className="logo" src="media/img/peerio-logo-white-beta.png" alt="Peerio"
+                      <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"
                         onTouchEnd={devmode.summon}/>
 
                       <form className="loginForm" onSubmit={this.handleSubmit}>
@@ -277,21 +286,21 @@
                              <strong> {this.state.savedLogin.firstName || this.state.savedLogin.username}</strong>
                              </div>
 
-                             <div className="caption">Tap here to change or forget username.</div>
+                             <div className="caption">Tap here to change and forget username.</div>
                                     </Peerio.UI.Tappable>)
                                     :
                                     (<div className="login-input">
                                         <div className="input-group">
                                             <label htmlFor="username">username</label>
-                                            <input value={this.state.username} 
+                                            <input value={this.state.username}
                                                 id="username" ref="username"
                                                 type="text" maxLength="16"
-                                                autoComplete="off" 
-                                                autoCorrect="off" 
+                                                autoComplete="off"
+                                                autoCorrect="off"
                                                 autoCapitalize="off"
                                                 spellCheck="false"
-                                                onKeyDown={this.handleKeyDownLogin} 
-                                                onChange={this.handleUsernameChange} 
+                                                onKeyDown={this.handleKeyDownLogin}
+                                                onChange={this.handleUsernameChange}
                                             />
                                         </div>
                                     </div>)

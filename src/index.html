@@ -34,6 +34,8 @@
          On devices it will 404 which is ok. -->
     <script type="application/javascript" src="../debug.js"></script>
     <script type="application/javascript" src="js/js/urlfix.js"></script>
+    <!-- tracing does not actually start before we enable it -->
+    <script type="application/javascript" src="js/js/piwik.js"></script>
 
     <!-- JS libraries  TODO: replace react to production version on build -->
     <script type="application/javascript" src="cordova.js"></script>
@@ -305,21 +307,5 @@
 
 </script>
 <!---------------- </DEVMODE CONTROL END> ---------------->
-<!-- Piwik -->
-<script type="text/javascript">
-var _paq = _paq || [];
-_paq.push(['trackPageView']);
-_paq.push(['enableLinkTracking']);
-(function() {
-    var u="https://piwik.peerio.com/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 1]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-})();
-</script>
-<noscript><p><img src="//piwik.peerio.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
-
 </body>
 </html>
