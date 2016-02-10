@@ -52,10 +52,6 @@ Peerio.UI.AddContact = React.createClass({
             </Peerio.UI.Tappable>
           </div>
           </div>
-          <div id="footer" className={'footer-light' + (!this.state.inviteCode ? ' hide' : '')}>Your Invite Code<strong className="margin-small"> {this.state.inviteCode}</strong>
-            {/* TODO: get content for info alert */}
-            <Peerio.UI.Tappable element="i" className="material-icons">info_outline</Peerio.UI.Tappable>
-          </div>
         </div>);
   }
 });
