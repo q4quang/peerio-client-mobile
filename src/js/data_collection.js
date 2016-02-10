@@ -135,6 +135,10 @@ Peerio.DataCollection.init = function () {
         }
     };
 
+    api.trackCountry = function(code) {
+        api.trackUserAction('country', code);
+    };
+
     var signup = Peerio.DataCollection.Signup;
 
     signup.trackAction = function(name, value) {

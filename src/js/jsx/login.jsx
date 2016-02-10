@@ -99,6 +99,11 @@
                 this.trackSuccessfulSignup && Peerio.DataCollection.Signup.successfulSignup();
                 Peerio.DataCollection.flushDelayedTracking();
             });
+
+            Peerio.NativeAPI.getCountryCode().then( (code) => {
+                Peerio.DataCollection.trackCountry(code);
+            });
+
             Peerio.NativeAPI.enablePushNotifications()
                 .catch(error => L.error('Error enabling push notifications. {0}', error))
                 .finally(() => Peerio.NativeAPI.clearPushBadge());
