@@ -95,7 +95,7 @@
     <plugin name="cordova-plugin-camera" spec="~2" />
     <plugin name="cordova-plugin-whitelist" spec="*" />
     <plugin name="cordova-plugin-email" spec="~1" />
-    <plugin name="br.com.dtmtec.plugins.carrier" spec="*" />
+    <plugin name="br.com.dtmtec.plugins.carrier" spec="https://github.com/dtmtec/cordova-plugin-carrier" />
     <plugin name="cordova-plugin-globalization" spec="*" />
     <plugin name="org.devgeeks.privacyscreen" spec="https://github.com/jeroentrappers/PrivacyScreen" />
     <plugin name="io.litehelpers.cordova.sqlcipher" spec="https://github.com/litehelpers/Cordova-sqlcipher-adapter" />
