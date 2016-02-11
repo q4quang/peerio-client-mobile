@@ -5,11 +5,16 @@
         mixins: [ReactRouter.Navigation],
 
         getInitialState: function () {
-            return {
+            return this.props.data.pass 
+            || {
+                passphrase: '',
+                passphrase_reentered: '',
+                passphrase_valid: false,
             };
         },
 
         componentDidMount: function () {
+            if(!this.state.passphrase) this.generatePassphrase();
             this.subscriptions = [
                 Peerio.Dispatcher.onSetPassphrase(this.processReturnedPassphrase),
             ];
@@ -17,10 +22,6 @@
 
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
-        },
-
-        showModal: function() {
-            this.transitionTo('set_passphrase', {passphrase: this.state.passphrase} );
         },
 
         generatePassphrase: function () {
@@ -33,6 +34,10 @@
             .then(function (phrase) {
                 this.setState({passphrase: phrase});
             }.bind(this));
+        },
+
+        handleNextStep: function () {
+            this.props.handleNextStep({ pass: this.state });
         },
 
         render: function () {
@@ -78,7 +83,7 @@
                             </div>
                         </div>
                         <div className="buttons">
-                            <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.showModal}> I'll remember my
+                            <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.handleNextStep}> I'll remember my
                                 passphrase</Peerio.UI.Tappable>
                             <Peerio.UI.Tappable element='div' className="btn-primary" onTap={this.generatePassphrase}> I don't like
                                 this passphrase</Peerio.UI.Tappable>

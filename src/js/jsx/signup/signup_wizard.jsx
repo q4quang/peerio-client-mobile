@@ -10,12 +10,15 @@
 
             this.setState({activeStep: 4});
 
-            Peerio.Auth.signup(this.state.username, this.state.passphrase, this.state.firstName, this.state.lastName)
+            Peerio.Auth.signup(this.data.name.username, 
+                               this.data.pass.passphrase, 
+                               this.data.name.firstName, 
+                               this.data.name.lastName)
             .then(() => {
                 //todo: terrible, transfer this through router
                 Peerio.autoLogin = {
-                    username: this.state.username,
-                    passphrase: this.state.passphrase
+                    username: this.data.name.username,
+                    passphrase: this.data.pass.passphrase
                 };
 
                 this.transitionTo('root');
@@ -28,26 +31,17 @@
 
         getInitialState: function () {
             return {
-                steps: [],
                 activeStep: 0,
-                usernameValid: null,
-                username: '',
-                passphrase: '',
-                passphrase_reentered: '',
-                passphrase_valid: false,
-                firstNameValid: true,
-                firstName: '',
-                lastNameValid: true,
-                lastName: '',
-                activeModalID: null
             };
         },
 
-        componentWillMount: function() {
+        componentWillMount: function () {
+            this.data = {};
             this.steps = [
                 Peerio.UI.SignupWizardOptIn,
                 Peerio.UI.SignupWizardName,
                 Peerio.UI.SignupWizardPassphrase,
+                Peerio.UI.SignupWizardConfirm,
                 Peerio.UI.SignupWizardSpinner,
             ];
         },
@@ -56,25 +50,15 @@
             L.info('processing returned passphrase, lol');
         },
 
-        handleNextStep: function (childState) {
-            if(childState) this.childState = childState;
+        handleNextStep: function (data) {
+            if(data) _.extend(this.data, data);
             if(this.state.activeStep >= this.steps.length - 1) {
                 return;
             }
             this.setState( { activeStep: this.state.activeStep + 1 } );
-
-            /** 
-                if (this.state.activeStep === 1) {
-                this.setState({
-                    username: this.refs.username.getDOMNode().value,
-                    firstName: this.refs.firstName.getDOMNode().value,
-                    lastName: this.refs.lastName.getDOMNode().value
-                });
+            if(data.signup) {
+                this.doSignup();
             }
-
-            this.setState({activeStep: ++this.state.activeStep}, function () {
-                if (this.state.activeStep === 2) this.generatePassphrase();
-            }); **/
         },
 
         handlePreviousStep: function () {
@@ -89,14 +73,15 @@
             var activeStep = this.state.activeStep;
             var currentStep = React.createElement(this.steps[activeStep], { 
                 key: 'step' + activeStep,
-                handleNextStep: this.handleNextStep,
-                state: this.childState
+                handleNextStep: (data) => this.handleNextStep(data),
+                handlePreviousStep: (data) => this.handlePreviousStep(data),
+                data: this.data
             });
             var progressBarSteps = [];
 
             for (var i = 0; i < this.steps.length; i++) {
                 var activeClass = (i === activeStep) ? 'active progress-bar-step' : 'progress-bar-step';
-                progressBarSteps.push(<div className={activeClass}></div>);
+                progressBarSteps.push(<div className={activeClass} key={'div' + i}></div>);
             }
 
             return (
@@ -118,7 +103,7 @@
                                 <Peerio.UI.Tappable 
                                     element='div' 
                                     className={classNames(
-                                        'btn-back', {'hide': this.state.activeStep === 0}
+                                        'btn-back', {'hide': this.state.activeStep < 2}
                                     )}
                                     onTap={this.handlePreviousStep}>
                                     <i className="material-icons">chevron_left</i>

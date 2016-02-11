@@ -5,14 +5,11 @@
         mixins: [ReactRouter.Navigation],
 
         getInitialState: function () {
-            return this.props.state
+            return this.props.data.name
             || {
                 usernameValid: null,
                 username: '',
                 auth_method: null,
-                passphrase: '',
-                passphrase_reentered: '',
-                passphrase_valid: false,
                 firstNameValid: true,
                 firstName: '',
                 lastNameValid: true,
@@ -23,12 +20,13 @@
         validateUsername: function () {
             var username = this.refs.username.getDOMNode().value;
             this.setState({username: username});
-            Peerio.Net.validateUsername(username).then(function (valid) {
+            Peerio.Net.validateUsername(username)
+            .then( (valid) => {
                 this.setState({usernameValid: valid});
-            }.bind(this)).catch(function () {
+            })
+            .catch( () => {
                 this.setState({usernameValid: false});
-            }.bind(this));
-
+            });
         },
 
         validateFirstName: function () {
@@ -45,6 +43,10 @@
                 lastNameValid: Peerio.Helpers.isNameValid(name),
                 lastName: name
             });
+        },
+
+        handleNextStep: function () {
+            this.props.handleNextStep({ name: this.state });
         },
 
         render: function () {
@@ -90,7 +92,7 @@
                         ? <Peerio.UI.Tappable 
                             element='div' 
                             className="btn-safe" 
-                            onTap={this.props.handleNextStep.bind(this, this.state)}>
+                            onTap={this.handleNextStep}>
                             continue</Peerio.UI.Tappable>
                         : null }
                     </div>
