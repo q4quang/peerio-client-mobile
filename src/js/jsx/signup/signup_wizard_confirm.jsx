@@ -50,8 +50,7 @@
                     <div className="headline">Please enter the passphrase</div>
 
                     <textarea
-                        style={ { color: 'black' } }
-                        className="txt-lrg border-none margin-small padding-small"
+                        className="border-none"
                         ref="passPhraseInput"
                         autoFocus="true" autoComplete="off" autoCorrect="off"
                         autoCapitalize="off" spellCheck="false"
