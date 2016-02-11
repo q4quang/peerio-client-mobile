@@ -58,7 +58,7 @@
                     <div className="input-group">{
                         (this.state.usernameValid === null || this.state.usernameValid === true)
                         ? <label htmlFor="user_name">Desired username</label>
-                        : <label style={{color: '#FF7272', fontWeight:600}} htmlFor="user_name">Please pick a different username</label>}
+                        : <label className="red-bold" htmlFor="user_name">Please pick a different username</label>}
                         <input type="text" value={this.state.username} name="user_name"
                             id="user_name"
                             ref='username' required="required" autoComplete="off" autoCorrect="off" autoCapitalize="off"
@@ -68,7 +68,7 @@
                     <div className="input-group">{
                         (this.state.firstNameValid === null || this.state.firstNameValid === true)
                         ? <label htmlFor="user_first_name">First name</label>
-                        : <label htmlFor="user_first_name" style={{color: '#FF7272', fontWeight:600}}>Invalid name</label>
+                        : <label htmlFor="user_first_name" className="red-bold">Invalid name</label>
                         }
                         <input type="text" name="user_first_name" id="user_first_name"
                             value={this.state.firstName}
@@ -79,7 +79,7 @@
                     <div className="input-group">{
                         (this.state.lastNameValid === null || this.state.lastNameValid === true)
                         ? <label htmlFor="user_last_name">Last name</label>
-                        : <label htmlFor="user_last_name" style={{color: '#FF7272', fontWeight:600}}>Invalid name</label>
+                        : <label htmlFor="user_last_name" className="red-bold">Invalid name</label>
                         }
                         <input type="text" name="user_last_name" id="user_last_name" ref="lastName"
                             value={this.state.lastName}
@@ -89,9 +89,9 @@
 
                     <div className="buttons">{
                         this.state.usernameValid === true && this.state.firstNameValid && this.state.lastNameValid
-                        ? <Peerio.UI.Tappable 
-                            element='div' 
-                            className="btn-safe" 
+                        ? <Peerio.UI.Tappable
+                            element='div'
+                            className="btn-safe"
                             onTap={this.handleNextStep}>
                             continue</Peerio.UI.Tappable>
                         : null }

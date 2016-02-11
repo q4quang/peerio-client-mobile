@@ -48,14 +48,15 @@
             return (
                 <div>
                     <div className="headline">Please enter the passphrase</div>
-
-                    <textarea
-                        className="border-none"
-                        ref="passPhraseInput"
-                        autoFocus="true" autoComplete="off" autoCorrect="off"
-                        autoCapitalize="off" spellCheck="false"
-                        onChange={this.validatePassPhrase}>
-                    </textarea>
+                    <div className="textarea-wrapper">
+                        <textarea
+                            className="border-none"
+                            ref="passPhraseInput"
+                            autoFocus="true" autoComplete="off" autoCorrect="off"
+                            autoCapitalize="off" spellCheck="false"
+                            onChange={this.validatePassPhrase}>
+                        </textarea>
+                    </div>
                     <p className="info-small text-center red-bold">{passphraseMsg}</p>
                     <div className="buttons">
                         {createPassPhrase}
