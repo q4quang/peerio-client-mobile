@@ -10,9 +10,9 @@
 
             this.setState({activeStep: 4});
 
-            Peerio.Auth.signup(this.data.name.username, 
-                               this.data.pass.passphrase, 
-                               this.data.name.firstName, 
+            Peerio.Auth.signup(this.data.name.username,
+                               this.data.pass.passphrase,
+                               this.data.name.firstName,
                                this.data.name.lastName)
             .then(() => {
                 //todo: terrible, transfer this through router
@@ -71,7 +71,7 @@
         render: function () {
 
             var activeStep = this.state.activeStep;
-            var currentStep = React.createElement(this.steps[activeStep], { 
+            var currentStep = React.createElement(this.steps[activeStep], {
                 key: 'step' + activeStep,
                 handleNextStep: (data) => this.handleNextStep(data),
                 handlePreviousStep: (data) => this.handlePreviousStep(data),
@@ -96,12 +96,12 @@
                                 {currentStep}
                             </ReactCSSTransitionGroup>
                             <div className={classNames(
-                                'flex-row', 
-                                this.state.activeStep === 0 ? 
+                                'flex-row',
+                                this.state.activeStep < 2 ?
                                     ' flex-justify-end' : ' flex-justify-between'
                             )}>
-                                <Peerio.UI.Tappable 
-                                    element='div' 
+                                <Peerio.UI.Tappable
+                                    element='div'
                                     className={classNames(
                                         'btn-back', {'hide': this.state.activeStep < 2}
                                     )}
@@ -109,9 +109,9 @@
                                     <i className="material-icons">chevron_left</i>
                                     back
                                 </Peerio.UI.Tappable>
-                                <Peerio.UI.Tappable  
-                                    element="div" 
-                                    className="btn" 
+                                <Peerio.UI.Tappable
+                                    element="div"
+                                    className="btn"
                                     onTap={this.transitionTo.bind(this,'login')}>
                                     Exit
                                 </Peerio.UI.Tappable>
