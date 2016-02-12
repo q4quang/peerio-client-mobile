@@ -53,9 +53,11 @@
                                 text: 'Would you like to enable Touch ID?',
                                 caption: 'Touch ID requires using your Apple Keychain'
                             })
-                            .then(() => Peerio.UI.TouchId.clearKeyPair())
-                            .catch(() => true)
-                            .then(() => Peerio.UI.TouchId.saveKeyPair())
+                            .then(() => {
+                                return Peerio.UI.TouchId.clearKeyPair()
+                                .catch(() => true)
+                                .then(() => Peerio.UI.TouchId.saveKeyPair());
+                            })
                             .catch(() => true)
                             .then(() => Peerio.UI.TouchId.setUserSeenOffer());
 
