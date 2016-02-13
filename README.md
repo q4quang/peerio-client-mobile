@@ -29,6 +29,14 @@ sudo gem install github_changelog_generator
 
 chmod a+x ./generate_changelog.sh ./release_android.sh
 
+using bower link
+============
+for the live development of peerio-client-api, the following should be done:
+
+bower link # in peerio-client-api directory creates a link to the component named the same as dir name (peerio-client-api)
+
+bower link peerio-client-api # in peerio-client-mobile directory creates a symbolic link to the upper dir
+
 notes
 ============
 xwalk will not work without these permissions
