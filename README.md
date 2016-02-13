@@ -16,6 +16,7 @@ xcode-select --install # if you don't already have console tools for XCode you w
 npm install -d # install or update all packages
 
 bower install
+
 bower-installer
 
 cordova platform add ios android # this will generate all the required project files for both platforms
