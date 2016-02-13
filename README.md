@@ -7,7 +7,9 @@ git config core.ignorecase false
 
 We use specifically node v4 (node v5 breaks the build)
 
-npm install cordova bower bower-installer gulp -g -d
+npm install bower bower-installer gulp -g -d
+
+npm install -g cordova@5.3.3
 
 npm install -g ios-deploy # for MacOSX using sudo causes an error, removed
 
