@@ -19,29 +19,29 @@
             },
 
             hasTouchID: function (username) {
-                return Peerio.TinyDB.getObject(Peerio.UI.TouchId.touchidname(username));
+                return Peerio.TinyDB.getItem(Peerio.UI.TouchId.touchidname(username));
             },
 
             setHasTouchID: function (username, value) {
                 return value ?
-                    Peerio.TinyDB.setObject(Peerio.UI.TouchId.touchidname(username), true) :
+                    Peerio.TinyDB.saveItem(Peerio.UI.TouchId.touchidname(username), true) :
                     Peerio.TinyDB.removeItem(Peerio.UI.TouchId.touchidname(username));
             },
 
             hasUserSeenOffer: function () {
-                return Peerio.TinyDB.getObject(Peerio.UI.TouchId.offername());
+                return Peerio.TinyDB.getItem(Peerio.UI.TouchId.offername());
             },
 
             setUserSeenOffer: function () {
-                return Peerio.TinyDB.setObject(Peerio.UI.TouchId.offername(), true);
+                return Peerio.TinyDB.saveItem(Peerio.UI.TouchId.offername(), true);
             },
 
             hasUserSeenBubble: function () {
-                return Peerio.TinyDB.getObject(Peerio.UI.TouchId.bubblename());
+                return Peerio.TinyDB.getItem(Peerio.UI.TouchId.bubblename());
             },
 
             setUserSeenBubble: function () {
-                return Peerio.TinyDB.setObject(Peerio.UI.TouchId.bubblename(), true);
+                return Peerio.TinyDB.saveItem(Peerio.UI.TouchId.bubblename(), true);
             },
 
             showOfferIfNeeded: function () {
