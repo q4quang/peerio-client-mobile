@@ -121,16 +121,10 @@
             if (error && error.code === 411) {
                 // probably user touch id pin is corrupted
                 if(error.systemPin) {
-                    Peerio.UI.Confirm.show({
-                        text: 'Login failed. It seems your Peerio TouchID is corrupted. Do you wish to clear it?'
-                    })
-                    .then(() => { 
-                        // TODO: we expect Peerio.user.username to have meaningful value
-                        Peerio.user && Peerio.user.username && 
+                    L.error('Login failed. It seems your Peerio TouchID is corrupted.');
+                    // TODO: we expect Peerio.user.username to have meaningful value
+                    Peerio.user && Peerio.user.username && 
                         Peerio.UI.TouchId.clearKeyPair();
-                    })
-                    .catch(() => true);
-                    return;
                 }
             }
 
