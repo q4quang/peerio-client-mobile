@@ -195,7 +195,7 @@
                     this.state.attachments.splice(index, 1);
                     this.setState({attachments: this.state.attachments});
                       this.setState({removed: null});
-                }},350)
+                }},350);
         },
 
         //----- RENDER
@@ -248,8 +248,8 @@
                       <textarea
                           className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
                           rows="1" ref="reply" placeholder={this.state.placeholderText}
-                          onKeyUp={this.resizeTextArea, this.setEmpty}
-                          disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea}/>
+                          onKeyUp={this.resizeTextArea}
+                          disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea, this.setEmpty}/>
 
                         { !this.state.empty ?
                             <Peerio.UI.Tappable element="div" className="reply-send" onTap={this.sendReply}>
