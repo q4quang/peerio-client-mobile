@@ -119,7 +119,19 @@
             }
 
             if (error && error.code === 411) {
-                // we don't need to do anything here now
+                // probably user touch id pin is corrupted
+                if(error.systemPin) {
+                    Peerio.UI.Confirm.show({
+                        text: 'Login failed. It seems your Peerio TouchID is corrupted. Do you wish to clear it?'
+                    })
+                    .then(() => { 
+                        // TODO: we expect Peerio.user.username to have meaningful value
+                        Peerio.user && Peerio.user.username && 
+                        Peerio.UI.TouchId.clearKeyPair();
+                    })
+                    .catch(() => true);
+                    return;
+                }
             }
 
             if (error && error.code === 404) {
@@ -165,9 +177,8 @@
                 if(hasTouchID) {
                     Peerio.UI.TouchId.getSystemPin(data.username)
                     .then( (systemPin) => {
-                        this.systemPin = systemPin;
                         this.setState( { isPin: false } );
-                        this.handleSubmit();
+                        this.handleSubmit(null, null, systemPin);
                     });
                 }
             });
@@ -189,7 +200,7 @@
         },
 
         // initiate login
-        handleSubmit: function (e, passOrPin) {
+        handleSubmit: function (e, passOrPin, systemPin) {
             Peerio.DataCollection.endTimePoint('login_enter_passphrase');
             if (e) e.preventDefault();
 
@@ -204,7 +215,7 @@
 
             var userValue = userNode ? userNode.value : this.state.savedLogin.username;
             var passValue = passNode ? passNode.value : passOrPin;
-            passValue = this.systemPin ? this.systemPin : passValue;
+            passValue = systemPin ? systemPin : passValue;
             // hiding software keyboard
             Peerio.NativeAPI.hideKeyboard();
 
@@ -218,9 +229,12 @@
             Peerio.NativeAPI.preventSleep();
 
             this.setState({waitingForLogin: true});
-            Peerio.user.login(passValue, !!this.systemPin)
+            Peerio.user.login(passValue, !!systemPin)
                 .then(this.handleLoginSuccess)
-                .catch(this.handleLoginFail)
+                .catch((error) => {
+                    error.systemPin = systemPin;
+                    this.handleLoginFail(error);
+                })
                 .finally(Peerio.NativeAPI.allowSleep);
         },
         // change focus to passphrase input on enter
