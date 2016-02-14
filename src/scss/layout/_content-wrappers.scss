@@ -49,6 +49,22 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
   fieldset {
     height: auto;
   }
+
+  .textarea-wrapper {
+    padding: $padding-small $padding-base;
+    margin: $margin-base 0;
+    overflow: hidden;
+    background: $white-30;
+
+    textarea {
+      background: transparent;
+      font-size: 1.5em;
+      font-weight: 800;
+      padding: 4px 0;
+      width: 100%;
+      resize: none;
+    }
+  }
 }
 
 .content.with-reply-box {

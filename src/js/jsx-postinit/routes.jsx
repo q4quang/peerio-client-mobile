@@ -8,7 +8,7 @@ Peerio.UI.Routes = (
         <Route name="login" path="/login" handler={Peerio.UI.Login}>
             <Route name="login_2fa" path="/login/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
         </Route>
-        <Route name="signup" path="signup" handler={Peerio.UI.Signup}>
+        <Route name="signup" path="signup" handler={Peerio.UI.SignupWizard}>
             <Route name="set_passphrase" path="/signup/set_passphrase" handler={Peerio.UI.SetPassphrase} />
         </Route>
         <Route name="setup_wizard" path="setup_wizard" handler={Peerio.UI.SetupWizard}/>
