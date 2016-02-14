@@ -241,6 +241,13 @@ Peerio.NativeAPI.init = function () {
         return new Promise((resolve, reject) => cordova.plugins.clipboard.copy(text, resolve, reject));
     };
 
+    //--NATIVE SHARING
+
+    api.shareNativeDialog = function (text, subject, link) {
+        window.plugins && window.plugins.socialsharing &&
+            window.plugins.socialsharing.share(text, subject, null, link);
+    },
+
     //-- PUSH NOTIFICATIONS --------------------------------------------------------------------------------------------
     /**
      * Enables push notifications (if possible on the platform)
