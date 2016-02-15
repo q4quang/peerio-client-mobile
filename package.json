@@ -25,6 +25,7 @@
     "gulp-sass": "*",
     "gulp-sourcemaps": "*",
     "gulp-xml-editor": "*",
+    "gulp-replace": "*",
     "inquirer": "*",
     "lodash": "*",
     "minimist": "*",
