@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var shareText = 'Securely share messages and files with me on Peerio! Use code %s to add me and get 250MB bonus storage. Download at';
+    var shareText = 'Securely share messages and files with me on Peerio! Use code {0} to add me and get 250MB of bonus storage.';
     var shareSubject = 'Peerio';
     var shareLink = 'http://www.peerio.com/';
 
@@ -25,9 +25,9 @@
         invokeShare: function() {
             this.state.inviteCode && this.state.inviteCode.length && 
             Peerio.NativeAPI.shareNativeDialog(
-                sprintf(shareText, this.state.inviteCode),
+                Peerio.Util.interpolate(shareText, [this.state.inviteCode]),
                 shareSubject,
-                sprintf(shareLink, this.state.inviteCode)
+                Peerio.Util.interpolate(shareLink, [this.state.inviteCode])
             );
         },
 
