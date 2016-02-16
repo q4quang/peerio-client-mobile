@@ -2,10 +2,6 @@
 <html>
 
 <head>
-    <!-- release -->
-    <!-- /release -->
-    <!-- debug -->
-    <!-- /debug -->
     <meta charset="UTF-8"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no">
@@ -20,10 +16,12 @@
     	* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
     	* todo: unsafe inline can be removed from scripts in production. browsersync needs it in development.
 	-->
-    <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://piwik.peerio.com/ https://ssl.gstatic.com https://*.peerio.com
-                                https://peerio.blob.core.windows.net https://peeriodev.blob.core.windows.net wss://*.peerio.com ws://localhost:3000;
-                   media-src *;">
+    <!-- release -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://piwik.peerio.com/ https://ssl.gstatic.com https://app.peerio.com https://peerio.blob.core.windows.net https://peeriodev.blob.core.windows.net wss://app.peerio.com ws://localhost:3000; media-src 'self';">
+    <!-- /release -->
+    <!-- debug -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://piwik.peerio.com/ https://ssl.gstatic.com https://app.peerio.com https://hocuspocus.peerio.com https://peerio.blob.core.windows.net https://peeriodev.blob.core.windows.net wss://app.peerio.com wss://hocuspocus.peerio.com ws://localhost:3000; media-src 'self';">
+    <!-- /debug -->
     <title>Peerio</title>
     <link rel="icon" type="image/png" href="media/img/icon32.png"/>
     <!-- CSS -->

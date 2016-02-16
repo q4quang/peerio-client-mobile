@@ -14,8 +14,11 @@
     <access origin="https://peerio.com" />
     <access origin="https://peerio.blob.core.windows.net" />
     <access origin="https://peeriodev.blob.core.windows.net" />
-    <allow-intent href="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
     <allow-intent href="mailto:*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
     <preference name="Orientation" value="default" />
     <preference name="Fullscreen" value="false" />
     <preference name="DisallowOverscroll" value="true" />
