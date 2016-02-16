@@ -1,47 +1,37 @@
 (function () {
     'use strict';
+
+    var touchIdName = 'touchid';
+    var keyName = 'keypair';
+    var bubbleName = 'touch_bubble';
+    var offerName = 'touch_offer';
+
     Peerio.UI.TouchId = React.createClass({
         statics: {
-            keyname: function (username) {
-                return (username ? username : Peerio.user.username) + '_keypair';
-            },
-
-            touchidname: function (username) {
-                return (username ? username : Peerio.user.username) + '_touchid';
-            },
-
-            bubblename: function () {
-                return Peerio.user.username + '_touch_bubble';
-            },
-
-            offername: function () {
-                return Peerio.user.username + '_touch_offer';
-            },
-
             hasTouchID: function (username) {
-                return Peerio.TinyDB.getItem(Peerio.UI.TouchId.touchidname(username));
+                return Peerio.TinyDB.getItem( username||Peerio.user.username);
             },
 
             setHasTouchID: function (username, value) {
                 return value ?
-                    Peerio.TinyDB.saveItem(Peerio.UI.TouchId.touchidname(username), true) :
-                    Peerio.TinyDB.removeItem(Peerio.UI.TouchId.touchidname(username));
+                    Peerio.TinyDB.saveItem(touchIdName, true, username || Peerio.user.username) :
+                    Peerio.TinyDB.removeItem(touchIdName, username || Peerio.user.username);
             },
 
             hasUserSeenOffer: function () {
-                return Peerio.TinyDB.getItem(Peerio.UI.TouchId.offername());
+                return Peerio.TinyDB.getItem(offerName, Peerio.user,username);
             },
 
             setUserSeenOffer: function () {
-                return Peerio.TinyDB.saveItem(Peerio.UI.TouchId.offername(), true);
+                return Peerio.TinyDB.saveItem(offerName, true, Peerio.user.username);
             },
 
             hasUserSeenBubble: function () {
-                return Peerio.TinyDB.getItem(Peerio.UI.TouchId.bubblename());
+                return Peerio.TinyDB.getItem(bubbleName, Peerio.user.username);
             },
 
             setUserSeenBubble: function () {
-                return Peerio.TinyDB.saveItem(Peerio.UI.TouchId.bubblename(), true);
+                return Peerio.TinyDB.saveItem(bubbleName, true, Peerio.user.username);
             },
 
             showOfferIfNeeded: function () {
@@ -78,8 +68,7 @@
             },
 
             getSystemPin: function (username) {
-                return window.PeerioTouchIdKeychain.getValue(
-                    Peerio.UI.TouchId.keyname(username));
+                return window.PeerioTouchIdKeychain.getValue((username || Peerio.user.username) + '_' +keyName);
             },
 
             enableTouchId: function () {
@@ -91,10 +80,7 @@
 
             saveKeyPair: function () {
                 var systemPin = uuid.v4();
-                return window.PeerioTouchIdKeychain.saveValue(
-                    Peerio.UI.TouchId.keyname(),
-                    systemPin
-                    )
+                return window.PeerioTouchIdKeychain.saveValue(Peerio.user.username + '_' +keyName,systemPin)
                     .then(() => Peerio.user.setPIN(systemPin, true))
                     .catch((error) => {
                         Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false);
