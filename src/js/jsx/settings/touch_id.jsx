@@ -6,10 +6,14 @@
     var bubbleName = 'touch_bubble';
     var offerName = 'touch_offer';
 
+    function keychainName(username) {
+        return (username || Peerio.user.username) + '_' +keyName;
+    };
+
     Peerio.UI.TouchId = React.createClass({
         statics: {
             hasTouchID: function (username) {
-                return Peerio.TinyDB.getItem( username||Peerio.user.username);
+                return Peerio.TinyDB.getItem(touchIdName, username || Peerio.user.username);
             },
 
             setHasTouchID: function (username, value) {
@@ -68,7 +72,7 @@
             },
 
             getSystemPin: function (username) {
-                return window.PeerioTouchIdKeychain.getValue((username || Peerio.user.username) + '_' +keyName);
+                return window.PeerioTouchIdKeychain.getValue(keychainName(username));
             },
 
             enableTouchId: function () {
@@ -80,7 +84,7 @@
 
             saveKeyPair: function () {
                 var systemPin = uuid.v4();
-                return window.PeerioTouchIdKeychain.saveValue(Peerio.user.username + '_' +keyName,systemPin)
+                return window.PeerioTouchIdKeychain.saveValue(keychainName(), systemPin)
                     .then(() => Peerio.user.setPIN(systemPin, true))
                     .catch((error) => {
                         Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false);
@@ -90,8 +94,7 @@
             },
 
             clearKeyPair: function () {
-                return window.PeerioTouchIdKeychain.deleteValue(
-                    Peerio.UI.TouchId.keyname())
+                return window.PeerioTouchIdKeychain.deleteValue(keychainName())
                     .then(() => Peerio.UI.TouchId.setHasTouchID(Peerio.user.username, false));
             },
 
