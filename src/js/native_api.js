@@ -244,8 +244,12 @@ Peerio.NativeAPI.init = function () {
     //--NATIVE SHARING
 
     api.shareNativeDialog = function (text, subject, link) {
-        window.plugins && window.plugins.socialsharing &&
-            window.plugins.socialsharing.share(text, subject, null, link);
+        window.plugins && window.plugins.socialsharing ?
+            window.plugins.socialsharing.share(text, subject, null, link) :
+            Peerio.UI.Alert.show({ 
+            text: text + ' ' + link, 
+            title: subject,
+        });
     },
 
     //-- PUSH NOTIFICATIONS --------------------------------------------------------------------------------------------
