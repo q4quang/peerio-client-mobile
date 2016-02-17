@@ -50,6 +50,7 @@
 
             var text = this.props.text || 'confirm text';
             var inputType = this.props.inputType || 'text';
+            var pattern = (inputType == 'numeric') ? '[0-9]*' : '.*';
             return (
                 <div className="modal alert-wrapper">
                     <div className="alert">
@@ -59,6 +60,7 @@
                             </div>
                             <p>{text}</p>
                             <input type={inputType} ref="promptInput"
+                                pattern={pattern}
                                 autoCorrect="off" autoCapitalize="off" spellCheck="false"
                                 value={this.state.promptValue} onChange={this.updatePromptValue}/>
                         </div>

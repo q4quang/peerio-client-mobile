@@ -32,7 +32,10 @@
                     Peerio.user.addAddress(newAddress)
                     .then( () => {
                         var addAndEnter = () => {
-                            return Peerio.UI.Prompt.show({text: 'Please enter the code you received'})
+                            return Peerio.UI.Prompt.show({
+                                text: 'Please enter the code you received',
+                                inputType: 'numeric',
+                            })
                             .then((code) => Peerio.user.confirmAddress(newAddress, code))
                             .then(() => Peerio.UI.Alert.show({text: 'Address authorized'}))
                             .then(() => { return this.props.onSuccess && this.props.onSuccess(newAddress); })

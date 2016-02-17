@@ -20,6 +20,7 @@ var clean = require('gulp-clean');
 var cp = require('child_process');
 var inject = require('gulp-inject');
 var series = require('stream-series');
+var replace = require('gulp-replace');
 
 var babelOptions = {
     compact: false,
@@ -43,7 +44,7 @@ var babelOptions = {
 
 // extracting --cli --parameters
 var knownOptions = {
-    boolean: 'api',
+    boolean: ['api', 'release'],
     default: {}
 };
 var supportedBrowsers = ['ios >= 3.2', 'chrome >= 37', 'android >= 4.2'];
@@ -94,9 +95,16 @@ gulp.task('index', function () {
   var sourcesJsxPostInit = gulp.src(paths.jsx_postinit_inject, {read: false});
   console.log('DON\'T FORGET TO SET PROVISIONING PROFILE TO ios team provisioning profile: com.peerio');
   console.log('OTHERWISE PUSH NOTIFICATIONS WOULD NOT WORK');
-  return target.pipe(
-      inject(series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit), 
-          {addRootSlash: false, ignorePath: 'www'})).pipe(gulp.dest('./www'));
+  var result = target
+  .pipe(inject(
+      series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit), 
+      {addRootSlash: false, ignorePath: 'www'}
+  ));
+  // a piece of replacement code
+  if(!options.release) result = result.pipe(replace(/<!-- release -->[^]*?<!-- \/release -->\s*\r*\n*/mg, ''));
+  if(options.release) result = result.pipe(replace(/<!-- debug -->[^]*?<!-- \/debug -->\s*\r*\n*/mg, ''));
+
+  return result.pipe(gulp.dest('./www'));
 });
 
 gulp.task('js', function () {
@@ -113,19 +121,20 @@ gulp.task('compile-clean', function () {
 
 gulp.task('help', function () {
     console.log();
-    console.log('+---------------------------------------------------------------------------------------+');
-    console.log('|                                 =====  USAGE  =====                                   |');
-    console.log('+---------------------------------------------------------------------------------------+');
-    console.log('| gulp serve       - start http server with live reload                                 |');
-    console.log('| gulp serve --api - start http server with live reload and watch symlinked peerio api  |');
-    console.log('| gulp compile     - same as "gulp sass jsx"                                            |');
-    console.log('| gulp run-android - compile + "cordova run android"                                    |');
-    console.log('| gulp run-ios     - compile + "cordova run ios"                                        |');
-    console.log('| gulp sass        - compile scss files                                                 |');
-    console.log('| gulp jsx         - compile jsx files                                                  |');
-    console.log('| gulp bump        - interactively bump app version in config.xml                       |');
-    console.log('| gulp version     - prints current(last) app version from config.xml                   |');
-    console.log('+---------------------------------------------------------------------------------------+');
+    console.log('+-----------------------------------------------------------------------------------------------+');
+    console.log('|                                         =====  USAGE  =====                                   |');
+    console.log('+-----------------------------------------------------------------------------------------------+');
+    console.log('| gulp serve               - start http server with live reload                                 |');
+    console.log('| gulp serve --api         - start http server with live reload and watch symlinked peerio api  |');
+    console.log('| gulp compile             - same as "gulp sass jsx"                                            |');
+    console.log('| gulp compile --release   - release version                                                    |');
+    console.log('| gulp run-android         - compile + "cordova run android"                                    |');
+    console.log('| gulp run-ios             - compile + "cordova run ios"                                        |');
+    console.log('| gulp sass                - compile scss files                                                 |');
+    console.log('| gulp jsx                 - compile jsx files                                                  |');
+    console.log('| gulp bump                - interactively bump app version in config.xml                       |');
+    console.log('| gulp version             - prints current(last) app version from config.xml                   |');
+    console.log('+-----------------------------------------------------------------------------------------------+');
     console.log();
 });
 

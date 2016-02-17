@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var shareText = 'Get 250Mb of bonus storage when registering with this invite code: %s';
+    var shareText = 'Securely share messages and files with me on Peerio! Use code {0} to add me and get 250MB of bonus storage.';
     var shareSubject = 'Peerio';
     var shareLink = 'http://www.peerio.com/';
 
@@ -25,9 +25,9 @@
         invokeShare: function() {
             this.state.inviteCode && this.state.inviteCode.length && 
             Peerio.NativeAPI.shareNativeDialog(
-                sprintf(shareText, this.state.code),
+                Peerio.Util.interpolate(shareText, [this.state.inviteCode]),
                 shareSubject,
-                sprintf(shareLink, this.state.code)
+                Peerio.Util.interpolate(shareLink, [this.state.inviteCode])
             );
         },
 
@@ -37,7 +37,7 @@
                 <div className="section-highlight">
                     {this.state.inviteCode} <Peerio.UI.CopyButton copy={this.state.inviteCode}/> 
                 </div>
-                <p className="flex-grow-1">Every time one of your contacts signs up for Peerio using your invite code, both of you will receive 250MB of bonus storage. You can earn up to 10GB of free storage this way!</p>
+                <p className="flex-grow-1">When one of your contacts signs up for Peerio and enters your promo code, a contact request will automatically be sent to them from your account and both of you will receive 250MB of bonus storage. You can earn up to 10GB of free storage this way!</p>
 
                 <div className="buttons">
                     <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.invokeShare}>
