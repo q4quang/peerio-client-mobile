@@ -49,6 +49,18 @@
             this.setState({attachments: selection});
         },
 
+        detachFile: function (id) {
+            this.setState({removed: id});
+            var index = this.state.attachments.indexOf(id);
+
+            setTimeout(() => {
+                if(index != -1) {
+                    this.state.attachments.splice(index, 1);
+                    this.setState({attachments: this.state.attachments});
+                      this.setState({removed: null});
+                }},350);
+        },
+
         //--- RENDER
         render: function () {
             var r = this.state.recipients.map(function (username) {
@@ -77,6 +89,19 @@
                     className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
                 </Peerio.UI.Tappable>
                         </div>
+                        <ul className={'attached-files' + (this.state.attachments.length ? '' : ' removed')}>
+                          {this.state.attachments.map(id => {
+                              var file = Peerio.user.files.dict[id];
+
+                              return (<li className={'attached-file' + (this.state.removed === id ? ' removed':'')}>
+                                  { this.state.attachments.length ? file.name : null }
+                                  <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons" onTap={this.detachFile.bind(this, id)}>
+                                    highlight_off
+                                  </Peerio.UI.Tappable>
+                                </li>); })
+                              }
+
+                        </ul>
                         <textarea ref="message" className="message" placeholder="Type your message"></textarea>
                     </div>
                 </div>
