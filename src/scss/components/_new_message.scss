@@ -7,6 +7,12 @@ $recipients-height: 40px;
   flex-direction: column;
   height: 100%;
 
+  .attached-files {
+    position: initial;
+    background: $white-100;
+    border-top: 0;
+  }
+
   .recipients {
     display: flex;
     min-height: $recipients-height;
@@ -92,9 +98,6 @@ $recipients-height: 40px;
     border: 0;
     flex-grow: 1;
 
-    &:focus {
-      background-color: lighten(color(list-item-bg), 5%);
-    }
   }
 
 }
