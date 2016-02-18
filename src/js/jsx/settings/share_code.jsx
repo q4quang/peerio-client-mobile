@@ -31,11 +31,18 @@
             );
         },
 
+        onCopy: function () {
+            this.setState({animateCopy: true});
+            window.setTimeout( () => {
+                this.setState({animateCopy: false});
+            }, 1000);
+        },
+
         render: function() {
             return (<div className="content without-tab-bar without-footer flex-col">
                 <div className="headline"> Get Free Data</div>
                 <div className="section-highlight">
-                    {this.state.inviteCode} <Peerio.UI.CopyButton copy={this.state.inviteCode}/> 
+                    {this.state.animateCopy ? 'copied to clipboard' : this.state.inviteCode} <Peerio.UI.CopyButton onCopy={this.onCopy} copy={this.state.inviteCode}/> 
                 </div>
                 <p className="flex-grow-1">When one of your contacts signs up for Peerio and enters your promo code, a contact request will automatically be sent to them from your account and both of you will receive 250MB of bonus storage. You can earn up to 10GB of free storage this way!</p>
 
