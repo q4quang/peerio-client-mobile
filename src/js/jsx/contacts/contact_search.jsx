@@ -60,8 +60,14 @@
             }
         },
         inviteByEmail: function () {
-            Peerio.Net.inviteUserAddress(this.state.searchString);
-            Peerio.Action.showAlert({text: 'We\'ve sent an invite email to ' + this.state.searchString});
+            Peerio.Net.inviteByEmail(this.state.searchString)
+            .then( () => Peerio.Action.showAlert({
+                text: 'We\'ve sent an invite email to ' + this.state.searchString
+            }))
+            .catch( (error) => {
+                L.error(error);
+                Peerio.Action.showAlert({ text: 'Error adding address. Please contact support.' });
+            });
         },
         handleAddContact: function () {
             if (this.selectedUsers.length === 0) {
