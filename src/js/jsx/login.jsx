@@ -93,7 +93,7 @@
         handleLoginSuccess: function () {
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
-            Peerio.UI.TouchId.showOfferIfNeeded();
+            !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
             this.enableDataOptIn && Peerio.user.enableDataCollection(this.enableDataOptIn)
             .then( () => {
                 this.trackSuccessfulSignup && Peerio.DataCollection.Signup.successfulSignup();

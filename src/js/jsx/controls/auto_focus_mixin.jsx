@@ -6,9 +6,12 @@
      */
     Peerio.UI.AutoFocusMixin = {
         componentDidMount: function() {
-            this.props.autoFocus && this.refs.textEdit &&
-                window.setTimeout( () => this.refs.textEdit.getDOMNode().focus(), 
+            if(this.props.autoFocus) {
+                var node = this.props.focusNode ?
+                    this.refs[this.props.focusNode] : this.refs.textEdit;
+                node && window.setTimeout( () => node.getDOMNode().focus(), 
                               this.props.focusDelay ? this.props.focusDelay : 100);
+            }
         },
     };
 
