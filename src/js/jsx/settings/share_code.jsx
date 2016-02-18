@@ -3,7 +3,7 @@
 
     var shareText = 'Securely share messages and files with me on Peerio! Use code {0} to add me and get 250MB of bonus storage.';
     var shareSubject = 'Peerio';
-    var shareLink = 'http://www.peerio.com/';
+    var shareLink = 'http://www.peerio.com/invite?code={0}';
 
     Peerio.UI.ShareCode = React.createClass({
         mixins:[ReactRouter.Navigation],
@@ -31,11 +31,18 @@
             );
         },
 
+        onCopy: function () {
+            this.setState({animateCopy: true});
+            window.setTimeout( () => {
+                this.setState({animateCopy: false});
+            }, 1000);
+        },
+
         render: function() {
             return (<div className="content without-tab-bar without-footer flex-col">
                 <div className="headline"> Get Free Data</div>
                 <div className="section-highlight">
-                    {this.state.inviteCode} <Peerio.UI.CopyButton copy={this.state.inviteCode}/> 
+                    {this.state.animateCopy ? 'copied to clipboard' : this.state.inviteCode} <Peerio.UI.CopyButton onCopy={this.onCopy} copy={this.state.inviteCode}/> 
                 </div>
                 <p className="flex-grow-1">When one of your contacts signs up for Peerio and enters your promo code, a contact request will automatically be sent to them from your account and both of you will receive 250MB of bonus storage. You can earn up to 10GB of free storage this way!</p>
 

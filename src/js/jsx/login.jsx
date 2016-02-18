@@ -97,8 +97,9 @@
             this.enableDataOptIn && Peerio.user.enableDataCollection(this.enableDataOptIn)
             .then( () => {
                 this.trackSuccessfulSignup && Peerio.DataCollection.Signup.successfulSignup();
-                Peerio.DataCollection.flushDelayedTracking();
             });
+
+            Peerio.DataCollection.flushDelayedTracking();
 
             Peerio.NativeAPI.getCountryCode().then( (code) => {
                 Peerio.DataCollection.trackCountry(code);

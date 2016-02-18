@@ -3,7 +3,10 @@
 
   Peerio.UI.ContactSelect = React.createClass({
     getInitialState: function () {
-      return {selection: this.props.preselected || []};
+        return { 
+            selection: this.props.preselected || [],
+            hadItems: this.props.preselected && this.props.preselected.length
+        };
     },
     toggle: function (username) {
 
@@ -53,6 +56,7 @@
           contacts.push(intro_content);
         }
 
+
       return (
         <div className="modal item-select">
           <div className="subhead">
@@ -64,7 +68,7 @@
           <div id="footer">
             <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.accept}>
               <i className="material-icons">person_add</i>
-              <label>Add Recipients</label></Peerio.UI.Tappable>
+              <label>{this.state.hadItems ? 'Update' : 'Add'} Recipients</label></Peerio.UI.Tappable>
             <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.props.onClose}>
               <i className="material-icons">cancel</i>
               <label>Cancel</label></Peerio.UI.Tappable>

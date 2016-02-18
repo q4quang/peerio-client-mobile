@@ -7,6 +7,12 @@ $recipients-height: 40px;
   flex-direction: column;
   height: 100%;
 
+  .attached-files {
+    position: initial;
+    background: $white-100;
+    border-top: 0;
+  }
+
   .recipients {
     display: flex;
     min-height: $recipients-height;
@@ -22,19 +28,22 @@ $recipients-height: 40px;
       overflow-y: scroll;
     }
 
-    .add-btn {
-      min-width: 48px;
-      min-height: $recipients-height;
-      background-color: #eee;
-      color: color(meta-text-dark);
-      display: flex;
-      position: relative;
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      align-self: inherit;
-    }
+
   }
+  .add-btn,
+  .attach-btn {
+    min-width: 48px;
+    min-height: $recipients-height;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .attach-btn {
+    border-top: $border-dark;
+  }
+
 
   .name-selected {
     font-size: .9em;
@@ -59,17 +68,6 @@ $recipients-height: 40px;
     text-align: center;
   }
 
-  .attach-btn {
-    position: relative;
-    min-width: 48px;
-    border-top: $border-dark;
-    background-color: color(list-item-bg);
-    color: color(meta-text-dark);
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    min-height: $recipients-height;
-  }
 
   .subject {
     border-top: $border-dark;
@@ -92,9 +90,6 @@ $recipients-height: 40px;
     border: 0;
     flex-grow: 1;
 
-    &:focus {
-      background-color: lighten(color(list-item-bg), 5%);
-    }
   }
 
 }

@@ -23,7 +23,7 @@
             },
 
             hasUserSeenOffer: function () {
-                return Peerio.TinyDB.getItem(offerName, Peerio.user,username);
+                return Peerio.TinyDB.getItem(offerName, Peerio.user.username);
             },
 
             setUserSeenOffer: function () {
