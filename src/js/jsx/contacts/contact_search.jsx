@@ -113,14 +113,20 @@
             return (
                 <div className="content without-tab-bar">
                   <div className="flex-col flex-justify-start">
-
                     <div className="headline">Contact Search</div>
                     <div className="input-group">
                     {
                     // NOTE: maybe clear the search on a null return - paul
                     }
-                      <input type="search" placeholder="email/username/phone" ref="searchInput"/>
-                    </div>
+                    <input 
+                        autoComplete="off"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck="false"
+                        type="search" 
+                        placeholder="email/username/phone" 
+                        ref="searchInput"/>
+                </div>
                     <div className="buttons">
                       <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
                         <i className="material-icons">search</i> Search again
