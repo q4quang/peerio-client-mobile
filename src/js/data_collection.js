@@ -21,7 +21,27 @@ Peerio.DataCollection.init = function () {
 
     var timePoints = {};
 
-    var delayedPaq = [];
+    var delayedPaq = {};
+
+    (function () {
+        var items = [];
+        var limit = 1000;
+
+        delayedPaq.push = function (item) {
+            items.push(item);
+            if(items.length > limit) items.shift();
+        };
+
+        delayedPaq.get = function () {
+            return items;
+        };
+
+        delayedPaq.clear = function () {
+            items = [];
+        };
+    }());
+
+    
 
     api.enable = function() {
         L.info('Enabling data collection');
@@ -101,20 +121,20 @@ Peerio.DataCollection.init = function () {
     };
 
     api.trackUserAction = function(category, name, value, delayed) {
-        if(!api.isUndefined && !api.isEnabled()) return;
+        if(!api.isUndefined() && !api.isEnabled()) return;
         value = value ? value : 1;
         var arr = api.isUndefined() ? delayedPaq : window._paq;
         L.info('Tracking event category: ' + category + ', name: ' + name + ', value: ' + value);
-        window._paq.push(['trackEvent', category, name, category + '_' + name, value]);
+        arr.push(['trackEvent', category, name, category + '_' + name, value]);
     };
 
     api.flushDelayedTracking = function() {
         if(api.isEnabled()) {
-            for(var i of delayedPaq) {
+            for(var i of delayedPaq.get()) {
                 window._paq.push(i);
             }
         }
-        delayedPaq = [];
+        delayedPaq.clear();
     };
 
     /**
