@@ -54,7 +54,7 @@
             Peerio.Action.showConfirm({
                 headline: 'Update',
                 text: text,
-                onAccept: ()=>Peerio.NativeAPI.openInBrowser('http://peerio.com')
+                onAccept: ()=>Peerio.NativeAPI.openInBrowser('https://peerio.com')
             });
         },
         render: function () {
