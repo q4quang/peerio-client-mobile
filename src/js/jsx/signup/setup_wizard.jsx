@@ -19,10 +19,6 @@
                 Peerio.UI.SetupWizardEmail,
                 Peerio.UI.SetupWizardCoupon,
             ];
-
-            this.stepButtons = [
-              'get started', 'skip', 'no thanks','finish'
-            ];
         },
 
         componentWillUnmount: function () {
@@ -44,20 +40,29 @@
             var currentStep = React.createElement(
                 this.steps[this.state.activeStep], { key: 'step' + this.state.activeStep, onSuccess: this.handleNextStep });
             var button = (
-                <div className="buttons">
-                  <Peerio.UI.Tappable element='div' className="btn-safe"
-                    key={'next' + this.state.activeStep} onTap={this.handleNextStep}>
-                    {this.stepButtons[this.state.activeStep]}
-                  </Peerio.UI.Tappable>
 
-                  <Peerio.UI.Tappable element='div' className={'btn-primary ' + (this.steps[this.state.activeStep] === this.steps[this.steps.length - 1] ? 'hide' : '' )}
-                    onTap={this.transitionTo.bind(this, 'messages')}>
-                    {this.state.activeStep === 0 ? 'maybe later' : 'Exit'}
-                  </Peerio.UI.Tappable>
-
-                  <Peerio.UI.Tappable element='div' className={'btn-back ' + (this.steps[this.state.activeStep] === this.steps[0] ? 'hide': '' )} onTap={this.handlePreviousStep} ><i
-                          className="material-icons">chevron_left</i>back
-                  </Peerio.UI.Tappable>
+                <div className={classNames(
+                    'flex-row',
+                    this.state.activeStep === 1  ?
+                        ' flex-justify-end' : ' flex-justify-between',
+                    this.state.activeStep === 0 ?
+                        ' hide' : ''
+                )}>
+                    <Peerio.UI.Tappable
+                        element='div'
+                        className={classNames(
+                            'btn-back', {'hide': this.state.activeStep < 2}
+                        )}
+                        onTap={this.handlePreviousStep}>
+                        <i className="material-icons">chevron_left</i>
+                        back
+                    </Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable
+                        element="div"
+                        className="btn"
+                        key={'next' + this.state.activeStep} onTap={this.handleNextStep}>
+                        {this.state.activeStep !== this.steps.length - 1 ? 'Skip' : 'Finish'}
+                    </Peerio.UI.Tappable>
                 </div>
             );
             var progressBarSteps = [];
@@ -68,25 +73,22 @@
             }
 
             return (
-                <div>
-                    <div className="content-wrapper-signup">
+
+                    <div className="content-wrapper-signup flex-col">
                         <div className="progress-bar">
                             {progressBarSteps}
                         </div>
-                        <div>
-                            <div>
-                                <ReactCSSTransitionGroup
-                                    transitionName="animate"
-                                    transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
-                                    <fieldset  key={'cont'+this.state.activeStep} className="flex-col">
-                                        {currentStep}
-                                        {button}
-                                    </fieldset>
-                                </ReactCSSTransitionGroup>
+                        <ReactCSSTransitionGroup
+                            transitionName="animate"
+                            className="flex-grow-1 flex-shrink-0"
+                            transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
+                            <div  key={'cont'+this.state.activeStep} className="">
+                                {currentStep}
+
                             </div>
-                        </div>
+                        </ReactCSSTransitionGroup>
+                        {button}
                     </div>
-                </div>
             );
         },
     });
