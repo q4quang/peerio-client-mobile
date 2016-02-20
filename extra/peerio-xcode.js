@@ -61,16 +61,22 @@ function findBuildConfiguration(info) {
 }
 
 function applyBuildValue(info, build, name, value) {
-    build.buildSettings || error('Build settings not found');
-    if(typeof build.buildSettings[name] !== 'undefined') {
-        log('Found build settings: ' + name + '=' + build.buildSettings[name]);
+    if(typeof build[name] !== 'undefined') {
+        log('Found build settings: ' + name + '=' + build[name]);
     }
 
-    if(build.buildSettings[name] !== value) {
+    if(build[name] !== value) {
         log('Value differs. Updating to: ' + value);
-        build.buildSettings[name] = value;
+        build[name] = value;
         info.hasChanged = true;
     }
+}
+
+function applyAllBuildSettingsValue(info, name, value) {
+    log('Applying ' + name + '=' + value + ' to debug');
+    applyBuildValue(info, info.debugConfiguration.buildSettings, name, value);
+    log('Applying ' + name + '=' + value + ' to release');
+    applyBuildValue(info, info.releaseConfiguration.buildSettings, name, value);
 }
 
 function applyAllBuildValue(info, name, value) {
@@ -176,7 +182,8 @@ function apply(params) {
         params.dataProtection && enableSystemCapability(info, 'com.apple.DataProtection');
         params.push && enableSystemCapability(info, 'com.apple.Push');
         params.team && setDevelopmentTeam(info, params.team);
-        params.disableBitcode && applyAllBuildValue(info, 'ENABLE_BITCODE', 'NO');
+        params.disableBitcode && applyAllBuildSettingsValue(info, 'ENABLE_BITCODE', 'NO');
+        params.profile && applyAllBuildSettingsValue(info, 'PROVISIONING_PROFILE', params.profile);
         return info;
     })
     .then(write)

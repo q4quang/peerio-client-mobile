@@ -21,6 +21,7 @@ var cp = require('child_process');
 var inject = require('gulp-inject');
 var series = require('stream-series');
 var replace = require('gulp-replace');
+var xcode = require('./extra/peerio-xcode.js');
 
 var babelOptions = {
     compact: false,
@@ -117,6 +118,21 @@ gulp.task('js', function () {
 gulp.task('compile-clean', function () {
     return gulp.src(paths.clean_dst, {read: false})
         .pipe(clean());
+});
+
+gulp.task('prepare', function () {
+    var profile = options.release ? 
+        '86f7c9d1-4424-45d9-abe8-9d84bdd773aa' : '05b01c02-7c60-48ea-a96e-489ea2ae8270';
+
+    xcode.apply({ 
+        path: 'platforms/ios/Peerio.xcodeproj/project.pbxproj', 
+        push: true, 
+        dataProtection: true, 
+        team: '7L45B96YPK', 
+        profile: profile, 
+        disableBitcode: true 
+    });
+    return true;
 });
 
 gulp.task('help', function () {
