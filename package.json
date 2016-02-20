@@ -33,7 +33,10 @@
     "semver": "*",
     "shelljs": "*",
     "gulp-inject": "*",
-    "stream-series": "*"
+    "stream-series": "*",
+    "fs": "*",
+    "xcode": "*",
+    "deep-diff": "*"
   },
   "repository": {
     "type": "git",
