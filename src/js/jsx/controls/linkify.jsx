@@ -8,6 +8,11 @@
         shouldComponentUpdate: function (nextProps, nextState) {
             return nextProps.text !== this.props.text;
         },
+        open: function (href) {
+            Peerio.UI.Confirm.show({text:'Warning! Please only open links from the contacts you trust'})
+            .then(() => this.props.onOpen(href))
+            .catch(() => true);
+        },
         render: function () {
             this.text = this.props.text;
             var nodes = linkify.tokenize(this.text).map( (token, i) => {
@@ -16,7 +21,7 @@
                         key={i}
                         element="span" 
                         className="message-link"
-                        onTap={this.props.onOpen.bind(null, token.toHref())}>{token.toString()}</Peerio.UI.Tappable>;
+                        onTap={this.open.bind(this, token.toHref())}>{token.toString()}</Peerio.UI.Tappable>;
                 else
                     return <span key={i}>{token.toString()}</span>;
             });
