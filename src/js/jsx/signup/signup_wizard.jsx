@@ -56,7 +56,7 @@
                 return;
             }
             this.setState( { activeStep: this.state.activeStep + 1 } );
-            if(data.signup) {
+            if(data && data.signup) {
                 this.doSignup();
             }
         },

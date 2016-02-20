@@ -2,7 +2,15 @@
     'use strict';
 
     Peerio.UI.SignupWizardName = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [ReactRouter.Navigation, Peerio.UI.AutoFocusMixin],
+
+        getDefaultProps: function() {
+            return {
+                autoFocus: true,
+                focusNode: 'username',
+                focusDelay: 1000
+            };
+        },
 
         getInitialState: function () {
             return this.props.data.name

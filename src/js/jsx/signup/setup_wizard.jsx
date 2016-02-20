@@ -19,6 +19,14 @@
                 Peerio.UI.SetupWizardEmail,
                 Peerio.UI.SetupWizardCoupon,
             ];
+            this.stepButtons = [
+              'get started', 'skip', 'no thanks','finish'
+            ];
+
+            Peerio.UI.TouchId.isFeatureAvailable()
+            .then(() => {
+                this.steps[1] = Peerio.UI.SetupWizardTouchID;
+            });
         },
 
         componentWillUnmount: function () {
