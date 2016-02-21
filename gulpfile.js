@@ -76,7 +76,7 @@ var paths = {
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
     bower_installer_dst: 'www/bower',
-    static_src: ['*media/**/*', '*locale/**/*', 'extra/*'],
+    static_src: ['*media/**/*', '*locale/**/*', 'extra/cordova.js'],
     static_dst: 'www/',
     clean_dst: ['www/js', 'www/css', 'www/index.html', 
                 'www/media', 'www/locale']
