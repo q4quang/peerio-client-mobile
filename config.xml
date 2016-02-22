@@ -112,7 +112,7 @@
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
     <plugin name="cordova-plugin-insomnia" spec="~4.0.1" />
-    <plugin name="cordova-plugin-wkwebview" spec="~0.6.7">
+    <plugin name="com.peerio.cordova.plugin.wkwebview" spec="https://github.com/PeerioTechnologies/peerio-cordova-wkwebview">
         <variable name="WKWEBVIEW_SERVER_PORT" value="53741" />
     </plugin>
     <plugin name="cordova-plugin-x-socialsharing" spec="~5.0.10" />
