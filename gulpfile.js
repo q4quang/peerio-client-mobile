@@ -247,6 +247,7 @@ gulp.task('serve', ['compile'], function () {
     });
 
     // compile watchers
+    gulp.watch(paths.html_src, ['index']);
     gulp.watch(paths.sass_all, ['sass']);
     gulp.watch(paths.jsx_src, ['jsx']);
     gulp.watch(paths.js_src, ['js']);
