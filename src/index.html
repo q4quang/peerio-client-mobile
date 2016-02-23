@@ -29,12 +29,13 @@
     <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" type="text/css"/>
     <link rel="stylesheet" href="css/app.css" type="text/css"/>
 
+    <!-- debug -->
     <!-- debug.js may contain sensitive info that is used to help with development.
          The file is ignored in git and located in repository root,
          so it can't be accidentally exposed by cordova tools.
-         If you are cloning a new repository, you can create your own debug.js from debug_template.js.
-         On devices it will 404 which is ok. -->
+         If you are cloning a new repository, you can create your own debug.js from debug_template.js. -->
     <script type="application/javascript" src="../debug.js"></script>
+    <!-- /debug -->
     <script type="application/javascript" src="js/js/urlfix.js"></script>
     <!-- tracing does not actually start before we enable it -->
     <script type="application/javascript" src="js/js/piwik.js"></script>
@@ -66,7 +67,7 @@
 
 <!---------------- <DEVMODE CONTROL START> ---------------->
 <!-- This is as independent/vanilla as possible developer mode controls-->
-<div id="devmode" style="transform: translateX(105%);">
+<div id="devmode" style="transform: translateX(105%);-webkit-transform: translateX(105%)">
     <div id="devmode-title">woah.. secret ninja mode
         <div id="devmode-close" onclick="devmode.hide()">X</div>
     </div>
@@ -239,6 +240,7 @@
                 devmode.loadSettings();
                 //devmode.root.style.display = 'block';
                 devmode.root.style.transform = 'translateX(0%)';
+                devmode.root.style['-webkit-transform'] = 'translateX(0%)';
                 devmode.populateLog();
                 devmode.interval = setInterval(function () {
                     if (!L.cache.length) return;
@@ -251,6 +253,7 @@
             hide: function () {
                 //devmode.root.style.display = 'none';
                 devmode.root.style.transform = 'translateX(105%)';
+                devmode.root.style['-webkit-transform'] = 'translateX(105%)';
                 clearInterval(devmode.interval);
                 devmode.logNode.innerHTML = '';
             },
