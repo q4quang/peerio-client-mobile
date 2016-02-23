@@ -29,9 +29,6 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onBigGreenButton(this.reply),
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
-                // in case somebody sends to a user file via message 
-                // we need to update the file
-                Peerio.Dispatcher.onFileShared(this.fileShared),
                 Peerio.Dispatcher.onConversationsUpdated(this.handleConversationsUpdated),
                 Peerio.Dispatcher.onKeyboardDidShow(() => {
                     if (!this.keyboardHack) {
