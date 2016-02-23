@@ -8,7 +8,7 @@
 
     function keychainName(username) {
         return (username || Peerio.user.username) + '_' +keyName;
-    };
+    }
 
     Peerio.UI.TouchId = React.createClass({
         statics: {
