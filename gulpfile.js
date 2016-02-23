@@ -122,7 +122,7 @@ gulp.task('compile-clean', function () {
 
 gulp.task('prepare', function () {
     var profile = options.release ? 
-        '86f7c9d1-4424-45d9-abe8-9d84bdd773aa' : '05b01c02-7c60-48ea-a96e-489ea2ae8270';
+        '86f7c9d1-4424-45d9-abe8-9d84bdd773aa' : false;
 
     xcode.apply({ 
         path: 'platforms/ios/Peerio.xcodeproj/project.pbxproj', 
