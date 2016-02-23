@@ -174,7 +174,8 @@ gulp.task('sass', function (done) {
         }))
         .pipe(autoprefixer({
             browsers: supportedBrowsers,
-            cascade: false
+            cascade: false,
+            grid: false
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.css_dst))
