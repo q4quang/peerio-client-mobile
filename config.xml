@@ -104,7 +104,6 @@
     <plugin name="com.verso.cordova.clipboard" spec="https://github.com/VersoSolutions/CordovaClipboard" />
     <plugin name="io.litehelpers.cordova.sqlcipher" spec="https://github.com/litehelpers/Cordova-sqlcipher-adapter" />
     <plugin name="phonegap-plugin-push" spec="~1" />
-    <plugin name="cordova-plugin-safariviewcontroller" spec="~1" />
     <plugin name="com.peerio.cordova.plugin.touchid" spec="https://github.com/PeerioTechnologies/peerio-keychain-touchid" />
     <preference name="xwalkVersion" value="15+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
