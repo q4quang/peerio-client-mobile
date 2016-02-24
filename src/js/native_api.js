@@ -16,7 +16,6 @@ Peerio.NativeAPI.init = function () {
     Peerio.NativeAPI.init = undefined;
 
     var cordova = window.cordova;
-    var safariView = window.SafariViewController;
 
     //-- SYSTEM EVENT HANDLERS -----------------------------------------------------------------------------------------
     document.addEventListener('pause', Peerio.Action.pause, false);
