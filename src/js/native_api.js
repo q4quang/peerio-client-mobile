@@ -64,29 +64,12 @@ Peerio.NativeAPI.init = function () {
 
     //-- INTERNAL BROWSER ----------------------------------------------------------------------------------------------
     /**
-     * Opens url in safari or inAppBrowser, whatever is available
+     * Opens url 
      * @param url
      */
     api.openInBrowser = function (url) {
-        var open = cordova && cordova.InAppBrowser.open || window.open;
         try {
-            if (!safariView) {
-                open && open(url, '_blank', 'location=yes');
-                return;
-            }
-
-            safariView.isAvailable(function (available) {
-                if (!available) {
-                    open && open(url, '_blank', 'location=yes');
-                    return;
-                }
-                safariView.show({'url': url, 'enterReaderModeIfAvailable': false},
-                    function (msg) {
-                    }, // success callback
-                    function (msg) {
-                        L.error(msg);
-                    });
-            });
+            window.open(url, '_system');
         } catch (ex) {
             L.error('Failed to open url in browser. {0}', ex);
         }
