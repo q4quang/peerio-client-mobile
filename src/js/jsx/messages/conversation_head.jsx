@@ -14,9 +14,10 @@
         },
         render: function () {
             var c = this.props.conversation;
+            var participantsLength = c.participants.length + 1;
             var counter = c.exParticipantsArr.length
-                ? c.participants.length + '/' + (c.participants.length + c.exParticipantsArr.length)
-                : c.participants.length;
+                ? participantsLength + '/' + (participantsLength + c.exParticipantsArr.length)
+                : participantsLength;
 
             var participants = c.participants.map(function (username) {
                 return (
