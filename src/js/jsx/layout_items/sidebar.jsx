@@ -48,12 +48,12 @@
             this.toggleAndTransition('files');
             Peerio.Action.showFileUpload();
         },
-        signOut: function() {
+        signOut: function () {
             Peerio.NativeAPI.disablePushNotifications()
-                .finally(function() {
-                    L.info('reload window');
-                    window.location.reload();
-                });
+                .catch(noop)
+                .then(Peerio.SqlDB.closeAll)
+                .catch(noop)
+                .then(()=> window.location.reload());
         },
         //--- RENDER
         render: function () {
@@ -91,35 +91,35 @@
                             <div className="flex-col flex-grow-1 sidebar-menu" ref="menu">
                                 <ul>
                                     <Peerio.UI.Tappable tag='li'
-                                        onTap={this.toggleAndTransition.bind(this, 'set_pin')}>
+                                                        onTap={this.toggleAndTransition.bind(this, 'set_pin')}>
                                         <i className="material-icons">lock</i>
                                         <span>{pinNode}</span>
                                     </Peerio.UI.Tappable>
                                     <Peerio.UI.Tappable tag='li'
-                                        onTap={this.toggleAndTransition.bind(this, 'settings_2fa')}>
+                                                        onTap={this.toggleAndTransition.bind(this, 'settings_2fa')}>
                                         <i className="material-icons">smartphone</i>
                                         <span>{twoFactor}</span>
                                     </Peerio.UI.Tappable>
 
-                                     <Peerio.UI.Tappable tag="li"
-                                        onTap={this.toggleAndTransition.bind(this, 'account_settings')}>
+                                    <Peerio.UI.Tappable tag="li"
+                                                        onTap={this.toggleAndTransition.bind(this, 'account_settings')}>
                                         <i className="material-icons">person</i> Profile
-                                     </Peerio.UI.Tappable>
+                                    </Peerio.UI.Tappable>
 
-                                     <Peerio.UI.Tappable tag="li"
-                                         onTap={this.toggleAndTransition.bind(this, 'share_code')}>
-                                         <i className="material-icons">share</i> Get Free Data
-                                     </Peerio.UI.Tappable>
+                                    <Peerio.UI.Tappable tag="li"
+                                                        onTap={this.toggleAndTransition.bind(this, 'share_code')}>
+                                        <i className="material-icons">share</i> Get Free Data
+                                    </Peerio.UI.Tappable>
 
-                                     <Peerio.UI.Tappable tag="li"
-                                        onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
+                                    <Peerio.UI.Tappable tag="li"
+                                                        onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
                                         <i className="material-icons">settings</i> Preferences
-                                     </Peerio.UI.Tappable>
+                                    </Peerio.UI.Tappable>
 
-                                     <Peerio.UI.Tappable tag="li"
-                                        onTap={this.toggleAndTransition.bind(this, 'enter_coupon')}>
+                                    <Peerio.UI.Tappable tag="li"
+                                                        onTap={this.toggleAndTransition.bind(this, 'enter_coupon')}>
                                         <i className="fa fa-certificate"></i> Redeem Coupon
-                                     </Peerio.UI.Tappable>
+                                    </Peerio.UI.Tappable>
                                 </ul>
                                 <div className="flex-grow-1"></div>
                                 { /* signout */}
