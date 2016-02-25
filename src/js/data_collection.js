@@ -130,9 +130,7 @@ Peerio.DataCollection.init = function () {
 
     api.flushDelayedTracking = function() {
         if(api.isEnabled()) {
-            for(var i of delayedPaq.get()) {
-                window._paq.push(i);
-            }
+            delayedPaq.get().forEach( i => window._paq.push(i) );
         }
         delayedPaq.clear();
     };
