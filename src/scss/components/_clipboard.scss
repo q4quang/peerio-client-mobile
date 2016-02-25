@@ -1,0 +1,14 @@
+.copy,
+.coupon {
+  opacity: 0;
+  overflow: hidden;
+  transition: $speed-normal;
+  white-space: nowrap;
+  width: 0;
+  font-weight: 600;
+
+  &.show {
+    opacity: 1;
+    width: 100%;
+  }
+}
