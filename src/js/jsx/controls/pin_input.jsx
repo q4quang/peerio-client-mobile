@@ -13,7 +13,8 @@
         getInitialState: function() {
             return {
                 pin: '',
-                touchid: false
+                touchid: false,
+                failNumber: 0
             };
         },
 
@@ -36,8 +37,14 @@
         },
 
         handleLoginFail: function() {
+            if(this.state.failNumber > 1) {
+                this.setState( { failNumber: 0 }, () => {
+                    window.setTimeout(() => this.handleLoginFail(), 10000);
+                } );
+                return;
+            }
             this.refs.pinPad.getDOMNode().classList.add('shake');
-            this.setState({ inProgress: false });
+            this.setState({ failNumber: this.state.failNumber + 1, inProgress: false });
             window.setTimeout( () => {
                 this.refs.pinPad.getDOMNode().classList.remove('shake');
             }, 1000);
