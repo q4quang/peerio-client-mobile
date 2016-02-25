@@ -106,8 +106,8 @@
                     this.loadNextPage();
                 return;
             }
-
-            this.props.onGetItemsRange(this.getLastItem().seqID, this.getFirstItem().seqID)
+            // plus one here is to take care of an updated convo list (it increases seqID)
+            this.props.onGetItemsRange(this.getLastItem().seqID, this.getFirstItem().seqID + 1)
                 .then(items=> {
                     this.itemsHash = {};
                     for (var i = 0; i < items.length; i++) {
