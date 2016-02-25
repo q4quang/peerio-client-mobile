@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    var PIN_LENGTH = 6;
+
     Peerio.UI.SetPin = React.createClass({
         mixins: [ReactRouter.Navigation, Peerio.UI.AutoFocusMixin],
 
@@ -28,7 +30,8 @@
         },
 
         pinIsSane: function () {
-            return this.state.newPin && this.state.newPin.length === 6;
+            return this.state.newPin && this.state.newPin.length === PIN_LENGTH
+            && Peerio.user.pinEntropyCheck(this.state.newPin);
         },
 
         newPinChange: function (event) {
@@ -57,7 +60,14 @@
             var header = !!this.props.hideHeader ? null : (
                 <div className="headline-md">Device passcode</div>
             );
-            var setPinButton = !this.state.inProgress && this.pinIsSane() ? (
+            var pinIsSane = this.pinIsSane();
+            var message = !this.state.newPin ?
+                'please enter a distinct passcode' : (
+                    (this.state.newPin.length && this.state.newPin.length != PIN_LENGTH) ?
+                    (PIN_LENGTH - this.state.newPin.length) + ' more digits to go' :
+                    (pinIsSane ? 'you\'re good to go' : 'passcode is too simple, try again'));
+
+            var setPinButton = !this.state.inProgress && pinIsSane ? (
 
                 <Peerio.UI.Tappable
                     element="div"
@@ -88,6 +98,7 @@
                                  value={this.state.newPin}
                                  inputmode="numeric"
                                  onChange={this.newPinChange}/>
+                             <p className="info-small text-center"><b>{message}</b></p>
                         </div>
                         <div className="buttons">
                             {setPinButton}
