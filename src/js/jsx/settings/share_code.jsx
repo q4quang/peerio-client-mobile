@@ -3,7 +3,7 @@
 
     var shareText = 'Securely share messages and files with me on Peerio! Use code {0} to add me and get 250MB of bonus storage.';
     var shareSubject = 'Peerio';
-    var shareLink = 'http://www.peerio.com/invite?code={0}';
+    var shareLink = 'http://www.peerio.com/invite.html?code={0}';
 
     Peerio.UI.ShareCode = React.createClass({
         mixins:[ReactRouter.Navigation],
