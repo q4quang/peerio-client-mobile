@@ -184,6 +184,8 @@ function apply(params) {
         params.team && setDevelopmentTeam(info, params.team);
         params.disableBitcode && applyAllBuildSettingsValue(info, 'ENABLE_BITCODE', 'NO');
         params.profile && applyAllBuildSettingsValue(info, 'PROVISIONING_PROFILE', params.profile);
+        params.deploymentTarget && applyAllBuildSettingsValue(info, 'IPHONEOS_DEPLOYMENT_TARGET', params.deploymentTarget);
+        params.targetedDeviceFamily && applyAllBuildSettingsValue(info, 'TARGETED_DEVICE_FAMILY', params.targetedDeviceFamily);
         return info;
     })
     .then(write)
