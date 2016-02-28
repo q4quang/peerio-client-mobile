@@ -192,5 +192,9 @@ Peerio.DataCollection.init = function () {
     app.closeSideBar = function() {
         app.trackAction('closeSideBar');
     };
+
+    Peerio.Util.tryCatchAllFunctions(api);
+    Peerio.Util.tryCatchAllFunctions(signup);
+    Peerio.Util.tryCatchAllFunctions(app);
 };
 
