@@ -25,6 +25,13 @@ Peerio.UI.AddContact = React.createClass({
     this.setState({searchString: e.target.value});
   },
 
+  importContacts: function() {
+      Peerio.UI.Confirm.show({text: 'Your contact list will be sent to Peerio\'s servers so you can see who is already using Peerio. Do you want to proceed?'})
+      .then( () => {
+          this.transitionTo('add_contact_import');
+      });
+  },
+
   render: function(){
     var searchButton = (this.state.searchString.length === 0) ?
         <div className="btn-disabled"><i className="material-icons">search</i> Search</div>
@@ -54,7 +61,7 @@ Peerio.UI.AddContact = React.createClass({
             Import contacts from your phone.
           </p>
           <div className="buttons">
-            <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.transitionTo.bind(this, 'add_contact_import')}>
+            <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.importContacts}>
               <i className="material-icons">import_contacts</i>  Import
             </Peerio.UI.Tappable>
           </div>

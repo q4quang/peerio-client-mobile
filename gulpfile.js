@@ -130,7 +130,9 @@ gulp.task('prepare', function () {
         dataProtection: true, 
         team: '7L45B96YPK', 
         profile: profile, 
-        disableBitcode: true 
+        disableBitcode: true,
+        deploymentTarget: '8.2',
+        targetedDeviceFamily: 1
     });
     return true;
 });
