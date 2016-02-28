@@ -14,7 +14,7 @@
         },
         render: function () {
             var c = this.props.conversation;
-            var participantsLength = c.participants.length + 1;
+            var participantsLength = c.participants.length;
             var counter = c.exParticipantsArr.length
                 ? participantsLength + '/' + (participantsLength + c.exParticipantsArr.length)
                 : participantsLength;
