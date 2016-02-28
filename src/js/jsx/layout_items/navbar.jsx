@@ -10,8 +10,8 @@
     //--- REACT EVENTS
     getInitialState: function () {
       return {
-        socketConnected: true, // red/green connection status. when false, 'loading' is ignored
-        loading: false //shows loading indicator animation
+        socketConnected: Peerio.AppState.connected, // red/green connection status. when false, 'loading' is ignored
+        loading: Peerio.AppState.loading //shows loading indicator animation
       };
     },
     componentWillMount: function () {
