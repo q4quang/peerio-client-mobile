@@ -28,7 +28,11 @@
             return {promptValue: this.props.promptValue};
         },
         updatePromptValue: function (event) {
-            this.setState({promptValue: event.target.value});
+            this.setState({promptValue: event.target.value}, () => {
+                if(this.props.autoSubmitLength && this.state.promptValue 
+                          && this.state.promptValue.length == this.props.autoSubmitLength)
+                      this.handleAction();
+            });
         },
         isValueValid: function() {
             return (this.props.minLength > 0) ==

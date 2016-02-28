@@ -13,9 +13,6 @@
                 Peerio.Dispatcher.onSettingsUpdated(() => {
                     this.setState({addresses: this.getAddresses()});
                 }),
-                Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
-                Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend),
-                Peerio.Dispatcher.onTwoFactorAuthReject(this.handle2FAReject),
             ];
         },
 
@@ -23,24 +20,6 @@
             this.updateName();
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
-
-        handle2FA: function (resolve, reject) {
-            this.resolve2FA = resolve;
-            this.reject2FA = reject;
-            L.info('2fa requested');
-            this.transitionTo('account_settings_2fa_prompt');
-        },
-
-        handle2FAResend: function () {
-            L.info('2fa resend requested');
-            this.resolve2FA('succesfully entered 2fa code');
-        },
-
-        handle2FAReject: function () {
-            L.info('2fa reject');
-            this.reject2FA('2fa rejected');
-        },
-
 
         getSettings: function () {
             return {
@@ -96,11 +75,6 @@
 
         setPrimaryAddress: function (address) {
             Peerio.user.setPrimaryAddress(address);
-        },
-
-        confirm2FA: function (address) {
-            this.setState({newAddressText: address});
-            this.addNewAddress(true);
         },
 
         deleteAccount: function () {

@@ -18,6 +18,8 @@
                 }
             });
 
+            Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA);
+
             Peerio.Dispatcher.onOnline(() => {
                 L.info('ONLINE event received from Navigator. Connecting socket. ');
                 Peerio.Socket.connect();
@@ -57,6 +59,33 @@
                 onAccept: ()=>Peerio.NativeAPI.openInBrowser('https://peerio.com')
             });
         },
+
+        handle2FA: function (resolve, reject, retry) {
+            L.info('2fa requested');
+            Peerio.UI.Prompt.show({
+                text: retry ? 'Code is incorrect. Please try again:' :'Please enter 2FA code:',
+                inputType: 'numeric',
+                autoSubmitLength: 6
+            })
+            .then( (code) => {
+                L.info('2fa resend requested');
+                Peerio.Net.validate2FA(code, Peerio.user.username, Peerio.user.publicKey)
+                    .then(() => {
+                        resolve('successfully entered 2fa code');
+                    })
+                    .catch(() => {
+                        this.handle2FA(resolve, reject, true);
+                    });
+            })
+            .catch( () => {
+                L.info('2fa rejected by user');
+                reject({
+                    code: 411, // any special code for user cancel?
+                    message: '2FA authentication cancelled by user'
+                });
+            });
+        },
+
         render: function () {
             return (
                 <div>

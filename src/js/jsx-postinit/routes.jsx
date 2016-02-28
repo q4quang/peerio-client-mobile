@@ -18,7 +18,7 @@ Peerio.UI.Routes = (
                 <Route name='files' handler={Peerio.UI.Files}/>
                 <Route name='contacts' handler={Peerio.UI.Contacts}/>
             </Route>
-
+            <Route name="app2fa" path="/app/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
             <Route name="conversation" path="/app/conversation/:id" handler={Peerio.UI.Conversation}/>
             <Route name='conversation_info' path="/app/conversation/:id/info" handler={Peerio.UI.ConversationInfo}/>
 

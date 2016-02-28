@@ -29,7 +29,7 @@
                     <Peerio.UI.Footer/>
                 </div>
             );
-        }
+        },
     });
 
 }());

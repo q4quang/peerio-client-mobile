@@ -10,9 +10,6 @@
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onSettingsUpdated( this.resetSettings.bind(this, null) ),
-                Peerio.Dispatcher.onTwoFactorAuthReject(this.handle2FAReject),
-                Peerio.Dispatcher.onTwoFactorAuthRequested(this.handle2FA),
-                Peerio.Dispatcher.onTwoFactorAuthResend(this.handle2FAResend)
             ];
         },
 
@@ -31,22 +28,6 @@
                 notifyContactRequest: Peerio.user.settings.receiveContactRequestNotifications,
                 dataCollectionOptIn: Peerio.user.settings.dataCollectionOptIn
             };
-        },
-
-        handle2FA: function(resolve, reject) {
-            this.resolve2FA = resolve;
-            this.reject2FA = reject;
-            L.info('2fa requested');
-            this.transitionTo('preference_settings_2fa_prompt');
-        },
-
-        handle2FAResend: function() {
-            L.info('2fa resend requested');
-            this.resolve2FA('succesfully entered 2fa code');
-        },
-
-        handle2FAReject: function() {
-            this.reject2FA && this.reject2FA('2fa cancelled by user');
         },
 
         setDevicePin: function() {
