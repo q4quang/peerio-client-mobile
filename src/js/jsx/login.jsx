@@ -91,11 +91,10 @@
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
 
-
             this.transitionTo(this.nextRoute);
         },
 
-        handleLoginFail: function (error) {
+        handleLoginFail: function (error, systemPin) {
             this.setState({waitingForLogin: false});
             // if we got a 2FA request
             if (error && error.code === 424) {
@@ -105,7 +104,7 @@
 
             if (error && error.code === 411) {
                 // probably user touch id pin is corrupted
-                if (error.systemPin) {
+                if (systemPin) {
                     L.error('Login failed. It seems your Peerio TouchID is corrupted.');
                     // TODO: we expect Peerio.user.username to have meaningful value
                     Peerio.user && Peerio.user.username &&
@@ -127,8 +126,12 @@
                 return this.refs.pin.handleLoginFail();
             }
             // this.setState( { isPin: false } );
-
-            Peerio.Action.showAlert({text: 'Login failed. ' + (error ? (' Error message: ' + error.message) : '')});
+            var msg = '';
+            if (error) {
+                if (is.string(error)) msg = ' Error message: ' + error;
+                else if (error.message) msg = ' Error message: ' + error.message;
+            }
+            Peerio.Action.showAlert({text: 'Login failed.' + msg});
         },
         // show/hide passphrase
         handlePassphraseShowTap: function () {
@@ -210,9 +213,8 @@
             this.setState({waitingForLogin: true});
             Peerio.user.login(passValue, !!systemPin)
                 .then(this.handleLoginSuccess)
-                .catch((error) => {
-                    error.systemPin = systemPin;
-                    this.handleLoginFail(error);
+                .catch(error => {
+                    this.handleLoginFail(error, systemPin);
                 })
                 .finally(Peerio.NativeAPI.allowSleep);
         },
