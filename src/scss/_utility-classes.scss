@@ -175,3 +175,11 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
 .italic {
   font-style: italic;
 }
+
+.filter-animate {
+    transition: $speed-fast;
+
+    &.blur {
+      filter: blur(3px);
+    }
+}
