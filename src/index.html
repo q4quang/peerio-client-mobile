@@ -17,10 +17,43 @@
     	* todo: unsafe inline can be removed from scripts in production. browsersync needs it in development.
 	-->
     <!-- release -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://piwik.peerio.com/ https://ssl.gstatic.com https://app.peerio.com https://peerio.blob.core.windows.net https://peeriodev.blob.core.windows.net wss://app.peerio.com ws://localhost:3000; media-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src
+                                                            'self'
+                                                            data:
+                                                            gap:
+                                                            https://piwik.peerio.com
+                                                            https://ssl.gstatic.com
+                                                            https://app.peerio.com
+                                                            https://peerio.blob.core.windows.net
+                                                            https://blob.peerio.com
+                                                            https://blobmonster.peerio.com
+                                                            wss://app.peerio.com
+                                                            ;
+                                                            media-src 'self'
+                                                            ;">
     <!-- /release -->
     <!-- debug -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://piwik.peerio.com/ https://ssl.gstatic.com https://app.peerio.com https://hocuspocus.peerio.com https://peerio.blob.core.windows.net https://peeriodev.blob.core.windows.net wss://app.peerio.com wss://hocuspocus.peerio.com ws://localhost:3000 ws://localhost:3001; media-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src
+                                                            'self'
+                                                            'unsafe-inline'
+                                                            'unsafe-eval'
+                                                            data:
+                                                            gap:
+                                                            https://piwik.peerio.com
+                                                            https://ssl.gstatic.com
+                                                            https://app.peerio.com
+                                                            https://hocuspocus.peerio.com
+                                                            https://peerio.blob.core.windows.net
+                                                            https://blob.peerio.com
+                                                            https://blobmonster.peerio.com
+                                                            https://peeriodev.blob.core.windows.net
+                                                            wss://app.peerio.com
+                                                            wss://hocuspocus.peerio.com
+                                                            ws://localhost:3000
+                                                            ws://localhost:3001
+                                                            ;
+                                                            media-src 'self'
+                                                            ;">
     <!-- /debug -->
     <title>Peerio</title>
     <link rel="icon" type="image/png" href="media/img/icon32.png"/>
@@ -40,9 +73,14 @@
     <!-- tracing does not actually start before we enable it -->
     <script type="application/javascript" src="js/js/piwik.js"></script>
 
-    <!-- JS libraries  TODO: replace react to production version on build -->
+    <!-- JS libraries -->
     <script type="application/javascript" src="cordova.js"></script>
+    <!-- debug -->
     <script type="application/javascript" src="bower/react/react-with-addons.js"></script>
+    <!-- /debug -->
+    <!-- release -->
+    <script type="application/javascript" src="bower/react/react-with-addons.min.js"></script>
+    <!-- /release -->
     <script type="application/javascript" src="bower/react-router/ReactRouter.js"></script>
     <script type="application/javascript" src="bower/gsap/tweenlite.min.js"></script>
     <script type="application/javascript" src="bower/gsap/scrolltoplugin.min.js"></script>
@@ -86,8 +124,8 @@
             <label class="devlog-full-width" style="
   text-transform: capitalize;
   margin-top: 12px;">log limit</label>
-  <input onchange="devmode.changeLogLimit(event)" tabindex="-1" id="devmode-log-limit" type="text" size="7"
-                             value="123" class="devlog-full-width"/>
+            <input onchange="devmode.changeLogLimit(event)" tabindex="-1" id="devmode-log-limit" type="text" size="7"
+                   value="123" class="devlog-full-width"/>
         </div>
         <button onclick="devmode.send()" tabindex="-1" class="devlog-full-width">Send log by email</button>
         <div id="devmode-log"></div>
@@ -190,31 +228,31 @@
     }
 
     #devmode select {
-      -webkit-appearance: menulist;
+        -webkit-appearance: menulist;
     }
 
     #devmode input[type="checkbox"] {
-      width: auto;
+        width: auto;
     }
 
     #devmode input, #devmode select {
-      vertical-align: middle;
-      background: rgba(255,255,255,0.3);
-      border-radius: 2px;
-      padding: 0 8px;
+        vertical-align: middle;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+        padding: 0 8px;
     }
 
     #devmode input:focus, #devmode select:focus {
-      height: 34px;
-      border-bottom-width: 2px;
+        height: 34px;
+        border-bottom-width: 2px;
     }
 
     #devmode input:focus {
-      margin-bottom: 2px;
+        margin-bottom: 2px;
     }
 
     #devmode select:focus {
-      margin-bottom: -2px;
+        margin-bottom: -2px;
     }
 </style>
 
@@ -226,7 +264,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        if(window.PeerioDebug && PeerioDebug.logLevel != null){
+        if (window.PeerioDebug && PeerioDebug.logLevel != null) {
             L.level = PeerioDebug.logLevel;
             L.releaseConsole();
         }
@@ -240,7 +278,7 @@
             // open devmode control
             show: function () {
                 /* making sure that devmode isn't compressed into small scrollable window */
-                if ( Peerio && Peerio.NativeAPI && Peerio.NativeAPI.hideKeyboard ) {
+                if (Peerio && Peerio.NativeAPI && Peerio.NativeAPI.hideKeyboard) {
                     Peerio.NativeAPI.hideKeyboard();
                 }
                 devmode.loadSettings();

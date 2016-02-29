@@ -40,7 +40,10 @@
         "bower_components/font-awesome/fonts/fontawesome-webfont.woff",
         "bower_components/font-awesome/fonts/fontawesome-webfont.woff2"
       ],
-      "react": "bower_components/react/react-with-addons.js",
+      "react": [
+        "bower_components/react/react-with-addons.js",
+        "bower_components/react/react-with-addons.min.js"
+      ],
       "gsap": [
         "bower_components/gsap/src/minified/tweenlite.min.js",
         "bower_components/gsap/src/minified/plugins/scrolltoplugin.min.js"
