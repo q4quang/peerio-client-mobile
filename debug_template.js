@@ -23,3 +23,5 @@ PeerioDebug.user = '';
 PeerioDebug.pass = '';
 
 PeerioDebug.server = '';
+
+PeerioDebug.logLevel = 3;
