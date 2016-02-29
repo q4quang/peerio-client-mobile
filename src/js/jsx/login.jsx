@@ -24,21 +24,22 @@
             };
         },
         componentWillMount: function () {
-            this.subscriptions = [
-                Peerio.Dispatcher.onPause(this.cleanPassphrase),
-            ];
+            this.subscriptions = [Peerio.Dispatcher.onPause(this.cleanPassphrase)];
+            // self-unsubscribing handler
+            Peerio.Dispatcher.onAuthenticated(this.postAuth);
+
             if (!Peerio.autoLogin) {
                 Peerio.Auth.getSavedLogin()
-                .then( (data) => {
-                    this.setState({savedLogin: data});
+                    .then((data) => {
+                        this.setState({savedLogin: data});
 
-                    this.invokeTouchID(data);
+                        this.invokeTouchID(data);
 
-                    data && data.username && Peerio.Auth.getPinForUser(data.username)
-                    .then( (pin) => {
-                        this.setState({ isPin: !!pin });
+                        data && data.username && Peerio.Auth.getPinForUser(data.username)
+                            .then((pin) => {
+                                this.setState({isPin: !!pin});
+                            });
                     });
-                });
             }
         },
 
@@ -67,24 +68,30 @@
             this.refs.passphrase.getDOMNode().value = '';
         },
 
-        handleLoginSuccess: function () {
-            Peerio.user.isMe = true;
-            Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
-            !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
-            this.enableDataOptIn && Peerio.user.enableDataCollection(this.enableDataOptIn)
-            .then( () => {
-                this.trackSuccessfulSignup && Peerio.DataCollection.Signup.successfulSignup();
-            });
-
-            Peerio.DataCollection.flushDelayedTracking();
-
-            Peerio.NativeAPI.getCountryCode().then( (code) => {
-                Peerio.DataCollection.trackCountry(code);
-            });
+        postAuth: function () {
+            Peerio.Dispatcher.unsubscribe(this.postAuth);
 
             Peerio.NativeAPI.enablePushNotifications()
                 .catch(error => L.error('Error enabling push notifications. {0}', error))
                 .finally(() => Peerio.NativeAPI.clearPushBadge());
+
+            this.enableDataOptIn && Peerio.user.enableDataCollection(this.enableDataOptIn)
+                .then(() => {
+                    this.trackSuccessfulSignup && Peerio.DataCollection.Signup.successfulSignup();
+                });
+
+            Peerio.DataCollection.flushDelayedTracking();
+
+            Peerio.NativeAPI.getCountryCode().then((code) => {
+                Peerio.DataCollection.trackCountry(code);
+            });
+        },
+        handleLoginSuccess: function () {
+            Peerio.user.isMe = true;
+            Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
+            !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
+
+
             this.transitionTo(this.nextRoute);
         },
 
@@ -98,11 +105,11 @@
 
             if (error && error.code === 411) {
                 // probably user touch id pin is corrupted
-                if(error.systemPin) {
+                if (error.systemPin) {
                     L.error('Login failed. It seems your Peerio TouchID is corrupted.');
                     // TODO: we expect Peerio.user.username to have meaningful value
-                    Peerio.user && Peerio.user.username && 
-                        Peerio.UI.TouchId.clearKeyPair();
+                    Peerio.user && Peerio.user.username &&
+                    Peerio.UI.TouchId.clearKeyPair();
                 }
             }
 
@@ -116,7 +123,7 @@
             // maybe user entered wrong pin, so allow him
             // to enter a passphrase
 
-            if(this.state.isPin) {
+            if (this.state.isPin) {
                 return this.refs.pin.handleLoginFail();
             }
             // this.setState( { isPin: false } );
@@ -143,30 +150,30 @@
                     this.minFontSize) + 'rem';
         },
 
-        invokeTouchID: function(data) {
+        invokeTouchID: function (data) {
             data && data.username && Peerio.UI.TouchId.hasTouchID(data.username)
-            .then( (hasTouchID) => {
-                if(hasTouchID) {
-                    Peerio.UI.TouchId.getSystemPin(data.username)
-                    .then( (systemPin) => {
-                        this.setState( { isPin: false } );
-                        this.handleSubmit(null, null, systemPin);
-                    });
-                }
+                .then((hasTouchID) => {
+                    if (hasTouchID) {
+                        Peerio.UI.TouchId.getSystemPin(data.username)
+                            .then((systemPin) => {
+                                this.setState({isPin: false});
+                                this.handleSubmit(null, null, systemPin);
+                            });
+                    }
+                });
+        },
+
+        handlePinChangeUser: function () {
+            this.setState({isPin: false}, () => {
+                this.setState({savedLogin: null});
             });
         },
 
-        handlePinChangeUser: function() {
-            this.setState( { isPin: false }, () => {
-                this.setState({ savedLogin: null });
-            });
-        },
-
-        handlePinTouchID: function() {
+        handlePinTouchID: function () {
             this.invokeTouchID(this.state.savedLogin);
         },
 
-        handlePinEnter: function(pin) {
+        handlePinEnter: function (pin) {
             // this.setState( { isPin: false } );
             this.handleSubmit(null, pin);
         },
@@ -192,8 +199,8 @@
             Peerio.NativeAPI.hideKeyboard();
 
             // if username is empty, show user an alert
-            if(!userValue || !userValue.length) {
-                Peerio.UI.Alert.show( { text: 'Username cannot be empty' } );
+            if (!userValue || !userValue.length) {
+                Peerio.UI.Alert.show({text: 'Username cannot be empty'});
                 return;
             }
 
@@ -220,7 +227,7 @@
         // change focus to passphrase input on enter
         handleUsernameChange: function (e) {
             var value = this.refs.username.getDOMNode().value;
-            (!value || Peerio.Helpers.isValidUsername(value)) && this.setState( { username: value } );
+            (!value || Peerio.Helpers.isValidUsername(value)) && this.setState({username: value});
         },
 
         // submit form on enter
@@ -245,7 +252,7 @@
                     onEnterPin={this.handlePinEnter}
                     onChangeUser={this.handlePinChangeUser}
                     onTouchID={this.handlePinTouchID}
-                    />
+                />
             ) : (
                 <Peerio.UI.PasswordInput
                     id="password"
@@ -255,59 +262,59 @@
                     defaultValue={debugPassword}
                     onChange={this.handlePassphraseChange}
                     onKeyDown={this.handleKeyDownPass}
-                    />
+                />
             );
 
             return (
                 <div>
-                  <RouteHandler manual={true}/>
-                  <div className="page-wrapper-login">
+                    <RouteHandler manual={true}/>
+                    <div className="page-wrapper-login">
 
-                    <div className="content-wrapper-login">
-                      <div className="app-version">Peerio version: {Peerio.runtime.version}</div>
-                      <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"
-                        onTouchEnd={devmode.summon}/>
+                        <div className="content-wrapper-login">
+                            <div className="app-version">Peerio version: {Peerio.runtime.version}</div>
+                            <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"
+                                 onTouchEnd={devmode.summon}/>
 
-                      <form className="loginForm" onSubmit={this.handleSubmit}>
-                      {this.state.savedLogin
-                      ?
-                        (<Peerio.UI.Tappable ref="savedLogin" element="div" className="saved-login"
-                           onTap={this.clearLogin}>
-                           <div className="headline-md text-overflow">Welcome back,
-                             <strong> {this.state.savedLogin.firstName || this.state.savedLogin.username}</strong>
-                             </div>
+                            <form className="loginForm" onSubmit={this.handleSubmit}>
+                                {this.state.savedLogin
+                                    ?
+                                    (<Peerio.UI.Tappable ref="savedLogin" element="div" className="saved-login"
+                                                         onTap={this.clearLogin}>
+                                        <div className="headline-md text-overflow">Welcome back,
+                                            <strong> {this.state.savedLogin.firstName || this.state.savedLogin.username}</strong>
+                                        </div>
 
-                             <div className="caption">Tap here to change and forget username.</div>
+                                        <div className="caption">Tap here to change and forget username.</div>
                                     </Peerio.UI.Tappable>)
                                     :
                                     (<div className="login-input">
                                         <div className="input-group">
                                             <label htmlFor="username">username</label>
                                             <input value={this.state.username}
-                                                id="username" ref="username"
-                                                type="text" maxLength="16"
-                                                autoComplete="off"
-                                                autoCorrect="off"
-                                                autoCapitalize="off"
-                                                spellCheck="false"
-                                                onKeyDown={this.handleKeyDownLogin}
-                                                onChange={this.handleUsernameChange}
+                                                   id="username" ref="username"
+                                                   type="text" maxLength="16"
+                                                   autoComplete="off"
+                                                   autoCorrect="off"
+                                                   autoCapitalize="off"
+                                                   spellCheck="false"
+                                                   onKeyDown={this.handleKeyDownLogin}
+                                                   onChange={this.handleUsernameChange}
                                             />
                                         </div>
                                     </div>)
                                 }
                                 <div className="login-input">
-                                      <div className="input-group">
-                                          <label htmlFor="password">
-                                              {this.state.isPin ? 'passcode' : 'passphrase or passcode'}
-                                          </label>
-                                          <div className="input-control">
-                                              {passInput}
-                                               <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap} element="i"
-                                                   className='flex-shrink-0 material-icons'> {eyeIcon}
-                                               </Peerio.UI.Tappable>
-                                          </div>
-                                      </div>
+                                    <div className="input-group">
+                                        <label htmlFor="password">
+                                            {this.state.isPin ? 'passcode' : 'passphrase or passcode'}
+                                        </label>
+                                        <div className="input-control">
+                                            {passInput}
+                                            <Peerio.UI.Tappable onTap={this.handlePassphraseShowTap} element="i"
+                                                                className='flex-shrink-0 material-icons'> {eyeIcon}
+                                            </Peerio.UI.Tappable>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="login-process-state">
                                     <Peerio.UI.TalkativeProgress
