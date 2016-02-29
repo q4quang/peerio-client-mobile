@@ -108,7 +108,7 @@
 
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'share_code')}>
-                                        <i className="material-icons">share</i> Get Free Data
+                                        <i className="material-icons">share</i> Get Free Storage
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"

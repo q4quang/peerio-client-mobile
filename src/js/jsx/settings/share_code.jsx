@@ -40,7 +40,7 @@
 
         render: function() {
             return (<div className="content without-tab-bar without-footer flex-col">
-                <div className="headline"> Get Free Data</div>
+                <div className="headline"> Get Free Storage</div>
                 <div className="section-highlight">
                     <div className={'flex-row flex-justify-center coupon' + (this.state.animateCopy ? '' : ' show')} >{this.state.inviteCode}</div>
                     <div className={'flex-row flex-justify-center copy p-green-dark-15' + (this.state.animateCopy ? ' show' : '')} >Copied to clipboard</div>
