@@ -28,7 +28,6 @@
                                                             https://blob.peerio.com
                                                             https://blobmonster.peerio.com
                                                             wss://app.peerio.com
-                                                            'sha256-tW9RuZazynVUxcwbgy/uhJIHT4/qjEgNt8p0gkVWPSs='
                                                             ;
                                                         style-src
                                                             'self'
@@ -43,10 +42,7 @@
                                                             'self'
                                                             data:
                                                             gap:
-
-                                                            'sha256-a9DUmmxByhGlgkVpRIMsp5tpECxM9+fqDVL+IcHIdjs='
                                                             'sha256-8U0IjmKhdF6muyTAHYlt46GTDHbWDTClf0ZpO3SBmxs='
-
                                                             https://piwik.peerio.com
                                                             https://ssl.gstatic.com
                                                             https://app.peerio.com
@@ -59,15 +55,13 @@
                                                             wss://hocuspocus.peerio.com
                                                             ws://localhost:3000
                                                             ws://localhost:3001
-
-                                                            'sha256-tW9RuZazynVUxcwbgy/uhJIHT4/qjEgNt8p0gkVWPSs='
                                                             ;
                                                         style-src
                                                             'self'
                                                             'unsafe-inline'
                                                             ;
                                                         media-src
-                                                                'self'
+                                                            'self'
                                                             ;">
     <!-- /debug -->
     <title>Peerio</title>
@@ -101,20 +95,10 @@
     <script type="application/javascript" src="bower/gsap/scrolltoplugin.min.js"></script>
     <script type="application/javascript" src="bower/classnames/index.js"></script>
 
-    <!-- Peerio Client API -->
+    <!-- Peerio Client API (order is important) -->
     <script type="application/javascript" src="bower/peerio-client-api/ext_lib_bundle.js"></script>
-    <script type="application/javascript" src="bower/peerio-client-api/peerio_client_api_bundle.js"></script>
-    <script>
-        L.captureConsole();
-        L.captureRootErrors();
-    </script>
-    <!-- debug -->
-    <script>
-        L.level = 3;
-    </script>
-    <!-- /debug -->
-
     <script type="application/javascript" src="js/js/devmode.js"></script>
+    <script type="application/javascript" src="bower/peerio-client-api/peerio_client_api_bundle.js"></script>
 
     <!-- UI -->
     <!-- inject:js -->

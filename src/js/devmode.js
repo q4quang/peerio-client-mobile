@@ -1,8 +1,15 @@
+// APP DEFAULT L.js config
+L.captureConsole();
+L.captureRootErrors();
+L.benchmarkEnabled = true;
+L.level = L.LEVELS.SILLY;
+
+if (window.PeerioDebug && PeerioDebug.logLevel != null) {
+    L.level = PeerioDebug.logLevel || 3;
+    L.releaseConsole();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    if (window.PeerioDebug && PeerioDebug.logLevel != null) {
-        L.level = PeerioDebug.logLevel;
-        L.releaseConsole();
-    }
     window.devmode = {
         root: document.getElementById('devmode'), // root devmode dom node
         logNode: document.getElementById('devmode-log'), // root devmode dom node
