@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         loadSettings: function () {
             document.getElementById('devmode-log-level').value = L.level;
-            document.getElementById('devmode-bench').checked = L.B.enabled;
+            document.getElementById('devmode-bench').checked = L.benchmarkEnabled;
             document.getElementById('devmode-log-limit').value = L.cacheLimit;
         }
     };
