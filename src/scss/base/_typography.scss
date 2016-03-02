@@ -52,7 +52,7 @@ Text Style                                                                  | cl
 .headline-sm {
   @extend .headline;
   font-size: 1.1rem;
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
 }
 
 .headline-md {
@@ -183,8 +183,13 @@ Text Style                                                                  | cl
 
 
 .red-bold {
-    color: rgb(255, 114, 114);
-    font-weight: 600;
+  @extend .text-red;
+
+  font-weight: 600;
+}
+
+.text-red {
+  color: $color-error !important;
 }
 
 .caption {

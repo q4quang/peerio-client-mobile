@@ -11,7 +11,8 @@
     getInitialState: function () {
       return {
         socketConnected: Peerio.AppState.connected, // red/green connection status. when false, 'loading' is ignored
-        loading: Peerio.AppState.loading //shows loading indicator animation
+        loading: Peerio.AppState.loading, //shows loading indicator animation
+        outOfSync: true
       };
     },
     componentWillMount: function () {
@@ -33,7 +34,8 @@
     render: function () {
       var connectionClass;
       if (this.state.socketConnected)
-        connectionClass = this.state.loading ? 'loading' : 'connected';
+        connectionClass = this.state.outOfSync ? 'out-of-sync'
+          : this.state.loading ? 'loading' : 'connected';
 
       return (
         <div id="navbar" className="flex-row flex-align-center">
@@ -56,12 +58,21 @@
           */}
 
             <div id="app-lock">
-              <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>
-                <i className="material-icons">edit</i>
-              </Peerio.UI.Tappable>
+              {
+                this.state.outOfSync ?
+                    <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'sync')}>
+                        <i className="material-icons">sync</i>
+                    </Peerio.UI.Tappable>
+                :   <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>
+                        <i className="material-icons">edit</i>
+                    </Peerio.UI.Tappable>
+              }
             </div>
 
-          <div id="connection-status" className={connectionClass}>{this.state.socketConnected?'':'connecting...'}</div>
+            <div id="connection-status" className={'flex-row flex-justify-center flex-align-center ' + connectionClass}>
+                <div className="margin-small">{this.state.outOfSync ? 'Out of sync' : ''}</div>
+                <div>{this.state.socketConnected ? '':'connecting...'}</div>
+            </div>
         </div>
       );
     }

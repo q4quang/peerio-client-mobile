@@ -56,22 +56,21 @@ Text inputs are full-width by default. They can be contained using layout classe
 
 */
 
-/*
-  TODO:
-  Fix input and labeling inconsistencies by minimizing available classes and styling tags directly.
-  Use classes for modifying tag styling.
-  Current Issues include:
-  -  some labels have colons,
-  -  some labels are input placeholders
-  -  some labels are bold uppercase, some labels are normal capitalized, sometimes all in the same screen
-  -  some label fields are styled with underlines
-  -  some are styled with borders
 
-  FIND AND REPLACE/REMOVE/RESTYLE.
+// TODO:
+// Fix input and labeling inconsistencies by minimizing available classes and styling tags directly.
+// Use classes for modifying tag styling.
+// Current Issues include:
+// -  some labels have colons,
+// -  some labels are input placeholders
+// -  some labels are bold uppercase, some labels are normal capitalized, sometimes all in the same screen
+// -  some label fields are styled with underlines
+// -  some are styled with borders
+//
+// FIND AND REPLACE/REMOVE/RESTYLE.
 
-*/
 .address {
-  @extend .flex-row ;
+  @extend .flex-row;
   @extend .flex-justify-between;
   @extend .flex-align-center;
 
@@ -83,16 +82,16 @@ Text inputs are full-width by default. They can be contained using layout classe
 }
 
 .radio-button:checked + .radio-label i:after {
-  content: "radio_button_checked";
   color: color(p-green);
+  content: 'radio_button_checked';
 }
 
 .radio-label {
   padding: 0 12px 0 0;
 
   i:after {
-    content: "radio_button_unchecked";
     color: $black-12;
+    content: 'radio_button_unchecked';
     transition: $speed-normal;
   }
 }
@@ -102,8 +101,8 @@ Text inputs are full-width by default. They can be contained using layout classe
   height: 24px;
 
   i:after {
-    content: 'check_box_outline_blank';
     color: $black-12;
+    content: 'check_box_outline_blank';
     transition: $speed-fast ease-out;
   }
 }
@@ -120,9 +119,13 @@ Text inputs are full-width by default. They can be contained using layout classe
 }
 
 .content {
-    // TODO: find out where text-mono is used? - paul
-    .text-mono {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
+  // TODO: find out where text-mono is used? - paul
+  .text-mono {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+input.input-error {
+  border-bottom-color: $color-error;
 }
