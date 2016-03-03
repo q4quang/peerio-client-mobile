@@ -62,10 +62,13 @@
 
         handle2FA: function (resolve, reject, retry) {
             L.info('2fa requested');
+            this.blurEssential(true);
             Peerio.UI.Prompt.show({
                 text: retry ? 'Code is incorrect. Please try again:' :'Please enter 2FA code:',
                 inputType: 'numeric',
-                autoSubmitLength: 6
+                autoSubmitLength: 6,
+                minLength: 6,
+                cancelText: 'Sign out'
             })
             .then( (code) => {
                 L.info('2fa resend requested');
@@ -79,11 +82,23 @@
             })
             .catch( () => {
                 L.info('2fa rejected by user');
+                Peerio.NativeAPI.signOut();
                 reject({
                     code: 411, // any special code for user cancel?
                     message: '2FA authentication cancelled by user'
                 });
+            })
+            .finally( () => {
+                this.blurEssential(false);
             });
+        },
+
+        blurEssential: function (blur) {
+            [].forEach.call(document.getElementsByClassName('essential'),
+            i => { 
+                blur ? i.classList.add('blur') :
+                    i.classList.remove('blur');
+            }); 
         },
 
         render: function () {

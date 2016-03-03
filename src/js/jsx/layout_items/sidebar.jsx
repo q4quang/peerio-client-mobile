@@ -49,11 +49,7 @@
             Peerio.Action.showFileUpload();
         },
         signOut: function () {
-            Peerio.NativeAPI.disablePushNotifications()
-                .catch(noop)
-                .then(Peerio.SqlDB.closeAll)
-                .catch(noop)
-                .then(()=> window.location.reload());
+            Peerio.NativeAPI.signOut();
         },
         //--- RENDER
         render: function () {

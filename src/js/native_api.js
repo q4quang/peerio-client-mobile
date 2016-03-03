@@ -234,6 +234,14 @@ Peerio.NativeAPI.init = function () {
         });
     },
 
+    api.signOut = function () {
+        Peerio.NativeAPI.disablePushNotifications()
+        .catch(noop)
+        .then(Peerio.SqlDB.closeAll)
+        .catch(noop)
+        .then(()=> window.location.reload());
+    },
+
     //-- PUSH NOTIFICATIONS --------------------------------------------------------------------------------------------
     /**
      * Enables push notifications (if possible on the platform)

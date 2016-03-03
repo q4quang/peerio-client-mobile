@@ -45,7 +45,7 @@
         render: function () {
             var btns = this.props.btns ||
                   <div>
-                        <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleCancel}>{this.props.cancelText || 'Cancel'}</Peerio.UI.Tappable>
                         <Peerio.UI.Tappable
                             element="div"
                             className={(this.isValueValid() ? 'btn-safe' : 'btn-disabled')}

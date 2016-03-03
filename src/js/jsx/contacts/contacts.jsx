@@ -67,7 +67,7 @@
             }
             //TODO: by order, username
             return (
-                <div className="content" id="contact-list">
+                <div className="content essential filter-animate" id="contact-list">
                     <ul className="list-view">
                         {inRequests}
                         {contacts}

@@ -106,8 +106,10 @@
                     this.loadNextPage();
                 return;
             }
-            // plus one here is to take care of an updated convo list (it increases seqID)
-            this.props.onGetItemsRange(this.getLastItem().seqID, this.getFirstItem().seqID + 1)
+            // plus many here is to take care of an updated convo list (it increases seqID)
+            // TODO: rewrite getNextPage so it can accept null parameters
+            // and give all items after chosen one
+            this.props.onGetItemsRange(this.getLastItem().seqID, this.getFirstItem().seqID + 10)
                 .then(items=> {
                     this.itemsHash = {};
                     for (var i = 0; i < items.length; i++) {
@@ -286,7 +288,7 @@
             var bottomScrollHook = (<div className="bottomScrollHook" ref="bottomScrollHook"></div>);
 
             return (
-                <div className={'vscroll ' + this.props.className} id="vscroll" ref="vscroll">
+                <div className={classNames('vscroll', 'essential', 'filter-animate', this.props.className)} id="vscroll" ref="vscroll">
                     {loaderTop}
                     {nodes}
                     {bottomScrollHook}

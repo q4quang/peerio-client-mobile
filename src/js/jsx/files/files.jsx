@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     :
-                    <div className="content">
+                    <div className="content essential filter-animate">
                         <ul className="list-view">
                             {uploadNodes}
                             {nodes}
