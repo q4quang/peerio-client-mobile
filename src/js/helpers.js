@@ -232,13 +232,13 @@ Peerio.Helpers.init = function () {
     };
 
     //TODO: this should be a generic helper function, placed elsewhere.
-    api.formatBytes = function (bytes, decimals) {
-        if (bytes == 0) return '0 Byte';
+    api.formatBytes = function formatBytes(bytes, decimals) {
+        if(bytes == 0) return '0 Byte';
         var k = 1024;
-        var dm = decimals + 1 || 3;
+        var dm = decimals + 1 || 1;
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         var i = Math.floor(Math.log(bytes) / Math.log(k));
-        return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     };
 
     /**

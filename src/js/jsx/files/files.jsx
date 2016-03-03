@@ -127,10 +127,7 @@
             var downloadStateNode = null;
             if (item.downloadState) {
                 var ds = item.downloadState;
-                downloadStateNode = (
-                    <div className="download">{ds.stateName}
-                        {ds.percent}
-                    </div>);
+                downloadStateNode = (<div className="download">{ds.stateName}&nbsp;{ds.percent}</div>);
             }
 
             var cacheState = item.cached ? <i className="material-icons p-blue-dark-10">save</i> : null;
