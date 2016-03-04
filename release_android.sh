@@ -15,7 +15,7 @@ function signapk(){
   echo ==========================================================
   echo "SIGNING: $1 => $2"
   echo ==========================================================
-  jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore peerio.keystore $1 peerio_release_key
+  jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore peerio.keystore $1 peerio_release_key
 
   echo ========== VERIFYING ==========
   jarsigner -verify -verbose -certs $1
