@@ -36,7 +36,8 @@
     "stream-series": "*",
     "fs": "*",
     "xcode": "*",
-    "deep-diff": "*"
+    "deep-diff": "*",
+    "plist": "*"
   },
   "repository": {
     "type": "git",

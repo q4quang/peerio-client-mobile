@@ -22,6 +22,7 @@ var inject = require('gulp-inject');
 var series = require('stream-series');
 var replace = require('gulp-replace');
 var xcode = require('./extra/peerio-xcode.js');
+var plist = require('plist');
 
 var babelOptions = {
     compact: false,
@@ -79,7 +80,8 @@ var paths = {
     static_src: ['*media/**/*', '*locale/**/*', 'extra/cordova.js'],
     static_dst: 'www/',
     clean_dst: ['www/js', 'www/css', 'www/index.html', 
-                'www/media', 'www/locale']
+                'www/media', 'www/locale'],
+    project_plist: 'platforms/ios/Peerio/Peerio-Info.plist'
 };
 /*eslint-enable*/
 
@@ -120,10 +122,30 @@ gulp.task('compile-clean', function () {
         .pipe(clean());
 });
 
-gulp.task('prepare', function () {
+gulp.task('prepare-plist', function () {
+    var info = plist.parse(fs.readFileSync(paths.project_plist, 'utf8'));
+    var change = false;
+    var itsEncryption = true;
+    var complianceCode = '50fca128-07a4-40a7-8a57-e48418e296ec';
+    if(info['ITSAppUsesNonExemptEncryption'] != itsEncryption) {
+        change = true;
+        info['ITSAppUsesNonExemptEncryption'] = itsEncryption;
+    }
+    if(info['ITSEncryptionExportComplianceCode'] != complianceCode) {
+        change = true;
+        info['ITSEncryptionExportComplianceCode'] = complianceCode;
+    }
+    if(change) {
+        console.log('Applying changes to plist file');
+        fs.writeFileSync(paths.project_plist, plist.build(info));
+    } else {
+        console.log('No changes to plist needed. Skipping');
+    }
+});
+
+gulp.task('prepare-pbx', function () {
     var profile = options.release ? 
         '762f2597-7db7-4626-8eba-117f50135387' : false;
-
     xcode.apply({ 
         path: 'platforms/ios/Peerio.xcodeproj/project.pbxproj', 
         push: true, 
@@ -134,7 +156,10 @@ gulp.task('prepare', function () {
         deploymentTarget: '8.2',
         targetedDeviceFamily: 1
     });
-    return true;
+});
+
+gulp.task('prepare', ['prepare-pbx', 'prepare-plist'], function () {
+   return true;
 });
 
 gulp.task('help', function () {
