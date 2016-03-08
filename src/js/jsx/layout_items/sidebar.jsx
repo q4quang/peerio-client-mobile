@@ -86,20 +86,14 @@
 
                             <div className="flex-col flex-grow-1 sidebar-menu" ref="menu">
                                 <ul>
-                                    <Peerio.UI.Tappable tag='li'
-                                                        onTap={this.toggleAndTransition.bind(this, 'set_pin')}>
-                                        <i className="material-icons">lock</i>
-                                        <span>{pinNode}</span>
-                                    </Peerio.UI.Tappable>
-                                    <Peerio.UI.Tappable tag='li'
-                                                        onTap={this.toggleAndTransition.bind(this, 'settings_2fa')}>
-                                        <i className="material-icons">smartphone</i>
-                                        <span>{twoFactor}</span>
-                                    </Peerio.UI.Tappable>
-
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'account_settings')}>
                                         <i className="material-icons">person</i> Profile
+                                    </Peerio.UI.Tappable>
+
+                                    <Peerio.UI.Tappable tag="li"
+                                                        onTap={this.toggleAndTransition.bind(this, 'security')}>
+                                        <i className="material-icons">security</i> Security
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"
@@ -117,12 +111,19 @@
                                         <i className="fa fa-certificate"></i> Redeem Coupon
                                     </Peerio.UI.Tappable>
                                 </ul>
+                                <ul>
+                                    <Peerio.UI.Tappable tag="li"
+                                                        onTap={this.toggleAndTransition.bind(this, 'settings_2fa')}>
+                                        <i className="material-icons">help</i> Support
+                                    </Peerio.UI.Tappable>
+                                </ul>
+
+
                                 <div className="flex-grow-1"></div>
-                                { /* signout */}
                                 <ul>
                                     <Peerio.UI.Tappable element="li"
-                                                        onTap={this.signOut}><i
-                                        className="material-icons">power_settings_new</i> Sign Out
+                                                        onTap={this.signOut}>
+                                        <i className="material-icons">power_settings_new</i> Sign Out
                                     </Peerio.UI.Tappable>
                                 </ul>
                             </div>

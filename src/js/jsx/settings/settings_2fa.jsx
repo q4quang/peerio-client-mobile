@@ -128,7 +128,7 @@
                 'The following key has been copied to your clipboard. Please paste it in your authenticator app:' : 'Paste the following secret key into your authenticator app:';
 
                 return (
-                    <div className="content no-scroll-hack without-tab-bar flex-col without-footer">
+                    <div>
                         <div className="headline-md">Two Factor Authentication (2FA)</div>
                         { this.state.isEnabled2FA ? (
                             <div className="buttons">

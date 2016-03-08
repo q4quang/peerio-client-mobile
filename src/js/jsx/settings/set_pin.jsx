@@ -108,13 +108,11 @@
             }
 
             return (
-                <div className="content without-tab-bar without-footer">
+                <div>
                     {header}
                     <Peerio.UI.TalkativeProgress
                         enabled={this.state.inProgress}
-                        showSpin="true"
-                    />
-
+                        showSpin="true" />
                     {pinUI}
                 </div>
 
