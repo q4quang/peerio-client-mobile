@@ -95,7 +95,7 @@
     <plugin name="cordova-plugin-crosswalk-webview" spec="~1" />
     <plugin name="cordova-plugin-statusbar" spec="~2" />
     <plugin name="cordova-plugin-contacts" spec="~2" />
-    <plugin name="cordova-plugin-camera" spec="~2" />
+    <plugin name="com.peerio.cordova.plugin.camera" spec="https://github.com/PeerioTechnologies/peerio-cordova-camera" />
     <plugin name="cordova-plugin-whitelist" spec="*" />
     <plugin name="cordova-plugin-email" spec="~1" />
     <plugin name="br.com.dtmtec.plugins.carrier" spec="https://github.com/dtmtec/cordova-plugin-carrier" />
