@@ -16,7 +16,8 @@
                         });
                 })
                 // this catch handles user cancel on confirm/prompt
-                .catch(()=> {
+                .catch((e)=> {
+                    L.error(e);
                 })
                 .finally(function () {
                     if (camera) Peerio.NativeAPI.cleanupCamera();

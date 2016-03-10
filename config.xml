@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="100009" id="com.peerio" version="2.2.2" ios-CFBundleVersion="0">
+<widget android-versionCode="100009" id="com.peerio" ios-CFBundleVersion="0" version="2.2.2">
     <name>Peerio</name>
     <description>
         Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end
@@ -40,10 +40,10 @@
         <preference name="FadeSplashScreen" value="false" />
         <preference name="KeepRunning" value="true" />
         <preference name="AndroidPersistentFileLocation" value="Internal" />
-        <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
+        <preference name="AndroidExtraFilesystems" value="files,documents,cache,cache-external,root" />
         <preference name="AndroidLaunchMode" value="singleTop" />
         <preference name="android-minSdkVersion" value="16" />
-        <preference name="android-targetSdkVersion" value="23" />
+        <preference name="android-targetSdkVersion" value="22" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -84,14 +84,11 @@
     </platform>
     <engine name="ios" spec="~3.9.2" />
     <engine name="android" spec="~5.0.0" />
-    <plugin name="cordova-open" spec="https://github.com/PeerioTechnologies/cordova-open" />
     <plugin name="cordova-plugin-keyboard" spec="~1.1.3" />
     <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="~1" />
     <plugin name="cordova-plugin-appversion" spec="~1" />
     <plugin name="cordova-plugin-device" spec="~1" />
     <plugin name="cordova-plugin-splashscreen" spec="*" />
-    <plugin name="cordova-plugin-file" spec="~3" />
-    <plugin name="cordova-plugin-file-transfer" spec="~1" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="~1" />
     <plugin name="cordova-plugin-statusbar" spec="~2" />
     <plugin name="cordova-plugin-contacts" spec="~2" />
@@ -102,9 +99,12 @@
     <plugin name="cordova-plugin-globalization" spec="*" />
     <plugin name="com.peerio.cordova.plugin.privacyscreen" spec="https://github.com/PeerioTechnologies/peerio-privacy-screen" />
     <plugin name="com.verso.cordova.clipboard" spec="https://github.com/VersoSolutions/CordovaClipboard" />
-    <plugin name="com.peerio.cordova.plugins.sqlcipher" spec="https://github.com/PeerioTechnologies/peerio-cordova-sqlcipher" />
+    <plugin name="com.peerio.cordova.plugin.sqlcipher" spec="https://github.com/PeerioTechnologies/peerio-cordova-sqlcipher" />
     <plugin name="phonegap-plugin-push" spec="~1" />
     <plugin name="com.peerio.cordova.plugin.touchid" spec="https://github.com/PeerioTechnologies/peerio-keychain-touchid" />
+    <plugin name="com.peerio.cordova.plugin.social" spec="https://github.com/PeerioTechnologies/peerio-cordova-social" />
+    <plugin name="com.peerio.cordova.plugin.file" spec="https://github.com/PeerioTechnologies/peerio-cordova-file" />
+    <plugin name="com.peerio.cordova.open" spec="https://github.com/PeerioTechnologies/peerio-cordova-open" />
     <preference name="xwalkVersion" value="15+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
@@ -113,5 +113,4 @@
     <plugin name="com.peerio.cordova.plugin.wkwebview" spec="https://github.com/PeerioTechnologies/peerio-cordova-wkwebview">
         <variable name="WKWEBVIEW_SERVER_PORT" value="53741" />
     </plugin>
-    <plugin name="cordova-plugin-x-socialsharing" spec="~5.0.10" />
 </widget>
