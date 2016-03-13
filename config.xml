@@ -19,7 +19,7 @@
     <allow-intent href="mailto:*" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
-    <preference name="Orientation" value="default" />
+    <preference name="Orientation" value="portrait" />
     <preference name="Fullscreen" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarBackgroundColor" value="#233445" />
