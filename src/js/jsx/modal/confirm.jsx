@@ -29,8 +29,8 @@
 
             var btns = this.props.btns ||
                     <div>
-                        <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleCancel}>Cancel</Peerio.UI.Tappable>
-                        <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleAction}>OK</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleCancel}>{this.props.cancelText || 'Cancel'}</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleAction}>{this.props.okText || 'OK'}</Peerio.UI.Tappable>
                     </div>;
 
             var text = this.props.text || 'confirm text';

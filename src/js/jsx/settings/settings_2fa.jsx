@@ -79,6 +79,16 @@
         },
 
         startEnable2FA: function() {
+            (!Peerio.user.addresses || Peerio.user.addresses.length == 0) 
+            && Peerio.UI.Confirm.show({
+                text: 'You don\'t have a registered contact address. If you lose your 2FA, ' + 
+                        'Peerio won\'t be able to recover your account.',
+                cancelText: 'I understand',
+                okText: 'Add address'
+            })
+            .then(() => this.transitionTo('account_settings'))
+            .catch(() => true);
+
             if(!this.state.isEnabled2FA) {
                 /* trying to get a new code right away */
                 Peerio.Net.setUp2FA().then((response) => {
