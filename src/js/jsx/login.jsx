@@ -91,7 +91,7 @@
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
 
-            Peerio.Helpers.checkFileSystemEncryption();
+            // Peerio.Helpers.checkFileSystemEncryption();
             this.transitionTo(this.nextRoute);
         },
 
