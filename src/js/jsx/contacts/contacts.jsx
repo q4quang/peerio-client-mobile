@@ -5,6 +5,7 @@
         mixins: [ReactRouter.Navigation, ReactRouter.State],
         componentDidMount: function () {
             this.subscriptions = [Peerio.Dispatcher.onBigGreenButton(this.handleAddContact),
+                Peerio.Dispatcher.onSettingsUpdated(this.forceUpdate.bind(this, null)),
                 Peerio.Dispatcher.onContactsUpdated(this.forceUpdate.bind(this, null)),
                 Peerio.Dispatcher.onUnreadStateChanged(this.handleUnreadStateChange.bind(this, null))
             ];
