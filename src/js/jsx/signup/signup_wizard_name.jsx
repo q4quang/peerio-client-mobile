@@ -23,7 +23,7 @@
                 firstNameValid: true,
                 firstName: '',
                 lastNameValid: true,
-                lastName: '',
+                lastName: ''
             };
         },
 
@@ -31,7 +31,7 @@
             var username = this.refs.username.getDOMNode().value;
 
             if(username.length > MAX_USERNAME_LEN) return;
-
+            username = username.toLowerCase();
             this.setState({username: username});
             Peerio.Net.validateUsername(username)
             .then( (valid) => {
@@ -76,6 +76,7 @@
                             id="user_name"
                             ref='username' required="required" autoComplete="off" autoCorrect="off" autoCapitalize="off"
                             spellCheck="false"
+                            className="lowercase"
                             onChange={this.validateUsername}/>
                     </div>
                     <div className="input-group">{

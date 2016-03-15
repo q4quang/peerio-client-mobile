@@ -61,7 +61,7 @@
 
             if (receipts.length <= this.maxDefaultReceipts) {
                 // read by no more then maxDefaultReceipts participant when more than maxDefaultReceipts participants exist
-                return (<div className="receipts">Read by {receipts} <i className="fa fa-check"></i></div>);
+                return (<div className="receipts">Read by {receipts.join(' \u2022\ ')} <i className="fa fa-check"></i></div>);
             } else {
                 // read by more then maxDefaultReceipts participants
                 return (<div className="receipts" onTouchEnd={this.toggle}>

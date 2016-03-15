@@ -181,7 +181,6 @@ Text Style                                                                  | cl
   margin: 0px 1rem;
 }
 
-
 .red-bold {
   @extend .text-red;
 
@@ -193,6 +192,14 @@ Text Style                                                                  | cl
 }
 
 .caption {
-  font-size: 12px;
   color: $black-38;
+  font-size: 12px;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.italic {
+  font-style: italic;
 }
