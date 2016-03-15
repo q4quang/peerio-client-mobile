@@ -273,4 +273,40 @@ Peerio.Helpers.init = function () {
     api.isValidUsername = function(name) {
         return !!name.match(/^\w{1,16}$/);
     };
+
+
+    var CFS_KEYNAME = 'check_filesystem_encryption';
+
+    api.checkFileSystemEncryption = function() {
+        try {
+            (Peerio.runtime.platform == 'android') &&
+            window.FileEncryption &&
+            Peerio.TinyDB.getItem(CFS_KEYNAME, Peerio.user.username)
+            .then(val => {
+                val ||
+                    window.FileEncryption.getEncryptionStatus()
+                    .then(status => {
+                        if(status == 2) return;
+                        var text = 'Your device supports full disk encryption, but it is not currently enabled. Peerio highly recommends the use of disk encryption. Would you like to learn more?';
+                        if(status == 1)
+                            text = 'Your device has encryption turned on but your passcode is still set to the default. We recommend setting a unique passcode. Would you like to learn more?';
+                        if(status == -1)
+                            text = 'Your device does not support encryption. We recommend upgrading to a version of Android which does. Would you like to learn more?';
+
+                        Peerio.UI.Confirm.show({
+                            text: text,
+                            okText: 'Yes',
+                            cancelText: 'No'
+                        })
+                        .then(() => Peerio.NativeAPI.openInBrowser('https://support.google.com/nexus/answer/2844831?hl=en'))
+                        .catch(() => L.info('user cancel'))
+                        .finally(() => {
+                            Peerio.TinyDB.saveItem(CFS_KEYNAME, true, Peerio.user.username);
+                        });
+                    });
+            });
+        } catch(e) {
+            L.error(e);
+        }
+    };
 };
