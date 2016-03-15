@@ -52,7 +52,8 @@
         render: function () {
             var inRequests = Peerio.user.receivedContactRequests.arr.map(item => this.getContactNode(item, true));
             var outRequests = Peerio.user.sentContactRequests.arr.map(item => this.getContactNode(item, false, true));
-            var contacts = Peerio.user.contacts.arr.map(item => this.getContactNode(item));
+            var contacts = Peerio.user.contacts.arr
+            .filter(c => !c.isDeleted).map(item => this.getContactNode(item));
 
             if (contacts.length === 1 && outRequests === 0 && inRequests === 0) {
                 var intro_content = <div className="content-intro" key="intro">
