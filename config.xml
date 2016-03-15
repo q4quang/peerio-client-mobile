@@ -43,7 +43,7 @@
         <preference name="AndroidExtraFilesystems" value="files,documents,cache,cache-external,root" />
         <preference name="AndroidLaunchMode" value="singleTop" />
         <preference name="android-minSdkVersion" value="16" />
-        <preference name="android-targetSdkVersion" value="22" />
+        <preference name="android-targetSdkVersion" value="23" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
