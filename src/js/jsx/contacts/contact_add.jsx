@@ -43,13 +43,14 @@ Peerio.UI.AddContact = React.createClass({
         <div className="headline">Add Contact</div>
         <div  className="input-group">
           <label>Search</label>
-          <input type="text" 
+          <input type="text"
+              className="lowercase"
               autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck="false"
-              onChange={this.updateSearchString} 
-              placeholder="username, email or phone" 
+              onChange={this.updateSearchString}
+              placeholder="username, email or phone"
               value={this.state.searchString}/>
         </div>
 

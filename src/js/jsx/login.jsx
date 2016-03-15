@@ -298,6 +298,7 @@
                                             <input value={this.state.username}
                                                    id="username" ref="username"
                                                    type="text" maxLength="16"
+                                                   className="lowercase"
                                                    autoComplete="off"
                                                    autoCorrect="off"
                                                    autoCapitalize="off"

@@ -76,6 +76,7 @@
                             id="user_name"
                             ref='username' required="required" autoComplete="off" autoCorrect="off" autoCapitalize="off"
                             spellCheck="false"
+                            className="lowercase"
                             onChange={this.validateUsername}/>
                     </div>
                     <div className="input-group">{
