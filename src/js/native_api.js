@@ -28,6 +28,15 @@ Peerio.NativeAPI.init = function () {
     window.addEventListener('keyboardWillHide', Peerio.Action.keyboardWillHide, true);
     window.addEventListener('keyboardDidHide', Peerio.Action.keyboardDidHide, true);
 
+    //-- PRIVACY SCREEN
+    
+    try {
+        window.PrivacyScreen && window.PrivacyScreen.enable
+        && window.PrivacyScreen.enable();
+    } catch(e) {
+        L.error(e);
+    }
+
     //-- PLUGIN AVAILABILITY TESTS -------------------------------------------------------------------------------------
     // we need separate tests because cordova plugins are not using the same (window.cordova.plugins)namespace
     // and in case of separate plugins fail to load (?) we isolate them this way
